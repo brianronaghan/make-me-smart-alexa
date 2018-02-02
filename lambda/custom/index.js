@@ -32,9 +32,11 @@ var handlers = {
 
     },
     'FindBlurb': function () {
-        var name = this.event.request.intent.slots.name.value;
-        this.response.speak('Hello ' + name)
-            .cardRenderer('hello world', 'hello ' + name);
+        console.log(this.event.request);
+
+        var query = this.event.request.intent;
+        this.response.speak("I'm gonna look for something")
+            .cardRenderer("her's what i got on");
         this.emit(':responseReady');
     },
     'ListEpisodes': function () {

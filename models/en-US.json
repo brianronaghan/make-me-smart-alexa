@@ -2,7 +2,64 @@
     "interactionModel":{
         "languageModel":{
             "invocationName":"make me smart",
-            "types":[],
+            "types":[
+              {
+                "values": [
+                  {
+                    "name": {
+                      "value": "Marketplace Morning Report"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "Marketplace"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "Make Me Smart"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "The Uncertain Hour"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "Marketplace Tech"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "Codebreaker"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "Corner Office"
+                    }
+                  }
+                ],
+                "name": "SHOWS"
+              },
+              {
+                "values" : [
+                  {
+                    "name": {
+                      "value": "Stocks"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "Interest Rates"
+                    }
+                  }
+                ],
+                "name": "TOPICS"
+
+              }
+            ],
             "intents":[
                 {
                   "name": "AMAZON.CancelIntent",
@@ -21,24 +78,35 @@
                     "samples":[
                         "what you got",
                         "what kind of topics",
-                        "what's up"
+                        "what's up in the world"
                     ]
                 },
                 {
                     "name":"FindBlurb",
+                    "slots" : [
+                      {
+                        "name": "Topic",
+                        "type": "TOPICS"
+                      }
+                    ],
                     "samples":[
-                        "about something",
-                        "look up something",
-                        "what about something",
-                        "what something is"
+                        "about {Topic}",
+                        "look up {Topic}",
+                        "what about {Topic}",
+                        "what {Topic} is"
                     ]
                 },
                 {
                     "name":"ListEpisodes",
+                    "slots" : [
+                      {
+                        "name": "Show",
+                        "type": "SHOWS"
+                      }
+                    ],
                     "samples":[
-                        "what episodes",
-                        "what kind of topics",
-                        "what's up"
+                        "what episodes of {Show}",
+                        "what's up with {Show}"
                     ]
                 }
             ]
