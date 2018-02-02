@@ -1,5 +1,6 @@
 'use strict';
 var Alexa = require("alexa-sdk");
+var config = require('./config');
 
 // For detailed tutorial on how to making a Alexa skill,
 // please visit us at http://alexa.design/build
@@ -7,6 +8,7 @@ var Alexa = require("alexa-sdk");
 
 exports.handler = function(event, context) {
     var alexa = Alexa.handler(event, context);
+    alexa.appId = config.appId;
     alexa.registerHandlers(handlers);
     alexa.execute();
 };
