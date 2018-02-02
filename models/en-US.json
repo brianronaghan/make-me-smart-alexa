@@ -1,0 +1,47 @@
+{
+    "interactionModel":{
+        "languageModel":{
+            "invocationName":"make me smart",
+            "types":[],
+            "intents":[
+                {
+                  "name": "AMAZON.CancelIntent",
+                  "samples": []
+                },
+                {
+                  "name": "AMAZON.HelpIntent",
+                  "samples": []
+                },
+                {
+                  "name": "AMAZON.StopIntent",
+                  "samples": []
+                },
+                {
+                    "name":"ListBlurbs",
+                    "samples":[
+                        "what you got",
+                        "what kind of topics",
+                        "what's up"
+                    ]
+                },
+                {
+                    "name":"FindBlurb",
+                    "samples":[
+                        "about something",
+                        "look up something",
+                        "what about something",
+                        "what something is"
+                    ]
+                },
+                {
+                    "name":"ListEpisodes",
+                    "samples":[
+                        "what episodes",
+                        "what kind of topics",
+                        "what's up"
+                    ]
+                }
+            ]
+        }
+    }
+}
