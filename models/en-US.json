@@ -85,28 +85,33 @@
                     "name":"FindBlurb",
                     "slots" : [
                       {
-                        "name": "Topic",
+                        "name": "topic",
                         "type": "TOPICS"
                       }
                     ],
                     "samples":[
-                        "about {Topic}",
-                        "look up {Topic}",
-                        "what about {Topic}",
-                        "what {Topic} is"
+                        "about {topic}",
+                        "look up {topic}",
+                        "what about {topic}",
+                        "what {topic} is"
                     ]
                 },
                 {
                     "name":"ListEpisodes",
                     "slots" : [
                       {
-                        "name": "Show",
+                        "name": "show",
                         "type": "SHOWS"
                       }
                     ],
                     "samples":[
-                        "what episodes of {Show}",
-                        "what's up with {Show}"
+                        "for episodes of {show}"
+                    ]
+                },
+                {
+                    "name":"ListShows",
+                    "samples":[
+                        "what shows Marketplace has"
                     ]
                 }
             ]

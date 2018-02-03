@@ -1,7 +1,8 @@
 'use strict';
 var Alexa = require("alexa-sdk");
 var config = require('./config');
-
+var util = require('./util');
+var {feedLister, cardImage} = require('./util');
 // For detailed tutorial on how to making a Alexa skill,
 // please visit us at http://alexa.design/build
 
@@ -32,17 +33,39 @@ var handlers = {
 
     },
     'FindBlurb': function () {
-        console.log(this.event.request);
+        console.log(JSON.stringify(this.event.request));
 
-        var query = this.event.request.intent;
-        this.response.speak("I'm gonna look for something")
+        var query = this.event.request.intent.slots.topic.value;
+        query = 'cheeseburgers'
+        this.response.speak(`I'm gonna look for something on ${query}`)
             .cardRenderer("her's what i got on");
         this.emit(':responseReady');
     },
     'ListEpisodes': function () {
-      console.log('lsit episodes')
+      var show = this.event.request.intent.slots.show.value;
+
+      console.log('lsit episodes', show);
       this.response.speak('epsiodes!')
 
+      this.emit(':responseReady');
+
+      // Go into feed
+    },
+    'ListShows': function () {
+      // var show = this.event.request.intent.slots.show.value;
+      console.log('LIST SHOWS', show);
+      this.response.speak('HERE ARE OUR SHOWS!');
+      console.log("LIST SHOWS FIRED")
+      console.log("event", JSON.stringify(this.event));
+      console.log("cont", this.event.context)
+      console.log("STATE", this.handler.state)
+      // Output the list of all feeds with card
+      var image = util.cardImage("https://www.runnersworld.com/sites/runnersworld.com/files/styles/article_main_custom_user_desktop_1x/public/ryssdal200902_200.jpg?itok=hU0uFezE&timestamp=1347392245");
+      var data = util.feedLister()
+      console.log("LIST FEEDS CAT LIST", data.cardCategoryList)
+      this.emit(':askWithCard', data.categoryList, 'heyyy', 'Our shows', data.cardCategoryList, image )
+
+      console.log("DOES THIS RUN?")
       this.emit(':responseReady');
 
       // Go into feed
