@@ -8,7 +8,7 @@ var config = {
     display_only_title_in_card : true,
 
     // TODO Add the s3 Bucket Name, dynamoDB Table Name and Region
-    // dynamoDBTableName : 'MarketplaceApp'
+    // dynamoDBTableName : 'MakeMeSmart'
 };
 
 module.exports = config;

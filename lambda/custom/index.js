@@ -2,7 +2,6 @@
 var Alexa = require("alexa-sdk");
 var config = require('./config');
 var util = require('./util');
-var {feedLister, cardImage} = require('./util');
 // For detailed tutorial on how to making a Alexa skill,
 // please visit us at http://alexa.design/build
 
@@ -33,12 +32,16 @@ var handlers = {
 
     },
     'FindBlurb': function () {
-        console.log(JSON.stringify(this.event.request));
-
+        console.log('atts before  ',this.attributes);
+        console.log('WHOLE EVENT', JSON.stringify(this.event));
         var query = this.event.request.intent.slots.topic.value;
-        query = 'cheeseburgers'
+
+        this.attributes.queries =  this.attributes.queries || [];
+        this.attributes.queries.push(query);
+        console.log('attributes/after', this.attributes);
+        // query = 'cheeseburgers'
         this.response.speak(`I'm gonna look for something on ${query}`)
-            .cardRenderer("her's what i got on");
+            .cardRenderer(`here's what i got on ${query}.`);
         this.emit(':responseReady');
     },
     'ListEpisodes': function () {
@@ -53,12 +56,11 @@ var handlers = {
     },
     'ListShows': function () {
       // var show = this.event.request.intent.slots.show.value;
-      console.log('LIST SHOWS', show);
       this.response.speak('HERE ARE OUR SHOWS!');
       console.log("LIST SHOWS FIRED")
       console.log("event", JSON.stringify(this.event));
       console.log("cont", this.event.context)
-      console.log("STATE", this.handler.state)
+      console.log("STATE", this.handler)
       // Output the list of all feeds with card
       var image = util.cardImage("https://www.runnersworld.com/sites/runnersworld.com/files/styles/article_main_custom_user_desktop_1x/public/ryssdal200902_200.jpg?itok=hU0uFezE&timestamp=1347392245");
       var data = util.feedLister()

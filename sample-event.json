@@ -1,0 +1,50 @@
+{
+    "session": {
+        "sessionId": "SessionId.0c01231d-b337-44de-9611-819fb242298a",
+        "application": {
+            "applicationId": "amzn1.ask.skill.20034481-27aa-4d91-8a6c-c52ea4a0d377"
+        },
+        "attributes": {
+            "queries": [
+                "stocks"
+            ]
+        },
+        "user": {
+            "userId": "amzn1.ask.account.AGVBOV52H57YA4GCHAMZKY2ONF4MOWN5EMQMDJ6YODNMLNN5BXG2AD4K5U7DAEDZBPROW5A3PCLILGBRSECKLNE4RSCJ4IVMPEXDXV5FIYXTKFNSMU3CH42JWTII24DJUF3WACCZQXQIVGVGOMJJPPXRGRJWL2F2RA5PFZQNBC5EDNRF5VEU7X7BLZMGWLE42KUVZ56QF37BPKI",
+            "accessToken": null
+        },
+        "new": false
+    },
+    "request": {
+        "intent": {
+            "name": "FindBlurb",
+            "slots": {
+                "topic": {
+                    "name": "topic",
+                    "value": "chickens"
+                }
+            }
+        },
+        "requestId": "EdwRequestId.f0aa09b4-c786-4d73-bbe8-16d6ead70aba",
+        "type": "IntentRequest",
+        "locale": "en-US",
+        "timestamp": "2018-02-03T01:15:13Z"
+    },
+    "context": {
+        "AudioPlayer": {
+            "playerActivity": "IDLE"
+        },
+        "System": {
+            "application": {
+                "applicationId": "amzn1.ask.skill.20034481-27aa-4d91-8a6c-c52ea4a0d377"
+            },
+            "user": {
+                "userId": "amzn1.ask.account.AGVBOV52H57YA4GCHAMZKY2ONF4MOWN5EMQMDJ6YODNMLNN5BXG2AD4K5U7DAEDZBPROW5A3PCLILGBRSECKLNE4RSCJ4IVMPEXDXV5FIYXTKFNSMU3CH42JWTII24DJUF3WACCZQXQIVGVGOMJJPPXRGRJWL2F2RA5PFZQNBC5EDNRF5VEU7X7BLZMGWLE42KUVZ56QF37BPKI"
+            },
+            "device": {
+                "supportedInterfaces": {}
+            }
+        }
+    },
+    "version": "1.0"
+}
