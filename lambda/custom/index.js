@@ -9,6 +9,7 @@ var util = require('./util');
 exports.handler = function(event, context) {
     var alexa = Alexa.handler(event, context);
     alexa.appId = config.appId;
+    alexa.dynamoDBTableName = config.dynamoDBTableName;
     alexa.registerHandlers(handlers);
     alexa.execute();
 };
@@ -35,6 +36,7 @@ var handlers = {
         console.log('atts before  ',this.attributes);
         console.log('WHOLE EVENT', JSON.stringify(this.event));
         var query = this.event.request.intent.slots.topic.value;
+        //
 
         this.attributes.queries =  this.attributes.queries || [];
         this.attributes.queries.push(query);
@@ -47,7 +49,7 @@ var handlers = {
     'ListEpisodes': function () {
       var show = this.event.request.intent.slots.show.value;
 
-      console.log('lsit episodes', show);
+      console.log('list episodes', show);
       this.response.speak('epsiodes!')
 
       this.emit(':responseReady');
