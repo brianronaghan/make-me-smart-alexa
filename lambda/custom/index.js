@@ -5,24 +5,39 @@ var util = require('./util');
 // For detailed tutorial on how to making a Alexa skill,
 // please visit us at http://alexa.design/build
 
+var dynasty = require('dynasty')(config.credentials);
+console.log("WTF ", config.sessionDBName, 'and process ', process.env)
+var sessions = dynasty.table(config.sessionDBName);
 
 exports.handler = function(event, context) {
     var alexa = Alexa.handler(event, context);
     alexa.appId = config.appId;
     alexa.dynamoDBTableName = config.dynamoDBTableName;
     alexa.registerHandlers(handlers);
+    console.log("WHEN DO I FIRE");
+
+
     alexa.execute();
 };
 
 var handlers = {
     'LaunchRequest': function () {
-      console.log("CHECK LAUNCH REQ")
+      console.log("CHECK LAUNCH REQ", this.event.session.user.userId);
+      sessions.find(this.event.session.user.userId, function (err, sessions) {
+        if (err) {
+          console.log('err', err)
+        } else {
+          console.log('sessions')
+          console.log(sessions)
+        }
+      });
        this.response.speak('Welcome to Make Me Smart!')
        this.emit(':responseReady');
 
        // this.emit('Make Me Smart');
         // Play the latest
     },
+
     'ListBlurbs': function () {
       console.log('list blurbs')
       console.log(this);
@@ -33,11 +48,12 @@ var handlers = {
 
     },
     'FindBlurb': function () {
+        console.log('context', this.context)
         console.log('atts before  ',this.attributes);
         console.log('WHOLE EVENT', JSON.stringify(this.event));
         var query = this.event.request.intent.slots.topic.value;
         //
-
+        this.attributes.sessionId = this.event.session.sessionId;
         this.attributes.queries =  this.attributes.queries || [];
         this.attributes.queries.push(query);
         console.log('attributes/after', this.attributes);
