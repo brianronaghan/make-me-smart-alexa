@@ -74,7 +74,7 @@
                   "samples": []
                 },
                 {
-                    "name":"ListBlurbs",
+                    "name":"ListExplainers",
                     "samples":[
                         "what you got",
                         "what kind of topics",
@@ -82,7 +82,7 @@
                     ]
                 },
                 {
-                    "name":"FindBlurb",
+                    "name":"FindExplainer",
                     "slots" : [
                       {
                         "name": "topic",

@@ -2,19 +2,29 @@
 var Alexa = require("alexa-sdk");
 var config = require('./config');
 var util = require('./util');
+var AWS = require('aws-sdk');
 // For detailed tutorial on how to making a Alexa skill,
 // please visit us at http://alexa.design/build
 
-var dynasty = require('dynasty')(config.credentials);
-console.log("WTF ", config.sessionDBName, 'and process ', process.env)
-var sessions = dynasty.table(config.sessionDBName);
+// var dynasty = require('dynasty')(config.credentials);
+// console.log('creds', config.credentials);
+// console.log("WTF ", config.sessionDBName, 'and process ', process.env)
+// console.log(dynasty.dynamo.config.credentials);
+// console.log(dynasty.loadAllTables());
+// var tablePromise = dynasty.loadAllTables();
+
+// tablePromise.then(function (what){
+//   console.log('load all', what)
+// });
+// var sessions = dynasty.table(config.sessionDBName);
+// var users = dynasty.table('makeMeSmart');
+var docClient = new AWS.DynamoDB.DocumentClient({ region: process.env.AWS_DEFAULT_REGION });
 
 exports.handler = function(event, context) {
     var alexa = Alexa.handler(event, context);
     alexa.appId = config.appId;
     alexa.dynamoDBTableName = config.dynamoDBTableName;
     alexa.registerHandlers(handlers);
-    console.log("WHEN DO I FIRE");
 
 
     alexa.execute();
@@ -22,32 +32,65 @@ exports.handler = function(event, context) {
 
 var handlers = {
     'LaunchRequest': function () {
-      console.log("CHECK LAUNCH REQ", this.event.session.user.userId);
-      sessions.find(this.event.session.user.userId, function (err, sessions) {
+      console.log(this.event)
+      var params = {
+        TableName: 'makeMeSmart',
+        Key: {'userId': this.event.session.user.userId}
+      };
+      var session_params = {
+        TableName: 'sessions',
+        Key: {'userId': this.event.session.user.userId, sessionStart: this.event.request.timestamp}
+      };
+      var boundThis = this;
+      docClient.get(session_params, function(err, data) {
         if (err) {
-          console.log('err', err)
+          console.log("Error", err);
+          boundThis.response.speak('Welcome to Make Me Smart!')
+          boundThis.emit(':responseReady');
+
         } else {
-          console.log('sessions')
-          console.log(sessions)
+          console.log("SESSions", data);
+          boundThis.response.speak('Welcome to Make Me Smart!')
+          boundThis.emit(':responseReady');
+
         }
       });
-       this.response.speak('Welcome to Make Me Smart!')
-       this.emit(':responseReady');
+
+      // docClient.get(params, function(err, data) {
+      //   if (err) {
+      //     console.log("Error", err);
+      //   } else {
+      //     console.log("Success", data.Item);
+      //   }
+      // });
+
+      // console.log(docClient);
+      // console.log("CHECK LAUNCH REQ", this.event.session.user.userId);
+      // users.find(this.event.session.user.userId, function (err, user) {
+      //   if (err) {
+      //     console.log('err', err)
+      //   } else {
+      //     console.log('user')
+      //     console.log(user)
+      //   }
+      // });
+       // this.response.speak('Welcome to Make Me Smart!')
+       // this.emit(':responseReady');
 
        // this.emit('Make Me Smart');
         // Play the latest
     },
 
-    'ListBlurbs': function () {
-      console.log('list blurbs')
+    'ListExplainers': function () {
+      console.log('list Explainers')
       console.log(this);
 
-      this.response.speak('we got some blurbs!')
+      this.response.speak('we got some Explainers!')
 
       this.emit(':responseReady');
 
     },
-    'FindBlurb': function () {
+    'FindExplainer': function () {
         console.log('context', this.context)
         console.log('atts before  ',this.attributes);
         console.log('WHOLE EVENT', JSON.stringify(this.event));
