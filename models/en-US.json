@@ -47,6 +47,21 @@
                 "values" : [
                   {
                     "name": {
+                      "value": "What are you talking about"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "Wednesday"
+                    }
+                  }
+                ],
+                "name": "TITLES"
+              },
+              {
+                "values" : [
+                  {
+                    "name": {
                       "value": "Stocks"
                     }
                   },
@@ -57,7 +72,361 @@
                   }
                 ],
                 "name": "TOPICS"
-
+              },
+              {
+                "values": [
+                  {
+                    "name": {
+                      "value": "1st"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "2nd"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "3rd"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "4th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "5th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "6th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "7th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "8th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "9th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "10th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "11th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "12th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "13th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "14th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "15th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "16th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "17th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "18th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "19th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "20th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "21st"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "22nd"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "23rd"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "24th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "25th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "26th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "27th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "28th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "29th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "30th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "31st"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "32nd"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "33rd"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "34th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "35th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "36th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "37th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "38th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "39th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "40th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "41st"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "42nd"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "43rd"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "44th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "45th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "46th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "47th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "48th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "49th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "50th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "51st"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "52nd"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "53rd"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "54th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "55th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "56th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "57th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "58th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "59th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "60th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "61st"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "62nd"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "63rd"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "64th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "65th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "66th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "67th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "68th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "69th"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "70th"
+                    }
+                  }
+                ],
+                "name": "ORDINAL"
               }
             ],
             "intents":[
@@ -105,13 +474,38 @@
                       }
                     ],
                     "samples":[
-                        "for episodes of {show}"
+                        "for episodes of {show}",
+                        "past episodes {show}",
+                        "list episodes of {show}"
                     ]
+                },
+                {
+                  "name": "PickEpisode",
+                  "slots": [
+                    {
+                      "name": "ordinal",
+                      "type": "ORDINAL"
+                    },
+                    {
+                      "name": "index",
+                      "type": "AMAZON.NUMBER"
+                    },
+                    {
+                      "name": "title",
+                      "type": "TITLES"
+                    }
+                  ],
+                  "samples":[
+                      "play episode number {index}",
+                      "play the {ordinal} episode",
+                      "play the episode titled {title}"
+                  ]
                 },
                 {
                     "name":"ListShows",
                     "samples":[
-                        "what shows Marketplace has"
+                        "what shows Marketplace has",
+                        "tell me the shows"
                     ]
                 }
             ]

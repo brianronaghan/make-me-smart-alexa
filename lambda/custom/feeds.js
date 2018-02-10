@@ -1,7 +1,11 @@
 'use strict';
 
-// Audio Source - AWS Podcast : https://aws.amazon.com/podcasts/aws-podcast/
 var feeds = [
+    {
+      'feed' : 'Make Me Smart',
+      'image': 'https://img.apmcdn.org/3b52d43387699b5913df1dc0d4a460dcf0dba882/square/cc6709-make-me-smart-tile.jpg',
+      'url' : 'https://feeds.publicradio.org/public_feeds/make-me-smart-with-kai-and-molly/rss/rss'
+    },
     {
         'feed' : 'Marketplace',
         'image': 'https://cms.marketplace.org/sites/default/files/marketplace_250.png',
@@ -21,11 +25,6 @@ var feeds = [
         'feed' : 'Marketplace Weekend',
         'image': 'https://cms.marketplace.org/sites/default/files/APM_Spotify-1000x1000_MW.jpg',
         'url' : 'https://feeds.publicradio.org/public_feeds/apm-marketplace-weekend/alexa/rss'
-    },
-    {
-        'feed' : 'Make Me Smart',
-        'image': 'https://img.apmcdn.org/3b52d43387699b5913df1dc0d4a460dcf0dba882/square/cc6709-make-me-smart-tile.jpg',
-        'url' : 'https://feeds.publicradio.org/public_feeds/make-me-smart-with-kai-and-molly/rss/rss'
     },
     {
       'feed' : 'Uncertain Hour',
