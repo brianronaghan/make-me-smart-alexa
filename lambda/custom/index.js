@@ -10,7 +10,7 @@ var dynasty = require('dynasty')({ region: process.env.AWS_DEFAULT_REGION });
 var sessions = dynasty.table(config.sessionDBName);
 var itemLister = util.itemLister;
 var itemPicker = util.itemPicker;
-
+var feedLoader = feedHelper.feedLoader;
 
 // var users = dynasty.table('makeMeSmart');
 
@@ -164,7 +164,6 @@ var handlers = {
       var data = util.itemLister()
       // Go into feed
     },
-
     'PickShow': function() {
       // if feeds are being iterated, should destroy that index
       // slots should be specific. show_title rather than title...
@@ -172,7 +171,23 @@ var handlers = {
       console.log(this.handler.state)
       //HERE
       var chosen = itemPicker(this.event.request.intent.slots, feeds, 'feed');
+      var image = util.cardImage(chosen.image);
       console.log('CHOSEN ', chosen);
+      feedLoader(chosen.feed, function(err, feedData, what) {
+        // will not wait for card, just to test
+        console.log('err', err)
+        console.log('feedData', feedData)
+        console.log('jsonified', what)
+
+        this.emit(
+          ':askWithCard',
+          `You chose ${chosen.feed}. Should I play the latest episode or list them?`,
+          'Say play latest or list episodes.',
+          'Selected Show: ',
+          `${chosen.feed}: Say play latest or list episodes`,
+          image
+        );
+      });
     },
 
     'PickEpisode': function () {

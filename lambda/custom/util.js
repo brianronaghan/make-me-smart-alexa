@@ -2,22 +2,22 @@ var feeds = require('./feeds');
 var constants = require('./constants');
 
 module.exports = {
-  feedLister: function () {
-      // Generate a list of categories to serve several functions
-      var categoryList = 'Here are the shows we have: ';
-      var cardCategoryList = 'Our Shows: ';
-      var index = 0;
-      feeds.forEach(function (feeds) {
-          categoryList += (++index) + constants.breakTime['100'] + feeds.feed + constants.breakTime['200'];
-          cardCategoryList += (index) + ') ' + feeds.feed + ' \n';
-      });
-      categoryList += '. Which one would you like to hear?';
-      cardCategoryList += 'Which one would you like to hear?';
-      return {
-        categoryList,
-        cardCategoryList
-      }
-  },
+  // feedLister: function () {
+  //     // Generate a list of categories to serve several functions
+  //     var categoryList = 'Here are the shows we have: ';
+  //     var cardCategoryList = 'Our Shows: ';
+  //     var index = 0;
+  //     feeds.forEach(function (feeds) {
+  //         categoryList += (++index) + constants.breakTime['100'] + feeds.feed + constants.breakTime['200'];
+  //         cardCategoryList += (index) + ') ' + feeds.feed + ' \n';
+  //     });
+  //     categoryList += '. Which one would you like to hear?';
+  //     cardCategoryList += 'Which one would you like to hear?';
+  //     return {
+  //       categoryList,
+  //       cardCategoryList
+  //     }
+  // },
   cardImage: function (url) {
     return {
       smallImageUrl: url,
@@ -88,7 +88,7 @@ module.exports = {
     }
     return chosen;
 
-  }
+  },
   // feedPicker: function (intentSlot, callback) {
   //     /*
   //      *  Extract the category requested by the user
