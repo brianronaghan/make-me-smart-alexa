@@ -2,6 +2,139 @@
     "interactionModel":{
         "languageModel":{
             "invocationName":"make me smart",
+            "intents":[
+                {
+                  "name": "AMAZON.CancelIntent",
+                  "samples": []
+                },
+                {
+                  "name": "AMAZON.HelpIntent",
+                  "samples": []
+                },
+                {
+                  "name": "AMAZON.StopIntent",
+                  "samples": []
+                },
+                {
+                  "name": "AMAZON.NextIntent",
+                  "samples": []
+                },
+                {
+                  "name": "AMAZON.PreviousIntent",
+                  "samples": []
+                },
+                {
+                    "name":"ListExplainers",
+                    "samples":[
+                        "what you got",
+                        "what kind of topics",
+                        "what's up in the world"
+                    ]
+                },
+                {
+                    "name":"FindExplainer",
+                    "slots" : [
+                      {
+                        "name": "topic",
+                        "type": "TOPICS"
+                      }
+                    ],
+                    "samples":[
+                        "about {topic}",
+                        "look up {topic}",
+                        "what about {topic}",
+                        "what {topic} is"
+                    ]
+                },
+                {
+                    "name":"ListEpisodes",
+                    "slots" : [
+                      {
+                        "name": "show",
+                        "type": "SHOW_TITLES"
+                      }
+                    ],
+                    "samples":[
+                        "for episodes of {show}",
+                        "past episodes {show}",
+                        "list episodes of {show}"
+                    ]
+                },
+                {
+                  "name": "PickEpisode",
+                  "slots": [
+                    {
+                      "name": "ordinal",
+                      "type": "ORDINAL"
+                    },
+                    {
+                      "name": "index",
+                      "type": "AMAZON.NUMBER"
+                    }
+                  ],
+                  "samples":[
+                      "play episode number {index}",
+                      "play the {ordinal} episode"
+                  ]
+                },
+                {
+                    "name":"ListShows",
+                    "samples":[
+                        "what shows Marketplace has",
+                        "tell me the shows",
+                        "what shows you got"
+                    ]
+                },
+                {
+                    "name":"PickShow",
+                    "slots": [
+                      {
+                        "name": "ordinal",
+                        "type": "ORDINAL"
+                      },
+                      {
+                        "name": "index",
+                        "type": "AMAZON.NUMBER"
+                      },
+                      {
+                        "name": "feed",
+                        "type": "SHOW_TITLES"
+                      }
+                    ],
+                    "samples":[
+                        "select show number {index}",
+                        "select show {index}",
+                        "select the {ordinal} show",
+                        "select show called {feed}",
+                        "pick show {feed}"
+                    ]
+                },
+                {
+                    "name":"PickItem",
+                    "slots": [
+                      {
+                        "name": "ordinal",
+                        "type": "ORDINAL"
+                      },
+                      {
+                        "name": "index",
+                        "type": "AMAZON.NUMBER"
+                      },
+                      {
+                        "name": "title",
+                        "type": "TITLES_WILDCARD"
+                      }
+                    ],
+                    "samples":[
+                        "select {index}",
+                        "select the {ordinal}",
+                        "select {title}",
+                        "pick {title}",
+                        "{index}",
+                        "{ordinal}"
+                    ]
+                }
+            ],
             "types":[
               {
                 "values": [
@@ -41,7 +174,7 @@
                     }
                   }
                 ],
-                "name": "SHOWS"
+                "name": "SHOW_TITLES"
               },
               {
                 "values" : [
@@ -56,7 +189,7 @@
                     }
                   }
                 ],
-                "name": "TITLES"
+                "name": "TITLES_WILDCARD"
               },
               {
                 "values" : [
@@ -428,86 +561,6 @@
                 ],
                 "name": "ORDINAL"
               }
-            ],
-            "intents":[
-                {
-                  "name": "AMAZON.CancelIntent",
-                  "samples": []
-                },
-                {
-                  "name": "AMAZON.HelpIntent",
-                  "samples": []
-                },
-                {
-                  "name": "AMAZON.StopIntent",
-                  "samples": []
-                },
-                {
-                    "name":"ListExplainers",
-                    "samples":[
-                        "what you got",
-                        "what kind of topics",
-                        "what's up in the world"
-                    ]
-                },
-                {
-                    "name":"FindExplainer",
-                    "slots" : [
-                      {
-                        "name": "topic",
-                        "type": "TOPICS"
-                      }
-                    ],
-                    "samples":[
-                        "about {topic}",
-                        "look up {topic}",
-                        "what about {topic}",
-                        "what {topic} is"
-                    ]
-                },
-                {
-                    "name":"ListEpisodes",
-                    "slots" : [
-                      {
-                        "name": "show",
-                        "type": "SHOWS"
-                      }
-                    ],
-                    "samples":[
-                        "for episodes of {show}",
-                        "past episodes {show}",
-                        "list episodes of {show}"
-                    ]
-                },
-                {
-                  "name": "PickEpisode",
-                  "slots": [
-                    {
-                      "name": "ordinal",
-                      "type": "ORDINAL"
-                    },
-                    {
-                      "name": "index",
-                      "type": "AMAZON.NUMBER"
-                    },
-                    {
-                      "name": "title",
-                      "type": "TITLES"
-                    }
-                  ],
-                  "samples":[
-                      "play episode number {index}",
-                      "play the {ordinal} episode",
-                      "play the episode titled {title}"
-                  ]
-                },
-                {
-                    "name":"ListShows",
-                    "samples":[
-                        "what shows Marketplace has",
-                        "tell me the shows"
-                    ]
-                }
             ]
         }
     }

@@ -25,24 +25,36 @@ module.exports = {
     }
   },
   itemLister: function(items, itemTitlePlural, titleKey, start, chunkLength) {
-    var itemsAudio = `Here are the ${itemTitlePlural} we have. `;
-    var itemsCard = `Here are the ${itemTitlePlural} we have:`;
+    var itemsAudio, itemsCard;
+    if (start === 0) {
+      itemsAudio = itemsCard = `Here are the ${itemTitlePlural} we have: `
+    } else {
+      itemsAudio = itemsCard = '';
+    }
     for (var x = start; x < start + chunkLength; x++) {
       console.log(x, items[x]);
       if (items[x]) {
-        itemsAudio += constants.breakTime['50'] +  `${x+1}, ${items[x][titleKey]}` + constants.breakTime['50'];
+        itemsAudio += constants.breakTime['25'] +  `${x+1}, ${items[x][titleKey]}` + constants.breakTime['25'];
         itemsCard += `${x+1}) ${items[x][titleKey]}`;
       }
     }
-    itemsAudio += 'Choose one!';
-    itemsCard += 'Choose one!';
-    if (start + chunkLength <= items.length-1) { // check math
-      itemsAudio += constants.breakTime['50'] + `or say more to hear the next ${chunkLength} ${itemTitlePlural}`;
-      itemsCard += `or say more to hear the next ${chunkLength} ${itemTitlePlural}`;
-    } else {
-      itemsAudio += "And that's all we got.";
-      itemsCard += "And that's all we got."
-
+    itemsAudio += 'Choose one.';
+    itemsCard += 'Choose one.';
+    if (start == 0) {// if start is 0
+      if (chunkLength < items.length) {// if chunk length is less than total length
+        // add more
+        itemsAudio += constants.breakTime['50'] + `or say next for more ${itemTitlePlural}`;
+        itemsCard += ` or say next for more ${itemTitlePlural} `;
+      }
+    } else {// start != 0
+      if (start + chunkLength < items.length -1) {// if it is start + chunk is < total length
+        // add more
+        itemsAudio += constants.breakTime['50'] + `or say say next for more ${itemTitlePlural}`;
+        itemsCard += ` or say next for more ${itemTitlePlural} `;
+      }
+      // always have previous (if we're gonna do previous)
+      itemsAudio += `or say previous to hear the last ${chunkLength}`;
+      itemsCard += `or say previous to hear the last ${chunkLength}`;
     }
     return {itemsAudio, itemsCard};
   },
