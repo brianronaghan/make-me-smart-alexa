@@ -2,8 +2,8 @@
 var Alexa = require("alexa-sdk");
 var config = require('./config');
 var util = require('./util');
-// For detailed tutorial on how to making a Alexa skill,
-// please visit us at http://alexa.design/build
+var feedHelper = require('./feedHelpers');
+
 var feeds = require('./feeds');
 
 var dynasty = require('dynasty')({ region: process.env.AWS_DEFAULT_REGION });
@@ -11,8 +11,14 @@ var sessions = dynasty.table(config.sessionDBName);
 var itemLister = util.itemLister;
 var itemPicker = util.itemPicker;
 var feedLoader = feedHelper.feedLoader;
+let items = [];
 
 // var users = dynasty.table('makeMeSmart');
+
+var episodes = [];
+var explainers = [];
+
+let showImage;
 
 exports.handler = function(event, context) {
     var alexa = Alexa.handler(event, context);
@@ -25,6 +31,13 @@ exports.handler = function(event, context) {
 };
 
 var handlers = {
+    // 'NewSession': function () {
+    //   if (this.attributes.iterating === 'show') {// seems like a state handler use case?
+    //     this.attributes.showIndex = 0;
+    //   }
+    //   console.log('WILL I THEN HIT the original destination?');
+    //
+    // },
     'LaunchRequest': function () {
       // var params = {
       //   TableName: 'makeMeSmart',
@@ -67,7 +80,6 @@ var handlers = {
             boundThis.emit(':responseReady');
 
           })
-
       }
 
       // docClient.get(session_params, function(err, data) {
@@ -122,7 +134,7 @@ var handlers = {
         var query = this.event.request.intent.slots.topic.value;
         //
         this.attributes.latestSession = this.event.session.sessionId;
-        this.attributes.queries =  this.attributes.queries || [];
+        this.attributes.queries = this.attributes.queries || [];
         this.attributes.queries.push(query);
         console.log('attributes/after', this.attributes);
         // query = 'cheeseburgers'
@@ -132,22 +144,24 @@ var handlers = {
     },
 
 
-    'ListShows': function () {
+    'ListShows': function () { // SHOWS AND ITEMS MIGHT BE EASILY MERGED EVENTUALLY
       console.log('SHOW pick')
-      console.log(this.handler.state)
+      this.attributes.indices = this.attributes.indices || {};
 
-      // var show = this.event.request.intent.slots.show.value;
-      console.log('start list shows', this.attributes.shows_index);
-      this.attributes.iterating = 'shows'; // This might be better done via the statehandler API
+      if (this.event.session.new) {
+        this.attributes.indices.show = 0;
+      }
+      console.log('start list shows', this.attributes.indices.show);
+      this.attributes.iterating = 'show'; // This might be better done via the statehandler API
       // Output the list of all feeds with card
       var image = util.cardImage("https://www.runnersworld.com/sites/runnersworld.com/files/styles/article_main_custom_user_desktop_1x/public/ryssdal200902_200.jpg?itok=hU0uFezE&timestamp=1347392245");
-      if (!this.attributes.shows_index) {
-        this.attributes.shows_index = 0;
+      if (!this.attributes.indices.show) {
+        this.attributes.indices.show = 0;
       }
 
-      var data = itemLister(feeds, 'shows', 'feed', this.attributes.shows_index, config.items_per_prompt['shows']); // HEY: uses item lister
+      var data = itemLister(feeds, 'shows', 'feed', this.attributes.indices.show, config.items_per_prompt['show']); // HEY: uses item lister
 
-      console.log('end list shows', this.attributes.shows_index);
+      console.log('end list shows', this.attributes.indices.show);
       this.emit(':askWithCard', data.itemsAudio, 'what do you want', 'Our shows', data.itemsCard, image );
       this.emit(':responseReady');
 
@@ -155,39 +169,56 @@ var handlers = {
     },
 
     'ListEpisodes': function () {
-      var show = this.event.request.intent.slots.show.value;
-      // or, if there is none, then what? either a default value, or handle the user's favorite yadda yadda
-      console.log('list episodes', show);
-      this.response.speak('epsiodes!')
+      var show = this.event.request.intent.slots.show.value || this.attributes.show;
+      this.attributes.indices = this.attributes.indices || {};
+      this.attributes.iterating = 'episode';
+      this.attributes.indices.episode = this.attributes.indices.episode || 0;
 
-      this.emit(':responseReady');
-      var data = util.itemLister()
+      console.log('list episodes', show);
+      console.log(episodes);
+
+      var data = util.itemLister(episodes, 'episodes', 'title', this.attributes.indices.episode, config.items_per_prompt['episode'])
+      console.log(data)
+      this.emit(':askWithCard', data.itemsAudio, 'what do you want', 'EPISODES ', data.itemsCard, showImage );
+
       // Go into feed
     },
     'PickShow': function() {
       // if feeds are being iterated, should destroy that index
       // slots should be specific. show_title rather than title...
       console.log('SHOW pick')
-      console.log(this.handler.state)
-      //HERE
+      //NOTE: what if we're not currently iterating the shows?
+      console.log('episodes persistence?', episodes);
       var chosen = itemPicker(this.event.request.intent.slots, feeds, 'feed');
-      var image = util.cardImage(chosen.image);
+      var showImage = util.cardImage(chosen.image);
+      this.attributes.show = chosen.feed;
+      this.attributes.indices = this.attributes.indices || {};
+      this.attributes.indices.show = null;
+      this.attributes.indices.episode = 0;
       console.log('CHOSEN ', chosen);
-      feedLoader(chosen.feed, function(err, feedData, what) {
-        // will not wait for card, just to test
+      console.log(this.attributes);
+      console.time('feedload')
+      var boundThis = this;
+      feedLoader(chosen.url, function(err, feedData) {
+
         console.log('err', err)
         console.log('feedData', feedData)
-        console.log('jsonified', what)
+        episodes = feedData;
 
-        this.emit(
+        // will not wait for card, must use progressive RESPONSE
+        console.timeEnd('feedload')
+        boundThis.emit(
           ':askWithCard',
-          `You chose ${chosen.feed}. Should I play the latest episode or list them?`,
+          `You chose ${chosen.feed}. Should I play the latest episode or list ${feedData.length} episodes?`,
           'Say play latest or list episodes.',
           'Selected Show: ',
           `${chosen.feed}: Say play latest or list episodes`,
-          image
+          showImage
         );
       });
+
+
+
     },
 
     'PickEpisode': function () {
@@ -203,20 +234,20 @@ var handlers = {
     'SessionEndedRequest' : function() {
       // save the session i guess
       // console.log('Session ended with reason: ' + this.event.request.reason);
-      this.attributes.shows_index = null;
+      this.attributes.indices.show = null;
       this.emit(':saveState', true);
 
     },
     'AMAZON.NextIntent' : function () { // we'll have to handle for iterating through shows, eps and explainers separaterly
-      this.attributes.shows_index += config.items_per_prompt['shows'];
-      console.log("after NEXT FIRES", this.attributes.shows_index);
+      this.attributes.indices[this.attributes.iterating] += config.items_per_prompt[this.attributes.iterating];
+      console.log("after NEXT FIRES", this.attributes.indices);
       this.emit(':saveState', true);
-
+      // needs to handle different items being iterated
       this.emit('ListShows');
     },
     'AMAZON.PreviousIntent' : function () {
-      this.attributes.shows_index -= config.items_per_prompt['shows'] ;
-      console.log('after PREVIOUS FIRES',this.attributes.shows_index)
+      this.attributes.indices[this.attributes.iterating] -= config.items_per_prompt[this.attributes.iterating];
+      console.log('after PREVIOUS FIRES',this.attributes.indices)
       this.emit(':saveState', true);
 
       console.log("PREVIOUS FIRES ");

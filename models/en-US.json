@@ -57,7 +57,8 @@
                     "samples":[
                         "for episodes of {show}",
                         "past episodes {show}",
-                        "list episodes of {show}"
+                        "list episodes of {show}",
+                        "list episodes"
                     ]
                 },
                 {

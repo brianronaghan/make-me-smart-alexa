@@ -4,9 +4,9 @@ var config = {
     appId : "amzn1.ask.skill.20034481-27aa-4d91-8a6c-c52ea4a0d377",
     // TODO Add an appropriate welcome message.
     items_per_prompt : {
-      shows: 4,
-      explainers: 3,
-      episodes: 5,
+      show: 4,
+      explainer: 3,
+      episode: 5,
     },
     // TODO Add the s3 Bucket Name, dynamoDB Table Name and Region
     // dynamoDBTableName : 'session_saves'
