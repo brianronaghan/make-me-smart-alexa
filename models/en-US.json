@@ -47,7 +47,7 @@
                     ]
                 },
                 {
-                    "name":"ListEpisodes",
+                    "name":"List_episodes",
                     "slots" : [
                       {
                         "name": "show",
@@ -71,15 +71,26 @@
                     {
                       "name": "index",
                       "type": "AMAZON.NUMBER"
+                    },
+                    {
+                      "name": "show_title",
+                      "type": "SHOW_TITLES"
+                    },
+                    {
+                      "name": "title",
+                      "type": "TITLES_WILDCARD"
                     }
                   ],
                   "samples":[
-                      "play episode number {index}",
-                      "play the {ordinal} episode"
+                      "play the latest episode of {show_title}",
+                      "play the latest {show_title}",
+                      "play episode {index}",
+                      "play the {ordinal} episode",
+                      "play episode called {title}"
                   ]
                 },
                 {
-                    "name":"ListShows",
+                    "name":"List_shows",
                     "samples":[
                         "what shows Marketplace has",
                         "tell me the shows",

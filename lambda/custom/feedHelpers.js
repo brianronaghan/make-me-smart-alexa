@@ -7,12 +7,17 @@ var striptags = require('striptags');
 
 module.exports = {
   feedLoader: function (feedUrl, cb) {
+    console.time('feed-response');
+    console.time('feed-end');
+
     var req = request(feedUrl);
     var feedparser = new FeedParser(null);
     var items = [];
     req.on('response', function (res) {
+      console.timeEnd('feed-response');
+
+
         var stream = this;
-        console.log(res.statusCode)
 
         if (res.statusCode === 200) {
             stream.pipe(feedparser);
@@ -33,7 +38,7 @@ module.exports = {
         while (item = stream.read()) {
             var feedItem = {};
             // Process feedItem item and push it to items data if it exists
-            // console.log("ITEM ", item);
+            console.log("ITEM from RSS, what do want to keep? ", item);
             if (item['title'] && item['date']) {
               // console.log("ITEM ", item)
                 feedItem['title'] = item['title'];
@@ -72,6 +77,8 @@ module.exports = {
 
     // All items parsed. Store items in S3 and return items
     feedparser.on('end', function () {
+      console.timeEnd('feed-end');
+
         var count = 0;
         // do I need to sort?
         items.sort(function (a, b) {

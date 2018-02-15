@@ -1,5 +1,7 @@
+var Alexa = require("alexa-sdk");
 var feeds = require('./feeds');
 var constants = require('./constants');
+var request = require('request');
 
 module.exports = {
   // feedLister: function () {
@@ -18,6 +20,43 @@ module.exports = {
   //       cardCategoryList
   //     }
   // },
+  sendProgressive: function (endpoint, requestId, accessToken, speech, cb) {
+    const ds = new Alexa.services.DirectiveService();
+    const directive = new Alexa.directives.VoicePlayerSpeakDirective(requestId, speech);
+    console.log('dir', directive);
+
+    const progressiveResponse = ds.enqueue(directive, endpoint, accessToken)
+      .then(function (what) {
+        console.log('after return ', what);
+        cb(null, what)
+      })
+      .catch((err) => {
+        console.log('err', JSON.stringify(err, null, 2));
+        cb(err, null)
+      });
+    // request.post({
+    //   url: endpoint,
+    //   headers: {
+    //     'Content-Type': 'application/json',
+    //     'Authorization': `Bearer ${accessToken}`
+    //   },
+    //   form: {
+    //     "header": {
+    //       "requestId": requestId,
+    //
+    //     },
+    //     "directive":{
+    //       "type":"VoicePlayer.Speak",
+    //       "speech":speech
+    //     }
+    //   }
+    // }, function(err, resp, body) {
+    //   console.log('err', JSON.stringify(err, null, 2));
+    //   console.log(resp);
+    //   console.log(body)
+    //   cb()
+    // });
+  },
   cardImage: function (url) {
     return {
       smallImageUrl: url,
@@ -27,7 +66,8 @@ module.exports = {
   itemLister: function(items, itemTitlePlural, titleKey, start, chunkLength) {
     var itemsAudio, itemsCard;
     if (start === 0) {
-      itemsAudio = itemsCard = `Here are the ${itemTitlePlural} we have: `
+      itemsAudio = `Here are the ${itemTitlePlural} we have: `
+      itemsCard = '';
     } else {
       itemsAudio = itemsCard = '';
     }
@@ -49,7 +89,7 @@ module.exports = {
     } else {// start != 0
       if (start + chunkLength < items.length -1) {// if it is start + chunk is < total length
         // add more
-        itemsAudio += constants.breakTime['50'] + `or say say next for more ${itemTitlePlural}`;
+        itemsAudio += constants.breakTime['50'] + `or say next for more ${itemTitlePlural}`;
         itemsCard += ` or say next for more ${itemTitlePlural} `;
       }
       // always have previous (if we're gonna do previous)
@@ -77,7 +117,7 @@ module.exports = {
         }
         index--;
     } else if (intentSlot && intentSlot[choiceKey] && intentSlot[choiceKey].value) {
-        index = itemNames.indexOf(intentSlot[choiceKey].value.toLowerCase())
+        index = itemNames.indexOf(intentSlot[choiceKey].value.toLowerCase());
     } else {
         index = -1;
     }
