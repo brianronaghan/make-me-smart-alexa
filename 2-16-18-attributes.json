@@ -1,0 +1,144 @@
+{
+    "indices": {
+        "show": 4,
+        "episode": 3
+    },
+    "iterating": "show",
+    "show": "Marketplace Tech",
+    "playing": {
+        "progress": -1,
+        "type": "episode",
+        "title": "02/09/2018: Can we blame algorithms for market volatility?",
+        "url": "https://play.podtrac.com/APM-MarketplaceTechReport/play.publicradio.org/alexa/d/podcast/marketplace/tech_report/2018/02/09/tech_20180209_pod_128.mp3",
+        "status": "finished",
+        "token": "http://www.marketplace.org/shows/marketplace-tech/02092018-can-we-blame-algorithms-market-volatility"
+    },
+    "history": {
+        "http://www.marketplace.org/shows/marketplace-morning-report/02162018-us-edition": {
+            "events": [
+                {
+                    "event": "start",
+                    "progress": 0,
+                    "timestamp": 1518820064686
+                },
+                {
+                    "event": "stop",
+                    "progress": 25312,
+                    "timestamp": 1518820090323
+                },
+                {
+                    "event": "resume",
+                    "progress": 25328,
+                    "timestamp": 1518820114384
+                },
+                {
+                    "event": "stop",
+                    "progress": 49920,
+                    "timestamp": 1518820139009
+                },
+                {
+                    "event": "resume",
+                    "progress": 49936,
+                    "timestamp": 1518820219607
+                },
+                {
+                    "event": "stop",
+                    "progress": 107536,
+                    "timestamp": 1518820277290
+                },
+                {
+                    "event": "resume",
+                    "progress": 107552,
+                    "timestamp": 1518820306666
+                },
+                {
+                    "event": "stop",
+                    "progress": 172496,
+                    "timestamp": 1518820371583
+                },
+                {
+                    "event": "resume",
+                    "progress": 172512,
+                    "timestamp": 1518820498949
+                },
+                {
+                    "event": "stop",
+                    "progress": 196947,
+                    "timestamp": 1518820523603
+                },
+                {
+                    "event": "resume",
+                    "progress": 196960,
+                    "timestamp": 1518820549623
+                },
+                {
+                    "event": "stop",
+                    "progress": 218912,
+                    "timestamp": 1518820571724
+                },
+                {
+                    "event": "resume",
+                    "progress": 218912,
+                    "timestamp": 1518820589608
+                },
+                {
+                    "event": "finish",
+                    "progress": 393965,
+                    "timestamp": 1518820764745
+                },
+                {
+                    "event": "resume",
+                    "progress": 218779,
+                    "timestamp": 1518820906482
+                },
+                {
+                    "event": "stop",
+                    "progress": 236658,
+                    "timestamp": 1518820924545
+                }
+            ],
+            "status": "stopped"
+        },
+        "http://www.marketplace.org/shows/marketplace-tech/02092018-can-we-blame-algorithms-market-volatility": {
+            "events": [
+                {
+                    "event": "start",
+                    "progress": 0,
+                    "timestamp": 1518821572063
+                },
+                {
+                    "event": "stop",
+                    "progress": 63888,
+                    "timestamp": 1518821636043
+                },
+                {
+                    "event": "resume",
+                    "progress": 63888,
+                    "timestamp": 1518821652983
+                },
+                {
+                    "event": "stop",
+                    "progress": 154752,
+                    "timestamp": 1518821743944
+                },
+                {
+                    "event": "resume",
+                    "progress": 154768,
+                    "timestamp": 1518821819529
+                },
+                {
+                    "event": "finish",
+                    "progress": 332292,
+                    "timestamp": 1518821997054
+                }
+            ],
+            "status": "finished"
+        }
+    },
+    "queries": [
+        "okay",
+        "interest rates",
+        "yeah"
+    ],
+    "latestSession": "amzn1.echo-api.session.8db99e6d-635f-4ddf-b870-006b7e4708e2"
+}

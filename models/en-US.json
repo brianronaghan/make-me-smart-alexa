@@ -128,7 +128,22 @@
                       "play the latest {show_title}",
                       "play episode {index}",
                       "play the {ordinal} episode",
-                      "play episode called {title}"
+                      "play episode called {title}",
+                      "pick the latest episode of {show_title}",
+                      "pick the latest {show_title}",
+                      "pick episode {index}",
+                      "pick the {ordinal} episode",
+                      "pick episode called {title}",
+                      "choose the latest episode of {show_title}",
+                      "choose the latest {show_title}",
+                      "choose episode {index}",
+                      "choose the {ordinal} episode",
+                      "choose episode called {title}",
+                      "latest episode of {show_title}",
+                      "episode titled {show_title}",
+                      "episode number {index}",
+                      "the {ordinal} episode",
+                      "episode called {title}"
                   ]
                 },
                 {
@@ -136,7 +151,8 @@
                     "samples":[
                         "what shows Marketplace has",
                         "tell me the shows",
-                        "what shows you got"
+                        "what shows you got",
+                        "shows"
                     ]
                 },
                 {
@@ -156,11 +172,14 @@
                       }
                     ],
                     "samples":[
+                        "pick show number {index}",
+                        "pick the {ordinal} show",
                         "select show number {index}",
                         "select show {index}",
                         "select the {ordinal} show",
                         "select show called {feed}",
-                        "pick show {feed}"
+                        "pick show {feed}",
+                        "show {feed}"
                     ]
                 }
             ],

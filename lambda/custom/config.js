@@ -6,7 +6,7 @@ var config = {
     items_per_prompt : {
       show: 4,
       explainer: 3,
-      episode: 5,
+      episode: 3,
     },
     // TODO Add the s3 Bucket Name, dynamoDB Table Name and Region
     // dynamoDBTableName : 'session_saves'

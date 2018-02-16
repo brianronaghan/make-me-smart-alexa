@@ -116,6 +116,8 @@ module.exports = {
             index = parseInt(str);
         }
         index--;
+    } else if (typeof intentSlot === 'string') {
+        index = itemNames.indexOf(intentSlot.toLowerCase());
     } else if (intentSlot && intentSlot[choiceKey] && intentSlot[choiceKey].value) {
         index = itemNames.indexOf(intentSlot[choiceKey].value.toLowerCase());
     } else {

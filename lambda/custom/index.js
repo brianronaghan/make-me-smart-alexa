@@ -4,6 +4,7 @@ var config = require('./config');
 var util = require('./util');
 var feedHelper = require('./feedHelpers');
 var feeds = require('./feeds');
+var audioEventHandlers = require('./audioEventHandlers');
 
 var dynasty = require('dynasty')({ region: process.env.AWS_DEFAULT_REGION });
 var sessions = dynasty.table(config.sessionDBName);
@@ -25,22 +26,28 @@ exports.handler = function(event, context) {
     var alexa = Alexa.handler(event, context);
     alexa.appId = config.appId;
     alexa.dynamoDBTableName = config.dynamoDBTableName;
-    alexa.registerHandlers(handlers);
+    alexa.registerHandlers(handlers, audioEventHandlers);
 
 
     alexa.execute();
 };
 
 var handlers = {
-    'NewSession': function () {
-      console.log('new session ', JSON.stringify(this.event, null, 2));
-      if (this.attributes.iterating === 'show') {// seems like a state handler use case?
-        this.attributes.showIndex = 0;
-      }
-      console.log('WILL I THEN HIT the original destination?');
-      this.emit(this.event.request.intent.name);
-
-    },
+    // 'NewSession': function () {
+    //   console.log('new session ', JSON.stringify(this.event, null, 2));
+    //   if (this.attributes.iterating === 'show') {// seems like a state handler use case?
+    //     this.attributes.showIndex = 0;
+    //   }
+    // NOTE: I can easily do this and redirect... but MOST requests will be new session, so to what end?
+    //   if (this.event.request.type === 'LaunchRequest') {
+    //     console.log('WILL I THEN HIT the original destination?');
+    //
+    //   } else {
+    //
+    //   }
+    //   this.emit(this.event.request.intent.name);
+    //
+    // },
     'LaunchRequest': function () {
       // var params = {
       //   TableName: 'makeMeSmart',
@@ -51,11 +58,10 @@ var handlers = {
       //   Key: {'userId': this.event.session.user.userId, sessionStart: this.event.request.timestamp}
       // };
       this.attributes.latestSession = this.event.session.sessionId;
-
+      console.log(JSON.stringify(this.attributes, null, 2));
       var boundThis = this;
-      console.log("WTF DOG  ", this.event.session.user.userId);
-      console.log('MY USER ATTRIBUTE', this.attributes);
-      console.log('sesh id ', boundThis.event.session.sessionId);
+      // console.log('MY USER ATTRIBUTE', this.attributes);
+      // console.log('sesh id ', boundThis.event.session.sessionId);
       if (this.event.session.new) { // can put this in new session right? or no?
         sessions.insert({userId: boundThis.event.session.user.userId, sessionId: boundThis.event.session.sessionId, begin: boundThis.event.request.timestamp, userId:boundThis.event.session.user.userId})
           .then(function(resp){
@@ -198,21 +204,56 @@ var handlers = {
     },
 
     'List_episodes': function () {
+      // SOMETHING IS WRONG, IT IS GOING TO MARKETPLACE
       // TODO: if we get here directly, NOT having gone through 'Pick Show', we need to do some state management
       // (IF do we have a show selected? are we iterating through episodes? Do we have the feed live? We would have to pull the feed
-      console.log('LIST FUCKING EPISODES')
+
       this.attributes.indices = this.attributes.indices || {};
       this.attributes.iterating = 'episode';
       this.attributes.indices.episode = this.attributes.indices.episode || 0;
-      console.log("What'sthe show", this.event.request.intent.slots, this.attributes.show);
-      console.log('EPISODE PERSISTENCE ', episodes);
-      if (!episodes[this.attributes.show]) {
-        // not in cache, gotta fresh pull
+      if (this.event.request.intent.slots && this.event.request.intent.slots.show && this.event.request.intent.slots.show.value) {
+        this.attributes.show = this.event.request.intent.slots.show.value;
       }
-      var feedEpisodes = episodes[this.attributes.show].items;
-      var data = util.itemLister(feedEpisodes, `${this.attributes.iterating}s`, 'title', this.attributes.indices[this.attributes.iterating], config.items_per_prompt[this.attributes.iterating]);
-      console.log('DATA', data)
-      this.emit(':askWithCard', data.itemsAudio, 'what do you want', `${this.attributes.show} episodes:`, data.itemsCard, showImage );
+      this.attributes.show = this.attributes.show || 'Make Me Smart';
+      var boundThis = this;
+
+      console.log("What'sthe show", this.event.request.intent.slots, this.attributes.show);
+      console.log('EPISODE PERSISTENCE ', episodes[this.attributes.show]);
+      console.log(Date.now())
+      console.log('SHOW', this.attributes.show)
+      if (!episodes[this.attributes.show] || episodes[this.attributes.show].pulledAt < (Date.now() - (1000 * 60 * 60))) {
+        // not in cache, gotta fresh pull
+        console.log('fresh pull needed');
+        var chosen = itemPicker(this.attributes.show, feeds, 'feed');
+        var showImage = util.cardImage(chosen.image);
+
+        sendProgressive(
+          this.event.context.System.apiEndpoint, // no need to add directives params
+          this.event.request.requestId,
+          this.event.context.System.apiAccessToken,
+          `Let me check for new episodes of ${chosen.feed}.`,
+          function (err, thing) {
+            console.log('uh wtf', err, thing)
+          }
+        );
+        feedLoader(chosen.url, function(err, feedData) {
+          episodes[chosen.feed] = {
+            pulledAt: Date.now(),
+            items:feedData
+          }
+          var data = util.itemLister(feedData, `${boundThis.attributes.iterating}s`, 'title', boundThis.attributes.indices[boundThis.attributes.iterating], config.items_per_prompt[boundThis.attributes.iterating]);
+
+          boundThis.emit(':askWithCard', data.itemsAudio, 'what do you want', `${this.attributes.show} episodes:`, data.itemsCard, showImage );
+
+        });
+      } else {
+        console.log("cached");
+        var feedEpisodes = episodes[this.attributes.show].items;
+        var data = util.itemLister(feedEpisodes, `${this.attributes.iterating}s`, 'title', this.attributes.indices[this.attributes.iterating], config.items_per_prompt[this.attributes.iterating]);
+        console.log('DATA', data)
+        boundThis.emit(':askWithCard', data.itemsAudio, 'what do you want', `${this.attributes.show} episodes:`, data.itemsCard, showImage );
+      }
+
 
       // Go into feed
     },
@@ -223,6 +264,7 @@ var handlers = {
       //NOTE: what if we're not currently iterating the shows IE. someone just says "CHOOSE show x"?
       // GOTTA HANDLE FOR THAT
       // NOTE: currently putting show loading behind 1 hour cache... on testing the sendProgressive takes just as long as the damn lookup in most of the cases, so this might not be worth it.
+      console.log("PICK SHOW");
       var chosen = itemPicker(this.event.request.intent.slots, feeds, 'feed');
       var showImage = util.cardImage(chosen.image);
       this.attributes.show = chosen.feed;
@@ -275,10 +317,27 @@ var handlers = {
 
 
     },
+    //
+    // 'PlayLatestEpisode' : function () {
+    //
+    // },
+    // {
+    //   "name": "PlayLatestEpisode",
+    //   "slots": [
+    //     {
+    //       "name": "show_title",
+    //       "type": "SHOW_TITLES"
+    //     },
+    //   ],
+    //   "samples":[
+    //       "play the latest episode of {show_title}",
+    //       "play the latest {show_title}",
+    //       "for the latest episode",
+    //   ]
+    //
+    //
+    // },
 
-    'ListItems': function () {
-      // possible future catch all?
-    },
 
     'PickEpisode': function () {
       // need out of bounds error on numbers, god forbid look up by title.
@@ -289,6 +348,7 @@ var handlers = {
       // if not iterating EPISODES
         // slots: show_title should be there
         // if not, just either pick last show, or default to whatever we want.
+      // need to handle if the session is over
       var show = this.attributes.show
       var chosenEp = itemPicker(this.event.request.intent.slots, episodes[show].items, 'title');
 
@@ -306,53 +366,35 @@ var handlers = {
       //   showImage
       // );
       this.response.speak(`Playing ${chosenEp.title}`);
-      var playDirective = {
-        "type": "AudioPlayer.Play",
-        "playBehavior": "REPLACE_ALL",
-        "audioItem": {
-          "stream": {
-            "url": chosenEp.audio.url,
-            "token": chosenEp.guid,
-            "offsetInMilliseconds": 0
-          }
-        }
+      // var playDirective = {
+      //   "type": "AudioPlayer.Play",
+      //   "playBehavior": "REPLACE_ALL",
+      //   "audioItem": {
+      //     "stream": {
+      //       "url": chosenEp.audio.url,
+      //       "token": chosenEp.guid,
+      //       "offsetInMilliseconds": 0
+      //     }
+      //   }
+      // };
+
+      this.attributes.playing = {
+        status: 'requested',
+        type: 'episode',
+        title: chosenEp.title,
+        url: chosenEp.audio.url,
+        token: chosenEp.guid,
+        progress: -1
       };
       this.response.audioPlayerPlay('REPLACE_ALL', chosenEp.audio.url, chosenEp.guid, null, 0);
       this.emit(':responseReady');
 
     },
+    'FinishedHandler': function () {
+      console.log('WE FINISHED!', this.attributes.playing);
+      this.response.speak('You and me are done professionally, man');
 
-    // PickItem: function () {
-    //   console.log('general pick')
-    //   // should I be using state handlers for iterating through each type of item?
-    //
-    // },
-
-    /* {
-        "name":"PickItem",
-        "slots": [
-          {
-            "name": "ordinal",
-            "type": "ORDINAL"
-          },
-          {
-            "name": "index",
-            "type": "AMAZON.NUMBER"
-          },
-          {
-            "name": "title",
-            "type": "TITLES_WILDCARD"
-          }
-        ],
-        "samples":[
-            "select {index}",
-            "select the {ordinal}",
-            "select {title}",
-            "pick {title}",
-            "{index}",
-            "{ordinal}"
-        ]
-    } */
+    },
 
     'SessionEndedRequest' : function() {
       // save the session i guess
@@ -368,6 +410,7 @@ var handlers = {
     // NEXT AND PREVIOUS: for now, will call explicit listEntity functions for each.
     // For now, will allow us
     'AMAZON.NextIntent' : function () {
+      // handle in play mode... I guess
       this.attributes.indices[this.attributes.iterating] += config.items_per_prompt[this.attributes.iterating];
       console.log("after NEXT FIRES", this.attributes.indices);
       this.emit(':saveState', true);
@@ -385,17 +428,37 @@ var handlers = {
 
     'AMAZON.PauseIntent' : function () {
       //
-      console.log('pause');
+        console.log('pause', JSON.stringify(this.event.context, null, 2));
+        // this.event.context.AudioPlayer.offsetInMilliseconds
+        this.attributes.playing['progress'] = this.event.context.AudioPlayer.offsetInMilliseconds;
+        this.attributes.playing['status'] = 'paused';
+        this.response.audioPlayerStop();
+        this.emit(':responseReady');
+
     },
 
     'AMAZON.ResumeIntent' : function () {
       //
-      console.log('resume')
+      console.log('resume', this.attributes.playing)
+      // this.response.audioPlayerPlay('REPLACE_ALL', chosenEp.audio.url, chosenEp.guid, null, this.attributes.progress);
+      var playing = this.attributes.playing;
+      // Probably don't need this rsume message?
+      this.response.speak(`Resuming ${playing.title}`);
+      this.response.audioPlayerPlay('REPLACE_ALL', playing.url, playing.token, null, playing.progress);
+
+      this.emit(':responseReady');
+
     },
 
     'AMAZON.StopIntent' : function() {
-        console.log('built in ')
-        this.response.speak('stop');
+        console.log('built in STOP')
+        this.attributes.playing['progress'] = this.event.context.AudioPlayer.offsetInMilliseconds;
+        this.attributes.playing['status'] = 'stopped';
+
+        // We should say stopped rather than paused?
+        this.response.audioPlayerStop();
+        this.response.speak("I STOPPED it for you.");
+
         this.emit(':responseReady');
     },
     'AMAZON.HelpIntent' : function() {
