@@ -32,13 +32,15 @@ exports.handler = function(event, context) {
 };
 
 var handlers = {
-    // 'NewSession': function () {
-    //   if (this.attributes.iterating === 'show') {// seems like a state handler use case?
-    //     this.attributes.showIndex = 0;
-    //   }
-    //   console.log('WILL I THEN HIT the original destination?');
-    //
-    // },
+    'NewSession': function () {
+      console.log('new session ', JSON.stringify(this.event, null, 2));
+      if (this.attributes.iterating === 'show') {// seems like a state handler use case?
+        this.attributes.showIndex = 0;
+      }
+      console.log('WILL I THEN HIT the original destination?');
+      this.emit(this.event.request.intent.name);
+
+    },
     'LaunchRequest': function () {
       // var params = {
       //   TableName: 'makeMeSmart',
@@ -131,18 +133,9 @@ var handlers = {
       //
       // this.emit(':responseReady');
     },
-
-    'List_explainers': function () {
-      console.log('list Explainers')
-      console.log(this);
-
-      this.response.speak('we got some Explainers!')
-
-      this.emit(':responseReady');
-
-    },
     'FindExplainer': function () {
-        var query = this.event.request.intent.slots.topic.value;
+        console.log("find explainer ", JSON.stringify(this.event.request,null,2));
+        var query = this.event.request.intent.slots.query.value || this.event.request.intent.slots.wildcard.value;
         //
         this.attributes.latestSession = this.event.session.sessionId;
         this.attributes.queries = this.attributes.queries || [];
@@ -153,6 +146,28 @@ var handlers = {
             .cardRenderer(`here's what i got on ${query}.`);
         this.emit(':responseReady');
     },
+
+    'List_explainers': function () {
+      console.log('list Explainers')
+      console.log(JSON.stringify(this.event.request, null, 2));
+
+      this.response.speak('we got some Explainers!')
+
+      this.emit(':responseReady');
+
+    },
+    // "what topics it has",
+    // "what's up in the world",
+    // "what I should know",
+    // "list explainers",
+    // "list all explainers",
+    // "list the explainers",
+    // "all explainers",
+    // "explainer list",
+    // "explainers",
+    // "list topics",
+    // "list all topics"
+
 
 
     'List_shows': function () { // SHOWS AND ITEMS MIGHT BE EASILY MERGED EVENTUALLY
@@ -185,6 +200,7 @@ var handlers = {
     'List_episodes': function () {
       // TODO: if we get here directly, NOT having gone through 'Pick Show', we need to do some state management
       // (IF do we have a show selected? are we iterating through episodes? Do we have the feed live? We would have to pull the feed
+      console.log('LIST FUCKING EPISODES')
       this.attributes.indices = this.attributes.indices || {};
       this.attributes.iterating = 'episode';
       this.attributes.indices.episode = this.attributes.indices.episode || 0;
@@ -280,23 +296,64 @@ var handlers = {
       console.log('slots baby', this.event.request.intent.slots);
       console.log(chosenEp);
       /// no image???
-      this.emit(
-        ':askWithCard',
-        `${chosenEp.title}`,
-        'should be playin',
-        `${this.attributes.show}`,
-        `${chosenEp.title} shouold be playing ${chosenEp.date} there are ${episodes[show].items.length} others.`,
-        showImage
-      );
-
+      console.log('response', this.response)
+      // this.emit(
+      //   ':askWithCard',
+      //   `${chosenEp.title}`,
+      //   'should be playin',
+      //   `${this.attributes.show}`,
+      //   `${chosenEp.title} shouold be playing ${chosenEp.date} there are ${episodes[show].items.length} others.`,
+      //   showImage
+      // );
+      this.response.speak(`Playing ${chosenEp.title}`);
+      var playDirective = {
+        "type": "AudioPlayer.Play",
+        "playBehavior": "REPLACE_ALL",
+        "audioItem": {
+          "stream": {
+            "url": chosenEp.audio.url,
+            "token": chosenEp.guid,
+            "offsetInMilliseconds": 0
+          }
+        }
+      };
+      this.response.audioPlayerPlay('REPLACE_ALL', chosenEp.audio.url, chosenEp.guid, null, 0);
+      this.emit(':responseReady');
 
     },
 
-    PickItem: function () {
-      console.log('general pick')
-      // should I be using state handlers for iterating through each type of item?
+    // PickItem: function () {
+    //   console.log('general pick')
+    //   // should I be using state handlers for iterating through each type of item?
+    //
+    // },
 
-    },
+    /* {
+        "name":"PickItem",
+        "slots": [
+          {
+            "name": "ordinal",
+            "type": "ORDINAL"
+          },
+          {
+            "name": "index",
+            "type": "AMAZON.NUMBER"
+          },
+          {
+            "name": "title",
+            "type": "TITLES_WILDCARD"
+          }
+        ],
+        "samples":[
+            "select {index}",
+            "select the {ordinal}",
+            "select {title}",
+            "pick {title}",
+            "{index}",
+            "{ordinal}"
+        ]
+    } */
+
     'SessionEndedRequest' : function() {
       // save the session i guess
       console.log('Session ended with reason: ' + this.event.request.reason);
@@ -326,8 +383,18 @@ var handlers = {
       this.emit(`List_${this.attributes.iterating}s`);
     },
 
+    'AMAZON.PauseIntent' : function () {
+      //
+      console.log('pause');
+    },
+
+    'AMAZON.ResumeIntent' : function () {
+      //
+      console.log('resume')
+    },
 
     'AMAZON.StopIntent' : function() {
+        console.log('built in ')
         this.response.speak('stop');
         this.emit(':responseReady');
     },

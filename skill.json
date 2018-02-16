@@ -28,7 +28,12 @@
         "endpoint": {
           "sourceDir": "lambda/custom",
           "uri": "arn:aws:lambda:us-east-1:881439228984:function:ask-custom-make-me-smart-default"
-        }
+        },
+        "interfaces": [
+          {
+            "type": "AUDIO_PLAYER"
+          }
+        ]
       }
     },
     "manifestVersion": "1.0",

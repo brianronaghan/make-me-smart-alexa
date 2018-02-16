@@ -41,6 +41,7 @@ module.exports = {
             console.log("ITEM from RSS, what do want to keep? ", item);
             if (item['title'] && item['date']) {
               // console.log("ITEM ", item)
+                feedItem['guid'] = item['guid'];
                 feedItem['title'] = item['title'];
                 feedItem['title'] = entities.decode(striptags(feedItem['title']));
                 feedItem['title'] = feedItem['title'].trim();
@@ -58,7 +59,7 @@ module.exports = {
                   for(var x=0; x<item['enclosures'].length; x++) {
                     var enclosure = item['enclosures'][x];
                     if (enclosure.type === 'audio/mpeg') {
-                      feedItem['podcast'] = enclosure;
+                      feedItem['audio'] = enclosure;
                       break;
                     }
                   }
@@ -70,6 +71,11 @@ module.exports = {
                 if (item['image'] && item['image'].url) {
                     feedItem['imageUrl'] = item['image'].url;
                 }
+
+                if (item['meta'] && item['meta']['image'] && item['meta']['image'].url) {
+                    feedItem['imageUrl'] = item['meta']['image'].url;
+                }
+
                 items.push(feedItem);
             }
         }

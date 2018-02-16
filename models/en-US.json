@@ -24,26 +24,68 @@
                   "samples": []
                 },
                 {
-                    "name":"ListExplainers",
-                    "samples":[
-                        "what you got",
-                        "what kind of topics",
-                        "what's up in the world"
-                    ]
+                  "name": "AMAZON.PauseIntent",
+                  "samples": []
+                },
+                {
+                  "name": "AMAZON.ResumeIntent",
+                  "samples": []
                 },
                 {
                     "name":"FindExplainer",
                     "slots" : [
                       {
-                        "name": "topic",
+                        "name": "query",
+                        "type": "AMAZON.SearchQuery"
+                      },
+                      {
+                        "name": "wildcard",
                         "type": "TOPICS"
                       }
                     ],
                     "samples":[
-                        "about {topic}",
-                        "look up {topic}",
-                        "what about {topic}",
-                        "what {topic} is"
+                        "make me smart",
+                        "make me smart about {query}",
+                        "about {query}",
+                        "to look up {query}",
+                        "what about {query}",
+                        "what {query} is",
+                        "on {query}",
+                        "look up {query}",
+                        "find info on {query}",
+                        "abot {query}",
+                        "a bout {query}",
+                        "define {query}",
+                        "what {query} means",
+                        "what it knows about {query}",
+                        "the dish on {query}",
+                        "for conversations on {query}",
+                        "for content on {query}",
+                        "what's the low down on {query}",
+                        "what it thinks about {query}",
+                        "what Kai and Molly think about {query}",
+                        "what Kai and Molly know about {query}",
+                        "to ask Kai and Molly what {query} is",
+                        "to explain {query}",
+                        "explain {query}",
+                        "uh bout {query}",
+                        "u bout {query}",
+                        "a {query}",
+                        "bout {query}",
+                        "abbot {query}",
+                        "some {query}",
+                        "topic {query}",
+                        "the {query}",
+                        "educate me on {query}",
+                        "a {query}",
+                        "{wildcard}"
+                    ]
+                },
+                {
+                    "name":"List_explainers",
+                    "slots" : [],
+                    "samples":[
+                        "what explainers it has"
                     ]
                 },
                 {
@@ -120,31 +162,6 @@
                         "select show called {feed}",
                         "pick show {feed}"
                     ]
-                },
-                {
-                    "name":"PickItem",
-                    "slots": [
-                      {
-                        "name": "ordinal",
-                        "type": "ORDINAL"
-                      },
-                      {
-                        "name": "index",
-                        "type": "AMAZON.NUMBER"
-                      },
-                      {
-                        "name": "title",
-                        "type": "TITLES_WILDCARD"
-                      }
-                    ],
-                    "samples":[
-                        "select {index}",
-                        "select the {ordinal}",
-                        "select {title}",
-                        "pick {title}",
-                        "{index}",
-                        "{ordinal}"
-                    ]
                 }
             ],
             "types":[
@@ -189,17 +206,38 @@
                 "name": "SHOW_TITLES"
               },
               {
-                "values" : [
+                "name": "PREPOSITIONS",
+                "values": [
                   {
                     "name": {
-                      "value": "What are you talking about"
+                      "value": "for info on"
                     }
                   },
                   {
                     "name": {
-                      "value": "Wednesday"
+                      "value": "about"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "what it knows on"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "what it knows about"
                     }
                   }
+                ]
+              },
+              {
+                "values" : [
+                  {
+                    "name": {
+                      "value": "something"
+                    }
+                  }
+
                 ],
                 "name": "TITLES_WILDCARD"
               },
@@ -207,12 +245,37 @@
                 "values" : [
                   {
                     "name": {
-                      "value": "Stocks"
+                      "value": "the cloud"
                     }
                   },
                   {
                     "name": {
-                      "value": "Interest Rates"
+                      "value": "cloud"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "the fed"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "inflation"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "bonds"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "stocks"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "interest rates"
                     }
                   }
                 ],
