@@ -1,8 +1,11 @@
 'use strict';
 
 var Alexa = require('alexa-sdk');
+var feeds = require('./feeds');
+var feedHelper = require('./feedHelpers');
 
-// Binding audio handlers to PLAY_MODE State since they are expected only in this mode.
+var feedLoader = feedHelper.feedLoader;
+
 var audioEventHandlers = {
     'PlaybackStarted' : function () {
         /*
@@ -10,6 +13,9 @@ var audioEventHandlers = {
          * Confirming that requested audio file began playing.
          * Storing details in dynamoDB using attributes.
          */
+
+        console.log("STARTED", JSON.stringify(this, null,2));
+        // maybe check playing against enqueued? then put in playing and nuke enqueued?
         logPlay.call(this)
         this.emit(':saveState', true);
     },
@@ -19,8 +25,8 @@ var audioEventHandlers = {
          * Confirming that audio file completed playing.
          * Storing details in dynamoDB using attributes.
          */
-
         logFinished.call(this);
+        console.log("WE FINISHED"); // although... hm
         this.emit('FinshedHandler'); // did not work... gotta require it or somethign?
         this.emit(':saveState', true);
     },
@@ -40,6 +46,34 @@ var audioEventHandlers = {
          * Storing details in dynamoDB using attributes.
          * Enqueuing the next audio file.
          */
+         if (this.attributes['enqueued']) {
+             /*
+              * Since AudioPlayer.PlaybackNearlyFinished Directive are prone to be delivered multiple times during the
+              * same audio being played.
+              * If an audio file is already enqueued, exit without enqueuing again.
+              */
+             return this.context.succeed(true);
+         }
+         var chosenShow = itemPicker(this.attributes.show, feeds, 'feed');
+         console.log('nearly finished', chosenShow)
+         feedLoader.call(this, chosenShow, false, function(err, feedData) {
+           var currentEpIndex = feedData.items.findIndex(function(episode) {
+             return episode.guid === this.attriputes.playing.token
+           });
+           var nextEp = feedData.items[currentEpIndex+1];
+           logEnqueue.call(this, nextEp)
+           // do I need to put all the playing data in here or let playback started do it?
+           this.response.audioPlayerPlay('ENQUEUE', nextEp.audio.url, nextEp.guid, this.playing.token, 0);
+           this.emit(':saveState', true);
+
+         })
+
+         // var enqueueToken = this.attributes['enqueuedToken'];
+         // var playBehavior = 'ENQUEUE';
+         // var podcast = audioData[this.attributes['playOrder'][enqueueIndex]];
+         // var expectedPreviousToken = this.attributes['token'];
+         // var offsetInMilliseconds = 0;
+         //
 
         // if (this.attributes['enqueuedToken']) {
         //     /*
@@ -130,6 +164,8 @@ function logStop() {
 function logFinished() {
   nullCheck.call(this)
   this.attributes.playing.status = 'finished';
+  this.attributes['enqueuedToken'] = false;
+
   this.attributes.playing.progress = -1; // or something else? or wipe it out?
   this.attributes.history[this.attributes.playing.token].status = 'finished';
   this.attributes.history[this.attributes.playing.token].events.push({
@@ -150,11 +186,31 @@ function logFail() {
 
 }
 
-function nullCheck () {
+function logEnqueue(nextEp) {
+  nullCheck.call(this, nextEp.guid);
+  this.attributes['enqueued'] = {
+    type: 'episode',
+    title: nextEp.title,
+    url: nextEp.audio.url,
+    token: nextEp.guid,
+    progress: -1
+  };
+  this.attributes.history[nextEp.guid].status = 'enqueued';
+  this.attributes.history[nextEp.guid].events.push({
+    'event': 'enqueued',
+    'timestamp': Date.now(),
+    'progress': -1
+  })
+
+}
+
+
+function nullCheck (token) {
+  var token = token || this.attributes.playing.token;
   this.attributes.history = this.attributes.history || {};
-  this.attributes.history[this.attributes.playing.token] = this.attributes.history[this.attributes.playing.token] || {};
-  this.attributes.history[this.attributes.playing.token].status = this.attributes.history[this.attributes.playing.token].status || 'initiated';
-  this.attributes.history[this.attributes.playing.token].events = this.attributes.history[this.attributes.playing.token].events || []
+  this.attributes.history[token] = this.attributes.history[token] || {};
+  this.attributes.history[token].status = this.attributes.history[token].status || 'initiated';
+  this.attributes.history[token].events = this.attributes.history[token].events || [];
 }
 
 function getToken() {

@@ -32,6 +32,22 @@
                   "samples": []
                 },
                 {
+                  "name": "PlayLatestEpisode",
+                  "slots": [
+                    {
+                      "name": "show",
+                      "type": "SHOW_TITLES"
+                    }
+                  ],
+                  "samples":[
+                      "play the latest episode of {show}",
+                      "play the latest {show}",
+                      "for the latest episode",
+                      "play latest",
+                      "play the latest"
+                  ]
+                },
+                {
                     "name":"FindExplainer",
                     "slots" : [
                       {
@@ -115,32 +131,21 @@
                       "type": "AMAZON.NUMBER"
                     },
                     {
-                      "name": "show_title",
-                      "type": "SHOW_TITLES"
-                    },
-                    {
                       "name": "title",
                       "type": "TITLES_WILDCARD"
                     }
                   ],
                   "samples":[
-                      "play the latest episode of {show_title}",
-                      "play the latest {show_title}",
                       "play episode {index}",
                       "play the {ordinal} episode",
                       "play episode called {title}",
-                      "pick the latest episode of {show_title}",
-                      "pick the latest {show_title}",
                       "pick episode {index}",
                       "pick the {ordinal} episode",
                       "pick episode called {title}",
-                      "choose the latest episode of {show_title}",
-                      "choose the latest {show_title}",
                       "choose episode {index}",
                       "choose the {ordinal} episode",
                       "choose episode called {title}",
-                      "latest episode of {show_title}",
-                      "episode titled {show_title}",
+                      "episode titled {title}",
                       "episode number {index}",
                       "the {ordinal} episode",
                       "episode called {title}"

@@ -8,6 +8,7 @@ var config = {
       explainer: 3,
       episode: 3,
     },
+    cacheExpiry: 1000 * 60 * 60, // 1 hour, but for this user, right? should I persist?
     // TODO Add the s3 Bucket Name, dynamoDB Table Name and Region
     // dynamoDBTableName : 'session_saves'
     dynamoDBTableName: 'makeMeSmart',

@@ -4,7 +4,7 @@ var feeds = [
     {
       'feed' : 'Make Me Smart',
       'image': 'https://img.apmcdn.org/3b52d43387699b5913df1dc0d4a460dcf0dba882/square/cc6709-make-me-smart-tile.jpg',
-      'url' : 'https://feeds.publicradio.org/public_feeds/make-me-smart-with-kai-and-molly/rss/rss'
+      'url' : 'https://feeds.publicradio.org/public_feeds/make-me-smart-with-kai-and-molly/alexa/rss'
     },
     {
         'feed' : 'Marketplace',
@@ -34,12 +34,12 @@ var feeds = [
     {
         'feed' : 'Codebreaker',
         'image': 'https://cms.marketplace.org/sites/default/files/field_image_branding/2015/10/Codebreaker_1400x1400_new.png',
-        'url' : 'https://feeds.publicradio.org/public_feeds/marketplace-pm/alexa/rss'
+        'url' : 'https://feeds.publicradio.org/public_feeds/codebreaker-by-marketplace-and-tech-insider/alexa/rss'
     },
     {
         'feed' : 'Corner Office',
         'image': 'https://cms.marketplace.org/sites/default/files/field_image_branding/2015/06/corner_office_fin.png',
-        'url' : 'https://cms.marketplace.org/podcasts/collections/152161/rss'
+        'url' : 'https://feeds.publicradio.org/public_feeds/corner-office/itunes/rss'
     }
 ];
 

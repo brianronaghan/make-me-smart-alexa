@@ -23,39 +23,15 @@ module.exports = {
   sendProgressive: function (endpoint, requestId, accessToken, speech, cb) {
     const ds = new Alexa.services.DirectiveService();
     const directive = new Alexa.directives.VoicePlayerSpeakDirective(requestId, speech);
-    console.log('dir', directive);
 
     const progressiveResponse = ds.enqueue(directive, endpoint, accessToken)
       .then(function (what) {
-        console.log('after return ', what);
         cb(null, what)
       })
       .catch((err) => {
         console.log('err', JSON.stringify(err, null, 2));
         cb(err, null)
       });
-    // request.post({
-    //   url: endpoint,
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //     'Authorization': `Bearer ${accessToken}`
-    //   },
-    //   form: {
-    //     "header": {
-    //       "requestId": requestId,
-    //
-    //     },
-    //     "directive":{
-    //       "type":"VoicePlayer.Speak",
-    //       "speech":speech
-    //     }
-    //   }
-    // }, function(err, resp, body) {
-    //   console.log('err', JSON.stringify(err, null, 2));
-    //   console.log(resp);
-    //   console.log(body)
-    //   cb()
-    // });
   },
   cardImage: function (url) {
     return {
@@ -63,6 +39,7 @@ module.exports = {
       largeImageUrl: url
     }
   },
+  cleanShowName: cleanShowName,
   itemLister: function(items, itemTitlePlural, titleKey, start, chunkLength) {
     var itemsAudio, itemsCard;
     if (start === 0) {
@@ -117,9 +94,10 @@ module.exports = {
         }
         index--;
     } else if (typeof intentSlot === 'string') {
-        index = itemNames.indexOf(intentSlot.toLowerCase());
+        index = itemNames.indexOf(cleanShowName(intentSlot));
     } else if (intentSlot && intentSlot[choiceKey] && intentSlot[choiceKey].value) {
-        index = itemNames.indexOf(intentSlot[choiceKey].value.toLowerCase());
+        var cleanedSlot = cleanShowName(intentSlot[choiceKey].value);
+        index = itemNames.indexOf(cleanedSlot);
     } else {
         index = -1;
     }
@@ -128,6 +106,7 @@ module.exports = {
     if (index >= 0 && index < choices.length) {
         chosen = choices[index];
     }
+    console.log('WTF', chosen);
     return chosen;
 
   },
@@ -173,3 +152,11 @@ module.exports = {
 
 
 }
+
+function cleanShowName (showString) {
+  var cleanedSlot = showString.toLowerCase();
+  var reg = /market place/i;
+  cleanedSlot = cleanedSlot.replace(reg, 'marketplace');
+  console.log('clean', cleanedSlot)
+  return cleanedSlot;
+};

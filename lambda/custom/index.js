@@ -14,7 +14,7 @@ var sendProgressive = util.sendProgressive;
 
 var feedLoader = feedHelper.feedLoader;
 let items = [];
-
+var cleanShowName = util.cleanShowName;
 // var users = dynasty.table('makeMeSmart');
 
 var episodes = {};
@@ -202,7 +202,9 @@ var handlers = {
 
       // Go into feed
     },
+    'LoadFeed': function () {
 
+    },
     'List_episodes': function () {
       // SOMETHING IS WRONG, IT IS GOING TO MARKETPLACE
       // TODO: if we get here directly, NOT having gone through 'Pick Show', we need to do some state management
@@ -215,44 +217,31 @@ var handlers = {
         this.attributes.show = this.event.request.intent.slots.show.value;
       }
       this.attributes.show = this.attributes.show || 'Make Me Smart';
-      var boundThis = this;
 
-      console.log("What'sthe show", this.event.request.intent.slots, this.attributes.show);
-      console.log('EPISODE PERSISTENCE ', episodes[this.attributes.show]);
-      console.log(Date.now())
-      console.log('SHOW', this.attributes.show)
-      if (!episodes[this.attributes.show] || episodes[this.attributes.show].pulledAt < (Date.now() - (1000 * 60 * 60))) {
-        // not in cache, gotta fresh pull
-        console.log('fresh pull needed');
-        var chosen = itemPicker(this.attributes.show, feeds, 'feed');
-        var showImage = util.cardImage(chosen.image);
+      var chosen = itemPicker(this.attributes.show, feeds, 'feed');
+      var showImage = util.cardImage(chosen.image);
+      console.time('list-episodes-load');
 
-        sendProgressive(
-          this.event.context.System.apiEndpoint, // no need to add directives params
-          this.event.request.requestId,
-          this.event.context.System.apiAccessToken,
-          `Let me check for new episodes of ${chosen.feed}.`,
-          function (err, thing) {
-            console.log('uh wtf', err, thing)
-          }
+      feedLoader.call(this, chosen, true, function(err, feedData) {
+        console.timeEnd('list-episodes-load');
+
+        console.log('LIST EPISODES FEED LOAD cb')
+        var data = util.itemLister(
+          feedData.items,
+          `${this.attributes.iterating}s`,
+          'title',
+          this.attributes.indices[this.attributes.iterating],
+          config.items_per_prompt[this.attributes.iterating]
         );
-        feedLoader(chosen.url, function(err, feedData) {
-          episodes[chosen.feed] = {
-            pulledAt: Date.now(),
-            items:feedData
-          }
-          var data = util.itemLister(feedData, `${boundThis.attributes.iterating}s`, 'title', boundThis.attributes.indices[boundThis.attributes.iterating], config.items_per_prompt[boundThis.attributes.iterating]);
-
-          boundThis.emit(':askWithCard', data.itemsAudio, 'what do you want', `${this.attributes.show} episodes:`, data.itemsCard, showImage );
-
-        });
-      } else {
-        console.log("cached");
-        var feedEpisodes = episodes[this.attributes.show].items;
-        var data = util.itemLister(feedEpisodes, `${this.attributes.iterating}s`, 'title', this.attributes.indices[this.attributes.iterating], config.items_per_prompt[this.attributes.iterating]);
-        console.log('DATA', data)
-        boundThis.emit(':askWithCard', data.itemsAudio, 'what do you want', `${this.attributes.show} episodes:`, data.itemsCard, showImage );
-      }
+        this.emit(':askWithCard', data.itemsAudio, 'what do you want', `${this.attributes.show} episodes:`, data.itemsCard, showImage );
+      });
+      // } else {
+      //   console.log("cached");
+      //   var feedEpisodes = episodes[this.attributes.show].items;
+      //   var data = util.itemLister(feedEpisodes, `${this.attributes.iterating}s`, 'title', this.attributes.indices[this.attributes.iterating], config.items_per_prompt[this.attributes.iterating]);
+      //   console.log('DATA', data)
+      //   boundThis.emit(':askWithCard', data.itemsAudio, 'what do you want', `${this.attributes.show} episodes:`, data.itemsCard, showImage );
+      // }
 
 
       // Go into feed
@@ -264,6 +253,7 @@ var handlers = {
       //NOTE: what if we're not currently iterating the shows IE. someone just says "CHOOSE show x"?
       // GOTTA HANDLE FOR THAT
       // NOTE: currently putting show loading behind 1 hour cache... on testing the sendProgressive takes just as long as the damn lookup in most of the cases, so this might not be worth it.
+      // NOTE: on the device, progressive comes instantly
       console.log("PICK SHOW");
       var chosen = itemPicker(this.event.request.intent.slots, feeds, 'feed');
       var showImage = util.cardImage(chosen.image);
@@ -271,75 +261,66 @@ var handlers = {
       this.attributes.indices = this.attributes.indices || {};
       this.attributes.indices.show = null;
       this.attributes.indices.episode = 0;
-      console.log('CHOSEN ', chosen, 'and do we have it loaded ', episodes[chosen.feed]);
-      // console.log(this.event.request);
-      var boundThis = this;
-      if (episodes[chosen.feed] && episodes[chosen.feed].pulledAt > (Date.now() - (1000 * 60 * 60))) {
-        console.log('within hour cache hit') // this is only if the session stays live though. Think about and whether to put it on user attributes. (MEH, prolly don't want to do that. )
-        boundThis.emit(
-          ':askWithCard',
-          `You chose ${chosen.feed}. Should I play the latest episode or list ${episodes[chosen.feed].items.length} episodes?`,
-          'Say play latest or list episodes.',
-          `${chosen.feed}`,
-          `Say "play latest" to hear the latest episode or "list episodes" to explore ${episodes[chosen.feed].items.length} episodes.`,
-          showImage
-        );
-      } else {
-        // send a message before we fully load the feed
-        sendProgressive(
-          this.event.context.System.apiEndpoint, // no need to add directives params
-          this.event.request.requestId,
-          this.event.context.System.apiAccessToken,
-          `Let me check for new episodes of ${chosen.feed}.`,
-          function (err, thing) {
-            console.log('uh wtf', err, thing)
-          }
-        );
-        console.time('feedload')
-        feedLoader(chosen.url, function(err, feedData) {
-          episodes[chosen.feed] = {
-            pulledAt: Date.now(),
-            items:feedData
-          }
-          boundThis.emit(
-            ':askWithCard',
-            `Okay, I found ${episodes[chosen.feed].items.length} episodes of ${chosen.feed}. Should I play the latest or list them?`,
-            'Say play latest or list episodes.',
-            `${chosen.feed}:`,
-            `Say "play latest" to hear the latest episode or "list episodes" to explore ${episodes[chosen.feed].items.length} episodes.`,
-            showImage
-          );
-          boundThis.emit('List_episodes');
-        });
+      console.time('pick-show-load');
+      feedLoader.call(this, chosen, false, function(err, feedData) {
+        console.timeEnd('pick-show-load');
 
+        console.log('PICK SHOW feed load cb')
+      });
+
+      this.emit(
+        ':askWithCard',
+        `You chose ${chosen.feed}. Should I play the latest episode or list the episodes?`,
+        'Say play latest or list episodes.',
+        `${chosen.feed}`,
+        `Say "play latest" to hear the latest episode or "list episodes" to explore episodes.`,
+        showImage
+      );
+    },
+
+    'PlayLatestEpisode' : function () {
+      if (this.event.request.intent.slots && this.event.request.intent.slots.show && this.event.request.intent.slots.show.value) {
+        this.attributes.show = this.event.request.intent.slots.show.value;
       }
+      var show = this.attributes.show || 'Make Me Smart';
+      var chosenShow = itemPicker(this.attributes.show, feeds, 'feed');
+      var showImage = util.cardImage(chosenShow.image);
+      feedLoader.call(this, chosenShow, false, function(err, feedData) {
+        console.log('PLAY LATEST feed load cb')
+        var chosenEp = feedData.items[0];
+        this.response.speak(`Playing the latest ${chosenShow.feed}, titled ${chosenEp.title}`);
+        this.attributes.playing = {
+          status: 'requested',
+          type: 'episode',
+          title: chosenEp.title,
+          url: chosenEp.audio.url,
+          token: chosenEp.guid,
+          progress: -1
+        };
+        // this.response._responseObject.response.directives = this.response._responseObject.response.directives || [];
+        // this.response._responseObject.response.directives.push({
+        //   "type": "AudioPlayer.Play",
+        //   "playBehavior": "REPLACE_ALL",
+        //   "audioItem": {
+        //     "stream": {
+        //       "token": chosenEp.guid,
+        //       "url": chosenEp.audio.url,
+        //       "offsetInMilliseconds": 0
+        //     }
+        //   }
+        // });
 
+
+        this.response.audioPlayerPlay('REPLACE_ALL', chosenEp.audio.url, chosenEp.guid, null, 0);
+        console.log('PLAY LATEST ', JSON.stringify(this.response,null, 2));
+        this.emit(':responseReady');
+      });
 
 
     },
-    //
-    // 'PlayLatestEpisode' : function () {
-    //
-    // },
-    // {
-    //   "name": "PlayLatestEpisode",
-    //   "slots": [
-    //     {
-    //       "name": "show_title",
-    //       "type": "SHOW_TITLES"
-    //     },
-    //   ],
-    //   "samples":[
-    //       "play the latest episode of {show_title}",
-    //       "play the latest {show_title}",
-    //       "for the latest episode",
-    //   ]
-    //
-    //
-    // },
 
 
-    'PickEpisode': function () {
+    'PickEpisode': function (index) {
       // need out of bounds error on numbers, god forbid look up by title.
       // still have to deal with play latest
       // if iterating == episodes
@@ -350,13 +331,28 @@ var handlers = {
         // if not, just either pick last show, or default to whatever we want.
       // need to handle if the session is over
       var show = this.attributes.show
-      var chosenEp = itemPicker(this.event.request.intent.slots, episodes[show].items, 'title');
-
+      var chosenShow = itemPicker(show, feeds, 'feed');
       console.log('Episode pick - iterating', this.attributes.iterating, ' show ', this.attributes.show);
       console.log('slots baby', this.event.request.intent.slots);
-      console.log(chosenEp);
+      console.log(chosenShow)
+      feedLoader.call(this, chosenShow, false, function(err, feedData) {
+        console.log('PICK EPISODE feed load cb')
+        var chosenEp = itemPicker(this.event.request.intent.slots, feedData.items, 'title');
+        console.log('PICK EPISODE', JSON.stringify(chosenEp, null, 2));
+        this.response.speak(`Playing ${chosenEp.title}`);
+        this.attributes.playing = {
+          status: 'requested',
+          type: 'episode',
+          title: chosenEp.title,
+          url: chosenEp.audio.url,
+          token: chosenEp.guid,
+          progress: -1
+        };
+        this.response.audioPlayerPlay('REPLACE_ALL', chosenEp.audio.url, chosenEp.guid, null, 0);
+        this.emit(':responseReady');
+      });
+
       /// no image???
-      console.log('response', this.response)
       // this.emit(
       //   ':askWithCard',
       //   `${chosenEp.title}`,
@@ -365,7 +361,7 @@ var handlers = {
       //   `${chosenEp.title} shouold be playing ${chosenEp.date} there are ${episodes[show].items.length} others.`,
       //   showImage
       // );
-      this.response.speak(`Playing ${chosenEp.title}`);
+      // this.response.speak(`Playing ${chosenEp.title}`);
       // var playDirective = {
       //   "type": "AudioPlayer.Play",
       //   "playBehavior": "REPLACE_ALL",
@@ -378,16 +374,6 @@ var handlers = {
       //   }
       // };
 
-      this.attributes.playing = {
-        status: 'requested',
-        type: 'episode',
-        title: chosenEp.title,
-        url: chosenEp.audio.url,
-        token: chosenEp.guid,
-        progress: -1
-      };
-      this.response.audioPlayerPlay('REPLACE_ALL', chosenEp.audio.url, chosenEp.guid, null, 0);
-      this.emit(':responseReady');
 
     },
     'FinishedHandler': function () {
@@ -410,6 +396,8 @@ var handlers = {
     // NEXT AND PREVIOUS: for now, will call explicit listEntity functions for each.
     // For now, will allow us
     'AMAZON.NextIntent' : function () {
+      // if playing, find current in feed by token, then increment
+
       // handle in play mode... I guess
       this.attributes.indices[this.attributes.iterating] += config.items_per_prompt[this.attributes.iterating];
       console.log("after NEXT FIRES", this.attributes.indices);
@@ -418,6 +406,7 @@ var handlers = {
     },
     'AMAZON.PreviousIntent' : function () {
       this.attributes.indices[this.attributes.iterating] -= config.items_per_prompt[this.attributes.iterating];
+      // if it's less than zero, reset to zero
       console.log('after PREVIOUS FIRES',this.attributes.indices);
       this.emit(':saveState', true);
 
