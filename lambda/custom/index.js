@@ -190,6 +190,9 @@ var handlers = {
         this.attributes.indices.show = 0;
       }
 
+      const listItemBuilder = new Alexa.templateBuilders.ListItemBuilder();
+      const listTemplateBuilder = new Alexa.templateBuilders.ListTemplate1Builder();
+      // HERE
       var data = itemLister(
         feeds,
         `${this.attributes.iterating}s`,
@@ -197,7 +200,39 @@ var handlers = {
         this.attributes.indices[this.attributes.iterating],
         config.items_per_prompt[this.attributes.iterating]
       );
-      this.emit(':askWithCard', data.itemsAudio, 'what do you want', 'Our shows', data.itemsCard, image );
+      var listItems = feeds.map(function(feed){
+        return {
+          token: feed.url,
+          image: feed.image,
+          textContent: {
+            primaryText: {
+              type: 'PlainText',
+              text: feed.feed
+            },
+            secondaryText: {
+              type: 'RichText',
+              text: "<action value='select-batman' Select me </action>"
+            }
+          }
+        }
+      })
+      console.log(JSON.stringify(listItems, null, 2));
+      var tempTemp = {
+        "type": "Display.RenderTemplate",
+        "template": {
+         "type": "ListTemplate1",
+         "token": "list_shows",
+         "backButton": "HIDDEN",
+         "backgroundImage": "https://cms.marketplace.org/sites/default/files/heroheader.jpg",
+         "title": "Our Shows",
+         "listItems": listItems,
+        }
+      }
+      console.log(JSON.stringify(tempTemp))
+      this.response.renderTemplate(JSON.stringify(tempTemp));
+
+
+      // this.emit(':askWithCard', data.itemsAudio, 'what do you want', 'Our shows', data.itemsCard, image );
       this.emit(':responseReady');
 
       // Go into feed
@@ -312,7 +347,6 @@ var handlers = {
 
 
         this.response.audioPlayerPlay('REPLACE_ALL', chosenEp.audio.url, chosenEp.guid, null, 0);
-        console.log('PLAY LATEST ', JSON.stringify(this.response,null, 2));
         this.emit(':responseReady');
       });
 
@@ -384,7 +418,7 @@ var handlers = {
 
     'SessionEndedRequest' : function() {
       // save the session i guess
-      console.log('Session ended with reason: ' + this.event.request.reason);
+      console.log('Session ended with reason: ' + JSON.stringify(this.event.request, null, 2));
       if(this.attributes.iterating === 'show') {
         if(this.attributes.indices && this.attributes.indices.show) {
           this.attributes.indices.show = 0;

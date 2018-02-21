@@ -140,6 +140,7 @@ module.exports = {
   //         index = itemNames.indexOf(intentSlot.Show.value.toLowerCase())
   //     } else {
   //         index = -1;
+
   //     }
   //
   //     console.log(index, " the index ", choices[index])

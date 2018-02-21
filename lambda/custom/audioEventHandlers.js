@@ -5,7 +5,7 @@ var feeds = require('./feeds');
 var feedHelper = require('./feedHelpers');
 
 var feedLoader = feedHelper.feedLoader;
-
+var util = require('./util')
 var audioEventHandlers = {
     'PlaybackStarted' : function () {
         /*
@@ -54,12 +54,15 @@ var audioEventHandlers = {
               */
              return this.context.succeed(true);
          }
-         var chosenShow = itemPicker(this.attributes.show, feeds, 'feed');
+         console.log('NEARLY FINISHED ATTS', JSON.stringify(this.attributes, null, 2))
+         var chosenShow = util.itemPicker(this.attributes.show, feeds, 'feed');
          console.log('nearly finished', chosenShow)
          feedLoader.call(this, chosenShow, false, function(err, feedData) {
+           console.log('NEARLY FINISHED feed cb');
            var currentEpIndex = feedData.items.findIndex(function(episode) {
              return episode.guid === this.attriputes.playing.token
            });
+           console.log('cur ind', currentEpIndex)
            var nextEp = feedData.items[currentEpIndex+1];
            logEnqueue.call(this, nextEp)
            // do I need to put all the playing data in here or let playback started do it?
@@ -111,7 +114,8 @@ var audioEventHandlers = {
     'PlaybackFailed' : function () {
         logFail.call(this);
         //  AudioPlayer.PlaybackNearlyFinished Directive received. Logging the error.
-        console.log("Playback Failed : %j", this.event.request.error);
+        console.log("Playback Failed ", JSON.stringify(this.event, null, 2));
+        this.response.speak("Sorry, I could not play the requested audio. Blame it on the rain.")
         this.context.succeed(true);
     },
 
