@@ -17,6 +17,11 @@ let items = [];
 var cleanShowName = util.cleanShowName;
 // var users = dynasty.table('makeMeSmart');
 
+const makeImage = Alexa.utils.ImageUtils.makeImage;
+const makePlainText = Alexa.utils.TextUtils.makePlainText;
+const makeRichText = Alexa.utils.TextUtils.makeRichText;
+
+
 var episodes = {};
 var explainers = [];
 
@@ -27,8 +32,6 @@ exports.handler = function(event, context) {
     alexa.appId = config.appId;
     alexa.dynamoDBTableName = config.dynamoDBTableName;
     alexa.registerHandlers(handlers, audioEventHandlers);
-
-
     alexa.execute();
 };
 
@@ -48,6 +51,7 @@ var handlers = {
     //   this.emit(this.event.request.intent.name);
     //
     // },
+
     'LaunchRequest': function () {
       // var params = {
       //   TableName: 'makeMeSmart',
@@ -177,7 +181,7 @@ var handlers = {
 
 
     'List_shows': function () { // SHOWS AND ITEMS MIGHT BE EASILY MERGED EVENTUALLY
-      console.log('SHOW pick')
+      console.log('SHOW list')
       this.attributes.indices = this.attributes.indices || {};
 
       if (this.event.session.new || (!this.attributes.indices.show)) {
@@ -190,9 +194,24 @@ var handlers = {
         this.attributes.indices.show = 0;
       }
 
-      const listItemBuilder = new Alexa.templateBuilders.ListItemBuilder();
-      const listTemplateBuilder = new Alexa.templateBuilders.ListTemplate1Builder();
-      // HERE
+      var listItemBuilder = new Alexa.templateBuilders.ListItemBuilder();
+      var listTemplateBuilder = new Alexa.templateBuilders.ListTemplate1Builder();
+      // NOTE: probably don't want to do this
+      var currentFeeds = feeds;
+      // var currentFeeds = feeds.slice(this.attributes.indices.show, this.attributes.indices.show + config.items_per_prompt[this.attributes.iterating]);
+      console.log('CF', currentFeeds);
+      currentFeeds.forEach(function(feed, i) {
+        var image = makeImage(feed.image, 88, 88);
+        listItemBuilder.addItem(image, `PickShow_${i}`, makeRichText(`<font size='5'>${feed.feed}</font>`));
+      });
+
+
+      console.log("WTF", this.event.context.System.device.supportedInterfaces.Display);
+
+
+      var autoListItems = listItemBuilder.build();
+
+      console.log('from build', autoListItems);
       var data = itemLister(
         feeds,
         `${this.attributes.iterating}s`,
@@ -200,51 +219,26 @@ var handlers = {
         this.attributes.indices[this.attributes.iterating],
         config.items_per_prompt[this.attributes.iterating]
       );
-      var listItems = feeds.map(function(feed){
-        return {
-          token: feed.url,
-          image: feed.image,
-          textContent: {
-            primaryText: {
-              type: 'PlainText',
-              text: feed.feed
-            },
-            secondaryText: {
-              type: 'RichText',
-              text: "<action value='select-batman' Select me </action>"
-            }
-          }
-        }
-      })
-      console.log(JSON.stringify(listItems, null, 2));
-      var tempTemp = {
-        "type": "Display.RenderTemplate",
-        "template": {
-         "type": "ListTemplate1",
-         "token": "list_shows",
-         "backButton": "HIDDEN",
-         "backgroundImage": "https://cms.marketplace.org/sites/default/files/heroheader.jpg",
-         "title": "Our Shows",
-         "listItems": listItems,
-        }
-      }
-      console.log(JSON.stringify(tempTemp))
-      this.response.renderTemplate(JSON.stringify(tempTemp));
 
+      const listTemplate = listTemplateBuilder.setToken('list-some-shows')
+        .setTitle('Our Shows')
+        .setListItems(autoListItems)
+        .build();
 
-      // this.emit(':askWithCard', data.itemsAudio, 'what do you want', 'Our shows', data.itemsCard, image );
+      // console.log('render temp', JSON.stringify(listTemplate, null, 2));
+      console.log('DAT', data.itemsCard);
+      this.response.speak(data.itemsAudio).listen('Pick one or say next').cardRenderer(data.itemsCard);
+      this.response.renderTemplate(listTemplate);
+
       this.emit(':responseReady');
 
       // Go into feed
-    },
-    'LoadFeed': function () {
-
     },
     'List_episodes': function () {
       // SOMETHING IS WRONG, IT IS GOING TO MARKETPLACE
       // TODO: if we get here directly, NOT having gone through 'Pick Show', we need to do some state management
       // (IF do we have a show selected? are we iterating through episodes? Do we have the feed live? We would have to pull the feed
-
+      console.log("HI?")
       this.attributes.indices = this.attributes.indices || {};
       this.attributes.iterating = 'episode';
       this.attributes.indices.episode = this.attributes.indices.episode || 0;
@@ -281,7 +275,21 @@ var handlers = {
 
       // Go into feed
     },
-    'PickShow': function() {
+    'ElementSelected': function () {
+      console.log('ElementSelected')
+      var tokenData = this.event.request.token.split('_');
+      var intentName = tokenData[0];
+      var spot = parseInt(tokenData[1]) + 1;
+
+      var intentSlot = {
+        index: {
+          value: spot
+        }
+      }
+      console.log(intentName, intentSlot);
+      this.emit(intentName, intentSlot);
+    },
+    'PickShow': function(slot) {
       // also need out of bounds era on numbers, right?
       // if feeds are being iterated, should destroy that index
       // slots should be specific. show_title rather than title...
@@ -290,7 +298,8 @@ var handlers = {
       // NOTE: currently putting show loading behind 1 hour cache... on testing the sendProgressive takes just as long as the damn lookup in most of the cases, so this might not be worth it.
       // NOTE: on the device, progressive comes instantly
       console.log("PICK SHOW");
-      var chosen = itemPicker(this.event.request.intent.slots, feeds, 'feed');
+      var slot = slot || this.event.request.intent.slots;
+      var chosen = itemPicker(slot, feeds, 'feed');
       var showImage = util.cardImage(chosen.image);
       this.attributes.show = chosen.feed;
       this.attributes.indices = this.attributes.indices || {};
@@ -483,6 +492,11 @@ var handlers = {
         this.response.speak("I STOPPED it for you.");
 
         this.emit(':responseReady');
+    },
+
+
+    'AMAZON.ScrollDownIntent': function () {
+      console.log('AMAZON.ScrollDownIntent');
     },
     'AMAZON.HelpIntent' : function() {
         this.response.speak("You can try: 'make me smart about interest rates' or 'what are the latest episodes'");

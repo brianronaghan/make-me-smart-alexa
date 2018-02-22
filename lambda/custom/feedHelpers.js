@@ -54,6 +54,7 @@ module.exports = {
       });
 
       req.on('error', function (err) {
+        console.log('err', err);
           return cb(err, null);
       });
 
@@ -65,9 +66,6 @@ module.exports = {
               var feedItem = {};
               // Process feedItem item and push it to items data if it exists
               if (item['title'] && item['date']) {
-                if (item.title === 'S02-6: Encryption' || item['title'] === 'Five ways a bioethicist wants to change our bodies to fight climate change') {
-                  console.log("ITEM ", JSON.stringify(item, null, 2));
-                }
                   feedItem['guid'] = item['guid'];
                   feedItem['title'] = item['title'];
                   feedItem['title'] = entities.decode(striptags(feedItem['title']));

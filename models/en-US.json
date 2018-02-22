@@ -4,23 +4,36 @@
             "invocationName":"make me smart",
             "intents":[
                 {
-                  "name": "AMAZON.CancelIntent",
-                  "samples": []
+                "name": "AMAZON.CancelIntent",
+                "samples": []
                 },
                 {
                   "name": "AMAZON.HelpIntent",
                   "samples": []
                 },
                 {
-                  "name": "AMAZON.StopIntent",
+                  "name": "AMAZON.MoreIntent",
                   "samples": []
                 },
+                {
+                  "name": "AMAZON.NavigateSettingsIntent",
+                  "samples": []
+                },
+                {
+                  "name": "AMAZON.NavigateHomeIntent",
+                  "samples": []
+                },
+
                 {
                   "name": "AMAZON.NextIntent",
                   "samples": []
                 },
                 {
-                  "name": "AMAZON.PreviousIntent",
+                  "name": "AMAZON.PageDownIntent",
+                  "samples": []
+                },
+                {
+                  "name": "AMAZON.PageUpIntent",
                   "samples": []
                 },
                 {
@@ -28,10 +41,34 @@
                   "samples": []
                 },
                 {
+                  "name": "AMAZON.PreviousIntent",
+                  "samples": []
+                },
+                {
                   "name": "AMAZON.ResumeIntent",
                   "samples": []
                 },
                 {
+                  "name": "AMAZON.ScrollDownIntent",
+                  "samples": []
+                },
+                {
+                  "name": "AMAZON.ScrollLeftIntent",
+                  "samples": []
+                },
+                {
+                  "name": "AMAZON.ScrollRightIntent",
+                  "samples": []
+                },
+                {
+                  "name": "AMAZON.ScrollUpIntent",
+                  "samples": []
+                },
+                {
+                  "name": "AMAZON.StopIntent",
+                  "samples": []
+                },
+                 {
                   "name": "PlayLatestEpisode",
                   "slots": [
                     {
