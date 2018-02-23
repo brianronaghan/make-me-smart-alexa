@@ -3,6 +3,11 @@ var feeds = require('./feeds');
 var constants = require('./constants');
 var request = require('request');
 
+const makeImage = Alexa.utils.ImageUtils.makeImage;
+const makePlainText = Alexa.utils.TextUtils.makePlainText;
+const makeRichText = Alexa.utils.TextUtils.makeRichText;
+
+
 module.exports = {
   // feedLister: function () {
   //     // Generate a list of categories to serve several functions
@@ -39,6 +44,62 @@ module.exports = {
       largeImageUrl: url
     }
   },
+  templateListTemplate1: function (title, token, itemLabel, itemTitleKey, items) {
+    var listItemBuilder = new Alexa.templateBuilders.ListItemBuilder();
+    var listTemplateBuilder = new Alexa.templateBuilders.ListTemplate1Builder();
+    items.forEach(function(item, i) {
+      var image;
+      if (item.image) {
+        image = makeImage(item.image, 88, 88);
+      }
+      // addItem signature:
+      // addItem(image, token, primaryText, secondaryText, tertiaryText) {
+
+      listItemBuilder.addItem(image, `Pick${itemLabel}_${i}`, makeRichText(`<font size='5'>${item[itemTitleKey]}</font>`));
+    });
+    var autoListItems = listItemBuilder.build();
+
+    var listTemplate = listTemplateBuilder.setToken(token)
+      .setTitle(title)
+      .setListItems(autoListItems)
+      .build();
+
+    console.log('listTemplate', listTemplate);
+    return listTemplate;
+  },
+  templateBodyTemplate3: function (title, image) {
+    var builder = new Alexa.templateBuilders.BodyTemplate3Builder();
+  	var autoTemplate = builder.setTitle(title)
+      .setImage(makeImage(image, 340, 340))
+      .setTextContent(makePlainText('Text content'))
+      .build();
+    console.log(JSON.stringify(autoTemplate));
+    // NOTE: make button actions correct and then handle in the intent
+    var template = {
+         "type": "BodyTemplate3",
+         "title": title,
+         "textContent": {
+           "primaryText": {
+             "type": "RichText",
+             "text": "<action value='play_latest'>Play latest</action> | <action value='list_episodes'>List episodes</action><br/> Some description of show?. This content contains <b>bold text</b>, <i>italics</i>"
+           },
+           "secondaryText": {
+             "type": "PlainText",
+             "text": "Secondary Text yay?"
+           },
+           "tertiaryText": {
+             "type": "RichText",
+             "text": "what is this"
+           }
+         },
+         "image": makeImage(image.smallImageUrl, 340, 340),
+         "backButton": "VISIBLE"
+    }
+    console.log('body', JSON.stringify(template));
+    return template;
+
+
+  },
   cleanShowName: cleanShowName,
   itemLister: function(items, itemTitlePlural, titleKey, start, chunkLength) {
     var itemsAudio, itemsCard;
@@ -52,11 +113,11 @@ module.exports = {
       console.log(x, items[x]);
       if (items[x]) {
         itemsAudio += constants.breakTime['25'] +  `${x+1}, ${items[x][titleKey]}` + constants.breakTime['25'];
-        itemsCard += `${x+1}) ${items[x][titleKey]}`;
+        itemsCard += `${x+1}) ${items[x][titleKey]}\n`;
       }
     }
-    itemsAudio += 'Choose one.';
-    itemsCard += 'Choose one.';
+    itemsAudio += 'Choose one ';
+    itemsCard += 'Choose one ';
     if (start == 0) {// if start is 0
       if (chunkLength < items.length) {// if chunk length is less than total length
         // add more
@@ -119,7 +180,7 @@ module.exports = {
   //      *      2) Ordinal - (1st, 2nd, 3rd ...)
   //      *      3) Category Name - (World, Technology, Politics ...)
   //      */
-  //     console.log("IN FEED PICKER ",  intentSlot)
+  //     console.log("IN `FEED` PICKER ",  intentSlot)
   //     console.log("categoryNames", categoryNames)
   //
   //     console.log("feedPicker AUDIO FEEDS", audioFeeds)

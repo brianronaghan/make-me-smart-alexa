@@ -55,7 +55,7 @@ module.exports = {
 
       req.on('error', function (err) {
         console.log('err', err);
-          return cb(err, null);
+          return cb.call(boundThis, err, null);
       });
 
       // Received stream. parse through the stream and create JSON Objects for each item

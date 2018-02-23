@@ -14,12 +14,11 @@ var sendProgressive = util.sendProgressive;
 
 var feedLoader = feedHelper.feedLoader;
 let items = [];
-var cleanShowName = util.cleanShowName;
+var templateListTemplate1 = util.templateListTemplate1;
+var templateBodyTemplate3 = util.templateBodyTemplate3;
+
 // var users = dynasty.table('makeMeSmart');
 
-const makeImage = Alexa.utils.ImageUtils.makeImage;
-const makePlainText = Alexa.utils.TextUtils.makePlainText;
-const makeRichText = Alexa.utils.TextUtils.makeRichText;
 
 
 var episodes = {};
@@ -96,52 +95,6 @@ var handlers = {
 
           })
       }
-
-      // docClient.get(session_params, function(err, data) {
-      //   if (err) {
-      //     console.log("Error", err);
-      //     boundThis.response.speak('Welcome to Make Me Smart!')
-      //     boundThis.emit(':responseReady');
-      //
-      //   } else {
-      //     console.log("SESSions", data);
-      //     boundThis.response.speak('Welcome to Make Me Smart!')
-      //     boundThis.emit(':responseReady');
-      //
-      //   }
-      // });
-
-      // docClient.get(params, function(err, data) {
-      //   if (err) {
-      //     console.log("Error", err);
-      //   } else {
-      //     console.log("Success", data.Item);
-      //   }
-      // });
-
-      // console.log(docClient);
-      // console.log("CHECK LAUNCH REQ", this.event.session.user.userId);
-      // users.find(this.event.session.user.userId, function (err, user) {
-      //   if (err) {
-      //     console.log('err', err)
-      //   } else {
-      //     console.log('user')
-      //     console.log(user)
-      //   }
-      // });
-       // this.response.speak('Welcome to Make Me Smart!')
-       // this.emit(':responseReady');
-
-       // this.emit('Make Me Smart');
-        // Play the latest
-
-
-        // separate card cardRenderer
-
-      //   this.response.cardRenderer(cardTitle, cardContent, null);
-      // this.response.speak(message).listen(reprompt);
-      //
-      // this.emit(':responseReady');
     },
     'FindExplainer': function () {
         console.log("find explainer ", JSON.stringify(this.event.request,null,2));
@@ -194,24 +147,21 @@ var handlers = {
         this.attributes.indices.show = 0;
       }
 
-      var listItemBuilder = new Alexa.templateBuilders.ListItemBuilder();
-      var listTemplateBuilder = new Alexa.templateBuilders.ListTemplate1Builder();
+      // var listItemBuilder = new Alexa.templateBuilders.ListItemBuilder();
+      // var listTemplateBuilder = new Alexa.templateBuilders.ListTemplate1Builder();
       // NOTE: probably don't want to do this
-      var currentFeeds = feeds;
       // var currentFeeds = feeds.slice(this.attributes.indices.show, this.attributes.indices.show + config.items_per_prompt[this.attributes.iterating]);
-      console.log('CF', currentFeeds);
-      currentFeeds.forEach(function(feed, i) {
-        var image = makeImage(feed.image, 88, 88);
-        listItemBuilder.addItem(image, `PickShow_${i}`, makeRichText(`<font size='5'>${feed.feed}</font>`));
-      });
+      // feeds.forEach(function(feed, i) {
+      //   var image = makeImage(feed.image, 88, 88);
+      //   listItemBuilder.addItem(image, `PickShow_${i}`, makeRichText(`<font size='5'>${feed.feed}</font>`));
+      // });
 
 
       console.log("WTF", this.event.context.System.device.supportedInterfaces.Display);
 
 
-      var autoListItems = listItemBuilder.build();
+      // var autoListItems = listItemBuilder.build();
 
-      console.log('from build', autoListItems);
       var data = itemLister(
         feeds,
         `${this.attributes.iterating}s`,
@@ -220,15 +170,26 @@ var handlers = {
         config.items_per_prompt[this.attributes.iterating]
       );
 
-      const listTemplate = listTemplateBuilder.setToken('list-some-shows')
-        .setTitle('Our Shows')
-        .setListItems(autoListItems)
-        .build();
+      // const listTemplate = listTemplateBuilder.setToken('list-some-shows')
+      //   .setTitle('Our Shows')
+      //   .setListItems(autoListItems)
+      //   .build();
 
       // console.log('render temp', JSON.stringify(listTemplate, null, 2));
       console.log('DAT', data.itemsCard);
       this.response.speak(data.itemsAudio).listen('Pick one or say next').cardRenderer(data.itemsCard);
-      this.response.renderTemplate(listTemplate);
+
+      if (this.event.context.System.device.supportedInterfaces.Display) {
+        this.response.renderTemplate(
+          templateListTemplate1(
+            'Our Shows',
+            'list-shows',
+            'Show',
+            'feed',
+            feeds
+          )
+        );
+      }
 
       this.emit(':responseReady');
 
@@ -262,7 +223,23 @@ var handlers = {
           this.attributes.indices[this.attributes.iterating],
           config.items_per_prompt[this.attributes.iterating]
         );
-        this.emit(':askWithCard', data.itemsAudio, 'what do you want', `${this.attributes.show} episodes:`, data.itemsCard, showImage );
+
+        this.response.speak(data.itemsAudio).listen('Pick one or say next').cardRenderer(data.itemsCard);
+
+        if (this.event.context.System.device.supportedInterfaces.Display) {
+          this.response.renderTemplate(
+            templateListTemplate1(
+              'Episodes',
+              'list-episodes',
+              'Episode',
+              'title',
+              feedData.items
+            )
+          );
+        }
+        this.emit(':responseReady');
+
+        // this.emit(':askWithCard', data.itemsAudio, 'what do you want', `${this.attributes.show} episodes:`, data.itemsCard, showImage );
       });
       // } else {
       //   console.log("cached");
@@ -276,7 +253,8 @@ var handlers = {
       // Go into feed
     },
     'ElementSelected': function () {
-      console.log('ElementSelected')
+      // handle play latest or pick episode actions
+      console.log('ElementSelected -- ', this.event.request)
       var tokenData = this.event.request.token.split('_');
       var intentName = tokenData[0];
       var spot = parseInt(tokenData[1]) + 1;
@@ -312,14 +290,27 @@ var handlers = {
         console.log('PICK SHOW feed load cb')
       });
 
-      this.emit(
-        ':askWithCard',
-        `You chose ${chosen.feed}. Should I play the latest episode or list the episodes?`,
-        'Say play latest or list episodes.',
-        `${chosen.feed}`,
-        `Say "play latest" to hear the latest episode or "list episodes" to explore episodes.`,
-        showImage
-      );
+
+
+      this.response.speak(`You chose ${chosen.feed}. Should I play the latest episode or list the episodes?`).listen('Pick one or say next').cardRenderer(chosen.feed, 'Say "play latest" to hear the latest episode or "list episodes" to explore episodes.', showImage);
+      if (this.event.context.System.device.supportedInterfaces.Display) {
+        this.response.renderTemplate(
+          templateBodyTemplate3(
+            chosen.feed,
+            showImage
+          )
+        );
+      }
+      this.emit(':responseReady');
+
+      // this.emit(
+      //   ':askWithCard',
+      //   `You chose ${chosen.feed}. Should I play the latest episode or list the episodes?`,
+      //   'Say play latest or list episodes.',
+      //   `${chosen.feed}`,
+      //   `Say "play latest" to hear the latest episode or "list episodes" to explore episodes.`,
+      //   showImage
+      // );
     },
 
     'PlayLatestEpisode' : function () {
@@ -353,7 +344,7 @@ var handlers = {
         //     }
         //   }
         // });
-
+        // THAT'S A GREAT IDEA I'LL ASK KAI AND MOLLY
 
         this.response.audioPlayerPlay('REPLACE_ALL', chosenEp.audio.url, chosenEp.guid, null, 0);
         this.emit(':responseReady');
@@ -363,7 +354,7 @@ var handlers = {
     },
 
 
-    'PickEpisode': function (index) {
+    'PickEpisode': function (slot) {
       // need out of bounds error on numbers, god forbid look up by title.
       // still have to deal with play latest
       // if iterating == episodes
@@ -373,14 +364,16 @@ var handlers = {
         // slots: show_title should be there
         // if not, just either pick last show, or default to whatever we want.
       // need to handle if the session is over
+      var slot = slot || this.event.request.intent.slots;
+
       var show = this.attributes.show
       var chosenShow = itemPicker(show, feeds, 'feed');
       console.log('Episode pick - iterating', this.attributes.iterating, ' show ', this.attributes.show);
-      console.log('slots baby', this.event.request.intent.slots);
+      console.log('slots baby', slot);
       console.log(chosenShow)
       feedLoader.call(this, chosenShow, false, function(err, feedData) {
         console.log('PICK EPISODE feed load cb')
-        var chosenEp = itemPicker(this.event.request.intent.slots, feedData.items, 'title');
+        var chosenEp = itemPicker(slot, feedData.items, 'title');
         console.log('PICK EPISODE', JSON.stringify(chosenEp, null, 2));
         this.response.speak(`Playing ${chosenEp.title}`);
         this.attributes.playing = {

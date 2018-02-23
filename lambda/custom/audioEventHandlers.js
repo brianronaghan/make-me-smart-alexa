@@ -13,7 +13,7 @@ var audioEventHandlers = {
          * Confirming that requested audio file began playing.
          * Storing details in dynamoDB using attributes.
          */
-
+        this.attributes.enqueued = {};
         console.log("STARTED", JSON.stringify(this, null,2));
         // maybe check playing against enqueued? then put in playing and nuke enqueued?
         logPlay.call(this)
@@ -46,7 +46,7 @@ var audioEventHandlers = {
          * Storing details in dynamoDB using attributes.
          * Enqueuing the next audio file.
          */
-         if (this.attributes['enqueued']) {
+         if (this.attributes['enqueued'] && this.attributes['enqueued'].token) {
              /*
               * Since AudioPlayer.PlaybackNearlyFinished Directive are prone to be delivered multiple times during the
               * same audio being played.
@@ -57,17 +57,21 @@ var audioEventHandlers = {
          console.log('NEARLY FINISHED ATTS', JSON.stringify(this.attributes, null, 2))
          var chosenShow = util.itemPicker(this.attributes.show, feeds, 'feed');
          console.log('nearly finished', chosenShow)
+         var boundThis = this;
          feedLoader.call(this, chosenShow, false, function(err, feedData) {
            console.log('NEARLY FINISHED feed cb');
            var currentEpIndex = feedData.items.findIndex(function(episode) {
-             return episode.guid === this.attriputes.playing.token
+             return episode.guid === boundThis.attributes.playing.token
            });
            console.log('cur ind', currentEpIndex)
            var nextEp = feedData.items[currentEpIndex+1];
-           logEnqueue.call(this, nextEp)
+           console.log('next', nextEp);
+           console.log('this',boundThis)
+           logEnqueue.call(boundThis, nextEp)
            // do I need to put all the playing data in here or let playback started do it?
-           this.response.audioPlayerPlay('ENQUEUE', nextEp.audio.url, nextEp.guid, this.playing.token, 0);
-           this.emit(':saveState', true);
+           console.log('things ', nextEp.audio.url, nextEp.guid, boundThis.attributes.playing.token);
+           boundThis.response.audioPlayerPlay('ENQUEUE', nextEp.audio.url, nextEp.guid, boundThis.attributes.playing.token, 0);
+           boundThis.emit(':saveState', true);
 
          })
 
@@ -109,7 +113,6 @@ var audioEventHandlers = {
         // var offsetInMilliseconds = 0;
         //
         // this.response.audioPlayerPlay(playBehavior, podcast.url, enqueueToken, expectedPreviousToken, offsetInMilliseconds);
-        this.emit(':responseReady');
     },
     'PlaybackFailed' : function () {
         logFail.call(this);
@@ -168,8 +171,7 @@ function logStop() {
 function logFinished() {
   nullCheck.call(this)
   this.attributes.playing.status = 'finished';
-  this.attributes['enqueuedToken'] = false;
-
+  // set play to enqueued? Why isn't enqueue working?
   this.attributes.playing.progress = -1; // or something else? or wipe it out?
   this.attributes.history[this.attributes.playing.token].status = 'finished';
   this.attributes.history[this.attributes.playing.token].events.push({
