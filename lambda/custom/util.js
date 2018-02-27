@@ -67,29 +67,44 @@ module.exports = {
     console.log('listTemplate', listTemplate);
     return listTemplate;
   },
-  templateBodyTemplate3: function (title, image) {
-    var builder = new Alexa.templateBuilders.BodyTemplate3Builder();
-  	var autoTemplate = builder.setTitle(title)
-      .setImage(makeImage(image, 340, 340))
-      .setTextContent(makePlainText('Text content'))
-      .build();
-    console.log(JSON.stringify(autoTemplate));
-    // NOTE: make button actions correct and then handle in the intent
+  templateBodyTemplate1: function (title, body, backgroundImage) {
+    body = body.replace(/<emphasis level='strong'>/gi, "<b>")
+    body = body.replace(/<emphasis>/gi, "<b>")
+    console.log("NEW BODY ", body)
+    var template = {
+         "type": "BodyTemplate1",
+         "title": title,
+         "textContent": {
+           "primaryText": {
+             "type": "RichText",
+               "text": `<font size='7'>${body}</font>`
+           },
+         },
+         // "backgroundImage": makeImage(backgroundImage),
+         "backButton": "HIDDEN"
+    }
+    console.log('body', JSON.stringify(template));
+    return template;
+
+
+  },
+
+  templateBodyTemplate3: function (title, image, description) {
     var template = {
          "type": "BodyTemplate3",
          "title": title,
          "textContent": {
            "primaryText": {
              "type": "RichText",
-             "text": "<action value='play_latest'>Play latest</action> | <action value='list_episodes'>List episodes</action><br/> Some description of show?. This content contains <b>bold text</b>, <i>italics</i>"
+             "text": "<action value='PlayLatestEpisode'>Play latest</action> | <action value='List_episodes'>List episodes</action><br/>"
            },
            "secondaryText": {
              "type": "PlainText",
-             "text": "Secondary Text yay?"
+             "text": "Say 'play the latest' or 'list episodes'."
            },
            "tertiaryText": {
-             "type": "RichText",
-             "text": "what is this"
+             "type": "PlainText",
+             "text": description
            }
          },
          "image": makeImage(image.smallImageUrl, 340, 340),
@@ -100,6 +115,29 @@ module.exports = {
 
 
   },
+  templateBodyTemplate6: function (title, body, backgroundImage) {
+    var template = {
+         "type": "BodyTemplate6",
+         "title": title,
+         "textContent": {
+           "primaryText": {
+             "type": "RichText",
+             "text": `<font size='3'>${body}</font>`
+           },
+           "secondaryText": {
+             "type": "PlainText",
+             "text": title
+           },
+         },
+         // "backgroundImage": makeImage(backgroundImage),
+         "backButton": "HIDDEN"
+    }
+    console.log('body', JSON.stringify(template));
+    return template;
+
+
+  },
+
   cleanShowName: cleanShowName,
   itemLister: function(items, itemTitlePlural, titleKey, start, chunkLength) {
     var itemsAudio, itemsCard;

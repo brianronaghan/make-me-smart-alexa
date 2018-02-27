@@ -15,7 +15,10 @@ var sendProgressive = util.sendProgressive;
 var feedLoader = feedHelper.feedLoader;
 let items = [];
 var templateListTemplate1 = util.templateListTemplate1;
+var templateBodyTemplate1 = util.templateBodyTemplate1;
+
 var templateBodyTemplate3 = util.templateBodyTemplate3;
+var templateBodyTemplate6 = util.templateBodyTemplate6;
 
 // var users = dynasty.table('makeMeSmart');
 
@@ -60,41 +63,66 @@ var handlers = {
       //   TableName: 'sessions',
       //   Key: {'userId': this.event.session.user.userId, sessionStart: this.event.request.timestamp}
       // };
+
+      // If first time
+
+      // ELSE
+
+
+
       this.attributes.latestSession = this.event.session.sessionId;
       console.log(JSON.stringify(this.attributes, null, 2));
       var boundThis = this;
       // console.log('MY USER ATTRIBUTE', this.attributes);
       // console.log('sesh id ', boundThis.event.session.sessionId);
-      if (this.event.session.new) { // can put this in new session right? or no?
-        sessions.insert({userId: boundThis.event.session.user.userId, sessionId: boundThis.event.session.sessionId, begin: boundThis.event.request.timestamp, userId:boundThis.event.session.user.userId})
-          .then(function(resp){
-            console.log('new sesh babe i tried to insert', resp);
-            boundThis.response.speak('INSERTED A SESSION, maybe').listen("why don't you try something");
-            // have to ask to prevent session end
-            boundThis.emit(':responseReady');
 
-          })
-          .catch(function(err){
-            console.log('session insert fail fail', err)
-            boundThis.response.speak('baaad insert').listen("why don't you try something");
-            boundThis.emit(':responseReady');
 
-          })
-      } else {
-        // what the fuck am i doing wrong here?
-        console.log(typeof this.event.session.user.userId);
-        sessions.find({hash: this.event.session.user.userId, range: boundThis.event.session.sessionId})
-          .then(function(data){
-            console.log("SESSIONS WHAT", data)
-            boundThis.response.speak('bueno! FROM SESSIONS').listen("why don't you try something");
-            boundThis.emit(':responseReady');
-          }).catch(function(err){
-            console.log('session fail', err)
-            boundThis.response.speak('baaad SESSIONS').listen("why don't you try something");
-            boundThis.emit(':responseReady');
+      // if (this.event.session.new) { // can put this in new session right? or no?
+      //   sessions.insert({userId: boundThis.event.session.user.userId, sessionId: boundThis.event.session.sessionId, begin: boundThis.event.request.timestamp, userId:boundThis.event.session.user.userId})
+      //     .then(function(resp){
+      //       console.log('new sesh babe i tried to insert', resp);
+      //       boundThis.response.speak('INSERTED A SESSION, maybe').listen("why don't you try something");
+      //       // have to ask to prevent session end
+      //       boundThis.emit(':responseReady');
+      //
+      //     })
+      //     .catch(function(err){
+      //       console.log('session insert fail fail', err)
+      //       boundThis.response.speak('baaad insert').listen("why don't you try something");
+      //       boundThis.emit(':responseReady');
+      //
+      //     })
+      // } else {
+      //   // what the fuck am i doing wrong here?
+      //   console.log(typeof this.event.session.user.userId);
+      //   sessions.find({hash: this.event.session.user.userId, range: boundThis.event.session.sessionId})
+      //     .then(function(data){
+      //       console.log("SESSIONS WHAT", data)
+      //       boundThis.response.speak('bueno! FROM SESSIONS').listen("why don't you try something");
+      //       boundThis.emit(':responseReady');
+      //     }).catch(function(err){
+      //       console.log('session fail', err)
+      //       boundThis.response.speak('baaad SESSIONS').listen("why don't you try something");
+      //       boundThis.emit(':responseReady');
+      //
+      //     })
+      // }
+      var topics = [
+        'interest rates',
+        'the cloud',
+        'batman'
 
-          })
+      ]
+      var speech = `This week we're learning about <emphasis level='strong'>${topics[0]}</emphasis>, <emphasis level='strong'>${topics[1]}</emphasis>, and <emphasis level='strong'>${topics[2]}</emphasis>. To skip to the next explanation at any time say 'next'.`;
+      this.response.speak(speech).cardRenderer(speech);
+
+      if (this.event.context.System.device.supportedInterfaces.Display) {
+        this.response.renderTemplate(templateBodyTemplate1('Welcome to Make Me Smart', speech, feeds[0].image));
       }
+      this.response.hint('play the latest episode', 'PlainText');
+
+      this.emit(':responseReady');
+
     },
     'FindExplainer': function () {
         console.log("find explainer ", JSON.stringify(this.event.request,null,2));
@@ -195,16 +223,17 @@ var handlers = {
 
       // Go into feed
     },
-    'List_episodes': function () {
+    'List_episodes': function (slot) {
       // SOMETHING IS WRONG, IT IS GOING TO MARKETPLACE
       // TODO: if we get here directly, NOT having gone through 'Pick Show', we need to do some state management
       // (IF do we have a show selected? are we iterating through episodes? Do we have the feed live? We would have to pull the feed
       console.log("HI?")
+      var slot = slot || this.event.request.intent.slots;
       this.attributes.indices = this.attributes.indices || {};
       this.attributes.iterating = 'episode';
       this.attributes.indices.episode = this.attributes.indices.episode || 0;
-      if (this.event.request.intent.slots && this.event.request.intent.slots.show && this.event.request.intent.slots.show.value) {
-        this.attributes.show = this.event.request.intent.slots.show.value;
+      if (slot && slot.show && slot.show.value) {
+        this.attributes.show = slot.show.value;
       }
       this.attributes.show = this.attributes.show || 'Make Me Smart';
 
@@ -255,13 +284,22 @@ var handlers = {
     'ElementSelected': function () {
       // handle play latest or pick episode actions
       console.log('ElementSelected -- ', this.event.request)
-      var tokenData = this.event.request.token.split('_');
-      var intentName = tokenData[0];
-      var spot = parseInt(tokenData[1]) + 1;
-
-      var intentSlot = {
-        index: {
-          value: spot
+      console.log('ATTRIBUTES?', this.attributes)
+      var intentSlot,intentName;
+      if (this.event.request.token === 'PlayLatestEpisode' || this.event.request.token === 'List_episodes') {
+        intentName = this.event.request.token;
+        intentSlot = {
+          index: {
+            value: this.attributes.show
+          }
+        }
+      }  else {
+        var tokenData = this.event.request.token.split('_');
+        intentName = tokenData[0];
+        intentSlot = {
+          index: {
+            value: parseInt(tokenData[1]) + 1
+          }
         }
       }
       console.log(intentName, intentSlot);
@@ -292,15 +330,29 @@ var handlers = {
 
 
 
-      this.response.speak(`You chose ${chosen.feed}. Should I play the latest episode or list the episodes?`).listen('Pick one or say next').cardRenderer(chosen.feed, 'Say "play latest" to hear the latest episode or "list episodes" to explore episodes.', showImage);
+      this.response.speak(`You chose ${chosen.feed}. Should I play the latest episode or list the episodes?`)
+        .listen("Say 'play latest' to hear the latest episode or 'list episodes' to explore episodes.")
+        .cardRenderer(chosen.feed, 'Say "play latest" to hear the latest episode or "list episodes" to explore episodes.', showImage);
+
       if (this.event.context.System.device.supportedInterfaces.Display) {
         this.response.renderTemplate(
           templateBodyTemplate3(
             chosen.feed,
-            showImage
+            showImage,
+            chosen.description
           )
         );
       }
+      this.response.hint('play the latest episode', 'PlainText')
+      // this.response.directives.push({
+      //   "type": "Hint",
+      //   "hint": {
+      //     "type": "PlainText",
+      //     "text": "play the latest episode"
+      //   }
+      // });
+
+      console.log('RESPONSE', JSON.stringify(this.response, null, 2));
       this.emit(':responseReady');
 
       // this.emit(
@@ -313,9 +365,11 @@ var handlers = {
       // );
     },
 
-    'PlayLatestEpisode' : function () {
-      if (this.event.request.intent.slots && this.event.request.intent.slots.show && this.event.request.intent.slots.show.value) {
-        this.attributes.show = this.event.request.intent.slots.show.value;
+    'PlayLatestEpisode' : function (slot) {
+      var slot = slot || this.event.request.intent.slots;
+
+      if (slot && slot.show && slot.show.value) {
+        this.attributes.show = slot.show.value;
       }
       var show = this.attributes.show || 'Make Me Smart';
       var chosenShow = itemPicker(this.attributes.show, feeds, 'feed');
