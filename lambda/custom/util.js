@@ -44,6 +44,10 @@ module.exports = {
       largeImageUrl: url
     }
   },
+  getDeviceId: function () {
+    return this.event.context.System.device.deviceId;
+  },
+  nullCheck: nullCheck,
   templateListTemplate1: function (title, token, itemLabel, itemTitleKey, items) {
     var listItemBuilder = new Alexa.templateBuilders.ListItemBuilder();
     var listTemplateBuilder = new Alexa.templateBuilders.ListTemplate1Builder();
@@ -67,17 +71,16 @@ module.exports = {
     console.log('listTemplate', listTemplate);
     return listTemplate;
   },
+  prosodyToBold: prosodyToBold,
   templateBodyTemplate1: function (title, body, backgroundImage) {
-    body = body.replace(/<emphasis level='strong'>/gi, "<b>")
-    body = body.replace(/<emphasis>/gi, "<b>")
-    console.log("NEW BODY ", body)
+    var bodyText = prosodyToBold(body)
     var template = {
          "type": "BodyTemplate1",
          "title": title,
          "textContent": {
            "primaryText": {
              "type": "RichText",
-               "text": `<font size='7'>${body}</font>`
+               "text": `<font size='7'>${bodyText}</font>`
            },
          },
          // "backgroundImage": makeImage(backgroundImage),
@@ -140,6 +143,7 @@ module.exports = {
 
   cleanShowName: cleanShowName,
   itemLister: function(items, itemTitlePlural, titleKey, start, chunkLength) {
+    // TODO: add a listen feature as well... the hint thing we tell them, handles whether next or previous
     var itemsAudio, itemsCard;
     if (start === 0) {
       itemsAudio = `Here are the ${itemTitlePlural} we have: `
@@ -159,7 +163,7 @@ module.exports = {
     if (start == 0) {// if start is 0
       if (chunkLength < items.length) {// if chunk length is less than total length
         // add more
-        itemsAudio += constants.breakTime['50'] + `or say next for more ${itemTitlePlural}`;
+        itemsAudio += `or say next for more ${itemTitlePlural}`;
         itemsCard += ` or say next for more ${itemTitlePlural} `;
       }
     } else {// start != 0
@@ -173,6 +177,17 @@ module.exports = {
       itemsCard += `or say previous to hear the last ${chunkLength}`;
     }
     return {itemsAudio, itemsCard};
+  },
+  nextPicker :function (currentItem, itemKey, choices, choiceKey) {
+    var currentItemIndex = choices.findIndex(function(item){
+      return item[choiceKey] === currentItem[itemKey];
+    });
+    if (currentItemIndex === -1) {
+      console.log('not found')
+    }
+    var nextItem = choices[currentItemIndex+1];
+    console.log('THE ITEM IN NEXT PICKER', nextItem);
+    return nextItem;
   },
   itemPicker: function (intentSlot, choices, choiceKey) {
     // MONDAY: this is where we begin. Making sure this works... implementing choose show with this... then implementing list episodes intent using itemLister
@@ -253,10 +268,31 @@ module.exports = {
 
 }
 
+function nullCheck(deviceId) {
+  console.log(deviceId,  "  UTIL NULL CHECK    ", this.attributes[deviceId]);
+  this.attributes[deviceId] = this.attributes[deviceId] || {};
+  this.attributes[deviceId].indices = this.attributes[deviceId].indices || {};
+  this.attributes[deviceId].playing = this.attributes[deviceId].playing || {};
+  this.attributes[deviceId].enqueued = this.attributes[deviceId].enqueued || {};
+  this.attributes[deviceId].iterating = this.attributes[deviceId].iterating || {};
+  this.attributes[deviceId].queries = this.attributes[deviceId].queries || [];
+  this.attributes[deviceId].history = this.attributes[deviceId].history || [];
+}
+
+function prosodyToBold (text) {
+  text = text.replace(/<prosody[^>]*>/gi, "<b>")
+  text = text.replace(/<\/prosody>/gi, "</b>")
+  return text;
+};
+
 function cleanShowName (showString) {
   var cleanedSlot = showString.toLowerCase();
   var reg = /market place/i;
   cleanedSlot = cleanedSlot.replace(reg, 'marketplace');
+  // remove all spaces?
+  if (cleanedSlot === 'code breaker') {
+    cleanedSlot = 'codebreaker';
+  }
   console.log('clean', cleanedSlot)
   return cleanedSlot;
 };

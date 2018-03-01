@@ -3,9 +3,10 @@
 var Alexa = require('alexa-sdk');
 var feeds = require('./feeds');
 var feedHelper = require('./feedHelpers');
-
 var feedLoader = feedHelper.feedLoader;
 var util = require('./util')
+var audioPlayer = require('./audioPlayer');
+
 var audioEventHandlers = {
     'PlaybackStarted' : function () {
         /*
@@ -13,9 +14,9 @@ var audioEventHandlers = {
          * Confirming that requested audio file began playing.
          * Storing details in dynamoDB using attributes.
          */
-        this.attributes.enqueued = {};
-        console.log("STARTED", JSON.stringify(this, null,2));
+
         // maybe check playing against enqueued? then put in playing and nuke enqueued?
+
         logPlay.call(this)
         this.emit(':saveState', true);
     },
@@ -25,10 +26,13 @@ var audioEventHandlers = {
          * Confirming that audio file completed playing.
          * Storing details in dynamoDB using attributes.
          */
+
         logFinished.call(this);
-        console.log("WE FINISHED"); // although... hm
-        this.emit('FinshedHandler'); // did not work... gotta require it or somethign?
-        this.emit(':saveState', true);
+        console.log("PlaybackFinished EVER")
+
+        // audioPlayer.stop.call(this);
+        // should I... nuke the playing here?
+        this.emit('FinishedHandler');
     },
     'PlaybackStopped' : function () {
         /*
@@ -36,6 +40,7 @@ var audioEventHandlers = {
          * Confirming that audio file stopped playing.
          * Storing details in dynamoDB using attributes.
          */
+        console.log("AUDIO EVENT PlaybackStopped ");
         logStop.call(this);
         this.emit(':saveState', true);
     },
@@ -46,7 +51,11 @@ var audioEventHandlers = {
          * Storing details in dynamoDB using attributes.
          * Enqueuing the next audio file.
          */
-         if (this.attributes['enqueued'] && this.attributes['enqueued'].token) {
+         /// chaeck by device id?
+         var deviceId = util.getDeviceId.call(this);
+         // NOTE: since I'm actually handling playing, i DON't THINK i need to worry about this... it'll just update it
+         if (this.attributes[deviceId]['enqueued'] && this.attributes[deviceId]['enqueued'].token) {
+           console.log('PLAYBACK NEARLY FINISHED, BUT I ALREADY HAVE SOMETHING ENQUEUED')
              /*
               * Since AudioPlayer.PlaybackNearlyFinished Directive are prone to be delivered multiple times during the
               * same audio being played.
@@ -54,71 +63,32 @@ var audioEventHandlers = {
               */
              return this.context.succeed(true);
          }
-         console.log('NEARLY FINISHED ATTS', JSON.stringify(this.attributes, null, 2))
-         var chosenShow = util.itemPicker(this.attributes.show, feeds, 'feed');
-         console.log('nearly finished', chosenShow)
+         console.log('NEARLY FINISHED ATTS', JSON.stringify(this.attributes[deviceId], null, 2))
+
+         var chosenShow = util.itemPicker(this.attributes[deviceId].playing.feed, feeds, 'feed');
          var boundThis = this;
          feedLoader.call(this, chosenShow, false, function(err, feedData) {
-           console.log('NEARLY FINISHED feed cb');
-           var currentEpIndex = feedData.items.findIndex(function(episode) {
-             return episode.guid === boundThis.attributes.playing.token
-           });
-           console.log('cur ind', currentEpIndex)
-           var nextEp = feedData.items[currentEpIndex+1];
-           console.log('next', nextEp);
-           console.log('this',boundThis)
+           var nextEp = util.nextPicker(boundThis.attributes[deviceId].playing, 'token', feedData.items, 'guid')
+           // var currentEpIndex = feedData.items.findIndex(function(episode) {
+           //   return episode.guid === boundThis.attributes[deviceId].playing.token
+           // });
+
            logEnqueue.call(boundThis, nextEp)
            // do I need to put all the playing data in here or let playback started do it?
-           console.log('things ', nextEp.audio.url, nextEp.guid, boundThis.attributes.playing.token);
-           boundThis.response.audioPlayerPlay('ENQUEUE', nextEp.audio.url, nextEp.guid, boundThis.attributes.playing.token, 0);
+           // console.log('things ', nextEp.audio.url, nextEp.guid, boundThis.attributes[deviceId].playing.token);
+           boundThis.response.audioPlayerPlay('ENQUEUE', nextEp.audio.url, nextEp.guid, boundThis.attributes[deviceId].playing.token, 0);
            boundThis.emit(':saveState', true);
 
          })
 
-         // var enqueueToken = this.attributes['enqueuedToken'];
-         // var playBehavior = 'ENQUEUE';
-         // var podcast = audioData[this.attributes['playOrder'][enqueueIndex]];
-         // var expectedPreviousToken = this.attributes['token'];
-         // var offsetInMilliseconds = 0;
-         //
 
-        // if (this.attributes['enqueuedToken']) {
-        //     /*
-        //      * Since AudioPlayer.PlaybackNearlyFinished Directive are prone to be delivered multiple times during the
-        //      * same audio being played.
-        //      * If an audio file is already enqueued, exit without enqueuing again.
-        //      */
-        //     return this.context.succeed(true);
-        // }
-
-        // var enqueueIndex = this.attributes['index'];
-        // enqueueIndex +=1;
-        // // Checking if  there are any items to be enqueued.
-        // if (enqueueIndex === audioData.length) {
-        //     if (this.attributes['loop']) {
-        //         // Enqueueing the first item since looping is enabled.
-        //         enqueueIndex = 0;
-        //     } else {
-        //         // Nothing to enqueue since reached end of the list and looping is disabled.
-        //         return this.context.succeed(true);
-        //     }
-        // }
-        // // Setting attributes to indicate item is enqueued.
-        // this.attributes['enqueuedToken'] = String(this.attributes['playOrder'][enqueueIndex]);
-        //
-        // var enqueueToken = this.attributes['enqueuedToken'];
-        // var playBehavior = 'ENQUEUE';
-        // var podcast = audioData[this.attributes['playOrder'][enqueueIndex]];
-        // var expectedPreviousToken = this.attributes['token'];
-        // var offsetInMilliseconds = 0;
-        //
-        // this.response.audioPlayerPlay(playBehavior, podcast.url, enqueueToken, expectedPreviousToken, offsetInMilliseconds);
     },
     'PlaybackFailed' : function () {
-        logFail.call(this);
-        //  AudioPlayer.PlaybackNearlyFinished Directive received. Logging the error.
         console.log("Playback Failed ", JSON.stringify(this.event, null, 2));
         this.response.speak("Sorry, I could not play the requested audio. Blame it on the rain.")
+
+        logFail.call(this, this.event.request.token , this.event.request.error);
+        //  AudioPlayer.PlaybackNearlyFinished Directive received. Logging the error.
         this.context.succeed(true);
     },
 
@@ -126,30 +96,27 @@ var audioEventHandlers = {
 
 module.exports = audioEventHandlers;
 
-
-/*
-  this.attributes.history = {
-  tokenId: [
-
-]
-}
-*/
-
 function logPlay() {
-  nullCheck.call(this)
-  if (this.attributes.playing.progress === -1) {
-    this.attributes.history[this.attributes.playing.token].status = 'started';
-    this.attributes.history[this.attributes.playing.token].events.push({
+  var deviceId = util.getDeviceId.call(this);
+  historyNullCheck.call(this, deviceId)
+  if (this.attributes[deviceId].playing.progress === -1) {
+    console.log("ENQUEUED ", this.attributes[deviceId].enqueued);
+    console.log("PLAYING ", this.attributes[deviceId].playing);
+    // only if playing and enqueued are the same, nuke enqueued
+    this.attributes[deviceId].enqueued = {};
+
+    this.attributes[deviceId].history[this.attributes[deviceId].playing.token].status = 'started';
+    this.attributes[deviceId].history[this.attributes[deviceId].playing.token].events.push({
       'event': 'start',
       'timestamp': Date.now(),
       'progress': getOffsetInMilliseconds.call(this)
     })
-    this.attributes.playing.progress = getOffsetInMilliseconds.call(this)
-    this.attributes.playing.status = 'playing';
+    this.attributes[deviceId].playing.progress = getOffsetInMilliseconds.call(this)
+    this.attributes[deviceId].playing.status = 'playing';
   } else {
-    this.attributes.playing.status = 'playing';
-    this.attributes.history[this.attributes.playing.token].status = 'resumed';
-    this.attributes.history[this.attributes.playing.token].events.push({
+    this.attributes[deviceId].playing.status = 'playing';
+    this.attributes[deviceId].history[this.attributes[deviceId].playing.token].status = 'resumed';
+    this.attributes[deviceId].history[this.attributes[deviceId].playing.token].events.push({
       'event': 'resume',
       'timestamp': Date.now(),
       'progress': getOffsetInMilliseconds.call(this)
@@ -158,9 +125,10 @@ function logPlay() {
 
 }
 function logStop() {
-  nullCheck.call(this)
-  this.attributes.history[this.attributes.playing.token].status = 'stopped';
-  this.attributes.history[this.attributes.playing.token].events.push({
+  var deviceId = util.getDeviceId.call(this);
+  historyNullCheck.call(this, deviceId)
+  this.attributes[deviceId].history[this.attributes[deviceId].playing.token].status = 'stopped';
+  this.attributes[deviceId].history[this.attributes[deviceId].playing.token].events.push({
     'event': 'stop',
     'timestamp': Date.now(),
     'progress': getOffsetInMilliseconds.call(this)
@@ -169,23 +137,29 @@ function logStop() {
 }
 
 function logFinished() {
-  nullCheck.call(this)
-  this.attributes.playing.status = 'finished';
+  var deviceId = util.getDeviceId.call(this);
+  historyNullCheck.call(this, deviceId);
+  this.attributes[deviceId].playing.status = 'finished';
   // set play to enqueued? Why isn't enqueue working?
-  this.attributes.playing.progress = -1; // or something else? or wipe it out?
-  this.attributes.history[this.attributes.playing.token].status = 'finished';
-  this.attributes.history[this.attributes.playing.token].events.push({
+  this.attributes[deviceId].playing.progress = -1; // or something else? or wipe it out?
+  this.attributes[deviceId].history[this.attributes[deviceId].playing.token].status = 'finished';
+  this.attributes[deviceId].history[this.attributes[deviceId].playing.token].events.push({
     'event': 'finish',
     'timestamp': Date.now(),
     'progress': getOffsetInMilliseconds.call(this)
   })
 }
 
-function logFail() {
-  nullCheck.call(this);
-  this.attributes.history[this.attributes.playing.token].status = 'failed';
-  this.attributes.history[this.attributes.playing.token].events.push({
+function logFail(token, error) {
+  var deviceId = util.getDeviceId.call(this);
+  historyNullCheck.call(this, deviceId);
+  var token = token || this.attributes.token;
+  this.attributes[deviceId].playing.status = 'failed';
+
+  this.attributes[deviceId].history[token].status = 'failed';
+  this.attributes[deviceId].history[token].events.push({
     'event': 'failed',
+    'error': error,
     'timestamp': Date.now(),
     'progress': getOffsetInMilliseconds.call(this)
   })
@@ -193,16 +167,13 @@ function logFail() {
 }
 
 function logEnqueue(nextEp) {
-  nullCheck.call(this, nextEp.guid);
-  this.attributes['enqueued'] = {
-    type: 'episode',
-    title: nextEp.title,
-    url: nextEp.audio.url,
-    token: nextEp.guid,
-    progress: -1
-  };
-  this.attributes.history[nextEp.guid].status = 'enqueued';
-  this.attributes.history[nextEp.guid].events.push({
+  var deviceId = util.getDeviceId.call(this);
+  historyNullCheck.call(this, deviceId, nextEp.guid);
+  console.log('logging enqueue current play is --> ', getOffsetInMilliseconds.call(this));
+  this.attributes[deviceId].playing.progress = getOffsetInMilliseconds.call(this);
+  this.attributes[deviceId]['enqueued'] = nextEp;
+  this.attributes[deviceId].history[nextEp.guid].status = 'enqueued';
+  this.attributes[deviceId].history[nextEp.guid].events.push({
     'event': 'enqueued',
     'timestamp': Date.now(),
     'progress': -1
@@ -210,18 +181,18 @@ function logEnqueue(nextEp) {
 
 }
 
-
-function nullCheck (token) {
-  var token = token || this.attributes.playing.token;
-  this.attributes.history = this.attributes.history || {};
-  this.attributes.history[token] = this.attributes.history[token] || {};
-  this.attributes.history[token].status = this.attributes.history[token].status || 'initiated';
-  this.attributes.history[token].events = this.attributes.history[token].events || [];
-}
-
-function getToken() {
-    // Extracting token received in the request.
-    return this.event.request.token;
+function historyNullCheck (deviceId, token) {
+  if (!this.attributes[deviceId]) {
+    console.log("WE ARE FUCKED");
+    console.log(JSON.stringify(this.attributes, null, 2));
+  }
+  this.attributes[deviceId] = this.attributes[deviceId] || {};
+  this.attributes[deviceId].playing = this.attributes[deviceId].playing || {};
+  var token = token || this.attributes[deviceId].playing.token;
+  this.attributes[deviceId].history = this.attributes[deviceId].history || {};
+  this.attributes[deviceId].history[token] = this.attributes[deviceId].history[token] || {};
+  this.attributes[deviceId].history[token].status = this.attributes[deviceId].history[token].status || 'initiated';
+  this.attributes[deviceId].history[token].events = this.attributes[deviceId].history[token].events || [];
 }
 
 function getOffsetInMilliseconds() {

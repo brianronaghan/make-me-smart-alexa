@@ -5,7 +5,7 @@ var util = require('./util');
 var feedHelper = require('./feedHelpers');
 var feeds = require('./feeds');
 var audioEventHandlers = require('./audioEventHandlers');
-
+var audioPlayer = require('./audioPlayer')
 var dynasty = require('dynasty')({ region: process.env.AWS_DEFAULT_REGION });
 var sessions = dynasty.table(config.sessionDBName);
 var itemLister = util.itemLister;
@@ -14,12 +14,6 @@ var sendProgressive = util.sendProgressive;
 
 var feedLoader = feedHelper.feedLoader;
 let items = [];
-var templateListTemplate1 = util.templateListTemplate1;
-var templateBodyTemplate1 = util.templateBodyTemplate1;
-
-var templateBodyTemplate3 = util.templateBodyTemplate3;
-var templateBodyTemplate6 = util.templateBodyTemplate6;
-
 // var users = dynasty.table('makeMeSmart');
 
 
@@ -40,8 +34,8 @@ exports.handler = function(event, context) {
 var handlers = {
     // 'NewSession': function () {
     //   console.log('new session ', JSON.stringify(this.event, null, 2));
-    //   if (this.attributes.iterating === 'show') {// seems like a state handler use case?
-    //     this.attributes.showIndex = 0;
+    //   if (this.attributes[deviceId].iterating === 'show') {// seems like a state handler use case?
+    //     this.attributes[deviceId].showIndex = 0;
     //   }
     // NOTE: I can easily do this and redirect... but MOST requests will be new session, so to what end?
     //   if (this.event.request.type === 'LaunchRequest') {
@@ -52,9 +46,46 @@ var handlers = {
     //   }
     //   this.emit(this.event.request.intent.name);
     //
+    // console.log('MY USER ATTRIBUTE', this.attributes[deviceId]);
+    // console.log('sesh id ', boundThis.event.session.sessionId);
+
+
+    // if (this.event.session.new) { // can put this in new session right? or no?
+    //   sessions.insert({userId: boundThis.event.session.user.userId, sessionId: boundThis.event.session.sessionId, begin: boundThis.event.request.timestamp, userId:boundThis.event.session.user.userId})
+    //     .then(function(resp){
+    //       console.log('new sesh babe i tried to insert', resp);
+    //       boundThis.response.speak('INSERTED A SESSION, maybe').listen("why don't you try something");
+    //       // have to ask to prevent session end
+    //       boundThis.emit(':responseReady');
+    //
+    //     })
+    //     .catch(function(err){
+    //       console.log('session insert fail fail', err)
+    //       boundThis.response.speak('baaad insert').listen("why don't you try something");
+    //       boundThis.emit(':responseReady');
+    //
+    //     })
+    // } else {
+    //   // what the fuck am i doing wrong here?
+    //   console.log(typeof this.event.session.user.userId);
+    //   sessions.find({hash: this.event.session.user.userId, range: boundThis.event.session.sessionId})
+    //     .then(function(data){
+    //       console.log("SESSIONS WHAT", data)
+    //       boundThis.response.speak('bueno! FROM SESSIONS').listen("why don't you try something");
+    //       boundThis.emit(':responseReady');
+    //     }).catch(function(err){
+    //       console.log('session fail', err)
+    //       boundThis.response.speak('baaad SESSIONS').listen("why don't you try something");
+    //       boundThis.emit(':responseReady');
+    //
+    //     })
+    //
     // },
 
     'LaunchRequest': function () {
+      var deviceId = util.getDeviceId.call(this);
+      util.nullCheck.call(this, deviceId);
+
       // var params = {
       //   TableName: 'makeMeSmart',
       //   Key: {'userId': this.event.session.user.userId}
@@ -64,74 +95,43 @@ var handlers = {
       //   Key: {'userId': this.event.session.user.userId, sessionStart: this.event.request.timestamp}
       // };
 
-      // If first time
+      // if you were playing episode
+
+      // if you were playing explainer
 
       // ELSE
 
 
-
-      this.attributes.latestSession = this.event.session.sessionId;
-      console.log(JSON.stringify(this.attributes, null, 2));
       var boundThis = this;
-      // console.log('MY USER ATTRIBUTE', this.attributes);
-      // console.log('sesh id ', boundThis.event.session.sessionId);
 
-
-      // if (this.event.session.new) { // can put this in new session right? or no?
-      //   sessions.insert({userId: boundThis.event.session.user.userId, sessionId: boundThis.event.session.sessionId, begin: boundThis.event.request.timestamp, userId:boundThis.event.session.user.userId})
-      //     .then(function(resp){
-      //       console.log('new sesh babe i tried to insert', resp);
-      //       boundThis.response.speak('INSERTED A SESSION, maybe').listen("why don't you try something");
-      //       // have to ask to prevent session end
-      //       boundThis.emit(':responseReady');
-      //
-      //     })
-      //     .catch(function(err){
-      //       console.log('session insert fail fail', err)
-      //       boundThis.response.speak('baaad insert').listen("why don't you try something");
-      //       boundThis.emit(':responseReady');
-      //
-      //     })
-      // } else {
-      //   // what the fuck am i doing wrong here?
-      //   console.log(typeof this.event.session.user.userId);
-      //   sessions.find({hash: this.event.session.user.userId, range: boundThis.event.session.sessionId})
-      //     .then(function(data){
-      //       console.log("SESSIONS WHAT", data)
-      //       boundThis.response.speak('bueno! FROM SESSIONS').listen("why don't you try something");
-      //       boundThis.emit(':responseReady');
-      //     }).catch(function(err){
-      //       console.log('session fail', err)
-      //       boundThis.response.speak('baaad SESSIONS').listen("why don't you try something");
-      //       boundThis.emit(':responseReady');
-      //
-      //     })
-      // }
       var topics = [
         'interest rates',
         'the cloud',
         'batman'
 
       ]
-      var speech = `This week we're learning about <emphasis level='strong'>${topics[0]}</emphasis>, <emphasis level='strong'>${topics[1]}</emphasis>, and <emphasis level='strong'>${topics[2]}</emphasis>. To skip to the next explanation at any time say 'next'.`;
+      var speech = `This week we're learning about <prosody pitch="high" volume="x-loud">${topics[0]}</prosody>, <prosody volume="x-loud" pitch="high">${topics[1]}</prosody>, and <prosody volume="x-loud" pitch="high" >${topics[2]}</prosody>. To skip to the next explanation at any time say 'next'.`;
       this.response.speak(speech).cardRenderer(speech);
 
       if (this.event.context.System.device.supportedInterfaces.Display) {
-        this.response.renderTemplate(templateBodyTemplate1('Welcome to Make Me Smart', speech, feeds[0].image));
+        this.response.renderTemplate(util.templateBodyTemplate1('Welcome to Make Me Smart', speech, feeds[0].image));
       }
-      this.response.hint('play the latest episode', 'PlainText');
+      console.log("LAUNCH REQUEST ", this.event.context.System.device.deviceId )
+      this.response.hint('ahhh', 'PlainText');
+      // I'll have to enqueue all three I guess? THIS IS
 
       this.emit(':responseReady');
 
     },
     'FindExplainer': function () {
+        var deviceId = util.getDeviceId.call(this);
+        util.nullCheck.call(this, deviceId);
+
         console.log("find explainer ", JSON.stringify(this.event.request,null,2));
         var query = this.event.request.intent.slots.query.value || this.event.request.intent.slots.wildcard.value;
-        //
-        this.attributes.latestSession = this.event.session.sessionId;
-        this.attributes.queries = this.attributes.queries || [];
-        this.attributes.queries.push(query);
-        console.log('attributes/after', this.attributes);
+
+        this.attributes[deviceId].queries.push(query);
+        console.log('attributes/after', this.attributes[deviceId]);
         // query = 'cheeseburgers'
         this.response.speak(`I'm gonna look for something on ${query}`)
             .cardRenderer(`here's what i got on ${query}.`);
@@ -139,6 +139,9 @@ var handlers = {
     },
 
     'List_explainers': function () {
+      var deviceId = util.getDeviceId.call(this);
+      util.nullCheck.call(this, deviceId);
+
       console.log('list Explainers')
       console.log(JSON.stringify(this.event.request, null, 2));
 
@@ -162,54 +165,28 @@ var handlers = {
 
 
     'List_shows': function () { // SHOWS AND ITEMS MIGHT BE EASILY MERGED EVENTUALLY
-      console.log('SHOW list')
-      this.attributes.indices = this.attributes.indices || {};
+      var deviceId = util.getDeviceId.call(this);
+      util.nullCheck.call(this, deviceId);
 
-      if (this.event.session.new || (!this.attributes.indices.show)) {
-        this.attributes.indices.show = 0;
+      if (this.event.session.new || (!this.attributes[deviceId].indices.show)) {
+        this.attributes[deviceId].indices.show = 0;
       }
-      this.attributes.iterating = 'show'; // This might be better done via the statehandler API
-      // Output the list of all feeds with card
-      var image = util.cardImage("https://www.runnersworld.com/sites/runnersworld.com/files/styles/article_main_custom_user_desktop_1x/public/ryssdal200902_200.jpg?itok=hU0uFezE&timestamp=1347392245");
-      if (!this.attributes.indices.show) {
-        this.attributes.indices.show = 0;
-      }
-
-      // var listItemBuilder = new Alexa.templateBuilders.ListItemBuilder();
-      // var listTemplateBuilder = new Alexa.templateBuilders.ListTemplate1Builder();
-      // NOTE: probably don't want to do this
-      // var currentFeeds = feeds.slice(this.attributes.indices.show, this.attributes.indices.show + config.items_per_prompt[this.attributes.iterating]);
-      // feeds.forEach(function(feed, i) {
-      //   var image = makeImage(feed.image, 88, 88);
-      //   listItemBuilder.addItem(image, `PickShow_${i}`, makeRichText(`<font size='5'>${feed.feed}</font>`));
-      // });
-
-
-      console.log("WTF", this.event.context.System.device.supportedInterfaces.Display);
-
-
-      // var autoListItems = listItemBuilder.build();
+      this.attributes[deviceId].iterating = 'show';
+      // This might be better done via the statehandler API
 
       var data = itemLister(
         feeds,
-        `${this.attributes.iterating}s`,
+        `${this.attributes[deviceId].iterating}s`,
         'feed',
-        this.attributes.indices[this.attributes.iterating],
-        config.items_per_prompt[this.attributes.iterating]
+        this.attributes[deviceId].indices[this.attributes[deviceId].iterating],
+        config.items_per_prompt[this.attributes[deviceId].iterating]
       );
 
-      // const listTemplate = listTemplateBuilder.setToken('list-some-shows')
-      //   .setTitle('Our Shows')
-      //   .setListItems(autoListItems)
-      //   .build();
-
-      // console.log('render temp', JSON.stringify(listTemplate, null, 2));
-      console.log('DAT', data.itemsCard);
-      this.response.speak(data.itemsAudio).listen('Pick one or say next').cardRenderer(data.itemsCard);
+      this.response.speak(data.itemsAudio).listen('Pick one or move forward or backward through list.').cardRenderer(data.itemsCard);
 
       if (this.event.context.System.device.supportedInterfaces.Display) {
         this.response.renderTemplate(
-          templateListTemplate1(
+          util.templateListTemplate1(
             'Our Shows',
             'list-shows',
             'Show',
@@ -224,20 +201,19 @@ var handlers = {
       // Go into feed
     },
     'List_episodes': function (slot) {
-      // SOMETHING IS WRONG, IT IS GOING TO MARKETPLACE
-      // TODO: if we get here directly, NOT having gone through 'Pick Show', we need to do some state management
-      // (IF do we have a show selected? are we iterating through episodes? Do we have the feed live? We would have to pull the feed
-      console.log("HI?")
-      var slot = slot || this.event.request.intent.slots;
-      this.attributes.indices = this.attributes.indices || {};
-      this.attributes.iterating = 'episode';
-      this.attributes.indices.episode = this.attributes.indices.episode || 0;
-      if (slot && slot.show && slot.show.value) {
-        this.attributes.show = slot.show.value;
-      }
-      this.attributes.show = this.attributes.show || 'Make Me Smart';
+      var deviceId = util.getDeviceId.call(this);
+      util.nullCheck.call(this, deviceId);
 
-      var chosen = itemPicker(this.attributes.show, feeds, 'feed');
+      // TODO: if we get here directly, NOT having gone through 'Pick Show', we need to do some state management
+      var slot = slot || this.event.request.intent.slots;
+      this.attributes[deviceId].iterating = 'episode';
+      this.attributes[deviceId].indices.episode = this.attributes[deviceId].indices.episode || 0;
+      if (slot && slot.show && slot.show.value) {
+        this.attributes[deviceId].show = slot.show.value;
+      }
+      this.attributes[deviceId].show = this.attributes[deviceId].show || 'Make Me Smart';
+
+      var chosen = itemPicker(this.attributes[deviceId].show, feeds, 'feed');
       var showImage = util.cardImage(chosen.image);
       console.time('list-episodes-load');
 
@@ -247,17 +223,17 @@ var handlers = {
         console.log('LIST EPISODES FEED LOAD cb')
         var data = util.itemLister(
           feedData.items,
-          `${this.attributes.iterating}s`,
+          `${this.attributes[deviceId].iterating}s`,
           'title',
-          this.attributes.indices[this.attributes.iterating],
-          config.items_per_prompt[this.attributes.iterating]
+          this.attributes[deviceId].indices[this.attributes[deviceId].iterating],
+          config.items_per_prompt[this.attributes[deviceId].iterating]
         );
 
         this.response.speak(data.itemsAudio).listen('Pick one or say next').cardRenderer(data.itemsCard);
 
         if (this.event.context.System.device.supportedInterfaces.Display) {
           this.response.renderTemplate(
-            templateListTemplate1(
+            util.templateListTemplate1(
               'Episodes',
               'list-episodes',
               'Episode',
@@ -267,30 +243,21 @@ var handlers = {
           );
         }
         this.emit(':responseReady');
-
-        // this.emit(':askWithCard', data.itemsAudio, 'what do you want', `${this.attributes.show} episodes:`, data.itemsCard, showImage );
       });
-      // } else {
-      //   console.log("cached");
-      //   var feedEpisodes = episodes[this.attributes.show].items;
-      //   var data = util.itemLister(feedEpisodes, `${this.attributes.iterating}s`, 'title', this.attributes.indices[this.attributes.iterating], config.items_per_prompt[this.attributes.iterating]);
-      //   console.log('DATA', data)
-      //   boundThis.emit(':askWithCard', data.itemsAudio, 'what do you want', `${this.attributes.show} episodes:`, data.itemsCard, showImage );
-      // }
-
-
-      // Go into feed
     },
     'ElementSelected': function () {
+      var deviceId = util.getDeviceId.call(this);
+      util.nullCheck.call(this, deviceId);
+
       // handle play latest or pick episode actions
       console.log('ElementSelected -- ', this.event.request)
-      console.log('ATTRIBUTES?', this.attributes)
+      console.log('ATTRIBUTES?', this.attributes[deviceId])
       var intentSlot,intentName;
       if (this.event.request.token === 'PlayLatestEpisode' || this.event.request.token === 'List_episodes') {
         intentName = this.event.request.token;
         intentSlot = {
           index: {
-            value: this.attributes.show
+            value: this.attributes[deviceId].show
           }
         }
       }  else {
@@ -306,6 +273,9 @@ var handlers = {
       this.emit(intentName, intentSlot);
     },
     'PickShow': function(slot) {
+      var deviceId = util.getDeviceId.call(this);
+      util.nullCheck.call(this, deviceId);
+
       // also need out of bounds era on numbers, right?
       // if feeds are being iterated, should destroy that index
       // slots should be specific. show_title rather than title...
@@ -317,90 +287,55 @@ var handlers = {
       var slot = slot || this.event.request.intent.slots;
       var chosen = itemPicker(slot, feeds, 'feed');
       var showImage = util.cardImage(chosen.image);
-      this.attributes.show = chosen.feed;
-      this.attributes.indices = this.attributes.indices || {};
-      this.attributes.indices.show = null;
-      this.attributes.indices.episode = 0;
+      this.attributes[deviceId].show = chosen.feed;
+      this.attributes[deviceId].indices = this.attributes[deviceId].indices || {};
+      this.attributes[deviceId].indices.show = null;
+      this.attributes[deviceId].indices.episode = 0;
       console.time('pick-show-load');
       feedLoader.call(this, chosen, false, function(err, feedData) {
         console.timeEnd('pick-show-load');
+        this.response.speak(`You chose ${chosen.feed}. Should I play the latest episode or list the episodes?`)
+          .listen("Say 'play latest' to hear the latest episode or 'list episodes' to explore episodes.")
+          .cardRenderer(chosen.feed, 'Say "play latest" to hear the latest episode or "list episodes" to explore episodes.', showImage);
 
-        console.log('PICK SHOW feed load cb')
+        if (this.event.context.System.device.supportedInterfaces.Display) {
+          this.response.renderTemplate(
+            util.templateBodyTemplate3(
+              chosen.feed,
+              showImage,
+              chosen.description
+            )
+          );
+        }
+        this.response.hint('play the latest episode', 'PlainText')
+
+        console.log('RESPONSE', JSON.stringify(this.response, null, 2));
+        this.emit(':responseReady');
       });
 
 
-
-      this.response.speak(`You chose ${chosen.feed}. Should I play the latest episode or list the episodes?`)
-        .listen("Say 'play latest' to hear the latest episode or 'list episodes' to explore episodes.")
-        .cardRenderer(chosen.feed, 'Say "play latest" to hear the latest episode or "list episodes" to explore episodes.', showImage);
-
-      if (this.event.context.System.device.supportedInterfaces.Display) {
-        this.response.renderTemplate(
-          templateBodyTemplate3(
-            chosen.feed,
-            showImage,
-            chosen.description
-          )
-        );
-      }
-      this.response.hint('play the latest episode', 'PlainText')
-      // this.response.directives.push({
-      //   "type": "Hint",
-      //   "hint": {
-      //     "type": "PlainText",
-      //     "text": "play the latest episode"
-      //   }
-      // });
-
-      console.log('RESPONSE', JSON.stringify(this.response, null, 2));
-      this.emit(':responseReady');
-
-      // this.emit(
-      //   ':askWithCard',
-      //   `You chose ${chosen.feed}. Should I play the latest episode or list the episodes?`,
-      //   'Say play latest or list episodes.',
-      //   `${chosen.feed}`,
-      //   `Say "play latest" to hear the latest episode or "list episodes" to explore episodes.`,
-      //   showImage
-      // );
     },
 
     'PlayLatestEpisode' : function (slot) {
+      var deviceId = util.getDeviceId.call(this);
+      util.nullCheck.call(this, deviceId);
+
       var slot = slot || this.event.request.intent.slots;
 
       if (slot && slot.show && slot.show.value) {
-        this.attributes.show = slot.show.value;
+        this.attributes[deviceId].show = slot.show.value;
       }
-      var show = this.attributes.show || 'Make Me Smart';
-      var chosenShow = itemPicker(this.attributes.show, feeds, 'feed');
+
+
+      var show = this.attributes[deviceId].show || 'Make Me Smart';
+      var chosenShow = itemPicker(show, feeds, 'feed');
       var showImage = util.cardImage(chosenShow.image);
       feedLoader.call(this, chosenShow, false, function(err, feedData) {
         console.log('PLAY LATEST feed load cb')
         var chosenEp = feedData.items[0];
         this.response.speak(`Playing the latest ${chosenShow.feed}, titled ${chosenEp.title}`);
-        this.attributes.playing = {
-          status: 'requested',
-          type: 'episode',
-          title: chosenEp.title,
-          url: chosenEp.audio.url,
-          token: chosenEp.guid,
-          progress: -1
-        };
-        // this.response._responseObject.response.directives = this.response._responseObject.response.directives || [];
-        // this.response._responseObject.response.directives.push({
-        //   "type": "AudioPlayer.Play",
-        //   "playBehavior": "REPLACE_ALL",
-        //   "audioItem": {
-        //     "stream": {
-        //       "token": chosenEp.guid,
-        //       "url": chosenEp.audio.url,
-        //       "offsetInMilliseconds": 0
-        //     }
-        //   }
-        // });
-        // THAT'S A GREAT IDEA I'LL ASK KAI AND MOLLY
-
-        this.response.audioPlayerPlay('REPLACE_ALL', chosenEp.audio.url, chosenEp.guid, null, 0);
+        audioPlayer.start.call(this, chosenEp, 'episode', chosenShow.feed);
+        // this.response.audioPlayerPlay('REPLACE_ALL', chosenEp.audio.url, chosenEp.guid, null, 0);
         this.emit(':responseReady');
       });
 
@@ -409,6 +344,9 @@ var handlers = {
 
 
     'PickEpisode': function (slot) {
+      var deviceId = util.getDeviceId.call(this);
+      util.nullCheck.call(this, deviceId);
+
       // need out of bounds error on numbers, god forbid look up by title.
       // still have to deal with play latest
       // if iterating == episodes
@@ -420,64 +358,44 @@ var handlers = {
       // need to handle if the session is over
       var slot = slot || this.event.request.intent.slots;
 
-      var show = this.attributes.show
+      var show = this.attributes[deviceId].show
       var chosenShow = itemPicker(show, feeds, 'feed');
-      console.log('Episode pick - iterating', this.attributes.iterating, ' show ', this.attributes.show);
+      console.log('Episode pick - iterating', this.attributes[deviceId].iterating, ' show ', this.attributes[deviceId].show);
       console.log('slots baby', slot);
       console.log(chosenShow)
       feedLoader.call(this, chosenShow, false, function(err, feedData) {
         console.log('PICK EPISODE feed load cb')
         var chosenEp = itemPicker(slot, feedData.items, 'title');
         console.log('PICK EPISODE', JSON.stringify(chosenEp, null, 2));
-        this.response.speak(`Playing ${chosenEp.title}`);
-        this.attributes.playing = {
-          status: 'requested',
-          type: 'episode',
-          title: chosenEp.title,
-          url: chosenEp.audio.url,
-          token: chosenEp.guid,
-          progress: -1
-        };
-        this.response.audioPlayerPlay('REPLACE_ALL', chosenEp.audio.url, chosenEp.guid, null, 0);
-        this.emit(':responseReady');
+        this.response.speak(`Starting ${chosenEp.title}`);
+        audioPlayer.start.call(this, chosenEp, 'episode', chosenShow.feed);
       });
-
-      /// no image???
-      // this.emit(
-      //   ':askWithCard',
-      //   `${chosenEp.title}`,
-      //   'should be playin',
-      //   `${this.attributes.show}`,
-      //   `${chosenEp.title} shouold be playing ${chosenEp.date} there are ${episodes[show].items.length} others.`,
-      //   showImage
-      // );
-      // this.response.speak(`Playing ${chosenEp.title}`);
-      // var playDirective = {
-      //   "type": "AudioPlayer.Play",
-      //   "playBehavior": "REPLACE_ALL",
-      //   "audioItem": {
-      //     "stream": {
-      //       "url": chosenEp.audio.url,
-      //       "token": chosenEp.guid,
-      //       "offsetInMilliseconds": 0
-      //     }
-      //   }
-      // };
-
-
     },
-    'FinishedHandler': function () {
-      console.log('WE FINISHED!', this.attributes.playing);
-      this.response.speak('You and me are done professionally, man');
-
-    },
+    // 'FinishedHandler': function () {
+    //   //
+    //   console.log("FINISHED HANDLER")
+    //   var deviceId = util.getDeviceId.call(this);
+    //   util.nullCheck.call(this, deviceId);
+    //   var newItem = this.attributes[deviceId].enqueued;
+    //   var playing = this.attributes[deviceId].playing;
+    //   // console.log('DONE PLAYING!', playing);
+    //   // console.log("NEW ITEM ", newItem)
+    //   // console.log('THIS IN FINISHED   ', JSON.stringify(this.response, null, 2));
+    //   this.response.speak(`Done. Now playing the next ${playing.type}, ${newItem.title}`);
+    //   this.emit(':responseReady');
+    //   // audioPlayer.start.call(this, newItem, playing.type, playing.feed)
+    //
+    // },
 
     'SessionEndedRequest' : function() {
       // save the session i guess
       console.log('Session ended with reason: ' + JSON.stringify(this.event.request, null, 2));
-      if(this.attributes.iterating === 'show') {
-        if(this.attributes.indices && this.attributes.indices.show) {
-          this.attributes.indices.show = 0;
+      var deviceId = util.getDeviceId.call(this);
+      util.nullCheck.call(this, deviceId);
+
+      if(this.attributes[deviceId].iterating === 'show') {
+        if(this.attributes[deviceId].indices && this.attributes[deviceId].indices.show) {
+          this.attributes[deviceId].indices.show = 0;
         }
       }
       this.emit(':saveState', true);
@@ -486,59 +404,57 @@ var handlers = {
     // NEXT AND PREVIOUS: for now, will call explicit listEntity functions for each.
     // For now, will allow us
     'AMAZON.NextIntent' : function () {
-      // if playing, find current in feed by token, then increment
+      var deviceId = util.getDeviceId.call(this);
+      util.nullCheck.call(this, deviceId);
 
-      // handle in play mode... I guess
-      this.attributes.indices[this.attributes.iterating] += config.items_per_prompt[this.attributes.iterating];
-      console.log("after NEXT FIRES", this.attributes.indices);
+      // if playing.status === playing
+        // FUCK THE ENQUEUED, just find it again
+        // load feed, find next, send play with REPLACE_ALL
+        // nuke enqueued?
+      // else
+        // do below
+      this.attributes[deviceId].indices[this.attributes[deviceId].iterating] += config.items_per_prompt[this.attributes[deviceId].iterating];
       this.emit(':saveState', true);
-      this.emit(`List_${this.attributes.iterating}s`);
+      this.emit(`List_${this.attributes[deviceId].iterating}s`);
     },
     'AMAZON.PreviousIntent' : function () {
-      this.attributes.indices[this.attributes.iterating] -= config.items_per_prompt[this.attributes.iterating];
+      var deviceId = util.getDeviceId.call(this);
+      util.nullCheck.call(this, deviceId);
+      // if playing
+        // i guess find previous, play that? nuke enqueued
+      // else
+      this.attributes[deviceId].indices[this.attributes[deviceId].iterating] -= config.items_per_prompt[this.attributes[deviceId].iterating];
       // if it's less than zero, reset to zero
-      console.log('after PREVIOUS FIRES',this.attributes.indices);
+      console.log('after PREVIOUS FIRES',this.attributes[deviceId].indices);
       this.emit(':saveState', true);
 
       console.log("PREVIOUS FIRES ");
 
-      this.emit(`List_${this.attributes.iterating}s`);
+      this.emit(`List_${this.attributes[deviceId].iterating}s`);
     },
 
     'AMAZON.PauseIntent' : function () {
-      //
-        console.log('pause', JSON.stringify(this.event.context, null, 2));
-        // this.event.context.AudioPlayer.offsetInMilliseconds
-        this.attributes.playing['progress'] = this.event.context.AudioPlayer.offsetInMilliseconds;
-        this.attributes.playing['status'] = 'paused';
-        this.response.audioPlayerStop();
-        this.emit(':responseReady');
-
+        // TEST
+        this.response.speak('Paused it for you');
+        audioPlayer.stop.call(this);
     },
 
     'AMAZON.ResumeIntent' : function () {
-      //
-      console.log('resume', this.attributes.playing)
-      // this.response.audioPlayerPlay('REPLACE_ALL', chosenEp.audio.url, chosenEp.guid, null, this.attributes.progress);
-      var playing = this.attributes.playing;
-      // Probably don't need this rsume message?
-      this.response.speak(`Resuming ${playing.title}`);
-      this.response.audioPlayerPlay('REPLACE_ALL', playing.url, playing.token, null, playing.progress);
-
-      this.emit(':responseReady');
-
+      console.log('buit in RESUME');
+      // MUST CHECK FINISHED:
+        // if playing was finished,
+          // find next, give message, play
+        // else
+          // if ep, and playing within 30 * 1000 of end, go to next
+          // else, resume
+      audioPlayer.resume.call(this);
     },
 
     'AMAZON.StopIntent' : function() {
-        console.log('built in STOP')
-        this.attributes.playing['progress'] = this.event.context.AudioPlayer.offsetInMilliseconds;
-        this.attributes.playing['status'] = 'stopped';
-
-        // We should say stopped rather than paused?
-        this.response.audioPlayerStop();
-        this.response.speak("I STOPPED it for you.");
-
-        this.emit(':responseReady');
+      console.log('built in STOP')
+      // This needs to work for not playing as well
+      audioPlayer.stop.call(this);
+      this.emit(':responseReady');
     },
 
 
@@ -546,6 +462,7 @@ var handlers = {
       console.log('AMAZON.ScrollDownIntent');
     },
     'AMAZON.HelpIntent' : function() {
+      // get real things
         this.response.speak("You can try: 'make me smart about interest rates' or 'what are the latest episodes'");
         this.emit(':responseReady');
     },
@@ -556,4 +473,5 @@ var handlers = {
     'Unhandled' : function() {
         this.response.speak("Sorry, we're not quite that smart. Please try something else.");
     }
+
 };
