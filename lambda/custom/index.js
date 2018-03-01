@@ -3,7 +3,7 @@ var Alexa = require("alexa-sdk");
 var config = require('./config');
 var util = require('./util');
 var feedHelper = require('./feedHelpers');
-var feeds = require('./feeds');
+var feeds = config.feeds;
 var audioEventHandlers = require('./audioEventHandlers');
 var audioPlayer = require('./audioPlayer')
 var dynasty = require('dynasty')({ region: process.env.AWS_DEFAULT_REGION });
@@ -84,6 +84,8 @@ var handlers = {
 
     'LaunchRequest': function () {
       var deviceId = util.getDeviceId.call(this);
+      var intro = `Welcome ${this.attributes[deviceId] && 'back'} to 'Make Me Smart'.`
+
       util.nullCheck.call(this, deviceId);
 
       // var params = {
@@ -100,7 +102,6 @@ var handlers = {
       // if you were playing explainer
 
       // ELSE
-
 
       var boundThis = this;
 
@@ -121,6 +122,12 @@ var handlers = {
       // I'll have to enqueue all three I guess? THIS IS
 
       this.emit(':responseReady');
+
+    },
+    'ResumeEpisode': function () {
+
+    },
+    'ResumeExplainer': function () {
 
     },
     'FindExplainer': function () {
@@ -286,18 +293,20 @@ var handlers = {
       console.log("PICK SHOW");
       var slot = slot || this.event.request.intent.slots;
       var chosen = itemPicker(slot, feeds, 'feed');
+      this.attributes[deviceId].iterating = null;
+
       var showImage = util.cardImage(chosen.image);
       this.attributes[deviceId].show = chosen.feed;
-      this.attributes[deviceId].indices = this.attributes[deviceId].indices || {};
       this.attributes[deviceId].indices.show = null;
       this.attributes[deviceId].indices.episode = 0;
+
       console.time('pick-show-load');
       feedLoader.call(this, chosen, false, function(err, feedData) {
         console.timeEnd('pick-show-load');
         this.response.speak(`You chose ${chosen.feed}. Should I play the latest episode or list the episodes?`)
           .listen("Say 'play latest' to hear the latest episode or 'list episodes' to explore episodes.")
           .cardRenderer(chosen.feed, 'Say "play latest" to hear the latest episode or "list episodes" to explore episodes.', showImage);
-
+        //
         if (this.event.context.System.device.supportedInterfaces.Display) {
           this.response.renderTemplate(
             util.templateBodyTemplate3(
@@ -326,7 +335,7 @@ var handlers = {
         this.attributes[deviceId].show = slot.show.value;
       }
 
-
+      this.attributes[deviceId].iterating = null;
       var show = this.attributes[deviceId].show || 'Make Me Smart';
       var chosenShow = itemPicker(show, feeds, 'feed');
       var showImage = util.cardImage(chosenShow.image);
@@ -336,7 +345,7 @@ var handlers = {
         this.response.speak(`Playing the latest ${chosenShow.feed}, titled ${chosenEp.title}`);
         audioPlayer.start.call(this, chosenEp, 'episode', chosenShow.feed);
         // this.response.audioPlayerPlay('REPLACE_ALL', chosenEp.audio.url, chosenEp.guid, null, 0);
-        this.emit(':responseReady');
+        // this.emit(':responseReady');
       });
 
 
@@ -357,6 +366,7 @@ var handlers = {
         // if not, just either pick last show, or default to whatever we want.
       // need to handle if the session is over
       var slot = slot || this.event.request.intent.slots;
+      this.attributes[deviceId].iterating = null;
 
       var show = this.attributes[deviceId].show
       var chosenShow = itemPicker(show, feeds, 'feed');
@@ -394,7 +404,9 @@ var handlers = {
       util.nullCheck.call(this, deviceId);
 
       if(this.attributes[deviceId].iterating === 'show') {
+        this.attriubutes[deviceId].iterating = null;
         if(this.attributes[deviceId].indices && this.attributes[deviceId].indices.show) {
+
           this.attributes[deviceId].indices.show = 0;
         }
       }
@@ -406,6 +418,66 @@ var handlers = {
     'AMAZON.NextIntent' : function () {
       var deviceId = util.getDeviceId.call(this);
       util.nullCheck.call(this, deviceId);
+      console.log('NEXT called, not playing?', this.attributes[deviceId].playing)
+      console.log("UM WHAT THE FUK EVENT: ", this.event)
+      this.response.speak('Got the next call')
+      this.emit(':responseReady');
+
+      // if we're iterating something, move next
+      if (this.attributes[deviceId].iterating) {
+        console.log('we ARE iterating')
+
+        this.attributes[deviceId].indices[this.attributes[deviceId].iterating] += config.items_per_prompt[this.attributes[deviceId].iterating];
+        this.emit(':saveState', true);
+        this.emit(`List_${this.attributes[deviceId].iterating}s`);
+      } else if (this.attributes[deviceId].playing) {
+        console.log('we are not iterating')
+        var chosenShow = util.itemPicker(this.attributes[deviceId].playing.feed, feeds, 'feed');
+        var boundThis = this;
+
+        feedLoader.call(this, chosenShow, false, function(err, feedData) {
+          var nextEp = util.nextPicker(boundThis.attributes[deviceId].playing, 'token', feedData.items, 'guid');
+          //
+          if (nextEp === -1) {
+            console.log('handle no next')
+          }
+          var nextSpeech = 'Okay. '
+          switch(this.attributes[deviceId].playing.status) {
+            case 'playing':
+              nextSpeech += `Skipping to the next ${boundThis.attributes[deviceId].playing.feed}, titled ${nextEp.title}.`;
+              console.log("you were playing")
+              break;
+            case 'finished':
+              nextSpeech += `Last time you finished hearing ${boundThis.attributes[deviceId].playing.title}. I'll play the next ${boundThis.attributes[deviceId].playing.type}.`;
+              break;
+            // case 'requested':
+            //   console.log("you requested")
+            //   break;
+            // case 'paused':
+            //   console.log("paused")
+            //   break;
+            // case 'failed':
+            //
+            //   console.log("you failed")
+            //   break;
+            default:
+              nextSpeech += `Playing the next ${boundThis.attributes[deviceId].playing.feed}, titled ${nextEp.title}.`;
+              break;
+          }
+          this.response.speak(nextSpeech);
+          audioPlayer.start.call(this, nextEp, boundThis.attributes[deviceId].playing.type, chosenShow.feed);
+        });
+
+
+      } else {
+        // if I'm not iterating and I'm not playing, just go home.
+
+        this.emit('LaunchRequest');
+      }
+      //
+
+
+
 
       // if playing.status === playing
         // FUCK THE ENQUEUED, just find it again
@@ -413,9 +485,7 @@ var handlers = {
         // nuke enqueued?
       // else
         // do below
-      this.attributes[deviceId].indices[this.attributes[deviceId].iterating] += config.items_per_prompt[this.attributes[deviceId].iterating];
-      this.emit(':saveState', true);
-      this.emit(`List_${this.attributes[deviceId].iterating}s`);
+
     },
     'AMAZON.PreviousIntent' : function () {
       var deviceId = util.getDeviceId.call(this);
@@ -441,6 +511,7 @@ var handlers = {
 
     'AMAZON.ResumeIntent' : function () {
       console.log('buit in RESUME');
+
       // MUST CHECK FINISHED:
         // if playing was finished,
           // find next, give message, play

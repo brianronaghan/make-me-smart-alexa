@@ -1,7 +1,8 @@
 'use strict';
 
 var Alexa = require('alexa-sdk');
-var feeds = require('./feeds');
+var config = require('./config');
+var feeds = config.feeds;
 var feedHelper = require('./feedHelpers');
 var feedLoader = feedHelper.feedLoader;
 var util = require('./util')
@@ -53,7 +54,6 @@ var audioEventHandlers = {
          */
          /// chaeck by device id?
          var deviceId = util.getDeviceId.call(this);
-         // NOTE: since I'm actually handling playing, i DON't THINK i need to worry about this... it'll just update it
          if (this.attributes[deviceId]['enqueued'] && this.attributes[deviceId]['enqueued'].token) {
            console.log('PLAYBACK NEARLY FINISHED, BUT I ALREADY HAVE SOMETHING ENQUEUED')
              /*
@@ -127,6 +127,8 @@ function logPlay() {
 function logStop() {
   var deviceId = util.getDeviceId.call(this);
   historyNullCheck.call(this, deviceId)
+  this.attributes[deviceId].playing.status = 'stopped';
+
   this.attributes[deviceId].history[this.attributes[deviceId].playing.token].status = 'stopped';
   this.attributes[deviceId].history[this.attributes[deviceId].playing.token].events.push({
     'event': 'stop',

@@ -1,6 +1,7 @@
 var Alexa = require("alexa-sdk");
-var feeds = require('./feeds');
-var constants = require('./constants');
+var config = require('./config')
+var feeds = config.feeds;
+var constants = config.constants;
 var request = require('request');
 
 const makeImage = Alexa.utils.ImageUtils.makeImage;
@@ -178,17 +179,37 @@ module.exports = {
     }
     return {itemsAudio, itemsCard};
   },
+  loadNextItem: function () {
+    // NOTE: TK
+  },
   nextPicker :function (currentItem, itemKey, choices, choiceKey) {
     var currentItemIndex = choices.findIndex(function(item){
       return item[choiceKey] === currentItem[itemKey];
     });
     if (currentItemIndex === -1) {
+      return -1
       console.log('not found')
     }
     var nextItem = choices[currentItemIndex+1];
-    console.log('THE ITEM IN NEXT PICKER', nextItem);
+    if (nextItem) {
+      return nextItem;
+    } else {
+      return -1;
+    }
+  },
+  prevPicker :function (currentItem, itemKey, choices, choiceKey) {
+    var currentItemIndex = choices.findIndex(function(item){
+      return item[choiceKey] === currentItem[itemKey];
+    });
+    if (currentItemIndex === -1 || currentItemIndex === 0) {
+      console.log('PREVIOUS not found')
+      return null
+    }
+    var nextItem = choices[currentItemIndex-1];
+    console.log('PREVIOUS ITEM', nextItem);
     return nextItem;
   },
+
   itemPicker: function (intentSlot, choices, choiceKey) {
     // MONDAY: this is where we begin. Making sure this works... implementing choose show with this... then implementing list episodes intent using itemLister
     var itemNames = choices.map(function (choice) {return choice[choiceKey].toLowerCase()});

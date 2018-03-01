@@ -49,16 +49,15 @@ var controllers = {
     } else {
       this.response.speak("You asked me to pause, I paused.");
       this.attributes[deviceId].playing['progress'] = this.event.context.AudioPlayer.offsetInMilliseconds;
-      this.attributes[deviceId].playing['status'] = 'paused';
+      this.attributes[deviceId].playing.status = 'paused';
       this.response.audioPlayerStop();
       this.emit(':responseReady');
 
     }
-    //NOTE: this we will want if playing is NOT finished
 
   },
   'enqueue': function () {
-    console.log('enqueues');
+    console.log('enqueued');
   }
 };
 
