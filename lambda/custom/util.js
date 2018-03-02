@@ -67,6 +67,7 @@ module.exports = {
     var listTemplate = listTemplateBuilder.setToken(token)
       .setTitle(title)
       .setListItems(autoListItems)
+      .setBackgroundImage(makeImage("https://photos-1.dropbox.com/t/2/AACQSoCkPgxU97c9x553OYPj3NiYF1Q_Ta5qcI68gvZQpA/12/20237196/png/32x32/3/1519963200/0/2/1024x600_optB.png/ELfalA8Yre4YIAIoAg/2GMa2nEjkJ1EhjNaqq80RQuKevxZTkH0yFB_GVmJ6Go?dl=0&preserve_transparency=1&size=2048x1536&size_mode=3"))
       .build();
 
     console.log('listTemplate', listTemplate);
@@ -81,10 +82,10 @@ module.exports = {
          "textContent": {
            "primaryText": {
              "type": "RichText",
-               "text": `<font size='7'>${bodyText}</font>`
+               "text": `<font size='5'>${bodyText}</font>`
            },
          },
-         // "backgroundImage": makeImage(backgroundImage),
+         "backgroundImage": makeImage(backgroundImage),
          "backButton": "HIDDEN"
     }
     console.log('body', JSON.stringify(template));
@@ -93,7 +94,7 @@ module.exports = {
 
   },
 
-  templateBodyTemplate3: function (title, image, description) {
+  templateBodyTemplate3: function (title, image, description, back) {
     var template = {
          "type": "BodyTemplate3",
          "title": title,
@@ -111,7 +112,8 @@ module.exports = {
              "text": description
            }
          },
-         "image": makeImage(image.smallImageUrl, 340, 340),
+         "image": makeImage(image, 340,340),
+         "backgroundImage": makeImage(back),
          "backButton": "VISIBLE"
     }
     console.log('body', JSON.stringify(template));
@@ -133,7 +135,7 @@ module.exports = {
              "text": title
            },
          },
-         // "backgroundImage": makeImage(backgroundImage),
+         "backgroundImage": makeImage(backgroundImage),
          "backButton": "HIDDEN"
     }
     console.log('body', JSON.stringify(template));

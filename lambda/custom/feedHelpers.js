@@ -14,6 +14,8 @@ var sendProgressive = util.sendProgressive;
 
 var itemsByFeed = {};
 
+
+
 module.exports = {
   feedLoader: function (feed, message, cb) {
     console.log("ITEMS IN MEMORY ", itemsByFeed)

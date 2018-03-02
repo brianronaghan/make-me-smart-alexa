@@ -16,7 +16,67 @@ var feedLoader = feedHelper.feedLoader;
 let items = [];
 // var users = dynasty.table('makeMeSmart');
 
-
+var testExplainers = {
+  feed: 'Explainers',
+  url: null,
+  image:null,
+  items: [{
+      title: 'bonds',
+      guid: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa-Bonds-Kai.MP3',
+      date: null,
+      description: 'describing some bonds',
+      audio: {
+        url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa-Bonds-Kai.MP3",
+        length: null,
+        type: null
+      }
+    },
+    {
+      title: 'inflation',
+      guid: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa-Inflation-Kai.MP3',
+      date: null,
+      description: 'describing some inflation',
+      audio: {
+        url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa-Inflation-Kai.MP3",
+        length: null,
+        type: null
+      }
+    },
+    {
+      title: 'interest rates',
+      guid: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa-Interest-Rates-Kai.MP3",
+      date: null,
+      description: 'describing some interest rates',
+      audio: {
+        url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa-Interest-Rates-Kai.MP3",
+        length: null,
+        type: null
+      }
+    },
+    {
+      title: 'productivity',
+      guid: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa-Productivity-Kai.MP3",
+      date: null,
+      description: 'describing some productivity',
+      audio: {
+        url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa-Productivity-Kai.MP3",
+        length: null,
+        type: null
+      }
+    },
+    {
+      title: 'the cloud',
+      guid: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa-The-Cloud-Molly+Wood.MP3",
+      date: null,
+      description: 'describing the cloud',
+      audio: {
+        url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa-The-Cloud-Molly+Wood.MP3",
+        length: null,
+        type: null
+      }
+    }
+  ]
+}
 
 var episodes = {};
 var explainers = [];
@@ -84,7 +144,7 @@ var handlers = {
 
     'LaunchRequest': function () {
       var deviceId = util.getDeviceId.call(this);
-      var intro = `Welcome ${this.attributes[deviceId] && 'back'} to 'Make Me Smart'.`
+      var intro = `Welcome ${this.attributes[deviceId] ? 'back' : ''} to Make Me Smart.`
 
       util.nullCheck.call(this, deviceId);
 
@@ -104,18 +164,15 @@ var handlers = {
       // ELSE
 
       var boundThis = this;
-
-      var topics = [
-        'interest rates',
-        'the cloud',
-        'batman'
-
-      ]
-      var speech = `This week we're learning about <prosody pitch="high" volume="x-loud">${topics[0]}</prosody>, <prosody volume="x-loud" pitch="high">${topics[1]}</prosody>, and <prosody volume="x-loud" pitch="high" >${topics[2]}</prosody>. To skip to the next explanation at any time say 'next'.`;
-      this.response.speak(speech).cardRenderer(speech);
+      console.log('test explainers', testExplainers)
+      var topics = testExplainers.items.map(function(item) {
+        return item.title
+      });
+      intro += `This week we're learning about <prosody pitch="high" volume="x-loud">${topics[0]}</prosody>, <prosody volume="x-loud" pitch="high">${topics[1]}</prosody>, and <prosody volume="x-loud" pitch="high" >${topics[2]}</prosody>. To skip to the next explanation at any time say 'next'.`;
+      this.response.speak(intro).cardRenderer(intro);
 
       if (this.event.context.System.device.supportedInterfaces.Display) {
-        this.response.renderTemplate(util.templateBodyTemplate1('Welcome to Make Me Smart', speech, feeds[0].image));
+        this.response.renderTemplate(util.templateBodyTemplate1('Welcome to Make Me Smart', intro, "https://photos-1.dropbox.com/t/2/AACQSoCkPgxU97c9x553OYPj3NiYF1Q_Ta5qcI68gvZQpA/12/20237196/png/32x32/3/1519963200/0/2/1024x600_optB.png/ELfalA8Yre4YIAIoAg/2GMa2nEjkJ1EhjNaqq80RQuKevxZTkH0yFB_GVmJ6Go?dl=0&preserve_transparency=1&size=2048x1536&size_mode=3"));
       }
       console.log("LAUNCH REQUEST ", this.event.context.System.device.deviceId )
       this.response.hint('ahhh', 'PlainText');
@@ -293,7 +350,7 @@ var handlers = {
       console.log("PICK SHOW");
       var slot = slot || this.event.request.intent.slots;
       var chosen = itemPicker(slot, feeds, 'feed');
-      this.attributes[deviceId].iterating = null;
+      this.attributes[deviceId].iterating = -1;
 
       var showImage = util.cardImage(chosen.image);
       this.attributes[deviceId].show = chosen.feed;
@@ -311,8 +368,10 @@ var handlers = {
           this.response.renderTemplate(
             util.templateBodyTemplate3(
               chosen.feed,
-              showImage,
-              chosen.description
+              chosen.image,
+              chosen.description,
+              "https://photos-1.dropbox.com/t/2/AACQSoCkPgxU97c9x553OYPj3NiYF1Q_Ta5qcI68gvZQpA/12/20237196/png/32x32/3/1519963200/0/2/1024x600_optB.png/ELfalA8Yre4YIAIoAg/2GMa2nEjkJ1EhjNaqq80RQuKevxZTkH0yFB_GVmJ6Go?dl=0&preserve_transparency=1&size=2048x1536&size_mode=3"
+
             )
           );
         }
@@ -335,7 +394,7 @@ var handlers = {
         this.attributes[deviceId].show = slot.show.value;
       }
 
-      this.attributes[deviceId].iterating = null;
+      this.attributes[deviceId].iterating = -1;
       var show = this.attributes[deviceId].show || 'Make Me Smart';
       var chosenShow = itemPicker(show, feeds, 'feed');
       var showImage = util.cardImage(chosenShow.image);
@@ -366,7 +425,7 @@ var handlers = {
         // if not, just either pick last show, or default to whatever we want.
       // need to handle if the session is over
       var slot = slot || this.event.request.intent.slots;
-      this.attributes[deviceId].iterating = null;
+      this.attributes[deviceId].iterating = -1;
 
       var show = this.attributes[deviceId].show
       var chosenShow = itemPicker(show, feeds, 'feed');
@@ -402,9 +461,9 @@ var handlers = {
       console.log('Session ended with reason: ' + JSON.stringify(this.event.request, null, 2));
       var deviceId = util.getDeviceId.call(this);
       util.nullCheck.call(this, deviceId);
-
+      // GOTTA set playing to exit?
       if(this.attributes[deviceId].iterating === 'show') {
-        this.attriubutes[deviceId].iterating = null;
+        this.attriubutes[deviceId].iterating = -1;
         if(this.attributes[deviceId].indices && this.attributes[deviceId].indices.show) {
 
           this.attributes[deviceId].indices.show = 0;
@@ -420,11 +479,13 @@ var handlers = {
       util.nullCheck.call(this, deviceId);
       console.log('NEXT called, not playing?', this.attributes[deviceId].playing)
       console.log("UM WHAT THE FUK EVENT: ", this.event)
-      this.response.speak('Got the next call')
-      this.emit(':responseReady');
+      // this.response.speak('Got the next call')
+      // this.emit(':responseReady');
+      console.log('HOPEFULLY NON EXISTENT', this.attributes[deviceId].iterating)
+      console.log('null', this.attributes[deviceId].iterating === -1)
 
       // if we're iterating something, move next
-      if (this.attributes[deviceId].iterating) {
+      if (this.attributes[deviceId].iterating !== -1) {
         console.log('we ARE iterating')
 
         this.attributes[deviceId].indices[this.attributes[deviceId].iterating] += config.items_per_prompt[this.attributes[deviceId].iterating];
