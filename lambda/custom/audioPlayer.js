@@ -16,8 +16,9 @@ var controllers = {
       progress: -1,
       length: chosenEp.audio.length
     }
-    nullCheck.call(this, deviceId);
-    console.log("I PLAYED ", JSON.stringify(this, null, 2));
+    // nullCheck.call(this, deviceId);
+    // console.log("I PLAYED ", JSON.stringify(this, null, 2));
+    console.log('START', chosenEp.audio.url, chosenEp.guid)
     this.attributes[deviceId].playing = devicePlaying;
     this.response.audioPlayerPlay('REPLACE_ALL', chosenEp.audio.url, chosenEp.guid, null, 0);
     this.emit(':responseReady');
@@ -28,7 +29,7 @@ var controllers = {
   'resume': function () {
     console.log("RESUME -- ", JSON.stringify(this.attributes, null,2));
     var deviceId = util.getDeviceId.call(this);
-    nullCheck.call(this, deviceId);
+    // nullCheck.call(this, deviceId);
 
     var playing = this.attributes[deviceId].playing;
     this.response.speak(`Resuming ${playing.title}`);
@@ -43,7 +44,7 @@ var controllers = {
     console.log("STOP -- playing ", this.attributes[deviceId].playing);
     console.log("STOP -- enqueued ", this.attributes[deviceId].enqueued);
 
-    nullCheck.call(this, deviceId);
+    // nullCheck.call(this, deviceId);
     if (this.attributes[deviceId].playing.status === 'finished') {
       this.response.speak('you done. playing the next baby.');
     } else {

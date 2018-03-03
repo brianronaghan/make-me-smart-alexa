@@ -12,12 +12,84 @@ var cacheExpiry = config.cacheExpiry;
 var sendProgressive = util.sendProgressive;
 
 
-var itemsByFeed = {};
+var itemsByFeed = {
+  'tk': {
+    'pulledAt': Date.now(),
+    'items': [{
+          title: 'bonds',
+          guid: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_bonds_kai.MP3',
+          date: null,
+          description: 'describing some bonds',
+          audio: {
+            url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_bonds_kai.MP3",
+            length: null,
+            type: null
+          }
+        },
+        {
+          title: 'the cloud',
+          guid: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_cloud_molly.MP3",
+          date: null,
+          description: 'describing the cloud',
+          audio: {
+            url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_cloud_molly.MP3",
+            length: null,
+            type: null
+          }
+        },
+        {
+          title: 'productivity',
+          guid: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_productivity_kai.MP3",
+          date: null,
+          description: 'describing some productivity',
+          audio: {
+            url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_productivity_kai.MP3",
+            length: null,
+            type: null
+          }
+        },
+        {
+          title: 'NETWORK EFFECT',
+          guid: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_network_effects_molly.MP3',
+          date: null,
+          description: 'describing NETWORK EFFECT',
+          audio: {
+            url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_network_effects_molly.MP3",
+            length: null,
+            type: null
+          }
+        },
+        {
+          title: 'inflation',
+          guid: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_inflation_kai.MP3',
+          date: null,
+          description: 'describing some inflation',
+          audio: {
+            url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_inflation_kai.MP3",
+            length: null,
+            type: null
+          }
+        },
+        {
+          title: 'interest rates',
+          guid: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_interest_rates_kai.MP3",
+          date: null,
+          description: 'describing some interest rates',
+          audio: {
+            url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_interest_rates_kai.MP3",
+            length: null,
+            type: null
+          }
+        }
+      ]
+  }
+};
 
 
 
 module.exports = {
   feedLoader: function (feed, message, cb) {
+    console.log("WHAT THE FEED", feed)
     console.log("ITEMS IN MEMORY ", itemsByFeed)
     var boundThis = this;
     if (itemsByFeed[feed.url] && itemsByFeed[feed.url].pulledAt > (Date.now() - cacheExpiry)) {

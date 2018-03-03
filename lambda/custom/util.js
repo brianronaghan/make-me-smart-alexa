@@ -185,6 +185,8 @@ module.exports = {
     // NOTE: TK
   },
   nextPicker :function (currentItem, itemKey, choices, choiceKey) {
+    console.log('next', currentItem, itemKey, choiceKey);
+    console.log('nextpick', JSON.stringify(choices, null, 2));
     var currentItemIndex = choices.findIndex(function(item){
       return item[choiceKey] === currentItem[itemKey];
     });
@@ -297,14 +299,16 @@ function nullCheck(deviceId) {
   this.attributes[deviceId].indices = this.attributes[deviceId].indices || {};
   this.attributes[deviceId].playing = this.attributes[deviceId].playing || {};
   this.attributes[deviceId].enqueued = this.attributes[deviceId].enqueued || {};
-  this.attributes[deviceId].iterating = this.attributes[deviceId].iterating || {};
+  this.attributes[deviceId].iterating = this.attributes[deviceId].iterating || -1;
   this.attributes[deviceId].queries = this.attributes[deviceId].queries || [];
-  this.attributes[deviceId].history = this.attributes[deviceId].history || [];
+  this.attributes[deviceId].history = this.attributes[deviceId].history || {};
 }
 
 function prosodyToBold (text) {
   text = text.replace(/<prosody[^>]*>/gi, "<b>")
   text = text.replace(/<\/prosody>/gi, "</b>")
+  text = text.replace(/<audio[^>]*>/gi, "")
+  console.log('TEXT', text)
   return text;
 };
 

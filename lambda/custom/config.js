@@ -8,6 +8,9 @@ var config = {
       explainer: 3,
       episode: 3,
     },
+    background: {
+      show: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/1024x600_FINAL.png"
+    },
     cacheExpiry: 1000 * 60 * 60 * 60, // 1 hour, but for this user, right? should I persist?
     // TODO Add the s3 Bucket Name, dynamoDB Table Name and Region
     // dynamoDBTableName : 'session_saves'
@@ -26,6 +29,11 @@ var config = {
           '500' : '<break time = "500ms"/>'
       },
 
+    },
+    testExplainerFeed: {
+      feed: 'explainers',
+      url: 'tk',
+      image:"https://photos-1.dropbox.com/t/2/AACQSoCkPgxU97c9x553OYPj3NiYF1Q_Ta5qcI68gvZQpA/12/20237196/png/32x32/3/1519963200/0/2/1024x600_optB.png/ELfalA8Yre4YIAIoAg/2GMa2nEjkJ1EhjNaqq80RQuKevxZTkH0yFB_GVmJ6Go?dl=0&preserve_transparency=1&size=2048x1536&size_mode=3"
     },
     feeds: [
         {

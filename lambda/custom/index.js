@@ -15,71 +15,13 @@ var sendProgressive = util.sendProgressive;
 var feedLoader = feedHelper.feedLoader;
 let items = [];
 // var users = dynasty.table('makeMeSmart');
+var AWS = require('aws-sdk');
+AWS.config.update({
+  region: "us-east-1" // or whatever region your lambda and dynamo is
+  });
 
-var testExplainers = {
-  feed: 'Explainers',
-  url: null,
-  image:null,
-  items: [{
-      title: 'bonds',
-      guid: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa-Bonds-Kai.MP3',
-      date: null,
-      description: 'describing some bonds',
-      audio: {
-        url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa-Bonds-Kai.MP3",
-        length: null,
-        type: null
-      }
-    },
-    {
-      title: 'inflation',
-      guid: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa-Inflation-Kai.MP3',
-      date: null,
-      description: 'describing some inflation',
-      audio: {
-        url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa-Inflation-Kai.MP3",
-        length: null,
-        type: null
-      }
-    },
-    {
-      title: 'interest rates',
-      guid: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa-Interest-Rates-Kai.MP3",
-      date: null,
-      description: 'describing some interest rates',
-      audio: {
-        url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa-Interest-Rates-Kai.MP3",
-        length: null,
-        type: null
-      }
-    },
-    {
-      title: 'productivity',
-      guid: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa-Productivity-Kai.MP3",
-      date: null,
-      description: 'describing some productivity',
-      audio: {
-        url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa-Productivity-Kai.MP3",
-        length: null,
-        type: null
-      }
-    },
-    {
-      title: 'the cloud',
-      guid: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa-The-Cloud-Molly+Wood.MP3",
-      date: null,
-      description: 'describing the cloud',
-      audio: {
-        url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa-The-Cloud-Molly+Wood.MP3",
-        length: null,
-        type: null
-      }
-    }
-  ]
-}
 
 var episodes = {};
-var explainers = [];
 
 let showImage;
 
@@ -88,6 +30,7 @@ exports.handler = function(event, context) {
     alexa.appId = config.appId;
     alexa.dynamoDBTableName = config.dynamoDBTableName;
     alexa.registerHandlers(handlers, audioEventHandlers);
+    console.log("EVENT  ", JSON.stringify(event, null,2));
     alexa.execute();
 };
 
@@ -144,7 +87,7 @@ var handlers = {
 
     'LaunchRequest': function () {
       var deviceId = util.getDeviceId.call(this);
-      var intro = `Welcome ${this.attributes[deviceId] ? 'back' : ''} to Make Me Smart.`
+      var intro = `Welcome ${this.attributes[deviceId] ? 'back' : ''} to Make Me Smart. `
 
       util.nullCheck.call(this, deviceId);
 
@@ -162,23 +105,38 @@ var handlers = {
       // if you were playing explainer
 
       // ELSE
-
       var boundThis = this;
-      console.log('test explainers', testExplainers)
-      var topics = testExplainers.items.map(function(item) {
-        return item.title
+      feedLoader.call(this, config.testExplainerFeed, false, function(err, feedData) {
+        console.log('successful load', feedData.items.length);
+        var topics = feedData.items.map(function(item) {
+          return item.title
+        });
+        intro += `This week we're learning about <prosody pitch="high" volume="x-loud">${topics[0]}</prosody>, <prosody volume="x-loud" pitch="high">${topics[1]}</prosody>, and <prosody volume="x-loud" pitch="high" >${topics[2]}</prosody>. To skip to the next explanation at any time say 'next'. <audio src="${feedData.items[0].audio.url}" /> And that was the explainer on ${feedData.items[0].title}.`;
+
+        // pick one or say play all, then make them individual
+
+
+        // On add the and that was to the speech... not for card
+        console.log(feedData.items[0].audio.url)
+        console.log('INTRO ', intro);
+        this.response.speak(intro);
+        if (this.event.context.System.device.supportedInterfaces.Display) {
+          this.response.renderTemplate(util.templateBodyTemplate1('Welcome to Make Me Smart', intro, config.background.show));
+        }
+        this.emit(':responseReady');
+        // audioPlayer.start.call(this, feedData.items[0], 'explainer', 'explainers');
+
       });
-      intro += `This week we're learning about <prosody pitch="high" volume="x-loud">${topics[0]}</prosody>, <prosody volume="x-loud" pitch="high">${topics[1]}</prosody>, and <prosody volume="x-loud" pitch="high" >${topics[2]}</prosody>. To skip to the next explanation at any time say 'next'.`;
-      this.response.speak(intro).cardRenderer(intro);
 
-      if (this.event.context.System.device.supportedInterfaces.Display) {
-        this.response.renderTemplate(util.templateBodyTemplate1('Welcome to Make Me Smart', intro, "https://photos-1.dropbox.com/t/2/AACQSoCkPgxU97c9x553OYPj3NiYF1Q_Ta5qcI68gvZQpA/12/20237196/png/32x32/3/1519963200/0/2/1024x600_optB.png/ELfalA8Yre4YIAIoAg/2GMa2nEjkJ1EhjNaqq80RQuKevxZTkH0yFB_GVmJ6Go?dl=0&preserve_transparency=1&size=2048x1536&size_mode=3"));
-      }
-      console.log("LAUNCH REQUEST ", this.event.context.System.device.deviceId )
-      this.response.hint('ahhh', 'PlainText');
-      // I'll have to enqueue all three I guess? THIS IS
 
-      this.emit(':responseReady');
+
+
+
+      // console.log("LAUNCH REQUEST ", this.event.context.System.device.deviceId )
+      // this.response.hint('ahhh', 'PlainText');
+      // // I'll have to enqueue all three I guess? THIS IS
+      //
+      // this.emit(':responseReady');
 
     },
     'ResumeEpisode': function () {
@@ -200,6 +158,9 @@ var handlers = {
         this.response.speak(`I'm gonna look for something on ${query}`)
             .cardRenderer(`here's what i got on ${query}.`);
         this.emit(':responseReady');
+    },
+    'PickExplainer': function () {
+      // `Alright, here's ${host} talking about {topic}`
     },
 
     'List_explainers': function () {
@@ -370,8 +331,7 @@ var handlers = {
               chosen.feed,
               chosen.image,
               chosen.description,
-              "https://photos-1.dropbox.com/t/2/AACQSoCkPgxU97c9x553OYPj3NiYF1Q_Ta5qcI68gvZQpA/12/20237196/png/32x32/3/1519963200/0/2/1024x600_optB.png/ELfalA8Yre4YIAIoAg/2GMa2nEjkJ1EhjNaqq80RQuKevxZTkH0yFB_GVmJ6Go?dl=0&preserve_transparency=1&size=2048x1536&size_mode=3"
-
+              config.background.show
             )
           );
         }
@@ -492,11 +452,17 @@ var handlers = {
         this.emit(':saveState', true);
         this.emit(`List_${this.attributes[deviceId].iterating}s`);
       } else if (this.attributes[deviceId].playing) {
-        console.log('we are not iterating')
-        var chosenShow = util.itemPicker(this.attributes[deviceId].playing.feed, feeds, 'feed');
+        console.log('we are not iterating', this.attributes[deviceId].playing.type)
+        var chosenShow;
+        if (this.attributes[deviceId].playing.type === 'episode') {
+          chosenShow = util.itemPicker(this.attributes[deviceId].playing.feed, feeds, 'feed');
+        } else {
+          chosenShow = config.testExplainerFeed;
+        }
         var boundThis = this;
-
-        feedLoader.call(this, chosenShow, false, function(err, feedData) {
+        console.log('chosenShow', chosenShow)
+        feedLoader.call(boundThis, chosenShow, false, function(err, feedData) {
+          console.log('WHAT', feedData.items)
           var nextEp = util.nextPicker(boundThis.attributes[deviceId].playing, 'token', feedData.items, 'guid');
           //
           if (nextEp === -1) {
