@@ -20,11 +20,6 @@ AWS.config.update({
   region: "us-east-1" // or whatever region your lambda and dynamo is
   });
 
-
-var episodes = {};
-
-let showImage;
-
 exports.handler = function(event, context) {
     var alexa = Alexa.handler(event, context);
     alexa.appId = config.appId;
@@ -87,64 +82,94 @@ var handlers = {
 
     'LaunchRequest': function () {
       var deviceId = util.getDeviceId.call(this);
-      var intro = `Welcome ${this.attributes[deviceId] ? 'back' : ''} to Make Me Smart. `
-
       util.nullCheck.call(this, deviceId);
-
-      // var params = {
-      //   TableName: 'makeMeSmart',
-      //   Key: {'userId': this.event.session.user.userId}
-      // };
-      // var session_params = {
-      //   TableName: 'sessions',
-      //   Key: {'userId': this.event.session.user.userId, sessionStart: this.event.request.timestamp}
-      // };
 
       // if you were playing episode
 
       // if you were playing explainer
 
       // ELSE
+      console.log('HANDLER', this.handler)
+      var intro = `Welcome ${this.attributes[deviceId] ? 'back' : ''} to Make Me Smart. `;
       var boundThis = this;
       feedLoader.call(this, config.testExplainerFeed, false, function(err, feedData) {
         console.log('successful load', feedData.items.length);
         var topics = feedData.items.map(function(item) {
           return item.title
         });
-        intro += `This week we're learning about <prosody pitch="high" volume="x-loud">${topics[0]}</prosody>, <prosody volume="x-loud" pitch="high">${topics[1]}</prosody>, and <prosody volume="x-loud" pitch="high" >${topics[2]}</prosody>. To skip to the next explanation at any time say 'next'. <audio src="${feedData.items[0].audio.url}" /> And that was the explainer on ${feedData.items[0].title}.`;
+        intro += `This week we're learning about <prosody pitch="high" volume="x-loud">1) ${topics[0]}</prosody>, <prosody volume="x-loud" pitch="high">2) ${topics[1]}</prosody>, and <prosody volume="x-loud" pitch="high">3) ${topics[2]}</prosody>. Pick one, or say 'play all' to learn about all of them.`;
 
-        // pick one or say play all, then make them individual
+        // set iterating to explainers
 
-
-        // On add the and that was to the speech... not for card
-        console.log(feedData.items[0].audio.url)
-        console.log('INTRO ', intro);
-        this.response.speak(intro);
+        // On add the and that was to the speech... not for card'
+        var links = "<action value='PlayLatestExplainer'>Play All</action>"
+        this.response.speak(intro).listen("Pick one, or say 'play all' to learn about all of them.");
         if (this.event.context.System.device.supportedInterfaces.Display) {
-          this.response.renderTemplate(util.templateBodyTemplate1('Welcome to Make Me Smart', intro, config.background.show));
+          this.response.renderTemplate(util.templateBodyTemplate1('Welcome to Make Me Smart', intro, links, config.background.show));
         }
+        // this.emit(':elicitSlot', 'topic', intro, "Pick one, or say 'play all' to learn about all of them.");
         this.emit(':responseReady');
         // audioPlayer.start.call(this, feedData.items[0], 'explainer', 'explainers');
 
       });
+    },
+    ReplayExplainer: function () {
+      var deviceId = util.getDeviceId.call(this);
+      util.nullCheck.call(this, deviceId);
+      // currentExplainerIndex is 0 based, and PickExplainer expects 1-based
+      this.emit('PickExplainer', {index: {value: this.attributes[deviceId].currentExplainerIndex + 1}})
+    },
+    'PlayLatestExplainer': function () {
+      // this is what 'play all would do'
+      var deviceId = util.getDeviceId.call(this);
+      util.nullCheck.call(this, deviceId);
+      this.emit('PickExplainer', {index: {value: 1}});
 
-
-
-
-
-      // console.log("LAUNCH REQUEST ", this.event.context.System.device.deviceId )
-      // this.response.hint('ahhh', 'PlainText');
-      // // I'll have to enqueue all three I guess? THIS IS
-      //
-      // this.emit(':responseReady');
 
     },
-    'ResumeEpisode': function () {
+    'PickExplainer': function (slot) {
+      // set spot in indices
+      var deviceId = util.getDeviceId.call(this);
+      util.nullCheck.call(this, deviceId);
+      console.log('PICK EXPLAINER?', this.event.request)
+      var slot = slot || this.event.request.intent.slots;
+      console.log("SLOT",slot)
+      feedLoader.call(this, config.testExplainerFeed, false, function(err, feedData) {
+        console.log('successful load', feedData.items.length);
+        var chosenExplainer = itemPicker(slot, feedData.items, 'title', 'topic');
+        if (!chosenExplainer) {
+          console.log('handle not found');
+        }
+        this.attributes[deviceId].currentExplainerIndex = chosenExplainer.index;
+
+        var intro = `Here's ${chosenExplainer.author} explaining ${chosenExplainer.title}. <audio src="${chosenExplainer.audio.url}" /> `;
+        var prompt;
+        if (feedData.items[chosenExplainer.index+1]) {
+          prompt = `Say 'replay' to hear that again or 'next' to learn about ${feedData.items[chosenExplainer.index+1].title} or 'list explainers' to see all.`;
+        } else {
+          prompt = "And that's all we have right now."
+        }
+        if (this.event.context.System.device.supportedInterfaces.Display) {
+          this.response.renderTemplate(
+            util.templateBodyTemplate3(
+              chosenExplainer.title,
+              chosenExplainer.image || config.icon.full,
+              chosenExplainer.description,
+              "<action value='ReplayExplainer'>Replay</action> | <action value='Next'>Next</action>",
+              config.background.show
+            )
+          );
+
+          this.response.renderTemplate(util.templateBodyTemplate3('Welcome to Make Me Smart', intro, config.background.show));
+        }
+        var fullSpeech = intro + prompt;
+        this.response.speak(fullSpeech).listen(prompt);
+        this.emit(':responseReady');
+
+      });
 
     },
-    'ResumeExplainer': function () {
 
-    },
     'FindExplainer': function () {
         var deviceId = util.getDeviceId.call(this);
         util.nullCheck.call(this, deviceId);
@@ -158,9 +183,6 @@ var handlers = {
         this.response.speak(`I'm gonna look for something on ${query}`)
             .cardRenderer(`here's what i got on ${query}.`);
         this.emit(':responseReady');
-    },
-    'PickExplainer': function () {
-      // `Alright, here's ${host} talking about {topic}`
     },
 
     'List_explainers': function () {
@@ -238,7 +260,7 @@ var handlers = {
       }
       this.attributes[deviceId].show = this.attributes[deviceId].show || 'Make Me Smart';
 
-      var chosen = itemPicker(this.attributes[deviceId].show, feeds, 'feed');
+      var chosen = itemPicker(this.attributes[deviceId].show, feeds, 'feed', 'feed');
       var showImage = util.cardImage(chosen.image);
       console.time('list-episodes-load');
 
@@ -276,7 +298,6 @@ var handlers = {
 
       // handle play latest or pick episode actions
       console.log('ElementSelected -- ', this.event.request)
-      console.log('ATTRIBUTES?', this.attributes[deviceId])
       var intentSlot,intentName;
       if (this.event.request.token === 'PlayLatestEpisode' || this.event.request.token === 'List_episodes') {
         intentName = this.event.request.token;
@@ -308,9 +329,9 @@ var handlers = {
       // GOTTA HANDLE FOR THAT
       // NOTE: currently putting show loading behind 1 hour cache... on testing the sendProgressive takes just as long as the damn lookup in most of the cases, so this might not be worth it.
       // NOTE: on the device, progressive comes instantly
-      console.log("PICK SHOW");
+
       var slot = slot || this.event.request.intent.slots;
-      var chosen = itemPicker(slot, feeds, 'feed');
+      var chosen = itemPicker(slot, feeds, 'feed', 'feed');
       this.attributes[deviceId].iterating = -1;
 
       var showImage = util.cardImage(chosen.image);
@@ -331,6 +352,7 @@ var handlers = {
               chosen.feed,
               chosen.image,
               chosen.description,
+              "<action value='PlayLatestEpisode'>Play latest</action> | <action value='List_episodes'>List episodes</action><br/>",
               config.background.show
             )
           );
@@ -356,7 +378,7 @@ var handlers = {
 
       this.attributes[deviceId].iterating = -1;
       var show = this.attributes[deviceId].show || 'Make Me Smart';
-      var chosenShow = itemPicker(show, feeds, 'feed');
+      var chosenShow = itemPicker(show, feeds, 'feed', 'feed');
       var showImage = util.cardImage(chosenShow.image);
       feedLoader.call(this, chosenShow, false, function(err, feedData) {
         console.log('PLAY LATEST feed load cb')
@@ -388,13 +410,13 @@ var handlers = {
       this.attributes[deviceId].iterating = -1;
 
       var show = this.attributes[deviceId].show
-      var chosenShow = itemPicker(show, feeds, 'feed');
+      var chosenShow = itemPicker(show, feeds, 'feed', 'feed');
       console.log('Episode pick - iterating', this.attributes[deviceId].iterating, ' show ', this.attributes[deviceId].show);
       console.log('slots baby', slot);
       console.log(chosenShow)
       feedLoader.call(this, chosenShow, false, function(err, feedData) {
         console.log('PICK EPISODE feed load cb')
-        var chosenEp = itemPicker(slot, feedData.items, 'title');
+        var chosenEp = itemPicker(slot, feedData.items, 'title', 'title');
         console.log('PICK EPISODE', JSON.stringify(chosenEp, null, 2));
         this.response.speak(`Starting ${chosenEp.title}`);
         audioPlayer.start.call(this, chosenEp, 'episode', chosenShow.feed);
@@ -438,12 +460,9 @@ var handlers = {
       var deviceId = util.getDeviceId.call(this);
       util.nullCheck.call(this, deviceId);
       console.log('NEXT called, not playing?', this.attributes[deviceId].playing)
-      console.log("UM WHAT THE FUK EVENT: ", this.event)
       // this.response.speak('Got the next call')
       // this.emit(':responseReady');
-      console.log('HOPEFULLY NON EXISTENT', this.attributes[deviceId].iterating)
-      console.log('null', this.attributes[deviceId].iterating === -1)
-
+      console.log("NEXT ", this.attributes[deviceId].currentExplainerIndex)
       // if we're iterating something, move next
       if (this.attributes[deviceId].iterating !== -1) {
         console.log('we ARE iterating')
@@ -451,13 +470,14 @@ var handlers = {
         this.attributes[deviceId].indices[this.attributes[deviceId].iterating] += config.items_per_prompt[this.attributes[deviceId].iterating];
         this.emit(':saveState', true);
         this.emit(`List_${this.attributes[deviceId].iterating}s`);
+      } else if (this.attributes[deviceId].currentExplainerIndex !== -1) {
+        // currentExplainerIndex is 0 based, and PickExplainer expects 1-based
+        this.emit('PickExplainer', {index: {value: this.attributes[deviceId].currentExplainerIndex+2}});
       } else if (this.attributes[deviceId].playing) {
         console.log('we are not iterating', this.attributes[deviceId].playing.type)
         var chosenShow;
         if (this.attributes[deviceId].playing.type === 'episode') {
-          chosenShow = util.itemPicker(this.attributes[deviceId].playing.feed, feeds, 'feed');
-        } else {
-          chosenShow = config.testExplainerFeed;
+          chosenShow = util.itemPicker(this.attributes[deviceId].playing.feed, feeds, 'feed', 'feed');
         }
         var boundThis = this;
         console.log('chosenShow', chosenShow)

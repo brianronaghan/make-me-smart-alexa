@@ -17,6 +17,7 @@ var itemsByFeed = {
     'pulledAt': Date.now(),
     'items': [{
           title: 'bonds',
+          author: 'Kai Ryssdal',
           guid: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_bonds_kai.MP3',
           date: null,
           description: 'describing some bonds',
@@ -30,6 +31,7 @@ var itemsByFeed = {
           title: 'the cloud',
           guid: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_cloud_molly.MP3",
           date: null,
+          author: 'Molly Wood',
           description: 'describing the cloud',
           audio: {
             url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_cloud_molly.MP3",
@@ -41,6 +43,8 @@ var itemsByFeed = {
           title: 'productivity',
           guid: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_productivity_kai.MP3",
           date: null,
+          author: 'Kai Ryssdal',
+
           description: 'describing some productivity',
           audio: {
             url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_productivity_kai.MP3",
@@ -52,6 +56,7 @@ var itemsByFeed = {
           title: 'NETWORK EFFECT',
           guid: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_network_effects_molly.MP3',
           date: null,
+          author: 'Molly Wood',
           description: 'describing NETWORK EFFECT',
           audio: {
             url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_network_effects_molly.MP3",

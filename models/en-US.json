@@ -1,5 +1,44 @@
 {
     "interactionModel":{
+      "prompts": [
+   {
+     "id": "Elicit.Intent-HomePage.IntentSlot-topic",
+     "variations": [
+       {
+         "type": "PlainText",
+         "value": "what topic do you want to get smart about"
+       },
+       {
+         "type": "PlainText",
+         "value": "pick a topic"
+       },
+       {
+         "type": "PlainText",
+         "value": "pick one"
+       }
+     ]
+   }
+ ],
+ "dialog": {
+   "intents": [
+     {
+       "name": "HomePage",
+       "confirmationRequired": false,
+       "prompts": {},
+       "slots": [
+         {
+           "name": "topic",
+           "type": "TOPICS",
+           "elicitationRequired": true,
+           "confirmationRequired": false,
+           "prompts": {
+             "elicitation": "Elicit.Intent-HomePage.IntentSlot-topic"
+           }
+         }
+       ]
+     }
+   ]
+ },
         "languageModel":{
             "invocationName":"make me smart",
             "intents":[
@@ -85,6 +124,72 @@
                   ]
                 },
                 {
+                  "name": "HomePage",
+                  "samples": [
+                    "home page",
+                    "go home",
+                    "start over"
+                  ],
+                  "slots": [
+                    {
+                      "name": "topic",
+                      "type": "TOPICS"
+                    }
+                  ]
+                },
+                {
+                  "name": "ReplayExplainer",
+                  "samples": [
+                    "replay",
+                    "let me hear that again",
+                    "start over"
+                  ]
+                },
+                {
+                  "name": "PlayLatestExplainer",
+                  "samples": [
+                    "play all"
+                  ]
+                },
+                {
+                  "name": "PickExplainer",
+                  "slots": [
+                    {
+                      "name": "topic",
+                      "type": "TOPICS"
+                    },
+                    {
+                      "name": "ordinal",
+                      "type": "ORDINAL"
+                    },
+                    {
+                      "name": "index",
+                      "type": "AMAZON.NUMBER"
+                    }
+                  ],
+                  "samples": [
+                    "{index}",
+                    "{ordinal}",
+                    "{topic}",
+                    "pick topic {topic}",
+                    "teach me about {topic}",
+                    "explain {topic}",
+                    "topic {topic}",
+                    "number {index}",
+                    "pick topic {index}",
+                    "pick the {ordinal} topic",
+                    "play explainer called {topic}",
+                    "play the {ordinal} topic",
+                    "pick the {ordinal} topic",
+                    "choose topic {index}",
+                    "choose the {ordinal} topic",
+                    "choose topic called {topic}",
+                    "topic titled {topic}",
+                    "topic number {index}",
+                    "the {ordinal} topic"
+                  ]
+                },
+                {
                     "name":"FindExplainer",
                     "slots" : [
                       {
@@ -97,7 +202,6 @@
                       }
                     ],
                     "samples":[
-                        "make me smart",
                         "make me smart about {query}",
                         "about {query}",
                         "to look up {query}",
@@ -130,8 +234,7 @@
                         "topic {query}",
                         "the {query}",
                         "educate me on {query}",
-                        "a {query}",
-                        "{wildcard}"
+                        "a {query}"
                     ]
                 },
                 {

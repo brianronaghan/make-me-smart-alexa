@@ -67,7 +67,7 @@ var audioEventHandlers = {
          console.log('NEARLY FINISHED ATTS', JSON.stringify(this.attributes[deviceId], null, 2))
          var chosen;
          if (this.attributes[deviceId].playing.type === 'episode') {
-           chosen = util.itemPicker(this.attributes[deviceId].playing.feed, feeds, 'feed');
+           chosen = util.itemPicker(this.attributes[deviceId].playing.feed, feeds, 'feed', 'feed');
          } else {
            chosen = config.testExplainerFeed;
          }

@@ -67,14 +67,14 @@ module.exports = {
     var listTemplate = listTemplateBuilder.setToken(token)
       .setTitle(title)
       .setListItems(autoListItems)
-      .setBackgroundImage(makeImage("https://photos-1.dropbox.com/t/2/AACQSoCkPgxU97c9x553OYPj3NiYF1Q_Ta5qcI68gvZQpA/12/20237196/png/32x32/3/1519963200/0/2/1024x600_optB.png/ELfalA8Yre4YIAIoAg/2GMa2nEjkJ1EhjNaqq80RQuKevxZTkH0yFB_GVmJ6Go?dl=0&preserve_transparency=1&size=2048x1536&size_mode=3"))
+      .setBackgroundImage(makeImage(config.background.show))
       .build();
 
     console.log('listTemplate', listTemplate);
     return listTemplate;
   },
   prosodyToBold: prosodyToBold,
-  templateBodyTemplate1: function (title, body, backgroundImage) {
+  templateBodyTemplate1: function (title, body, links, backgroundImage) {
     var bodyText = prosodyToBold(body)
     var template = {
          "type": "BodyTemplate1",
@@ -82,39 +82,42 @@ module.exports = {
          "textContent": {
            "primaryText": {
              "type": "RichText",
-               "text": `<font size='5'>${bodyText}</font>`
+             "text": `<font size='5'>${bodyText}</font>`
+           },
+           "secondaryText": {
+             "type": "RichText",
+             "text": links
            },
          },
-         "backgroundImage": makeImage(backgroundImage),
+         "backgroundImage": makeImage(backgroundImage || config.background.show),
          "backButton": "HIDDEN"
     }
-    console.log('body', JSON.stringify(template));
+    console.log('TEMPLATE 1', JSON.stringify(template));
     return template;
 
 
   },
 
-  templateBodyTemplate3: function (title, image, description, back) {
+  templateBodyTemplate3: function (title, image, description, links, background) {
     var template = {
          "type": "BodyTemplate3",
-         "title": title,
          "textContent": {
            "primaryText": {
              "type": "RichText",
-             "text": "<action value='PlayLatestEpisode'>Play latest</action> | <action value='List_episodes'>List episodes</action><br/>"
+             "text": `<font size='5'>${title}</font>`
            },
            "secondaryText": {
              "type": "PlainText",
-             "text": "Say 'play the latest' or 'list episodes'."
+             "text": description
            },
            "tertiaryText": {
-             "type": "PlainText",
-             "text": description
+             "type": "RichText",
+             "text": links
            }
          },
          "image": makeImage(image, 340,340),
-         "backgroundImage": makeImage(back),
-         "backButton": "VISIBLE"
+         "backgroundImage": makeImage(background || config.background.show),
+         "backButton": "HIDDEN"
     }
     console.log('body', JSON.stringify(template));
     return template;
@@ -214,7 +217,7 @@ module.exports = {
     return nextItem;
   },
 
-  itemPicker: function (intentSlot, choices, choiceKey) {
+  itemPicker: function (intentSlot, choices, choiceKey, slotKey) {
     // MONDAY: this is where we begin. Making sure this works... implementing choose show with this... then implementing list episodes intent using itemLister
     var itemNames = choices.map(function (choice) {return choice[choiceKey].toLowerCase()});
     console.log('itemnames', itemNames);
@@ -234,8 +237,8 @@ module.exports = {
         index--;
     } else if (typeof intentSlot === 'string') {
         index = itemNames.indexOf(cleanShowName(intentSlot));
-    } else if (intentSlot && intentSlot[choiceKey] && intentSlot[choiceKey].value) {
-        var cleanedSlot = cleanShowName(intentSlot[choiceKey].value);
+    } else if (intentSlot && intentSlot[slotKey] && intentSlot[slotKey].value) {
+        var cleanedSlot = cleanShowName(intentSlot[slotKey].value);
         index = itemNames.indexOf(cleanedSlot);
     } else {
         index = -1;
@@ -244,8 +247,9 @@ module.exports = {
     var chosen;
     if (index >= 0 && index < choices.length) {
         chosen = choices[index];
+        chosen.index = index;
     }
-    console.log('WTF', chosen);
+    console.log('ITEM PICKER ', chosen);
     return chosen;
 
   },

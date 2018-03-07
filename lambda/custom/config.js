@@ -8,8 +8,18 @@ var config = {
       explainer: 3,
       episode: 3,
     },
+    states: {
+      START: '',
+      EXPLAINERS: '_EXPLAINERS',
+      ITERATING_SHOWS: '_ITERATING_SHOWS',
+      ITERATING_EPS: '_ITERATING_EPISODES',
+      PLAYING_EPS: '_PLAYING_EPISODES'
+    },
     background: {
       show: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/1024x600_FINAL.png"
+    },
+    icon : {
+      full: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/icon_full.png"
     },
     cacheExpiry: 1000 * 60 * 60 * 60, // 1 hour, but for this user, right? should I persist?
     // TODO Add the s3 Bucket Name, dynamoDB Table Name and Region
