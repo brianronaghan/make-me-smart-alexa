@@ -180,6 +180,19 @@ var stateHandlers = {
       // if we're iterating something, move next
 
     },
+    'List_explainers': function () {
+      var deviceId = util.getDeviceId.call(this);
+      util.nullCheck.call(this, deviceId);
+
+      console.log('list Explainers')
+      console.log(JSON.stringify(this.event.request, null, 2));
+
+      this.handler.state = config.states.ITERATING_EXPLAINERS;
+      this.attributes.STATE = config.states.ITERATING_EXPLAINERS;
+      // this just throws to the correct state version of itself
+      this.emitWithState(':List_explainers');
+
+    },
     // DEFAULT:
     'SessionEndedRequest' : function () {
       console.log("SESSION ENDED IN EXPLAINER STATE")
@@ -192,6 +205,27 @@ var stateHandlers = {
 
   }),
   iteratingExplainerModeHandlers : Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINERS, {
+    'List_explainers': function () {
+      var deviceId = util.getDeviceId.call(this);
+      util.nullCheck.call(this, deviceId);
+      if (this.event.session.new || (!this.attributes.indices.show)) {
+        this.attributes.indices.explainer = 0;
+      }
+      // NOTE: here:
+
+
+    },
+    'SessionEndedRequest' : function () {
+      console.log("SESSION ENDED IN ITERATING EXPLAINER")
+     },
+     'Unhandled' : function () {
+       console.log("UNHANDLERD ITERATING EXPLAINER");
+         var message = 'UNDHANDLED ITER EXPLA What now?';
+         this.response.speak(message).listen(message);
+         this.emit(':responseReady');
+     }
+
+
   }),
   iteratingShowModeHandlers : Alexa.CreateStateHandler(config.states.ITERATING_SHOWS, {
   }),
