@@ -54,34 +54,37 @@ var itemsByFeed = {
         },
         {
           title: 'NETWORK EFFECT',
-          guid: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_network_effects_molly.MP3',
+          guid: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_network_effect_molly.MP3",
           date: null,
           author: 'Molly Wood',
           description: 'describing NETWORK EFFECT',
           audio: {
-            url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_network_effects_molly.MP3",
+            url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_network_effect_molly.MP3",
             length: null,
             type: null
           }
         },
         {
           title: 'inflation',
-          guid: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_inflation_kai.MP3',
+          guid: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_inflation_kai.mp3',
           date: null,
+          author: 'Kai Ryssdal',
           description: 'describing some inflation',
           audio: {
-            url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_inflation_kai.MP3",
+            url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_inflation_kai.mp3",
             length: null,
             type: null
           }
         },
         {
           title: 'interest rates',
-          guid: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_interest_rates_kai.MP3",
+          guid: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_interest_rates_kai.mp3",
           date: null,
+          author: 'Kai Ryssdal',
+
           description: 'describing some interest rates',
           audio: {
-            url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_interest_rates_kai.MP3",
+            url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_interest_rates_kai.mp3",
             length: null,
             type: null
           }

@@ -128,7 +128,8 @@
                   "samples": [
                     "home page",
                     "go home",
-                    "start over"
+                    "start over",
+                    "what's new"
                   ],
                   "slots": [
                     {
@@ -141,6 +142,7 @@
                   "name": "ReplayExplainer",
                   "samples": [
                     "replay",
+                    "restart",
                     "let me hear that again",
                     "start over"
                   ]
@@ -420,6 +422,11 @@
                   {
                     "name": {
                       "value": "the fed"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "productivity"
                     }
                   },
                   {

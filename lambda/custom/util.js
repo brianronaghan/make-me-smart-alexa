@@ -70,7 +70,7 @@ module.exports = {
       .setBackgroundImage(makeImage(config.background.show))
       .build();
 
-    console.log('listTemplate', listTemplate);
+    // console.log('listTemplate', listTemplate);
     return listTemplate;
   },
   prosodyToBold: prosodyToBold,
@@ -92,7 +92,7 @@ module.exports = {
          "backgroundImage": makeImage(backgroundImage || config.background.show),
          "backButton": "HIDDEN"
     }
-    console.log('TEMPLATE 1', JSON.stringify(template));
+    // console.log('TEMPLATE 1', JSON.stringify(template));
     return template;
 
 
@@ -119,7 +119,7 @@ module.exports = {
          "backgroundImage": makeImage(background || config.background.show),
          "backButton": "HIDDEN"
     }
-    console.log('body', JSON.stringify(template));
+    // console.log('body', JSON.stringify(template));
     return template;
 
 
@@ -141,7 +141,7 @@ module.exports = {
          "backgroundImage": makeImage(backgroundImage),
          "backButton": "HIDDEN"
     }
-    console.log('body', JSON.stringify(template));
+    // console.log('body', JSON.stringify(template));
     return template;
 
 
@@ -298,14 +298,17 @@ module.exports = {
 }
 
 function nullCheck(deviceId) {
-  console.log(deviceId,  "  UTIL NULL CHECK    ", this.attributes[deviceId]);
-  this.attributes[deviceId] = this.attributes[deviceId] || {};
-  this.attributes[deviceId].indices = this.attributes[deviceId].indices || {};
-  this.attributes[deviceId].playing = this.attributes[deviceId].playing || {};
-  this.attributes[deviceId].enqueued = this.attributes[deviceId].enqueued || {};
-  this.attributes[deviceId].iterating = this.attributes[deviceId].iterating || -1;
-  this.attributes[deviceId].queries = this.attributes[deviceId].queries || [];
-  this.attributes[deviceId].history = this.attributes[deviceId].history || {};
+  console.log("NULL CHECK ", this.attributes)
+  if (this.attributes.deviceId !== deviceId) {
+    console.log("MISMATCHED DEVICE ID")
+  }
+  this.attributes.deviceId = deviceId;
+  this.attributes.indices = this.attributes.indices || {};
+  this.attributes.playing = this.attributes.playing || {};
+  this.attributes.enqueued = this.attributes.enqueued || {};
+  this.attributes.iterating = this.attributes.iterating || -1;
+  this.attributes.queries = this.attributes.queries || [];
+  this.attributes.history = this.attributes.history || {};
 }
 
 function prosodyToBold (text) {
