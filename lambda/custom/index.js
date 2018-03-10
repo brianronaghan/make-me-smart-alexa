@@ -26,7 +26,7 @@ exports.handler = function(event, context) {
       stateHandlers.iteratingExplainerModeHandlers
 
     );
-    console.log("EVENT  ", JSON.stringify(event, null,2));
+    // console.log("EVENT  ", JSON.stringify(event, null,2));
     alexa.execute();
 };
 

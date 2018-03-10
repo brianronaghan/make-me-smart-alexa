@@ -129,7 +129,8 @@
                     "home page",
                     "go home",
                     "start over",
-                    "what's new"
+                    "what's new",
+                    "what is new"
                   ],
                   "slots": [
                     {
@@ -236,14 +237,18 @@
                         "topic {query}",
                         "the {query}",
                         "educate me on {query}",
-                        "a {query}"
+                        "a {query}",
+                        "{query}",
+                        "{wildcard}"
                     ]
                 },
+
                 {
-                    "name":"List_explainers",
+                    "name":"ListExplainers",
                     "slots" : [],
                     "samples":[
-                        "what explainers it has"
+                        "what explainers it has",
+                        "list explainers"
                     ]
                 },
                 {

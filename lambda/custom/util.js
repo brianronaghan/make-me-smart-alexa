@@ -158,7 +158,7 @@ module.exports = {
       itemsAudio = itemsCard = '';
     }
     for (var x = start; x < start + chunkLength; x++) {
-      console.log(x, items[x]);
+      // console.log(x, items[x]);
       if (items[x]) {
         itemsAudio += constants.breakTime['25'] +  `${x+1}, ${items[x][titleKey]}` + constants.breakTime['25'];
         itemsCard += `${x+1}) ${items[x][titleKey]}\n`;
@@ -220,8 +220,8 @@ module.exports = {
   itemPicker: function (intentSlot, choices, choiceKey, slotKey) {
     // MONDAY: this is where we begin. Making sure this works... implementing choose show with this... then implementing list episodes intent using itemLister
     var itemNames = choices.map(function (choice) {return choice[choiceKey].toLowerCase()});
-    console.log('itemnames', itemNames);
-    console.log('intent slot', intentSlot);
+    // console.log('itemnames', itemNames);
+    // console.log('intent slot', intentSlot);
     var index;
     if (intentSlot && intentSlot.index && intentSlot.index.value) {
         index = parseInt(intentSlot.index.value);
@@ -243,13 +243,13 @@ module.exports = {
     } else {
         index = -1;
     }
-    console.log(index, " the index ", choices[index])
+    // console.log(index, " the index ", choices[index])
     var chosen;
     if (index >= 0 && index < choices.length) {
         chosen = choices[index];
         chosen.index = index;
     }
-    console.log('ITEM PICKER ', chosen);
+    // console.log('ITEM PICKER ', chosen);
     return chosen;
 
   },

@@ -13,9 +13,9 @@
             "business"
           ],
           "name": "make me smart",
-          "smallIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/eded/150aca19f2e34440890806893454fd99/APP_ICON?versionId=nIvBWa0x4rS.0gTCOv8RT_XTPzigQfru&AWSAccessKeyId=AKIAI3X6PUXD7CU5F5BQ&Expires=1517699739&Signature=%2FnGPPM2%2FTjrGgUxLohqvXLKG5vw%3D",
-          "description": "Sample Full Description",
-          "largeIconUri": "https://s3.amazonaws.com/CAPS-SSE/echo_developer/a9d9/f55d02c450d74737ae7be538061f61bd/APP_ICON_LARGE?versionId=2Fbv_hDZygrSinTrk.wnWlnt_SHxpCqF&AWSAccessKeyId=AKIAI3X6PUXD7CU5F5BQ&Expires=1517699739&Signature=HY%2B%2F23USirT4BMFLJk1y8J2%2FcJY%3D"
+          "smallIconUri": "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/108X108.png",
+          "description": "From Marketplace, we're making you smart",
+          "largeIconUri": "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/512X512.png"
         }
       },
       "isAvailableWorldwide": true,

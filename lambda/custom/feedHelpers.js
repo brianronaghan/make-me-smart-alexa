@@ -97,8 +97,6 @@ var itemsByFeed = {
 
 module.exports = {
   feedLoader: function (feed, message, cb) {
-    console.log("WHAT THE FEED", feed)
-    console.log("ITEMS IN MEMORY ", itemsByFeed)
     var boundThis = this;
     if (itemsByFeed[feed.url] && itemsByFeed[feed.url].pulledAt > (Date.now() - cacheExpiry)) {
       console.log('within hour cache');
@@ -106,7 +104,7 @@ module.exports = {
     } else {
       console.log('fresh pull')
       if (message) {
-        console.log('sending message, means called from list eps');
+        // console.log('sending message, means called from list eps');
         sendProgressive(
           this.event.context.System.apiEndpoint, // no need to add directives params
           this.event.request.requestId,
