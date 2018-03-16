@@ -2,37 +2,64 @@
     "interactionModel":{
       "prompts": [
    {
-     "id": "Elicit.Intent-HomePage.IntentSlot-topic",
+     "id": "Elicit.Intent-PickItem.IntentSlot-userName",
      "variations": [
        {
          "type": "PlainText",
-         "value": "what topic do you want to get smart about"
+         "value": "who should I say is calling?"
        },
        {
          "type": "PlainText",
-         "value": "pick a topic"
+         "value": "give me a name"
        },
        {
          "type": "PlainText",
-         "value": "pick one"
+         "value": "what's your name"
+       }
+     ]
+   },
+   {
+     "id": "Elicit.Intent-PickItem.IntentSlot-userLocation",
+     "variations": [
+       {
+         "type": "PlainText",
+         "value": "where are you from? "
+       },
+       {
+         "type": "PlainText",
+         "value": "what city"
+       },
+       {
+         "type": "PlainText",
+         "value": "tell me where "
        }
      ]
    }
+
  ],
  "dialog": {
    "intents": [
      {
-       "name": "HomePage",
+       "name": "PickItem",
        "confirmationRequired": false,
        "prompts": {},
        "slots": [
          {
-           "name": "topic",
-           "type": "TOPICS",
+           "name": "userName",
+           "type": "AMAZON.US_FIRST_NAME",
            "elicitationRequired": true,
            "confirmationRequired": false,
            "prompts": {
-             "elicitation": "Elicit.Intent-HomePage.IntentSlot-topic"
+             "elicitation": "Elicit.Intent-PickItem.IntentSlot-userName"
+           }
+         },
+         {
+           "name": "userLocation",
+           "type": "AMAZON.US_CITY",
+           "elicitationRequired": true,
+           "confirmationRequired": false,
+           "prompts": {
+             "elicitation": "Elicit.Intent-PickItem.IntentSlot-userLocation"
            }
          }
        ]
@@ -155,8 +182,12 @@
                   ]
                 },
                 {
-                  "name": "PickExplainer",
+                  "name": "PickItem",
                   "slots": [
+                    {
+                      "name": "query",
+                      "type": "AMAZON.SearchQuery"
+                    },
                     {
                       "name": "topic",
                       "type": "TOPICS"
@@ -168,12 +199,25 @@
                     {
                       "name": "index",
                       "type": "AMAZON.NUMBER"
+                    },
+                    {
+                      "name": "userName",
+                      "type": "AMAZON.US_FIRST_NAME"
+                    },
+                    {
+                      "name": "userLocation",
+                      "type": "AMAZON.US_CITY"
+                    },
+                    {
+                      "name": "feed",
+                      "type": "SHOW_TITLES"
                     }
                   ],
                   "samples": [
                     "{index}",
                     "{ordinal}",
                     "{topic}",
+                    "{feed}",
                     "pick topic {topic}",
                     "teach me about {topic}",
                     "explain {topic}",
@@ -189,60 +233,55 @@
                     "choose topic called {topic}",
                     "topic titled {topic}",
                     "topic number {index}",
-                    "the {ordinal} topic"
+                    "the {ordinal} topic",
+                    "make me smart about {query}",
+                    "to look up {query}",
+                    "what {query} is",
+                    "for conversations on {query}",
+                    "for content on {query}",
+                    "what's the low down on {query}",
+                    "what it thinks about {query}",
+                    "what Kai and Molly think about {query}",
+                    "what Kai and Molly know about {query}",
+                    "to ask Kai and Molly what {query} is",
+                    "to explain {query}",
+                    "explain {query}",
+                    "about {query}",
+                    "uh bout {query}",
+                    "u bout {query}",
+                    "a {query}",
+                    "educate me on {query}",
+                    "define {query}",
+                    "what {query} means",
+                    "what it knows about {query}",
+                    "the dish on {query}",
+                    "for conversations on {query}",
+                    "pick show number {index}",
+                    "pick the {ordinal} show",
+                    "select show number {index}",
+                    "select show {index}",
+                    "select the {ordinal} show",
+                    "select show called {feed}",
+                    "pick show {feed}",
+                    "show {feed}"
                   ]
                 },
                 {
-                    "name":"FindExplainer",
-                    "slots" : [
-                      {
-                        "name": "query",
-                        "type": "AMAZON.SearchQuery"
-                      },
-                      {
-                        "name": "wildcard",
-                        "type": "TOPICS"
-                      }
-                    ],
-                    "samples":[
-                        "make me smart about {query}",
-                        "about {query}",
-                        "to look up {query}",
-                        "what about {query}",
-                        "what {query} is",
-                        "on {query}",
-                        "look up {query}",
-                        "find info on {query}",
-                        "abot {query}",
-                        "a bout {query}",
-                        "define {query}",
-                        "what {query} means",
-                        "what it knows about {query}",
-                        "the dish on {query}",
-                        "for conversations on {query}",
-                        "for content on {query}",
-                        "what's the low down on {query}",
-                        "what it thinks about {query}",
-                        "what Kai and Molly think about {query}",
-                        "what Kai and Molly know about {query}",
-                        "to ask Kai and Molly what {query} is",
-                        "to explain {query}",
-                        "explain {query}",
-                        "uh bout {query}",
-                        "u bout {query}",
-                        "a {query}",
-                        "bout {query}",
-                        "abbot {query}",
-                        "some {query}",
-                        "topic {query}",
-                        "the {query}",
-                        "educate me on {query}",
-                        "a {query}",
-                        "{query}",
-                        "{wildcard}"
-                    ]
+                  "name": "RequestExplainer",
+                  "slots": [
+                    {
+                      "name": "userName",
+                      "type": "AMAZON.US_FIRST_NAME"
+                    },
+                    {
+                      "name": "userLocation",
+                      "type": "AMAZON.US_CITY"
+                    }
+                  ],
+                  "samples": [
+                    "request explainer slot "
+                  ]
                 },
-
                 {
                     "name":"ListExplainers",
                     "slots" : [],
@@ -252,7 +291,7 @@
                     ]
                 },
                 {
-                    "name":"List_episodes",
+                    "name":"ListEpisodes",
                     "slots" : [
                       {
                         "name": "show",
@@ -299,39 +338,13 @@
                   ]
                 },
                 {
-                    "name":"List_shows",
+                    "name":"ListShows",
                     "samples":[
                         "what shows Marketplace has",
                         "tell me the shows",
                         "what shows you got",
-                        "shows"
-                    ]
-                },
-                {
-                    "name":"PickShow",
-                    "slots": [
-                      {
-                        "name": "ordinal",
-                        "type": "ORDINAL"
-                      },
-                      {
-                        "name": "index",
-                        "type": "AMAZON.NUMBER"
-                      },
-                      {
-                        "name": "feed",
-                        "type": "SHOW_TITLES"
-                      }
-                    ],
-                    "samples":[
-                        "pick show number {index}",
-                        "pick the {ordinal} show",
-                        "select show number {index}",
-                        "select show {index}",
-                        "select the {ordinal} show",
-                        "select show called {feed}",
-                        "pick show {feed}",
-                        "show {feed}"
+                        "shows",
+                        "list shows"
                     ]
                 }
             ],

@@ -18,6 +18,7 @@ var itemsByFeed = {
     'items': [{
           title: 'bonds',
           author: 'Kai Ryssdal',
+          tags: [],
           guid: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_bonds_kai.MP3',
           date: null,
           description: 'describing some bonds',
@@ -31,6 +32,7 @@ var itemsByFeed = {
           title: 'the cloud',
           guid: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_cloud_molly.MP3",
           date: null,
+          tags: ['web', 'internet'],
           author: 'Molly Wood',
           description: 'describing the cloud',
           audio: {
@@ -44,7 +46,7 @@ var itemsByFeed = {
           guid: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_productivity_kai.MP3",
           date: null,
           author: 'Kai Ryssdal',
-
+          tags: [],
           description: 'describing some productivity',
           audio: {
             url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_productivity_kai.MP3",
@@ -69,6 +71,7 @@ var itemsByFeed = {
           guid: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_inflation_kai.mp3',
           date: null,
           author: 'Kai Ryssdal',
+          tags: ['value of money', 'monetary policy'],
           description: 'describing some inflation',
           audio: {
             url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_inflation_kai.mp3",
@@ -81,7 +84,7 @@ var itemsByFeed = {
           guid: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_interest_rates_kai.mp3",
           date: null,
           author: 'Kai Ryssdal',
-
+          tags: ['federal reserve', 'the fed'],
           description: 'describing some interest rates',
           audio: {
             url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_interest_rates_kai.mp3",
@@ -104,7 +107,7 @@ module.exports = {
     } else {
       console.log('fresh pull')
       if (message) {
-        // console.log('sending message, means called from list eps');
+        console.log('sending message, means called from list eps');
         sendProgressive(
           this.event.context.System.apiEndpoint, // no need to add directives params
           this.event.request.requestId,

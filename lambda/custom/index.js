@@ -21,9 +21,14 @@ exports.handler = function(event, context) {
     alexa.dynamoDBTableName = config.dynamoDBTableName;
     alexa.registerHandlers(
       audioEventHandlers,
-      stateHandlers.startModeHandlers,
-      stateHandlers.explainerModeHandlers,
-      stateHandlers.iteratingExplainerModeHandlers
+      stateHandlers.startHandlers,
+      stateHandlers.requestHandlers,
+      stateHandlers.playingExplainerHandlers,
+      stateHandlers.iteratingExplainerHandlers,
+      stateHandlers.iteratingShowHandlers,
+      stateHandlers.iteratingEpisodeHandlers,
+      stateHandlers.playingEpisodeHandlers
+
 
     );
     // console.log("EVENT  ", JSON.stringify(event, null,2));

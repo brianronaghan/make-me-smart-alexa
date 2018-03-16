@@ -10,11 +10,12 @@ var config = {
     },
     states: {
       START: '',
-      EXPLAINERS: '_EXPLAINERS',
-      ITERATING_EXPLAINERS: '_ITERATING_EXPLAINERS',
-      ITERATING_SHOWS: '_ITERATING_SHOWS',
-      ITERATING_EPS: '_ITERATING_EPISODES',
-      PLAYING_EPS: '_PLAYING_EPISODES'
+      PLAYING_EXPLAINER: '_PLAYING_EXPLAINER',
+      REQUEST: '_REQUEST',
+      ITERATING_EXPLAINER: '_ITERATING_EXPLAINER',
+      ITERATING_SHOW: '_ITERATING_SHOW',
+      ITERATING_EPISODE: '_ITERATING_EPISODE',
+      PLAYING_EPISODE: '_PLAYING_EPISODE'
     },
     background: {
       show: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/1024x600_FINAL.png"

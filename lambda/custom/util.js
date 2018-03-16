@@ -48,6 +48,15 @@ module.exports = {
   getDeviceId: function () {
     return this.event.context.System.device.deviceId;
   },
+  logExplainer: function (explainer) {
+    console.log('ex log', explainer)
+    this.attributes.history[explainer.guid] = this.attributes.history[explainer.guid] || {}
+    this.attributes.history[explainer.guid].events = this.attributes.history[explainer.guid].events || [];
+
+    this.attributes.history[explainer.guid].events.push({
+      timestamp: Date.now()
+    })
+  },
   nullCheck: nullCheck,
   templateListTemplate1: function (title, token, itemLabel, itemTitleKey, items) {
     var listItemBuilder = new Alexa.templateBuilders.ListItemBuilder();
@@ -60,7 +69,7 @@ module.exports = {
       // addItem signature:
       // addItem(image, token, primaryText, secondaryText, tertiaryText) {
 
-      listItemBuilder.addItem(image, `Pick${itemLabel}_${i}`, makeRichText(`<font size='5'>${item[itemTitleKey]}</font>`));
+      listItemBuilder.addItem(image, `PickItem_${i}`, makeRichText(`<font size='5'>${item[itemTitleKey]}</font>`));
     });
     var autoListItems = listItemBuilder.build();
 
@@ -309,6 +318,7 @@ function nullCheck(deviceId) {
   this.attributes.iterating = this.attributes.iterating || -1;
   this.attributes.queries = this.attributes.queries || [];
   this.attributes.history = this.attributes.history || {};
+  this.attributes.requests = this.attributes.requests || [];
 }
 
 function prosodyToBold (text) {
