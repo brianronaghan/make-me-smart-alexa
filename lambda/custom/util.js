@@ -49,12 +49,18 @@ module.exports = {
     return this.event.context.System.device.deviceId;
   },
   logExplainer: function (explainer) {
-    console.log('ex log', explainer)
+    console.log('explainer log', explainer)
     this.attributes.history[explainer.guid] = this.attributes.history[explainer.guid] || {}
     this.attributes.history[explainer.guid].events = this.attributes.history[explainer.guid].events || [];
-
+    // Should I switch playig?
+    this.attributes.playing = {};
+    this.attributes.playing.status = 'playing';
+    this.attributes.playing.type = 'explainer';
+    this.attributes.playing.token = explainer.guid;
+    this.attributes.playing.url = explainer.audio.url;
+    // then when resuming, we could find using this. More reliable than explainerIndex
     this.attributes.history[explainer.guid].events.push({
-      timestamp: Date.now()
+      timestamp: Date.now(),
     })
   },
   nullCheck: nullCheck,
@@ -79,7 +85,6 @@ module.exports = {
       .setBackgroundImage(makeImage(config.background.show))
       .build();
 
-    // console.log('listTemplate', listTemplate);
     return listTemplate;
   },
   prosodyToBold: prosodyToBold,
@@ -214,20 +219,22 @@ module.exports = {
     }
   },
   prevPicker :function (currentItem, itemKey, choices, choiceKey) {
+    console.log('prev', currentItem, itemKey, choiceKey);
+    console.log('PREVPICK', JSON.stringify(choices, null, 2));
+
     var currentItemIndex = choices.findIndex(function(item){
       return item[choiceKey] === currentItem[itemKey];
     });
     if (currentItemIndex === -1 || currentItemIndex === 0) {
       console.log('PREVIOUS not found')
-      return null
+      return -1
     }
-    var nextItem = choices[currentItemIndex-1];
-    console.log('PREVIOUS ITEM', nextItem);
-    return nextItem;
+    var prevItem = choices[currentItemIndex-1];
+    console.log('PREVIOUS ITEM', prevItem);
+    return prevItem;
   },
 
   itemPicker: function (intentSlot, choices, choiceKey, slotKey) {
-    // MONDAY: this is where we begin. Making sure this works... implementing choose show with this... then implementing list episodes intent using itemLister
     var itemNames = choices.map(function (choice) {return choice[choiceKey].toLowerCase()});
     // console.log('itemnames', itemNames);
     // console.log('intent slot', intentSlot);
@@ -258,52 +265,8 @@ module.exports = {
         chosen = choices[index];
         chosen.index = index;
     }
-    // console.log('ITEM PICKER ', chosen);
     return chosen;
-
   },
-  // feedPicker: function (intentSlot, callback) {
-  //     /*
-  //      *  Extract the category requested by the user
-  //      *  index stores position of category requested
-  //      *  category requested in 3 different ways :
-  //      *      1) Amazon.NumberIntent - (1,2,3 ...)
-  //      *      2) Ordinal - (1st, 2nd, 3rd ...)
-  //      *      3) Category Name - (World, Technology, Politics ...)
-  //      */
-  //     console.log("IN `FEED` PICKER ",  intentSlot)
-  //     console.log("categoryNames", categoryNames)
-  //
-  //     console.log("feedPicker AUDIO FEEDS", audioFeeds)
-  //     var index;
-  //     if (intentSlot && intentSlot.index && intentSlot.index.value) {
-  //         index = parseInt(intentSlot.index.value);
-  //         index--;
-  //     } else if (intentSlot && intentSlot.ordinal && intentSlot.ordinal.value) {
-  //         var str = intentSlot.ordinal.value;
-  //         if (str === "second") {
-  //             index = 2;
-  //         } else {
-  //             str = str.substring(0, str.length - 2);
-  //             index = parseInt(str);
-  //         }
-  //         index--;
-  //     } else if (intentSlot && intentSlot[choiceKey] && intentSlot[choiceKey].value) {
-  //         index = itemNames.indexOf(intentSlot.Show.value.toLowerCase())
-  //     } else {
-  //         index = -1;
-
-  //     }
-  //
-  //     console.log(index, " the index ", choices[index])
-  //     var chosen;
-  //     if (index >= 0 && index < choices.length) {
-  //         chosen = choices[index];
-  //     }
-  //     return chosen;
-  // },
-
-
 }
 
 function nullCheck(deviceId) {
@@ -325,7 +288,6 @@ function prosodyToBold (text) {
   text = text.replace(/<prosody[^>]*>/gi, "<b>")
   text = text.replace(/<\/prosody>/gi, "</b>")
   text = text.replace(/<audio[^>]*>/gi, "")
-  console.log('TEXT', text)
   return text;
 };
 

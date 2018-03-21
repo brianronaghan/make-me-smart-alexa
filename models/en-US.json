@@ -157,7 +157,8 @@
                     "go home",
                     "start over",
                     "what's new",
-                    "what is new"
+                    "what is new",
+                    "hear new explainers"
                   ],
                   "slots": [
                     {
@@ -263,6 +264,8 @@
                     "select the {ordinal} show",
                     "select show called {feed}",
                     "pick show {feed}",
+                    "pick episode {index}",
+                    "pick this {ordinal} episode",
                     "show {feed}"
                   ]
                 },
@@ -287,7 +290,9 @@
                     "slots" : [],
                     "samples":[
                         "what explainers it has",
-                        "list explainers"
+                        "list explainers",
+                        "all explainers",
+                        "show all explainers"
                     ]
                 },
                 {
@@ -344,7 +349,8 @@
                         "tell me the shows",
                         "what shows you got",
                         "shows",
-                        "list shows"
+                        "list shows",
+                        "play full episodes"
                     ]
                 }
             ],

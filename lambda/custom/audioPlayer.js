@@ -18,8 +18,17 @@ var controllers = {
     }
     // nullCheck.call(this, deviceId);
     // console.log("I PLAYED ", JSON.stringify(this, null, 2));
-    console.log('START', chosenEp.audio.url, chosenEp.guid)
-    this.attributes[deviceId].playing = devicePlaying;
+    console.log('START', chosenEp.audio.url, chosenEp.guid);
+    this.attributes.playing = devicePlaying;
+    this.attributes.history[chosenEp.guid] = this.attributes.history[chosenEp.guid] || {}
+    this.attributes.history[chosenEp.guid].events = this.attributes.history[chosenEp.guid].events || [];
+    this.attributes.history[chosenEp.guid].status = 'requested';
+    this.attributes.history[chosenEp.guid].events.push({
+      timestamp: Date.now(),
+      'event': 'request',
+      progress: -1
+
+    })
     this.response.audioPlayerPlay('REPLACE_ALL', chosenEp.audio.url, chosenEp.guid, null, 0);
     this.emit(':responseReady');
 
@@ -31,7 +40,7 @@ var controllers = {
     var deviceId = util.getDeviceId.call(this);
     // nullCheck.call(this, deviceId);
 
-    var playing = this.attributes[deviceId].playing;
+    var playing = this.attributes.playing;
     this.response.speak(`Resuming ${playing.title}`);
     this.response.audioPlayerPlay('REPLACE_ALL', playing.url, playing.token, null, playing.progress);
     this.emit(':responseReady');
@@ -39,18 +48,13 @@ var controllers = {
 
   },
   'stop': function () {
-
     var deviceId = util.getDeviceId.call(this);
-    console.log("STOP -- playing ", this.attributes[deviceId].playing);
-    console.log("STOP -- enqueued ", this.attributes[deviceId].enqueued);
-
-    // nullCheck.call(this, deviceId);
-    if (this.attributes[deviceId].playing.status === 'finished') {
+    if (this.attributes.playing.status === 'finished') {
       this.response.speak('you done. playing the next baby.');
     } else {
-      this.response.speak("You asked me to pause, I paused.");
-      this.attributes[deviceId].playing['progress'] = this.event.context.AudioPlayer.offsetInMilliseconds;
-      this.attributes[deviceId].playing.status = 'paused';
+      // this.response.speak("You asked me to pause, I paused.");
+      this.attributes.playing['progress'] = this.event.context.AudioPlayer.offsetInMilliseconds;
+      this.attributes.playing.status = 'paused';
       this.response.audioPlayerStop();
       this.emit(':responseReady');
 
@@ -65,7 +69,6 @@ var controllers = {
 module.exports = controllers;
 
 function nullCheck (deviceId) {
-  this.attributes[deviceId] = this.attributes[deviceId] || {};
-  this.attributes[deviceId].playing = this.attributes[deviceId].playing || {};
+  this.attributes.playing = this.attributes.playing || {};
 
 }

@@ -31,7 +31,6 @@ exports.handler = function(event, context) {
 
 
     );
-    // console.log("EVENT  ", JSON.stringify(event, null,2));
     alexa.execute();
 };
 

@@ -8,7 +8,7 @@ var feedLoader = feedHelper.feedLoader;
 var util = require('./util')
 var audioPlayer = require('./audioPlayer');
 
-var audioEventHandlers = {
+var audioEventHandlers = Alexa.CreateStateHandler(config.states.PLAYING_EPISODE, {
     'PlaybackStarted' : function () {
         /*
          * AudioPlayer.PlaybackStarted Directive received.
@@ -82,7 +82,7 @@ var audioEventHandlers = {
              boundThis.emit(':saveState', true);
 
            }
-           console.log('NEXT  play', this.attributes.playing)
+           console.log('playback NEARLY FINISHED , playing: ', this.attributes.playing)
 
          })
 
@@ -96,7 +96,7 @@ var audioEventHandlers = {
         this.context.succeed(true);
     },
 
-};
+});
 
 module.exports = audioEventHandlers;
 
