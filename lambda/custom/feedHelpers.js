@@ -103,7 +103,9 @@ module.exports = {
     var boundThis = this;
     if (itemsByFeed[feed.url] && itemsByFeed[feed.url].pulledAt > (Date.now() - cacheExpiry)) {
       console.log('within hour cache');
-      return cb.call(boundThis, null, itemsByFeed[feed.url])
+      var feedData = itemsByFeed[feed.url];
+      feedData.cached = true;
+      return cb.call(boundThis, null, feedData);
     } else {
       console.log('fresh pull')
       if (message) {
@@ -112,13 +114,13 @@ module.exports = {
           this.event.context.System.apiEndpoint, // no need to add directives params
           this.event.request.requestId,
           this.event.context.System.apiAccessToken,
-          `Let me look for new items of ${feed.feed}.`,
+          message,
           function () {
             console.log('progressive cb')
           }
         );
       } else {
-        console.log('no message')
+        console.log('NO CACHE, and NO message')
       }
 
       var req = request(feed.url);

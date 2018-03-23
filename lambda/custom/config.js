@@ -23,7 +23,7 @@ var config = {
     icon : {
       full: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/icon_full.png"
     },
-    cacheExpiry: 1000 * 60 * 60 * 60, // 1 hour, but for this user, right? should I persist?
+    cacheExpiry: 1000 * 60 * 60 * 60 * 3, // 2 hour, but for this spin-up, right? should I persist?
     // TODO Add the s3 Bucket Name, dynamoDB Table Name and Region
     // dynamoDBTableName : 'session_saves'
     dynamoDBTableName: 'makeMeSmart',

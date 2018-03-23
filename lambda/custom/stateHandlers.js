@@ -73,20 +73,6 @@ var stateHandlers = {
 
       });
     },
-    // STATE TRANSITION
-    // 'PickItem': function () {
-    //   console.log("PICK IN START MODE");
-    //   console.log(JSON.stringify(this.event.request, null,2));
-    //   this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
-    //   this.emitWithState('PickItem');
-    // },
-    // 'PlayLatestExplainer': function () {
-    //   // this is what 'play all would do'
-    //   var deviceId = util.getDeviceId.call(this);
-    //   util.nullCheck.call(this, deviceId);
-    //   this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
-    //   this.emitWithState('PlayLatestExplainer');
-    // },
     'ListShows' : function () {
       this.handler.state = this.attributes.STATE = config.states.ITERATING_SHOW;
       console.log('list shows from start');
@@ -109,8 +95,8 @@ var stateHandlers = {
       util.nullCheck.call(this, deviceId);
       var slot = slot || this.event.request.intent.slots;
       var message = '';
-      var message;
       var boundThis = this;
+      console.log("REQUEST PICK ITEM SLOT ", slot)
       if (this.attributes.userName && this.attributes.userLocation && false) { // NOTE: turn off for test/build if we've already got your info
         message = `Hmmm, we don't have anything on ${slot.query.value}. But I'll tell Kai and Molly that ${this.attributes.userName} from ${this.attributes.userLocation} wants to get smart about that!`;
         this.attributes.requests.push({
@@ -134,10 +120,10 @@ var stateHandlers = {
             }
           }
         );
-      } else if (!slot.userName.value && !this.attributes.userName) {
+      } else if (!slot.userName.value ) { // NOTE NOT SAVING NAME && !this.attributes.userName
         message += `Hmmm, we don't have anything on ${slot.query.value}. But I'll ask Kai and Molly to look into it. Who should I say is asking?`;
         this.emit(':elicitSlot', 'userName', message, "Let me know what name to leave.");
-      } else if (!slot.userLocation.value && this.attributes.userLocation) {
+      } else if (!slot.userLocation.value ) { // NOTE NOT SAVING NAME && this.attributes.userLocation
         this.attributes.userName = slot.userName.value;
         message += 'And where are you from?';
         this.emit(':elicitSlot', 'userLocation', message, "Let me know what location to leave.");
@@ -151,6 +137,9 @@ var stateHandlers = {
           location: slot.userLocation.value
         });
         var confirmationMessage =  `Okay, I'll tell Kai and Molly that ${slot.userName.value} from ${slot.userLocation.value} asked for an explainer about ${slot.query.value}.`;
+
+        // TODO: if was playing, resume, reset state
+
         util.sendProgressive(
           this.event.context.System.apiEndpoint, // no need to add directives params
           this.event.request.requestId,
@@ -166,12 +155,15 @@ var stateHandlers = {
         );
       }
     },
-
+    'LaunchRequest' : function () {
+      this.handler.state = this.attributes.STATE = config.states.START;
+      this.emitWithState('LaunchRequest');
+    },
     'SessionEndedRequest' : function () {
       console.log("SESSION ENDED IN REQUEST")
      },
      'Unhandled' : function () {
-       console.log("REQUEST unhandler -> event  ",JSON.stringify(this.event.request,null, 2));
+       console.log("REQUEST unhandled -> event  ",JSON.stringify(this.event.request,null, 2));
          var message = 'UNDHANDLED REQUEST What now?';
          this.response.speak(message).listen(message);
          this.emit(':responseReady');
@@ -181,20 +173,14 @@ var stateHandlers = {
   playingExplainerHandlers : Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     'LaunchRequest': function () {
       var deviceId = util.getDeviceId.call(this);
-      var intro = `Welcome ${this.attributes.deviceId ? 'back' : ''} to Make Me Smart. `;
+      var intro = `Welcome back to Make Me Smart. `;
       util.nullCheck.call(this, deviceId);
 
-      // if you were playing episode
-
-      // if you were playing explainer
-
-      // ELSE
       console.log('LAUNCH IN EXPLAINER STATE');
       // console.log('handler state', this.handler.state, ' atty state', this.attributes.STATE)
       if (!this.attributes.currentExplainerIndex || this.attributes.currentExplainerIndex === -1) {
         console.log('no explainer index SWITCHING state');
-        this.handler.state = config.states.START;
-        this.attributes.STATE = config.states.START;
+        this.handler.state = this.attributes.STATE = config.states.START;
         return this.emitWithState('LaunchRequest')
       }
       var boundThis = this;
@@ -217,7 +203,7 @@ var stateHandlers = {
       });
     },
     'HomePage': function () {
-      this.attributes.currentExplainerIndex = 0;
+      this.attributes.currentExplainerIndex = -1;
       this.handler.state = this.attributes.STATE = config.states.START;
       return this.emitWithState('LaunchRequest', 'no_welcome')
 
@@ -273,7 +259,6 @@ var stateHandlers = {
       var deviceId = util.getDeviceId.call(this);
       util.nullCheck.call(this, deviceId);
       this.emitWithState('PickItem', {index: {value: 1}});
-
     },
     'ReplayExplainer': function () {
       console.log("REPLAY?")
@@ -286,6 +271,8 @@ var stateHandlers = {
     // STATE TRANSITION:
     'ListShows' : function () {
       console.log('list shows from play explain')
+      this.attributes.currentExplainerIndex = -1;
+      this.attributes.indices.explainer = 0;
       this.handler.state = this.attributes.STATE = config.states.ITERATING_SHOW;
       this.emitWithState('ListShows');
     },
@@ -471,7 +458,7 @@ var stateHandlers = {
       // handle play latest or pick episode actions
       console.log('ElementSelected -- ', this.event.request)
       var intentSlot,intentName;
-      if (this.event.request.token === 'PlayLatestEpisode' || this.event.request.token === 'ListEpisodes') {
+      if (this.event.request.token === 'PlayLatestEpisode' || this.event.request.token === 'ListEpisodes') { // I don't think I use either
         intentName = this.event.request.token;
         intentSlot = {
           index: {
@@ -559,31 +546,38 @@ var stateHandlers = {
     'LaunchRequest': function () { // iterating shows
       var deviceId = util.getDeviceId.call(this);
       util.nullCheck.call(this, deviceId);
+      this.attributes.indices.show = 0;
+      this.attributes.indices.episode = 0;
+      this.attributes.show = null;
       this.handler.state = this.attributes.STATE = config.states.START;
       this.emitWithState('LaunchRequest');
-      // go back to home page?
+      // go back to home page
     },
     // STATE TRANSITION
     'PickItem': function (slot) {
       console.log('pick item in iterating show', this.attributes.STATE)
-      // this should do the display
-      // this.handler.state = this.attributes.STATE = config.states.ITERATING_EPISODE;
-      this.attributes.indices.show = 0;
+      // this should do the display of show, and choice of latest or list
+      // THE INTENTS for play latest and list episodes transition to the next state
 
       var slot = slot || this.event.request.intent.slots;
       var chosen = util.itemPicker(slot, feeds, 'feed', 'feed');
 
       var showImage = util.cardImage(chosen.image);
       this.attributes.show = chosen.feed;
-      this.attributes.indices.show = null;
+      this.attributes.indices.show = 0;
       this.attributes.indices.episode = 0;
+      console.log("SHOUD BE 0",
+        this.attributes.indices.show,
+        this.attributes.indices.episode
+      )
       console.time('pick-show-load');
-      feedLoader.call(this, chosen, false, function(err, feedData) {
+      var intro = `You chose ${chosen.feed}. `
+      feedLoader.call(this, chosen, intro, function(err, feedData) {
         console.timeEnd('pick-show-load');
         // this might not be right
-        this.response.speak(`You chose ${chosen.feed}. Should I play the latest episode or list the episodes?`)
+        this.response.speak(`${feedData.cached ? intro : ''} Should I play the latest episode or list the episodes?`)
           .listen("Say 'play latest' to hear the latest episode or 'list episodes' to explore episodes.")
-          .cardRenderer(chosen.feed, 'Say "play latest" to hear the latest episode or "list episodes" to explore episodes.', showImage);
+          .cardRenderer(chosen.feed, "Say 'play latest' to hear the latest episode or 'list episodes' to explore episodes.", showImage);
 
         if (this.event.context.System.device.supportedInterfaces.Display) {
           this.response.renderTemplate(
@@ -624,7 +618,7 @@ var stateHandlers = {
             value: this.attributes.show
           }
         }
-      }  else {
+      }  else if (this.event.request.token.indexOf('_') > -1) {
         var tokenData = this.event.request.token.split('_');
         intentName = tokenData[0];
         intentSlot = {
@@ -632,6 +626,8 @@ var stateHandlers = {
             value: parseInt(tokenData[1]) + 1
           }
         }
+      } else {
+        intentName = this.event.request.token;
       }
       console.log(intentName, intentSlot);
       this.emitWithState(intentName, intentSlot);
@@ -647,7 +643,7 @@ var stateHandlers = {
 
     },
     'AMAZON.PreviousIntent' : function () {
-      console.log('iterating explainers previous')
+      console.log('iterating shows previous')
       var deviceId = util.getDeviceId.call(this);
       util.nullCheck.call(this, deviceId);
       this.attributes.indices.show -= config.items_per_prompt.show;
@@ -679,13 +675,14 @@ var stateHandlers = {
       var show = this.attributes.show;
       this.handler.state = this.attributes.STATE = config.states.PLAYING_EPISODE;
       var chosenShow = util.itemPicker(show, feeds, 'feed', 'feed');
-      console.log('Episode pick - pick episode. what our show ', this.attributes.show);
-      console.log('slots baby', slot);
-      feedLoader.call(this, chosenShow, false, function(err, feedData) {
+      var message = `Let me grab the episode`;
+      feedLoader.call(this, chosenShow, message, function(err, feedData) {
         console.log('PICK EPISODE feed load cb')
         var chosenEp = util.itemPicker(slot, feedData.items, 'title', 'title');
         console.log('PICK EPISODE', JSON.stringify(chosenEp, null, 2));
-        this.response.speak(`Starting ${chosenEp.title}`);
+        if (feedData.cached) {
+          this.response.speak(`Starting ${chosenEp.title}`);
+        }
         audioPlayer.start.call(this, chosenEp, 'episode', chosenShow.feed);
       });
     },
@@ -693,7 +690,7 @@ var stateHandlers = {
     'ListEpisodes': function (slot) {
       var deviceId = util.getDeviceId.call(this);
       util.nullCheck.call(this, deviceId);
-
+      console.log("IT EP IN IT EP ", this.attributes.indices.episode, " SHOW ", this.attributes.show, 'SLOT ', slot);
       // TODO: if we get here directly, NOT having gone through 'Pick Show', we need to do some state management
       var slot = slot || this.event.request.intent.slots;
       this.attributes.indices.episode = this.attributes.indices.episode || 0;
@@ -705,11 +702,9 @@ var stateHandlers = {
       var chosen = util.itemPicker(this.attributes.show, feeds, 'feed', 'feed');
       var showImage = util.cardImage(chosen.image);
       console.time('list-episodes-load');
-
-      feedLoader.call(this, chosen, true, function(err, feedData) {
+      var message = `Let me check for episodes of ${chosen.feed}`;
+      feedLoader.call(this, chosen, message, function(err, feedData) {
         console.timeEnd('list-episodes-load');
-
-        console.log('LIST EPISODES FEED LOAD cb')
         var data = util.itemLister(
           feedData.items,
           'episodes',
@@ -763,8 +758,12 @@ var stateHandlers = {
     },
     // STATE TRANSITIONS
     'LaunchRequest': function () {
-      console.log('SHOW', this.attributes.show)
-      var intro = `Welcome back to Make Me Smart. Last time you were exploring episodes of ${this.attributes.show} Say 'list episodes' to see all episodes or 'what's new' to hear the latest explainers.`;
+      var deviceId = util.getDeviceId.call(this);
+      util.nullCheck.call(this, deviceId);
+
+      var intro = `Welcome back to Make Me Smart. Last time you were exploring episodes of ${this.attributes.show}. Say 'list episodes' to see all episodes or 'what's new' to hear the latest explainers.`;
+      this.attributes.indices.show = 0;
+      this.attributes.indices.episode = 0;
       this.response.speak(intro).listen("Say 'list episodes' or 'what's new' to explore explainers.");
       var links = "<action value='ListEpisodes'>List Episodes</action> | <action value='HomePage'>List Explainers</action>";
 
@@ -775,57 +774,41 @@ var stateHandlers = {
 
     },
 
-    // console.log('handler state', this.handler.state, ' atty state', this.attributes.STATE)
-    // if (!this.attributes.currentExplainerIndex || this.attributes.currentExplainerIndex === -1) {
-    //   console.log('no explainer index SWITCHING state');
-    //   this.handler.state = config.states.START;
-    //   this.attributes.STATE = config.states.START;
-    //   return this.emitWithState('LaunchRequest')
-    // }
-    // var boundThis = this;
-    // feedLoader.call(this, config.testExplainerFeed, false, function(err, feedData) {
-    //   var previousExplainer = feedData.items[this.attributes.currentExplainerIndex];
-    //
-    //   intro += `Last time you were learning about ${previousExplainer.title}. Say 'restart' to hear that again or 'what's new' to hear the latest explainers.`;
-    //
-    //
-    //   // On add the and that was to the speech... not for card'
-    //   var links = "<action value='PlayLatestExplainer'>Play All</action>";
-    //   this.response.speak(intro).listen("Pick one, or say 'play all' to learn about all of them.");
-    //   if (this.event.context.System.device.supportedInterfaces.Display) {
-    //     this.response.renderTemplate(util.templateBodyTemplate1('Welcome to Make Me Smart', intro, links, config.background.show));
-    //   }
-    //   // this.emit(':elicitSlot', 'topic', intro, "Pick one, or say 'play all' to learn about all of them.");
-    //   this.emit(':saveState', true);
-    //   // audioPlayer.start.call(this, feedData.items[0], 'explainer', 'explainers');
-
-
     'HomePage': function () {
       this.attributes.currentExplainerIndex = 0;
       this.handler.state = this.attributes.STATE = config.states.START;
       return this.emitWithState('LaunchRequest', 'no_welcome')
-
+    },
+    'ListShows': function () {
+      this.attributes.show = null;
+      this.attributes.indices.episode = 0;
+      this.attributes.indices.show = 0;
+      this.handler.state = this.attributes.STATE = config.states.ITERATING_SHOW;
+      this.emitWithState('ListShows');
     },
 
     'PlayLatestEpisode' : function (slot) {
-      var deviceId = util.getDeviceId.call(this);
-      util.nullCheck.call(this, deviceId);
-
-      var slot = slot || this.event.request.intent.slots;
-
-      if (slot && slot.show && slot.show.value) {
-        this.attributes.show = slot.show.value;
-      }
-      var show = this.attributes.show || 'Make Me Smart';
-      var chosenShow = util.itemPicker(show, feeds, 'feed', 'feed');
-      var showImage = util.cardImage(chosenShow.image);
+      // var deviceId = util.getDeviceId.call(this);
+      // util.nullCheck.call(this, deviceId);
+      //
+      // var slot = slot || this.event.request.intent.slots;
+      //
+      // if (slot && slot.show && slot.show.value) {
+      //   this.attributes.show = slot.show.value;
+      // }
+      // var show = this.attributes.show || 'Make Me Smart';
+      // var chosenShow = util.itemPicker(show, feeds, 'feed', 'feed');
+      // var showImage = util.cardImage(chosenShow.image);
+      console.log('PLAY THE LATEST from iterating eps -> show   ', this.attributes.show)
       this.handler.state = this.attributes.STATE = config.states.PLAYING_EPISODE;
-      feedLoader.call(this, chosenShow, false, function(err, feedData) {
-        console.log('PLAY LATEST ')
-        var chosenEp = feedData.items[0];
-        this.response.speak(`Playing the latest ${chosenShow.feed}, titled ${chosenEp.title}`);
-        audioPlayer.start.call(this, chosenEp, 'episode', chosenShow.feed);
-      });
+      this.emitWithState('PlayLatestEpisode', slot)
+      // var message = `Let me find the latest episode of ${chosenShow.feed}`;
+      // feedLoader.call(this, chosenShow, message, function(err, feedData) {
+      //   console.log('PLAY LATEST ')
+      //   var chosenEp = feedData.items[0];
+      //   this.response.speak(`Playing the latest ${chosenShow.feed}, titled ${chosenEp.title}`);
+      //   audioPlayer.start.call(this, chosenEp, 'episode', chosenShow.feed);
+      // });
     },
     // BUILT IN
     'AMAZON.NextIntent' : function () {
@@ -849,7 +832,9 @@ var stateHandlers = {
     },
     // DEFAULT
     'SessionEndedRequest' : function () {
-      console.log("ended -- ITERATING  EPS ")
+      console.log("ended -- ITERATING  EPS -- state ",JSON.stringify(this.attributes.state, null, 2))
+      this.emit(':saveState', true);
+
      },
      'Unhandled' : function () {
        console.log("unhandled - ITERATING EP  ", this.event.request);
@@ -872,7 +857,9 @@ var stateHandlers = {
       var show = this.attributes.show || 'Make Me Smart';
       var chosenShow = util.itemPicker(show, feeds, 'feed', 'feed');
       var showImage = util.cardImage(chosenShow.image);
-      feedLoader.call(this, chosenShow, false, function(err, feedData) {
+      var message = `Let me find the latest episode of ${chosenShow.feed}`;
+
+      feedLoader.call(this, chosenShow, message, function(err, feedData) {
         console.log('PLAY LATEST feed load cb')
         var chosenEp = feedData.items[0];
         this.response.speak(`Playing the latest ${chosenShow.feed}, titled ${chosenEp.title}`);
@@ -891,7 +878,7 @@ var stateHandlers = {
     'LaunchRequest' : function () {
       console.log('LAUNCH REQUEST from playing ep', this.attributes.playing)
       // this.emitWithState('LaunchRequest', 'no_welcome');
-      var intro = `Last time you were listening to a ${this.attributes.playing.feed} episode titled ${this.attributes.playing.title}. Say 'resume' to continue or 'what's new' to hear our latest explainers.`;
+      var intro = `Welcome back to Make Me Smart. Last time you were listening to a ${this.attributes.playing.feed} episode titled ${this.attributes.playing.title}. Say 'resume' to continue or 'what's new' to hear our latest explainers.`;
       var links = "<action value='Resume'>Resume Episode</action> | <action value='HomePage'>See New Explainers</action>";
 
       if (this.event.context.System.device.supportedInterfaces.Display) {
@@ -901,7 +888,17 @@ var stateHandlers = {
 
       this.emit(':saveState', true);
     },
+    'PickItem' : function () {  // pick item in playing
+      var slot = this.event.request.intent.slots;
+      if (slot.query && slot.query.value) {
+        this.handler.state = this.attributes.STATE = config.states.REQUEST;
+        audioPlayer.stop.call(this); // TODO: make it actually stop
+        this.emitWithState('PickItem', slot);
+      } else {
+        console.log('IN PLAYING EP, PICK ITEM, no query', slot)
+      }
 
+    },
 
     // TOUCH
     'ElementSelected': function () {
@@ -936,13 +933,6 @@ var stateHandlers = {
     // BUILT IN
     'AMAZON.ResumeIntent' : function () {
       console.log('buit in RESUME');
-      //
-      // MUST CHECK FINISHED:
-        // if playing was finished,
-          // find next, give message, play
-        // else
-          // if ep, and playing within 30 * 1000 of end, go to next
-          // else, resume
       audioPlayer.resume.call(this);
     },
 
@@ -958,8 +948,7 @@ var stateHandlers = {
     },
 
     'AMAZON.PauseIntent' : function () {
-        // TEST
-        this.response.speak('Paused it for you');
+        this.response.speak(`Stopping. Say resume to continue episode ${this.attributes.playing.title}`);
         audioPlayer.stop.call(this);
     },
     'AMAZON.NextIntent' : function () {
@@ -1035,8 +1024,9 @@ var stateHandlers = {
               if (this.event.context.System.device.supportedInterfaces.Display) {
                 this.response.renderTemplate(util.templateBodyTemplate1(this.attributes.playing.title, message, '', config.background.show));
               }
+              audioPlayer.stop.call(this); // TODO: make it actually stop
+
               this.response.speak(message).listen("Say 'resume' or 'what's new.'");
-              audioPlayer.stop.call(this);
             } else {
               return util.sendProgressive(
                 boundThis.event.context.System.apiEndpoint, // no need to add directives params

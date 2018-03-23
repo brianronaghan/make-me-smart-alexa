@@ -16,8 +16,6 @@ var controllers = {
       progress: -1,
       length: chosenEp.audio.length
     }
-    // nullCheck.call(this, deviceId);
-    // console.log("I PLAYED ", JSON.stringify(this, null, 2));
     console.log('START', chosenEp.audio.url, chosenEp.guid);
     this.attributes.playing = devicePlaying;
     this.attributes.history[chosenEp.guid] = this.attributes.history[chosenEp.guid] || {}
@@ -57,12 +55,7 @@ var controllers = {
       this.attributes.playing.status = 'paused';
       this.response.audioPlayerStop();
       this.emit(':responseReady');
-
     }
-
-  },
-  'enqueue': function () {
-    console.log('enqueued');
   }
 };
 

@@ -265,8 +265,16 @@
                     "select show called {feed}",
                     "pick show {feed}",
                     "pick episode {index}",
-                    "pick this {ordinal} episode",
-                    "show {feed}"
+                    "pick the {ordinal} episode",
+                    "show {feed}",
+                    "play episode {index}",
+                    "play the {ordinal} episode",
+                    "pick episode {index}",
+                    "pick the {ordinal} episode",
+                     "choose episode {index}",
+                     "choose the {ordinal} episode",
+                     "episode number {index}",
+                     "the {ordinal} episode"
                   ]
                 },
                 {
@@ -309,38 +317,6 @@
                         "list episodes of {show}",
                         "list episodes"
                     ]
-                },
-                {
-                  "name": "PickEpisode",
-                  "slots": [
-                    {
-                      "name": "ordinal",
-                      "type": "ORDINAL"
-                    },
-                    {
-                      "name": "index",
-                      "type": "AMAZON.NUMBER"
-                    },
-                    {
-                      "name": "title",
-                      "type": "TITLES_WILDCARD"
-                    }
-                  ],
-                  "samples":[
-                      "play episode {index}",
-                      "play the {ordinal} episode",
-                      "play episode called {title}",
-                      "pick episode {index}",
-                      "pick the {ordinal} episode",
-                      "pick episode called {title}",
-                      "choose episode {index}",
-                      "choose the {ordinal} episode",
-                      "choose episode called {title}",
-                      "episode titled {title}",
-                      "episode number {index}",
-                      "the {ordinal} episode",
-                      "episode called {title}"
-                  ]
                 },
                 {
                     "name":"ListShows",

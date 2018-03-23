@@ -83,6 +83,7 @@ module.exports = {
       .setTitle(title)
       .setListItems(autoListItems)
       .setBackgroundImage(makeImage(config.background.show))
+      .setBackButtonBehavior('HIDDEN')
       .build();
 
     return listTemplate;
