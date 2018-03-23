@@ -12,9 +12,13 @@ var feedLoader = feedHelper.feedLoader;
 var audioPlayer = require('./audioPlayer')
 
 /*
-startHandlers
-playingExplainerHandlers
-
+stateHandlers.startHandlers,
+stateHandlers.requestHandlers,
+stateHandlers.playingExplainerHandlers,
+stateHandlers.iteratingExplainerHandlers,
+stateHandlers.iteratingShowHandlers,
+stateHandlers.iteratingEpisodeHandlers,
+stateHandlers.playingEpisodeHandlers
 
 */
 
@@ -24,13 +28,7 @@ var stateHandlers = {
     // //   console.log('new session ', JSON.stringify(this.event, null, 2));
     // },
     'LaunchRequest': function (condition, message) {
-      console.log('con passed in', condition)
       console.log('LAUNCH in, START STATE. handler state', this.handler.state, ' atty state', this.attributes.STATE)
-
-      // If they were previously palying an ep...?
-      // If they were previouslt explainer
-      // for iterating, fuck it.
-
       var deviceId = util.getDeviceId.call(this);
       var intro = '';
       console.log('con --> ', condition, message)
@@ -129,7 +127,6 @@ var stateHandlers = {
         this.emit(':elicitSlot', 'userLocation', message, "Let me know what location to leave.");
       } else {
         this.attributes.userLocation = slot.userLocation.value;
-        this.handler.state = this.attributes.STATE = config.states.START;
         this.attributes.requests.push({
           timestamp: Date.now(),
           query: slot.query.value,
@@ -140,19 +137,30 @@ var stateHandlers = {
 
         // TODO: if was playing, resume, reset state
 
-        util.sendProgressive(
-          this.event.context.System.apiEndpoint, // no need to add directives params
-          this.event.request.requestId,
-          this.event.context.System.apiAccessToken,
-          confirmationMessage,
-          function (err) {
-            if (err) {
-              boundThis.emitWithState('LaunchRequest', 'requested', confirmationMessage);
-            } else {
-              boundThis.emitWithState('LaunchRequest', 'requested');
+        if (this.attributes.IN_PROGRESS_EP) {
+          delete this.attributes.IN_PROGRESS_EP;
+          this.handler.state = this.attributes.STATE = config.states.PLAYING_EPISODE;
+          confirmationMessage += ` Now I'll resume ${this.attributes.playing.title}.`;
+          audioPlayer.resume.call(this, confirmationMessage);
+
+        } else {
+          this.handler.state = this.attributes.STATE = config.states.START;
+
+          return util.sendProgressive(
+            this.event.context.System.apiEndpoint, // no need to add directives params
+            this.event.request.requestId,
+            this.event.context.System.apiAccessToken,
+            confirmationMessage,
+            function (err) {
+              if (err) {
+                boundThis.emitWithState('LaunchRequest', 'requested', confirmationMessage);
+              } else {
+                boundThis.emitWithState('LaunchRequest', 'requested');
+              }
             }
-          }
-        );
+          );
+        }
+
       }
     },
     'LaunchRequest' : function () {
@@ -203,10 +211,10 @@ var stateHandlers = {
       });
     },
     'HomePage': function () {
+      // why did what's new not go here?
       this.attributes.currentExplainerIndex = -1;
       this.handler.state = this.attributes.STATE = config.states.START;
       return this.emitWithState('LaunchRequest', 'no_welcome')
-
     },
 
     'PickItem': function (slot) {
@@ -261,7 +269,6 @@ var stateHandlers = {
       this.emitWithState('PickItem', {index: {value: 1}});
     },
     'ReplayExplainer': function () {
-      console.log("REPLAY?")
       var deviceId = util.getDeviceId.call(this);
       util.nullCheck.call(this, deviceId);
       console.log('GOT REPLAY', this.handler.state)
@@ -289,6 +296,13 @@ var stateHandlers = {
       this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
       // this just throws to the correct state version of itself
       this.emitWithState('ListExplainers');
+    },
+    'ListEpisodes' : function () {
+      this.attributes.currentExplainerIndex = -1;
+      this.attributes.indices.explainer = 0;
+      this.handler.state = this.attributes.STATE = config.states.ITERATING_EPISODE;
+      console.log('LIST EPISODES from PLAY EXP')
+      this.emitWithState('ListEpisodes');
     },
 
     // TOUCH EVENTS:
@@ -387,7 +401,8 @@ var stateHandlers = {
 
     // DEFAULT:
     'SessionEndedRequest' : function () {
-      console.log("SESSION ENDED IN EXPLAINER state")
+      console.log("PLAYING EXPLAINER session end", JSON.stringify(this.event.request, null,2));
+
      },
      'Unhandled' : function () {
        console.log('PLAYING EXPLAINER UNHANDLED',JSON.stringify(this.event, null, 2))
@@ -436,6 +451,15 @@ var stateHandlers = {
 
     },
     // STATE TRANSITIONS
+    'ListShows': function (slot) {
+      console.log('list shows from ITERATE explain')
+      this.attributes.currentExplainerIndex = -1;
+      this.attributes.indices.explainer = 0;
+      this.handler.state = this.attributes.STATE = config.states.ITERATING_SHOW;
+      this.emitWithState('ListShows');
+
+    },
+
     'PickItem': function (slot) {
       console.log('ITERATING EXPLAINER, pick explainer');
       console.log('manual slot', slot);
@@ -499,7 +523,7 @@ var stateHandlers = {
 
     },
     'SessionEndedRequest' : function () {
-      console.log("SESSION ENDED IN ITERATING EXPLAINER")
+      console.log("IT  EXPLAINER  session end", JSON.stringify(this.event.request, null,2));
      },
      'Unhandled' : function () {
        console.log("UNHANDLED ITERATING EXPLAINER", this.event.request);
@@ -526,8 +550,9 @@ var stateHandlers = {
         this.attributes.indices.show,
         config.items_per_prompt.show
       );
-
+      // console.log("SHOW LIST ", data)
       this.response.speak(data.itemsAudio).listen('Pick one or say next or previous to move forward or backward through list.').cardRenderer(data.itemsCard);
+      console.log('DEV DISP', JSON.stringify(this.event.context.System.device.supportedInterfaces.Display, null,2));
 
       if (this.event.context.System.device.supportedInterfaces.Display) {
         this.response.renderTemplate(
@@ -540,7 +565,6 @@ var stateHandlers = {
           )
         );
       }
-
       this.emit(':responseReady');
     },
     'LaunchRequest': function () { // iterating shows
@@ -596,9 +620,12 @@ var stateHandlers = {
     },
     'PlayLatestEpisode': function () {
       this.handler.state = this.attributes.STATE = config.states.PLAYING_EPISODE;
+      console.log("ITERATING SHOW, PLAY LATEST ", this.attributes.show)
       this.emitWithState('PlayLatestEpisode', {show: {value: this.attributes.show}});
     },
     'ListEpisodes': function () {
+      console.log("ITERATING SHOW, LIST EPISODES ", this.attributes.show)
+
       this.handler.state = this.attributes.STATE = config.states.ITERATING_EPISODE;
       this.emitWithState('ListEpisodes', {show: {value: this.attributes.show}});
 
@@ -655,7 +682,7 @@ var stateHandlers = {
     },
     // DEFAULT
     'SessionEndedRequest' : function () {
-      console.log("IT  SHOW session end")
+      console.log("IT  SHOW session end", JSON.stringify(this.event.request, null,2));
      },
      'Unhandled' : function () {
        console.log("IT SHOW unhandled", JSON.stringify(this.event.request, null, 2));
@@ -832,7 +859,7 @@ var stateHandlers = {
     },
     // DEFAULT
     'SessionEndedRequest' : function () {
-      console.log("ended -- ITERATING  EPS -- state ",JSON.stringify(this.attributes.state, null, 2))
+      console.log("ended -- ITERATING  EPS -- state ",JSON.stringify(this.event.request, null, 2))
       this.emit(':saveState', true);
 
      },
@@ -846,11 +873,12 @@ var stateHandlers = {
   }),
   playingEpisodeHandlers : Alexa.CreateStateHandler(config.states.PLAYING_EPISODE, {
     'PlayLatestEpisode' : function (slot) {
+
       var deviceId = util.getDeviceId.call(this);
       util.nullCheck.call(this, deviceId);
 
       var slot = slot || this.event.request.intent.slots;
-
+      console.log("PLAYING EPISODE, PLAY LATEST", slot)
       if (slot && slot.show && slot.show.value) {
         this.attributes.show = slot.show.value;
       }
@@ -890,10 +918,22 @@ var stateHandlers = {
     },
     'PickItem' : function () {  // pick item in playing
       var slot = this.event.request.intent.slots;
+      console.log("PICK ITEM IN PLAYING EP ", slot);
       if (slot.query && slot.query.value) {
-        this.handler.state = this.attributes.STATE = config.states.REQUEST;
-        audioPlayer.stop.call(this); // TODO: make it actually stop
-        this.emitWithState('PickItem', slot);
+        if (this.attributes.playing.status === 'playing' || this.attributes.playing.status === 'stopped') {
+          this.handler.state = this.attributes.STATE = config.states.REQUEST;
+
+          audioPlayer.stop.call(this, function () {
+            console.log("AND NOW PICKING ITEM;");
+            this.attributes.IN_PROGRESS_EP = true;
+            this.emitWithState('PickItem', slot);
+          });
+        } else {
+          this.handler.state = this.attributes.STATE = config.states.REQUEST;
+          console.log('HAD PREVIOUSLY PAUSED')
+          this.emitWithState('PickItem', slot);
+        }
+
       } else {
         console.log('IN PLAYING EP, PICK ITEM, no query', slot)
       }
@@ -1024,9 +1064,11 @@ var stateHandlers = {
               if (this.event.context.System.device.supportedInterfaces.Display) {
                 this.response.renderTemplate(util.templateBodyTemplate1(this.attributes.playing.title, message, '', config.background.show));
               }
-              audioPlayer.stop.call(this); // TODO: make it actually stop
+              audioPlayer.stop.call(this, function () {
+                this.response.speak(message).listen("Say 'resume' or 'what's new.'");
+                this.emit(':responseReady');
+              }); // TODO: make it actually stop
 
-              this.response.speak(message).listen("Say 'resume' or 'what's new.'");
             } else {
               return util.sendProgressive(
                 boundThis.event.context.System.apiEndpoint, // no need to add directives params
@@ -1070,7 +1112,7 @@ var stateHandlers = {
 
     // DEFAULT
     'SessionEndedRequest' : function () {
-      console.log("IT  PLAYING EP ")
+      console.log("SESSION ENDED  PLAYING EP ")
      },
      'Unhandled' : function () {
        console.log("PLAYING EP  unhandled", JSON.stringify(this.event.request, null,2));

@@ -33,19 +33,19 @@ var controllers = {
 
 
   },
-  'resume': function () {
-    console.log("RESUME -- ", JSON.stringify(this.attributes, null,2));
+  'resume': function (message) {
     var deviceId = util.getDeviceId.call(this);
     // nullCheck.call(this, deviceId);
-
     var playing = this.attributes.playing;
-    this.response.speak(`Resuming ${playing.title}`);
+    var response = message || `Resuming ${playing.title}`;
+    this.response.speak(response);
     this.response.audioPlayerPlay('REPLACE_ALL', playing.url, playing.token, null, playing.progress);
     this.emit(':responseReady');
 
 
   },
-  'stop': function () {
+  'stop': function (cb) {
+    console.log("AUDIO PLAYER FUCKING STOP")
     var deviceId = util.getDeviceId.call(this);
     if (this.attributes.playing.status === 'finished') {
       this.response.speak('you done. playing the next baby.');
@@ -54,7 +54,11 @@ var controllers = {
       this.attributes.playing['progress'] = this.event.context.AudioPlayer.offsetInMilliseconds;
       this.attributes.playing.status = 'paused';
       this.response.audioPlayerStop();
-      this.emit(':responseReady');
+      if (cb) {
+        return cb.call(this);
+      } else {
+        this.emit(':responseReady');
+      }
     }
   }
 };

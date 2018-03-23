@@ -10,22 +10,6 @@ const makeRichText = Alexa.utils.TextUtils.makeRichText;
 
 
 module.exports = {
-  // feedLister: function () {
-  //     // Generate a list of categories to serve several functions
-  //     var categoryList = 'Here are the shows we have: ';
-  //     var cardCategoryList = 'Our Shows: ';
-  //     var index = 0;
-  //     feeds.forEach(function (feeds) {
-  //         categoryList += (++index) + constants.breakTime['100'] + feeds.feed + constants.breakTime['200'];
-  //         cardCategoryList += (index) + ') ' + feeds.feed + ' \n';
-  //     });
-  //     categoryList += '. Which one would you like to hear?';
-  //     cardCategoryList += 'Which one would you like to hear?';
-  //     return {
-  //       categoryList,
-  //       cardCategoryList
-  //     }
-  // },
   sendProgressive: function (endpoint, requestId, accessToken, speech, cb) {
     const ds = new Alexa.services.DirectiveService();
     const directive = new Alexa.directives.VoicePlayerSpeakDirective(requestId, speech);
@@ -85,7 +69,7 @@ module.exports = {
       .setBackgroundImage(makeImage(config.background.show))
       .setBackButtonBehavior('HIDDEN')
       .build();
-
+    console.log(JSON.stringify(listTemplate, null,2));
     return listTemplate;
   },
   prosodyToBold: prosodyToBold,
