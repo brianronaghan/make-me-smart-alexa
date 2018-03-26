@@ -18,15 +18,14 @@ var controllers = {
     }
     console.log('START', chosenEp.audio.url, chosenEp.guid);
     this.attributes.playing = devicePlaying;
-    this.attributes.history[chosenEp.guid] = this.attributes.history[chosenEp.guid] || {}
-    this.attributes.history[chosenEp.guid].events = this.attributes.history[chosenEp.guid].events || [];
-    this.attributes.history[chosenEp.guid].status = 'requested';
-    this.attributes.history[chosenEp.guid].events.push({
-      timestamp: Date.now(),
-      'event': 'request',
-      progress: -1
-
-    })
+    // this.attributes.history[chosenEp.guid] = this.attributes.history[chosenEp.guid] || {}
+    // this.attributes.history[chosenEp.guid].events = this.attributes.history[chosenEp.guid].events || [];
+    // this.attributes.history[chosenEp.guid].status = 'requested';
+    // this.attributes.history[chosenEp.guid].events.push({
+    //   timestamp: Date.now(),
+    //   'event': 'request',
+    //   progress: -1
+    // })
     this.response.audioPlayerPlay('REPLACE_ALL', chosenEp.audio.url, chosenEp.guid, null, 0);
     this.emit(':responseReady');
 

@@ -122,33 +122,33 @@ function logPlay() {
     }
     this.attributes.playing = newPlaying;
     this.attributes.enqueued = {}
-    this.attributes.history[this.attributes.playing.token].status = 'auto-started';
-    this.attributes.history[this.attributes.playing.token].events.push({
-      'event': 'auto-started',
-      'timestamp': Date.now(),
-      'progress': getOffsetInMilliseconds.call(this)
-    })
+    // this.attributes.history[this.attributes.playing.token].status = 'auto-started';
+    // this.attributes.history[this.attributes.playing.token].events.push({
+    //   'event': 'auto-started',
+    //   'timestamp': Date.now(),
+    //   'progress': getOffsetInMilliseconds.call(this)
+    // })
 
   } else if (this.attributes.playing.progress === -1) {// this is only MANUAL, right?
     // only if playing and enqueued are the same, nuke enqueued, resetplaying to new dats
-    this.attributes.history[this.attributes.playing.token].status = 'started';
-    this.attributes.history[this.attributes.playing.token].events.push({
-      'event': 'start',
-      'timestamp': Date.now(),
-      'progress': getOffsetInMilliseconds.call(this)
-    })
+    // this.attributes.history[this.attributes.playing.token].status = 'started';
+    // this.attributes.history[this.attributes.playing.token].events.push({
+    //   'event': 'start',
+    //   'timestamp': Date.now(),
+    //   'progress': getOffsetInMilliseconds.call(this)
+    // })
     this.attributes.playing.progress = getOffsetInMilliseconds.call(this)
     this.attributes.playing.status = 'playing';
   } else {
     //
     this.attributes.playing.status = 'playing';
     this.attributes.playing.progress = getOffsetInMilliseconds.call(this);
-    this.attributes.history[this.attributes.playing.token].status = 'resumed';
-    this.attributes.history[this.attributes.playing.token].events.push({
-      'event': 'resumed',
-      'timestamp': Date.now(),
-      'progress': getOffsetInMilliseconds.call(this)
-    })
+    // this.attributes.history[this.attributes.playing.token].status = 'resumed';
+    // this.attributes.history[this.attributes.playing.token].events.push({
+    //   'event': 'resumed',
+    //   'timestamp': Date.now(),
+    //   'progress': getOffsetInMilliseconds.call(this)
+    // })
   }
 
 }
@@ -157,12 +157,12 @@ function logStop() {
   historyNullCheck.call(this, deviceId)
   this.attributes.playing.status = 'stopped';
 
-  this.attributes.history[this.attributes.playing.token].status = 'stopped';
-  this.attributes.history[this.attributes.playing.token].events.push({
-    'event': 'stop',
-    'timestamp': Date.now(),
-    'progress': getOffsetInMilliseconds.call(this)
-  })
+  // this.attributes.history[this.attributes.playing.token].status = 'stopped';
+  // this.attributes.history[this.attributes.playing.token].events.push({
+  //   'event': 'stop',
+  //   'timestamp': Date.now(),
+  //   'progress': getOffsetInMilliseconds.call(this)
+  // })
 
 }
 
@@ -172,12 +172,12 @@ function logFinished() {
   this.attributes.playing.status = 'finished';
   // set play to enqueued? Why isn't enqueue working?
   // this.attributes.playing.progress = -1; // or something else? or wipe it out?
-  this.attributes.history[this.attributes.playing.token].status = 'finished';
-  this.attributes.history[this.attributes.playing.token].events.push({
-    'event': 'finish',
-    'timestamp': Date.now(),
-    'progress': getOffsetInMilliseconds.call(this)
-  })
+  // this.attributes.history[this.attributes.playing.token].status = 'finished';
+  // this.attributes.history[this.attributes.playing.token].events.push({
+  //   'event': 'finish',
+  //   'timestamp': Date.now(),
+  //   'progress': getOffsetInMilliseconds.call(this)
+  // })
 }
 
 function logFail(token, error) {
@@ -186,13 +186,13 @@ function logFail(token, error) {
   var token = token || this.attributes.token;
   this.attributes.playing.status = 'failed';
 
-  this.attributes.history[token].status = 'failed';
-  this.attributes.history[token].events.push({
-    'event': 'failed',
-    'error': error,
-    'timestamp': Date.now(),
-    'progress': getOffsetInMilliseconds.call(this)
-  })
+  // this.attributes.history[token].status = 'failed';
+  // this.attributes.history[token].events.push({
+  //   'event': 'failed',
+  //   'error': error,
+  //   'timestamp': Date.now(),
+  //   'progress': getOffsetInMilliseconds.call(this)
+  // })
 
 }
 
@@ -201,12 +201,12 @@ function logEnqueue(nextEp) {
   historyNullCheck.call(this, deviceId, nextEp.guid);
   this.attributes.playing.progress = getOffsetInMilliseconds.call(this);
   this.attributes['enqueued'] = nextEp;
-  this.attributes.history[nextEp.guid].status = 'enqueued';
-  this.attributes.history[nextEp.guid].events.push({
-    'event': 'enqueued',
-    'timestamp': Date.now(),
-    'progress': -1
-  })
+  // this.attributes.history[nextEp.guid].status = 'enqueued';
+  // this.attributes.history[nextEp.guid].events.push({
+  //   'event': 'enqueued',
+  //   'timestamp': Date.now(),
+  //   'progress': -1
+  // })
 
 }
 
@@ -220,12 +220,12 @@ function historyNullCheck (deviceId, token, cb) {
   this.attributes = this.attributes || {};
   this.attributes.playing = this.attributes.playing || {};
   var token = token || this.attributes.playing.token;
-  console.log("HIST ", this.attributes.history)
-  this.attributes.history = this.attributes.history || {};
-  this.attributes.history[token] = this.attributes.history[token] || {};
-  this.attributes.history[token].status = this.attributes.history[token].status || 'initiated';
-  this.attributes.history[token].events = this.attributes.history[token].events || [];
-  console.log('historyNullCheck',this.attributes.history[token].events)
+  // console.log("HIST ", this.attributes.history)
+  // this.attributes.history = this.attributes.history || {};
+  // this.attributes.history[token] = this.attributes.history[token] || {};
+  // this.attributes.history[token].status = this.attributes.history[token].status || 'initiated';
+  // this.attributes.history[token].events = this.attributes.history[token].events || [];
+  // console.log('historyNullCheck',this.attributes.history[token].events)
 }
 
 function getOffsetInMilliseconds() {
