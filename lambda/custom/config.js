@@ -15,7 +15,8 @@ var config = {
       ITERATING_EXPLAINER: '_ITERATING_EXPLAINER',
       ITERATING_SHOW: '_ITERATING_SHOW',
       ITERATING_EPISODE: '_ITERATING_EPISODE',
-      PLAYING_EPISODE: '_PLAYING_EPISODE'
+      PLAYING_EPISODE: '_PLAYING_EPISODE',
+      EXPLAINER_DURING_EPISODE: '_EXPLAINER_DURING_EPISODE'
     },
     background: {
       show: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/1024x600_FINAL.png"

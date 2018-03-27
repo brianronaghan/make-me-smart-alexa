@@ -27,8 +27,8 @@ exports.handler = function(event, context) {
       stateHandlers.iteratingExplainerHandlers,
       stateHandlers.iteratingShowHandlers,
       stateHandlers.iteratingEpisodeHandlers,
-      stateHandlers.playingEpisodeHandlers
-
+      stateHandlers.playingEpisodeHandlers,
+      stateHandlers.explainDuringEpisodeHandlers
 
     );
     alexa.execute();

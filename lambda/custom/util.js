@@ -34,8 +34,8 @@ module.exports = {
   },
   logExplainer: function (explainer) {
     console.log('explainer log', explainer)
-    this.attributes.history[explainer.guid] = this.attributes.history[explainer.guid] || {}
-    this.attributes.history[explainer.guid].events = this.attributes.history[explainer.guid].events || [];
+    // this.attributes.history[explainer.guid] = this.attributes.history[explainer.guid] || {}
+    // this.attributes.history[explainer.guid].events = this.attributes.history[explainer.guid].events || [];
     // Should I switch playig?
     this.attributes.playing = {};
     this.attributes.playing.status = 'playing';
@@ -43,9 +43,9 @@ module.exports = {
     this.attributes.playing.token = explainer.guid;
     this.attributes.playing.url = explainer.audio.url;
     // then when resuming, we could find using this. More reliable than explainerIndex
-    this.attributes.history[explainer.guid].events.push({
-      timestamp: Date.now(),
-    })
+    // this.attributes.history[explainer.guid].events.push({
+    //   timestamp: Date.now(),
+    // })
   },
   nullCheck: nullCheck,
   templateListTemplate1: function (title, token, itemLabel, itemTitleKey, items) {
