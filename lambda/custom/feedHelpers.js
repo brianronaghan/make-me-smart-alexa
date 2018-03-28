@@ -80,7 +80,7 @@ var itemsByFeed = {
           }
         },
         {
-          title: 'Interest rates',
+          title: 'Interest Rates',
           guid: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_interest_rates_kai.mp3",
           date: null,
           author: 'Kai Ryssdal',
@@ -101,13 +101,15 @@ var itemsByFeed = {
 module.exports = {
   feedLoader: function (feed, message, cb) {
     var boundThis = this;
+    var feedData;
+    var needsMessage = false;
     if (itemsByFeed[feed.url] && itemsByFeed[feed.url].pulledAt > (Date.now() - cacheExpiry)) {
       console.log('within hour cache');
-      var feedData = itemsByFeed[feed.url];
-      feedData.cached = true;
+      feedData = itemsByFeed[feed.url];
+      feedData.needsMessage = true;
       return cb.call(boundThis, null, feedData);
     } else {
-      console.log('fresh pull')
+      console.log('fresh pull');
       if (message) {
         console.log('sending message, means called from list eps');
         sendProgressive(
@@ -115,8 +117,11 @@ module.exports = {
           this.event.request.requestId,
           this.event.context.System.apiAccessToken,
           message,
-          function () {
-            console.log('progressive cb')
+          function (err) {
+            if (err) {
+              console.log('progressive ERR', err);
+              needsMessage = true;
+            }
           }
         );
       } else {
@@ -127,15 +132,12 @@ module.exports = {
       var feedparser = new FeedParser(null);
       var items = [];
       req.on('response', function (res) {
-
-
-          var stream = this;
-
-          if (res.statusCode === 200) {
-              stream.pipe(feedparser);
-          } else {
-              return stream.emit('error', new Error('Bad status code'));
-          }
+        var stream = this;
+        if (res.statusCode === 200) {
+            stream.pipe(feedparser);
+        } else {
+            return stream.emit('error', new Error('Bad status code'));
+        }
       });
 
       req.on('error', function (err) {
@@ -205,10 +207,11 @@ module.exports = {
           });
           itemsByFeed[feed.url] = {
             pulledAt: Date.now(),
-            items: items
+            items: items,
           }
-          console.log("FEED ON END", feed)
-          cb.call(boundThis, null, itemsByFeed[feed.url])
+          feedData = itemsByFeed[feed.url];
+          feedData.needsMessage = needsMessage;
+          cb.call(boundThis, null, feedData)
       });
 
       feedparser.on('error', function(err) {

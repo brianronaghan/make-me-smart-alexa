@@ -220,6 +220,7 @@ module.exports = {
   },
 
   itemPicker: function (intentSlot, choices, choiceKey, slotKey) {
+    console.log("ITEM PICKER", intentSlot, "SLOT KEY", slotKey);
     var itemNames = choices.map(function (choice) {return choice[choiceKey].toLowerCase()});
     // console.log('itemnames', itemNames);
     // console.log('intent slot', intentSlot);

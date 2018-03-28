@@ -212,6 +212,10 @@
                     {
                       "name": "feed",
                       "type": "SHOW_TITLES"
+                    },
+                    {
+                      "name": "wildcard",
+                      "type": "TITLES_WILDCARD"
                     }
                   ],
                   "samples": [
@@ -219,6 +223,7 @@
                     "{ordinal}",
                     "{topic}",
                     "{feed}",
+                    "{wildcard}",
                     "pick topic {topic}",
                     "teach me about {topic}",
                     "explain {topic}",

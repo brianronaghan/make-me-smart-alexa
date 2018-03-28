@@ -79,10 +79,14 @@ var stateHandlers = {
     'AMAZON.CancelIntent' : function() {
       console.log('CANCEL START STATE')
       // This needs to work for not playing as well
-      this.response.speak('See you later. Say alexa, make me smart to get learning again.')
+      this.response.speak("See you later. Say 'Alexa, Make Me Smart' to get learning again.");
       this.emit(':saveState');
     },
-    'SessionEndedRequest' : function () {
+    'AMAZON.HelpIntent': function () {
+    // Handler for built-in HelpIntent
+    },
+    // error handling
+    'SessionEndedRequest' : function () { // this gets purposeful exit as well
       console.log("SESSION ENDED IN START")
      },
      'Unhandled' : function () {
@@ -99,7 +103,7 @@ var stateHandlers = {
       var slot = slot || this.event.request.intent.slots;
       var message = '';
       var boundThis = this;
-      this.attributes.queries.push(slot.query.value)
+      this.attributes.queries.push(slot.query.value); // This happens for each time intnet is hit, ie 3 times. Gott a
       console.log("REQUEST PICK ITEM SLOT ", slot)
       if (slot.topic && slot.topic.value) {
         console.log("WTF, we now have a goddamned topic?", slot);
@@ -201,9 +205,10 @@ var stateHandlers = {
       audioPlayer.stop.call(this);
     },
     'AMAZON.CancelIntent' : function() {
-      console.log('built in request')
+      console.log('CANCEL REQUEST STATE')
       // This needs to work for not playing as well
-      audioPlayer.stop.call(this);
+      this.response.speak("See you later. Say 'Alexa, Make Me Smart' to get learning again.");
+      this.emit(':saveState');
     },
     'SessionEndedRequest' : function () {
       console.log("SESSION ENDED IN REQUEST")
@@ -288,7 +293,7 @@ var stateHandlers = {
     'AMAZON.CancelIntent' : function() {
       console.log(' EXPLAINER during ep STATE')
       // This needs to work for not playing as well
-      this.response.speak('See you later. Say alexa, make me smart to get learning again.')
+      this.response.speak('See you later. Say alexa, Make Me Smart to get learning again.')
       this.emit(':saveState');
     },
     // DEFAULT
@@ -328,7 +333,7 @@ var stateHandlers = {
 
         // On add the and that was to the speech... not for card'
         var links = "<action value='PlayLatestExplainer'>Play All</action>";
-        this.response.speak(intro).listen("Pick one, or say 'play all' to learn about all of them.");
+        this.response.speak(intro).listen("Say 'restart', or say 'what's new' to hear the latest explainers.");
         if (this.event.context.System.device.supportedInterfaces.Display) {
           this.response.renderTemplate(util.templateBodyTemplate1('Welcome to Make Me Smart', intro, links, config.background.show));
         }
@@ -350,12 +355,12 @@ var stateHandlers = {
       var deviceId = util.getDeviceId.call(this);
       util.nullCheck.call(this, deviceId);
       var slot = slot || this.event.request.intent.slots;
+      console.log("PICK -> in play explainer SESSION ", this.event.session);
       feedLoader.call(this, config.testExplainerFeed, false, function(err, feedData) {
         var chosenExplainer = util.itemPicker(slot, feedData.items, 'title', 'topic');
         if (!chosenExplainer) {
           if (slot.query && slot.query.value) {
-            console.log("NO EXPLAINER , but there is QUERY ", JSON.stringify(slot, null,2))
-
+            console.log("NO EXPLAINER , but there is QUERY ", JSON.stringify(slot, null,2));
             this.handler.state = config.states.REQUEST;
             this.attributes.STATE = config.states.REQUEST;
             return this.emitWithState('PickItem', slot);
@@ -388,6 +393,11 @@ var stateHandlers = {
                 boundThis.emitWithState('ListExplainers');
               }
             );
+          } else if (slot.wildcard && slot.wildcard.value) {
+            console.log("NO EXPLAINER , but there is WILDCARD ", JSON.stringify(slot, null,2));
+            this.handler.state = config.states.REQUEST;
+            this.attributes.STATE = config.states.REQUEST;
+            return this.emitWithState('PickItem', slot);
           } else if (slot.feed && slot.feed.value) {
             console.log("NO EXPLAINER, but there is feed ", JSON.stringify(slot, null,2));
 
@@ -426,7 +436,10 @@ var stateHandlers = {
           var intro = `Here's ${author} explaining ${chosenExplainer.title}. <break time = "500ms"/> <audio src="${chosenExplainer.audio.url}" /> `; // <break time = "200ms"/>
           var prompt;
           var links = "<action value='ReplayExplainer'>Replay</action> | <action value='ListExplainers'>List Explainers</action>";
-          if (feedData.items[chosenExplainer.index+1]) { // handle if end of explainer feed
+          if (this.event.session.new) {
+            prompt = `Say 'replay' to hear that again, 'list explainers' to see all of our explainers, or 'what's new' to explore our latest explainers.`;
+            links += " | <action value='HomePage'> What's new </action>";
+          } else if (feedData.items[chosenExplainer.index+1]) { // handle if end of explainer feed
             prompt = `Say 'replay' to hear that again, 'next' to learn about ${feedData.items[chosenExplainer.index+1].title}, or 'list explainers' to see all of our explainers.`;
             links += " | <action value='Next'>Next</action>";
           } else {
@@ -575,16 +588,16 @@ var stateHandlers = {
       this.response.speak('See you later. Say alexa, Make Me Smart to get learning again.')
       this.emit(':saveState');
     },
-    'AMAZON.CancelIntent' : function() {
-      console.log('CANCEL EXPLAINER STATE')
-      // This needs to work for not playing as well
-      this.response.speak('See you later. Say alexa, Make Me Smart to get learning again.')
-      this.emit(':saveState');
-    },
     'AMAZON.ResumeIntent' : function() {
       console.log('RESume playing EXPLAINER STATE')
       // This needs to work for not playing as well
       this.emitWithState('LaunchRequest');
+    },
+    'AMAZON.CancelIntent' : function() {
+      console.log('CANCEL PLAY EXPLAINER STATE')
+      // This needs to work for not playing as well
+      this.response.speak('See you later. Say Alexa, Make Me Smart to get learning again.')
+      this.emit(':saveState');
     },
 
     'AMAZON.PauseIntent' : function() {
@@ -597,7 +610,8 @@ var stateHandlers = {
     // DEFAULT:
     'SessionEndedRequest' : function () {
       console.log("PLAYING EXPLAINER session end", JSON.stringify(this.event.request, null,2));
-
+      this.response.speak('See you later. Say Alexa, Make Me Smart to get learning again.')
+      this.emit(':saveState');
      },
      'Unhandled' : function () {
        console.log('PLAYING EXPLAINER UNHANDLED',JSON.stringify(this.event, null, 2))
@@ -625,7 +639,6 @@ var stateHandlers = {
       util.nullCheck.call(this, deviceId);
       console.log('this.event.session.new',this.event.session.new)
       console.log("ITERATING EXPLAINERS LIST -> explainer idx", this.attributes.indices.explainer)
-
       if (this.event.session.new || (!this.attributes.indices.explainer)) { // is this logic correct?
         this.attributes.indices.explainer = 0;
       }
@@ -668,7 +681,6 @@ var stateHandlers = {
       console.log('ITERATING EXPLAINER, pick explainer');
       console.log('manual slot', slot);
       console.log('alexa EVENT',JSON.stringify(this.event.request));
-
       this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
       this.emitWithState('PickItem', slot);
     },
@@ -803,8 +815,8 @@ var stateHandlers = {
       feedLoader.call(this, chosen, intro, function(err, feedData) {
         console.timeEnd('pick-show-load');
         // this might not be right
-        console.log('CACHED?' , feedData.cached, )
-        this.response.speak(`${feedData.cached ? intro : ''} Should I play the latest episode or list the episodes?`)
+        console.log('CACHED?' , feedData.needsMessage)
+        this.response.speak(`${feedData.needsMessage ? intro : ''} Should I play the latest episode or list the episodes?`)
           .listen("Say 'play latest' to hear the latest episode or 'list episodes' to explore episodes.")
           .cardRenderer(chosen.feed, "Say 'play latest' to hear the latest episode or 'list episodes' to explore episodes.", showImage);
 
@@ -915,7 +927,7 @@ var stateHandlers = {
         console.log('PICK EPISODE feed load cb')
         var chosenEp = util.itemPicker(slot, feedData.items, 'title', 'title');
         console.log('PICK EPISODE', JSON.stringify(chosenEp, null, 2));
-        if (feedData.cached) {
+        if (feedData.needsMessage) {
           this.response.speak(`Starting ${chosenEp.title}`);
         }
         audioPlayer.start.call(this, chosenEp, 'episode', chosenShow.feed);
@@ -1000,7 +1012,7 @@ var stateHandlers = {
       this.attributes.indices.show = 0;
       this.attributes.indices.episode = 0;
       this.response.speak(intro).listen("Say 'list episodes' or 'what's new' to explore explainers.");
-      var links = "<action value='ListEpisodes'>List Episodes</action> | <action value='HomePage'>List Explainers</action>";
+      var links = "<action value='ListEpisodes'>List Episodes</action> | <action value='HomePage'>See New Explainers</action>";
 
       if (this.event.context.System.device.supportedInterfaces.Display) {
         this.response.renderTemplate(util.templateBodyTemplate1('Welcome Back to Make Me Smart', intro, links, config.background.show));
