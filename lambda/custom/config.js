@@ -19,7 +19,7 @@ var config = {
       EXPLAINER_DURING_EPISODE: '_EXPLAINER_DURING_EPISODE'
     },
     background: {
-      show: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/1024x600_FINAL.png"
+      show: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/1024x600_FINALB.png"
     },
     icon : {
       full: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/icon_full.png"

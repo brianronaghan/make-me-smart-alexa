@@ -140,7 +140,7 @@ module.exports = {
          "backgroundImage": makeImage(backgroundImage),
          "backButton": "HIDDEN"
     }
-    // console.log('body', JSON.stringify(template));
+    console.log('BODY 6', JSON.stringify(template));
     return template;
 
 

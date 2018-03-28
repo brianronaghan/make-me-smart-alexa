@@ -41,7 +41,7 @@ var stateHandlers = {
         intro += 'In the meantime, ';
       } else if (condition === 'no_welcome') {
         intro += 'This week ';
-      } else if (condtion === 'finished_playing') {
+      } else if (condition === 'finished_playing') {
         if (message) {
           intro += message;
         }
@@ -76,7 +76,12 @@ var stateHandlers = {
       console.log('list shows from start');
       this.emitWithState('ListShows');
     },
-
+    'AMAZON.CancelIntent' : function() {
+      console.log('CANCEL START STATE')
+      // This needs to work for not playing as well
+      this.response.speak('See you later. Say alexa, make me smart to get learning again.')
+      this.emit(':saveState');
+    },
     'SessionEndedRequest' : function () {
       console.log("SESSION ENDED IN START")
      },
@@ -94,11 +99,14 @@ var stateHandlers = {
       var slot = slot || this.event.request.intent.slots;
       var message = '';
       var boundThis = this;
+      this.attributes.queries.push(slot.query.value)
       console.log("REQUEST PICK ITEM SLOT ", slot)
-      if (this.attributes.userName && this.attributes.userLocation && false) { // NOTE: turn off for test/build if we've already got your info
+      if (slot.topic && slot.topic.value) {
+        console.log("WTF, we now have a goddamned topic?", slot);
+      } else if (this.attributes.userName && this.attributes.userLocation && false) { // NOTE: turn off for test/build if we've already got your info
         message = `Hmmm, we don't have anything on ${slot.query.value}. But I'll tell Kai and Molly that ${this.attributes.userName} from ${this.attributes.userLocation} wants to get smart about that!`;
         this.attributes.requests.push({
-          timestamp: Date.now(),
+          timestamp: new Date().toTimeString(),
           query: slot.query.value,
           name: this.attributes.userName,
           location: this.attributes.userLocation
@@ -118,26 +126,40 @@ var stateHandlers = {
             }
           }
         );
-      } else if (!slot.userName.value ) { // NOTE NOT SAVING NAME && !this.attributes.userName
+      } else if (!slot.userName.value) { // NOTE NOT SAVING NAME && !this.attributes.userName
         message += `Hmmm, we don't have anything on ${slot.query.value}. But I'll ask Kai and Molly to look into it. Who should I say is asking?`;
-        this.emit(':elicitSlot', 'userName', message, "Let me know what name to leave.");
+        console.log("WTF NO USERNAME",slot );
+        this.emit(':elicitSlotWithCard', 'userName', message, "Let me know what name to leave.", 'Request Explainer',message, this.event.request.intent, util.cardImage(config.icon.full));
       } else if (!slot.userLocation.value ) { // NOTE NOT SAVING NAME && this.attributes.userLocation
         this.attributes.userName = slot.userName.value;
+        var cardMessage = `I'll note that ${slot.userName.value} would like an explainer on ${slot.query.value}. `;
         message += 'And where are you from?';
-        this.emit(':elicitSlot', 'userLocation', message, "Let me know what location to leave.");
+        cardMessage += message;
+        this.emit(':elicitSlotWithCard', 'userLocation', message, "Let me know what location to leave.", 'Request Explainer', cardMessage, this.event.request.intent, util.cardImage(config.icon.full) );
       } else {
+        console.log("ALL ELSE in request ", slot)
         this.attributes.userLocation = slot.userLocation.value;
         this.attributes.requests.push({
-          timestamp: Date.now(),
+          timestamp: new Date().toTimeString(),
           query: slot.query.value,
           name: slot.userName.value,
           location: slot.userLocation.value
         });
-        var confirmationMessage =  `Okay, I'll tell Kai and Molly that ${slot.userName.value} from ${slot.userLocation.value} asked for an explainer about ${slot.query.value}.`;
+        var confirmationMessage = `Okay, I'll tell Kai and Molly that ${slot.userName.value} from ${slot.userLocation.value} asked for an explainer about ${slot.query.value}.`;
 
-        // TODO: if was playing, resume, reset state
-
+        // TODO: I was going to have it go back if there was an explainer playing, but nah. Seems logical they don't want that.
+        if (this.event.context.System.device.supportedInterfaces.Display) {
+          this.response.renderTemplate(
+            util.templateBodyTemplate1(
+              'Request Received!',
+              confirmationMessage,
+              '',
+              config.background.show
+            )
+          );
+        }
         if (this.attributes.IN_PROGRESS_EP) {
+          console.log("AN IN PROG EP ")
           delete this.attributes.IN_PROGRESS_EP;
           this.handler.state = this.attributes.STATE = config.states.PLAYING_EPISODE;
           confirmationMessage += ` Now I'll resume ${this.attributes.playing.title}.`;
@@ -160,19 +182,35 @@ var stateHandlers = {
             }
           );
         }
-
       }
+    },
+    'HomePage' : function () {
+      this.handler.state = this.attributes.STATE = config.states.START;
+      this.emitWithState('LaunchRequest', 'no_message');
+
     },
     'LaunchRequest' : function () {
       this.handler.state = this.attributes.STATE = config.states.START;
       this.emitWithState('LaunchRequest');
     },
+    // BUILT IN
+
+    'AMAZON.StopIntent' : function() {
+      console.log('built in STOP, request')
+      // This needs to work for not playing as well
+      audioPlayer.stop.call(this);
+    },
+    'AMAZON.CancelIntent' : function() {
+      console.log('built in request')
+      // This needs to work for not playing as well
+      audioPlayer.stop.call(this);
+    },
     'SessionEndedRequest' : function () {
       console.log("SESSION ENDED IN REQUEST")
      },
      'Unhandled' : function () {
-       console.log("REQUEST unhandled -> event  ",JSON.stringify(this.event.request,null, 2));
-         var message = 'UNDHANDLED REQUEST What now?';
+       console.log("REQUEST unhandled -> event  ", JSON.stringify(this.event.request,null, 2));
+         var message = "Sorry I couldn't understand that . Say 'what's new' to hear our latest explainers.";
          this.response.speak(message).listen(message);
          this.emit(':responseReady');
      }
@@ -247,6 +285,12 @@ var stateHandlers = {
       var confirmationMessage = `Okay I'll resume.`;
       audioPlayer.resume.call(this, confirmationMessage);
     },
+    'AMAZON.CancelIntent' : function() {
+      console.log(' EXPLAINER during ep STATE')
+      // This needs to work for not playing as well
+      this.response.speak('See you later. Say alexa, make me smart to get learning again.')
+      this.emit(':saveState');
+    },
     // DEFAULT
     'SessionEndedRequest' : function () {
       console.log("SESSION ENDEDPLAYING EXPLAINER  durin ep", JSON.stringify(this.event.request, null,2));
@@ -308,43 +352,104 @@ var stateHandlers = {
       var slot = slot || this.event.request.intent.slots;
       feedLoader.call(this, config.testExplainerFeed, false, function(err, feedData) {
         var chosenExplainer = util.itemPicker(slot, feedData.items, 'title', 'topic');
-        if (!chosenExplainer && slot.query) {
-          // if query, it's a req
-          // else, it's a ... what? just go home
-          console.log("NO EXPLAINER , but there is query ", slot)
-          this.handler.state = config.states.REQUEST;
-          this.attributes.STATE = config.states.REQUEST;
-          return this.emitWithState('PickItem', slot);
-        }
-        this.attributes.currentExplainerIndex = chosenExplainer.index;
-        util.logExplainer.call(this, chosenExplainer);
-        var intro = `Here's ${chosenExplainer.author} explaining ${chosenExplainer.title}. <audio src="${chosenExplainer.audio.url}" /> `;
-        var prompt;
-        var links = "<action value='ReplayExplainer'>Replay</action> | <action value='ListExplainers'>List explainers</action>";
-        if (feedData.items[chosenExplainer.index+1]) { // handle if end of explainer feed
-          prompt = `Say 'replay' to hear that again, 'next' to learn about ${feedData.items[chosenExplainer.index+1].title}, or 'list explainers' to see all of our explainers.`;
-          links += " | <action value='Next'>Next</action>";
+        if (!chosenExplainer) {
+          if (slot.query && slot.query.value) {
+            console.log("NO EXPLAINER , but there is QUERY ", JSON.stringify(slot, null,2))
+
+            this.handler.state = config.states.REQUEST;
+            this.attributes.STATE = config.states.REQUEST;
+            return this.emitWithState('PickItem', slot);
+          } else if (slot.index && slot.index.value) {
+            console.log("NO EXPLAINER , but there is INDEX ", JSON.stringify(slot, null,2))
+            var message = `${slot.index.value} is not a valid choice. Please choose between 1 and ${feedData.items.length}. I'll list the explainers again.`
+            var boundThis = this;
+            return util.sendProgressive(
+              boundThis.event.context.System.apiEndpoint, // no need to add directives params
+              boundThis.event.request.requestId,
+              boundThis.event.context.System.apiAccessToken,
+              message,
+              function (err) {
+                boundThis.handler.state = boundThis.attributes.STATE = config.states.ITERATING_EXPLAINER;
+                boundThis.emitWithState('ListExplainers');
+              }
+            );
+          } else if (slot.ordinal && slot.ordinal.value) {
+            console.log("NO EXPLAINER , but there is ORDINAL ", JSON.stringify(slot, null,2))
+
+            var message = `We don't have a ${slot.ordinal.value}. Please choose between 1 and ${feedData.items.length}. I'll list the explainers again.`
+            var boundThis = this;
+            return util.sendProgressive(
+              boundThis.event.context.System.apiEndpoint, // no need to add directives params
+              boundThis.event.request.requestId,
+              boundThis.event.context.System.apiAccessToken,
+              message,
+              function (err) {
+                boundThis.handler.state = boundThis.attributes.STATE = config.states.ITERATING_EXPLAINER;
+                boundThis.emitWithState('ListExplainers');
+              }
+            );
+          } else if (slot.feed && slot.feed.value) {
+            console.log("NO EXPLAINER, but there is feed ", JSON.stringify(slot, null,2));
+
+            var message = `Okay. You want to hear about our show ${slot.feed.value}`;
+            return util.sendProgressive(
+              boundThis.event.context.System.apiEndpoint, // no need to add directives params
+              boundThis.event.request.requestId,
+              boundThis.event.context.System.apiAccessToken,
+              message,
+              function (err) {
+                boundThis.handler.state = boundThis.attributes.STATE = config.states.ITERATING_SHOW;
+                boundThis.emitWithState('PickItem', slot);
+              }
+            );
+          } else {
+            console.log("NO EXPLAINER, and no slot info I can use ", JSON.stringify(slot, null,2));
+            var message = `Sorry, I couldn't quite understand that. Here are our latest explainers.`;
+            return util.sendProgressive(
+              boundThis.event.context.System.apiEndpoint, // no need to add directives params
+              boundThis.event.request.requestId,
+              boundThis.event.context.System.apiAccessToken,
+              message,
+              function (err) {
+                this.handler.state = this.attributes.STATE = config.states.START;
+                return this.emitWithState('LaunchRequest', 'no_welcome')
+              }
+            );
+          }
         } else {
-          prompt = "And that's all we have right now. Say 'replay' to hear that again, 'list explainers' to see all, or 'play full episodes' for full episodes of our shows."
-          links += " | <action value='ListShows'>Play full episodes</action>";
-        }
+          this.attributes.currentExplainerIndex = chosenExplainer.index;
+          util.logExplainer.call(this, chosenExplainer);
+          var author = chosenExplainer.author;
+          if (author === 'Molly Wood') {
+            author = `Molly '<emphasis level="strong"> Wood</emphasis>`;
+          }
+          var intro = `Here's ${author} explaining ${chosenExplainer.title}. <break time = "500ms"/> <audio src="${chosenExplainer.audio.url}" /> `; // <break time = "200ms"/>
+          var prompt;
+          var links = "<action value='ReplayExplainer'>Replay</action> | <action value='ListExplainers'>List Explainers</action>";
+          if (feedData.items[chosenExplainer.index+1]) { // handle if end of explainer feed
+            prompt = `Say 'replay' to hear that again, 'next' to learn about ${feedData.items[chosenExplainer.index+1].title}, or 'list explainers' to see all of our explainers.`;
+            links += " | <action value='Next'>Next</action>";
+          } else {
+            prompt = "And that's all we have right now. Say 'replay' to hear that again, 'list explainers' to see all, or 'play full episodes' for full episodes of our shows."
+            links += " | <action value='ListShows'>Play full episodes</action>";
+          }
 
-        if (this.event.context.System.device.supportedInterfaces.Display) {
-          this.response.renderTemplate(
-            util.templateBodyTemplate3(
-              chosenExplainer.title,
-              chosenExplainer.image || config.icon.full,
-              chosenExplainer.description,
-              links,
-              config.background.show
-            )
-          );
+          if (this.event.context.System.device.supportedInterfaces.Display) {
+            this.response.renderTemplate(
+              util.templateBodyTemplate3(
+                chosenExplainer.title,
+                chosenExplainer.image || config.icon.full,
+                chosenExplainer.description,
+                links,
+                config.background.show
+              )
+            );
+          }
+          var fullSpeech = intro + prompt;
+          this.response.speak(fullSpeech).listen(prompt); // if i do listen, you can't request an explainer during
+          this.emit(':saveState', true);
         }
-        var fullSpeech = intro + prompt;
-        this.response.speak(fullSpeech).listen(prompt);
-        this.emit(':saveState', true);
       });
-
     },
     'PlayLatestExplainer': function () {
       // this is what 'play all would do'
@@ -388,6 +493,12 @@ var stateHandlers = {
       console.log('LIST EPISODES from PLAY EXP')
       this.emitWithState('ListEpisodes');
     },
+    'PlayLatestEpisode': function () {
+      this.handler.state = this.attributes.STATE = config.states.PLAYING_EPISODE;
+      console.log("PLAYING explainer , PLAY LATEST episode", this.attributes.show)
+      this.emitWithState('PlayLatestEpisode', {show: {value: this.attributes.show}});
+    },
+
 
     // TOUCH EVENTS:
     'ElementSelected': function () {
@@ -461,13 +572,13 @@ var stateHandlers = {
     'AMAZON.StopIntent' : function() {
       console.log('STOP EXPLAINER STATE')
       // This needs to work for not playing as well
-      this.response.speak('See you later. Say alexa, make me smart to get learning again.')
+      this.response.speak('See you later. Say alexa, Make Me Smart to get learning again.')
       this.emit(':saveState');
     },
     'AMAZON.CancelIntent' : function() {
-      console.log('STOP EXPLAINER STATE')
+      console.log('CANCEL EXPLAINER STATE')
       // This needs to work for not playing as well
-      this.response.speak('See you later. Say alexa, make me smart to get learning again.')
+      this.response.speak('See you later. Say alexa, Make Me Smart to get learning again.')
       this.emit(':saveState');
     },
     'AMAZON.ResumeIntent' : function() {
@@ -477,9 +588,9 @@ var stateHandlers = {
     },
 
     'AMAZON.PauseIntent' : function() {
-      console.log('STOP EXPLAINER STATE')
+      console.log('PAUSE EXPLAINER STATE')
       // This needs to work for not playing as well
-      this.response.speak('See you later. Say alexa, make me smart to get learning again.')
+      this.response.speak('See you later. Say alexa, Make Me Smart to get learning again.')
       this.emit(':saveState');
     },
 
@@ -493,9 +604,18 @@ var stateHandlers = {
        if (this.event.context.AudioPlayer) {
          console.log('we screwed, audio in mismatched state')
        }
-       var message = 'UNHANDLED PLAYING EXPLAINERS . What now?';
-       this.response.speak(message).listen(message);
-       this.emit(':responseReady');
+       var message = "I couldn't quite make that out.";
+       return util.sendProgressive(
+         boundThis.event.context.System.apiEndpoint, // no need to add directives params
+         boundThis.event.request.requestId,
+         boundThis.event.context.System.apiAccessToken,
+         message,
+         function (err) {
+           boundThis.handler.state = boundThis.attributes.STATE = config.states.START;
+           return boundThis.emitWithState('LaunchRequest', 'no_welcome')
+         }
+       );
+
      }
 
   }),
@@ -547,7 +667,7 @@ var stateHandlers = {
     'PickItem': function (slot) {
       console.log('ITERATING EXPLAINER, pick explainer');
       console.log('manual slot', slot);
-      console.log('alexa',this.event.request);
+      console.log('alexa EVENT',JSON.stringify(this.event.request));
 
       this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
       this.emitWithState('PickItem', slot);
@@ -683,6 +803,7 @@ var stateHandlers = {
       feedLoader.call(this, chosen, intro, function(err, feedData) {
         console.timeEnd('pick-show-load');
         // this might not be right
+        console.log('CACHED?' , feedData.cached, )
         this.response.speak(`${feedData.cached ? intro : ''} Should I play the latest episode or list the episodes?`)
           .listen("Say 'play latest' to hear the latest episode or 'list episodes' to explore episodes.")
           .cardRenderer(chosen.feed, "Say 'play latest' to hear the latest episode or 'list episodes' to explore episodes.", showImage);
@@ -763,6 +884,9 @@ var stateHandlers = {
         this.attributes.indices.show = 0;
       }
       this.emitWithState('ListShows');
+    },
+    'AMAZON.CancelIntent' : function() {
+      console.log('built in STOP')
     },
     // DEFAULT
     'SessionEndedRequest' : function () {
@@ -989,16 +1113,21 @@ var stateHandlers = {
     },
     'LaunchRequest' : function () {
       console.log('LAUNCH REQUEST from playing ep', this.attributes.playing)
-      // this.emitWithState('LaunchRequest', 'no_welcome');
-      var intro = `Welcome back to Make Me Smart. Last time you were listening to a ${this.attributes.playing.feed} episode titled ${this.attributes.playing.title}. Say 'resume' to continue or 'what's new' to hear our latest explainers.`;
-      var links = "<action value='Resume'>Resume Episode</action> | <action value='HomePage'>See New Explainers</action>";
+      if (this.attributes.playing && this.attributes.playing.finished) {
+        this.emitWithState('AMAZON.NextIntent')
+      } else {
+        var intro = `Welcome back to Make Me Smart. Last time you were listening to a ${this.attributes.playing.feed} episode titled ${this.attributes.playing.title}. Say 'resume' to continue or 'what's new' to hear our latest explainers.`;
+        var links = "<action value='Resume'>Resume Episode</action> | <action value='HomePage'>See New Explainers</action>";
 
-      if (this.event.context.System.device.supportedInterfaces.Display) {
-        this.response.renderTemplate(util.templateBodyTemplate1('Welcome back to Make Me Smart', intro, links, config.background.show));
+        if (this.event.context.System.device.supportedInterfaces.Display) {
+          this.response.renderTemplate(util.templateBodyTemplate1('Welcome back to Make Me Smart', intro, links, config.background.show));
+        }
+        this.response.speak(intro).listen("Say 'resume', or 'what's new' to see what we're getting smart about lately.");
+
+        this.emit(':saveState', true);
+
       }
-      this.response.speak(intro).listen("Say 'resume', or 'what's new' to see what we're getting smart about lately.");
-
-      this.emit(':saveState', true);
+      // this.emitWithState('LaunchRequest', 'no_welcome');
     },
     'PickItem' : function () {  // pick item in playing
       var slot = this.event.request.intent.slots;

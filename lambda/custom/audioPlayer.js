@@ -16,7 +16,7 @@ var controllers = {
       progress: -1,
       length: chosenEp.audio.length
     }
-    console.log('START', chosenEp.audio.url, chosenEp.guid);
+    console.log('PLAYBACK START', chosenEp);
     this.attributes.playing = devicePlaying;
     // this.attributes.history[chosenEp.guid] = this.attributes.history[chosenEp.guid] || {}
     // this.attributes.history[chosenEp.guid].events = this.attributes.history[chosenEp.guid].events || [];
@@ -32,14 +32,20 @@ var controllers = {
 
 
   },
-  'resume': function (message) {
+  'resume': function (message, internal) {
     var deviceId = util.getDeviceId.call(this);
     // nullCheck.call(this, deviceId);
     var playing = this.attributes.playing;
-    var response = message || `Resuming ${playing.title}`;
-    this.response.speak(response);
-    this.response.audioPlayerPlay('REPLACE_ALL', playing.url, playing.token, null, playing.progress);
-    this.emit(':responseReady');
+    if (internal) {
+      console.log("TRYING AGAIN ON FAIL")
+      this.response.audioPlayerPlay('REPLACE_ALL', playing.url, playing.token, null, playing.progress);
+      this.emit(':responseReady');
+    } else {
+      var response = message || `Resuming ${playing.title}`;
+      this.response.speak(response);
+      this.response.audioPlayerPlay('REPLACE_ALL', playing.url, playing.token, null, playing.progress);
+      this.emit(':responseReady');
+    }
 
 
   },

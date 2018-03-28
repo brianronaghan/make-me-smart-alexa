@@ -5,9 +5,9 @@
         "en-US": {
           "summary": "Make Me Smart",
           "examplePhrases": [
-            "Alexa Make Me Smart",
-            "Alexa Make Me Smart about interest rates",
-            "Alexa ask Make Me Smart what I need to know"
+            "Alexa, Make Me Smart",
+            "Alexa, ask Make Me Smart to explain interest rates",
+            "Alexa, ask Make Me Smart what I need to know"
           ],
           "keywords": [
             "business"

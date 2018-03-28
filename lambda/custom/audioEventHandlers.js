@@ -42,7 +42,7 @@ var audioEventHandlers = Alexa.CreateStateHandler(config.states.PLAYING_EPISODE,
          * Confirming that audio file stopped playing.
          * Storing details in dynamoDB using attributes.
          */
-        console.log("AUDIO EVENT PlaybackStopped ");
+        console.log("AUDIO EVENT PlaybackStopped ",JSON.stringify(this.event, null,2));
         logStop.call(this);
         this.emit(':saveState', true);
     },
@@ -93,7 +93,7 @@ var audioEventHandlers = Alexa.CreateStateHandler(config.states.PLAYING_EPISODE,
 
         logFail.call(this, this.event.request.token , this.event.request.error);
         //  AudioPlayer.PlaybackNearlyFinished Directive received. Logging the error.
-        this.context.succeed(true);
+        audioPlayer.resume.call(this, false, true);
     },
 
 });
