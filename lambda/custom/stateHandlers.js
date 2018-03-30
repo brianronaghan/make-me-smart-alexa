@@ -32,7 +32,7 @@ var stateHandlers = {
       var deviceId = util.getDeviceId.call(this);
       var intro = '';
       console.log('con --> ', condition, message)
-      if (!condition) {
+      if (!condition) { // FIX THIS THING
         intro += `Welcome ${this.attributes.deviceId ? 'back' : ''} to Make Me Smart. This week `;
       } else if (condition === 'requested') {
         if (message) {
@@ -40,6 +40,9 @@ var stateHandlers = {
         }
         intro += 'In the meantime, ';
       } else if (condition === 'no_welcome') {
+        if (message) {
+          intro += `${message} `;
+        }
         intro += 'This week ';
       } else if (condition === 'finished_playing') {
         if (message) {
@@ -151,7 +154,7 @@ var stateHandlers = {
         });
         var confirmationMessage = `Okay, I'll tell Kai and Molly that ${slot.userName.value} from ${slot.userLocation.value} asked for an explainer about ${slot.query.value}.`;
 
-        // TODO: I was going to have it go back if there was an explainer playing, but nah. Seems logical they don't want that.
+        // TODO: I was going to have it go back if there was an explainer playing, but nah. Seems logical they don't want that, since they requested soemthing else.
         if (this.event.context.System.device.supportedInterfaces.Display) {
           this.response.renderTemplate(
             util.templateBodyTemplate1(
@@ -163,15 +166,12 @@ var stateHandlers = {
           );
         }
         if (this.attributes.IN_PROGRESS_EP) {
-          console.log("AN IN PROG EP ")
           delete this.attributes.IN_PROGRESS_EP;
           this.handler.state = this.attributes.STATE = config.states.PLAYING_EPISODE;
           confirmationMessage += ` Now I'll resume ${this.attributes.playing.title}.`;
           audioPlayer.resume.call(this, confirmationMessage);
-
         } else {
           this.handler.state = this.attributes.STATE = config.states.START;
-
           return util.sendProgressive(
             this.event.context.System.apiEndpoint, // no need to add directives params
             this.event.request.requestId,
@@ -202,20 +202,22 @@ var stateHandlers = {
     'AMAZON.StopIntent' : function() {
       console.log('built in STOP, request')
       // This needs to work for not playing as well
-      audioPlayer.stop.call(this);
+      this.handler.state = this.attributes.STATE = config.states.START;
+      this.emitWithState('LaunchRequest', 'no_welcome', "Got it, I won't put in that request.");
+
     },
     'AMAZON.CancelIntent' : function() {
-      console.log('CANCEL REQUEST STATE')
-      // This needs to work for not playing as well
-      this.response.speak("See you later. Say 'Alexa, Make Me Smart' to get learning again.");
-      this.emit(':saveState');
+      console.log('CANCEL REQUEST STATE');
+      // means they don't wnt to leave it.
+      this.handler.state = this.attributes.STATE = config.states.START;
+      this.emitWithState('LaunchRequest', 'no_welcome', "Got it, I won't put in that request.");
     },
     'SessionEndedRequest' : function () {
       console.log("SESSION ENDED IN REQUEST")
      },
      'Unhandled' : function () {
        console.log("REQUEST unhandled -> event  ", JSON.stringify(this.event.request,null, 2));
-         var message = "Sorry I couldn't understand that . Say 'what's new' to hear our latest explainers.";
+         var message = "Sorry I couldn't understand that. Say 'what's new' to hear our latest explainers.";
          this.response.speak(message).listen(message);
          this.emit(':responseReady');
      }
@@ -237,7 +239,7 @@ var stateHandlers = {
         var chosenExplainer = util.itemPicker(slot, feedData.items, 'title', 'topic');
         this.attributes.currentExplainerIndex = chosenExplainer.index;
         // util.logExplainer.call(this, chosenExplainer); // don't want to wipe out the playing ep
-        var intro = `Here's ${chosenExplainer.author} explaining ${chosenExplainer.title}. <audio src="${chosenExplainer.audio.url}" /> .`;
+        var intro = `Here's ${chosenExplainer.author} explaining ${chosenExplainer.title}. <audio src="${chosenExplainer.audio.url}" />. `;
         var prompt;
         var links = "<action value='ReplayExplainer'>Replay</action> | <action value='Resume'>Resume Episode</action>";
 
@@ -438,7 +440,7 @@ var stateHandlers = {
           var links = "<action value='ReplayExplainer'>Replay</action> | <action value='ListExplainers'>List Explainers</action>";
           if (this.event.session.new) {
             prompt = `Say 'replay' to hear that again, 'list explainers' to see all of our explainers, or 'what's new' to explore our latest explainers.`;
-            links += " | <action value='HomePage'> What's new </action>";
+            links += " | <action value='HomePage'> What's New </action>";
           } else if (feedData.items[chosenExplainer.index+1]) { // handle if end of explainer feed
             prompt = `Say 'replay' to hear that again, 'next' to learn about ${feedData.items[chosenExplainer.index+1].title}, or 'list explainers' to see all of our explainers.`;
             links += " | <action value='Next'>Next</action>";
@@ -801,15 +803,25 @@ var stateHandlers = {
 
       var slot = slot || this.event.request.intent.slots;
       var chosen = util.itemPicker(slot, feeds, 'feed', 'feed');
-
+      var boundThis = this;
+      if (!chosen) {
+        var message = "I couldn't make that out. "
+        // progressive...
+        return util.sendProgressive(
+          boundThis.event.context.System.apiEndpoint, // no need to add directives params
+          boundThis.event.request.requestId,
+          boundThis.event.context.System.apiAccessToken,
+          message,
+          function (err) {
+            console.log("ERR PROGR", err)
+            return boundThis.emitWithState('ListShows');
+          }
+        );
+      }
       var showImage = util.cardImage(chosen.image);
       this.attributes.show = chosen.feed;
       this.attributes.indices.show = 0;
       this.attributes.indices.episode = 0;
-      console.log("SHOUD BE 0",
-        this.attributes.indices.show,
-        this.attributes.indices.episode
-      )
       console.time('pick-show-load');
       var intro = `You chose ${chosen.feed}. `
       feedLoader.call(this, chosen, intro, function(err, feedData) {
@@ -898,8 +910,15 @@ var stateHandlers = {
       this.emitWithState('ListShows');
     },
     'AMAZON.CancelIntent' : function() {
-      console.log('built in STOP')
+      console.log('built in CANCEL');
     },
+    'AMAZON.StopIntent' : function() {
+      console.log('STOP ITERATING SHOW')
+      // This needs to work for not playing as well
+      this.response.speak('See you later. Say alexa, Make Me Smart to get learning again.')
+      this.emit(':saveState');
+    },
+
     // DEFAULT
     'SessionEndedRequest' : function () {
       console.log("IT  SHOW session end", JSON.stringify(this.event.request, null,2));

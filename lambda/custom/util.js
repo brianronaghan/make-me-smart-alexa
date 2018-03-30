@@ -146,7 +146,7 @@ module.exports = {
 
   },
 
-  cleanShowName: cleanShowName,
+  cleanSlotName: cleanSlotName,
   itemLister: function(items, itemTitlePlural, titleKey, start, chunkLength) {
     // TODO: add a listen feature as well... the hint thing we tell them, handles whether next or previous
     var itemsAudio, itemsCard;
@@ -238,14 +238,24 @@ module.exports = {
         }
         index--;
     } else if (typeof intentSlot === 'string') {
-        index = itemNames.indexOf(cleanShowName(intentSlot));
+        index = itemNames.indexOf(cleanSlotName(intentSlot));
     } else if (intentSlot && intentSlot[slotKey] && intentSlot[slotKey].value) {
-        var cleanedSlot = cleanShowName(intentSlot[slotKey].value);
+        var cleanedSlot = cleanSlotName(intentSlot[slotKey].value);
         index = itemNames.indexOf(cleanedSlot);
+    } else if (intentSlot && intentSlot.query && intentSlot.query.value) {
+      var asIndex = parseInt(intentSlot.query.value);
+      console.log('QUERY', intentSlot.query.value)
+      console.log("INT index", asIndex);
+
+      if (isNaN(asIndex)) {
+        var cleanedQuery = cleanSlotName(intentSlot.query.value);
+        index = itemNames.indexOf(cleanedQuery);
+      } else {
+        index = asIndex -1
+      }
     } else {
-        index = -1;
+      index = -1;
     }
-    // console.log(index, " the index ", choices[index])
     var chosen;
     if (index >= 0 && index < choices.length) {
         chosen = choices[index];
@@ -277,7 +287,7 @@ function prosodyToBold (text) {
   return text;
 };
 
-function cleanShowName (showString) {
+function cleanSlotName (showString) {
   var cleanedSlot = showString.toLowerCase();
   var reg = /market place/i;
   cleanedSlot = cleanedSlot.replace(reg, 'marketplace');
