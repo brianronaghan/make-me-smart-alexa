@@ -103,12 +103,20 @@ var stateHandlers = {
     'PickItem': function (slot) {
       var deviceId = util.getDeviceId.call(this);
       util.nullCheck.call(this, deviceId);
+      console.log("REQUEST pick item natural slot ", this.event.request.intent.slots)
+
       var slot = slot || this.event.request.intent.slots;
       var message = '';
       var boundThis = this;
-      this.attributes.queries.push(slot.query.value); // This happens for each time intnet is hit, ie 3 times. Gott a
-      console.log("REQUEST PICK ITEM SLOT ", slot)
-      if (slot.topic && slot.topic.value) {
+      console.log("REQUEST ", slot)
+      if (slot.query && slot.query.value) {
+        this.attributes.queries.push(slot.query.value); // This happens for each time intnet is hit, ie 3 times. Gotta fix
+      }
+      if (!slot.query && (slot.topic && !slot.topic.value)) { // came here without a query
+        message = "What would you like to get smart about?";
+        this.emit(':elicitSlotWithCard', 'topic', message, "Let me know what to request an explainer about.", 'Request Explainer',message, this.event.request.intent, util.cardImage(config.icon.full));
+
+      } else if (slot.topic && slot.topic.value) {
         console.log("WTF, we now have a goddamned topic?", slot);
       } else if (this.attributes.userName && this.attributes.userLocation && false) { // NOTE: turn off for test/build if we've already got your info
         message = `Hmmm, we don't have anything on ${slot.query.value}. But I'll tell Kai and Molly that ${this.attributes.userName} from ${this.attributes.userLocation} wants to get smart about that!`;
@@ -118,21 +126,27 @@ var stateHandlers = {
           name: this.attributes.userName,
           location: this.attributes.userLocation
         });
-        this.handler.state = this.attributes.STATE = config.states.START;
-        util.sendProgressive(
-          this.event.context.System.apiEndpoint, // no need to add directives params
-          this.event.request.requestId,
-          this.event.context.System.apiAccessToken,
-          message,
-          function (err) {
-            console.log('progressive cb')
-            if (err) {
-              boundThis.emitWithState('LaunchRequest', 'requested', message);
-            } else {
-              boundThis.emitWithState('LaunchRequest', 'requested');
+        if (this.attributes.IN_PROGRESS_EP) {
+          delete this.attributes.IN_PROGRESS_EP;
+          this.handler.state = this.attributes.STATE = config.states.PLAYING_EPISODE;
+          message += ` Now I'll resume ${this.attributes.playing.title}.`;
+          return audioPlayer.resume.call(this, confirmationMessage);
+        } else {
+          this.handler.state = this.attributes.STATE = config.states.START;
+          return util.sendProgressive(
+            this.event.context.System.apiEndpoint, // no need to add directives params
+            this.event.request.requestId,
+            this.event.context.System.apiAccessToken,
+            message,
+            function (err) {
+              if (err) {
+                boundThis.emitWithState('LaunchRequest', 'requested', message);
+              } else {
+                boundThis.emitWithState('LaunchRequest', 'requested');
+              }
             }
-          }
-        );
+          );
+        }
       } else if (!slot.userName.value) { // NOTE NOT SAVING NAME && !this.attributes.userName
         message += `Hmmm, we don't have anything on ${slot.query.value}. But I'll ask Kai and Molly to look into it. Who should I say is asking?`;
         console.log("WTF NO USERNAME",slot );
@@ -197,6 +211,15 @@ var stateHandlers = {
       this.handler.state = this.attributes.STATE = config.states.START;
       this.emitWithState('LaunchRequest');
     },
+
+    'ReplayExplainer': function () {
+      var deviceId = util.getDeviceId.call(this);
+      util.nullCheck.call(this, deviceId);
+      console.log('REPLAY exp in REQUEST', this.handler.state)
+      this.emitWithState('PickItem');
+    },
+
+
     // BUILT IN
 
     'AMAZON.StopIntent' : function() {
@@ -211,6 +234,16 @@ var stateHandlers = {
       // means they don't wnt to leave it.
       this.handler.state = this.attributes.STATE = config.states.START;
       this.emitWithState('LaunchRequest', 'no_welcome', "Got it, I won't put in that request.");
+    },
+    'AMAZON.HelpIntent' : function () {
+      console.log('Help in REQUEST')
+      var message = "You can say 'nevermind' to cancel, or else let us know your name and city so we can give you credit if we answer your question.";
+      this.response.speak(message).listen(message);
+      if (this.event.context.System.device.supportedInterfaces.Display) {
+        var links = "<action value='HomePage'>What's New</action> | <action value='ListExplainers'>List Explainers</action>";
+        this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, links, config.background.show));
+      }
+      this.emit(':saveState', true);
     },
     'SessionEndedRequest' : function () {
       console.log("SESSION ENDED IN REQUEST")
@@ -300,7 +333,7 @@ var stateHandlers = {
     },
     // DEFAULT
     'SessionEndedRequest' : function () {
-      console.log("SESSION ENDEDPLAYING EXPLAINER  durin ep", JSON.stringify(this.event.request, null,2));
+      console.log("session ended  EXPLAINER  durin ep", JSON.stringify(this.event.request, null,2));
     },
     'Unhandled' : function () {
        console.log('EXPLAINER during ep UNHANDLED',JSON.stringify(this.event, null, 2))
@@ -479,6 +512,11 @@ var stateHandlers = {
       this.emitWithState('PickItem', {index: {value: this.attributes.currentExplainerIndex + 1}})
     },
     // STATE TRANSITION:
+    'RequestExplainer' : function () {
+      console.log('request explainer test')
+      this.handler.state = this.attributes.STATE = config.states.REQUEST;
+      this.emitWithState('PickItem');
+    },
     'ListShows' : function () {
       console.log('list shows from play explain')
       this.attributes.currentExplainerIndex = -1;
@@ -609,6 +647,16 @@ var stateHandlers = {
     },
 
     // DEFAULT:
+    'AMAZON.HelpIntent' : function () {
+      console.log('Help in PLAYING EXPLAINER')
+      var message = "You can say 'next' or 'previous', or 'what's new' to see our latest explainers, or 'list explainers' to see them all.";
+      this.response.speak(message).listen(message);
+      if (this.event.context.System.device.supportedInterfaces.Display) {
+        var links = "<action value='HomePage'>What's New</action> | <action value='ListExplainers'>List Explainers</action>";
+        this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, links, config.background.show));
+      }
+      this.emit(':saveState', true);
+    },
     'SessionEndedRequest' : function () {
       console.log("PLAYING EXPLAINER session end", JSON.stringify(this.event.request, null,2));
       this.response.speak('See you later. Say Alexa, Make Me Smart to get learning again.')
@@ -726,6 +774,16 @@ var stateHandlers = {
       }
       this.emitWithState('ListExplainers');
 
+    },
+    'AMAZON.HelpIntent' : function () {
+      console.log('Help in ITERATING EXPLAINER')
+      var message = "You can say 'next' or 'previous', or 'what's new' to see our latest explainers.";
+      this.response.speak(message).listen(message);
+      if (this.event.context.System.device.supportedInterfaces.Display) {
+        var links = "<action value='HomePage'>What's New</action>";
+        this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, links, config.background.show));
+      }
+      this.emit(':saveState', true);
     },
     'SessionEndedRequest' : function () {
       console.log("IT  EXPLAINER  session end", JSON.stringify(this.event.request, null,2));
@@ -846,6 +904,13 @@ var stateHandlers = {
       this.emitWithState('ListEpisodes', {show: {value: this.attributes.show}});
 
     },
+
+    'HomePage': function () {
+      this.attributes.currentExplainerIndex = 0;
+      this.attributes.show = null;
+      this.handler.state = this.attributes.STATE = config.states.START;
+      return this.emitWithState('LaunchRequest', 'no_welcome')
+    },
     // TOUCH
     'ElementSelected': function () {
       var deviceId = util.getDeviceId.call(this);
@@ -907,6 +972,16 @@ var stateHandlers = {
     },
 
     // DEFAULT
+    'AMAZON.HelpIntent' : function () {
+      console.log('Help in ITERATING SHOW')
+      var message = "You can say 'next' or 'previous', 'list shows', or 'what's new' to see our latest explainers.";
+      this.response.speak(message).listen(message);
+      if (this.event.context.System.device.supportedInterfaces.Display) {
+        var links = "<action value='ListShows'>List Shows</action> | <action value='HomePage'>What's New</action>";
+        this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, links, config.background.show));
+      }
+      this.emit(':saveState', true);
+    },
     'SessionEndedRequest' : function () {
       console.log("IT  SHOW session end", JSON.stringify(this.event.request, null,2));
      },
@@ -1081,6 +1156,16 @@ var stateHandlers = {
       this.emitWithState('ListEpisodes');
     },
     // DEFAULT
+    'AMAZON.HelpIntent' : function () {
+      console.log('Help in ITERATING EPISODE')
+      var message = "You can say 'next' or 'previous', 'list shows' for other shows, or 'what's new' to see our latest explainers.";
+      this.response.speak(message).listen(message);
+      if (this.event.context.System.device.supportedInterfaces.Display) {
+        var links = "<action value='ListShows'>List Shows</action> | <action value='HomePage'>What's New</action>";
+        this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, links, config.background.show));
+      }
+      this.emit(':saveState', true);
+    },
     'SessionEndedRequest' : function () {
       console.log("ended -- ITERATING  EPS -- state ",JSON.stringify(this.event.request, null, 2))
       this.emit(':saveState', true);
@@ -1125,13 +1210,17 @@ var stateHandlers = {
       this.handler.state = this.attributes.STATE = config.states.START;
       this.emitWithState('LaunchRequest', 'no_welcome');
     },
+    'ListEpisodes' : function () {
+      this.handler.state = this.attributes.STATE = config.states.ITERATING_EPISODE;
+      this.emitWithState('ListEpisodes');
+    },
     'LaunchRequest' : function () {
       console.log('LAUNCH REQUEST from playing ep', this.attributes.playing)
       if (this.attributes.playing && this.attributes.playing.finished) {
         this.emitWithState('AMAZON.NextIntent')
       } else {
         var intro = `Welcome back to Make Me Smart. Last time you were listening to a ${this.attributes.playing.feed} episode titled ${this.attributes.playing.title}. Say 'resume' to continue or 'what's new' to hear our latest explainers.`;
-        var links = "<action value='Resume'>Resume Episode</action> | <action value='HomePage'>See New Explainers</action>";
+        var links = "<action value='Resume'>Resume Episode</action> | <action value='HomePage'>What's New</action>";
 
         if (this.event.context.System.device.supportedInterfaces.Display) {
           this.response.renderTemplate(util.templateBodyTemplate1('Welcome back to Make Me Smart', intro, links, config.background.show));
@@ -1188,6 +1277,8 @@ var stateHandlers = {
         }
       } else if (this.event.request.token === 'Next' || this.event.request.token === 'Previous' || this.event.request.token === 'Resume') {
         intentName = `AMAZON.${this.event.request.token}Intent`;
+      } else if (this.event.request.token === 'ListShows') {
+        intentName = this.event.request.token;
       } else {
         var tokenData = this.event.request.token.split('_');
         intentName = tokenData[0];
@@ -1342,6 +1433,17 @@ var stateHandlers = {
 
 
     // DEFAULT
+    'AMAZON.HelpIntent' : function () {
+      console.log('Help in PLAYING EPISODE')
+      var message = "You can say 'list shows' or 'list episodes', or 'what's new' to see the latest explainers.";
+      this.response.speak(message).listen(message);
+      if (this.event.context.System.device.supportedInterfaces.Display) {
+        var links = "<action value='ListShows'>List Shows</action> | <action value='ListEpisodes'>List Episodes</action> | <action value='HomePage'>What's New</action>";
+        this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, links, config.background.show));
+      }
+      this.emit(':saveState', true);
+    },
+
     'SessionEndedRequest' : function () {
       console.log("SESSION ENDED  PLAYING EP ")
      },

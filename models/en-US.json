@@ -34,8 +34,16 @@
          "value": "tell me where "
        }
      ]
+   },
+   {
+     "id": "Elicit.Intent-PickItem.IntentSlot-topic",
+     "variations": [
+       {
+         "type": "PlainText",
+         "value": "what do you wanna get smart about? "
+       }
+     ]
    }
-
  ],
  "dialog": {
    "intents": [
@@ -60,6 +68,15 @@
            "confirmationRequired": false,
            "prompts": {
              "elicitation": "Elicit.Intent-PickItem.IntentSlot-userLocation"
+           }
+         },
+         {
+           "name": "topic",
+           "type": "TOPICS",
+           "elicitationRequired": true,
+           "confirmationRequired": false,
+           "prompts": {
+             "elicitation": "Elicit.Intent-PickItem.IntentSlot-topic"
            }
          }
        ]
@@ -329,6 +346,7 @@
                         "what shows Marketplace has",
                         "tell me the shows",
                         "what shows you got",
+                        "what shows do you have",
                         "shows",
                         "list shows",
                         "play full episodes"
