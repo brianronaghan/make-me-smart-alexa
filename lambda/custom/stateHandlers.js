@@ -216,10 +216,10 @@ var stateHandlers = {
       console.log("SESSION ENDED IN REQUEST")
      },
      'Unhandled' : function () {
+       // Just go to start
        console.log("REQUEST unhandled -> event  ", JSON.stringify(this.event.request,null, 2));
-         var message = "Sorry I couldn't understand that. Say 'what's new' to hear our latest explainers.";
-         this.response.speak(message).listen(message);
-         this.emit(':responseReady');
+       this.handler.state = this.attributes.STATE = config.states.START;
+       this.emitWithState('LaunchRequest', 'no_welcome', "Sorry I couldn't quite handle that.");
      }
 
   }),
@@ -307,9 +307,8 @@ var stateHandlers = {
        if (this.event.context.AudioPlayer) {
          console.log('we screwed, audio in playing explainer while listenign to ep')
        }
-       var message = 'UNHANDLED PLAYING EXPLAINERS during EPISODe . What now?';
-       this.response.speak(message).listen(message);
-       this.emit(':responseReady');
+       this.handler.state = this.attributes.STATE = config.states.START;
+       this.emitWithState('LaunchRequest', 'no_welcome', "Sorry I couldn't quite handle that.");
      }
 
   }),
@@ -617,20 +616,8 @@ var stateHandlers = {
      },
      'Unhandled' : function () {
        console.log('PLAYING EXPLAINER UNHANDLED',JSON.stringify(this.event, null, 2))
-       if (this.event.context.AudioPlayer) {
-         console.log('we screwed, audio in mismatched state')
-       }
-       var message = "I couldn't quite make that out.";
-       return util.sendProgressive(
-         boundThis.event.context.System.apiEndpoint, // no need to add directives params
-         boundThis.event.request.requestId,
-         boundThis.event.context.System.apiAccessToken,
-         message,
-         function (err) {
-           boundThis.handler.state = boundThis.attributes.STATE = config.states.START;
-           return boundThis.emitWithState('LaunchRequest', 'no_welcome')
-         }
-       );
+       this.handler.state = this.attributes.STATE = config.states.START;
+       this.emitWithState('LaunchRequest', 'no_welcome', "Sorry I couldn't quite handle that.");
 
      }
 
@@ -744,10 +731,10 @@ var stateHandlers = {
       console.log("IT  EXPLAINER  session end", JSON.stringify(this.event.request, null,2));
      },
      'Unhandled' : function () {
-       console.log("UNHANDLED ITERATING EXPLAINER", this.event.request);
-         var message = 'UNDHANDLED ITER EXPLAINER What now?';
-         this.response.speak(message).listen(message);
-         this.emit(':responseReady');
+       console.log('UNHANDLED ITERATING EXPLAINER',JSON.stringify(this.event, null, 2))
+       this.handler.state = this.attributes.STATE = config.states.START;
+       this.emitWithState('LaunchRequest', 'no_welcome', "Sorry I couldn't quite handle that.");
+
      }
 
 
@@ -924,13 +911,10 @@ var stateHandlers = {
       console.log("IT  SHOW session end", JSON.stringify(this.event.request, null,2));
      },
      'Unhandled' : function () {
-       console.log("IT SHOW unhandled", JSON.stringify(this.event.request, null, 2));
-         var message = 'UNDHANDLED ITER SHOW What now?';
-         this.response.speak(message).listen(message);
-         this.emit(':responseReady');
+       console.log('UNHANDLED ITERATING SHOW',JSON.stringify(this.event, null, 2))
+       this.handler.state = this.attributes.STATE = config.states.START;
+       this.emitWithState('LaunchRequest', 'no_welcome', "Sorry I couldn't quite handle that.");
      }
-
-
   }),
   iteratingEpisodeHandlers : Alexa.CreateStateHandler(config.states.ITERATING_EPISODE, {
     'PickItem': function (slot) {
@@ -1103,10 +1087,9 @@ var stateHandlers = {
 
      },
      'Unhandled' : function () {
-       console.log("unhandled - ITERATING EP  ", this.event.request);
-         var message = 'UNDHANDLED ITERATING EP What now?';
-         this.response.speak(message).listen(message);
-         this.emit(':responseReady');
+       console.log('unhandled - ITERATING EP ',JSON.stringify(this.event, null, 2))
+       this.handler.state = this.attributes.STATE = config.states.START;
+       this.emitWithState('LaunchRequest', 'no_welcome', "Sorry I couldn't quite handle that.");
      }
 
   }),
@@ -1363,10 +1346,9 @@ var stateHandlers = {
       console.log("SESSION ENDED  PLAYING EP ")
      },
      'Unhandled' : function () {
-       console.log("PLAYING EP  unhandled", JSON.stringify(this.event.request, null,2));
-         var message = 'UNDHANDLED PLAYING EP What now?';
-         this.response.speak(message);
-         this.emit(':responseReady');
+       console.log('unhandled - PLAYING EPISODE ',JSON.stringify(this.event, null, 2))
+       this.handler.state = this.attributes.STATE = config.states.START;
+       this.emitWithState('LaunchRequest', 'no_welcome', "Sorry I couldn't quite handle that.");
      }
 
   })
