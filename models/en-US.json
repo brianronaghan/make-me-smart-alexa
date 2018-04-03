@@ -36,7 +36,7 @@
      ]
    },
    {
-     "id": "Elicit.Intent-PickItem.IntentSlot-topic",
+     "id": "Elicit.Intent-PickItem.IntentSlot-wildcard",
      "variations": [
        {
          "type": "PlainText",
@@ -71,12 +71,12 @@
            }
          },
          {
-           "name": "topic",
-           "type": "TOPICS",
+           "name": "wildcard",
+           "type": "TITLES_WILDCARD",
            "elicitationRequired": true,
            "confirmationRequired": false,
            "prompts": {
-             "elicitation": "Elicit.Intent-PickItem.IntentSlot-topic"
+             "elicitation": "Elicit.Intent-PickItem.IntentSlot-wildcard"
            }
          }
        ]
@@ -309,6 +309,10 @@
                     {
                       "name": "userLocation",
                       "type": "AMAZON.US_CITY"
+                    },
+                    {
+                      "name": "query",
+                      "type": "AMAZON.SearchQuery"
                     }
                   ],
                   "samples": [

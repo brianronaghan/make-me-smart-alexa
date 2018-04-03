@@ -112,12 +112,15 @@ var stateHandlers = {
       if (slot.query && slot.query.value) {
         this.attributes.queries.push(slot.query.value); // This happens for each time intnet is hit, ie 3 times. Gotta fix
       }
-      if (!slot.query && (slot.topic && !slot.topic.value)) { // came here without a query
-        message = "What would you like to get smart about?";
-        this.emit(':elicitSlotWithCard', 'topic', message, "Let me know what to request an explainer about.", 'Request Explainer',message, this.event.request.intent, util.cardImage(config.icon.full));
 
-      } else if (slot.topic && slot.topic.value) {
-        console.log("WTF, we now have a goddamned topic?", slot);
+      if (slot.query && !slot.query.value) { // came here without a query
+        console.log("INTENT ", this.event.request.intent);
+        // var newIntent = this.event.request.intent;
+        // newIntent.name = 'PickItem';
+        // console.log("NEW INTENT",newIntent);
+        message = "What would you like to get smart about?";
+        this.emit(':elicitSlotWithCard', 'query', message, "Let me know what to request an explainer about.", 'Request Explainer',message, this.event.request.intent, util.cardImage(config.icon.full));
+
       } else if (this.attributes.userName && this.attributes.userLocation && false) { // NOTE: turn off for test/build if we've already got your info
         message = `Hmmm, we don't have anything on ${slot.query.value}. But I'll tell Kai and Molly that ${this.attributes.userName} from ${this.attributes.userLocation} wants to get smart about that!`;
         this.attributes.requests.push({
@@ -152,6 +155,120 @@ var stateHandlers = {
         console.log("WTF NO USERNAME",slot );
         this.emit(':elicitSlotWithCard', 'userName', message, "Let me know what name to leave.", 'Request Explainer',message, this.event.request.intent, util.cardImage(config.icon.full));
       } else if (!slot.userLocation.value ) { // NOTE NOT SAVING NAME && this.attributes.userLocation
+        this.attributes.userName = slot.userName.value;
+        var cardMessage = `I'll note that ${slot.userName.value} would like an explainer on ${slot.query.value}. `;
+        message += 'And where are you from?';
+        cardMessage += message;
+        this.emit(':elicitSlotWithCard', 'userLocation', message, "Let me know what location to leave.", 'Request Explainer', cardMessage, this.event.request.intent, util.cardImage(config.icon.full) );
+      } else {
+        console.log("ALL ELSE in request ", slot)
+        this.attributes.userLocation = slot.userLocation.value;
+        this.attributes.requests.push({
+          timestamp: new Date().toTimeString(),
+          query: slot.query.value,
+          name: slot.userName.value,
+          location: slot.userLocation.value
+        });
+        var confirmationMessage = `Okay, I'll tell Kai and Molly ${slot.userName.value} from ${slot.userLocation.value} asked for an explainer on ${slot.query.value}.`;
+
+        // TODO: I was going to have it go back if there was an explainer playing, but nah. Seems logical they don't want that, since they requested soemthing else.
+        if (this.event.context.System.device.supportedInterfaces.Display) {
+          this.response.renderTemplate(
+            util.templateBodyTemplate1(
+              'Request Received!',
+              confirmationMessage,
+              '',
+              config.background.show
+            )
+          );
+        }
+        if (this.attributes.IN_PROGRESS_EP) {
+          delete this.attributes.IN_PROGRESS_EP;
+          this.handler.state = this.attributes.STATE = config.states.PLAYING_EPISODE;
+          confirmationMessage += ` Now I'll resume ${this.attributes.playing.title}.`;
+          audioPlayer.resume.call(this, confirmationMessage);
+        } else {
+          this.handler.state = this.attributes.STATE = config.states.START;
+          return util.sendProgressive(
+            this.event.context.System.apiEndpoint, // no need to add directives params
+            this.event.request.requestId,
+            this.event.context.System.apiAccessToken,
+            confirmationMessage,
+            function (err) {
+              if (err) {
+                boundThis.emitWithState('LaunchRequest', 'requested', confirmationMessage);
+              } else {
+                boundThis.emitWithState('LaunchRequest', 'requested');
+              }
+            }
+          );
+        }
+      }
+    },
+    'RequestExplainer': function (slot) {
+      var deviceId = util.getDeviceId.call(this);
+      util.nullCheck.call(this, deviceId);
+      var slot = slot || this.event.request.intent.slots;
+      var message = '';
+      var boundThis = this;
+      var chosenExplainer;
+      console.log("REQUEST ", slot)
+      if (slot.query && slot.query.value) {
+        this.attributes.queries.push(slot.query.value); // This happens for each time intnet is hit, ie 3 times. Gotta fix
+        feedLoader.call(this, config.testExplainerFeed, false, function(err, feedData) { // this is not gonna be async, right? so don't need it.
+          chosenExplainer = util.itemPicker(slot, feedData.items, 'title', 'query');
+        })
+      }
+      if (slot.query && !slot.query.value) { // came here without a query
+        // gotta check if the query matches.
+          // if it does, go to that.
+        message = "What would you like to get smart about?";
+        this.emit(':elicitSlotWithCard', 'query', message, "Let me know what to request an explainer about.", 'Request Explainer',message, this.event.request.intent, util.cardImage(config.icon.full));
+      } else if (slot.query && slot.query.value && chosenExplainer) {
+        message = "Actually, we've got you covered there."
+        return util.sendProgressive(
+          boundThis.event.context.System.apiEndpoint, // no need to add directives params
+          boundThis.event.request.requestId,
+          boundThis.event.context.System.apiAccessToken,
+          message,
+          function (err) {
+            boundThis.handler.state = boundThis.attributes.STATE = config.states.PLAYING_EXPLAINER;
+            boundThis.emitWithState('PickItem', slot);
+          }
+        );
+      } else if (this.attributes.userName && this.attributes.userLocation && false) { // NOTE: turn off for test/build if we've already got your info
+        message = `An explainer on ${slot.query.value}. Good idea. I'll tell Kai and Molly that ${this.attributes.userName} from ${this.attributes.userLocation} wants to get smart about that!`;
+        this.attributes.requests.push({
+          timestamp: new Date().toTimeString(),
+          query: slot.query.value,
+          name: this.attributes.userName,
+          location: this.attributes.userLocation
+        });
+        if (this.attributes.IN_PROGRESS_EP) {
+          delete this.attributes.IN_PROGRESS_EP;
+          this.handler.state = this.attributes.STATE = config.states.PLAYING_EPISODE;
+          message += ` Now I'll resume ${this.attributes.playing.title}.`;
+          return audioPlayer.resume.call(this, confirmationMessage);
+        } else {
+          this.handler.state = this.attributes.STATE = config.states.START;
+          return util.sendProgressive(
+            boundThis.event.context.System.apiEndpoint, // no need to add directives params
+            boundThis.event.request.requestId,
+            boundThis.event.context.System.apiAccessToken,
+            message,
+            function (err) {
+              if (err) {
+                boundThis.emitWithState('LaunchRequest', 'requested', message);
+              } else {
+                boundThis.emitWithState('LaunchRequest', 'requested');
+              }
+            }
+          );
+        }
+      } else if (!slot.userName.value) { // NOTE NOT SAVING NAME && !this.attributes.userName
+        message += `Okay, I'll ask Kai and Molly to look into ${slot.query.value}. Who should I say is asking?`;
+        this.emit(':elicitSlotWithCard', 'userName', message, "Let me know what name to leave.", 'Request Explainer',message, this.event.request.intent, util.cardImage(config.icon.full));
+      } else if (!slot.userLocation.value) { // NOTE NOT SAVING NAME && this.attributes.userLocation
         this.attributes.userName = slot.userName.value;
         var cardMessage = `I'll note that ${slot.userName.value} would like an explainer on ${slot.query.value}. `;
         message += 'And where are you from?';
@@ -390,6 +507,8 @@ var stateHandlers = {
       util.nullCheck.call(this, deviceId);
       var slot = slot || this.event.request.intent.slots;
       console.log("PICK -> in play explainer SESSION ", this.event.session);
+      var boundThis = this;
+
       feedLoader.call(this, config.testExplainerFeed, false, function(err, feedData) {
         var chosenExplainer = util.itemPicker(slot, feedData.items, 'title', 'topic');
         if (!chosenExplainer) {
@@ -416,7 +535,6 @@ var stateHandlers = {
             console.log("NO EXPLAINER , but there is ORDINAL ", JSON.stringify(slot, null,2))
 
             var message = `We don't have a ${slot.ordinal.value}. Please choose between 1 and ${feedData.items.length}. I'll list the explainers again.`
-            var boundThis = this;
             return util.sendProgressive(
               boundThis.event.context.System.apiEndpoint, // no need to add directives params
               boundThis.event.request.requestId,
@@ -515,7 +633,7 @@ var stateHandlers = {
     'RequestExplainer' : function () {
       console.log('request explainer test')
       this.handler.state = this.attributes.STATE = config.states.REQUEST;
-      this.emitWithState('PickItem');
+      this.emitWithState('RequestExplainer');
     },
     'ListShows' : function () {
       console.log('list shows from play explain')
@@ -713,7 +831,11 @@ var stateHandlers = {
       this.emitWithState('ListShows');
 
     },
-
+    'RequestExplainer' : function () {
+      console.log('request explainer test')
+      this.handler.state = this.attributes.STATE = config.states.REQUEST;
+      this.emitWithState('RequestExplainer');
+    },
     'PickItem': function (slot) {
       console.log('ITERATING EXPLAINER, pick explainer');
       console.log('manual slot', slot);
