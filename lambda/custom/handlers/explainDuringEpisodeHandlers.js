@@ -8,6 +8,8 @@ var feedHelper = require('../feedHelpers');
 var feedLoader = feedHelper.feedLoader;
 
 var audioPlayer = require('../audioPlayer');
+var explainers = require('../explainers')
+
 
 module.exports = Alexa.CreateStateHandler(config.states.EXPLAINER_DURING_EPISODE, {
   'LaunchRequest' : function () {
@@ -21,31 +23,29 @@ module.exports = Alexa.CreateStateHandler(config.states.EXPLAINER_DURING_EPISODE
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     var slot = slot || this.event.request.intent.slots;
-    feedLoader.call(this, config.testExplainerFeed, false, function(err, feedData) {
-      var chosenExplainer = util.itemPicker(slot, feedData.items, 'title', 'topic');
-      this.attributes.currentExplainerIndex = chosenExplainer.index;
-      // util.logExplainer.call(this, chosenExplainer); // don't want to wipe out the playing ep
-      var intro = `Here's ${chosenExplainer.author} explaining ${chosenExplainer.title}. <audio src="${chosenExplainer.audio.url}" />. `;
-      var prompt;
-      var links = "<action value='ReplayExplainer'>Replay</action> | <action value='Resume'>Resume Episode</action>";
+    var chosenExplainer = util.itemPicker(slot, explainers, 'title', 'topic');
+    this.attributes.currentExplainerIndex = chosenExplainer.index;
+    // util.logExplainer.call(this, chosenExplainer); // don't want to wipe out the playing ep
+    var intro = `Here's ${chosenExplainer.author} explaining ${chosenExplainer.title}. <audio src="${chosenExplainer.audio.url}" />. `;
+    var prompt;
+    var links = "<action value='ReplayExplainer'>Replay</action> | <action value='Resume'>Resume Episode</action>";
 
-      prompt = `Say 'replay' to hear that again, or 'resume' to continue ${this.attributes.playing.title}.`;
+    prompt = `Say 'replay' to hear that again, or 'resume' to continue ${this.attributes.playing.title}.`;
 
-      if (this.event.context.System.device.supportedInterfaces.Display) {
-        this.response.renderTemplate(
-          util.templateBodyTemplate3(
-            chosenExplainer.title,
-            chosenExplainer.image || config.icon.full,
-            chosenExplainer.description,
-            links,
-            config.background.show
-          )
-        );
-      }
-      var fullSpeech = intro + prompt;
-      this.response.speak(fullSpeech).listen(prompt);
-      this.emit(':saveState', true);
-    });
+    if (this.event.context.System.device.supportedInterfaces.Display) {
+      this.response.renderTemplate(
+        util.templateBodyTemplate3(
+          chosenExplainer.title,
+          chosenExplainer.image || config.icon.full,
+          chosenExplainer.description,
+          links,
+          config.background.show
+        )
+      );
+    }
+    var fullSpeech = intro + prompt;
+    this.response.speak(fullSpeech).listen(prompt);
+    this.emit(':saveState', true);
 
   },
   'ElementSelected': function () {

@@ -10,6 +10,7 @@ var feedHelper = require('../feedHelpers');
 var feedLoader = feedHelper.feedLoader;
 
 var audioPlayer = require('../audioPlayer');
+var explainers = require('../explainers');
 
 module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
   'LaunchRequest': function () {
@@ -24,24 +25,17 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
       this.handler.state = this.attributes.STATE = config.states.START;
       return this.emitWithState('LaunchRequest')
     }
-    var boundThis = this;
-    feedLoader.call(this, config.testExplainerFeed, false, function(err, feedData) {
-      var previousExplainer = feedData.items[this.attributes.currentExplainerIndex];
+    var previousExplainer = explainers[this.attributes.currentExplainerIndex];
 
-      intro += `Last time you were learning about ${previousExplainer.title}. Say 'restart' to hear that again or 'what's new' to hear the latest explainers.`;
+    intro += `Last time you were learning about ${previousExplainer.title}. Say 'restart' to hear that again or 'what's new' to hear the latest explainers.`;
+    // On add the and that was to the speech... not for card'
+    var links = "<action value='PlayLatestExplainer'>Play All</action>";
+    this.response.speak(intro).listen("Say 'restart', or say 'what's new' to hear the latest explainers.");
+    if (this.event.context.System.device.supportedInterfaces.Display) {
+      this.response.renderTemplate(util.templateBodyTemplate1('Welcome to Make Me Smart', intro, links, config.background.show));
+    }
+    this.emit(':saveState', true);
 
-
-      // On add the and that was to the speech... not for card'
-      var links = "<action value='PlayLatestExplainer'>Play All</action>";
-      this.response.speak(intro).listen("Say 'restart', or say 'what's new' to hear the latest explainers.");
-      if (this.event.context.System.device.supportedInterfaces.Display) {
-        this.response.renderTemplate(util.templateBodyTemplate1('Welcome to Make Me Smart', intro, links, config.background.show));
-      }
-      // this.emit(':elicitSlot', 'topic', intro, "Pick one, or say 'play all' to learn about all of them.");
-      this.emit(':saveState', true);
-      // audioPlayer.start.call(this, feedData.items[0], 'explainer', 'explainers');
-
-    });
   },
   'HomePage': function () {
     // why did what's new not go here?
@@ -58,112 +52,110 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     console.log("PICK -> in play explainer SESSION ", this.event.session);
     var boundThis = this;
 
-    feedLoader.call(this, config.testExplainerFeed, false, function(err, feedData) {
-      var chosenExplainer = util.itemPicker(slot, feedData.items, 'title', 'topic');
-      if (!chosenExplainer) {
-        if (slot.query && slot.query.value) {
-          console.log("NO EXPLAINER , but there is QUERY ", JSON.stringify(slot, null,2));
-          this.handler.state = config.states.REQUEST;
-          this.attributes.STATE = config.states.REQUEST;
-          return this.emitWithState('PickItem', slot);
-        } else if (slot.index && slot.index.value) {
-          console.log("NO EXPLAINER , but there is INDEX ", JSON.stringify(slot, null,2))
-          var message = `${slot.index.value} is not a valid choice. Please choose between 1 and ${feedData.items.length}. I'll list the explainers again.`
-          var boundThis = this;
-          return util.sendProgressive(
-            boundThis.event.context.System.apiEndpoint, // no need to add directives params
-            boundThis.event.request.requestId,
-            boundThis.event.context.System.apiAccessToken,
-            message,
-            function (err) {
-              boundThis.handler.state = boundThis.attributes.STATE = config.states.ITERATING_EXPLAINER;
-              boundThis.emitWithState('ListExplainers');
-            }
-          );
-        } else if (slot.ordinal && slot.ordinal.value) {
-          console.log("NO EXPLAINER , but there is ORDINAL ", JSON.stringify(slot, null,2))
+    var chosenExplainer = util.itemPicker(slot, explainers, 'title', 'topic');
+    if (!chosenExplainer) {
+      if (slot.query && slot.query.value) {
+        console.log("NO EXPLAINER , but there is QUERY ", JSON.stringify(slot, null,2));
+        this.handler.state = config.states.REQUEST;
+        this.attributes.STATE = config.states.REQUEST;
+        return this.emitWithState('PickItem', slot);
+      } else if (slot.index && slot.index.value) {
+        console.log("NO EXPLAINER , but there is INDEX ", JSON.stringify(slot, null,2))
+        var message = `${slot.index.value} is not a valid choice. Please choose between 1 and ${explainers.length}. I'll list the explainers again.`
+        var boundThis = this;
+        return util.sendProgressive(
+          boundThis.event.context.System.apiEndpoint, // no need to add directives params
+          boundThis.event.request.requestId,
+          boundThis.event.context.System.apiAccessToken,
+          message,
+          function (err) {
+            boundThis.handler.state = boundThis.attributes.STATE = config.states.ITERATING_EXPLAINER;
+            boundThis.emitWithState('ListExplainers');
+          }
+        );
+      } else if (slot.ordinal && slot.ordinal.value) {
+        console.log("NO EXPLAINER , but there is ORDINAL ", JSON.stringify(slot, null,2))
 
-          var message = `We don't have a ${slot.ordinal.value}. Please choose between 1 and ${feedData.items.length}. I'll list the explainers again.`
-          return util.sendProgressive(
-            boundThis.event.context.System.apiEndpoint, // no need to add directives params
-            boundThis.event.request.requestId,
-            boundThis.event.context.System.apiAccessToken,
-            message,
-            function (err) {
-              boundThis.handler.state = boundThis.attributes.STATE = config.states.ITERATING_EXPLAINER;
-              boundThis.emitWithState('ListExplainers');
-            }
-          );
-        } else if (slot.wildcard && slot.wildcard.value) {
-          console.log("NO EXPLAINER , but there is WILDCARD ", JSON.stringify(slot, null,2));
-          this.handler.state = config.states.REQUEST;
-          this.attributes.STATE = config.states.REQUEST;
-          return this.emitWithState('PickItem', slot);
-        } else if (slot.feed && slot.feed.value) {
-          console.log("NO EXPLAINER, but there is feed ", JSON.stringify(slot, null,2));
+        var message = `We don't have a ${slot.ordinal.value}. Please choose between 1 and ${explainers.length}. I'll list the explainers again.`
+        return util.sendProgressive(
+          boundThis.event.context.System.apiEndpoint, // no need to add directives params
+          boundThis.event.request.requestId,
+          boundThis.event.context.System.apiAccessToken,
+          message,
+          function (err) {
+            boundThis.handler.state = boundThis.attributes.STATE = config.states.ITERATING_EXPLAINER;
+            boundThis.emitWithState('ListExplainers');
+          }
+        );
+      } else if (slot.wildcard && slot.wildcard.value) {
+        console.log("NO EXPLAINER , but there is WILDCARD ", JSON.stringify(slot, null,2));
+        this.handler.state = config.states.REQUEST;
+        this.attributes.STATE = config.states.REQUEST;
+        return this.emitWithState('PickItem', slot);
+      } else if (slot.feed && slot.feed.value) {
+        console.log("NO EXPLAINER, but there is feed ", JSON.stringify(slot, null,2));
 
-          var message = `Okay. You want to hear about our show ${slot.feed.value}`;
-          return util.sendProgressive(
-            boundThis.event.context.System.apiEndpoint, // no need to add directives params
-            boundThis.event.request.requestId,
-            boundThis.event.context.System.apiAccessToken,
-            message,
-            function (err) {
-              boundThis.handler.state = boundThis.attributes.STATE = config.states.ITERATING_SHOW;
-              boundThis.emitWithState('PickItem', slot);
-            }
-          );
-        } else {
-          console.log("NO EXPLAINER, and no slot info I can use ", JSON.stringify(slot, null,2));
-          var message = `Sorry, I couldn't quite understand that. Here are our latest explainers.`;
-          return util.sendProgressive(
-            boundThis.event.context.System.apiEndpoint, // no need to add directives params
-            boundThis.event.request.requestId,
-            boundThis.event.context.System.apiAccessToken,
-            message,
-            function (err) {
-              this.handler.state = this.attributes.STATE = config.states.START;
-              return this.emitWithState('LaunchRequest', 'no_welcome')
-            }
-          );
-        }
+        var message = `Okay. You want to hear about our show ${slot.feed.value}`;
+        return util.sendProgressive(
+          boundThis.event.context.System.apiEndpoint, // no need to add directives params
+          boundThis.event.request.requestId,
+          boundThis.event.context.System.apiAccessToken,
+          message,
+          function (err) {
+            boundThis.handler.state = boundThis.attributes.STATE = config.states.ITERATING_SHOW;
+            boundThis.emitWithState('PickItem', slot);
+          }
+        );
       } else {
-        this.attributes.currentExplainerIndex = chosenExplainer.index;
-        util.logExplainer.call(this, chosenExplainer);
-        var author = chosenExplainer.author;
-        if (author === 'Molly Wood') {
-          author = `Molly '<emphasis level="strong"> Wood</emphasis>`;
-        }
-        var intro = `Here's ${author} explaining ${chosenExplainer.title}. <break time = "500ms"/> <audio src="${chosenExplainer.audio.url}" /> `; // <break time = "200ms"/>
-        var prompt;
-        var links = "<action value='ReplayExplainer'>Replay</action> | <action value='ListExplainers'>List Explainers</action>";
-        if (this.event.session.new) {
-          prompt = `Say 'replay' to hear that again, 'list explainers' to see all of our explainers, or 'what's new' to explore our latest explainers.`;
-          links += " | <action value='HomePage'> What's New </action>";
-        } else if (feedData.items[chosenExplainer.index+1]) { // handle if end of explainer feed
-          prompt = `Say 'replay' to hear that again, 'next' to learn about ${feedData.items[chosenExplainer.index+1].title}, or 'list explainers' to see all of our explainers.`;
-          links += " | <action value='Next'>Next</action>";
-        } else {
-          prompt = "And that's all we have right now. Say 'replay' to hear that again, 'list explainers' to see all, or 'play full episodes' for full episodes of our shows."
-          links += " | <action value='ListShows'>Play full episodes</action>";
-        }
-
-        if (this.event.context.System.device.supportedInterfaces.Display) {
-          this.response.renderTemplate(
-            util.templateBodyTemplate3(
-              chosenExplainer.title,
-              chosenExplainer.image || config.icon.full,
-              chosenExplainer.description,
-              links,
-              config.background.show
-            )
-          );
-        }
-        var fullSpeech = intro + prompt;
-        this.response.speak(fullSpeech).listen(prompt); // if i do listen, you can't request an explainer during
-        this.emit(':saveState', true);
+        console.log("NO EXPLAINER, and no slot info I can use ", JSON.stringify(slot, null,2));
+        var message = `Sorry, I couldn't quite understand that. Here are our latest explainers.`;
+        return util.sendProgressive(
+          boundThis.event.context.System.apiEndpoint, // no need to add directives params
+          boundThis.event.request.requestId,
+          boundThis.event.context.System.apiAccessToken,
+          message,
+          function (err) {
+            this.handler.state = this.attributes.STATE = config.states.START;
+            return this.emitWithState('LaunchRequest', 'no_welcome')
+          }
+        );
       }
-    });
+    } else {
+      this.attributes.currentExplainerIndex = chosenExplainer.index;
+      util.logExplainer.call(this, chosenExplainer);
+      var author = chosenExplainer.author;
+      if (author === 'Molly Wood') {
+        author = `Molly '<emphasis level="strong"> Wood</emphasis>`;
+      }
+      var intro = `Here's ${author} explaining ${chosenExplainer.title}. <break time = "500ms"/> <audio src="${chosenExplainer.audio.url}" /> `; // <break time = "200ms"/>
+      var prompt;
+      var links = "<action value='ReplayExplainer'>Replay</action> | <action value='ListExplainers'>List Explainers</action>";
+      if (this.event.session.new) {
+        prompt = `Say 'replay' to hear that again, 'list explainers' to see all of our explainers, or 'what's new' to explore our latest explainers.`;
+        links += " | <action value='HomePage'> What's New </action>";
+      } else if (explainers[chosenExplainer.index+1]) { // handle if end of explainer feed
+        prompt = `Say 'replay' to hear that again, 'next' to learn about ${explainers[chosenExplainer.index+1].title}, or 'list explainers' to see all of our explainers.`;
+        links += " | <action value='Next'>Next</action>";
+      } else {
+        prompt = "And that's all we have right now. Say 'replay' to hear that again, 'list explainers' to see all, or 'play full episodes' for full episodes of our shows."
+        links += " | <action value='ListShows'>Play full episodes</action>";
+      }
+
+      if (this.event.context.System.device.supportedInterfaces.Display) {
+        this.response.renderTemplate(
+          util.templateBodyTemplate3(
+            chosenExplainer.title,
+            chosenExplainer.image || config.icon.full,
+            chosenExplainer.description,
+            links,
+            config.background.show
+          )
+        );
+      }
+      var fullSpeech = intro + prompt;
+      this.response.speak(fullSpeech).listen(prompt); // if i do listen, you can't request an explainer during
+      this.emit(':saveState', true);
+    }
   },
   'PlayLatestExplainer': function () {
     // this is what 'play all would do'
@@ -251,33 +243,31 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     // handle next at end of list?
-    feedLoader.call(this, config.testExplainerFeed, false, function(err, feedData) {
-      if (feedData.items.length <= this.attributes.currentExplainerIndex +1) {
-        // last spot
-        var message = "We don't have any more explainers right now. Say 'list explainers' to see all or 'play full episodes' to hear episodes of our shows."
-        var prompt = "Say 'list explainers' to see all, or 'play full episodes' to for full episodes of our show."
-        var links = "<action value='ListExplainers'>List explainers</action> | <action value='ListShows'>Play full episodes</action>";
+    if (explainers.length <= this.attributes.currentExplainerIndex +1) {
+      // last spot
+      var message = "We don't have any more explainers right now. Say 'list explainers' to see all or 'play full episodes' to hear episodes of our shows."
+      var prompt = "Say 'list explainers' to see all, or 'play full episodes' to for full episodes of our show."
+      var links = "<action value='ListExplainers'>List explainers</action> | <action value='ListShows'>Play full episodes</action>";
 
-        if (this.event.context.System.device.supportedInterfaces.Display) {
-          this.response.renderTemplate(
-            util.templateBodyTemplate3(
-              "Make Me Smart",
-              config.icon.full,
-              "We don't have any more explainers right now.",
-              links,
-              config.background.show
-            )
-          );
-        }
-        this.response.speak(message).listen(prompt);
-        this.emit(':saveState');
-
-      } else {
-        // currentExplainerIndex is 0 based, and PickItem expects 1-based
-        return this.emitWithState('PickItem', {index: {value: this.attributes.currentExplainerIndex+2}});
-
+      if (this.event.context.System.device.supportedInterfaces.Display) {
+        this.response.renderTemplate(
+          util.templateBodyTemplate3(
+            "Make Me Smart",
+            config.icon.full,
+            "We don't have any more explainers right now.",
+            links,
+            config.background.show
+          )
+        );
       }
-    })
+      this.response.speak(message).listen(prompt);
+      this.emit(':saveState');
+
+    } else {
+      // currentExplainerIndex is 0 based, and PickItem expects 1-based
+      return this.emitWithState('PickItem', {index: {value: this.attributes.currentExplainerIndex+2}});
+
+    }
   },
   'AMAZON.PreviousIntent' : function () {
     // only in playing explainer mode, right?

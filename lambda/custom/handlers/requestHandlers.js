@@ -10,6 +10,7 @@ var feedHelper = require('../feedHelpers');
 var feedLoader = feedHelper.feedLoader;
 
 var audioPlayer = require('../audioPlayer');
+var explainers = require('../explainers')
 
 module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
   'PickItem': function (slot) {
@@ -126,10 +127,8 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     var chosenExplainer;
     console.log("REQUEST ", slot)
     if (slot.query && slot.query.value) {
-      this.attributes.queries.push(slot.query.value); // This happens for each time intnet is hit, ie 3 times. Gotta fix
-      feedLoader.call(this, config.testExplainerFeed, false, function(err, feedData) { // this is not gonna be async, right? so should eventually stop using this
-        chosenExplainer = util.itemPicker(slot, feedData.items, 'title', 'query');
-      })
+      this.attributes.queries.push(slot.query.value); // This happens for each time intnet is hit, ie 3 times. Gotta fix. THEN AGAIN -> we don't want to lose the query b/c a user cancels
+      chosenExplainer = util.itemPicker(slot, explainers, 'title', 'query');
     }
     if (slot.query && !slot.query.value) { // came here without a query
       // gotta check if the query matches.

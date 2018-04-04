@@ -8,6 +8,7 @@ var feedHelper = require('../feedHelpers');
 var feedLoader = feedHelper.feedLoader;
 
 var audioPlayer = require('../audioPlayer');
+var explainers = require('../explainers')
 
 module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
   'ListExplainers': function () {
@@ -18,29 +19,26 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     if (this.event.session.new || (!this.attributes.indices.explainer)) { // is this logic correct?
       this.attributes.indices.explainer = 0;
     }
-    feedLoader.call(this, config.testExplainerFeed, false, function(err, feedData) {
-      console.log('feedData', feedData.items.length)
-      var data = util.itemLister(
-        feedData.items,
-        `explainers`,
-        'title',
-        this.attributes.indices.explainer,
-        config.items_per_prompt.explainer
+    var data = util.itemLister(
+      explainers,
+      `explainers`,
+      'title',
+      this.attributes.indices.explainer,
+      config.items_per_prompt.explainer
+    );
+    this.response.speak(data.itemsAudio).listen('Pick one or say next or previous to move forward or backward through list.').cardRenderer(data.itemsCard);
+    if (this.event.context.System.device.supportedInterfaces.Display) {
+      this.response.renderTemplate(
+        util.templateListTemplate1(
+          'Explainers',
+          'list-explainers',
+          'Explainer',
+          'title',
+          explainers
+        )
       );
-      this.response.speak(data.itemsAudio).listen('Pick one or say next or previous to move forward or backward through list.').cardRenderer(data.itemsCard);
-      if (this.event.context.System.device.supportedInterfaces.Display) {
-        this.response.renderTemplate(
-          util.templateListTemplate1(
-            'Explainers',
-            'list-explainers',
-            'Explainer',
-            'title',
-            feedData.items
-          )
-        );
-      }
-      this.emit(':responseReady');
-    });
+    }
+    this.emit(':responseReady');
 
   },
   // STATE TRANSITIONS

@@ -65,12 +65,7 @@ var audioEventHandlers = Alexa.CreateStateHandler(config.states.PLAYING_EPISODE,
          //     return this.context.succeed(true);
          // }
          console.log('NEARLY FINISHED ATTS', JSON.stringify(this.attributes, null, 2))
-         var chosen;
-         if (this.attributes.playing.type === 'episode') {
-           chosen = util.itemPicker(this.attributes.playing.feed, feeds, 'feed', 'feed');
-         } else {
-           chosen = config.testExplainerFeed;
-         }
+         var chosen = util.itemPicker(this.attributes.playing.feed, feeds, 'feed', 'feed');
          var boundThis = this;
          feedLoader.call(this, chosen, false, function(err, feedData) {
            var nextEp = util.nextPicker(boundThis.attributes.playing, 'token', feedData.items, 'guid')

@@ -10,6 +10,7 @@ var feedHelper = require('../feedHelpers');
 var feedLoader = feedHelper.feedLoader;
 
 var audioPlayer = require('../audioPlayer');
+var explainers = require('../explainers');
 
 var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
   // 'NewSession': function () {
@@ -41,26 +42,21 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     util.nullCheck.call(this, deviceId);
     // I DON'T THINK I NEED TO RESET:
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
-    var boundThis = this;
-    feedLoader.call(this, config.testExplainerFeed, false, function(err, feedData) {
-      var topics = feedData.items.map(function(item) {
-        return item.title
-      });
-      intro += `we're learning about <prosody pitch="high" volume="x-loud">1) ${topics[0]}</prosody>, <prosody volume="x-loud" pitch="high">2) ${topics[1]}</prosody>, and <prosody volume="x-loud" pitch="high">3) ${topics[2]}</prosody>. Pick one, or say 'play all' to learn about all of them.`;
 
-      // set iterating to explainers
-
-      // On add the and that was to the speech... not for card'
-      var links = "<action value='PlayLatestExplainer'>Play All</action>";
-      this.response.speak(intro).listen("Pick one, or say 'play all' to learn about all of them.");
-      if (this.event.context.System.device.supportedInterfaces.Display) {
-        this.response.renderTemplate(util.templateBodyTemplate1('Welcome to Make Me Smart', intro, links, config.background.show));
-      }
-      // this.emit(':elicitSlot', 'userLocation', intro, "Let me know where they're from.");
-      this.emit(':saveState', true);
-      // audioPlayer.start.call(this, feedData.items[0], 'explainer', 'explainers');
-
+    var topics = explainers.map(function(item) {
+      return item.title
     });
+    intro += `we're learning about <prosody pitch="high" volume="x-loud">1) ${topics[0]}</prosody>, <prosody volume="x-loud" pitch="high">2) ${topics[1]}</prosody>, and <prosody volume="x-loud" pitch="high">3) ${topics[2]}</prosody>. Pick one, or say 'play all' to learn about all of them.`;
+
+    // set iterating to explainers
+
+    // On add the and that was to the speech... not for card'
+    var links = "<action value='PlayLatestExplainer'>Play All</action>";
+    this.response.speak(intro).listen("Pick one, or say 'play all' to learn about all of them.");
+    if (this.event.context.System.device.supportedInterfaces.Display) {
+      this.response.renderTemplate(util.templateBodyTemplate1('Welcome to Make Me Smart', intro, links, config.background.show));
+    }
+    this.emit(':saveState', true);
   },
   'ListShows' : function () {
     this.handler.state = this.attributes.STATE = config.states.ITERATING_SHOW;
