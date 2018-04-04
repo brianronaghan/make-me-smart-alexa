@@ -11,6 +11,7 @@ var feedLoader = feedHelper.feedLoader;
 
 var audioPlayer = require('./audioPlayer')
 
+
 /*
 stateHandlers.startHandlers,
 stateHandlers.requestHandlers,
@@ -215,7 +216,7 @@ var stateHandlers = {
       console.log("REQUEST ", slot)
       if (slot.query && slot.query.value) {
         this.attributes.queries.push(slot.query.value); // This happens for each time intnet is hit, ie 3 times. Gotta fix
-        feedLoader.call(this, config.testExplainerFeed, false, function(err, feedData) { // this is not gonna be async, right? so don't need it.
+        feedLoader.call(this, config.testExplainerFeed, false, function(err, feedData) { // this is not gonna be async, right? so should eventually stop using this
           chosenExplainer = util.itemPicker(slot, feedData.items, 'title', 'query');
         })
       }
