@@ -57,6 +57,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
       this.response.renderTemplate(util.templateBodyTemplate1('Welcome to Make Me Smart', intro, links, config.background.show));
     }
     this.emit(':saveState', true);
+
   },
   'ListShows' : function () {
     this.handler.state = this.attributes.STATE = config.states.ITERATING_SHOW;

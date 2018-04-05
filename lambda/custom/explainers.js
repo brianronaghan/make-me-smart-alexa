@@ -4,7 +4,7 @@ module.exports = [{
       tags: [],
       guid: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_bonds_kai.MP3',
       date: null,
-      description: 'A bond is a fixed income investment in which an investor loans money to an entity (typically corporate or governmental) which borrows the funds for a defined period of time at a variable or fixed interest rate.',
+      description: 'BATMAN',
       audio: {
         url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_bonds_kai.MP3",
         length: null,
