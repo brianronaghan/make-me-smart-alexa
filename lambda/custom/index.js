@@ -1,18 +1,8 @@
 'use strict';
 var Alexa = require("alexa-sdk");
 var config = require('./config');
-var util = require('./util');
-var feedHelper = require('./feedHelpers');
-var feeds = config.feeds;
+
 var audioEventHandlers = require('./audioEventHandlers');
-var audioPlayer = require('./audioPlayer')
-var sendProgressive = util.sendProgressive;
-var feedLoader = feedHelper.feedLoader;
-// var users = dynasty.table('makeMeSmart');
-// var AWS = require('aws-sdk');
-// AWS.config.update({
-//   region: "us-east-1" // or whatever region your lambda and dynamo is
-//   });
 
 var startHandlers = require('handlers/startHandlers');
 var requestHandlers = require('handlers/requestHandlers.js');
@@ -37,7 +27,6 @@ exports.handler = function(event, context) {
       iteratingEpisodeHandlers,
       playingEpisodeHandlers,
       explainDuringEpisodeHandlers
-
     );
     alexa.execute();
 };

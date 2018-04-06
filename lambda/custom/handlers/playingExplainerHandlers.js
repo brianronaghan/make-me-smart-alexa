@@ -12,8 +12,14 @@ var feedLoader = feedHelper.feedLoader;
 var audioPlayer = require('../audioPlayer');
 var explainers = require('../explainers');
 
+var dynasty = require('dynasty')({ region: process.env.AWS_DEFAULT_REGION });
+var sessions = dynasty.table(config.sessionDBName);
+
+var db = require('../db');
+
 module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
   'LaunchRequest': function () {
+
     var deviceId = util.getDeviceId.call(this);
     var intro = `Welcome back to Make Me Smart. `;
     util.nullCheck.call(this, deviceId);
@@ -45,6 +51,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
   },
 
   'PickItem': function (slot) {
+
     // set spot in indices
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
@@ -121,40 +128,51 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
         );
       }
     } else {
-      this.attributes.currentExplainerIndex = chosenExplainer.index;
-      util.logExplainer.call(this, chosenExplainer);
-      var author = chosenExplainer.author;
-      if (author === 'Molly Wood') {
-        author = `Molly '<emphasis level="strong"> Wood</emphasis>`;
-      }
-      var intro = `Here's ${author} explaining ${chosenExplainer.title}. <break time = "500ms"/> <audio src="${chosenExplainer.audio.url}" /> `; // <break time = "200ms"/>
-      var prompt;
-      var links = "<action value='ReplayExplainer'>Replay</action> | <action value='ListExplainers'>List Explainers</action>";
-      if (this.event.session.new) {
-        prompt = `Say 'replay' to hear that again, 'list explainers' to see all of our explainers, or 'what's new' to explore our latest explainers.`;
-        links += " | <action value='HomePage'> What's New </action>";
-      } else if (explainers[chosenExplainer.index+1]) { // handle if end of explainer feed
-        prompt = `Say 'replay' to hear that again, 'next' to learn about ${explainers[chosenExplainer.index+1].title}, or 'list explainers' to see all of our explainers.`;
-        links += " | <action value='Next'>Next</action>";
-      } else {
-        prompt = "And that's all we have right now. Say 'replay' to hear that again, 'list explainers' to see all, or 'play full episodes' for full episodes of our shows."
-        links += " | <action value='ListShows'>Play full episodes</action>";
-      }
+      console.time('UPDATE-DB');
+      var expKey = chosenExplainer.guid;
+      var payload = {};
+      payload.explainer = [{
+        guid: chosenExplainer.guid,
+        time: this.event.request.timestamp
+      }]
+      db.update.call(this, payload, function(err, resp) {
+        console.timeEnd('UPDATE-DB');
+        this.attributes.currentExplainerIndex = chosenExplainer.index;
+        util.logExplainer.call(this, chosenExplainer);
+        var author = chosenExplainer.author;
+        if (author === 'Molly Wood') {
+          author = `Molly '<emphasis level="strong"> Wood</emphasis>`;
+        }
+        var intro = `Here's ${author} explaining ${chosenExplainer.title}. <break time = "500ms"/> <audio src="${chosenExplainer.audio.url}" /> `; // <break time = "200ms"/>
+        var prompt;
+        var links = "<action value='ReplayExplainer'>Replay</action> | <action value='ListExplainers'>List Explainers</action>";
+        if (this.event.session.new) {
+          prompt = `Say 'replay' to hear that again, 'list explainers' to see all of our explainers, or 'what's new' to explore our latest explainers.`;
+          links += " | <action value='HomePage'> What's New </action>";
+        } else if (explainers[chosenExplainer.index+1]) { // handle if end of explainer feed
+          prompt = `Say 'replay' to hear that again, 'next' to learn about ${explainers[chosenExplainer.index+1].title}, or 'list explainers' to see all of our explainers.`;
+          links += " | <action value='Next'>Next</action>";
+        } else {
+          prompt = "And that's all we have right now. Say 'replay' to hear that again, 'list explainers' to see all, or 'play full episodes' for full episodes of our shows."
+          links += " | <action value='ListShows'>Play full episodes</action>";
+        }
 
-      if (this.event.context.System.device.supportedInterfaces.Display) {
-        this.response.renderTemplate(
-          util.templateBodyTemplate3(
-            chosenExplainer.title,
-            chosenExplainer.image || config.icon.full,
-            chosenExplainer.description,
-            links,
-            config.background.show
-          )
-        );
-      }
-      var fullSpeech = intro + prompt;
-      this.response.speak(fullSpeech).listen(prompt); // if i do listen, you can't request an explainer during
-      this.emit(':saveState', true);
+        if (this.event.context.System.device.supportedInterfaces.Display) {
+          this.response.renderTemplate(
+            util.templateBodyTemplate3(
+              chosenExplainer.title,
+              chosenExplainer.image || config.icon.full,
+              chosenExplainer.description,
+              links,
+              config.background.show
+            )
+          );
+        }
+        var fullSpeech = intro + prompt;
+        this.response.speak(fullSpeech).listen(prompt); // if i do listen, you can't request an explainer during
+        this.emit(':saveState', true);
+      });
+
     }
   },
   'PlayLatestExplainer': function () {
