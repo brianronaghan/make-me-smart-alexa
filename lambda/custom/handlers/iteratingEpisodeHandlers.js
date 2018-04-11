@@ -44,10 +44,8 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EPISODE, {
 
     var chosen = util.itemPicker(this.attributes.show, feeds, 'feed', 'feed');
     var showImage = util.cardImage(chosen.image);
-    console.time('list-episodes-load');
     var message = `Let me check for episodes of ${chosen.feed}`;
     feedLoader.call(this, chosen, message, function(err, feedData) {
-      console.timeEnd('list-episodes-load');
       var data = util.itemLister(
         feedData.items,
         'episodes',

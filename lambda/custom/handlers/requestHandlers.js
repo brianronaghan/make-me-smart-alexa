@@ -11,6 +11,7 @@ var feedLoader = feedHelper.feedLoader;
 
 var audioPlayer = require('../audioPlayer');
 var explainers = require('../explainers')
+var db = require('../db');
 
 module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
   'PickItem': function (slot) {
@@ -22,9 +23,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     var message = '';
     var boundThis = this;
     console.log("REQUEST ", slot)
-    if (slot.query && slot.query.value) {
-      this.attributes.queries.push(slot.query.value); // This happens for each time intnet is hit, ie 3 times. Gotta fix
-    }
+    var payload = {}
 
     if (slot.query && !slot.query.value) { // came here without a query
       console.log("INTENT ", this.event.request.intent);
@@ -35,34 +34,39 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       this.emit(':elicitSlotWithCard', 'query', message, "Let me know what to request an explainer about.", 'Request Explainer',message, this.event.request.intent, util.cardImage(config.icon.full));
 
     } else if (this.attributes.userName && this.attributes.userLocation && false) { // NOTE: turn off for test/build if we've already got your info
-      message = `Hmmm, we don't have anything on ${slot.query.value}. But I'll tell Kai and Molly that ${this.attributes.userName} from ${this.attributes.userLocation} wants to get smart about that!`;
-      this.attributes.requests.push({
-        timestamp: new Date().toTimeString(),
+      payload.requests = [{
         query: slot.query.value,
-        name: this.attributes.userName,
+        time: this.event.request.timestamp,
+        user: this.attributes.userName,
         location: this.attributes.userLocation
-      });
-      if (this.attributes.IN_PROGRESS_EP) {
-        delete this.attributes.IN_PROGRESS_EP;
-        this.handler.state = this.attributes.STATE = config.states.PLAYING_EPISODE;
-        message += ` Now I'll resume ${this.attributes.playing.title}.`;
-        return audioPlayer.resume.call(this, confirmationMessage);
-      } else {
-        this.handler.state = this.attributes.STATE = config.states.START;
-        return util.sendProgressive(
-          this.event.context.System.apiEndpoint, // no need to add directives params
-          this.event.request.requestId,
-          this.event.context.System.apiAccessToken,
-          message,
-          function (err) {
-            if (err) {
-              boundThis.emitWithState('LaunchRequest', 'requested', message);
-            } else {
-              boundThis.emitWithState('LaunchRequest', 'requested');
+      }];
+      console.time('UPDATE-DB-request-saved');
+      db.update.call(this, payload, function(err, response) {
+        console.timeEnd('UPDATE-DB-request-saved');
+        message = `Hmmm, we don't have anything on ${slot.query.value}. But I'll tell Kai and Molly that ${this.attributes.userName} from ${this.attributes.userLocation} wants to get smart about that!`;
+        if (this.attributes.IN_PROGRESS_EP) {
+          delete this.attributes.IN_PROGRESS_EP;
+          this.handler.state = this.attributes.STATE = config.states.PLAYING_EPISODE;
+          message += ` Now I'll resume ${this.attributes.playing.title}.`;
+          return audioPlayer.resume.call(this, confirmationMessage);
+        } else {
+          this.handler.state = this.attributes.STATE = config.states.START;
+          return util.sendProgressive(
+            this.event.context.System.apiEndpoint, // no need to add directives params
+            this.event.request.requestId,
+            this.event.context.System.apiAccessToken,
+            message,
+            function (err) {
+              if (err) {
+                boundThis.emitWithState('LaunchRequest', 'requested', message);
+              } else {
+                boundThis.emitWithState('LaunchRequest', 'requested');
+              }
             }
-          }
-        );
-      }
+          );
+        }
+      });
+
     } else if (!slot.userName.value) { // NOTE NOT SAVING NAME && !this.attributes.userName
       message += `Hmmm, we don't have anything on ${slot.query.value}. But I'll ask Kai and Molly to look into it. Who should I say is asking?`;
       console.log("WTF NO USERNAME",slot );
@@ -76,46 +80,50 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     } else {
       console.log("ALL ELSE in request ", slot)
       this.attributes.userLocation = slot.userLocation.value;
-      this.attributes.requests.push({
-        timestamp: new Date().toTimeString(),
+      payload.requests = [{
         query: slot.query.value,
-        name: slot.userName.value,
-        location: slot.userLocation.value
-      });
-      var confirmationMessage = `Okay, I'll tell Kai and Molly ${slot.userName.value} from ${slot.userLocation.value} asked for an explainer on ${slot.query.value}.`;
+        time: this.event.request.timestamp,
+        user: this.attributes.userName,
+        location: this.attributes.userLocation
+      }];
+      console.time('UPDATE-DB-request-new');
+      db.update.call(this, payload, function(err, response) {
+        console.timeEnd('UPDATE-DB-request-new');
+        var confirmationMessage = `Okay, I'll tell Kai and Molly ${slot.userName.value} from ${slot.userLocation.value} asked for an explainer on ${slot.query.value}.`;
 
-      // TODO: I was going to have it go back if there was an explainer playing, but nah. Seems logical they don't want that, since they requested soemthing else.
-      if (this.event.context.System.device.supportedInterfaces.Display) {
-        this.response.renderTemplate(
-          util.templateBodyTemplate1(
-            'Request Received!',
+        // TODO: I was going to have it go back if there was an explainer playing, but nah. Seems logical they don't want that, since they requested soemthing else.
+        if (this.event.context.System.device.supportedInterfaces.Display) {
+          this.response.renderTemplate(
+            util.templateBodyTemplate1(
+              'Request Received!',
+              confirmationMessage,
+              '',
+              config.background.show
+            )
+          );
+        }
+        if (this.attributes.IN_PROGRESS_EP) {
+          delete this.attributes.IN_PROGRESS_EP;
+          this.handler.state = this.attributes.STATE = config.states.PLAYING_EPISODE;
+          confirmationMessage += ` Now I'll resume ${this.attributes.playing.title}.`;
+          audioPlayer.resume.call(this, confirmationMessage);
+        } else {
+          this.handler.state = this.attributes.STATE = config.states.START;
+          return util.sendProgressive(
+            this.event.context.System.apiEndpoint, // no need to add directives params
+            this.event.request.requestId,
+            this.event.context.System.apiAccessToken,
             confirmationMessage,
-            '',
-            config.background.show
-          )
-        );
-      }
-      if (this.attributes.IN_PROGRESS_EP) {
-        delete this.attributes.IN_PROGRESS_EP;
-        this.handler.state = this.attributes.STATE = config.states.PLAYING_EPISODE;
-        confirmationMessage += ` Now I'll resume ${this.attributes.playing.title}.`;
-        audioPlayer.resume.call(this, confirmationMessage);
-      } else {
-        this.handler.state = this.attributes.STATE = config.states.START;
-        return util.sendProgressive(
-          this.event.context.System.apiEndpoint, // no need to add directives params
-          this.event.request.requestId,
-          this.event.context.System.apiAccessToken,
-          confirmationMessage,
-          function (err) {
-            if (err) {
-              boundThis.emitWithState('LaunchRequest', 'requested', confirmationMessage);
-            } else {
-              boundThis.emitWithState('LaunchRequest', 'requested');
+            function (err) {
+              if (err) {
+                boundThis.emitWithState('LaunchRequest', 'requested', confirmationMessage);
+              } else {
+                boundThis.emitWithState('LaunchRequest', 'requested');
+              }
             }
-          }
-        );
-      }
+          );
+        }
+      });
     }
   },
   'RequestExplainer': function (slot) {
@@ -278,6 +286,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
    },
    'Unhandled' : function () {
      // Just go to start
+
      console.log("REQUEST unhandled -> event  ", JSON.stringify(this.event.request,null, 2));
      this.handler.state = this.attributes.STATE = config.states.START;
      this.emitWithState('LaunchRequest', 'no_welcome', "Sorry I couldn't quite handle that.");

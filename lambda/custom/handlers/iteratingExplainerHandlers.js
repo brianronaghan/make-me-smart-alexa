@@ -17,35 +17,29 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     console.log('this.event.req',this.event.request)
-    db.update.call(this, {
-      begin: this.event.request.timestamp,
-      intent: 'ListExplainers'
-    }, function(err, resp) {
-      console.log("EVER RETURN", err, resp)
-      if (this.event.session.new || (!this.attributes.indices.explainer)) { // is this logic correct?
-        this.attributes.indices.explainer = 0;
-      }
-      var data = util.itemLister(
-        explainers,
-        `explainers`,
-        'title',
-        this.attributes.indices.explainer,
-        config.items_per_prompt.explainer
+    if (this.event.session.new || (!this.attributes.indices.explainer)) { // is this logic correct?
+      this.attributes.indices.explainer = 0;
+    }
+    var data = util.itemLister(
+      explainers,
+      `explainers`,
+      'title',
+      this.attributes.indices.explainer,
+      config.items_per_prompt.explainer
+    );
+    this.response.speak(data.itemsAudio).listen('Pick one or say next or previous to move forward or backward through list.').cardRenderer(data.itemsCard);
+    if (this.event.context.System.device.supportedInterfaces.Display) {
+      this.response.renderTemplate(
+        util.templateListTemplate1(
+          'Explainers',
+          'list-explainers',
+          'Explainer',
+          'title',
+          explainers
+        )
       );
-      this.response.speak(data.itemsAudio).listen('Pick one or say next or previous to move forward or backward through list.').cardRenderer(data.itemsCard);
-      if (this.event.context.System.device.supportedInterfaces.Display) {
-        this.response.renderTemplate(
-          util.templateListTemplate1(
-            'Explainers',
-            'list-explainers',
-            'Explainer',
-            'title',
-            explainers
-          )
-        );
-      }
-      this.emit(':responseReady');
-    });
+    }
+    this.emit(':responseReady');
 
   },
   // STATE TRANSITIONS

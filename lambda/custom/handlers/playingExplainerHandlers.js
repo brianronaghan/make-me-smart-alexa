@@ -129,11 +129,11 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
       }
     } else {
       console.time('UPDATE-DB');
-      var expKey = chosenExplainer.guid;
       var payload = {};
-      payload.explainer = [{
+      payload.explainers = [{
         guid: chosenExplainer.guid,
-        time: this.event.request.timestamp
+        time: this.event.request.timestamp,
+        // this.event.request.timestamp: chosenExplainer.guid
       }]
       db.update.call(this, payload, function(err, resp) {
         console.timeEnd('UPDATE-DB');
