@@ -299,6 +299,8 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
   'AMAZON.StopIntent' : function() {
     console.log('STOP EXPLAINER STATE')
     // This needs to work for not playing as well
+    // SHOULD I CLEAR THE STATE?
+
     this.response.speak('See you later. Say alexa, Make Me Smart to get learning again.')
     this.emit(':saveState');
   },
@@ -310,6 +312,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
   'AMAZON.CancelIntent' : function() {
     console.log('CANCEL PLAY EXPLAINER STATE')
     // This needs to work for not playing as well
+    // SHOULD I CLEAR THE STATE?
     this.response.speak('See you later. Say Alexa, Make Me Smart to get learning again.')
     this.emit(':saveState');
   },
@@ -333,6 +336,8 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     this.emit(':saveState', true);
   },
   'SessionEndedRequest' : function () {
+    // SHOULD I CLEAR THE STATE?
+
     console.log("PLAYING EXPLAINER session end", JSON.stringify(this.event.request, null,2));
     this.response.speak('See you later. Say Alexa, Make Me Smart to get learning again.')
     this.emit(':saveState');
