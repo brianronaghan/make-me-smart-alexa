@@ -4,12 +4,7 @@ var Alexa = require('alexa-sdk');
 
 var config = require('../config');
 var util = require('../util');
-var feeds = config.feeds;
 
-var feedHelper = require('../feedHelpers');
-var feedLoader = feedHelper.feedLoader;
-
-var audioPlayer = require('../audioPlayer');
 var explainers = require('../explainers')
 var db = require('../db');
 
