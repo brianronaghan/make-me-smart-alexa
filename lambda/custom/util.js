@@ -218,7 +218,7 @@ module.exports = {
     }
     return chosen;
   },
-}
+
 
   nextPicker :function (currentItem, itemKey, choices, choiceKey) {
     var currentItemIndex = choices.findIndex(function(item){
@@ -246,8 +246,8 @@ module.exports = {
     var prevItem = choices[currentItemIndex-1];
     console.log('PREVIOUS ITEM', prevItem);
     return prevItem;
-  },
-
+  }
+}
 
 function nullCheck(deviceId) {
   console.log("NULL CHECK ", this.attributes)
