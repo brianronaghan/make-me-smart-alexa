@@ -151,22 +151,6 @@
                   "name": "AMAZON.StopIntent",
                   "samples": []
                 },
-                 {
-                  "name": "PlayLatestEpisode",
-                  "slots": [
-                    {
-                      "name": "show",
-                      "type": "SHOW_TITLES"
-                    }
-                  ],
-                  "samples":[
-                      "play the latest episode of {show}",
-                      "play the latest {show}",
-                      "for the latest episode",
-                      "play latest",
-                      "play the latest"
-                  ]
-                },
                 {
                   "name": "HomePage",
                   "samples": [
@@ -227,10 +211,6 @@
                       "type": "AMAZON.US_CITY"
                     },
                     {
-                      "name": "feed",
-                      "type": "SHOW_TITLES"
-                    },
-                    {
                       "name": "wildcard",
                       "type": "TITLES_WILDCARD"
                     }
@@ -239,7 +219,6 @@
                     "{index}",
                     "{ordinal}",
                     "{topic}",
-                    "{feed}",
                     "{wildcard}",
                     "pick topic {topic}",
                     "teach me about {topic}",
@@ -278,25 +257,7 @@
                     "what {query} means",
                     "what it knows about {query}",
                     "the dish on {query}",
-                    "for conversations on {query}",
-                    "pick show number {index}",
-                    "pick the {ordinal} show",
-                    "select show number {index}",
-                    "select show {index}",
-                    "select the {ordinal} show",
-                    "select show called {feed}",
-                    "pick show {feed}",
-                    "pick episode {index}",
-                    "pick the {ordinal} episode",
-                    "show {feed}",
-                    "play episode {index}",
-                    "play the {ordinal} episode",
-                    "pick episode {index}",
-                    "pick the {ordinal} episode",
-                     "choose episode {index}",
-                     "choose the {ordinal} episode",
-                     "episode number {index}",
-                     "the {ordinal} episode"
+                    "for conversations on {query}"
                   ]
                 },
                 {
@@ -328,76 +289,9 @@
                         "all explainers",
                         "show all explainers"
                     ]
-                },
-                {
-                    "name":"ListEpisodes",
-                    "slots" : [
-                      {
-                        "name": "show",
-                        "type": "SHOW_TITLES"
-                      }
-                    ],
-                    "samples":[
-                        "for episodes of {show}",
-                        "past episodes {show}",
-                        "list episodes of {show}",
-                        "list episodes"
-                    ]
-                },
-                {
-                    "name":"ListShows",
-                    "samples":[
-                        "what shows Marketplace has",
-                        "tell me the shows",
-                        "what shows you got",
-                        "what shows do you have",
-                        "shows",
-                        "list shows",
-                        "play full episodes"
-                    ]
                 }
             ],
             "types":[
-              {
-                "values": [
-                  {
-                    "name": {
-                      "value": "Marketplace Morning Report"
-                    }
-                  },
-                  {
-                    "name": {
-                      "value": "Marketplace"
-                    }
-                  },
-                  {
-                    "name": {
-                      "value": "Make Me Smart"
-                    }
-                  },
-                  {
-                    "name": {
-                      "value": "The Uncertain Hour"
-                    }
-                  },
-                  {
-                    "name": {
-                      "value": "Marketplace Tech"
-                    }
-                  },
-                  {
-                    "name": {
-                      "value": "Codebreaker"
-                    }
-                  },
-                  {
-                    "name": {
-                      "value": "Corner Office"
-                    }
-                  }
-                ],
-                "name": "SHOW_TITLES"
-              },
               {
                 "name": "PREPOSITIONS",
                 "values": [

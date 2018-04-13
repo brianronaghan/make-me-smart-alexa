@@ -12,7 +12,7 @@ var config = {
       START: '',
       PLAYING_EXPLAINER: '_PLAYING_EXPLAINER',
       REQUEST: '_REQUEST',
-      ITERATING_EXPLAINER: '_ITERATING_EXPLAINER',
+      ITERATING_EXPLAINER: '_ITERATING_EXPLAINER'
     },
     background: {
       show: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/1024x600_FINALB.png"
@@ -35,7 +35,7 @@ var config = {
           '500' : '<break time = "500ms"/>'
       },
 
-    }
+    },
 };
 
 module.exports = config;

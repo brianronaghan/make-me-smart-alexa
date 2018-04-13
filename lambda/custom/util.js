@@ -1,8 +1,6 @@
 var Alexa = require("alexa-sdk");
 var config = require('./config')
-var feeds = config.feeds;
 var constants = config.constants;
-var request = require('request');
 
 const makeImage = Alexa.utils.ImageUtils.makeImage;
 const makePlainText = Alexa.utils.TextUtils.makePlainText;
@@ -34,20 +32,17 @@ module.exports = {
   },
   logExplainer: function (explainer) {
     console.log('explainer log', explainer)
-    // this.attributes.history[explainer.guid] = this.attributes.history[explainer.guid] || {}
-    // this.attributes.history[explainer.guid].events = this.attributes.history[explainer.guid].events || [];
     // Should I switch playig?
     this.attributes.playing = {};
     this.attributes.playing.status = 'playing';
     this.attributes.playing.type = 'explainer';
     this.attributes.playing.token = explainer.guid;
     this.attributes.playing.url = explainer.audio.url;
-    // then when resuming, we could find using this. More reliable than explainerIndex
-    // this.attributes.history[explainer.guid].events.push({
-    //   timestamp: Date.now(),
-    // })
   },
   nullCheck: nullCheck,
+  prosodyToBold: prosodyToBold,
+  cleanSlotName: cleanSlotName,
+
   templateListTemplate1: function (title, token, itemLabel, itemTitleKey, items) {
     var listItemBuilder = new Alexa.templateBuilders.ListItemBuilder();
     var listTemplateBuilder = new Alexa.templateBuilders.ListTemplate1Builder();
@@ -72,7 +67,6 @@ module.exports = {
     console.log(JSON.stringify(listTemplate, null,2));
     return listTemplate;
   },
-  prosodyToBold: prosodyToBold,
   templateBodyTemplate1: function (title, body, links, backgroundImage) {
     var bodyText = prosodyToBold(body)
     var template = {
@@ -146,7 +140,6 @@ module.exports = {
 
   },
 
-  cleanSlotName: cleanSlotName,
   itemLister: function(items, itemTitlePlural, titleKey, start, chunkLength) {
     // TODO: add a listen feature as well... the hint thing we tell them, handles whether next or previous
     var itemsAudio, itemsCard;
@@ -183,41 +176,6 @@ module.exports = {
     }
     return {itemsAudio, itemsCard};
   },
-  loadNextItem: function () {
-    // NOTE: TK
-  },
-  nextPicker :function (currentItem, itemKey, choices, choiceKey) {
-    console.log('next', currentItem, itemKey, choiceKey);
-    console.log('nextpick', JSON.stringify(choices, null, 2));
-    var currentItemIndex = choices.findIndex(function(item){
-      return item[choiceKey] === currentItem[itemKey];
-    });
-    if (currentItemIndex === -1) {
-      return -1
-      console.log('not found')
-    }
-    var nextItem = choices[currentItemIndex+1];
-    if (nextItem) {
-      return nextItem;
-    } else {
-      return -1;
-    }
-  },
-  prevPicker :function (currentItem, itemKey, choices, choiceKey) {
-    console.log('prev', currentItem, itemKey, choiceKey);
-    console.log('PREVPICK', JSON.stringify(choices, null, 2));
-
-    var currentItemIndex = choices.findIndex(function(item){
-      return item[choiceKey] === currentItem[itemKey];
-    });
-    if (currentItemIndex === -1 || currentItemIndex === 0) {
-      console.log('PREVIOUS not found')
-      return -1
-    }
-    var prevItem = choices[currentItemIndex-1];
-    console.log('PREVIOUS ITEM', prevItem);
-    return prevItem;
-  },
 
   itemPicker: function (intentSlot, choices, choiceKey, slotKey) {
     console.log("ITEM PICKER", intentSlot, "SLOT KEY", slotKey);
@@ -244,9 +202,6 @@ module.exports = {
         index = itemNames.indexOf(cleanedSlot);
     } else if (intentSlot && intentSlot.query && intentSlot.query.value) {
       var asIndex = parseInt(intentSlot.query.value);
-      console.log('QUERY', intentSlot.query.value)
-      console.log("INT index", asIndex);
-
       if (isNaN(asIndex)) {
         var cleanedQuery = cleanSlotName(intentSlot.query.value);
         index = itemNames.indexOf(cleanedQuery);
@@ -263,6 +218,35 @@ module.exports = {
     }
     return chosen;
   },
+
+
+  nextPicker :function (currentItem, itemKey, choices, choiceKey) {
+    var currentItemIndex = choices.findIndex(function(item){
+      return item[choiceKey] === currentItem[itemKey];
+    });
+    if (currentItemIndex === -1) {
+      return -1
+      console.log('not found')
+    }
+    var nextItem = choices[currentItemIndex+1];
+    if (nextItem) {
+      return nextItem;
+    } else {
+      return -1;
+    }
+  },
+  prevPicker :function (currentItem, itemKey, choices, choiceKey) {
+    var currentItemIndex = choices.findIndex(function(item){
+      return item[choiceKey] === currentItem[itemKey];
+    });
+    if (currentItemIndex === -1 || currentItemIndex === 0) {
+      console.log('PREVIOUS not found')
+      return -1
+    }
+    var prevItem = choices[currentItemIndex-1];
+    console.log('PREVIOUS ITEM', prevItem);
+    return prevItem;
+  }
 }
 
 function nullCheck(deviceId) {
@@ -273,10 +257,7 @@ function nullCheck(deviceId) {
   this.attributes.deviceId = deviceId;
   this.attributes.indices = this.attributes.indices || {};
   this.attributes.playing = this.attributes.playing || {};
-  this.attributes.enqueued = this.attributes.enqueued || {};
   this.attributes.iterating = this.attributes.iterating || -1;
-  this.attributes.queries = this.attributes.queries || [];
-  this.attributes.history = this.attributes.history || {};
   this.attributes.requests = this.attributes.requests || [];
 }
 

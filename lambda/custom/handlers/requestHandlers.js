@@ -4,12 +4,7 @@ var Alexa = require('alexa-sdk');
 
 var config = require('../config');
 var util = require('../util');
-var feeds = config.feeds;
 
-var feedHelper = require('../feedHelpers');
-var feedLoader = feedHelper.feedLoader;
-
-var audioPlayer = require('../audioPlayer');
 var explainers = require('../explainers')
 var db = require('../db');
 
@@ -44,27 +39,20 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       db.update.call(this, payload, function(err, response) {
         console.timeEnd('UPDATE-DB-request-saved');
         message = `Hmmm, we don't have anything on ${slot.query.value}. But I'll tell Kai and Molly that ${this.attributes.userName} from ${this.attributes.userLocation} wants to get smart about that!`;
-        if (this.attributes.IN_PROGRESS_EP) {
-          delete this.attributes.IN_PROGRESS_EP;
-          this.handler.state = this.attributes.STATE = config.states.PLAYING_EPISODE;
-          message += ` Now I'll resume ${this.attributes.playing.title}.`;
-          return audioPlayer.resume.call(this, confirmationMessage);
-        } else {
-          this.handler.state = this.attributes.STATE = config.states.START;
-          return util.sendProgressive(
-            this.event.context.System.apiEndpoint, // no need to add directives params
-            this.event.request.requestId,
-            this.event.context.System.apiAccessToken,
-            message,
-            function (err) {
-              if (err) {
-                boundThis.emitWithState('LaunchRequest', 'requested', message);
-              } else {
-                boundThis.emitWithState('LaunchRequest', 'requested');
-              }
+        this.handler.state = this.attributes.STATE = config.states.START;
+        return util.sendProgressive(
+          this.event.context.System.apiEndpoint, // no need to add directives params
+          this.event.request.requestId,
+          this.event.context.System.apiAccessToken,
+          message,
+          function (err) {
+            if (err) {
+              boundThis.emitWithState('LaunchRequest', 'requested', message);
+            } else {
+              boundThis.emitWithState('LaunchRequest', 'requested');
             }
-          );
-        }
+          }
+        );
       });
 
     } else if (!slot.userName.value) { // NOTE NOT SAVING NAME && !this.attributes.userName
@@ -102,27 +90,20 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
             )
           );
         }
-        if (this.attributes.IN_PROGRESS_EP) {
-          delete this.attributes.IN_PROGRESS_EP;
-          this.handler.state = this.attributes.STATE = config.states.PLAYING_EPISODE;
-          confirmationMessage += ` Now I'll resume ${this.attributes.playing.title}.`;
-          audioPlayer.resume.call(this, confirmationMessage);
-        } else {
-          this.handler.state = this.attributes.STATE = config.states.START;
-          return util.sendProgressive(
-            this.event.context.System.apiEndpoint, // no need to add directives params
-            this.event.request.requestId,
-            this.event.context.System.apiAccessToken,
-            confirmationMessage,
-            function (err) {
-              if (err) {
-                boundThis.emitWithState('LaunchRequest', 'requested', confirmationMessage);
-              } else {
-                boundThis.emitWithState('LaunchRequest', 'requested');
-              }
+        this.handler.state = this.attributes.STATE = config.states.START;
+        return util.sendProgressive(
+          this.event.context.System.apiEndpoint, // no need to add directives params
+          this.event.request.requestId,
+          this.event.context.System.apiAccessToken,
+          confirmationMessage,
+          function (err) {
+            if (err) {
+              boundThis.emitWithState('LaunchRequest', 'requested', confirmationMessage);
+            } else {
+              boundThis.emitWithState('LaunchRequest', 'requested');
             }
-          );
-        }
+          }
+        );
       });
     }
   },
