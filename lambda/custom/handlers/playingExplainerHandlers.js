@@ -94,20 +94,6 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
         this.handler.state = config.states.REQUEST;
         this.attributes.STATE = config.states.REQUEST;
         return this.emitWithState('PickItem', slot);
-      } else if (slot.feed && slot.feed.value) {
-        console.log("NO EXPLAINER, but there is feed ", JSON.stringify(slot, null,2));
-
-        var message = `Okay. You want to hear about our show ${slot.feed.value}`;
-        return util.sendProgressive(
-          boundThis.event.context.System.apiEndpoint, // no need to add directives params
-          boundThis.event.request.requestId,
-          boundThis.event.context.System.apiAccessToken,
-          message,
-          function (err) {
-            boundThis.handler.state = boundThis.attributes.STATE = config.states.ITERATING_SHOW;
-            boundThis.emitWithState('PickItem', slot);
-          }
-        );
       } else {
         console.log("NO EXPLAINER, and no slot info I can use ", JSON.stringify(slot, null,2));
         var message = `Sorry, I couldn't quite understand that. Here are our latest explainers.`;

@@ -97,27 +97,20 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
             )
           );
         }
-        if (this.attributes.IN_PROGRESS_EP) {
-          delete this.attributes.IN_PROGRESS_EP;
-          this.handler.state = this.attributes.STATE = config.states.PLAYING_EPISODE;
-          confirmationMessage += ` Now I'll resume ${this.attributes.playing.title}.`;
-          audioPlayer.resume.call(this, confirmationMessage);
-        } else {
-          this.handler.state = this.attributes.STATE = config.states.START;
-          return util.sendProgressive(
-            this.event.context.System.apiEndpoint, // no need to add directives params
-            this.event.request.requestId,
-            this.event.context.System.apiAccessToken,
-            confirmationMessage,
-            function (err) {
-              if (err) {
-                boundThis.emitWithState('LaunchRequest', 'requested', confirmationMessage);
-              } else {
-                boundThis.emitWithState('LaunchRequest', 'requested');
-              }
+        this.handler.state = this.attributes.STATE = config.states.START;
+        return util.sendProgressive(
+          this.event.context.System.apiEndpoint, // no need to add directives params
+          this.event.request.requestId,
+          this.event.context.System.apiAccessToken,
+          confirmationMessage,
+          function (err) {
+            if (err) {
+              boundThis.emitWithState('LaunchRequest', 'requested', confirmationMessage);
+            } else {
+              boundThis.emitWithState('LaunchRequest', 'requested');
             }
-          );
-        }
+          }
+        );
       });
     }
   },
