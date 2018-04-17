@@ -36,14 +36,13 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     }
     util.nullCheck.call(this, deviceId);
     // I DON'T THINK I NEED TO RESET:
-    this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
+    // this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
 
     var topics = explainers.map(function(item) {
       return item.title
     });
     intro += `we're learning about <prosody pitch="high" volume="x-loud">1) ${topics[0]}</prosody>, <prosody volume="x-loud" pitch="high">2) ${topics[1]}</prosody>, and <prosody volume="x-loud" pitch="high">3) ${topics[2]}</prosody>. Pick one, or say 'play all' to learn about all of them.`;
 
-    // set iterating to explainers
 
     // On add the and that was to the speech... not for card'
     var links = "<action value='PlayLatestExplainer'>Play All</action>";
@@ -51,13 +50,15 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     if (this.event.context.System.device.supportedInterfaces.Display) {
       this.response.renderTemplate(util.templateBodyTemplate1('Welcome to Make Me Smart', intro, links, config.background.show));
     }
-    this.emit(':saveState', true);
+    this.emit(':responseReady');
 
   },
-  'ListShows' : function () {
-    this.handler.state = this.attributes.STATE = config.states.ITERATING_SHOW;
-    console.log('list shows from start');
-    this.emitWithState('ListShows');
+  'PickItem' : function (slot) {
+    // redirects from homepage to play explainer choice
+    this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
+    this.emitWithState('PickItem', slot, 'HOME_PAGE');
+
+
   },
   'AMAZON.CancelIntent' : function() {
     console.log('CANCEL START STATE')
@@ -70,6 +71,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
   },
   // error handling
   'SessionEndedRequest' : function () { // this gets purposeful exit as well
+    delete this.attributes.STATE;
     console.log("SESSION ENDED IN START")
    },
    'Unhandled' : function () {

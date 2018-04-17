@@ -133,7 +133,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
         message,
         function (err) {
           boundThis.handler.state = boundThis.attributes.STATE = config.states.PLAYING_EXPLAINER;
-          boundThis.emitWithState('PickItem', slot);
+          boundThis.emitWithState('PickItem', slot, 'REQUEST_RESOLVED');
         }
       );
     } else if (this.attributes.userName && this.attributes.userLocation && false) { // NOTE: turn off for test/build if we've already got your info
@@ -233,7 +233,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     console.log('REPLAY exp in REQUEST', this.handler.state)
-    this.emitWithState('PickItem');
+    this.emitWithState('PickItem', 'REPLAY_FROM_REQUEST');
   },
 
 

@@ -56,7 +56,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     console.log('manual slot', slot);
     console.log('alexa EVENT',JSON.stringify(this.event.request));
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
-    this.emitWithState('PickItem', slot);
+    this.emitWithState('PickItem', slot, 'ITERATING_EXPLAINER');
   },
 
   //

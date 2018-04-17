@@ -45,15 +45,13 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     return this.emitWithState('LaunchRequest', 'no_welcome')
   },
 
-  'PickItem': function (slot) {
-
+  'PickItem': function (slot, source) {
+    console.log("WHAT'S MY SOURCE", slot, source)
     // set spot in indices
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     var slot = slot || this.event.request.intent.slots;
-    console.log("PICK -> in play explainer SESSION ", this.event.session);
     var boundThis = this;
-
     var chosenExplainer = util.itemPicker(slot, explainers, 'title', 'topic');
     if (!chosenExplainer) {
       if (slot.query && slot.query.value) {
@@ -111,8 +109,9 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     } else {
       console.time('UPDATE-DB');
       var payload = {};
+      console.log('source');
       payload.explainers = [{
-        source: 'tbd',
+        source: source || 'EXTERNAL',
         guid: chosenExplainer.guid,
         time: this.event.request.timestamp,
       }]
@@ -134,8 +133,8 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
           prompt = `Say 'replay' to hear that again, 'next' to learn about ${explainers[chosenExplainer.index+1].title}, or 'list explainers' to see all of our explainers.`;
           links += " | <action value='Next'>Next</action>";
         } else {
-          prompt = "And that's all we have right now. Say 'replay' to hear that again, 'list explainers' to see all, or 'play full episodes' for full episodes of our shows."
-          links += " | <action value='ListShows'>Play full episodes</action>";
+          prompt = "And that's all we have right now. Say 'replay' to hear that again, 'list explainers' to see all, or 'suggest a topic' to give us an idea for our next explainer."
+          links += " | <action value='RequestExplainer'>Suggest a topic</action>";
         }
 
         if (this.event.context.System.device.supportedInterfaces.Display) {
@@ -160,14 +159,14 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     // this is what 'play all would do'
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
-    this.emitWithState('PickItem', {index: {value: 1}});
+    this.emitWithState('PickItem', {index: {value: 1}}, 'PLAY_THE_LATEST');
   },
   'ReplayExplainer': function () {
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     console.log('GOT REPLAY', this.handler.state)
     // currentExplainerIndex is 0 based, and PickItem expects 1-based
-    this.emitWithState('PickItem', {index: {value: this.attributes.currentExplainerIndex + 1}})
+    this.emitWithState('PickItem', {index: {value: this.attributes.currentExplainerIndex + 1}}, 'REPLAY')
   },
   // STATE TRANSITION:
   'RequestExplainer' : function () {
@@ -175,14 +174,6 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     this.handler.state = this.attributes.STATE = config.states.REQUEST;
     this.emitWithState('RequestExplainer');
   },
-  'ListShows' : function () {
-    console.log('list shows from play explain')
-    this.attributes.currentExplainerIndex = -1;
-    this.attributes.indices.explainer = 0;
-    this.handler.state = this.attributes.STATE = config.states.ITERATING_SHOW;
-    this.emitWithState('ListShows');
-  },
-
   'ListExplainers': function () {
     console.log('list explainers from play explain')
 
@@ -203,11 +194,6 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     console.log('LIST EPISODES from PLAY EXP')
     this.emitWithState('ListEpisodes');
   },
-  'PlayLatestEpisode': function () {
-    this.handler.state = this.attributes.STATE = config.states.PLAYING_EPISODE;
-    console.log("PLAYING explainer , PLAY LATEST episode", this.attributes.show)
-    this.emitWithState('PlayLatestEpisode', {show: {value: this.attributes.show}});
-  },
 
 
   // TOUCH EVENTS:
@@ -218,7 +204,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     // handle play latest or pick episode actions
     console.log('ElementSelected -- ', this.event.request)
     var intentSlot,intentName;
-    if (this.event.request.token === 'PlayLatestExplainer' || this.event.request.token === 'ListExplainers' || this.event.request.token === 'ListShows') {
+    if (this.event.request.token === 'PlayLatestExplainer' || this.event.request.token === 'ListExplainers') {
       intentName = this.event.request.token;
     }  else if (this.event.request.token === 'Next' || this.event.request.token === 'Previous') {
       intentName = `AMAZON.${this.event.request.token}Intent`;
@@ -232,7 +218,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
       }
     }
     console.log('PLAYING EXPLAINERS, TOUCH', intentName, intentSlot);
-    this.emitWithState(intentName, intentSlot);
+    this.emitWithState(intentName, intentSlot, 'TOUCH_LIST_EXPLAINERS');
   },
 
   // BUILT INS:
@@ -264,7 +250,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
 
     } else {
       // currentExplainerIndex is 0 based, and PickItem expects 1-based
-      return this.emitWithState('PickItem', {index: {value: this.attributes.currentExplainerIndex+2}});
+      return this.emitWithState('PickItem', {index: {value: this.attributes.currentExplainerIndex+2}}, 'NEXT_PLAY');
 
     }
   },
