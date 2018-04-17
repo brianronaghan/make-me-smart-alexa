@@ -63,6 +63,8 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
   'AMAZON.CancelIntent' : function() {
     console.log('CANCEL START STATE')
     // This needs to work for not playing as well
+    delete this.attributes.STATE;
+
     this.response.speak("See you later. Say 'Alexa, Make Me Smart' to get learning again.");
     this.emit(':saveState');
   },
@@ -73,6 +75,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
   'SessionEndedRequest' : function () { // this gets purposeful exit as well
     delete this.attributes.STATE;
     console.log("SESSION ENDED IN START")
+    this.emit(':saveState');
    },
    'Unhandled' : function () {
      console.log("START UNHANDLED ",JSON.stringify(this.event.request,null, 2));
