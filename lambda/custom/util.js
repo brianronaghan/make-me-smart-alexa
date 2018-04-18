@@ -250,11 +250,15 @@ module.exports = {
 }
 
 function nullCheck(deviceId) {
-  console.log("NULL CHECK ", this.attributes)
-  if (this.attributes.deviceId !== deviceId) {
-    console.log("MISMATCHED DEVICE ID")
+  if (this.attributes.deviceIds && this.attributes.deviceIds.indexOf(deviceId) === -1) {
+    this.attributes.deviceIds.push(deviceId);
+    console.log('NEW DEVICE ON USER')
+  } else {
+    console.log('NO DEVICE ID, NEW USER')
+    this.attributes.userInitiated = new Date().toTimeString();
+    this.attributes.deviceIds = [];
+    this.attributes.deviceIds.push(deviceId);
   }
-  this.attributes.deviceId = deviceId;
   this.attributes.indices = this.attributes.indices || {};
   this.attributes.playing = this.attributes.playing || {};
   this.attributes.iterating = this.attributes.iterating || -1;
