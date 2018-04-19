@@ -57,9 +57,15 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     // redirects from homepage to play explainer choice
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
     this.emitWithState('PickItem', slot, 'HOME_PAGE');
-
-
   },
+  'PlayLatestExplainer': function () {
+    // this is what 'play all would do'
+    this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
+    var deviceId = util.getDeviceId.call(this);
+    util.nullCheck.call(this, deviceId);
+    this.emitWithState('PlayLatestExplainer', {index: {value: 1}}, 'HOME_PAGE_PLAY_LATEST');
+  },
+
   'AMAZON.CancelIntent' : function() {
     console.log('CANCEL START STATE')
     // This needs to work for not playing as well

@@ -252,10 +252,11 @@ module.exports = {
 function nullCheck(deviceId) {
   if (this.attributes.deviceIds && this.attributes.deviceIds.indexOf(deviceId) === -1) {
     this.attributes.deviceIds.push(deviceId);
+
     console.log('NEW DEVICE ON USER')
   } else {
     console.log('NO DEVICE ID, NEW USER')
-    this.attributes.userInitiated = new Date().toTimeString();
+    this.attributes.userInitiated = new Date().toDateString();
     this.attributes.deviceIds = [];
     this.attributes.deviceIds.push(deviceId);
   }
