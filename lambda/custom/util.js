@@ -250,12 +250,13 @@ module.exports = {
 }
 
 function nullCheck(deviceId) {
-  if (this.attributes.deviceIds && this.attributes.deviceIds.indexOf(deviceId) === -1) {
-    this.attributes.deviceIds.push(deviceId);
-
-    console.log('NEW DEVICE ON USER')
+  if (this.attributes.deviceIds) {
+    if (this.attributes.deviceIds.indexOf(deviceId) === -1) {
+      console.log('NEW DEVICE on old USER')
+      this.attributes.deviceIds.push(deviceId);
+    }
   } else {
-    console.log('NO DEVICE ID, NEW USER')
+    console.log('NEW USER')
     this.attributes.userInitiated = new Date().toDateString();
     this.attributes.deviceIds = [];
     this.attributes.deviceIds.push(deviceId);

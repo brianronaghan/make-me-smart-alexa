@@ -12,8 +12,8 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
   'PickItem': function (slot) {
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
-    console.log("REQUEST pick item natural slot ", this.event.request.intent.slots)
-
+    console.log("PICK ITEM IN REQ natural slot ", this.event.request.intent.slots)
+    console.log("PICK ITEM FAKE SLOT", slot)
     var slot = slot || this.event.request.intent.slots;
     var message = '';
     var boundThis = this;
@@ -57,7 +57,6 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
 
     } else if (!slot.userName.value) { // NOTE NOT SAVING NAME && !this.attributes.userName
       message += `Hmmm, we don't have anything on ${slot.query.value}. But I'll ask Kai and Molly to look into it. Who should I say is asking?`;
-      console.log("WTF NO USERNAME",slot );
       this.emit(':elicitSlotWithCard', 'userName', message, "Let me know what name to leave.", 'Request Explainer',message, this.event.request.intent, util.cardImage(config.icon.full));
     } else if (!slot.userLocation.value ) { // NOTE NOT SAVING NAME && this.attributes.userLocation
       this.attributes.userName = slot.userName.value;
@@ -66,7 +65,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       cardMessage += message;
       this.emit(':elicitSlotWithCard', 'userLocation', message, "Let me know what location to leave.", 'Request Explainer', cardMessage, this.event.request.intent, util.cardImage(config.icon.full) );
     } else {
-      console.log("ALL ELSE in request ", slot)
+      console.log("OKAY, NOW WE HAVE EVEYRTHING for request ", slot)
       this.attributes.userLocation = slot.userLocation.value;
       payload.requests = [{
         query: slot.query.value,
@@ -78,8 +77,6 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       db.update.call(this, payload, function(err, response) {
         console.timeEnd('UPDATE-DB-request-new');
         var confirmationMessage = `Okay, I'll tell Kai and Molly ${slot.userName.value} from ${slot.userLocation.value} asked for an explainer on ${slot.query.value}.`;
-
-        // TODO: I was going to have it go back if there was an explainer playing, but nah. Seems logical they don't want that, since they requested soemthing else.
         if (this.event.context.System.device.supportedInterfaces.Display) {
           this.response.renderTemplate(
             util.templateBodyTemplate1(
@@ -108,15 +105,15 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     }
   },
   'RequestExplainer': function (slot) {
+    // NOTE: look at this immediately, I think I have some old code here
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     var slot = slot || this.event.request.intent.slots;
     var message = '';
     var boundThis = this;
     var chosenExplainer;
-    console.log("REQUEST ", slot)
+    console.log("REQUEST EXPLAINER INTENT ", slot)
     if (slot.query && slot.query.value) {
-      this.attributes.queries.push(slot.query.value); // This happens for each time intnet is hit, ie 3 times. Gotta fix. THEN AGAIN -> we don't want to lose the query b/c a user cancels
       chosenExplainer = util.itemPicker(slot, explainers, 'title', 'query');
     }
     if (slot.query && !slot.query.value) { // came here without a query
@@ -136,87 +133,8 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
           boundThis.emitWithState('PickItem', slot, 'REQUEST_RESOLVED');
         }
       );
-    } else if (this.attributes.userName && this.attributes.userLocation && false) { // NOTE: turn off for test/build if we've already got your info
-      message = `An explainer on ${slot.query.value}. Good idea. I'll tell Kai and Molly that ${this.attributes.userName} from ${this.attributes.userLocation} wants to get smart about that!`;
-      this.attributes.requests.push({
-        timestamp: new Date().toTimeString(),
-        query: slot.query.value,
-        name: this.attributes.userName,
-        location: this.attributes.userLocation
-      });
-      if (this.attributes.IN_PROGRESS_EP) {
-        delete this.attributes.IN_PROGRESS_EP;
-        this.handler.state = this.attributes.STATE = config.states.PLAYING_EPISODE;
-        message += ` Now I'll resume ${this.attributes.playing.title}.`;
-        return audioPlayer.resume.call(this, confirmationMessage);
-      } else {
-        this.handler.state = this.attributes.STATE = config.states.START;
-        return util.sendProgressive(
-          boundThis.event.context.System.apiEndpoint, // no need to add directives params
-          boundThis.event.request.requestId,
-          boundThis.event.context.System.apiAccessToken,
-          message,
-          function (err) {
-            if (err) {
-              boundThis.emitWithState('LaunchRequest', 'requested', message);
-            } else {
-              boundThis.emitWithState('LaunchRequest', 'requested');
-            }
-          }
-        );
-      }
-    } else if (!slot.userName.value) { // NOTE NOT SAVING NAME && !this.attributes.userName
-      message += `Okay, I'll ask Kai and Molly to look into ${slot.query.value}. Who should I say is asking?`;
-      this.emit(':elicitSlotWithCard', 'userName', message, "Let me know what name to leave.", 'Request Explainer',message, this.event.request.intent, util.cardImage(config.icon.full));
-    } else if (!slot.userLocation.value) { // NOTE NOT SAVING NAME && this.attributes.userLocation
-      this.attributes.userName = slot.userName.value;
-      var cardMessage = `I'll note that ${slot.userName.value} would like an explainer on ${slot.query.value}. `;
-      message += 'And where are you from?';
-      cardMessage += message;
-      this.emit(':elicitSlotWithCard', 'userLocation', message, "Let me know what location to leave.", 'Request Explainer', cardMessage, this.event.request.intent, util.cardImage(config.icon.full) );
     } else {
-      console.log("ALL ELSE in request ", slot)
-      this.attributes.userLocation = slot.userLocation.value;
-      this.attributes.requests.push({
-        timestamp: new Date().toTimeString(),
-        query: slot.query.value,
-        name: slot.userName.value,
-        location: slot.userLocation.value
-      });
-      var confirmationMessage = `Okay, I'll tell Kai and Molly that ${slot.userName.value} from ${slot.userLocation.value} asked for an explainer about ${slot.query.value}.`;
-
-      // TODO: I was going to have it go back if there was an explainer playing, but nah. Seems logical they don't want that, since they requested soemthing else.
-      if (this.event.context.System.device.supportedInterfaces.Display) {
-        this.response.renderTemplate(
-          util.templateBodyTemplate1(
-            'Request Received!',
-            confirmationMessage,
-            '',
-            config.background.show
-          )
-        );
-      }
-      if (this.attributes.IN_PROGRESS_EP) {
-        delete this.attributes.IN_PROGRESS_EP;
-        this.handler.state = this.attributes.STATE = config.states.PLAYING_EPISODE;
-        confirmationMessage += ` Now I'll resume ${this.attributes.playing.title}.`;
-        audioPlayer.resume.call(this, confirmationMessage);
-      } else {
-        this.handler.state = this.attributes.STATE = config.states.START;
-        return util.sendProgressive(
-          this.event.context.System.apiEndpoint, // no need to add directives params
-          this.event.request.requestId,
-          this.event.context.System.apiAccessToken,
-          confirmationMessage,
-          function (err) {
-            if (err) {
-              boundThis.emitWithState('LaunchRequest', 'requested', confirmationMessage);
-            } else {
-              boundThis.emitWithState('LaunchRequest', 'requested');
-            }
-          }
-        );
-      }
+      boundThis.emitWithState('PickItem', slot);
     }
   },
   'HomePage' : function () {

@@ -187,15 +187,6 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     // this just throws to the correct state version of itself
     this.emitWithState('ListExplainers');
   },
-  'ListEpisodes' : function () {
-    this.attributes.currentExplainerIndex = -1;
-    this.attributes.indices.explainer = 0;
-    this.handler.state = this.attributes.STATE = config.states.ITERATING_EPISODE;
-    console.log('LIST EPISODES from PLAY EXP')
-    this.emitWithState('ListEpisodes');
-  },
-
-
   // TOUCH EVENTS:
   'ElementSelected': function () {
     var deviceId = util.getDeviceId.call(this);

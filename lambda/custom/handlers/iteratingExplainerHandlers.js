@@ -38,14 +38,6 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
 
   },
   // STATE TRANSITIONS
-  'ListShows': function (slot) {
-    console.log('list shows from ITERATE explain')
-    this.attributes.currentExplainerIndex = -1;
-    this.attributes.indices.explainer = 0;
-    this.handler.state = this.attributes.STATE = config.states.ITERATING_SHOW;
-    this.emitWithState('ListShows');
-
-  },
   'RequestExplainer' : function () {
     console.log('request explainer test')
     this.handler.state = this.attributes.STATE = config.states.REQUEST;
@@ -114,7 +106,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
   },
   'AMAZON.HelpIntent' : function () {
     console.log('Help in ITERATING EXPLAINER')
-    var message = "You can say 'next' or 'previous', or 'what's new' to see our latest explainers.";
+    var message = "You can pick an item or say 'next' or 'previous' to move through the list.";
     this.response.speak(message).listen(message);
     if (this.event.context.System.device.supportedInterfaces.Display) {
       var links = "<action value='HomePage'>What's New</action>";

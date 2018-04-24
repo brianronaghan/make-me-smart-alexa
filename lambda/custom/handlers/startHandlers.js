@@ -75,7 +75,16 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     this.emit(':saveState');
   },
   'AMAZON.HelpIntent': function () {
-  // Handler for built-in HelpIntent
+    console.log('Help in START');
+
+    // Handler for built-in HelpIntent
+    var message = "You can say the name of an explainer or the number, or 'play all' to hear them all.";
+    this.response.speak(message).listen(message);
+    if (this.event.context.System.device.supportedInterfaces.Display) {
+      var links = "<action value='PlayLatestExplainer'>Play All</action>";
+      this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, links, config.background.show));
+    }
+    this.emit(':saveState', true);
   },
   // error handling
   'SessionEndedRequest' : function () { // this gets purposeful exit as well
