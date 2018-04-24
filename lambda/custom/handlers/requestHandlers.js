@@ -12,12 +12,9 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
   'PickItem': function (slot) {
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
-    console.log("PICK ITEM IN REQ natural slot ", this.event.request.intent.slots)
-    console.log("PICK ITEM FAKE SLOT", slot)
     var slot = slot || this.event.request.intent.slots;
     var message = '';
     var boundThis = this;
-    console.log("REQUEST ", slot)
     var payload = {}
 
     if (slot.query && !slot.query.value) { // came here without a query

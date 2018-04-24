@@ -17,7 +17,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     var intro = '';
     console.log('con --> ', condition, message)
     if (!condition) { // FIX THIS THING
-      intro += `Welcome ${this.attributes.deviceId ? 'back' : ''} to Make Me Smart. This week `;
+      intro += `Welcome ${this.attributes.deviceIds ? 'back' : ''} to Make Me Smart. This week `;
     } else if (condition === 'requested') {
       if (message) {
         intro += `${message} `;

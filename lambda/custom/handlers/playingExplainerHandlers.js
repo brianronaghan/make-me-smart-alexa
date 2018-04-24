@@ -14,28 +14,30 @@ var db = require('../db');
 
 module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
   'LaunchRequest': function () {
-
-    var deviceId = util.getDeviceId.call(this);
-    var intro = `Welcome back to Make Me Smart. `;
-    util.nullCheck.call(this, deviceId);
-
-    console.log('LAUNCH IN EXPLAINER STATE');
-    // console.log('handler state', this.handler.state, ' atty state', this.attributes.STATE)
-    if (!this.attributes.currentExplainerIndex || this.attributes.currentExplainerIndex === -1) {
-      console.log('no explainer index SWITCHING state');
-      this.handler.state = this.attributes.STATE = config.states.START;
-      return this.emitWithState('LaunchRequest')
-    }
-    var previousExplainer = explainers[this.attributes.currentExplainerIndex];
-
-    intro += `Last time you were learning about ${previousExplainer.title}. Say 'restart' to hear that again or 'what's new' to hear the latest explainers.`;
-    // On add the and that was to the speech... not for card'
-    var links = "<action value='PlayLatestExplainer'>Play All</action>";
-    this.response.speak(intro).listen("Say 'restart', or say 'what's new' to hear the latest explainers.");
-    if (this.event.context.System.device.supportedInterfaces.Display) {
-      this.response.renderTemplate(util.templateBodyTemplate1('Welcome to Make Me Smart', intro, links, config.background.show));
-    }
-    this.emit(':saveState', true);
+    this.handler.state = this.attributes.STATE = config.states.START;
+    this.emitWithState('LaunchRequest');
+    // NOTE: For now, I'm just redirecting when the past state was playing. Doesn't seem like a common use case that the user would want to be reminded to resume a 60 second explainer
+    // var deviceId = util.getDeviceId.call(this);
+    // var intro = `Welcome back to Make Me Smart. `;
+    // util.nullCheck.call(this, deviceId);
+    //
+    // console.log('LAUNCH IN EXPLAINER STATE');
+    // // console.log('handler state', this.handler.state, ' atty state', this.attributes.STATE)
+    // if (!this.attributes.currentExplainerIndex || this.attributes.currentExplainerIndex === -1) {
+    //   console.log('no explainer index SWITCHING state');
+    //   this.handler.state = this.attributes.STATE = config.states.START;
+    //   return this.emitWithState('LaunchRequest')
+    // }
+    // var previousExplainer = explainers[this.attributes.currentExplainerIndex];
+    //
+    // intro += `Last time you were learning about ${previousExplainer.title}. Say 'restart' to hear that again or 'what's new' to hear the latest explainers.`;
+    // // On add the and that was to the speech... not for card'
+    // var links = "<action value='PlayLatestExplainer'>Play All</action>";
+    // this.response.speak(intro).listen("Say 'restart', or say 'what's new' to hear the latest explainers.");
+    // if (this.event.context.System.device.supportedInterfaces.Display) {
+    //   this.response.renderTemplate(util.templateBodyTemplate1('Welcome to Make Me Smart', intro, links, config.background.show));
+    // }
+    // this.emit(':saveState', true);
 
   },
   'HomePage': function () {
