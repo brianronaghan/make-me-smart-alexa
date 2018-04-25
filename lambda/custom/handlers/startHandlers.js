@@ -65,7 +65,20 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     util.nullCheck.call(this, deviceId);
     this.emitWithState('PlayLatestExplainer', {index: {value: 1}}, 'HOME_PAGE_PLAY_LATEST');
   },
-
+  'ListExplainers': function () {
+    console.log('list explainers from start')
+    var deviceId = util.getDeviceId.call(this);
+    util.nullCheck.call(this, deviceId);
+    this.attributes.currentExplainerIndex = -1;
+    this.attributes.indices.explainer = 0;
+    this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
+    this.emitWithState('ListExplainers');
+  },
+  'RequestExplainer' : function () {
+    console.log('request explainer test')
+    this.handler.state = this.attributes.STATE = config.states.REQUEST;
+    this.emitWithState('RequestExplainer');
+  },
   'AMAZON.CancelIntent' : function() {
     console.log('CANCEL START STATE')
     // This needs to work for not playing as well

@@ -41,7 +41,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
   'RequestExplainer' : function () {
     console.log('request explainer test')
     this.handler.state = this.attributes.STATE = config.states.REQUEST;
-    this.emitWithState('RequestExplainer');
+    this.emitWithState('RequestExplainer', {query: null});
   },
   'PickItem': function (slot) {
     console.log('ITERATING EXPLAINER, pick explainer');

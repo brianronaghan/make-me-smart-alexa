@@ -105,6 +105,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     // NOTE: look at this immediately, I think I have some old code here
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
+    console.log('REQUEST EVENT', this.event.request)
     var slot = slot || this.event.request.intent.slots;
     var message = '';
     var boundThis = this;

@@ -136,7 +136,6 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
           links += " | <action value='Next'>Next</action>";
         } else {
           prompt = "And that's all we have right now. Say 'replay' to hear that again, 'list explainers' to see all, or 'suggest a topic' to give us an idea for our next explainer."
-          links += " | <action value='RequestExplainer'>Suggest a topic</action>";
         }
 
         if (this.event.context.System.device.supportedInterfaces.Display) {
@@ -174,7 +173,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
   'RequestExplainer' : function () {
     console.log('request explainer test')
     this.handler.state = this.attributes.STATE = config.states.REQUEST;
-    this.emitWithState('RequestExplainer');
+    this.emitWithState('RequestExplainer', {query: {value:null},userLocation: {value: null}, userName: {value: null}});
   },
   'ListExplainers': function () {
     console.log('list explainers from play explain')
@@ -199,7 +198,10 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     var intentSlot,intentName;
     if (this.event.request.token === 'PlayLatestExplainer' || this.event.request.token === 'ListExplainers') {
       intentName = this.event.request.token;
-    }  else if (this.event.request.token === 'Next' || this.event.request.token === 'Previous') {
+    } else if (this.event.request.token === 'RequestExplainer') {
+      intentName = this.event.request.token;
+      intentSlot = {query: {value:null},userLocation: {value: null}, userName: {value: null}};
+    } else if (this.event.request.token === 'Next' || this.event.request.token === 'Previous') {
       intentName = `AMAZON.${this.event.request.token}Intent`;
     } else {
       var tokenData = this.event.request.token.split('_');
