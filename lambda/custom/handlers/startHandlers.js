@@ -87,6 +87,14 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     this.response.speak("See you later. Say 'Alexa, Make Me Smart' to get learning again.");
     this.emit(':saveState');
   },
+  'AMAZON.StopIntent' : function() {
+    console.log('STOP EXPLAINER STATE')
+    // This needs to work for not playing as well
+    // SHOULD I CLEAR THE STATE?
+
+    this.response.speak('See you later. Say alexa, Make Me Smart to get learning again.')
+    this.emit(':saveState');
+  },
   'AMAZON.HelpIntent': function () {
     console.log('Help in START');
 

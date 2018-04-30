@@ -188,7 +188,7 @@ module.exports = {
         index--;
     } else if (intentSlot && intentSlot.ordinal && intentSlot.ordinal.value) {
         var str = intentSlot.ordinal.value;
-        if (str === "second") {
+        if (str === "second" || str === "second 1") {
             index = 2;
         } else {
             str = str.substring(0, str.length - 2);
