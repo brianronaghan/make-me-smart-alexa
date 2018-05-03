@@ -111,7 +111,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     } else {
       console.time('UPDATE-DB');
       var payload = {};
-      console.log('source');
+      console.log('source', source);
       payload.explainers = [{
         source: source || 'EXTERNAL',
         guid: chosenExplainer.guid,
@@ -160,7 +160,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     // this is what 'play all would do'
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
-    this.emitWithState('PickItem', {index: {value: 1}}, 'PLAY_THE_LATEST');
+    this.emitWithState('PickItem', {index: {value: 1}}, 'LATEST_FROM_PLAY');
   },
   'ReplayExplainer': function () {
     var deviceId = util.getDeviceId.call(this);
@@ -245,7 +245,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
 
     } else {
       // currentExplainerIndex is 0 based, and PickItem expects 1-based
-      return this.emitWithState('PickItem', {index: {value: this.attributes.currentExplainerIndex+2}}, 'NEXT_PLAY');
+      return this.emitWithState('PickItem', {index: {value: this.attributes.currentExplainerIndex+2}}, 'NEXT');
 
     }
   },

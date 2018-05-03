@@ -56,14 +56,14 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
   'PickItem' : function (slot) {
     // redirects from homepage to play explainer choice
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
-    this.emitWithState('PickItem', slot, 'HOME_PAGE');
+    this.emitWithState('PickItem', slot, 'HOMEPAGE');
   },
   'PlayLatestExplainer': function () {
     // this is what 'play all would do'
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
-    this.emitWithState('PlayLatestExplainer', {index: {value: 1}}, 'HOME_PAGE_PLAY_LATEST');
+    this.emitWithState('PlayLatestExplainer', {index: {value: 1}}, 'HOMEPAGE_LATEST');
   },
   'ListExplainers': function () {
     console.log('list explainers from start')
@@ -91,7 +91,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     console.log('STOP EXPLAINER STATE')
     // This needs to work for not playing as well
     // SHOULD I CLEAR THE STATE?
-
+    delete this.attributes.STATE;
     this.response.speak('See you later. Say alexa, Make Me Smart to get learning again.')
     this.emit(':saveState');
   },
