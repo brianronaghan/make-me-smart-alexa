@@ -2,7 +2,7 @@ module.exports = [{
       title: 'Bonds',
       author: 'Kai Ryssdal',
       tags: [],
-      guid: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_bonds_kai.MP3',
+      guid: 'test_bonds_kai',
       date: "2018-04-07T20:55:57Z",
       description: 'A bond is a fixed income investment in which an investor loans money to an entity (typically corporate or governmental) which borrows the funds for a defined period of time at a variable or fixed interest rate.',
       audio: {
@@ -11,7 +11,7 @@ module.exports = [{
     },
     {
       title: 'The Cloud',
-      guid: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_cloud_molly.MP3",
+      guid: "test_cloud_molly",
       date: "2018-04-07T20:55:57Z",
       tags: ['web', 'internet'],
       author: 'Molly Wood',
@@ -24,7 +24,7 @@ module.exports = [{
     },
     {
       title: 'Productivity',
-      guid: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_productivity_kai.MP3",
+      guid: "test_productivity_kai",
       date: null,
       author: 'Kai Ryssdal',
       tags: [],
@@ -37,7 +37,7 @@ module.exports = [{
     },
     {
       title: 'Network Effect',
-      guid: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_network_effect_molly.MP3",
+      guid: "test_network_effect_molly",
       date: null,
       author: 'Molly Wood',
       description: 'The network effect is a phenomenon where increased numbers of people or participants improves the value of a good or service.',
@@ -49,7 +49,7 @@ module.exports = [{
     },
     {
       title: 'Inflation',
-      guid: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_inflation_kai.mp3',
+      guid: 'test_inflation_kai',
       date: null,
       author: 'Kai Ryssdal',
       tags: ['value of money', 'monetary policy'],
@@ -62,7 +62,7 @@ module.exports = [{
     },
     {
       title: 'Interest Rates',
-      guid: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_interest_rates_kai.mp3",
+      guid: "test_interest_rates_kai",
       date: null,
       author: 'Kai Ryssdal',
       tags: ['federal reserve', 'the fed'],
