@@ -158,6 +158,7 @@
                     "go home",
                     "start over",
                     "what's new",
+                    "hear what's new",
                     "what is new",
                     "hear new explainers"
                   ],
@@ -181,8 +182,8 @@
                   "name": "PlayLatestExplainer",
                   "samples": [
                     "play all",
-                    "all of them"
-
+                    "all of them",
+                    "all"
                   ]
                 },
                 {
@@ -1669,6 +1670,7 @@
                 "name": "TITLES_WILDCARD"
               },
               {
+                "name": "TOPICS",
                 "values" : [
                   {
                     "name": {
@@ -1710,8 +1712,7 @@
                       "value": "interest rates"
                     }
                   }
-                ],
-                "name": "TOPICS"
+                ]
               },
               {
                 "values": [

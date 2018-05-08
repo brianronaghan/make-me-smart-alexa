@@ -41,12 +41,12 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     var topics = explainers.map(function(item) {
       return item.title
     });
-    intro += `we're learning about <prosody pitch="high" volume="x-loud">1) ${topics[0]}</prosody>, <prosody volume="x-loud" pitch="high">2) ${topics[1]}</prosody>, and <prosody volume="x-loud" pitch="high">3) ${topics[2]}</prosody>. Pick one, or say 'play all' to learn about all of them.`;
+    intro += `we're learning about <prosody pitch="high" volume="x-loud">1) ${topics[0]}</prosody>, <prosody volume="x-loud" pitch="high">2) ${topics[1]}</prosody>, and <prosody volume="x-loud" pitch="high">3) ${topics[2]}</prosody>. Which would you like?`;
 
 
     // On add the and that was to the speech... not for card'
     var links = "<action value='PlayLatestExplainer'>Play All</action>";
-    this.response.speak(intro).listen("Pick one, or say 'play all' to learn about all of them.");
+    this.response.speak(intro).listen("Which topic would you like to get smart about?");
     if (this.event.context.System.device.supportedInterfaces.Display) {
       this.response.renderTemplate(util.templateBodyTemplate1('Welcome to Make Me Smart', intro, links, config.background.show));
     }
@@ -95,6 +95,16 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     this.response.speak('See you later. Say alexa, Make Me Smart to get learning again.')
     this.emit(':saveState');
   },
+  'AMAZON.NextIntent' : function () {
+    console.log("start handler NEXT")
+    var deviceId = util.getDeviceId.call(this);
+    util.nullCheck.call(this, deviceId);
+    this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
+    this.emitWithState('PlayLatestExplainer', {index: {value: 1}}, 'HOMEPAGE_NEXT');
+
+
+  },
+
   'AMAZON.HelpIntent': function () {
     console.log('Help in START');
 
@@ -115,9 +125,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
    },
    'Unhandled' : function () {
      console.log("START UNHANDLED ",JSON.stringify(this.event.request,null, 2));
-       var message = 'UNDHANDLED Start';
-       this.response.speak(message).listen(message);
-       this.emit(':responseReady');
+     this.emitWithState('LaunchRequest', 'no_welcome', "Sorry I couldn't quite handle that.");
    }
 });
 module.exports = startHandlers;

@@ -12,6 +12,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     console.log('this.event.req',this.event.request)
+    console.log(this.attributes.indices.explainer)
     if (this.event.session.new || (!this.attributes.indices.explainer)) { // is this logic correct?
       this.attributes.indices.explainer = 0;
     }
@@ -89,6 +90,24 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     console.log("iterating explainers NEXT")
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
+    let boundThis = this;
+
+    if (this.attributes.indices.explainer + config.items_per_prompt.explainer >= explainers.length) {
+      let message = "This is the end of the list. Again, the choices are, "
+      return util.sendProgressive(
+        this.event.context.System.apiEndpoint, // no need to add directives params
+        this.event.request.requestId,
+        this.event.context.System.apiAccessToken,
+        message,
+        function (err) {
+          if (err) {
+            boundThis.emitWithState('ListExplainers', 'requested', message);
+          } else {
+            boundThis.emitWithState('ListExplainers', 'requested');
+          }
+        }
+      );
+    }
     this.attributes.indices.explainer += config.items_per_prompt.explainer;
     this.emitWithState('ListExplainers');
 
@@ -97,7 +116,6 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     this.attributes.indices.explainer -= config.items_per_prompt.explainer;
-    // if
     if (this.attributes.indices.explainer < 0) {
       this.attributes.indices.explainer = 0;
     }

@@ -16,29 +16,6 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
   'LaunchRequest': function () {
     this.handler.state = this.attributes.STATE = config.states.START;
     this.emitWithState('LaunchRequest');
-    // NOTE: For now, I'm just redirecting when the past state was playing. Doesn't seem like a common use case that the user would want to be reminded to resume a 60 second explainer
-    // var deviceId = util.getDeviceId.call(this);
-    // var intro = `Welcome back to Make Me Smart. `;
-    // util.nullCheck.call(this, deviceId);
-    //
-    // console.log('LAUNCH IN EXPLAINER STATE');
-    // // console.log('handler state', this.handler.state, ' atty state', this.attributes.STATE)
-    // if (!this.attributes.currentExplainerIndex || this.attributes.currentExplainerIndex === -1) {
-    //   console.log('no explainer index SWITCHING state');
-    //   this.handler.state = this.attributes.STATE = config.states.START;
-    //   return this.emitWithState('LaunchRequest')
-    // }
-    // var previousExplainer = explainers[this.attributes.currentExplainerIndex];
-    //
-    // intro += `Last time you were learning about ${previousExplainer.title}. Say 'restart' to hear that again or 'what's new' to hear the latest explainers.`;
-    // // On add the and that was to the speech... not for card'
-    // var links = "<action value='PlayLatestExplainer'>Play All</action>";
-    // this.response.speak(intro).listen("Say 'restart', or say 'what's new' to hear the latest explainers.");
-    // if (this.event.context.System.device.supportedInterfaces.Display) {
-    //   this.response.renderTemplate(util.templateBodyTemplate1('Welcome to Make Me Smart', intro, links, config.background.show));
-    // }
-    // this.emit(':saveState', true);
-
   },
   'HomePage': function () {
     // why did what's new not go here?
@@ -129,13 +106,13 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
         var prompt;
         var links = "<action value='ReplayExplainer'>Replay</action> | <action value='ListExplainers'>List Explainers</action>";
         if (this.event.session.new) {
-          prompt = `Say 'replay' to hear that again, 'list explainers' to see all of our explainers, or 'what's new' to explore our latest explainers.`;
+          prompt = `You can say 'replay' to hear that again, 'list explainers' to see all of our explainers, or 'what's new' to explore our latest explainers. What would you like to do?`;
           links += " | <action value='HomePage'> What's New </action>";
         } else if (explainers[chosenExplainer.index+1]) { // handle if end of explainer feed
-          prompt = `Say 'replay' to hear that again, 'next' to learn about ${explainers[chosenExplainer.index+1].title}, or 'list explainers' to see all of our explainers.`;
+          prompt = `Say 'replay' to hear that again, 'next' to learn about ${explainers[chosenExplainer.index+1].title}, or 'list explainers' to see all of our explainers. What would you like to do?`;
           links += " | <action value='Next'>Next</action>";
         } else {
-          prompt = "And that's all we have right now. Say 'replay' to hear that again, 'list explainers' to see all, or 'suggest a topic' to give us an idea for our next explainer."
+          prompt = "And that's all we have right now. Say 'replay' to hear that again, 'list explainers' to see all, or 'suggest a topic' to give us an idea for our next explainer. What would you like to do?"
         }
 
         if (this.event.context.System.device.supportedInterfaces.Display) {
@@ -225,8 +202,8 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     // handle next at end of list?
     if (explainers.length <= this.attributes.currentExplainerIndex +1) {
       // last spot
-      var message = "We don't have any more explainers right now. Say 'list explainers' to see all or 'play full episodes' to hear episodes of our shows."
-      var prompt = "Say 'list explainers' to see all, or 'play full episodes' to for full episodes of our show."
+      var message = "We don't have any more explainers right now. Say 'list explainers' to see all or 'play full episodes' to hear episodes of our shows. What would you like to do?"
+      var prompt = "Say 'list explainers' to see all, or 'play full episodes' to for full episodes of our show. What would you like to do?"
       var links = "<action value='ListExplainers'>List explainers</action> | <action value='ListShows'>Play full episodes</action>";
 
       if (this.event.context.System.device.supportedInterfaces.Display) {
