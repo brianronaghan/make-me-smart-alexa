@@ -183,6 +183,8 @@
                   "samples": [
                     "play all",
                     "all of them",
+                    "play the latest",
+                    "the latest",
                     "all"
                   ]
                 },
@@ -1633,31 +1635,6 @@
                 }
             ],
             "types":[
-              {
-                "name": "PREPOSITIONS",
-                "values": [
-                  {
-                    "name": {
-                      "value": "for info on"
-                    }
-                  },
-                  {
-                    "name": {
-                      "value": "about"
-                    }
-                  },
-                  {
-                    "name": {
-                      "value": "what it knows on"
-                    }
-                  },
-                  {
-                    "name": {
-                      "value": "what it knows about"
-                    }
-                  }
-                ]
-              },
               {
                 "values" : [
                   {

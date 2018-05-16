@@ -4,60 +4,68 @@ var Alexa = require('alexa-sdk');
 
 var config = require('../config');
 var util = require('../util');
+var db = require('../db');
 
 var explainers = require('../explainers');
 
 var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
-  // 'NewSession': function () {
-  // //   console.log('new session ', JSON.stringify(this.event, null, 2));
-  // },
   'LaunchRequest': function (condition, message) {
-    console.log('LAUNCH in, START STATE. handler state', this.handler.state, ' atty state', this.attributes.STATE)
-    var deviceId = util.getDeviceId.call(this);
-    var intro = '';
-    console.log('con --> ', condition, message)
-    if (!condition) { // FIX THIS THING
-      intro += `Welcome ${this.attributes.deviceIds ? 'back' : ''} to Make Me Smart. This week `;
-    } else if (condition === 'requested') {
-      if (message) {
-        intro += `${message} `;
-      }
-      intro += 'In the meantime, ';
-    } else if (condition === 'no_welcome') {
-      if (message) {
-        intro += `${message} `;
-      }
-      intro += 'This week ';
-    } else if (condition === 'finished_playing') {
-      if (message) {
-        intro += message;
-      }
-      intro += 'You might also like our explainers. This week ';
-    }
-    util.nullCheck.call(this, deviceId);
-    // I DON'T THINK I NEED TO RESET:
-    // this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
+    let welcome = '';
 
-    var topics = explainers.map(function(item) {
-      return item.title
+    let latestExplainer = explainers[0];
+    let author = latestExplainer.author;
+    if (author === 'Molly Wood') {
+      author = `Molly '<emphasis level="strong"> Wood</emphasis>`;
+    }
+    welcome += `Welcome ${this.attributes.deviceIds ? 'back' : ''} to Make Me Smart. Today we're learning about ${latestExplainer.title}. Here's ${author} to make us smart. <break time = "500ms"/> <audio src="${latestExplainer.audio.url}" />`;
+    let prompt = "Would you like to replay that, hear 'what's new' or 'suggest a topic'?"
+
+    let links = "<action value='ReplayExplainer'>Replay</action> | <action value='HomePage'>Hear What's New</action> | <action value='RequestExplainer'> Suggest a Topic </action>";
+    var payload = {};
+    payload.explainers = [{
+      source: "LAUNCH_REQUEST",
+      guid: latestExplainer.guid,
+      timestamp: this.event.request.timestamp,
+    }]
+    console.time('UPDATE-LAUNCH-REQUEST');
+    db.update.call(this, payload, function(err, resp) {
+      console.timeEnd('UPDATE-LAUNCH-REQUEST');
+      if (this.event.context.System.device.supportedInterfaces.Display) {
+        this.response.renderTemplate(
+          util.templateBodyTemplate3(
+            latestExplainer.title,
+            latestExplainer.image || config.icon.full,
+            latestExplainer.description,
+            links,
+            config.background.show
+          )
+        );
+      }
+      let fullSpeech = welcome + prompt;
+      this.response.speak(fullSpeech).listen(prompt); // if i do listen, you can't request an explainer during
+      this.emit(':responseReady');
     });
-    intro += `we're learning about <prosody pitch="high" volume="x-loud">1) ${topics[0]}</prosody>, <prosody volume="x-loud" pitch="high">2) ${topics[1]}</prosody>, and <prosody volume="x-loud" pitch="high">3) ${topics[2]}</prosody>. Which would you like?`;
 
 
-    // On add the and that was to the speech... not for card'
-    var links = "<action value='PlayLatestExplainer'>Play All</action>";
-    this.response.speak(intro).listen("Which topic would you like to get smart about?");
-    if (this.event.context.System.device.supportedInterfaces.Display) {
-      this.response.renderTemplate(util.templateBodyTemplate1('Welcome to Make Me Smart', intro, links, config.background.show));
-    }
-    this.emit(':responseReady');
-
+  },
+  'HomePage': function (condition, message) {
+    this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
+    this.emitWithState('HomePage');
   },
   'PickItem' : function (slot) {
     // redirects from homepage to play explainer choice
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
     this.emitWithState('PickItem', slot, 'HOMEPAGE');
   },
+  'ReplayExplainer': function () {
+    var deviceId = util.getDeviceId.call(this);
+    util.nullCheck.call(this, deviceId);
+    console.log('GOT REPLAY', this.handler.state)
+    // currentExplainerIndex is 0 based, and PickItem expects 1-based
+    this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
+    this.emitWithState('PickItem', {index: {value: 1}}, 'LAUNCH_REPLAY')
+  },
+
   'PlayLatestExplainer': function () {
     // this is what 'play all would do'
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
@@ -65,6 +73,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     util.nullCheck.call(this, deviceId);
     this.emitWithState('PlayLatestExplainer', {index: {value: 1}}, 'HOMEPAGE_LATEST');
   },
+
   'ListExplainers': function () {
     console.log('list explainers from start')
     var deviceId = util.getDeviceId.call(this);
