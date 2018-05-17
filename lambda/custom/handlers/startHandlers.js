@@ -10,6 +10,7 @@ var explainers = require('../explainers');
 
 var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
   'LaunchRequest': function (condition, message) {
+    console.log("LAUNCH FUCKING REQUEST", this.event.request)
     let welcome = '';
 
     let latestExplainer = explainers[0];
@@ -49,10 +50,18 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
 
   },
   'HomePage': function (condition, message) {
+    console.log("HEY HOME PAGE")
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
     this.emitWithState('HomePage');
   },
+  'RequestExplainer' : function () {
+    console.log('request explainer test')
+    this.handler.state = this.attributes.STATE = config.states.REQUEST;
+    this.emitWithState('RequestExplainer');
+  },
   'PickItem' : function (slot) {
+    console.log("HEY PICK?")
+
     // redirects from homepage to play explainer choice
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
     this.emitWithState('PickItem', slot, 'HOMEPAGE');
@@ -83,11 +92,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
     this.emitWithState('ListExplainers');
   },
-  'RequestExplainer' : function () {
-    console.log('request explainer test')
-    this.handler.state = this.attributes.STATE = config.states.REQUEST;
-    this.emitWithState('RequestExplainer');
-  },
+
   'AMAZON.CancelIntent' : function() {
     console.log('CANCEL START STATE')
     // This needs to work for not playing as well
