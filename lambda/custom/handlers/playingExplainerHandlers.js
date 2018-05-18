@@ -27,7 +27,6 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     console.log('HOME PAGE IN PLAYING EXPLAINER STATE--  handler state', this.handler.state, ' atty state', this.attributes.STATE)
     var deviceId = util.getDeviceId.call(this);
     var intro = '';
-    console.log('con --> ', condition, message)
     if (!condition) { // FIX THIS THING
       intro += `Lately `;
     } else if (condition === 'requested') {

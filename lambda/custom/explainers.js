@@ -1,4 +1,28 @@
 module.exports = [{
+      title: 'Stock Buybacks',
+      author: 'Kai Ryssdal',
+      tags: [],
+      guid: 'preprod_stock_buybacks_kai',
+      date: "2018-05-18",
+      description: 'Stock buybacks happen when a publicly traded company buys outstanding shares of its own stock, often pushing the stock price higher.',
+      audio: {
+        url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Ryssdal+Stock+Buybacks+-+MIX.mp3",
+      },
+      requestedBy: 'Sitara from Los Angeles'
+    },
+    {
+      title: 'Inflation',
+      author: 'Kai Ryssdal',
+      tags: [],
+      guid: 'preprod_inflation_kai',
+      date: "2018-05-17",
+      description: 'In economics, inflation is a sustained increase in the general price level of goods and services in an economy over a period of time.',
+      audio: {
+        url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Ryssdal+Inflation+-+MIX.mp3",
+      },
+      requestedBy: 'Alan from Atlanta'
+    },
+    {
       title: 'Bonds',
       author: 'Kai Ryssdal',
       tags: [],
@@ -7,7 +31,8 @@ module.exports = [{
       description: 'A bond is a fixed income investment in which an investor loans money to an entity (typically corporate or governmental) which borrows the funds for a defined period of time at a variable or fixed interest rate.',
       audio: {
         url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_bonds_kai.MP3",
-      }
+      },
+      requestedBy: null
     },
     {
       title: 'The Cloud',
@@ -43,19 +68,6 @@ module.exports = [{
       description: 'The network effect is a phenomenon where increased numbers of people or participants improves the value of a good or service.',
       audio: {
         url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_network_effect_molly.MP3",
-        length: null,
-        type: null
-      }
-    },
-    {
-      title: 'Inflation',
-      guid: 'test_inflation_kai',
-      date: null,
-      author: 'Kai Ryssdal',
-      tags: ['value of money', 'monetary policy'],
-      description: 'In economics, inflation is a sustained increase in the general price level of goods and services in an economy over a period of time.',
-      audio: {
-        url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_inflation_kai.mp3",
         length: null,
         type: null
       }
