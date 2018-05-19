@@ -10,6 +10,7 @@ var config = {
     },
     states: {
       START: '',
+      HOME_PAGE: '_HOME_PAGE',
       PLAYING_EXPLAINER: '_PLAYING_EXPLAINER',
       REQUEST: '_REQUEST',
       ITERATING_EXPLAINER: '_ITERATING_EXPLAINER'

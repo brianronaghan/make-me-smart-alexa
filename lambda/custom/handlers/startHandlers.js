@@ -50,9 +50,9 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
 
   },
   'HomePage': function (condition, message) {
-    console.log("HEY HOME PAGE")
-    this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
-    this.emitWithState('HomePage');
+    console.log("HEY HOME PAGE REDIRECT")
+    this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
+    this.emitWithState('HomePage', 'from_launch');
   },
   'RequestExplainer' : function () {
     console.log('request explainer test')
@@ -60,11 +60,11 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     this.emitWithState('RequestExplainer');
   },
   'PickItem' : function (slot) {
-    console.log("HEY PICK?")
+    console.log("HEY PICK from start?")
 
     // redirects from homepage to play explainer choice
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
-    this.emitWithState('PickItem', slot, 'HOMEPAGE');
+    this.emitWithState('PickItem', slot, 'LAUNCH_PICK');
   },
   'ReplayExplainer': function () {
     var deviceId = util.getDeviceId.call(this);
@@ -80,7 +80,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
-    this.emitWithState('PlayLatestExplainer', {index: {value: 1}}, 'HOMEPAGE_LATEST');
+    this.emitWithState('PlayLatestExplainer', {index: {value: 1}}, 'LAUNCH_LATEST');
   },
 
   'ListExplainers': function () {
@@ -114,9 +114,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
-    this.emitWithState('PlayLatestExplainer', {index: {value: 1}}, 'HOMEPAGE_NEXT');
-
-
+    this.emitWithState('PlayLatestExplainer', {index: {value: 1}}, 'LAUNCH_NEXT'); // NOTE TEST 1 or 2?
   },
 
   'AMAZON.HelpIntent': function () {

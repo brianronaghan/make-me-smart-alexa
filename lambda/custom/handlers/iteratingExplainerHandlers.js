@@ -53,7 +53,14 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
   },
 
   //
+  'HomePage': function () {
+    console.log("HOME PAGE in ITERATING?")
+    this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
+    this.emitWithState('HomePage', 'no_welcome');
+  },
+
   'LaunchRequest': function () {
+    console.log("LR in ITERATING?")
     this.handler.state = this.attributes.STATE = config.states.START;
     this.emitWithState('LaunchRequest');
   },

@@ -165,7 +165,8 @@ module.exports = {
         itemsCard += ` or say next for more ${itemTitlePlural} `;
       }
     } else {// start != 0
-      if (start + chunkLength < items.length -1) {// if it is start + chunk is < total length
+      console.log('st', start, 'chu', chunkLength, items.length)
+      if (start + chunkLength < items.length) {// if it is start + chunk is < total length
         // add more
         itemsAudio += constants.breakTime['50'] + `or say next for more ${itemTitlePlural}`;
         itemsCard += ` or say next for more ${itemTitlePlural} `;
@@ -174,6 +175,7 @@ module.exports = {
       itemsAudio += `or say previous to hear the last ${chunkLength}`;
       itemsCard += `or say previous to hear the last ${chunkLength}`;
     }
+    itemsAudio += ". What would you like to do?"
     return {itemsAudio, itemsCard};
   },
 

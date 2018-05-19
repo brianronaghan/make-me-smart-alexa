@@ -18,48 +18,6 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     this.handler.state = this.attributes.STATE = config.states.START;
     this.emitWithState('LaunchRequest');
   },
-  'HomePage': function (condition, message) {
-    console.log("PLAYING HOME MAGE", this.event)
-
-    // why did what's new not go here?
-    this.attributes.currentExplainerIndex = -1;
-
-    console.log('HOME PAGE IN PLAYING EXPLAINER STATE--  handler state', this.handler.state, ' atty state', this.attributes.STATE)
-    var deviceId = util.getDeviceId.call(this);
-    var intro = '';
-    if (!condition) { // FIX THIS THING
-      intro += `Lately `;
-    } else if (condition === 'requested') {
-      if (message) {
-        intro += `${message} `;
-      }
-      intro += 'In the meantime, ';
-    } else if (condition === 'no_welcome') {
-      if (message) {
-        intro += `${message} `;
-      }
-      intro += 'This week ';
-    }
-    util.nullCheck.call(this, deviceId);
-    // I DON'T THINK I NEED TO RESET:
-    // this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
-
-    var topics = explainers.map(function(item) {
-      return item.title
-    });
-    intro += `we're learning about <prosody pitch="high" volume="x-loud">1) ${topics[0]}</prosody>, <prosody volume="x-loud" pitch="high">2) ${topics[1]}</prosody>, and <prosody volume="x-loud" pitch="high">3) ${topics[2]}</prosody>. Which would you like to hear?`;
-
-
-    // On add the and that was to the speech... not for card'
-    var links = "<action value='PlayLatestExplainer'>Play All</action>";
-    this.response.speak(intro).listen("Which topic would you like to get smart about?");
-    if (this.event.context.System.device.supportedInterfaces.Display) {
-      this.response.renderTemplate(util.templateBodyTemplate1("Make Me Smart's Latest Topics", intro, links, config.background.show));
-    }
-    this.emit(':responseReady');
-
-
-  },
 
   'PickItem': function (slot, source) {
     console.log("WHAT'S MY SOURCE", slot, source)
@@ -117,8 +75,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
           boundThis.event.context.System.apiAccessToken,
           message,
           function (err) {
-            this.handler.state = this.attributes.STATE = config.states.START;
-            return this.emitWithState('LaunchRequest', 'no_welcome')
+            return this.emitWithState('HomePage', 'no_welcome')
           }
         );
       }
@@ -143,10 +100,10 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
         var prompt;
         var links = "<action value='ReplayExplainer'>Replay</action> | <action value='ListExplainers'>List Explainers</action>";
         if (this.event.session.new) {
-          prompt = `You can say 'replay' to hear that again, 'list explainers' to see all of our explainers, or 'what's new' to explore our latest explainers. What would you like to do?`;
+          prompt = `You can say 'replay', 'list explainers', or 'play the latest' to hear our latest explainer. What would you like to do?`;
           links += " | <action value='HomePage'> What's New </action>";
         } else if (explainers[chosenExplainer.index+1]) { // handle if end of explainer feed
-          prompt = `Say 'replay' to hear that again, 'next' to learn about ${explainers[chosenExplainer.index+1].title}, or 'list explainers' to see all of our explainers. What would you like to do?`;
+          prompt = `You can say 'replay' to hear that again, 'next' to learn about ${explainers[chosenExplainer.index+1].title}, or 'list explainers' to see all of our explainers. What would you like to do?`;
           links += " | <action value='Next'>Next</action>";
         } else {
           prompt = "And that's all we have right now. Say 'replay' to hear that again, 'list explainers' to see all, or 'suggest a topic' to give us an idea for our next explainer. What would you like to do?"
@@ -202,6 +159,12 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     // this just throws to the correct state version of itself
     this.emitWithState('ListExplainers');
   },
+  'HomePage' : function () {
+    this.handler.state = this.attributes.STATE = config.states.START;
+    this.emitWithState('LaunchRequest', 'no_message');
+
+  },
+
   // TOUCH EVENTS:
   'ElementSelected': function () {
     var deviceId = util.getDeviceId.call(this);
@@ -320,8 +283,8 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
    },
    'Unhandled' : function () {
      console.log('PLAYING EXPLAINER UNHANDLED',JSON.stringify(this.event, null, 2))
-     this.handler.state = this.attributes.STATE = config.states.START;
-     this.emitWithState('LaunchRequest', 'no_welcome', "Sorry I couldn't quite handle that.");
+     this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
+     this.emitWithState('HomePage', 'no_welcome', "Sorry I couldn't quite handle that.");
 
    }
 

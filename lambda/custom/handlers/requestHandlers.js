@@ -44,9 +44,9 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
           message,
           function (err) {
             if (err) {
-              boundThis.emitWithState('LaunchRequest', 'requested', message);
+              boundThis.emitWithState('HomePage', 'requested', message);
             } else {
-              boundThis.emitWithState('LaunchRequest', 'requested');
+              boundThis.emitWithState('HomePage', 'requested');
             }
           }
         );
@@ -84,7 +84,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
             )
           );
         }
-        this.handler.state = this.attributes.STATE = config.states.START;
+        this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
         return util.sendProgressive(
           this.event.context.System.apiEndpoint, // no need to add directives params
           this.event.request.requestId,
@@ -92,9 +92,9 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
           confirmationMessage,
           function (err) {
             if (err) {
-              boundThis.emitWithState('LaunchRequest', 'requested', confirmationMessage);
+              boundThis.emitWithState('HomePage', 'requested', confirmationMessage);
             } else {
-              boundThis.emitWithState('LaunchRequest', 'requested');
+              boundThis.emitWithState('HomePage', 'requested');
             }
           }
         );
@@ -136,8 +136,8 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     }
   },
   'HomePage' : function () {
-    this.handler.state = this.attributes.STATE = config.states.START;
-    this.emitWithState('LaunchRequest', 'no_message');
+    this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
+    this.emitWithState('HomePage', 'no_message');
 
   },
   'LaunchRequest' : function () {
@@ -158,15 +158,15 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
   'AMAZON.StopIntent' : function() {
     console.log('built in STOP, request')
     // This needs to work for not playing as well
-    this.handler.state = this.attributes.STATE = config.states.START;
-    this.emitWithState('LaunchRequest', 'no_welcome', "Got it, I won't put in that request.");
+    this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
+    this.emitWithState('HomePage', 'no_welcome', "Got it, I won't put in that request.");
 
   },
   'AMAZON.CancelIntent' : function() {
     console.log('CANCEL REQUEST STATE');
     // means they don't wnt to leave it.
-    this.handler.state = this.attributes.STATE = config.states.START;
-    this.emitWithState('LaunchRequest', 'no_welcome', "Got it, I won't put in that request.");
+    this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
+    this.emitWithState('HomePage', 'no_welcome', "Got it, I won't put in that request.");
   },
   'AMAZON.HelpIntent' : function () {
     console.log('Help in REQUEST')
