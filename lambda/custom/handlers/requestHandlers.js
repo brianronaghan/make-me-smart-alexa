@@ -137,7 +137,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
   },
   'HomePage' : function () {
     this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
-    this.emitWithState('HomePage', 'no_message');
+    this.emitWithState('HomePage', 'no_welcome');
 
   },
   'LaunchRequest' : function () {

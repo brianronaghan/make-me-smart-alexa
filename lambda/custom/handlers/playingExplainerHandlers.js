@@ -160,9 +160,8 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     this.emitWithState('ListExplainers');
   },
   'HomePage' : function () {
-    this.handler.state = this.attributes.STATE = config.states.START;
-    this.emitWithState('LaunchRequest', 'no_message');
-
+    this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
+    this.emitWithState('HomePage', 'no_welcome');
   },
 
   // TOUCH EVENTS:

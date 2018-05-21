@@ -21,6 +21,8 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
   'HomePage': function (condition, message) {
 
     // why did what's new not go here?
+    console.log("HOME PAGE -> condition message", condition, message)
+
     this.attributes.currentExplainerIndex = -1;
     var intro = '';
     if (condition === 'requested') {
@@ -36,9 +38,10 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     } else if (condition === 'from_launch') {
       intro += "We've also been ";
       this.attributes.HEARD_FIRST = 1;
-    } else {
+    } else if (this.event.session.new){
       intro += "Welcome to Make Me Smart. This week we're ";
-
+    } else {
+      intro += "This week we're "
     }
     // I DON'T THINK I NEED TO RESET:
     // this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
@@ -55,7 +58,6 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     if (this.event.context.System.device.supportedInterfaces.Display) {
       this.response.renderTemplate(util.templateBodyTemplate1("Make Me Smart's Latest Topics", intro, links, config.background.show));
     }
-    console.log("OKAY WTF?s")
     this.emit(':responseReady');
 
 
@@ -94,12 +96,23 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
   },
 
   'AMAZON.NextIntent': function () {
-    // this is what 'play all would do'
+    // what should next even do here?
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
     this.emitWithState('PickItem', {index: {value: 1}}, 'HOMEPAGE_NEXT');
   },
 
   // DEFAULT:
+  'AMAZON.FallbackIntent': function () {
+    console.log("UM WHAT FALL BACK", JSON.stringify(this, null,2))
+    var message = "FALL BACK. You can pick a topic or choose by number or say 'play all'.";
+    this.response.speak(message).listen(message);
+    if (this.event.context.System.device.supportedInterfaces.Display) {
+      var links = "<action value='HomePage'>What's New</action> | <action value='ListExplainers'>List Explainers</action>";
+      this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, links, config.background.show));
+    }
+    this.emit(':saveState', true);
+
+  },
   'AMAZON.HelpIntent' : function () {
     console.log('Help in HOME PAGE')
     var message = "You can pick a topic or choose by number or say 'play all'.";

@@ -34,15 +34,6 @@
          "value": "tell me where "
        }
      ]
-   },
-   {
-     "id": "Elicit.Intent-PickItem.IntentSlot-wildcard",
-     "variations": [
-       {
-         "type": "PlainText",
-         "value": "what do you wanna get smart about? "
-       }
-     ]
    }
  ],
  "dialog": {
@@ -68,15 +59,6 @@
            "confirmationRequired": false,
            "prompts": {
              "elicitation": "Elicit.Intent-PickItem.IntentSlot-userLocation"
-           }
-         },
-         {
-           "name": "wildcard",
-           "type": "TITLES_WILDCARD",
-           "elicitationRequired": true,
-           "confirmationRequired": false,
-           "prompts": {
-             "elicitation": "Elicit.Intent-PickItem.IntentSlot-wildcard"
            }
          }
        ]
@@ -152,6 +134,10 @@
                   "samples": []
                 },
                 {
+                  "name": "AMAZON.FallbackIntent",
+                  "samples": []
+                },
+                {
                   "name": "HomePage",
                   "samples": [
                     "home page",
@@ -160,7 +146,8 @@
                     "what's new",
                     "hear what's new",
                     "what is new",
-                    "hear new explainers"
+                    "hear new explainers",
+                    "make me smart"
                   ],
                   "slots": [
                     {
@@ -214,17 +201,9 @@
                     {
                       "name": "userLocation",
                       "type": "AMAZON.US_CITY"
-                    },
-                    {
-                      "name": "wildcard",
-                      "type": "TITLES_WILDCARD"
                     }
                   ],
                   "samples": [
-                    "{index}",
-                    "{ordinal}",
-                    "{topic}",
-                    "{wildcard}",
                     "pick topic {topic}",
                     "teach me about {topic}",
                     "explain {topic}",
@@ -1597,8 +1576,10 @@
                     "tell us the conversation about {query}",
                     "tell us a conversation about {query}",
                     "tell us the conversation with {query}",
-                    "tell us a conversation with {query}"
-
+                    "tell us a conversation with {query}",
+                    "{index}",
+                    "{ordinal}",
+                    "{topic}"
                   ]
                 },
                 {

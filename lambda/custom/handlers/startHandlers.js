@@ -114,7 +114,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
-    this.emitWithState('PlayLatestExplainer', {index: {value: 1}}, 'LAUNCH_NEXT'); // NOTE TEST 1 or 2?
+    this.emitWithState('PickItem', {index: {value: 2}}, 'LAUNCH_NEXT'); // NOTE TEST 1 or 2?
   },
 
   'AMAZON.HelpIntent': function () {
