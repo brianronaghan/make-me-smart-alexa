@@ -201,9 +201,19 @@
                     {
                       "name": "userLocation",
                       "type": "AMAZON.US_CITY"
+                    },
+                    {
+                      "name": "wildcard",
+                      "type": "TITLES_WILDCARD"
                     }
                   ],
                   "samples": [
+                    "{index}",
+                    "{ordinal}",
+                    "{topic}",
+                    "{wildcard}",
+                    "{topic} {wildcard}",
+                    "pick {topic}",
                     "pick topic {topic}",
                     "teach me about {topic}",
                     "explain {topic}",
@@ -1576,10 +1586,7 @@
                     "tell us the conversation about {query}",
                     "tell us a conversation about {query}",
                     "tell us the conversation with {query}",
-                    "tell us a conversation with {query}",
-                    "{index}",
-                    "{ordinal}",
-                    "{topic}"
+                    "tell us a conversation with {query}"
                   ]
                 },
                 {
@@ -1622,8 +1629,17 @@
                     "name": {
                       "value": "something"
                     }
+                  },
+                  {
+                    "name": {
+                      "value": "something else"
+                    }
+                  },
+                  {
+                    "name": {
+                      "value": "something else more"
+                    }
                   }
-
                 ],
                 "name": "TITLES_WILDCARD"
               },

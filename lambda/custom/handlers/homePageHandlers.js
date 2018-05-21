@@ -22,7 +22,10 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
 
     // why did what's new not go here?
     console.log("HOME PAGE -> condition message", condition, message)
-
+    var slot = slot || this.event.request.intent.slots;
+    if (slot && slot.topic) {
+      console.log("WTF NOW?")
+    }
     this.attributes.currentExplainerIndex = -1;
     var intro = '';
     if (condition === 'requested') {
@@ -55,10 +58,15 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     // On add the and that was to the speech... not for card'
     var links = "<action value='PlayLatestExplainer'>Play All</action>";
     this.response.speak(intro).listen("Which topic would you like to get smart about?");
-    if (this.event.context.System.device.supportedInterfaces.Display) {
-      this.response.renderTemplate(util.templateBodyTemplate1("Make Me Smart's Latest Topics", intro, links, config.background.show));
-    }
-    this.emit(':responseReady');
+    // if (this.event.context.System.device.supportedInterfaces.Display) {
+    //   this.response.renderTemplate(util.templateBodyTemplate1("Make Me Smart's Latest Topics", intro, links, config.background.show));
+    // }
+    // HERE
+    /*
+    ':elicitSlotWithCard': function (slotName, speechOutput, repromptSpeech, cardTitle, cardContent, updatedIntent, imageObj) {
+    */
+    this.emit(':elicitSlotWithCard', 'topic', intro, "Which would you like to hear?", 'Request Explainer', util.clearProsody(intro), this.event.request.intent, util.cardImage(config.icon.full) );
+    // this.emit(':responseReady');
 
 
   },
@@ -102,17 +110,17 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
   },
 
   // DEFAULT:
-  'AMAZON.FallbackIntent': function () {
-    console.log("UM WHAT FALL BACK", JSON.stringify(this, null,2))
-    var message = "FALL BACK. You can pick a topic or choose by number or say 'play all'.";
-    this.response.speak(message).listen(message);
-    if (this.event.context.System.device.supportedInterfaces.Display) {
-      var links = "<action value='HomePage'>What's New</action> | <action value='ListExplainers'>List Explainers</action>";
-      this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, links, config.background.show));
-    }
-    this.emit(':saveState', true);
-
-  },
+  // 'AMAZON.FallbackIntent': function () {
+  //   console.log("UM WHAT FALL BACK", JSON.stringify(this, null,2))
+  //   var message = "FALL BACK. You can pick a topic or choose by number or say 'play all'.";
+  //   this.response.speak(message).listen(message);
+  //   if (this.event.context.System.device.supportedInterfaces.Display) {
+  //     var links = "<action value='HomePage'>What's New</action> | <action value='ListExplainers'>List Explainers</action>";
+  //     this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, links, config.background.show));
+  //   }
+  //   this.emit(':saveState', true);
+  //
+  // },
   'AMAZON.HelpIntent' : function () {
     console.log('Help in HOME PAGE')
     var message = "You can pick a topic or choose by number or say 'play all'.";

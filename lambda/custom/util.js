@@ -41,6 +41,7 @@ module.exports = {
   },
   nullCheck: nullCheck,
   prosodyToBold: prosodyToBold,
+  clearProsody: clearProsody,
   cleanSlotName: cleanSlotName,
 
   templateListTemplate1: function (title, token, itemLabel, itemTitleKey, items) {
@@ -275,6 +276,14 @@ function prosodyToBold (text) {
   text = text.replace(/<audio[^>]*>/gi, "")
   return text;
 };
+
+function clearProsody (text) {
+  text = text.replace(/<prosody[^>]*>/gi, "")
+  text = text.replace(/<\/prosody>/gi, "")
+  text = text.replace(/<audio[^>]*>/gi, "")
+  return text;
+};
+
 
 function cleanSlotName (showString) {
   var cleanedSlot = showString.toLowerCase();
