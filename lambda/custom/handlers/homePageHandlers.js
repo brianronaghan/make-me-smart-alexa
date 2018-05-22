@@ -21,10 +21,11 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
   'HomePage': function (condition, message) {
 
     // why did what's new not go here?
-    console.log("HOME PAGE -> condition message", condition, message)
     var slot = slot || this.event.request.intent.slots;
-    if (slot && slot.topic) {
-      console.log("WTF NOW?")
+    console.log("HOME PAGE", JSON.stringify(this.event.request, null,2))
+    if (slot && slot.topic && slot.topic.value) {
+      console.log("GOT AFTER ELICIT on home", slot)
+      return this.emitWithState('PickItem', slot)
     }
     this.attributes.currentExplainerIndex = -1;
     var intro = '';
@@ -65,7 +66,7 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     /*
     ':elicitSlotWithCard': function (slotName, speechOutput, repromptSpeech, cardTitle, cardContent, updatedIntent, imageObj) {
     */
-    this.emit(':elicitSlotWithCard', 'topic', intro, "Which would you like to hear?", 'Request Explainer', util.clearProsody(intro), this.event.request.intent, util.cardImage(config.icon.full) );
+    this.emit(':elicitSlotWithCard', 'topic', intro, "Which would you like to hear?", 'Latest Explainers', util.clearProsody(intro), this.event.request.intent, util.cardImage(config.icon.full) );
     // this.emit(':responseReady');
 
 
@@ -92,7 +93,10 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
       slot = {index: {value: index + 1}};
       this.attributes.HEARD_FIRST = 0;
       return this.emitWithState('PickItem', slot, 'HOME_AFTER_LAUNCH')
-    } else {
+    } else if (this.attributes.HEARD_FIRST === 1){
+      this.attributes.HEARD_FIRST = 0;
+      return this.emitWithState('PickItem', slot, 'HOME_AFTER_LAUNCH')
+    } else { // need a separate case to retain launch
       return this.emitWithState('PickItem', slot, 'HOME_PAGE')
     }
   },

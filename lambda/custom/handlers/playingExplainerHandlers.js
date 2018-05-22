@@ -61,21 +61,22 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
             boundThis.emitWithState('ListExplainers');
           }
         );
-      } else if (slot.wildcard && slot.wildcard.value) {
-        console.log("NO EXPLAINER , but there is WILDCARD ", JSON.stringify(slot, null,2));
+      } else if (slot.topic && slot.topic.value) {
+        // convert to query
+        console.log("NO EXPLAINER , but there is TOPIC ", JSON.stringify(slot, null,2));
         this.handler.state = config.states.REQUEST;
         this.attributes.STATE = config.states.REQUEST;
         return this.emitWithState('PickItem', slot);
       } else {
         console.log("NO EXPLAINER, and no slot info I can use ", JSON.stringify(slot, null,2));
-        var message = `Sorry, I couldn't quite understand that. Here are our latest explainers.`;
+        var message = `Sorry, I couldn't quite understand that.`;
         return util.sendProgressive(
           boundThis.event.context.System.apiEndpoint, // no need to add directives params
           boundThis.event.request.requestId,
           boundThis.event.context.System.apiAccessToken,
           message,
           function (err) {
-            return this.emitWithState('HomePage', 'no_welcome')
+            return boundThis.emitWithState('HomePage', 'no_welcome')
           }
         );
       }

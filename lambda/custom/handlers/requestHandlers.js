@@ -16,7 +16,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     var message = '';
     var boundThis = this;
     var payload = {}
-
+    // NOTE: NEED TO MAKE THIS WORK FOR EITHER TOPIC OR QUERY
     if (slot.query && !slot.query.value) { // came here without a query
       console.log("INTENT ", this.event.request.intent);
       // var newIntent = this.event.request.intent;
