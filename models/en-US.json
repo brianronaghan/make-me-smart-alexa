@@ -1697,7 +1697,7 @@
                     }
                   ],
                   "samples": [
-                    "request explainer",
+                    "request explainer slot",
                     "suggest a topic",
                     "request an explainer"
                   ]

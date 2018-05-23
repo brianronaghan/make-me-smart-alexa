@@ -19,6 +19,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     var slot = slot || this.event.request.intent.slots;
 
     if (slot && slot.topic && slot.topic.value) {
+      console.log("SLOT")
       return this.emitWithState('PickItem', slot)
     }
     var data = util.itemLister(
@@ -43,7 +44,6 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     //   );
     // }
     let newIntent = this.event.request.intent;
-    console.log("NEW INTENT", newIntent)
 
     newIntent.slots = {
       topic: {
@@ -110,7 +110,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     this.emitWithState(intentName, intentSlot);
   },
 
-  // BUILT IN
+  //BUILT IN
   'AMAZON.NextIntent' : function () {
     console.log("iterating explainers NEXT")
     var deviceId = util.getDeviceId.call(this);

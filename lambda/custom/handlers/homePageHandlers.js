@@ -113,6 +113,21 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     this.emitWithState('PickItem', {index: {value: 1}}, 'HOMEPAGE_NEXT');
   },
 
+  'ListExplainers': function () {
+    console.log('list explainers from HOME PAGE')
+
+    var deviceId = util.getDeviceId.call(this);
+    util.nullCheck.call(this, deviceId);
+    console.log('list Explainers FROM HOME PAGE')
+    console.log(JSON.stringify(this.event.request, null, 2));
+    this.attributes.currentExplainerIndex = -1;
+    this.attributes.indices.explainer = 0;
+    this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
+    // this just throws to the correct state version of itself
+    this.emitWithState('ListExplainers');
+  },
+
+
   // DEFAULT:
   // 'AMAZON.FallbackIntent': function () {
   //   console.log("UM WHAT FALL BACK", JSON.stringify(this, null,2))
@@ -143,7 +158,7 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     this.emit(':saveState');
    },
    'Unhandled' : function () {
-     console.log('PLAYING EXPLAINER UNHANDLED',JSON.stringify(this.event, null, 2))
+     console.log('HOME PAGE  UNHANDLED',JSON.stringify(this.event, null, 2))
      this.emitWithState('HomePage', 'no_welcome', "Sorry I couldn't quite handle that.");
 
    }
