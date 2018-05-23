@@ -107,7 +107,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
           prompt = `You can say 'replay' to hear that again, 'next' to learn about ${explainers[chosenExplainer.index+1].title}, or 'list explainers' to explore all of our explainers. What would you like to do?`;
           links += " | <action value='Next'>Next</action>";
         } else {
-          prompt = "And that's all we have right now. Say 'replay' to hear that again, 'list explainers' to hear all our explainers, or 'suggest a topic' to give us an idea for our next explainer. What would you like to do?"
+          prompt = "And that's all we have right now. Say 'replay' to hear that again, 'list explainers' to explore all our explainers, or 'suggest a topic' to give us an idea for our next explainer. What would you like to do?"
         }
 
         if (this.event.context.System.device.supportedInterfaces.Display) {

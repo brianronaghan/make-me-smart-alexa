@@ -16,21 +16,19 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     var message = '';
     var boundThis = this;
     var payload = {}
-     if (slot.query && !slot.query.value) { // came here without a query
+    if (slot.query && !slot.query.value) { // came here without a query
       // var newIntent = this.event.request.intent;
       // newIntent.name = 'PickItem';
       // console.log("NEW INTENT",newIntent);
       message = "What would you like to get smart about?";
       return this.emit(':elicitSlotWithCard', 'query', message, "What would you like to request an explainer about?", 'Request Explainer',message, this.event.request.intent, util.cardImage(config.icon.full));
     }
-    console.log("YO WAT", slot)
     let suggestion;
     if (slot.query && slot.query.value) {
       suggestion = slot.query.value;
     } else if (slot.topic && slot.topic.value) {
       suggestion = slot.topic.value;
     }
-    console.log("YO WAT", suggestion)
 
     if (this.attributes.userName && this.attributes.userLocation && false) { // NOTE: turn off for test/build if we've already got your info
       payload.requests = [{
@@ -59,7 +57,6 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
         );
       });
     } else if (slot.userName && !slot.userName.value) { // NOTE NOT SAVING NAME && !this.attributes.userName
-      console.log('no user ', suggestion)
       message += `Hmmm, we don't have anything on ${suggestion}. But I'll ask Kai and Molly to look into it. Who should I say is asking?`;
       this.emit(':elicitSlotWithCard', 'userName', message, "What name should I leave?", 'Request Explainer',message, this.event.request.intent, util.cardImage(config.icon.full));
     } else if (slot.userLocation && !slot.userLocation.value ) { // NOTE NOT SAVING NAME && this.attributes.userLocation
@@ -98,6 +95,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
           this.event.context.System.apiAccessToken,
           confirmationMessage,
           function (err) {
+
             if (err) {
               boundThis.emitWithState('HomePage', 'requested', confirmationMessage);
             } else {

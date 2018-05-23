@@ -24,17 +24,17 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
       config.items_per_prompt.explainer
     );
     this.response.speak(data.itemsAudio).listen('Pick one or say next or previous to move forward or backward through list.').cardRenderer(data.itemsCard);
-    if (this.event.context.System.device.supportedInterfaces.Display) {
-      this.response.renderTemplate(
-        util.templateListTemplate1(
-          'Explainers',
-          'list-explainers',
-          'Explainer',
-          'title',
-          explainers
-        )
-      );
-    }
+    // if (this.event.context.System.device.supportedInterfaces.Display) {
+    //   this.response.renderTemplate(
+    //     util.templateListTemplate1(
+    //       'Explainers',
+    //       'list-explainers',
+    //       'Explainer',
+    //       'title',
+    //       explainers
+    //     )
+    //   );
+    // }
     this.emit(':responseReady');
 
   },
