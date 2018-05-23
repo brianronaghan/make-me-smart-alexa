@@ -23,7 +23,41 @@
      "variations": [
        {
          "type": "PlainText",
-         "value": "where are you from? "
+         "value": "where are you from?"
+       },
+       {
+         "type": "PlainText",
+         "value": "what city"
+       },
+       {
+         "type": "PlainText",
+         "value": "tell me where "
+       }
+     ]
+   },
+   {
+     "id": "Elicit.Intent-HomePage.IntentSlot-userName",
+     "variations": [
+       {
+         "type": "PlainText",
+         "value": "who should I say is calling?"
+       },
+       {
+         "type": "PlainText",
+         "value": "give me a name"
+       },
+       {
+         "type": "PlainText",
+         "value": "what's your name"
+       }
+     ]
+   },
+   {
+     "id": "Elicit.Intent-HomePage.IntentSlot-userLocation",
+     "variations": [
+       {
+         "type": "PlainText",
+         "value": "where are you from?"
        },
        {
          "type": "PlainText",
@@ -59,6 +93,31 @@
            "confirmationRequired": false,
            "prompts": {
              "elicitation": "Elicit.Intent-PickItem.IntentSlot-userLocation"
+           }
+         }
+       ]
+     },
+     {
+       "name": "HomePage",
+       "confirmationRequired": false,
+       "prompts": {},
+       "slots": [
+         {
+           "name": "userName",
+           "type": "AMAZON.US_FIRST_NAME",
+           "elicitationRequired": true,
+           "confirmationRequired": false,
+           "prompts": {
+             "elicitation": "Elicit.Intent-HomePage.IntentSlot-userName"
+           }
+         },
+         {
+           "name": "userLocation",
+           "type": "AMAZON.US_CITY",
+           "elicitationRequired": true,
+           "confirmationRequired": false,
+           "prompts": {
+             "elicitation": "Elicit.Intent-HomePage.IntentSlot-userLocation"
            }
          }
        ]
@@ -153,6 +212,14 @@
                     {
                       "name": "topic",
                       "type": "TOPICS"
+                    },
+                    {
+                      "name": "userName",
+                      "type": "AMAZON.US_FIRST_NAME"
+                    },
+                    {
+                      "name": "userLocation",
+                      "type": "AMAZON.US_CITY"
                     }
                   ]
                 },

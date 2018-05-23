@@ -16,18 +16,25 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     var message = '';
     var boundThis = this;
     var payload = {}
-    // NOTE: NEED TO MAKE THIS WORK FOR EITHER TOPIC OR QUERY
-    if (slot.query && !slot.query.value) { // came here without a query
-      console.log("INTENT ", this.event.request.intent);
+     if (slot.query && !slot.query.value) { // came here without a query
       // var newIntent = this.event.request.intent;
       // newIntent.name = 'PickItem';
       // console.log("NEW INTENT",newIntent);
       message = "What would you like to get smart about?";
-      this.emit(':elicitSlotWithCard', 'query', message, "What would you like to request an explainer about?", 'Request Explainer',message, this.event.request.intent, util.cardImage(config.icon.full));
+      return this.emit(':elicitSlotWithCard', 'query', message, "What would you like to request an explainer about?", 'Request Explainer',message, this.event.request.intent, util.cardImage(config.icon.full));
+    }
+    console.log("YO WAT", slot)
+    let suggestion;
+    if (slot.query && slot.query.value) {
+      suggestion = slot.query.value;
+    } else if (slot.topic && slot.topic.value) {
+      suggestion = slot.topic.value;
+    }
+    console.log("YO WAT", suggestion)
 
-    } else if (this.attributes.userName && this.attributes.userLocation && false) { // NOTE: turn off for test/build if we've already got your info
+    if (this.attributes.userName && this.attributes.userLocation && false) { // NOTE: turn off for test/build if we've already got your info
       payload.requests = [{
-        query: slot.query.value,
+        query: suggestion,
         time: this.event.request.timestamp,
         user: this.attributes.userName,
         location: this.attributes.userLocation
@@ -35,7 +42,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       console.time('UPDATE-DB-request-saved');
       db.update.call(this, payload, function(err, response) {
         console.timeEnd('UPDATE-DB-request-saved');
-        message = `Hmmm, we don't have anything on ${slot.query.value}. But I'll tell Kai and Molly that ${this.attributes.userName} from ${this.attributes.userLocation} wants to get smart about that!`;
+        message = `Hmmm, we don't have anything on ${suggestion}. But I'll tell Kai and Molly that ${this.attributes.userName} from ${this.attributes.userLocation} wants to get smart about that!`;
         this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
         return util.sendProgressive(
           this.event.context.System.apiEndpoint, // no need to add directives params
@@ -51,13 +58,13 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
           }
         );
       });
-
-    } else if (!slot.userName.value) { // NOTE NOT SAVING NAME && !this.attributes.userName
-      message += `Hmmm, we don't have anything on ${slot.query.value}. But I'll ask Kai and Molly to look into it. Who should I say is asking?`;
+    } else if (slot.userName && !slot.userName.value) { // NOTE NOT SAVING NAME && !this.attributes.userName
+      console.log('no user ', suggestion)
+      message += `Hmmm, we don't have anything on ${suggestion}. But I'll ask Kai and Molly to look into it. Who should I say is asking?`;
       this.emit(':elicitSlotWithCard', 'userName', message, "What name should I leave?", 'Request Explainer',message, this.event.request.intent, util.cardImage(config.icon.full));
-    } else if (!slot.userLocation.value ) { // NOTE NOT SAVING NAME && this.attributes.userLocation
+    } else if (slot.userLocation && !slot.userLocation.value ) { // NOTE NOT SAVING NAME && this.attributes.userLocation
       this.attributes.userName = slot.userName.value;
-      var cardMessage = `I'll note that ${slot.userName.value} would like an explainer on ${slot.query.value}. `;
+      var cardMessage = `I'll note that ${slot.userName.value} would like an explainer on ${suggestion}. `;
       message += 'And where are you from?';
       cardMessage += message;
       this.emit(':elicitSlotWithCard', 'userLocation', message, "What location should I leave?", 'Request Explainer', cardMessage, this.event.request.intent, util.cardImage(config.icon.full) );
@@ -65,7 +72,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       console.log("OKAY, NOW WE HAVE EVEYRTHING for request ", slot)
       this.attributes.userLocation = slot.userLocation.value;
       payload.requests = [{
-        query: slot.query.value,
+        query: suggestion,
         time: this.event.request.timestamp,
         user: this.attributes.userName,
         location: this.attributes.userLocation
@@ -73,7 +80,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       console.time('UPDATE-DB-request-new');
       db.update.call(this, payload, function(err, response) {
         console.timeEnd('UPDATE-DB-request-new');
-        var confirmationMessage = `Okay, I'll tell Kai and Molly ${slot.userName.value} from ${slot.userLocation.value} asked for an explainer on ${slot.query.value}.`;
+        var confirmationMessage = `Okay, I'll tell Kai and Molly ${slot.userName.value} from ${slot.userLocation.value} asked for an explainer on ${suggestion}.`;
         if (this.event.context.System.device.supportedInterfaces.Display) {
           this.response.renderTemplate(
             util.templateBodyTemplate1(
@@ -179,7 +186,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     this.emit(':saveState', true);
   },
   'SessionEndedRequest' : function () {
-    console.log("SESSION ENDED IN REQUEST")
+    console.log("SESSION ENDED IN REQUEST", JSON.stringify(this.event, null,2))
    },
    'Unhandled' : function () {
      // Just go to start

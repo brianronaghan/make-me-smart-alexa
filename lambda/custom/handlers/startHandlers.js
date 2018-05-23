@@ -10,7 +10,7 @@ var explainers = require('../explainers');
 
 var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
   'LaunchRequest': function (condition, message) {
-    console.log("LAUNCH FUCKING REQUEST", this.event.request)
+    console.log("LAUNCH REQUEST", this.event.request, "ATS", this.attributes)
     let welcome = '';
 
     let latestExplainer = explainers[0];

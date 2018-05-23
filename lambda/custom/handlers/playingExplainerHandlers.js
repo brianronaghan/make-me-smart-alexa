@@ -104,10 +104,10 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
           prompt = `You can say 'replay', 'list explainers', or 'play the latest' to hear our latest explainer. What would you like to do?`;
           links += " | <action value='HomePage'> What's New </action>";
         } else if (explainers[chosenExplainer.index+1]) { // handle if end of explainer feed
-          prompt = `You can say 'replay' to hear that again, 'next' to learn about ${explainers[chosenExplainer.index+1].title}, or 'list explainers' to see all of our explainers. What would you like to do?`;
+          prompt = `You can say 'replay' to hear that again, 'next' to learn about ${explainers[chosenExplainer.index+1].title}, or 'list explainers' to explore all of our explainers. What would you like to do?`;
           links += " | <action value='Next'>Next</action>";
         } else {
-          prompt = "And that's all we have right now. Say 'replay' to hear that again, 'list explainers' to see all, or 'suggest a topic' to give us an idea for our next explainer. What would you like to do?"
+          prompt = "And that's all we have right now. Say 'replay' to hear that again, 'list explainers' to hear all our explainers, or 'suggest a topic' to give us an idea for our next explainer. What would you like to do?"
         }
 
         if (this.event.context.System.device.supportedInterfaces.Display) {
@@ -202,8 +202,8 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     // handle next at end of list?
     if (explainers.length <= this.attributes.currentExplainerIndex +1) {
       // last spot
-      var message = "We don't have any more explainers right now. Say 'list explainers' to see all or 'play full episodes' to hear episodes of our shows. What would you like to do?"
-      var prompt = "Say 'list explainers' to see all, or 'play full episodes' to for full episodes of our show. What would you like to do?"
+      var message = "We don't have any more explainers right now. Say 'list explainers' to explore all our explainers or 'what's new' for the latest. What would you like to do?"
+      var prompt = "Say 'list explainers' to explore all our explainers, or 'what's new' for the latest. What would you like to do?"
       var links = "<action value='ListExplainers'>List explainers</action> | <action value='ListShows'>Play full episodes</action>";
 
       if (this.event.context.System.device.supportedInterfaces.Display) {
@@ -266,7 +266,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
   // DEFAULT:
   'AMAZON.HelpIntent' : function () {
     console.log('Help in PLAYING EXPLAINER')
-    var message = "You can say 'next' or 'previous', or 'what's new' to see our latest explainers, or 'list explainers' to see them all.";
+    var message = "You can say 'next' or 'previous', or 'what's new' to see our latest explainers, or 'list explainers' to explore them all.";
     this.response.speak(message).listen(message);
     if (this.event.context.System.device.supportedInterfaces.Display) {
       var links = "<action value='HomePage'>What's New</action> | <action value='ListExplainers'>List Explainers</action>";

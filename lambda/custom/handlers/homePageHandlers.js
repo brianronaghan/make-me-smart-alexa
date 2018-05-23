@@ -23,7 +23,7 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     // why did what's new not go here?
     var slot = slot || this.event.request.intent.slots;
     console.log("HOME PAGE", JSON.stringify(this.event.request, null,2))
-    if (slot && slot.topic && slot.topic.value) {
+    if (slot && slot.topic && slot.topic.value && condition !== 'requested') {
       console.log("GOT AFTER ELICIT on home", slot)
       return this.emitWithState('PickItem', slot)
     }
