@@ -16,6 +16,11 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     if (this.event.session.new || (!this.attributes.indices.explainer)) { // is this logic correct?
       this.attributes.indices.explainer = 0;
     }
+    var slot = slot || this.event.request.intent.slots;
+
+    if (slot && slot.topic && slot.topic.value) {
+      return this.emitWithState('PickItem', slot)
+    }
     var data = util.itemLister(
       explainers,
       `explainers`,
@@ -23,7 +28,9 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
       this.attributes.indices.explainer,
       config.items_per_prompt.explainer
     );
-    this.response.speak(data.itemsAudio).listen('Pick one or say next or previous to move forward or backward through list.').cardRenderer(data.itemsCard);
+    console.log('dc',data.itemsCard)
+
+    // this.response.speak(data.itemsAudio).listen('Pick one or say next or previous to move forward or backward through list.').cardRenderer(data.itemsCard);
     // if (this.event.context.System.device.supportedInterfaces.Display) {
     //   this.response.renderTemplate(
     //     util.templateListTemplate1(
@@ -35,6 +42,17 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     //     )
     //   );
     // }
+    let newIntent = this.event.request.intent;
+    console.log("NEW INTENT", newIntent)
+
+    newIntent.slots = {
+      topic: {
+        name: 'topic',
+        confirmationStatus: 'NONE'
+      }
+    }
+    this.emit(':elicitSlotWithCard', 'topic', data.itemsAudio, "Pick one or say next or previous to move forward or backward through list.", 'List of Explainers', data.itemsCard, newIntent, util.cardImage(config.icon.full) );
+
     this.emit(':responseReady');
 
   },

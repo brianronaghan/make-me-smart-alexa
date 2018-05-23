@@ -68,6 +68,20 @@
          "value": "tell me where "
        }
      ]
+   },
+   {
+     "id": "Elicit.Intent-ListExplainers.IntentSlot-topic",
+     "variations": [
+       {
+         "type": "PlainText",
+         "value": "Which topic would you like to learn about?"
+       },
+       {
+         "type": "PlainText",
+         "value": "pick a topic"
+       }
+
+     ]
    }
  ],
  "dialog": {
@@ -93,6 +107,22 @@
            "confirmationRequired": false,
            "prompts": {
              "elicitation": "Elicit.Intent-PickItem.IntentSlot-userLocation"
+           }
+         }
+       ]
+     },
+     {
+       "name": "ListExplainers",
+       "confirmationRequired": false,
+       "prompts": {},
+       "slots": [
+         {
+           "name": "topic",
+           "type": "TOPICS",
+           "elicitationRequired": true,
+           "confirmationRequired": false,
+           "prompts": {
+             "elicitation": "Elicit.Intent-ListExplainers.IntentSlot-topic"
            }
          }
        ]
@@ -1667,14 +1697,19 @@
                     }
                   ],
                   "samples": [
-                    "request explainer slot",
+                    "request explainer",
                     "suggest a topic",
                     "request an explainer"
                   ]
                 },
                 {
                     "name":"ListExplainers",
-                    "slots" : [],
+                    "slots" : [
+                      {
+                        "name": "topic",
+                        "type": "TOPICS"
+                      }
+                    ],
                     "samples":[
                         "what explainers it has",
                         "list explainers",

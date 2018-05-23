@@ -153,11 +153,12 @@ module.exports = {
     for (var x = start; x < start + chunkLength; x++) {
       // console.log(x, items[x]);
       if (items[x]) {
-        itemsAudio += constants.breakTime['25'] +  `${x+1}, ${items[x][titleKey]}` + constants.breakTime['25'];
+        itemsAudio += constants.breakTime['25'] +  `${x+1}, ${items[x][titleKey]} ` + constants.breakTime['25'];
         itemsCard += `${x+1}) ${items[x][titleKey]}\n`;
       }
     }
-    itemsAudio += 'Choose one ';
+    itemsAudio += '. Choose one ';
+    itemsCard += '\n'
     itemsCard += 'Choose one ';
     if (start == 0) {// if start is 0
       if (chunkLength < items.length) {// if chunk length is less than total length
@@ -283,6 +284,7 @@ function clearProsody (text) {
   text = text.replace(/<audio[^>]*>/gi, "")
   return text;
 };
+
 
 
 function cleanSlotName (showString) {
