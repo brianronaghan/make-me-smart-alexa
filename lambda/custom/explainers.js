@@ -1,5 +1,79 @@
-module.exports = [{
-      title: 'Stock Buybacks',
+module.exports = [
+  {
+        title: 'MIXLEV inflation ',
+        author: 'Kai Ryssdal',
+        tags: [],
+        guid: 'inflation_MIXLEV',
+        date: "2018-05-18",
+        description: 'Alexa - Ryssdal Inflation - MIXLEV_alexa',
+        audio: {
+          url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa+-+Ryssdal+Inflation+-+MIXLEV_alexa.mp3",
+        },
+        requestedBy: 'Sitara from Los Angeles'
+  },
+  {
+        title: 'MIXLEV EQ inflation ',
+        author: 'Kai Ryssdal',
+        tags: [],
+        guid: 'inflation_MIXLEV_EQ',
+        date: "2018-05-18",
+        description: 'Alexa - Ryssdal Inflation - MIXEQ LEV_alexa',
+        audio: {
+          url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa+-+Ryssdal+Inflation+-+MIXEQ+LEV_alexa.mp3",
+        },
+        requestedBy: 'Sitara from Los Angeles'
+  },
+  {
+        title: 'MIXLEV EQ-2 inflation ',
+        author: 'Kai Ryssdal',
+        tags: [],
+        guid: 'inflation_MIXLEV_EQ-2',
+        date: "2018-05-18",
+        description: 'Alexa - Ryssdal Inflation - MIXEQLEV-2_alexa',
+        audio: {
+          url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa+-+Ryssdal+Inflation+-+MIXEQLEV-2_alexa.mp3",
+        },
+        requestedBy: 'Sitara from Los Angeles'
+  },
+  {
+        title: 'MIXLEV stock buybacks ',
+        author: 'Kai Ryssdal',
+        tags: [],
+        guid: 'stock_buybacks_MIXLEV',
+        date: "2018-05-18",
+        description: 'Alexa - Ryssdal Stock Buybacks - MIX LEV_alexa',
+        audio: {
+          url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa+-+Ryssdal+Stock+Buybacks+-+MIXLEV_alexa.mp3",
+        },
+        requestedBy: 'Sitara from Los Angeles'
+  },
+  {
+        title: 'MIXLEV EQ stock buybacks ',
+        author: 'Kai Ryssdal',
+        tags: [],
+        guid: 'stock_buybacks_MIXLEV_EQ',
+        date: "2018-05-18",
+        description: 'Alexa - Ryssdal Stock Buybacks - MIXEQ LEV_alexa',
+        audio: {
+          url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa+-+Ryssdal+Stock+Buybacks+-+MIXEQ+LEV_alexa.mp3",
+        },
+        requestedBy: 'Sitara from Los Angeles'
+  },
+  {
+        title: 'MIXLEV EQ-2 stock buybacks ',
+        author: 'Kai Ryssdal',
+        tags: [],
+        guid: 'stock_buybacks_MIXLEV_EQ-2',
+        date: "2018-05-18",
+        description: 'Alexa - Ryssdal Stock Buybacks - MIXEQ LEV-2_alexa',
+        audio: {
+          url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Ryssdal+Stock+Buybacks+-+MIX.mp3",
+        },
+        requestedBy: 'Sitara from Los Angeles'
+  },
+
+  {
+      title: 'Stock Buybacks ORIG',
       author: 'Kai Ryssdal',
       tags: [],
       guid: 'preprod_stock_buybacks_kai',
