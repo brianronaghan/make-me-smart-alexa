@@ -163,19 +163,19 @@ module.exports = {
     if (start == 0) {// if start is 0
       if (chunkLength < items.length) {// if chunk length is less than total length
         // add more
-        itemsAudio += `or say next for more ${itemTitlePlural}`;
-        itemsCard += ` or say next for more ${itemTitlePlural} `;
+        itemsAudio += `or say 'older' for older ${itemTitlePlural}`;
+        itemsCard += ` or say 'older' for older ${itemTitlePlural} `;
       }
     } else {// start != 0
       console.log('st', start, 'chu', chunkLength, items.length)
       if (start + chunkLength < items.length) {// if it is start + chunk is < total length
         // add more
-        itemsAudio += constants.breakTime['50'] + `or say next for more ${itemTitlePlural}`;
-        itemsCard += ` or say next for more ${itemTitlePlural} `;
+        itemsAudio += constants.breakTime['50'] + `or say 'older' for older ${itemTitlePlural}`;
+        itemsCard += ` or say 'older' for older ${itemTitlePlural} `;
       }
       // always have previous (if we're gonna do previous)
-      itemsAudio += `or say previous to hear the last ${chunkLength}`;
-      itemsCard += `or say previous to hear the last ${chunkLength}`;
+      itemsAudio += `or say 'newer' to hear the more recent ${chunkLength}`;
+      itemsCard += `or say 'newer' to hear the more recent ${chunkLength}`;
     }
     itemsAudio += ". What would you like to do?"
     return {itemsAudio, itemsCard};
@@ -280,7 +280,7 @@ function prosodyToBold (text) {
 
 function clearProsody (text) {
   text = text.replace(/<prosody[^>]*>/gi, "")
-  text = text.replace(/<\/prosody>/gi, "")
+  text = text.replace(/<\/prosody>/gi, "\n")
   text = text.replace(/<audio[^>]*>/gi, "")
   return text;
 };

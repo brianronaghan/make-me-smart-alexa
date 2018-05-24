@@ -82,7 +82,104 @@
        }
 
      ]
+   },
+   {
+     "id": "Elicit.Intent-EarlierExplainers.IntentSlot-topic",
+     "variations": [
+       {
+         "type": "PlainText",
+         "value": "Which topic would you like to learn about?"
+       },
+       {
+         "type": "PlainText",
+         "value": "pick a topic"
+       }
+
+     ]
+   },
+   {
+     "id": "Elicit.Intent-EarlierExplainers.IntentSlot-userName",
+     "variations": [
+       {
+         "type": "PlainText",
+         "value": "who should I say is calling?"
+       },
+       {
+         "type": "PlainText",
+         "value": "give me a name"
+       },
+       {
+         "type": "PlainText",
+         "value": "what's your name"
+       }
+     ]
+   },
+   {
+     "id": "Elicit.Intent-EarlierExplainers.IntentSlot-userLocation",
+     "variations": [
+       {
+         "type": "PlainText",
+         "value": "where are you from?"
+       },
+       {
+         "type": "PlainText",
+         "value": "what city"
+       },
+       {
+         "type": "PlainText",
+         "value": "tell me where "
+       }
+     ]
+   },
+   {
+     "id": "Elicit.Intent-LaterExplainers.IntentSlot-topic",
+     "variations": [
+       {
+         "type": "PlainText",
+         "value": "Which topic would you like to learn about?"
+       },
+       {
+         "type": "PlainText",
+         "value": "pick a topic"
+       }
+
+     ]
+   },
+   {
+     "id": "Elicit.Intent-LaterExplainers.IntentSlot-userName",
+     "variations": [
+       {
+         "type": "PlainText",
+         "value": "who should I say is calling?"
+       },
+       {
+         "type": "PlainText",
+         "value": "give me a name"
+       },
+       {
+         "type": "PlainText",
+         "value": "what's your name"
+       }
+     ]
+   },
+   {
+     "id": "Elicit.Intent-LaterExplainers.IntentSlot-userLocation",
+     "variations": [
+       {
+         "type": "PlainText",
+         "value": "where are you from?"
+       },
+       {
+         "type": "PlainText",
+         "value": "what city"
+       },
+       {
+         "type": "PlainText",
+         "value": "tell me where "
+       }
+     ]
    }
+
  ],
  "dialog": {
    "intents": [
@@ -123,6 +220,74 @@
            "confirmationRequired": false,
            "prompts": {
              "elicitation": "Elicit.Intent-ListExplainers.IntentSlot-topic"
+           }
+         }
+       ]
+     },
+     {
+       "name": "LaterExplainers",
+       "confirmationRequired": false,
+       "prompts": {},
+       "slots": [
+         {
+           "name": "topic",
+           "type": "TOPICS",
+           "elicitationRequired": true,
+           "confirmationRequired": false,
+           "prompts": {
+             "elicitation": "Elicit.Intent-LaterExplainers.IntentSlot-topic"
+           }
+         },
+         {
+           "name": "userName",
+           "type": "AMAZON.US_FIRST_NAME",
+           "elicitationRequired": true,
+           "confirmationRequired": false,
+           "prompts": {
+             "elicitation": "Elicit.Intent-LaterExplainers.IntentSlot-userName"
+           }
+         },
+         {
+           "name": "userLocation",
+           "type": "AMAZON.US_CITY",
+           "elicitationRequired": true,
+           "confirmationRequired": false,
+           "prompts": {
+             "elicitation": "Elicit.Intent-LaterExplainers.IntentSlot-userLocation"
+           }
+         }
+       ]
+     },
+     {
+       "name": "EarlierExplainers",
+       "confirmationRequired": false,
+       "prompts": {},
+       "slots": [
+         {
+           "name": "topic",
+           "type": "TOPICS",
+           "elicitationRequired": true,
+           "confirmationRequired": false,
+           "prompts": {
+             "elicitation": "Elicit.Intent-EarlierExplainers.IntentSlot-topic"
+           }
+         },
+         {
+           "name": "userName",
+           "type": "AMAZON.US_FIRST_NAME",
+           "elicitationRequired": true,
+           "confirmationRequired": false,
+           "prompts": {
+             "elicitation": "Elicit.Intent-EarlierExplainers.IntentSlot-userName"
+           }
+         },
+         {
+           "name": "userLocation",
+           "type": "AMAZON.US_CITY",
+           "elicitationRequired": true,
+           "confirmationRequired": false,
+           "prompts": {
+             "elicitation": "Elicit.Intent-EarlierExplainers.IntentSlot-userLocation"
            }
          }
        ]
@@ -237,6 +402,56 @@
                     "what is new",
                     "hear new explainers",
                     "make me smart"
+                  ],
+                  "slots": [
+                    {
+                      "name": "topic",
+                      "type": "TOPICS"
+                    },
+                    {
+                      "name": "userName",
+                      "type": "AMAZON.US_FIRST_NAME"
+                    },
+                    {
+                      "name": "userLocation",
+                      "type": "AMAZON.US_CITY"
+                    }
+                  ]
+                },
+                {
+                  "name": "EarlierExplainers",
+                  "samples": [
+                    "earlier",
+                    "earlier explainers",
+                    "before that",
+                    "further back",
+                    "older",
+                    "older explainers"
+                  ],
+                  "slots": [
+                    {
+                      "name": "topic",
+                      "type": "TOPICS"
+                    },
+                    {
+                      "name": "userName",
+                      "type": "AMAZON.US_FIRST_NAME"
+                    },
+                    {
+                      "name": "userLocation",
+                      "type": "AMAZON.US_CITY"
+                    }
+                  ]
+                },
+                {
+                  "name": "LaterExplainers",
+                  "samples": [
+                    "later",
+                    "later explainers",
+                    "after that",
+                    "more recent",
+                    "newer",
+                    "newer explainers"
                   ],
                   "slots": [
                     {

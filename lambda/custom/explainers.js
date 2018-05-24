@@ -1,18 +1,19 @@
 module.exports = [
   {
-        title: 'MIXLEV inflation ',
+        title: 'Apple Carts',
         author: 'Kai Ryssdal',
         tags: [],
         guid: 'inflation_MIXLEV',
         date: "2018-05-18",
         description: 'Alexa - Ryssdal Inflation - MIXLEV_alexa',
         audio: {
+          intro: 'https://s3.amazonaws.com/ask-soundlibrary/scifi/amzn_sfx_scifi_alien_voice_11.mp3',
           url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa+-+Ryssdal+Inflation+-+MIXLEV_alexa.mp3",
         },
         requestedBy: 'Sitara from Los Angeles'
   },
   {
-        title: 'MIXLEV EQ inflation ',
+        title: 'Rainbows',
         author: 'Kai Ryssdal',
         tags: [],
         guid: 'inflation_MIXLEV_EQ',
@@ -24,7 +25,7 @@ module.exports = [
         requestedBy: 'Sitara from Los Angeles'
   },
   {
-        title: 'MIXLEV EQ-2 inflation ',
+        title: 'arms dealers',
         author: 'Kai Ryssdal',
         tags: [],
         guid: 'inflation_MIXLEV_EQ-2',
@@ -36,7 +37,7 @@ module.exports = [
         requestedBy: 'Sitara from Los Angeles'
   },
   {
-        title: 'MIXLEV stock buybacks ',
+        title: 'flowers',
         author: 'Kai Ryssdal',
         tags: [],
         guid: 'stock_buybacks_MIXLEV',
@@ -48,7 +49,7 @@ module.exports = [
         requestedBy: 'Sitara from Los Angeles'
   },
   {
-        title: 'MIXLEV EQ stock buybacks ',
+        title: 'state capitals',
         author: 'Kai Ryssdal',
         tags: [],
         guid: 'stock_buybacks_MIXLEV_EQ',
@@ -60,20 +61,20 @@ module.exports = [
         requestedBy: 'Sitara from Los Angeles'
   },
   {
-        title: 'MIXLEV EQ-2 stock buybacks ',
+        title: 'who knows what',
         author: 'Kai Ryssdal',
         tags: [],
         guid: 'stock_buybacks_MIXLEV_EQ-2',
         date: "2018-05-18",
         description: 'Alexa - Ryssdal Stock Buybacks - MIXEQ LEV-2_alexa',
         audio: {
-          url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Ryssdal+Stock+Buybacks+-+MIX.mp3",
+          url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa+-+Ryssdal+Stock+Buybacks+-+MIXEQLEV-2_alexa.mp3",
         },
         requestedBy: 'Sitara from Los Angeles'
   },
 
   {
-      title: 'Stock Buybacks ORIG',
+      title: 'Stock Buybacks',
       author: 'Kai Ryssdal',
       tags: [],
       guid: 'preprod_stock_buybacks_kai',

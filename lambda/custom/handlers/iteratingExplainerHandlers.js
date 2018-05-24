@@ -11,15 +11,14 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
   'ListExplainers': function () {
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
-    console.log('this.event.req',this.event.request)
-    console.log(this.attributes.indices.explainer)
+    console.log('this.event.req',this.event.request.intent.slots)
     if (this.event.session.new || (!this.attributes.indices.explainer)) { // is this logic correct?
       this.attributes.indices.explainer = 0;
     }
     var slot = slot || this.event.request.intent.slots;
+    console.log("LIST EXPLAINER SLOT", slot)
 
     if (slot && slot.topic && slot.topic.value) {
-      console.log("SLOT")
       return this.emitWithState('PickItem', slot)
     }
     var data = util.itemLister(
@@ -29,7 +28,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
       this.attributes.indices.explainer,
       config.items_per_prompt.explainer
     );
-    console.log('dc',data.itemsCard)
+    console.log('WHAT IN LIST',data.itemsCard)
 
     // this.response.speak(data.itemsAudio).listen('Pick one or say next or previous to move forward or backward through list.').cardRenderer(data.itemsCard);
     // if (this.event.context.System.device.supportedInterfaces.Display) {
@@ -43,18 +42,8 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     //     )
     //   );
     // }
-    let newIntent = this.event.request.intent;
 
-    newIntent.slots = {
-      topic: {
-        name: 'topic',
-        confirmationStatus: 'NONE'
-      }
-    }
-    this.emit(':elicitSlotWithCard', 'topic', data.itemsAudio, "Pick one or say next or previous to move forward or backward through list.", 'List of Explainers', data.itemsCard, newIntent, util.cardImage(config.icon.full) );
-
-    this.emit(':responseReady');
-
+    this.emit(':elicitSlotWithCard', 'topic', data.itemsAudio, "Pick one or say newer or older to move forward or backward through list.", 'List of Explainers', data.itemsCard, this.event.request.intent, util.cardImage(config.icon.full) );
   },
   // STATE TRANSITIONS
   'RequestExplainer' : function () {
@@ -111,11 +100,17 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
   },
 
   //BUILT IN
-  'AMAZON.NextIntent' : function () {
-    console.log("iterating explainers NEXT")
+  'EarlierExplainers' : function () {
+    console.log("iterating explainers EARLIER")
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     let boundThis = this;
+    var slot = slot || this.event.request.intent.slots;
+
+    if (slot && slot.topic && slot.topic.value) {
+      console.log("SLOT EARLIER", slot)
+      return this.emitWithState('PickItem', slot)
+    }
 
     if (this.attributes.indices.explainer + config.items_per_prompt.explainer >= explainers.length) {
       let message = "This is the end of the list. Again, the choices are, "
@@ -137,7 +132,15 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     this.emitWithState('ListExplainers');
 
   },
-  'AMAZON.PreviousIntent' : function () {
+  'LaterExplainers' : function () {
+    console.log("iterating explainers LATER")
+    var slot = slot || this.event.request.intent.slots;
+
+    if (slot && slot.topic && slot.topic.value) {
+      console.log("SLOT LATER", slot)
+      return this.emitWithState('PickItem', slot)
+    }
+
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     this.attributes.indices.explainer -= config.items_per_prompt.explainer;
@@ -149,7 +152,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
   },
   'AMAZON.HelpIntent' : function () {
     console.log('Help in ITERATING EXPLAINER')
-    var message = "You can pick an item or say 'next' or 'previous' to move through the list.";
+    var message = "You can pick an item or say 'older' or 'newer' to move through the list.";
     this.response.speak(message).listen(message);
     if (this.event.context.System.device.supportedInterfaces.Display) {
       var links = "<action value='HomePage'>What's New</action>";

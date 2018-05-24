@@ -104,7 +104,13 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
   'PlayLatestExplainer': function () {
     // this is what 'play all would do'
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
-    this.emitWithState('PickItem', {index: {value: 1}}, 'HOMEPAGE_LATEST');
+    if (this.attributes.HEARD_FIRST === 1) {
+      this.attributes.HEARD_FIRST = 0;
+      this.emitWithState('PickItem', {index: {value: 2}}, 'HOMEPAGE_LATEST_AFTER_LAUNCH');
+    } else {
+      this.emitWithState('PickItem', {index: {value: 1}}, 'HOMEPAGE_LATEST');
+
+    }
   },
 
   'AMAZON.NextIntent': function () {
