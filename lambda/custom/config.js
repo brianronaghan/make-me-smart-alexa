@@ -15,6 +15,7 @@ var config = {
       REQUEST: '_REQUEST',
       ITERATING_EXPLAINER: '_ITERATING_EXPLAINER'
     },
+    newUserAudio: 'https://s3.amazonaws.com/ask-soundlibrary/office/amzn_sfx_typing_medium_02.mp3',
     background: {
       show: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/1024x600_FINALB.png"
     },

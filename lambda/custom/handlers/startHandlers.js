@@ -18,9 +18,20 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     if (author === 'Molly Wood') {
       author = `Molly '<emphasis level="strong"> Wood</emphasis>`;
     }
-    welcome += `Welcome ${this.attributes.deviceIds ? 'back' : ''} to Make Me Smart. Today we're learning about ${latestExplainer.title}. Here's ${author} to make us smart. <break time = "500ms"/> <audio src="${latestExplainer.audio.url}" />`;
-    let prompt = "Would you like to replay that, hear 'what's new' or 'suggest a topic'?"
 
+    // AUDIO
+
+    if (!this.attributes.deviceIds || true) {
+      welcome = `<audio src="${config.newUser}" />`;
+    } else if (latestExplainer.audio.intro) {
+      welcome = `<audio src="${latestExplainer.audio.intro}" />`;
+    } else {
+      welcome = `Welcome back to Make Me Smart. Today we're learning about ${latestExplainer.title}. Here's ${author} to make us smart.`;
+    }
+
+    welcome += ` <break time = "500ms"/> <audio src="${latestExplainer.audio.url}" /> `;
+
+    let prompt = "Would you like to replay that, hear 'what's new' or 'suggest a topic'?"
     let links = "<action value='ReplayExplainer'>Replay</action> | <action value='HomePage'>Hear What's New</action> | <action value='RequestExplainer'> Suggest a Topic </action>";
     var payload = {};
     payload.explainers = [{
