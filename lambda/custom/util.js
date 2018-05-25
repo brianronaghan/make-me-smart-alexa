@@ -182,8 +182,9 @@ module.exports = {
   },
 
   itemPicker: function (intentSlot, choices, choiceKey, slotKey) {
-    console.log("ITEM PICKER", intentSlot, "SLOT KEY", slotKey);
     var itemNames = choices.map(function (choice) {return choice[choiceKey].toLowerCase()});
+    // var itemAlts = choices.map(function (choice) {return choice.alts && choice.alts.toLowerCase()});
+    // console.log(itemAlts)
     // console.log('itemnames', itemNames);
     // console.log('intent slot', intentSlot);
     var index;
@@ -199,8 +200,16 @@ module.exports = {
             index = parseInt(str);
         }
         index--;
-    } else if (typeof intentSlot === 'string') {
+
+    } else if (typeof intentSlot === 'string') { //NOTE:check alts
         index = itemNames.indexOf(cleanSlotName(intentSlot));
+        // if
+        if (index === -1) {
+          itemAlts.forEach((alts, i)=>{
+            console.log('i, alts', i, alts)
+            // alt.indexOf(cleanSlotName(intentSlot))
+          })
+        }
     } else if (intentSlot && intentSlot[slotKey] && intentSlot[slotKey].value) {
         var cleanedSlot = cleanSlotName(intentSlot[slotKey].value);
         index = itemNames.indexOf(cleanedSlot);
@@ -280,7 +289,7 @@ function prosodyToBold (text) {
 
 function clearProsody (text) {
   text = text.replace(/<prosody[^>]*>/gi, "")
-  text = text.replace(/<\/prosody>/gi, "\n")
+  text = text.replace(/<\/prosody>/gi, "")
   text = text.replace(/<audio[^>]*>/gi, "")
   return text;
 };

@@ -163,15 +163,23 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
   'AMAZON.StopIntent' : function() {
     console.log('built in STOP, request')
     // This needs to work for not playing as well
-    this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
-    this.emitWithState('HomePage', 'no_welcome', "Got it, I won't put in that request.");
+    delete this.attributes.STATE;
+    this.response.speak('See you later. Say Alexa, Make Me Smart to get learning again.')
+    this.emit(':saveState');
+
+    // this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
+    // this.emitWithState('HomePage', 'no_welcome', "Got it, I won't put in that request.");
 
   },
   'AMAZON.CancelIntent' : function() {
     console.log('CANCEL REQUEST STATE');
     // means they don't wnt to leave it.
-    this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
-    this.emitWithState('HomePage', 'no_welcome', "Got it, I won't put in that request.");
+    delete this.attributes.STATE;
+    this.response.speak('See you later. Say Alexa, Make Me Smart to get learning again.')
+    this.emit(':saveState');
+
+    // this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
+    // this.emitWithState('HomePage', 'no_welcome', "Got it, I won't put in that request.");
   },
   'AMAZON.HelpIntent' : function () {
     console.log('Help in REQUEST')

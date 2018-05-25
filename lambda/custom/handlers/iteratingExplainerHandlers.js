@@ -11,7 +11,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
   'ListExplainers': function () {
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
-    console.log('this.event.req',this.event.request.intent.slots)
+    console.log('LIST EXPLAINER TOUCH this.event.req',this.event.request)
     if (this.event.session.new || (!this.attributes.indices.explainer)) { // is this logic correct?
       this.attributes.indices.explainer = 0;
     }

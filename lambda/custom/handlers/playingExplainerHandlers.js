@@ -148,12 +148,10 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     this.emitWithState('RequestExplainer', {query: {value:null},userLocation: {value: null}, userName: {value: null}});
   },
   'ListExplainers': function () {
-    console.log('list explainers from play explain')
 
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     console.log('list Explainers FROM Playing explainers')
-    console.log(JSON.stringify(this.event.request, null, 2));
     this.attributes.currentExplainerIndex = -1;
     this.attributes.indices.explainer = 0;
     this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;

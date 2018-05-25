@@ -30,7 +30,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     }
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
-    welcome += `<break time = "500ms"/> <audio src="${latestExplainer.audio.url}" />`;
+    welcome += `<audio src="${latestExplainer.audio.url}" />`;
 
     let prompt = "Would you like to replay that, hear 'what's new' or 'suggest a topic'?"
     let links = "<action value='ReplayExplainer'>Replay</action> | <action value='HomePage'>Hear What's New</action> | <action value='RequestExplainer'> Suggest a Topic </action>";

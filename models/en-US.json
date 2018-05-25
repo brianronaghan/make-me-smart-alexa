@@ -488,6 +488,47 @@
                   ]
                 },
                 {
+                  "name": "RequestExplainer",
+                  "slots": [
+                    {
+                      "name": "topic",
+                      "type": "TOPICS"
+                    },
+                    {
+                      "name": "userName",
+                      "type": "AMAZON.US_FIRST_NAME"
+                    },
+                    {
+                      "name": "userLocation",
+                      "type": "AMAZON.US_CITY"
+                    },
+                    {
+                      "name": "query",
+                      "type": "AMAZON.SearchQuery"
+                    }
+                  ],
+                  "samples": [
+                    "request explainer slot",
+                    "suggest a topic",
+                    "request an explainer"
+                  ]
+                },
+                {
+                    "name":"ListExplainers",
+                    "slots" : [
+                      {
+                        "name": "topic",
+                        "type": "TOPICS"
+                      }
+                    ],
+                    "samples":[
+                        "what explainers it has",
+                        "list explainers",
+                        "all explainers",
+                        "show all explainers"
+                    ]
+                },
+                {
                   "name": "PickItem",
                   "slots": [
                     {
@@ -1894,43 +1935,6 @@
                     "tell us the conversation with {query}",
                     "tell us a conversation with {query}"
                   ]
-                },
-                {
-                  "name": "RequestExplainer",
-                  "slots": [
-                    {
-                      "name": "userName",
-                      "type": "AMAZON.US_FIRST_NAME"
-                    },
-                    {
-                      "name": "userLocation",
-                      "type": "AMAZON.US_CITY"
-                    },
-                    {
-                      "name": "query",
-                      "type": "AMAZON.SearchQuery"
-                    }
-                  ],
-                  "samples": [
-                    "request explainer slot",
-                    "suggest a topic",
-                    "request an explainer"
-                  ]
-                },
-                {
-                    "name":"ListExplainers",
-                    "slots" : [
-                      {
-                        "name": "topic",
-                        "type": "TOPICS"
-                      }
-                    ],
-                    "samples":[
-                        "what explainers it has",
-                        "list explainers",
-                        "all explainers",
-                        "show all explainers"
-                    ]
                 }
             ],
             "types":[

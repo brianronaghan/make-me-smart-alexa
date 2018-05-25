@@ -1,163 +1,123 @@
 module.exports = [
   {
-        title: 'Apple Carts',
-        author: 'Kai Ryssdal',
-        tags: [],
-        guid: 'inflation_MIXLEV',
-        date: "2018-05-18",
-        description: 'Alexa - Ryssdal Inflation - MIXLEV_alexa',
-        audio: {
-          intro: 'https://s3.amazonaws.com/ask-soundlibrary/scifi/amzn_sfx_scifi_alien_voice_11.mp3',
-          url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa+-+Ryssdal+Inflation+-+MIXLEV_alexa.mp3",
-        },
-        requestedBy: 'Sitara from Los Angeles'
+    title: 'G.D.P.R.',
+    author: 'Molly Wood',
+    tags: [],
+    guid: 'GDPR_certification',
+    date: "2018-05-24",
+    description: 'What the heck GDPR is',
+    audio: {
+      intro: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/Alexa+-+Wood+-+GDPR+Intro+-+MIXLEV_alexa.mp3',
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Wood+-+GDPR+-+MIXLEV_alexa.mp3",
+    },
   },
   {
-        title: 'Rainbows',
-        author: 'Kai Ryssdal',
-        tags: [],
-        guid: 'inflation_MIXLEV_EQ',
-        date: "2018-05-18",
-        description: 'Alexa - Ryssdal Inflation - MIXEQ LEV_alexa',
-        audio: {
-          url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa+-+Ryssdal+Inflation+-+MIXEQ+LEV_alexa.mp3",
-        },
-        requestedBy: 'Sitara from Los Angeles'
+    title: 'The Royal Wedding',
+    author: 'Kai Ryssdal',
+    tags: [],
+    guid: 'royal_wedding_certification',
+    date: "2018-05-24",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Ryssdal+-+Royal+Wedding+-+MIXLEV_alexa.mp3",
+      intro: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/Alexa+-+Ryssdal+-+ROYAL+WEDDING+INTRO+-+MIXLEV_alexa.mp3'
+    },
   },
   {
-        title: 'arms dealers',
-        author: 'Kai Ryssdal',
-        tags: [],
-        guid: 'inflation_MIXLEV_EQ-2',
-        date: "2018-05-18",
-        description: 'Alexa - Ryssdal Inflation - MIXEQLEV-2_alexa',
-        audio: {
-          url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa+-+Ryssdal+Inflation+-+MIXEQLEV-2_alexa.mp3",
-        },
-        requestedBy: 'Sitara from Los Angeles'
+    title: 'Bitcoin',
+    guid: "bitcoin_certification",
+    alts: ['cryptocurrency'],
+    date: null,
+    author: 'Molly Wood',
+    description: "Bitcoin is the original cryptocurrency.",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Wood+-+Bitcoin+-+MIXLEV_alexa.mp3",
+      intro: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/Alexa+-+Wood+-+Bitcoin+Intro+-+MIXLEV_alexa.mp3'
+    }
   },
   {
-        title: 'flowers',
+        title: 'The Unemployment Report',
         author: 'Kai Ryssdal',
+        alts: ['unemployment', 'unemployment rate', 'unemployment report','jobs report'],
         tags: [],
-        guid: 'stock_buybacks_MIXLEV',
-        date: "2018-05-18",
-        description: 'Alexa - Ryssdal Stock Buybacks - MIX LEV_alexa',
+        guid: 'unemployment_certification',
+        date: "2018-05-24",
+        description: "How the unemployment report is calculated and what it means for the economy.",
         audio: {
-          url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa+-+Ryssdal+Stock+Buybacks+-+MIXLEV_alexa.mp3",
+          intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/Alexa+-+Ryssdal+-+UNEMPLOYMENT+RATE+INTRO+-+MIXLEV_alexa.mp3",
+          url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Ryssdal+-+Unemployment+Rate+-+MIXLEV_alexa.mp3",
         },
-        requestedBy: 'Sitara from Los Angeles'
   },
   {
-        title: 'state capitals',
-        author: 'Kai Ryssdal',
-        tags: [],
-        guid: 'stock_buybacks_MIXLEV_EQ',
-        date: "2018-05-18",
-        description: 'Alexa - Ryssdal Stock Buybacks - MIXEQ LEV_alexa',
-        audio: {
-          url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa+-+Ryssdal+Stock+Buybacks+-+MIXEQ+LEV_alexa.mp3",
-        },
-        requestedBy: 'Sitara from Los Angeles'
+    title: 'Five G',
+    alts: ['5 g', '5G'],
+    guid: "5G_certification",
+    date: null,
+    author: 'Molly Wood',
+    description: "5G will be the next cellular network standard.",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Wood+-+5g+-+MIXLEV_alexa.mp3",
+      intro: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/Alexa+-+Wood+-+5G+Intro+-+MIXLEV_alexa.mp3'
+    }
   },
   {
-        title: 'who knows what',
+        title: 'Inflation',
         author: 'Kai Ryssdal',
         tags: [],
-        guid: 'stock_buybacks_MIXLEV_EQ-2',
-        date: "2018-05-18",
-        description: 'Alexa - Ryssdal Stock Buybacks - MIXEQ LEV-2_alexa',
+        guid: 'inflation_certification',
+        date: "2018-05-24",
+        description: 'Inflation is a meaure of the value of money.',
         audio: {
-          url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa+-+Ryssdal+Stock+Buybacks+-+MIXEQLEV-2_alexa.mp3",
+          url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Ryssdal+Inflation+-+MIXLEV_alexa.mp3",
         },
-        requestedBy: 'Sitara from Los Angeles'
   },
 
+  {
+        title: 'The Fed',
+        author: 'Kai Ryssdal',
+        alts: ['the federal reserve', 'fed', 'the central bank'],
+        tags: [],
+        guid: 'fed_certification',
+        date: "2018-05-24",
+        description: "The Federal Reserve Bank is the United States' central bank",
+        audio: {
+          intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/Alexa+-+Ryssdal+-+THE+FED+INTRO+-+MIXLEV_alexa.mp3",
+          url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Ryssdal+-+The+Fed+-+MIXLEV_alexa.mp3",
+        },
+  },
   {
       title: 'Stock Buybacks',
       author: 'Kai Ryssdal',
       tags: [],
-      guid: 'preprod_stock_buybacks_kai',
-      date: "2018-05-18",
+      guid: 'stock_buybacks_certification',
+      date: "2018-05-24",
       description: 'Stock buybacks happen when a publicly traded company buys outstanding shares of its own stock, often pushing the stock price higher.',
       audio: {
-        url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Ryssdal+Stock+Buybacks+-+MIX.mp3",
+        url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Ryssdal+Stock+Buybacks+-+MIXLEV_alexa.mp3",
       },
-      requestedBy: 'Sitara from Los Angeles'
-    },
-    {
-      title: 'Inflation',
-      author: 'Kai Ryssdal',
-      tags: [],
-      guid: 'preprod_inflation_kai',
-      date: "2018-05-17",
-      description: 'In economics, inflation is a sustained increase in the general price level of goods and services in an economy over a period of time.',
-      audio: {
-        url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Ryssdal+Inflation+-+MIX.mp3",
-      },
-      requestedBy: 'Alan from Atlanta'
-    },
-    {
-      title: 'Bonds',
-      author: 'Kai Ryssdal',
-      tags: [],
-      guid: 'test_bonds_kai',
-      date: "2018-04-07T20:55:57Z",
-      description: 'A bond is a fixed income investment in which an investor loans money to an entity (typically corporate or governmental) which borrows the funds for a defined period of time at a variable or fixed interest rate.',
-      audio: {
-        url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_bonds_kai.MP3",
-      },
-      requestedBy: null
     },
     {
       title: 'The Cloud',
-      guid: "test_cloud_molly",
-      date: "2018-04-07T20:55:57Z",
-      tags: ['web', 'internet'],
+      guid: "cloud_certification",
+      date: "2018-05-24",
       author: 'Molly Wood',
       description: 'Cloud computing is a paradigm where computing resources (servers, storage, etc.) are offered as a utility via the Internet.',
       audio: {
-        url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_cloud_molly.MP3",
-        length: null,
-        type: null
+        intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/Alexa+-+Wood+-+The+Cloud+Intro+-+MIXLEV_alexa.mp3",
+        url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Wood+-+The+Cloud+-+MIXLEV_alexa.mp3",
       }
     },
+
     {
       title: 'Productivity',
-      guid: "test_productivity_kai",
-      date: null,
+      guid: "productivity_certification",
+      date: "2018-05-24",
       author: 'Kai Ryssdal',
       tags: [],
       description: "A productivity measure is expressed as the ratio of output to inputs used in a production process, i.e. output per unit of input.",
       audio: {
-        url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_productivity_kai.MP3",
-        length: null,
-        type: null
+        intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/Alexa+-+Ryssdal+-+PRODUCTIVITY+INTRO+-+MIXLEV_alexa.mp3",
+        url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Ryssdal+-+Productivity+-+MIXLEV_alexa.mp3",
       }
     },
-    {
-      title: 'Network Effect',
-      guid: "test_network_effect_molly",
-      date: null,
-      author: 'Molly Wood',
-      description: 'The network effect is a phenomenon where increased numbers of people or participants improves the value of a good or service.',
-      audio: {
-        url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_network_effect_molly.MP3",
-        length: null,
-        type: null
-      }
-    },
-    {
-      title: 'Interest Rates',
-      guid: "test_interest_rates_kai",
-      date: null,
-      author: 'Kai Ryssdal',
-      tags: ['federal reserve', 'the fed'],
-      description: "Interest Rates are the federal reserve bank's main tool to steer the economy.",
-      audio: {
-        url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/16k/test_interest_rates_kai.mp3",
-        length: null,
-        type: null
-      }
-    }
+
   ]
