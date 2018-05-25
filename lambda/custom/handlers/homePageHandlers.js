@@ -28,6 +28,7 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
       return this.emitWithState('PickItem', slot)
     } else if (slot && slot.query && slot.query.value && !condition) {
       console.log("GOT QUERY ELICIT on home", slot)
+      // check for stop
       return this.emitWithState('PickItem', slot)
     }
 
@@ -185,6 +186,24 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
   //   this.emit(':saveState', true);
   //
   // },
+
+  'AMAZON.CancelIntent' : function() {
+    console.log('CANCEL HOME PAGE')
+    // This needs to work for not playing as well
+    delete this.attributes.STATE;
+
+    this.response.speak("See you later. Say 'Alexa, Make Me Smart' to get learning again.");
+    this.emit(':saveState');
+  },
+  'AMAZON.StopIntent' : function() {
+    console.log('STOP HOME PAGE STATE')
+    // This needs to work for not playing as well
+    // SHOULD I CLEAR THE STATE?
+    delete this.attributes.STATE;
+    this.response.speak('See you later. Say alexa, Make Me Smart to get learning again.')
+    this.emit(':saveState');
+  },
+
   'AMAZON.HelpIntent' : function () {
     console.log('Help in HOME PAGE')
     var message = "Try using the numbers before the topics if you're having trouble. You can pick a topic or choose by number or say 'play all'.";

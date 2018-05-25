@@ -44,7 +44,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       }];
       console.time('UPDATE-DB-request-saved');
       delete this.attributes.startedRequest;
-
+      // NOTE: CONFIRM WE WANT TO SAVE REQUEST
       db.update.call(this, payload, function(err, response) {
         console.timeEnd('UPDATE-DB-request-saved');
         message = `${suggestionString} I'll tell Kai and Molly that ${this.attributes.userName} from ${this.attributes.userLocation} wants to get smart about that! You can also hear more from Kai and Molly by saying "alexa, play podcast Make Me Smart." `;
