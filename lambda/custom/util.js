@@ -183,8 +183,8 @@ module.exports = {
 
   itemPicker: function (intentSlot, choices, choiceKey, slotKey) {
     var itemNames = choices.map(function (choice) {return choice[choiceKey].toLowerCase()});
-    // var itemAlts = choices.map(function (choice) {return choice.alts && choice.alts.toLowerCase()});
-    // console.log(itemAlts)
+    var itemAlts = choices.map(function (choice) {return choice.alts && choice.alts});
+    console.log(itemAlts)
     // console.log('itemnames', itemNames);
     // console.log('intent slot', intentSlot);
     var index;
@@ -202,8 +202,9 @@ module.exports = {
         index--;
 
     } else if (typeof intentSlot === 'string') { //NOTE:check alts
-        index = itemNames.indexOf(cleanSlotName(intentSlot));
-        // if
+        index = searchByName(cleanSlotName(intentSlot), itemNames, itemAlts);
+
+        itemNames.indexOf(cleanSlotName(intentSlot));
         if (index === -1) {
           itemAlts.forEach((alts, i)=>{
             console.log('i, alts', i, alts)
@@ -211,14 +212,15 @@ module.exports = {
           })
         }
     } else if (intentSlot && intentSlot[slotKey] && intentSlot[slotKey].value) {
-        var cleanedSlot = cleanSlotName(intentSlot[slotKey].value);
-        index = itemNames.indexOf(cleanedSlot);
+        index = searchByName(cleanSlotName(intentSlot[slotKey].value), itemNames, itemAlts);
     } else if (intentSlot && intentSlot.query && intentSlot.query.value) {
       var asIndex = parseInt(intentSlot.query.value);
       if (isNaN(asIndex)) {
         var cleanedQuery = cleanSlotName(intentSlot.query.value);
-        index = itemNames.indexOf(cleanedQuery);
+
+        index = searchByName(cleanSlotName(intentSlot.query.value), itemNames, itemAlts);;
       } else {
+        console.log('using number val in query slot')
         index = asIndex -1
       }
     } else {
@@ -259,6 +261,30 @@ module.exports = {
     var prevItem = choices[currentItemIndex-1];
     console.log('PREVIOUS ITEM', prevItem);
     return prevItem;
+  }
+}
+
+function searchByName (searchTerm, itemNames, itemAlts) { // takes names and alts and finds by name or alt
+  var index = itemNames.indexOf(searchTerm);
+  if (index !== -1) {
+    console.log("found straight up", index)
+    return index;
+  } else {
+    itemAlts.forEach((alts, i)=>{
+      if (alts) {
+        alts.forEach((alt) => {
+          if (alt.indexOf(searchTerm) > -1) {
+            index = i;
+          }
+        })
+      }
+    })
+    if (index !== -1) {
+      console.log("FOUND via alt", index)
+    } else {
+      console.log('not even by alt')
+    }
+    return index;
   }
 }
 

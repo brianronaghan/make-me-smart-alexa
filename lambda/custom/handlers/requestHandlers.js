@@ -17,9 +17,6 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     var boundThis = this;
     var payload = {}
     if (slot.query && !slot.query.value) { // came here without a query
-      // var newIntent = this.event.request.intent;
-      // newIntent.name = 'PickItem';
-      // console.log("NEW INTENT",newIntent);
       message = "What would you like to get smart about?";
       return this.emit(':elicitSlotWithCard', 'query', message, "What would you like to request an explainer about?", 'Request Explainer',message, this.event.request.intent, util.cardImage(config.icon.full));
     }
@@ -29,8 +26,16 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     } else if (slot.topic && slot.topic.value) {
       suggestion = slot.topic.value;
     }
-
-    if (this.attributes.userName && this.attributes.userLocation && false) { // NOTE: turn off for test/build if we've already got your info
+    let suggestionString;
+    if (this.attributes.startedRequest) {
+      suggestionString = `${suggestion}! Great idea!`
+    } else {
+      suggestionString = `Hmmm, we don't have anything on ${suggestion}. But `
+    }
+    if (config.changeMyInfo.indexOf(suggestion) > -1) {
+      console.log('whoops, wants to change');
+    }
+    if (suggestion && this.attributes.userName && this.attributes.userLocation) {
       payload.requests = [{
         query: suggestion,
         time: this.event.request.timestamp,
@@ -38,9 +43,12 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
         location: this.attributes.userLocation
       }];
       console.time('UPDATE-DB-request-saved');
+      delete this.attributes.startedRequest;
+
       db.update.call(this, payload, function(err, response) {
         console.timeEnd('UPDATE-DB-request-saved');
-        message = `Hmmm, we don't have anything on ${suggestion}. But I'll tell Kai and Molly that ${this.attributes.userName} from ${this.attributes.userLocation} wants to get smart about that!`;
+        message = `${suggestionString} I'll tell Kai and Molly that ${this.attributes.userName} from ${this.attributes.userLocation} wants to get smart about that! You can also hear more from Kai and Molly by saying "alexa, play podcast Make Me Smart." `;
+        //
         this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
         return util.sendProgressive(
           this.event.context.System.apiEndpoint, // no need to add directives params
@@ -57,7 +65,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
         );
       });
     } else if (slot.userName && !slot.userName.value) { // NOTE NOT SAVING NAME && !this.attributes.userName
-      message += `Hmmm, we don't have anything on ${suggestion}. But I'll ask Kai and Molly to look into it. Who should I say is asking?`;
+      message += `${suggestionString} I'll ask Kai and Molly to look into it. Who should I say is asking?`;
       this.emit(':elicitSlotWithCard', 'userName', message, "What name should I leave?", 'Request Explainer',message, this.event.request.intent, util.cardImage(config.icon.full));
     } else if (slot.userLocation && !slot.userLocation.value ) { // NOTE NOT SAVING NAME && this.attributes.userLocation
       this.attributes.userName = slot.userName.value;
@@ -66,8 +74,10 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       cardMessage += message;
       this.emit(':elicitSlotWithCard', 'userLocation', message, "What location should I leave?", 'Request Explainer', cardMessage, this.event.request.intent, util.cardImage(config.icon.full) );
     } else {
-      console.log("OKAY, NOW WE HAVE EVEYRTHING for request ", slot)
+      console.log("OKAY, NOW WE HAVE EVEYRTHING for request ", slot);
+
       this.attributes.userLocation = slot.userLocation.value;
+      delete this.attributes.startedRequest;
       payload.requests = [{
         query: suggestion,
         time: this.event.request.timestamp,
@@ -77,7 +87,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       console.time('UPDATE-DB-request-new');
       db.update.call(this, payload, function(err, response) {
         console.timeEnd('UPDATE-DB-request-new');
-        var confirmationMessage = `Okay, I'll tell Kai and Molly ${slot.userName.value} from ${slot.userLocation.value} asked for an explainer on ${suggestion}.`;
+        var confirmationMessage = `Okay, I'll tell Kai and Molly ${slot.userName.value} from ${slot.userLocation.value} asked for an explainer on ${suggestion}. You can also hear more from Kai and Molly by saying "alexa, play podcast Make Me Smart." `;
         if (this.event.context.System.device.supportedInterfaces.Display) {
           this.response.renderTemplate(
             util.templateBodyTemplate1(
@@ -95,7 +105,6 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
           this.event.context.System.apiAccessToken,
           confirmationMessage,
           function (err) {
-
             if (err) {
               boundThis.emitWithState('HomePage', 'requested', confirmationMessage);
             } else {
@@ -111,6 +120,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     console.log('REQUEST EVENT', this.event.request)
+    this.attributes.startedRequest = true;
     var slot = slot || this.event.request.intent.slots;
     var message = '';
     var boundThis = this;
@@ -149,12 +159,50 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     this.handler.state = this.attributes.STATE = config.states.START;
     this.emitWithState('LaunchRequest');
   },
-
+  'PlayLatestExplainer': function () {
+    // this is what 'play all would do'
+    this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
+    this.emitWithState('PickItem', {index: {value: 1}}, 'REQUEST_LATEST');
+  },
   'ReplayExplainer': function () {
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     console.log('REPLAY exp in REQUEST', this.handler.state)
     this.emitWithState('PickItem', 'REPLAY_FROM_REQUEST');
+  },
+
+  ChangeMyInfo: function () {
+    var message = '';
+    delete this.attributes.startedRequest;
+    var slot = slot || this.event.request.intent.slots;
+
+    if (slot && slot.userName && !slot.userName.value) {
+      message += `Okay, you'd like to change your information. What should I save your first name as for requests?`;
+      this.emit(':elicitSlotWithCard', 'userName', message, "What name should I save?", 'Save a name',message, this.event.request.intent, util.cardImage(config.icon.full));
+   } else if (slot && slot.userLocation && !slot.userLocation.value) {
+     this.attributes.userName = slot.userName.value;
+     message = `Okay, whenever you leave a request I'll note it as from ${slot.userName.value}. We also give a location when citing you on the show. Where should I say you're from?`
+     this.emit(':elicitSlotWithCard', 'userLocation', message, "Where are you from?", 'Save your location',message, this.event.request.intent, util.cardImage(config.icon.full));
+   } else {
+     this.attributes.userLocation = slot.userLocation.value;
+     message += `Okay, I've saved your information. If Kai and Molly use one of your suggestions they'll thank ${slot.userName.value} from ${slot.userLocation.value} on the show! Would you like to 'play the latest' explainer or hear 'what's new?'`;
+     if (this.event.context.System.device.supportedInterfaces.Display) {
+       this.response.renderTemplate(
+         util.templateBodyTemplate1(
+           'Name and location information changed!',
+           message,
+           '',
+           config.background.show
+         )
+       );
+     }
+     this.response.speak(message).listen("Would you like to play the latest or hear what's new?");
+     console.log('new', this.attributes.userName, this.attributes.userLocation)
+     // this.emit(':elicitSlotWithCard', 'userLocation', message, "What location should I leave?", 'Request Explainer', cardMessage, this.event.request.intent, util.cardImage(config.icon.full) );
+     this.emit(':saveState');
+
+
+   }
   },
 
 
@@ -163,6 +211,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
   'AMAZON.StopIntent' : function() {
     console.log('built in STOP, request')
     // This needs to work for not playing as well
+    delete this.attributes.startedRequest;
     delete this.attributes.STATE;
     this.response.speak('See you later. Say Alexa, Make Me Smart to get learning again.')
     this.emit(':saveState');
@@ -175,6 +224,8 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     console.log('CANCEL REQUEST STATE');
     // means they don't wnt to leave it.
     delete this.attributes.STATE;
+    delete this.attributes.startedRequest;
+
     this.response.speak('See you later. Say Alexa, Make Me Smart to get learning again.')
     this.emit(':saveState');
 
@@ -183,10 +234,9 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
   },
   'AMAZON.HelpIntent' : function () {
     console.log('Help in REQUEST')
-    var message = "You can say 'nevermind' to cancel, or else let us know your name and city so we can give you credit if we answer your question.";
+    var message = `You can say 'nevermind' to cancel, let us know your name and city so we can give you credit if we answer your question, or 'change my info' to correct your name or location.`;
     this.response.speak(message).listen(message);
     if (this.event.context.System.device.supportedInterfaces.Display) {
-      var links = "<action value='HomePage'>What's New</action> | <action value='ListExplainers'>List Explainers</action>";
       this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, links, config.background.show));
     }
     this.emit(':saveState', true);
@@ -196,10 +246,13 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
    },
    'Unhandled' : function () {
      // Just go to start
-
-     console.log("REQUEST unhandled -> event  ", JSON.stringify(this.event.request,null, 2));
-     this.handler.state = this.attributes.STATE = config.states.START;
-     this.emitWithState('LaunchRequest', 'no_welcome', "Sorry I couldn't quite handle that.");
+     var message = "Sorry I couldn't quite understand that. ";
+     var prompt = "Say 'request explainer' or 'suggest a topic'.";
+     this.response.speak(message + prompt).listen(prompt);
+     if (this.event.context.System.device.supportedInterfaces.Display) {
+       this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message + prompt, null, config.background.show));
+     }
+     this.emit(':saveState', true);
    }
 
 });

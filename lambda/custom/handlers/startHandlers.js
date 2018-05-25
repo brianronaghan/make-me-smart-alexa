@@ -94,7 +94,10 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     util.nullCheck.call(this, deviceId);
     this.emitWithState('PlayLatestExplainer', {index: {value: 1}}, 'LAUNCH_LATEST');
   },
-
+  'ChangeMyInfo' : function () {
+    this.handler.state = this.attributes.STATE = config.states.REQUEST;
+    this.emitWithState('ChangeMyInfo');
+  },
   'ListExplainers': function () {
     console.log('list explainers from start')
     var deviceId = util.getDeviceId.call(this);
@@ -102,8 +105,27 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     this.attributes.currentExplainerIndex = -1;
     this.attributes.indices.explainer = 0;
     this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
-    this.emitWithState('ListExplainers');
+    this.emitWithState('ListExplainers', 'from_launch');
   },
+
+  // TOUCH EVENTS:
+  'ElementSelected': function () {
+    var deviceId = util.getDeviceId.call(this);
+    util.nullCheck.call(this, deviceId);
+
+    // handle play latest or pick episode actions
+    console.log('ElementSelected -- ', this.event.request)
+    var intentSlot,intentName;
+    if (this.event.request.token === 'ReplayExplainer') {
+      intentName = this.event.request.token;
+    } else if (this.event.request.token === 'RequestExplainer' || this.event.request.token === 'HomePage') {
+      intentName = this.event.request.token;
+    }
+    console.log('PLAYING EXPLAINERS, TOUCH', intentName, intentSlot);
+    this.emitWithState(intentName, intentSlot, 'TOUCH_HOMEPAGE');
+  },
+
+
 
   'AMAZON.CancelIntent' : function() {
     console.log('CANCEL START STATE')

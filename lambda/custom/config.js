@@ -8,6 +8,37 @@ var config = {
       explainer: 3,
       episode: 3,
     },
+    changeMyInfo: [
+      "change my name",
+      "change my info",
+      "correct name",
+      "update name",
+      "correct my name",
+      "update my name",
+      "change my city",
+      "change my location",
+      "correct location",
+      "update location",
+      "correct my location",
+      "update my city"
+    ],
+    earlier: [
+      "earlier",
+      "earlier explainers",
+      "before that",
+      "further back",
+      "older",
+      "older explainers"
+    ],
+    later: [
+      "later",
+      "later explainers",
+      "after that",
+      "more recent",
+      "newer",
+      "newer explainers"
+    ],
+    showLinks: false,
     states: {
       START: '',
       HOME_PAGE: '_HOME_PAGE',

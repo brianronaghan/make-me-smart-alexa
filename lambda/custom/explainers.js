@@ -2,10 +2,10 @@ module.exports = [
   {
     title: 'G.D.P.R.',
     author: 'Molly Wood',
-    tags: [],
+    alts: ['g.d.p.r', 'gdpr', 'g d p r'],
     guid: 'GDPR_certification',
     date: "2018-05-24",
-    description: 'What the heck GDPR is',
+    description: "Some background on the European Union's new data law the General Data Protection Regulation",
     audio: {
       intro: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/Alexa+-+Wood+-+GDPR+Intro+-+MIXLEV_alexa.mp3',
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Wood+-+GDPR+-+MIXLEV_alexa.mp3",
@@ -14,6 +14,7 @@ module.exports = [
   {
     title: 'The Royal Wedding',
     author: 'Kai Ryssdal',
+    alts: ['royal wedding'],
     tags: [],
     guid: 'royal_wedding_certification',
     date: "2018-05-24",
@@ -24,10 +25,10 @@ module.exports = [
   },
   {
     title: 'Bitcoin',
-    guid: "bitcoin_certification",
-    alts: ['cryptocurrency'],
-    date: null,
     author: 'Molly Wood',
+    alts: ['cryptocurrency'],
+    guid: "bitcoin_certification",
+    date: null,
     description: "Bitcoin is the original cryptocurrency.",
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Wood+-+Bitcoin+-+MIXLEV_alexa.mp3",
@@ -38,7 +39,6 @@ module.exports = [
         title: 'The Unemployment Report',
         author: 'Kai Ryssdal',
         alts: ['unemployment', 'unemployment rate', 'unemployment report','jobs report'],
-        tags: [],
         guid: 'unemployment_certification',
         date: "2018-05-24",
         description: "How the unemployment report is calculated and what it means for the economy.",
@@ -48,29 +48,17 @@ module.exports = [
         },
   },
   {
-    title: 'Five G',
-    alts: ['5 g', '5G'],
+    title: '5G', // change to 5G for visual
+    author: 'Molly Wood',
+    alts: ['5 g', '5G', 'five g'],
     guid: "5G_certification",
     date: null,
-    author: 'Molly Wood',
     description: "5G will be the next cellular network standard.",
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Wood+-+5g+-+MIXLEV_alexa.mp3",
       intro: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/Alexa+-+Wood+-+5G+Intro+-+MIXLEV_alexa.mp3'
     }
   },
-  {
-        title: 'Inflation',
-        author: 'Kai Ryssdal',
-        tags: [],
-        guid: 'inflation_certification',
-        date: "2018-05-24",
-        description: 'Inflation is a meaure of the value of money.',
-        audio: {
-          url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Ryssdal+Inflation+-+MIXLEV_alexa.mp3",
-        },
-  },
-
   {
         title: 'The Fed',
         author: 'Kai Ryssdal',

@@ -8,18 +8,25 @@ var explainers = require('../explainers')
 var db = require('../db');
 
 module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
-  'ListExplainers': function () {
+  'ListExplainers': function (condition) {
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
-    console.log('LIST EXPLAINER TOUCH this.event.req',this.event.request)
     if (this.event.session.new || (!this.attributes.indices.explainer)) { // is this logic correct?
       this.attributes.indices.explainer = 0;
     }
     var slot = slot || this.event.request.intent.slots;
     console.log("LIST EXPLAINER SLOT", slot)
 
-    if (slot && slot.topic && slot.topic.value) {
-      return this.emitWithState('PickItem', slot)
+    if (slot && slot.query && slot.query.value && !condition) {
+      console.log('got a query baby', slot.query.value);
+      if (config.earlier.indexOf(slot.query.value) > -1) {
+        return this.emitWithState('EarlierExplainers', slot)
+      } else if (config.later.indexOf(slot.query.value) > -1) {
+        return this.emitWithState('LaterExplainers', slot)
+      } else {
+        return this.emitWithState('PickItem', slot)
+
+      }
     }
     var data = util.itemLister(
       explainers,
@@ -43,7 +50,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     //   );
     // }
 
-    this.emit(':elicitSlotWithCard', 'topic', data.itemsAudio, "Pick one or say newer or older to move forward or backward through list.", 'List of Explainers', data.itemsCard, this.event.request.intent, util.cardImage(config.icon.full) );
+    this.emit(':elicitSlotWithCard', 'query', data.itemsAudio, "Pick one or say newer or older to move forward or backward through list.", 'List of Explainers', data.itemsCard, this.event.request.intent, util.cardImage(config.icon.full) );
   },
   // STATE TRANSITIONS
   'RequestExplainer' : function () {
@@ -101,16 +108,16 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
 
   //BUILT IN
   'EarlierExplainers' : function () {
-    console.log("iterating explainers EARLIER")
+    console.log("iterating explainers EARLIER", this)
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     let boundThis = this;
     var slot = slot || this.event.request.intent.slots;
 
-    if (slot && slot.topic && slot.topic.value) {
-      console.log("SLOT EARLIER", slot)
-      return this.emitWithState('PickItem', slot)
-    }
+    // if (slot && slot.topic && slot.topic.value) {
+    //   console.log("SLOT EARLIER", slot)
+    //   return this.emitWithState('PickItem', slot)
+    // }
 
     if (this.attributes.indices.explainer + config.items_per_prompt.explainer >= explainers.length) {
       let message = "This is the end of the list. Again, the choices are, "
@@ -121,25 +128,26 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
         message,
         function (err) {
           if (err) {
-            boundThis.emitWithState('ListExplainers', 'requested', message);
+            boundThis.emitWithState('ListExplainers');
           } else {
-            boundThis.emitWithState('ListExplainers', 'requested');
+            boundThis.emitWithState('ListExplainers');
           }
         }
       );
     }
     this.attributes.indices.explainer += config.items_per_prompt.explainer;
-    this.emitWithState('ListExplainers');
+    this.emitWithState('ListExplainers', 'earlier');
 
   },
+
   'LaterExplainers' : function () {
     console.log("iterating explainers LATER")
     var slot = slot || this.event.request.intent.slots;
 
-    if (slot && slot.topic && slot.topic.value) {
-      console.log("SLOT LATER", slot)
-      return this.emitWithState('PickItem', slot)
-    }
+    // if (slot && slot.topic && slot.topic.value) {
+    //   console.log("SLOT LATER", slot)
+    //   return this.emitWithState('PickItem', slot)
+    // }
 
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
@@ -147,12 +155,23 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     if (this.attributes.indices.explainer < 0) {
       this.attributes.indices.explainer = 0;
     }
-    this.emitWithState('ListExplainers');
+    this.emitWithState('ListExplainers', 'later');
 
   },
+  'ChangeMyInfo' : function () {
+    this.handler.state = this.attributes.STATE = config.states.REQUEST;
+    this.emitWithState('ChangeMyInfo');
+  },
+  'PlayLatestExplainer': function () {
+    // this is what 'play all would do'
+    var deviceId = util.getDeviceId.call(this);
+    util.nullCheck.call(this, deviceId);
+    this.emitWithState('PickItem', {index: {value: 1}}, 'LATEST_FROM_ITERATING');
+  },
+
   'AMAZON.HelpIntent' : function () {
     console.log('Help in ITERATING EXPLAINER')
-    var message = "You can pick an item or say 'older' or 'newer' to move through the list.";
+    var message = "You can pick an item by number or say 'older' or 'newer' to move through the list.";
     this.response.speak(message).listen(message);
     if (this.event.context.System.device.supportedInterfaces.Display) {
       var links = "<action value='HomePage'>What's New</action>";
@@ -160,13 +179,41 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     }
     this.emit(':saveState', true);
   },
+  'AMAZON.StopIntent' : function() {
+    console.log('STOP, iterating')
+    // This needs to work for not playing as well
+    delete this.attributes.STATE;
+    this.attributes.indices.explainer = 0;
+    this.response.speak('See you later. Say Alexa, Make Me Smart to get learning again.')
+    this.emit(':saveState');
+
+    // this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
+    // this.emitWithState('HomePage', 'no_welcome', "Got it, I won't put in that request.");
+
+  },
+  'AMAZON.CancelIntent' : function() {
+    console.log('CANCEL iterating');
+    // means they don't wnt to leave it.
+    delete this.attributes.STATE;
+    this.attributes.indices.explainer = 0;
+    this.response.speak('See you later. Say Alexa, Make Me Smart to get learning again.')
+    this.emit(':saveState');
+
+    // this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
+    // this.emitWithState('HomePage', 'no_welcome', "Got it, I won't put in that request.");
+  },
   'SessionEndedRequest' : function () {
     console.log("IT  EXPLAINER  session end", JSON.stringify(this.event.request, null,2));
    },
    'Unhandled' : function () {
      console.log('UNHANDLED ITERATING EXPLAINER',JSON.stringify(this.event, null, 2))
-     this.handler.state = this.attributes.STATE = config.states.START;
-     this.emitWithState('LaunchRequest', 'no_welcome', "Sorry I couldn't quite handle that.");
+     var message = "Sorry I couldn't quite understand that. Make sure to use the numbers before the topics if you're having trouble. Say 'list explainers' to hear the options again or 'play the latest' to hear our latest explainer."
+
+     this.response.speak(message).listen("Would you like to 'list explainers' or 'play the latest'?");
+     if (this.event.context.System.device.supportedInterfaces.Display) {
+       this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, null, config.background.show));
+     }
+     this.emit(':saveState', true);
 
    }
 

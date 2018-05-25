@@ -6,7 +6,7 @@
           "summary": "Make Me Smart",
           "examplePhrases": [
             "Alexa, Make Me Smart",
-            "Alexa, ask Make Me Smart to explain interest rates",
+            "Alexa, Make Me Smart about interest rates",
             "Alexa, ask Make Me Smart what I need to know"
           ],
           "keywords": [
@@ -14,7 +14,7 @@
           ],
           "name": "make me smart",
           "smallIconUri": "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/108X108.png",
-          "description": "From Marketplace, we're making you smart",
+          "description": "Say “Alexa, Make Me Smart” to learn something surprising and timely about the economy, pop culture, and tech. Brought to you By Marketplace.",
           "largeIconUri": "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/512X512.png"
         }
       },

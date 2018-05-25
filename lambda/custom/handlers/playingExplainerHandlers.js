@@ -233,6 +233,10 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
 
 
   },
+  'ChangeMyInfo' : function () {
+    this.handler.state = this.attributes.STATE = config.states.REQUEST;
+    this.emitWithState('ChangeMyInfo');
+  },
   'AMAZON.StopIntent' : function() {
     console.log('STOP EXPLAINER STATE')
     // This needs to work for not playing as well
@@ -240,11 +244,6 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
 
     this.response.speak('See you later. Say alexa, Make Me Smart to get learning again.')
     this.emit(':saveState');
-  },
-  'AMAZON.ResumeIntent' : function() {
-    console.log('RESume playing EXPLAINER STATE')
-    // This needs to work for not playing as well
-    this.emitWithState('LaunchRequest');
   },
   'AMAZON.CancelIntent' : function() {
     console.log('CANCEL PLAY EXPLAINER STATE')
@@ -280,10 +279,14 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     this.emit(':saveState');
    },
    'Unhandled' : function () {
-     console.log('PLAYING EXPLAINER UNHANDLED',JSON.stringify(this.event, null, 2))
-     this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
-     this.emitWithState('HomePage', 'no_welcome', "Sorry I couldn't quite handle that.");
-
+     console.log("UNHANDLED playing")
+     var message = "Sorry I couldn't quite understand that. ";
+     var prompt = "Say 'replay' or 'next', or 'list explainers'.";
+     this.response.speak(message + prompt).listen(prompt);
+     if (this.event.context.System.device.supportedInterfaces.Display) {
+       this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message + prompt, null, config.background.show));
+     }
+     this.emit(':saveState', true);
    }
 
 });

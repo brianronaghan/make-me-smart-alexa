@@ -36,6 +36,40 @@
      ]
    },
    {
+     "id": "Elicit.Intent-ChangeMyInfo.IntentSlot-userName",
+     "variations": [
+       {
+         "type": "PlainText",
+         "value": "who should I say is calling?"
+       },
+       {
+         "type": "PlainText",
+         "value": "give me a name"
+       },
+       {
+         "type": "PlainText",
+         "value": "what's your name"
+       }
+     ]
+   },
+   {
+     "id": "Elicit.Intent-ChangeMyInfo.IntentSlot-userLocation",
+     "variations": [
+       {
+         "type": "PlainText",
+         "value": "where are you from?"
+       },
+       {
+         "type": "PlainText",
+         "value": "what city"
+       },
+       {
+         "type": "PlainText",
+         "value": "tell me where "
+       }
+     ]
+   },
+   {
      "id": "Elicit.Intent-HomePage.IntentSlot-userName",
      "variations": [
        {
@@ -204,6 +238,31 @@
            "confirmationRequired": false,
            "prompts": {
              "elicitation": "Elicit.Intent-PickItem.IntentSlot-userLocation"
+           }
+         }
+       ]
+     },
+     {
+       "name": "ChangeMyInfo",
+       "confirmationRequired": false,
+       "prompts": {},
+       "slots": [
+         {
+           "name": "userName",
+           "type": "AMAZON.US_FIRST_NAME",
+           "elicitationRequired": true,
+           "confirmationRequired": false,
+           "prompts": {
+             "elicitation": "Elicit.Intent-ChangeMyInfo.IntentSlot-userName"
+           }
+         },
+         {
+           "name": "userLocation",
+           "type": "AMAZON.US_CITY",
+           "elicitationRequired": true,
+           "confirmationRequired": false,
+           "prompts": {
+             "elicitation": "Elicit.Intent-ChangeMyInfo.IntentSlot-userLocation"
            }
          }
        ]
@@ -405,6 +464,10 @@
                   ],
                   "slots": [
                     {
+                      "name": "query",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
                       "name": "topic",
                       "type": "TOPICS"
                     },
@@ -430,6 +493,10 @@
                   ],
                   "slots": [
                     {
+                      "name": "query",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
                       "name": "topic",
                       "type": "TOPICS"
                     },
@@ -454,6 +521,10 @@
                     "newer explainers"
                   ],
                   "slots": [
+                    {
+                      "name": "query",
+                      "type": "AMAZON.SearchQuery"
+                    },
                     {
                       "name": "topic",
                       "type": "TOPICS"
@@ -488,6 +559,38 @@
                   ]
                 },
                 {
+                  "name": "ChangeMyInfo",
+                  "samples": [
+                    "change my name",
+                    "change my info",
+                    "correct name",
+                    "update name",
+                    "correct my name",
+                    "update my name",
+                    "change my city",
+                    "change my location",
+                    "correct location",
+                    "update location",
+                    "correct my location",
+                    "update my city"
+                  ],
+                  "slots": [
+                    {
+                      "name": "topic",
+                      "type": "TOPICS"
+                    },
+                    {
+                      "name": "userName",
+                      "type": "AMAZON.US_FIRST_NAME"
+                    },
+                    {
+                      "name": "userLocation",
+                      "type": "AMAZON.US_CITY"
+                    }
+                  ]
+                },
+
+                {
                   "name": "RequestExplainer",
                   "slots": [
                     {
@@ -519,6 +622,10 @@
                       {
                         "name": "topic",
                         "type": "TOPICS"
+                      },
+                      {
+                        "name": "query",
+                        "type": "AMAZON.SearchQuery"
                       }
                     ],
                     "samples":[
