@@ -15,17 +15,12 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
       this.attributes.indices.explainer = 0;
     }
     var slot = slot || this.event.request.intent.slots;
-    console.log("LIST EXPLAINER SLOT", slot)
-
     if (slot && slot.query && slot.query.value && !condition) {
       console.log('got a query baby', slot.query.value);
-      if (config.earlier.indexOf(slot.query.value) > -1) {
-        return this.emitWithState('EarlierExplainers', slot)
-      } else if (config.later.indexOf(slot.query.value) > -1) {
-        return this.emitWithState('LaterExplainers', slot)
+      if (util.intentCheck(slot.query.value)) {
+        return this.emitWithState(util.intentCheck(slot.query.value), slot)
       } else {
         return this.emitWithState('PickItem', slot)
-
       }
     }
     var data = util.itemLister(
@@ -128,9 +123,9 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
         message,
         function (err) {
           if (err) {
-            boundThis.emitWithState('ListExplainers');
+            boundThis.emitWithState('ListExplainers', 'end_list');
           } else {
-            boundThis.emitWithState('ListExplainers');
+            boundThis.emitWithState('ListExplainers', 'end_list');
           }
         }
       );

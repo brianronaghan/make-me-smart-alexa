@@ -29,6 +29,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     var chosenExplainer = util.itemPicker(slot, explainers, 'title', 'topic');
     if (!chosenExplainer) {
       if (slot.query && slot.query.value) {
+        // TODO: intentCheck ???
         console.log("NO EXPLAINER , but there is QUERY ", JSON.stringify(slot, null,2));
         this.handler.state = config.states.REQUEST;
         this.attributes.STATE = config.states.REQUEST;

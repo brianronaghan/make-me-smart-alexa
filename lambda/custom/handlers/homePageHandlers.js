@@ -27,8 +27,7 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
       console.log("GOT topic home", slot)
       return this.emitWithState('PickItem', slot)
     } else if (slot && slot.query && slot.query.value && !condition) {
-      console.log("GOT QUERY ELICIT on home", slot)
-      // check for stop
+      // TODO: intentCheck
       return this.emitWithState('PickItem', slot)
     }
 
@@ -55,6 +54,9 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     var topics = explainers.map(function(item) {
       return item.title
     });
+    if(!this.attributes.HEARD_FIRST) {
+      this.attributes.HEARD_FIRST = 0;
+    }
     intro += `learning about <prosody pitch="high" volume="x-loud">1) ${topics[this.attributes.HEARD_FIRST + 0]}</prosody>, <prosody volume="x-loud" pitch="high">2) ${topics[this.attributes.HEARD_FIRST + 1]}</prosody>, and <prosody volume="x-loud" pitch="high">3) ${topics[this.attributes.HEARD_FIRST + 2]}</prosody>. You can pick one or say 'play all.' Which would you like to hear?`;
 
     let newIntent = this.event.request.intent;
@@ -101,6 +103,8 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     console.log('request explainer in HOME PAGE - it is most likely from REQUESTING artifcat')
     var slot = slot || this.event.request.intent.slots;
     if (slot && slot.query && slot.query.value) { // since we can't change the goddamn thing if it uses elicit, if it has a query, probably after being elicited
+    // TODO: intentCheck
+
       return this.emitWithState('PickItem', slot)
     } else {
       this.handler.state = this.attributes.STATE = config.states.REQUEST;

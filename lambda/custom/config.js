@@ -8,37 +8,77 @@ var config = {
       explainer: 3,
       episode: 3,
     },
-    changeMyInfo: [
-      "change my name",
-      "change my info",
-      "correct name",
-      "update name",
-      "correct my name",
-      "update my name",
-      "change my city",
-      "change my location",
-      "correct location",
-      "update location",
-      "correct my location",
-      "update my city"
-    ],
-    earlier: [
-      "earlier",
-      "earlier explainers",
-      "before that",
-      "further back",
-      "older",
-      "older explainers"
-    ],
-    later: [
-      "later",
-      "later explainers",
-      "after that",
-      "more recent",
-      "newer",
-      "newer explainers"
-    ],
-    showLinks: false,
+    intents:{
+      ChangeMyInfo: [
+        "change my name",
+        "change my info",
+        "correct name",
+        "update name",
+        "correct my name",
+        "update my name",
+        "change my city",
+        "change my location",
+        "correct location",
+        "update location",
+        "correct my location",
+        "update my city"
+      ],
+      ListExplainers: [
+        "what explainers it has",
+        "list explainers",
+        "all explainers",
+        "show all explainers"
+      ],
+      'AMAZON.StopIntent': [
+        "stop"
+      ],
+      HomePage: [
+        "home page",
+        "go home",
+        "start over",
+        "what's new",
+        "hear what's new",
+        "what is new",
+        "hear new explainers",
+        "make me smart"
+      ],
+      PlayLatestExplainer: [
+        "play all",
+        "all of them",
+        "play the latest",
+        "the latest",
+        "all"
+      ],
+      RequestExplainer: [
+        "request explainer slot",
+        "suggest a topic",
+        "request an explainer"
+      ],
+      PlayLatestExplainer: [
+        "play all",
+        "all of them",
+        "play the latest",
+        "the latest",
+        "all"
+      ],
+      EarlierExplainers: [
+        "earlier",
+        "earlier explainers",
+        "before that",
+        "further back",
+        "older",
+        "older explainers"
+      ],
+      LaterExplainers: [
+        "later",
+        "later explainers",
+        "after that",
+        "more recent",
+        "newer",
+        "newer explainers"
+      ],
+
+    },
     states: {
       START: '',
       HOME_PAGE: '_HOME_PAGE',

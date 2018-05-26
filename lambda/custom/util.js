@@ -6,6 +6,7 @@ const makeImage = Alexa.utils.ImageUtils.makeImage;
 const makePlainText = Alexa.utils.TextUtils.makePlainText;
 const makeRichText = Alexa.utils.TextUtils.makeRichText;
 
+let INTENT_DICT = undefined;
 
 module.exports = {
   sendProgressive: function (endpoint, requestId, accessToken, speech, cb) {
@@ -43,7 +44,7 @@ module.exports = {
   prosodyToBold: prosodyToBold,
   clearProsody: clearProsody,
   cleanSlotName: cleanSlotName,
-
+  intentCheck: intentCheck,
   templateListTemplate1: function (title, token, itemLabel, itemTitleKey, items) {
     var listItemBuilder = new Alexa.templateBuilders.ListItemBuilder();
     var listTemplateBuilder = new Alexa.templateBuilders.ListTemplate1Builder();
@@ -320,7 +321,21 @@ function clearProsody (text) {
   return text;
 };
 
-
+function intentCheck (text) {
+  console.log(`DOUBLE CHECKING ${text} against utterances.`)
+  if (!INTENT_DICT) {
+    INTENT_DICT = {};
+    for (let intent of Object.keys(config.intents)) {
+      console.log('INTENT', intent)
+      for (let utterance of config.intents[intent]) {
+        console.log("UT", utterance);
+        INTENT_DICT[utterance] = intent;
+      }
+    }
+    console.log("BUILT DICT ", JSON.stringify(INTENT_DICT, null,2))
+  }
+  return INTENT_DICT[text]
+}
 
 function cleanSlotName (showString) {
   var cleanedSlot = showString.toLowerCase();

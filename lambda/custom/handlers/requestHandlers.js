@@ -16,6 +16,18 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     var message = '';
     var boundThis = this;
     var payload = {}
+    // no query/no topic means they initiated request
+      // ask for topic
+    // query
+      //&& startedRequest
+        // definitely want to save
+      // && save req
+        // confirmed they'd like to submit
+      // saveReq === no
+        // redirect
+      // !save req
+        // ask them if they'd like to save req
+
     if (slot.query && !slot.query.value) { // came here without a query
       message = "What would you like to get smart about?";
       return this.emit(':elicitSlotWithCard', 'query', message, "What would you like to request an explainer about?", 'Request Explainer',message, this.event.request.intent, util.cardImage(config.icon.full));
@@ -30,11 +42,11 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     if (this.attributes.startedRequest) {
       suggestionString = `${suggestion}! Great idea!`
     } else {
+      // NOTE: if the user didn't do it intentionally, should we ask them if they want to?
+      // SHOULD WE confirm name and location too?
       suggestionString = `Hmmm, we don't have anything on ${suggestion}. But `
     }
-    if (config.changeMyInfo.indexOf(suggestion) > -1) {
-      console.log('whoops, wants to change');
-    }
+    // TODO: check intent? or should we do it before
     if (suggestion && this.attributes.userName && this.attributes.userLocation) {
       payload.requests = [{
         query: suggestion,
@@ -64,10 +76,10 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
           }
         );
       });
-    } else if (slot.userName && !slot.userName.value) { // NOTE NOT SAVING NAME && !this.attributes.userName
+    } else if (slot.userName && !slot.userName.value) {
       message += `${suggestionString} I'll ask Kai and Molly to look into it. Who should I say is asking?`;
       this.emit(':elicitSlotWithCard', 'userName', message, "What name should I leave?", 'Request Explainer',message, this.event.request.intent, util.cardImage(config.icon.full));
-    } else if (slot.userLocation && !slot.userLocation.value ) { // NOTE NOT SAVING NAME && this.attributes.userLocation
+    } else if (slot.userLocation && !slot.userLocation.value ) {
       this.attributes.userName = slot.userName.value;
       var cardMessage = `I'll note that ${slot.userName.value} would like an explainer on ${suggestion}. `;
       message += 'And where are you from?';
@@ -132,9 +144,11 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     if (slot.query && !slot.query.value) { // came here without a query
       // gotta check if the query matches.
         // if it does, go to that.
+
       message = "What would you like to get smart about?";
       this.emit(':elicitSlotWithCard', 'query', message, "What would you like to request an explainer about?", 'Request Explainer',message, this.event.request.intent, util.cardImage(config.icon.full));
     } else if (slot.query && slot.query.value && chosenExplainer) {
+      console.log("ACTUAL REQUEST EXPLAINER INTENT WITH QUERY")
       message = "Actually, we've got you covered there."
       return util.sendProgressive(
         boundThis.event.context.System.apiEndpoint, // no need to add directives params
@@ -147,6 +161,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
         }
       );
     } else {
+      // TODO: check intent
       boundThis.emitWithState('PickItem', slot);
     }
   },
