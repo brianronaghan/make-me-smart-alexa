@@ -285,12 +285,12 @@ function searchByName (searchTerm, itemNames, itemAlts) { // takes names and alt
   var index = itemNames.indexOf(searchTerm);
   var stripped = stripArticles(searchTerm);
   var strippedIndex = itemNames.indexOf(stripped);
-  console.log('searching normal: ', searchTerm, ' and stripped: ', stripped)
+  console.log('SEARCHING normal: ', searchTerm, ' and stripped: ', stripped)
   if (index > -1) {
-    console.log("found straight up", index)
+    console.log(`found ${searchTerm} straight up`);
     return index;
   } else if (strippedIndex > -1) {
-    console.log('found stripped, title');
+    console.log(`found stripped ${stripped} title`);
     return strippedIndex;
   } else {
     // check without articles
@@ -299,39 +299,21 @@ function searchByName (searchTerm, itemNames, itemAlts) { // takes names and alt
       if (itemNames[i].indexOf(searchTerm) > -1) {
         console.log('found ', searchTerm, ' as partial of ', itemNames[i], ' but not resolving b/c 5 would always pick 5g')
       }
-      console.log('spot ', i, 'alts ', itemAlts[i])
       if(itemAlts[i]) {
         for (var j = 0; j < itemAlts[i].length; j++) {
-          console.log('the alt ', j, itemAlts[i][j]);
           if (itemAlts[i][j].indexOf(searchTerm) > -1) {
-            console.log('found in alts')
+            console.log(`found term ${searchTerm} as part of alt ${itemAlts[i][j]}`)
             return i;
           } else if (itemAlts[i][j] === stripped) {
             // if i do index of on each string with stripped, any title with a number in it will always catch
-            console.log('found stripped in alts DIRECT')
+            console.log(`found STRIPPED direct ${itemAlts[i][j]}`)
             return i;
           }
         }
       }
     }
-    console.log('not even by alt')
+    console.log('not even by alt names')
     return -1;
-    // itemAlts.forEach((alts, i)=>{
-    //   if (alts) {
-    //     alts.forEach((alt) => {
-    //       if (alt.indexOf(searchTerm) > -1) {
-    //         index = i;
-    //       } else if (alt.indexOf(stripped) > -1) {
-    //
-    //       }
-    //     })
-    //   }
-    // })
-    if (index !== -1) {
-      console.log("FOUND via alt", index)
-    } else {
-    }
-    return index;
   }
 }
 
