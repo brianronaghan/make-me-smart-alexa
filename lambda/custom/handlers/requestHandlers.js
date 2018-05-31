@@ -116,6 +116,9 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
             )
           );
         }
+        if (slot && slot.query && slot.query.value) {
+          delete slot.query.value;
+        }
         this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
         return util.sendProgressive(
           this.event.context.System.apiEndpoint, // no need to add directives params

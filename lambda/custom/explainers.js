@@ -3,7 +3,7 @@ module.exports = [
     title: 'G.D.P.R.',
     author: 'Molly Wood',
     alts: ['g.d.p.r', 'gdpr', 'g d p r', 'g.b.p.r', 'gbpr', 'g b p r'],
-    guid: 'GDPR_certification',
+    guid: 'GDPR_certification-1',
     date: "2018-05-24",
     description: "G.D.P.R. is the European Union's new data law, the General Data Protection Regulation",
     audio: {
@@ -14,7 +14,7 @@ module.exports = [
   {
     title: 'The Royal Wedding',
     author: 'Kai Ryssdal',
-    alts: ['royal wedding'],
+    alts: ['royal wedding', 'royals', 'play the wedding', 'wedding', 'the wedding', 'royal'],
     tags: [],
     guid: 'royal_wedding_certification',
     date: "2018-05-24",
@@ -26,7 +26,7 @@ module.exports = [
   {
     title: 'Bitcoin',
     author: 'Molly Wood',
-    alts: ['a cryptocurrency', 'a bitcoin', 'uh bitcoin'],
+    alts: ['a cryptocurrency', 'a bitcoin', 'uh bitcoin', 'cryptocurrency', 'crypto', 'blockchain', 'flip coin'],
     guid: "bitcoin_certification",
     date: null,
     description: "Bitcoin is the best known cryptocurrency.",
@@ -38,7 +38,7 @@ module.exports = [
   {
     title: 'The Unemployment Report',
     author: 'Kai Ryssdal',
-    alts: ['unemployment', 'unemployment rate', 'unemployment report','jobs report', 'an employment'],
+    alts: ['unemployment', 'unemployment rate', 'unemployment report','jobs report', 'an employment', 'un employment'],
     guid: 'unemployment_certification',
     date: "2018-05-24",
     description: "How the unemployment report is calculated and what it means for the economy.",
@@ -48,9 +48,21 @@ module.exports = [
     },
   },
   {
+    title: 'The Cloud',
+    guid: "cloud_certification",
+    date: "2018-05-24",
+    alts: ['cloud', 'cloud computing', 'clouds'],
+    author: 'Molly Wood',
+    description: 'Cloud computing is a paradigm where computing resources (servers, storage, etc.) are offered as a utility via the Internet.',
+    audio: {
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/Alexa+-+Wood+-+The+Cloud+Intro+-+MIXLEV_alexa.mp3",
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Wood+-+The+Cloud+-+MIXLEV_alexa.mp3",
+    }
+  },
+  {
     title: 'The Fed',
     author: 'Kai Ryssdal',
-    alts: ['the federal reserve', 'fed', 'the central bank'],
+    alts: ['the federal reserve', 'fed', 'the central bank', 'central bank'],
     tags: [],
     guid: 'fed_certification',
     date: "2018-05-24",
@@ -70,18 +82,6 @@ module.exports = [
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Wood+-+5g+-+MIXLEV_alexa.mp3",
       intro: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/Alexa+-+Wood+-+5G+Intro+-+MIXLEV_alexa.mp3'
-    }
-  },
-
-  {
-    title: 'The Cloud',
-    guid: "cloud_certification",
-    date: "2018-05-24",
-    author: 'Molly Wood',
-    description: 'Cloud computing is a paradigm where computing resources (servers, storage, etc.) are offered as a utility via the Internet.',
-    audio: {
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/Alexa+-+Wood+-+The+Cloud+Intro+-+MIXLEV_alexa.mp3",
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Wood+-+The+Cloud+-+MIXLEV_alexa.mp3",
     }
   },
   {

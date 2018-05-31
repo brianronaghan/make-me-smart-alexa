@@ -36,14 +36,26 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
   },
   // STATE TRANSITIONS
   'RequestExplainer' : function () {
-    console.log('request explainer test')
+    console.log('request explainer test IN LIST EXPLAINERS!')
+    var slot = slot || this.event.request.intent.slots;
+    if (util.intentCheck(slot.query.value)) {
+      if (util.intentCheck(slot.query.value) === 'RequestExplainer') {
+        console.log('got actual request via query on iterating. Damn.')
+        this.handler.state = this.attributes.STATE = config.states.REQUEST;
+        return this.emitWithState('RequestExplainer');
+      } else {
+        console.log("Got a req", util.intentCheck(slot.query.value))
+        return this.emitWithState(util.intentCheck(slot.query.value), 'req_in_it', slot)
+      }
+    }
     this.handler.state = this.attributes.STATE = config.states.REQUEST;
-    this.emitWithState('RequestExplainer', {query: null});
+    return this.emitWithState('RequestExplainer', {query: {value:null},userLocation: {value: null}, userName: {value: null}});
   },
   'PickItem': function (slot) {
     console.log('ITERATING EXPLAINER, pick explainer');
     console.log('manual slot', slot);
     console.log('alexa EVENT',JSON.stringify(this.event.request));
+
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
     this.emitWithState('PickItem', slot, 'ITERATING');
   },

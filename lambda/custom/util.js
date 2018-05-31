@@ -296,6 +296,9 @@ function searchByName (searchTerm, itemNames, itemAlts) { // takes names and alt
     // check without articles
     console.log("CHECKING ALTS with both stripped and normal")
     for (var i = 0; i < itemAlts.length; i++) {
+      if (itemNames[i].indexOf(searchTerm) > -1) {
+        console.log('found ', searchTerm, ' as partial of ', itemNames[i], ' but not resolving b/c 5 would always pick 5g')
+      }
       console.log('spot ', i, 'alts ', itemAlts[i])
       if(itemAlts[i]) {
         for (var j = 0; j < itemAlts[i].length; j++) {

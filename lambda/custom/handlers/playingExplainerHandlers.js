@@ -168,7 +168,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
   },
   // STATE TRANSITION:
   'RequestExplainer' : function () {
-    console.log('request explainer test')
+    console.log('request explainer test IN PLAYING')
     this.handler.state = this.attributes.STATE = config.states.REQUEST;
     this.emitWithState('RequestExplainer', {query: {value:null},userLocation: {value: null}, userName: {value: null}});
   },

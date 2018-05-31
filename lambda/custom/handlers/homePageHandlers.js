@@ -21,13 +21,13 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
   'HomePage': function (condition, message) {
     // why did what's new not go here?
     var slot = slot || this.event.request.intent.slots;
-    console.log("HOME PAGE CONDITION ", condition)
+    console.log("HOME PAGE CONDITION ", condition, ' AND NAME: ', this.event.request.intent.name)
     if (slot && slot.topic && slot.topic.value && !condition) {
       console.log("GOT topic home", slot)
       return this.emitWithState('PickItem', slot)
     } else if (slot && slot.query && slot.query.value && !condition) {
       if (util.intentCheck(slot.query.value)) {
-        console.log(`Home Page: got ${slot.query.value} in query.`)
+        console.log(`HOME_PAGE Home Page: got ${slot.query.value} in query.`)
         return this.emitWithState(util.intentCheck(slot.query.value), slot)
       } else {
         return this.emitWithState('PickItem', slot)
@@ -150,9 +150,9 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     console.log('s', slot);
-    if(slot && slot.query && slot.query.value) {
-      delete slot.query.value;
-    }
+    // if(slot && slot.query && slot.query.value) {
+    //   delete slot.query.value;
+    // }
     console.log('list Explainers FROM HOME PAGE')
     console.log(JSON.stringify(this.event.request, null, 2));
 
