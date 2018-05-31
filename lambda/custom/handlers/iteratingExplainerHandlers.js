@@ -8,6 +8,14 @@ var explainers = require('../explainers')
 var db = require('../db');
 
 module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
+  'LaunchRequest': function () {
+    console.log("LR in ITERATING?")
+    if (this.attributes.indices && this.attributes.indices.explainer) {
+      this.attributes.indices.explainer = 0;
+    }
+    this.handler.state = this.attributes.STATE = config.states.START;
+    this.emitWithState('LaunchRequest');
+  },
   'ListExplainers': function (condition) {
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
@@ -15,11 +23,14 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
       this.attributes.indices.explainer = 0;
     }
     var slot = slot || this.event.request.intent.slots;
-    console.log("LIST EXPLAINERS, SLOT", slot)
+    console.log("LIST_EXPLAINERS ListExplainer, SLOT", slot, ' and condition ', condition)
     if (slot && slot.query && slot.query.value && !condition) {
       console.log('IT EXP, LIST EXP, got a query', slot.query.value);
-      if (util.intentCheck(slot.query.value)) {
-        return this.emitWithState(util.intentCheck(slot.query.value), slot)
+      let resolvedIntent = util.intentCheck(slot.query.value);
+      if (resolvedIntent) {
+        console.log(`ITERATING_EXPLAINERS listExplainers: got ${slot.query.value} in query.`)
+        delete slot.query.value;
+        return this.emitWithState(resolvedIntent, slot);
       } else {
         return this.emitWithState('PickItem', slot)
       }
@@ -38,18 +49,31 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
   'RequestExplainer' : function () {
     console.log('request explainer test IN LIST EXPLAINERS!')
     var slot = slot || this.event.request.intent.slots;
-    if (util.intentCheck(slot.query.value)) {
-      if (util.intentCheck(slot.query.value) === 'RequestExplainer') {
-        console.log('got actual request via query on iterating. Damn.')
-        this.handler.state = this.attributes.STATE = config.states.REQUEST;
-        return this.emitWithState('RequestExplainer');
+    if (slot && slot.query && slot.query.value) {
+      let resolvedIntent = util.intentCheck(slot.query.value);
+      if (resolvedIntent) {
+        console.log(`ITERATING_EXPLAINERS requestExplainer: got ${slot.query.value} in query.`)
+        delete slot.query.value;
+        return this.emitWithState(resolvedIntent, slot);
       } else {
-        console.log("Got a req", util.intentCheck(slot.query.value))
-        return this.emitWithState(util.intentCheck(slot.query.value), 'req_in_it', slot)
+        console.log('ITERATING_EXPLAINERS, sending to pick ', slot)
+        return this.emitWithState('PickItem', slot)
       }
+    } else {
+      console.log("ITERATING_EXPLAINERS , got requestExplainer with no slot. REDIRECTING")
+      this.handler.state = this.attributes.STATE = config.states.REQUEST;
+      return this.emitWithState('RequestExplainer', {query: {value:null},userLocation: {value: null}, userName: {value: null}});
     }
-    this.handler.state = this.attributes.STATE = config.states.REQUEST;
-    return this.emitWithState('RequestExplainer', {query: {value:null},userLocation: {value: null}, userName: {value: null}});
+    // if (util.intentCheck(slot.query.value)) {
+    //   if (util.intentCheck(slot.query.value) === 'RequestExplainer') {
+    //     console.log('got actual request via query on iterating. Damn.')
+    //     this.handler.state = this.attributes.STATE = config.states.REQUEST;
+    //     return this.emitWithState('RequestExplainer');
+    //   } else {
+    //     console.log("Got a req", util.intentCheck(slot.query.value))
+    //     return this.emitWithState(util.intentCheck(slot.query.value), 'req_in_it', slot)
+    //   }
+    // }
   },
   'PickItem': function (slot) {
     console.log('ITERATING EXPLAINER, pick explainer');
@@ -64,28 +88,40 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
   'HomePage': function () {
     var slot = slot || this.event.request.intent.slots;
     console.log("HOME PAGE in ITERATING?", JSON.stringify(this.event.request,null,2))
-    if (util.intentCheck(slot.query.value)) {
-      if (util.intentCheck(slot.query.value) === 'HomePage') {
-        console.log('got actual home page via query on iterating. Damn.')
-        this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
-        return this.emitWithState('HomePage', 'no_welcome');
+
+    if (slot && slot.query && slot.query.value) {
+      let resolvedIntent = util.intentCheck(slot.query.value);
+      if (resolvedIntent) {
+        console.log(`ITERATING_EXPLAINERS homePage: got ${slot.query.value} in query.`)
+        delete slot.query.value;
+        return this.emitWithState(resolvedIntent, slot);
       } else {
-        console.log("Got a req", util.intentCheck(slot.query.value))
-        return this.emitWithState(util.intentCheck(slot.query.value), slot)
+        console.log('ITERATING_EXPLAINERS homePage, sending to pick ', slot)
+        return this.emitWithState('PickItem', slot)
       }
     } else {
-      return this.emitWithState('PickItem', slot)
+      console.log("ITERATING_EXPLAINERS , got HOME PAGE with no query. REDIRECTING")
+      this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
+      return this.emitWithState('HomePage', 'no_welcome');
     }
-
-    this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
-    this.emitWithState('HomePage', 'no_welcome');
+    // if (util.intentCheck(slot.query.value)) {
+    //   if (util.intentCheck(slot.query.value) === 'HomePage') {
+    //     console.log('got actual home page via query on iterating. Damn.')
+    //     this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
+    //     return this.emitWithState('HomePage', 'no_welcome');
+    //   } else {
+    //     console.log("Got a req", util.intentCheck(slot.query.value))
+    //     return this.emitWithState(util.intentCheck(slot.query.value), slot)
+    //   }
+    // } else {
+    //   return this.emitWithState('PickItem', slot)
+    // }
+    //
+    // this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
+    // this.emitWithState('HomePage', 'no_welcome');
   },
 
-  'LaunchRequest': function () {
-    console.log("LR in ITERATING?")
-    this.handler.state = this.attributes.STATE = config.states.START;
-    this.emitWithState('LaunchRequest');
-  },
+
   // TOUCH EVENTS
   'ElementSelected': function () {
     var deviceId = util.getDeviceId.call(this);

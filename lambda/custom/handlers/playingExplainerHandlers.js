@@ -31,14 +31,19 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
       addOneBool = true
     }
     var chosenExplainer = util.itemPicker(slot, explainers, 'title', 'topic', addOneBool);
-    console.log("C E ", chosenExplainer)
+    console.log("CHOSEN EX valu ", chosenExplainer)
     if (chosenExplainer === -1) {
       console.log("OUT OF BOUNDS, but by number")
       var theNumber;
       if (slot.query && slot.query.value) {
         theNumber = slot.query.value;
+        delete slot.query.value;
       } else if (slot.index && slot.index.value) {
         theNumber = slot.index.value;
+        delete slot.index.value;
+      } else if (slot.ordinal && slot.ordinal.value) {
+        theNumber = slot.ordinal.value;
+        delete slot.ordinal.value;
       }
       var message = `${theNumber} is not a valid choice. Please choose between 1 and ${explainers.length}. I'll list the explainers again.`
       var boundThis = this;
@@ -76,7 +81,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
         );
       } else if (slot.ordinal && slot.ordinal.value) {
         console.log("NO EXPLAINER , but there is ORDINAL ", JSON.stringify(slot, null,2))
-
+        delete slot.ordinal.value;
         var message = `We don't have a ${slot.ordinal.value}. Please choose between 1 and ${explainers.length}. I'll list the explainers again.`
         return util.sendProgressive(
           boundThis.event.context.System.apiEndpoint, // no need to add directives params
@@ -263,7 +268,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     this.emitWithState('ChangeMyInfo');
   },
   'AMAZON.StopIntent' : function() {
-    console.log('STOP EXPLAINER STATE')
+    console.log('STOP PLAY EXPLAINER STATE')
     // This needs to work for not playing as well
     // SHOULD I CLEAR THE STATE?
 
@@ -279,7 +284,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
   },
 
   'AMAZON.PauseIntent' : function() {
-    console.log('PAUSE EXPLAINER STATE')
+    console.log('PAUSE PLAY EXPLAINER STATE')
     // This needs to work for not playing as well
     this.response.speak('See you later. Say alexa, Make Me Smart to get learning again.')
     this.emit(':saveState');

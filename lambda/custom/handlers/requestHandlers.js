@@ -9,6 +9,14 @@ var explainers = require('../explainers')
 var db = require('../db');
 
 module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
+  'LaunchRequest': function () {
+    console.log("REQUEST LAUNCH REQ", this.handler.state)
+    if (this.attributes.startedRequest) {
+      delete this.attributes.startedRequest;
+    }
+    this.handler.state = this.attributes.STATE = config.states.START;
+    this.emitWithState('LaunchRequest');
+  },
   'PickItem': function (slot) {
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
@@ -16,20 +24,25 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     var message = '';
     var boundThis = this;
     var payload = {}
-    console.log("HITS PICK IN REQ")
-    // no query/no topic means they initiated request
-      // ask for topic
-    // query
-      //&& startedRequest
-        // definitely want to save
-      // && save req
-        // confirmed they'd like to submit
-      // saveReq === no
-        // redirect
-      // !save req
-        // ask them if they'd like to save req
+    console.log("HITS PICK IN REQ - intent", JSON.stringify(this.event.request.intent, null, 2))
+    // TODO: what if it has come from pick item and there is no userName/userLocation slots?
+    if (!slot.userName) {
+      console.log("REQUEST PickItem had to add userName")
+      slot.userName = {
+        name: 'userName',
+        confirmationStatus: 'NONE'
+      };
+    }
+    if (!slot.userLocation) {
+      console.log("REQUEST PickItem had to add userLocation")
 
+      slot.userLocation = {
+        name: 'userLocation',
+        confirmationStatus: 'NONE'
+      };
+    }
     if (slot.query && !slot.query.value) { // came here without a query
+
       message = "What would you like to get smart about?";
       return this.emit(':elicitSlotWithCard', 'query', message, "What would you like to request an explainer about?", 'Request Explainer',message, this.event.request.intent, util.cardImage(config.icon.full));
     }
@@ -37,8 +50,8 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     if (slot.query && slot.query.value) {
       let intentCheck = util.intentCheck(slot.query.value);
       if (intentCheck === 'ChangeMyInfo') {
-        slot.query.value = null;
-       return this.emitWithState(intentCheck, slot);
+        delete slot.query.value;
+        return this.emitWithState(intentCheck, slot);
       }
       suggestion = slot.query.value;
     } else if (slot.topic && slot.topic.value) {
@@ -68,6 +81,11 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
         message = `${suggestionString} I'll tell Kai and Molly that ${this.attributes.userName} from ${this.attributes.userLocation} wants to get smart about that! You can also hear more from Kai and Molly by saying "alexa, play podcast Make Me Smart." `;
         //
         this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
+        if (slot && slot.query && slot.query.value) {
+          delete slot.query.value
+        } else if (slot && slot.query && slot.query.value) {
+          delete slot.topic.value
+        }
         return util.sendProgressive(
           this.event.context.System.apiEndpoint, // no need to add directives params
           this.event.request.requestId,
@@ -83,6 +101,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
         );
       });
     } else if (slot.userName && !slot.userName.value) {
+      console.log('slot.userName && !slot.userName.value');
       message += `${suggestionString} I'll ask Kai and Molly to look into it. Who should I say is asking?`;
       this.emit(':elicitSlotWithCard', 'userName', message, "What name should I leave?", 'Request Explainer',message, this.event.request.intent, util.cardImage(config.icon.full));
     } else if (slot.userLocation && !slot.userLocation.value ) {
@@ -91,7 +110,8 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       message += 'And where are you from?';
       cardMessage += message;
       this.emit(':elicitSlotWithCard', 'userLocation', message, "What location should I leave?", 'Request Explainer', cardMessage, this.event.request.intent, util.cardImage(config.icon.full) );
-    } else {
+    } else if (slot.userLocation && slot.userName) { // used to be just else
+
       console.log("OKAY, NOW WE HAVE EVEYRTHING for request ", slot);
 
       this.attributes.userLocation = slot.userLocation.value;
@@ -117,7 +137,9 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
           );
         }
         if (slot && slot.query && slot.query.value) {
-          delete slot.query.value;
+          delete slot.query.value
+        } else if (slot && slot.query && slot.query.value) {
+          delete slot.topic.value
         }
         this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
         return util.sendProgressive(
@@ -134,19 +156,21 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
           }
         );
       });
+    } else { // no userLocation or userName slot
+      console.log('IN THE GENERAL ELSE AT PICK ITEM in REQUEST state', JSON.stringify(this.event.request.intent, null, 2))
     }
   },
   'RequestExplainer': function (slot) {
     // NOTE: look at this immediately, I think I have some old code here
+    console.log('REQUEST, RequestExplainer, slot passed?', slot)
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
-    console.log('REQUEST EVENT', this.event.request)
     this.attributes.startedRequest = true;
     var slot = slot || this.event.request.intent.slots;
     var message = '';
     var boundThis = this;
     var chosenExplainer;
-    console.log("REQUEST EXPLAINER INTENT ", slot)
+    console.log("REQUEST state RequestExplainer INTENT ", JSON.stringify(this.event.request.intent, null, 2))
     if (slot.query && slot.query.value) {
       chosenExplainer = util.itemPicker(slot, explainers, 'title', 'query');
     }
@@ -182,10 +206,44 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
 
     }
   },
-  'HomePage' : function () {
-    this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
-    this.emitWithState('HomePage', 'no_welcome');
+  'ListExplainers': function () {
+    console.log("REQUEST, ListExpainers")
+    var slot = slot || this.event.request.intent.slots;
+    if (slot && slot.query && slot.query.value) {
+      let resolvedIntent = util.intentCheck(slot.query.value);
+      if (resolvedIntent) {
+        console.log(`REQUEST ListExplainers: got ${slot.query.value} in query.`)
+        delete slot.query.value;
+        return this.emitWithState(resolvedIntent, slot);
+      } else {
+        console.log("has non-intent query, redirect to pick")
+        return this.emitWithState('PickItem', slot);
+      }
+    } else {
+      console.log('NO QUERY redirect to list')
+      this.handler.state = this.attributes.STATE = config.states.LIST_EXPLAINERS;
+      return this.emitWithState('ListExpainers', slot);
 
+    }
+  },
+  'HomePage' : function () {
+    var slot = slot || this.event.request.intent.slots;
+    if (slot && slot.query && slot.query.value) {
+      let resolvedIntent = util.intentCheck(slot.query.value);
+      if (resolvedIntent) {
+        console.log(`REQUEST HomePage: got ${slot.query.value} in query.`)
+        delete slot.query.value;
+        return this.emitWithState(resolvedIntent, slot);
+      } else {
+        console.log("REQUEST HomePage has slot query, redirect to pick")
+        return this.emitWithState('PickItem', slot);
+
+      }
+    } else {
+      console.log('NO QUERY redirect to HomePage');
+      this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
+      this.emitWithState('HomePage', 'no_welcome');
+    }
   },
   'LaunchRequest' : function () {
     this.handler.state = this.attributes.STATE = config.states.START;
@@ -266,7 +324,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
   },
   'AMAZON.HelpIntent' : function () {
     console.log('Help in REQUEST')
-    var message = `You can say 'nevermind' to cancel, let us know your name and city so we can give you credit if we answer your question, or 'change my info' to correct your name or location.`;
+    var message = `You can cancel, or let us know your name and city so we can give you credit if we answer your question, or 'change my info' to correct your name or location.`;
     this.response.speak(message).listen(message);
     if (this.event.context.System.device.supportedInterfaces.Display) {
       this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, links, config.background.show));
@@ -281,7 +339,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
 
      // Just go to start
      var message = "Sorry I couldn't quite understand that. ";
-     var prompt = "Say 'request explainer' or 'suggest a topic'.";
+     var prompt = "You can hear what's new or suggest a topic. Which would you like to do?";
      this.response.speak(message + prompt).listen(prompt);
      if (this.event.context.System.device.supportedInterfaces.Display) {
        this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message + prompt, null, config.background.show));
