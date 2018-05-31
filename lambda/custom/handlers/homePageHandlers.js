@@ -26,9 +26,11 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
       console.log("GOT topic home", slot)
       return this.emitWithState('PickItem', slot)
     } else if (slot && slot.query && slot.query.value && !condition) {
-      if (util.intentCheck(slot.query.value)) {
+      let resolvedIntent = util.intentCheck(slot.query.value);
+      if (resolvedIntent) {
         console.log(`HOME_PAGE Home Page: got ${slot.query.value} in query.`)
-        return this.emitWithState(util.intentCheck(slot.query.value), slot)
+        delete slot.query.value;
+        return this.emitWithState(resolvedIntent, slot)
       } else {
         return this.emitWithState('PickItem', slot)
       }
@@ -37,6 +39,7 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     this.attributes.currentExplainerIndex = -1;
     var intro = '';
     if (this.event.session.new) {
+      this.attributes.HEARD_FIRST = 0;
       intro += "Welcome back to Make Me Smart. This week we're ";
     } else if (condition === 'requested') {
       if (message) {
@@ -82,20 +85,36 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
   },
 
   'RequestExplainer' : function () {
-    console.log('request explainer in HOME PAGE - it is most likely from REQUESTING artifact')
+    console.log('request explainer in HOME PAGE - POSSISBLY from REQUESTING artifact')
     var slot = slot || this.event.request.intent.slots;
     if (slot && slot.query && slot.query.value) { // since we can't change the goddamn thing if it uses elicit, if it has a query, probably after being elicited
-      if (util.intentCheck(slot.query.value)) {
-        console.log(`REQUEST EXPL: got ${slot.query.value} in query.`)
-        return this.emitWithState(util.intentCheck(slot.query.value), slot)
+      let resolvedIntent = util.intentCheck(slot.query.value);
+      if (resolvedIntent) {
+        console.log(`HOME_PAGE RequestExplainer: got ${slot.query.value} in query.`)
+        delete slot.query.value;
+        return this.emitWithState(resolvedIntent, slot)
       } else {
+        console.log(`HOME_PAGE RequestExplainer: no intent, but query ${slot.query.value}. sending to PickItem`)
         return this.emitWithState('PickItem', slot)
       }
-
     } else {
+      console.log("HOME_PAGE, RequestExplainer, no query, redirect to REQ state")
       this.handler.state = this.attributes.STATE = config.states.REQUEST;
       return this.emitWithState('RequestExplainer', {query: {value:null},userLocation: {value: null}, userName: {value: null}});
     }
+  },
+
+  'EarlierExplainers' : function () {
+    console.log("EARLIER in HOME_PAGE");
+
+    this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
+    this.emitWithState('EarlierExplainers', 'earlier_from_homepage');
+  },
+
+  'LaterExplainers' : function () {
+    console.log("LATER in HOME_PAGE");
+    this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
+    this.emitWithState('LaterExplainers', 'later_from_homepage');
   },
 
 
@@ -163,20 +182,6 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     // this just throws to the correct state version of itself
     this.emitWithState('ListExplainers');
   },
-
-
-  // DEFAULT:
-  // 'AMAZON.FallbackIntent': function () {
-  //   console.log("UM WHAT FALL BACK", JSON.stringify(this, null,2))
-  //   var message = "FALL BACK. You can pick a topic or choose by number or say 'play all'.";
-  //   this.response.speak(message).listen(message);
-  //   if (this.event.context.System.device.supportedInterfaces.Display) {
-  //     var links = "<action value='HomePage'>What's New</action> | <action value='ListExplainers'>List Explainers</action>";
-  //     this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, links, config.background.show));
-  //   }
-  //   this.emit(':saveState', true);
-  //
-  // },
 
   'AMAZON.CancelIntent' : function() {
     console.log('CANCEL HOME PAGE')
