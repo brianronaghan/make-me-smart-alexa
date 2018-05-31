@@ -447,10 +447,6 @@
                   "samples": []
                 },
                 {
-                  "name": "AMAZON.FallbackIntent",
-                  "samples": []
-                },
-                {
                   "name": "HomePage",
                   "samples": [
                     "a main menu",
@@ -502,7 +498,13 @@
                     "let me hear that again",
                     "start over",
                     "replay explainer",
-                    "replay today's explainer"
+                    "let's hear that again",
+                    "repeat",
+                    "begin again",
+                    "begin that again",
+                    "one more time",
+                    "replay today's explainer",
+                    "replay that exlplainer"
                   ]
                 },
                 {
@@ -519,7 +521,8 @@
                     "today's topic",
                     "play today's topic",
                     "today's explainer",
-                    "play today's explainer"
+                    "play today's explainer",
+                    "play the latest explainer"
                   ]
                 },
                 {
@@ -553,7 +556,12 @@
                     "request a topic",
                     "pitch explainer",
                     "pitch an explainer topic",
-                    "pitch a topic"
+                    "pitch a topic",
+                    "i want to suggest a topic",
+                    "can i make a suggestion",
+                    "suggestion",
+                    "request",
+                    "new topic"
                   ]
                 },
                 {
