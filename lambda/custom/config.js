@@ -123,6 +123,15 @@ var config = {
         "stop",
         "cancel"
       ],
+      'AMAZON.HelpIntent': [
+        "help",
+        "help me",
+        "can you help",
+        "can you help me",
+        "what do i do",
+        "help please"
+      ],
+
 
     },
     defaultDescription: "Something else you want to get smart about? Try 'Alexa, suggest a topic' and Kai and Molly might use your idea!",
