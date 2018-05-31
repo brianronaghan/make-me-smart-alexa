@@ -78,11 +78,11 @@ module.exports = {
            "primaryText": {
              "type": "RichText",
              "text": `<font size='5'>${bodyText}</font>`
-           },
-           "secondaryText": {
-             "type": "RichText",
-             "text": links
-           },
+           }
+           // "secondaryText": {
+           //   "type": "RichText",
+           //   "text": links
+           // },
          },
          "backgroundImage": makeImage(backgroundImage || config.background.show),
          "backButton": "HIDDEN"
@@ -93,7 +93,11 @@ module.exports = {
 
   },
 
-  templateBodyTemplate3: function (title, image, description, links, background) {
+  templateBodyTemplate3: function (title, image, description, help, background) {
+    let helpText = '';
+    if (help) {
+      helpText = `<font size='3'><b>${help}</b></font>`
+    }
     var template = {
          "type": "BodyTemplate3",
          "textContent": {
@@ -107,7 +111,7 @@ module.exports = {
            },
            "tertiaryText": {
              "type": "RichText",
-             "text": links
+             "text": helpText
            }
          },
          "image": makeImage(image, 340,340),
@@ -146,7 +150,7 @@ module.exports = {
     // TODO: add a listen feature as well... the hint thing we tell them, handles whether next or previous
     var itemsAudio, itemsCard;
     if (start === 0) {
-      itemsAudio = `Here are the ${itemTitlePlural} we have: `
+      itemsAudio = `Here are all the ${itemTitlePlural} we have: `
       itemsCard = '';
     } else {
       itemsAudio = itemsCard = '';
@@ -168,7 +172,6 @@ module.exports = {
         itemsCard += ` or say 'older' for older ${itemTitlePlural} `;
       }
     } else {// start != 0
-      console.log('st', start, 'chu', chunkLength, items.length)
       if (start + chunkLength < items.length) {// if it is start + chunk is < total length
         // add more
         itemsAudio += constants.breakTime['50'] + `or say 'older' for older ${itemTitlePlural}`;
@@ -182,17 +185,15 @@ module.exports = {
     return {itemsAudio, itemsCard};
   },
 
-  itemPicker: function (intentSlot, choices, choiceKey, slotKey) {
+  itemPicker: function (intentSlot, choices, choiceKey, slotKey, addOne) {
     var itemNames = choices.map(function (choice) {return choice[choiceKey].toLowerCase()});
     var itemAlts = choices.map(function (choice) {return choice.alts && choice.alts});
-    console.log(itemAlts)
-    // console.log('itemnames', itemNames);
-    // console.log('intent slot', intentSlot);
     var index;
     if (intentSlot && intentSlot.index && intentSlot.index.value) {
         index = parseInt(intentSlot.index.value);
-        index--;
-    } else if (intentSlot && intentSlot.ordinal && intentSlot.ordinal.value) {
+        if (!addOne) {
+          index--;
+        }    } else if (intentSlot && intentSlot.ordinal && intentSlot.ordinal.value) {
         var str = intentSlot.ordinal.value;
         if (str === "second" || str === "second 1") {
             index = 2;
@@ -200,37 +201,53 @@ module.exports = {
             str = str.substring(0, str.length - 2);
             index = parseInt(str);
         }
-        index--;
+        if (!addOne) {
+          index--;
+        }
 
     } else if (typeof intentSlot === 'string') { //NOTE:check alts
         index = searchByName(cleanSlotName(intentSlot), itemNames, itemAlts);
-
-        itemNames.indexOf(cleanSlotName(intentSlot));
-        if (index === -1) {
-          itemAlts.forEach((alts, i)=>{
-            console.log('i, alts', i, alts)
-            // alt.indexOf(cleanSlotName(intentSlot))
-          })
-        }
     } else if (intentSlot && intentSlot[slotKey] && intentSlot[slotKey].value) {
         index = searchByName(cleanSlotName(intentSlot[slotKey].value), itemNames, itemAlts);
     } else if (intentSlot && intentSlot.query && intentSlot.query.value) {
-      var asIndex = parseInt(intentSlot.query.value);
+      var asIndex = Number(intentSlot.query.value);
       if (isNaN(asIndex)) {
+        console.log("Searching query via query", intentSlot.query.value)
         var cleanedQuery = cleanSlotName(intentSlot.query.value);
-
-        index = searchByName(cleanSlotName(intentSlot.query.value), itemNames, itemAlts);;
+        index = searchByName(cleanSlotName(intentSlot.query.value), itemNames, itemAlts);
+        console.log("SEARCH BY NAME", index)
+        if (index === -1) {
+          // could not find a number based name
+          console.log("WTF", intentSlot.query.value);
+          var parsed = parseInt(stripArticles(intentSlot.query.value));
+          console.log("PARSED", parsed);
+          if (!isNaN(parsed)) { // if there is still a number in the title, just take it and try that
+            index = parsed;
+            if (!addOne) {
+              index--;
+            }
+          }
+        }
       } else {
         console.log('using number val in query slot')
-        index = asIndex -1
+        index = asIndex;
+        if (!addOne) {
+          index--;
+        }
       }
     } else {
       index = -1;
     }
+    console.log("END INDEX? ", index)
     var chosen;
-    if (index >= 0 && index < choices.length) {
+    if (index >= 0) {
+      if (index < choices.length) {
         chosen = choices[index];
         chosen.index = index;
+      } else {
+        console.log("WTF")
+        return -1;
+      }
     }
     return chosen;
   },
@@ -242,7 +259,6 @@ module.exports = {
     });
     if (currentItemIndex === -1) {
       return -1
-      console.log('not found')
     }
     var nextItem = choices[currentItemIndex+1];
     if (nextItem) {
@@ -267,23 +283,50 @@ module.exports = {
 
 function searchByName (searchTerm, itemNames, itemAlts) { // takes names and alts and finds by name or alt
   var index = itemNames.indexOf(searchTerm);
-  if (index !== -1) {
+  var stripped = stripArticles(searchTerm);
+  var strippedIndex = itemNames.indexOf(stripped);
+  console.log('searching normal: ', searchTerm, ' and stripped: ', stripped)
+  if (index > -1) {
     console.log("found straight up", index)
     return index;
+  } else if (strippedIndex > -1) {
+    console.log('found stripped, title');
+    return strippedIndex;
   } else {
-    itemAlts.forEach((alts, i)=>{
-      if (alts) {
-        alts.forEach((alt) => {
-          if (alt.indexOf(searchTerm) > -1) {
-            index = i;
+    // check without articles
+    console.log("CHECKING ALTS with both stripped and normal")
+    for (var i = 0; i < itemAlts.length; i++) {
+      console.log('spot ', i, 'alts ', itemAlts[i])
+      if(itemAlts[i]) {
+        for (var j = 0; j < itemAlts[i].length; j++) {
+          console.log('the alt ', j, itemAlts[i][j]);
+          if (itemAlts[i][j].indexOf(searchTerm) > -1) {
+            console.log('found in alts')
+            return i;
+          } else if (itemAlts[i][j] === stripped) {
+            // if i do index of on each string with stripped, any title with a number in it will always catch
+            console.log('found stripped in alts DIRECT')
+            return i;
           }
-        })
+        }
       }
-    })
+    }
+    console.log('not even by alt')
+    return -1;
+    // itemAlts.forEach((alts, i)=>{
+    //   if (alts) {
+    //     alts.forEach((alt) => {
+    //       if (alt.indexOf(searchTerm) > -1) {
+    //         index = i;
+    //       } else if (alt.indexOf(stripped) > -1) {
+    //
+    //       }
+    //     })
+    //   }
+    // })
     if (index !== -1) {
       console.log("FOUND via alt", index)
     } else {
-      console.log('not even by alt')
     }
     return index;
   }
@@ -326,15 +369,40 @@ function intentCheck (text) {
   if (!INTENT_DICT) {
     INTENT_DICT = {};
     for (let intent of Object.keys(config.intents)) {
-      console.log('INTENT', intent)
       for (let utterance of config.intents[intent]) {
-        console.log("UT", utterance);
         INTENT_DICT[utterance] = intent;
       }
     }
     console.log("BUILT DICT ", JSON.stringify(INTENT_DICT, null,2))
   }
   return INTENT_DICT[text]
+}
+
+function stripArticles (searchTerm) {
+  console.log('raw', searchTerm)
+  searchTerm = searchTerm.replace(/a\s/gi, " ")
+  searchTerm = searchTerm.replace(/um\s/gi, " ")
+  searchTerm = searchTerm.replace(/the\s/gi, " ")
+  searchTerm = searchTerm.replace(/an\s/gi, " ")
+  searchTerm = searchTerm.replace(/uh\s/gi, " ")
+  searchTerm = searchTerm.replace(/play\s/gi, " ")
+  searchTerm = searchTerm.replace(/number\s/gi, " ")
+  searchTerm = searchTerm.replace(/pick\s/gi, " ")
+  searchTerm = searchTerm.replace(/topic\s/gi, " ")
+  searchTerm = searchTerm.replace(/choose\s/gi, " ")
+  searchTerm = searchTerm.replace(/explainer\s/gi, " ")
+  searchTerm = searchTerm.replace(/choice\s/gi, " ")
+  searchTerm = searchTerm.replace(/item\s/gi, " ")
+  searchTerm = searchTerm.replace(/option\s/gi, " ")
+
+  searchTerm = searchTerm.replace(/#/gi, " ")
+
+  searchTerm = searchTerm.replace(/^\s+|\s+$/g, "");  // any leading or trailing whitespace
+
+
+  console.log("STRIPPED ", searchTerm)
+
+  return searchTerm;
 }
 
 function cleanSlotName (showString) {
@@ -345,6 +413,6 @@ function cleanSlotName (showString) {
   if (cleanedSlot === 'code breaker') {
     cleanedSlot = 'codebreaker';
   }
-  console.log('clean', cleanedSlot)
+
   return cleanedSlot;
 };

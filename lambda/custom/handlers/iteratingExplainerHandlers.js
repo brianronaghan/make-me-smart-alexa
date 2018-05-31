@@ -15,8 +15,9 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
       this.attributes.indices.explainer = 0;
     }
     var slot = slot || this.event.request.intent.slots;
+    console.log("LIST EXPLAINERS, SLOT", slot)
     if (slot && slot.query && slot.query.value && !condition) {
-      console.log('got a query baby', slot.query.value);
+      console.log('IT EXP, LIST EXP, got a query', slot.query.value);
       if (util.intentCheck(slot.query.value)) {
         return this.emitWithState(util.intentCheck(slot.query.value), slot)
       } else {
@@ -30,20 +31,6 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
       this.attributes.indices.explainer,
       config.items_per_prompt.explainer
     );
-    console.log('WHAT IN LIST',data.itemsCard)
-
-    // this.response.speak(data.itemsAudio).listen('Pick one or say next or previous to move forward or backward through list.').cardRenderer(data.itemsCard);
-    // if (this.event.context.System.device.supportedInterfaces.Display) {
-    //   this.response.renderTemplate(
-    //     util.templateListTemplate1(
-    //       'Explainers',
-    //       'list-explainers',
-    //       'Explainer',
-    //       'title',
-    //       explainers
-    //     )
-    //   );
-    // }
 
     this.emit(':elicitSlotWithCard', 'query', data.itemsAudio, "Pick one or say newer or older to move forward or backward through list.", 'List of Explainers', data.itemsCard, this.event.request.intent, util.cardImage(config.icon.full) );
   },
@@ -63,7 +50,21 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
 
   //
   'HomePage': function () {
-    console.log("HOME PAGE in ITERATING?")
+    var slot = slot || this.event.request.intent.slots;
+    console.log("HOME PAGE in ITERATING?", JSON.stringify(this.event.request,null,2))
+    if (util.intentCheck(slot.query.value)) {
+      if (util.intentCheck(slot.query.value) === 'HomePage') {
+        console.log('got actual home page via query on iterating. Damn.')
+        this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
+        return this.emitWithState('HomePage', 'no_welcome');
+      } else {
+        console.log("Got a req", util.intentCheck(slot.query.value))
+        return this.emitWithState(util.intentCheck(slot.query.value), slot)
+      }
+    } else {
+      return this.emitWithState('PickItem', slot)
+    }
+
     this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
     this.emitWithState('HomePage', 'no_welcome');
   },
@@ -103,7 +104,6 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
 
   //BUILT IN
   'EarlierExplainers' : function () {
-    console.log("iterating explainers EARLIER", this)
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     let boundThis = this;
@@ -113,6 +113,8 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     //   console.log("SLOT EARLIER", slot)
     //   return this.emitWithState('PickItem', slot)
     // }
+    console.log(" EARLIER", this.event.request.intent)
+
 
     if (this.attributes.indices.explainer + config.items_per_prompt.explainer >= explainers.length) {
       let message = "This is the end of the list. Again, the choices are, "
@@ -123,9 +125,9 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
         message,
         function (err) {
           if (err) {
-            boundThis.emitWithState('ListExplainers', 'end_list');
+            return boundThis.emitWithState('ListExplainers', 'end_list');
           } else {
-            boundThis.emitWithState('ListExplainers', 'end_list');
+            return boundThis.emitWithState('ListExplainers', 'end_list');
           }
         }
       );

@@ -12,28 +12,43 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
   'LaunchRequest': function (condition, message) {
     console.log("LAUNCH REQUEST", this.event.request, "ATS", this.attributes)
     let welcome = '';
-
+    let prompt = "You can replay that, hear what's new or suggest a topic. What would you like to do?"
     let latestExplainer = explainers[0];
     let author = latestExplainer.author;
     if (author === 'Molly Wood') {
       author = `Molly '<emphasis level="strong"> Wood</emphasis>`;
     }
-
-    // AUDIO
+    let links = "<action value='ReplayExplainer'>Replay</action> | <action value='HomePage'>Hear What's New</action> | <action value='RequestExplainer'> Suggest a Topic </action>";
 
     if (!this.attributes.deviceIds) {
-      welcome =`<audio src="${config.newUserAudio}" />`;
+      welcome =`<audio src="${config.newUserAudio}" /><audio src="${latestExplainer.audio.url}"/>`;
+    } else if (this.attributes.LATEST_HEARD && this.attributes.LATEST_HEARD === latestExplainer.guid) {
+      // user has heard todays
+      welcome = `Welcome back to Make Me Smart. `
+      prompt =  `You can replay today's explainer on ${latestExplainer.title}, hear what's new or suggest a topic. Which would you like to do?`;
+      if (this.event.context.System.device.supportedInterfaces.Display) {
+        this.response.renderTemplate(
+          util.templateBodyTemplate3(
+            latestExplainer.title,
+            latestExplainer.image || config.icon.full,
+            latestExplainer.description,
+            "You can replay that, hear what's new or suggest a topic.",
+            config.background.show
+          )
+        );
+      }
+      let fullSpeech = welcome + prompt;
+      this.response.speak(fullSpeech).listen(prompt);
+      return this.emit(':responseReady');
     } else if (latestExplainer.audio.intro) {
-      welcome =`<audio src="${latestExplainer.audio.intro}" />`;
+      welcome =`<audio src="${latestExplainer.audio.intro}" /><audio src="${latestExplainer.audio.url}"/>`;
     } else {
-      welcome = `Welcome back to Make Me Smart. Today we're learning about ${latestExplainer.title}. Here's ${author} to make us smart.`;
+      welcome = `Welcome back to Make Me Smart. Today we're learning about ${latestExplainer.title}. Here's ${author} to make us smart. <audio src="${latestExplainer.audio.url}"/>`;
     }
+    this.attributes.LATEST_HEARD = latestExplainer.guid;
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
-    welcome += `<audio src="${latestExplainer.audio.url}" />`;
 
-    let prompt = "Would you like to replay that, hear 'what's new' or 'suggest a topic'?"
-    let links = "<action value='ReplayExplainer'>Replay</action> | <action value='HomePage'>Hear What's New</action> | <action value='RequestExplainer'> Suggest a Topic </action>";
     var payload = {};
     payload.explainers = [{
       source: "LAUNCH_REQUEST",
@@ -49,17 +64,15 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
             latestExplainer.title,
             latestExplainer.image || config.icon.full,
             latestExplainer.description,
-            links,
+            "You can replay that, hear what's new or suggest a topic.",
             config.background.show
           )
         );
       }
       let fullSpeech = welcome + prompt;
-      this.response.speak(fullSpeech).listen(prompt); // if i do listen, you can't request an explainer during
-      this.emit(':responseReady');
+      this.response.speak(fullSpeech).listen(prompt);
+      this.emit(':saveState');
     });
-
-
   },
   'HomePage': function (condition, message) {
     console.log("HEY HOME PAGE REDIRECT")
@@ -67,7 +80,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     this.emitWithState('HomePage', 'from_launch');
   },
   'RequestExplainer' : function () {
-    console.log('request explainer test')
+    console.log('request explainer FROM START')
     this.handler.state = this.attributes.STATE = config.states.REQUEST;
     this.emitWithState('RequestExplainer');
   },
@@ -155,11 +168,10 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     console.log('Help in START');
 
     // Handler for built-in HelpIntent
-    var message = "You can say the name of an explainer or the number, or 'play all' to hear them all.";
+    var message = "You can say replay, hear what's new, or suggest a topic. What would you like to do?";
     this.response.speak(message).listen(message);
     if (this.event.context.System.device.supportedInterfaces.Display) {
-      var links = "<action value='PlayLatestExplainer'>Play All</action>";
-      this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, links, config.background.show));
+      this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, null, config.background.show));
     }
     this.emit(':saveState', true);
   },
@@ -171,7 +183,14 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
    },
    'Unhandled' : function () {
      console.log("START UNHANDLED ",JSON.stringify(this.event.request,null, 2));
-     this.emitWithState('LaunchRequest', 'no_welcome', "Sorry I couldn't quite handle that.");
+     var message = "Sorry I couldn't quite understand that. ";
+     var prompt = "You can say replay, hear what's new, or suggest a topic. What would you like to do?";
+     this.response.speak(message + prompt).listen(prompt);
+     if (this.event.context.System.device.supportedInterfaces.Display) {
+       this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message + prompt, null, config.background.show));
+     }
+     this.emit(':saveState', true);
    }
+
 });
 module.exports = startHandlers;

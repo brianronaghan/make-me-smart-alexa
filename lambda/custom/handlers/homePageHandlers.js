@@ -20,20 +20,25 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
   },
   'HomePage': function (condition, message) {
     // why did what's new not go here?
-    console.log("HOME PAGE EVENT", JSON.stringify(this.event.request, null,2))
     var slot = slot || this.event.request.intent.slots;
     console.log("HOME PAGE CONDITION ", condition)
     if (slot && slot.topic && slot.topic.value && !condition) {
       console.log("GOT topic home", slot)
       return this.emitWithState('PickItem', slot)
     } else if (slot && slot.query && slot.query.value && !condition) {
-      // TODO: intentCheck
-      return this.emitWithState('PickItem', slot)
+      if (util.intentCheck(slot.query.value)) {
+        console.log(`Home Page: got ${slot.query.value} in query.`)
+        return this.emitWithState(util.intentCheck(slot.query.value), slot)
+      } else {
+        return this.emitWithState('PickItem', slot)
+      }
     }
 
     this.attributes.currentExplainerIndex = -1;
     var intro = '';
-    if (condition === 'requested') {
+    if (this.event.session.new) {
+      intro += "Welcome back to Make Me Smart. This week we're ";
+    } else if (condition === 'requested') {
       if (message) {
         intro += `${message} `;
       }
@@ -46,8 +51,6 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     } else if (condition === 'from_launch') {
       intro += "We've also been ";
       this.attributes.HEARD_FIRST = 1;
-    } else if (this.event.session.new){
-      intro += "Welcome back to Make Me Smart. This week we're ";
     } else {
       intro += "This week we're "
     }
@@ -57,12 +60,7 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     if(!this.attributes.HEARD_FIRST) {
       this.attributes.HEARD_FIRST = 0;
     }
-    intro += `learning about <prosody pitch="high" volume="x-loud">1) ${topics[this.attributes.HEARD_FIRST + 0]}</prosody>, <prosody volume="x-loud" pitch="high">2) ${topics[this.attributes.HEARD_FIRST + 1]}</prosody>, and <prosody volume="x-loud" pitch="high">3) ${topics[this.attributes.HEARD_FIRST + 2]}</prosody>. You can pick one or say 'play all.' Which would you like to hear?`;
-
-    let newIntent = this.event.request.intent;
-    console.log('INTENT', this.event.request.intent)
-
-    // this.response.speak(intro).listen("Which topic would you like to get smart about?");
+    intro += `learning about <prosody pitch="high" volume="x-loud">1) ${topics[this.attributes.HEARD_FIRST + 0]}</prosody>, <prosody volume="x-loud" pitch="high">2) ${topics[this.attributes.HEARD_FIRST + 1]}</prosody>, and <prosody volume="x-loud" pitch="high">3) ${topics[this.attributes.HEARD_FIRST + 2]}</prosody>. You can pick one, play them all, or ask for more. Which would you like to hear?`;
     /*
     ':elicitSlotWithCard': function (slotName, speechOutput, repromptSpeech, cardTitle, cardContent, updatedIntent, imageObj) {
     */
@@ -75,37 +73,25 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     // set spot in indices
     var slot = slot || this.event.request.intent.slots;
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
-    if (this.attributes.HEARD_FIRST === 1 && slot.index && slot.index.value) {
-      slot = {index: {value: parseInt(slot.index.value) + 1}};
+    if (this.attributes.HEARD_FIRST === 1) {
       this.attributes.HEARD_FIRST = 0;
       return this.emitWithState('PickItem', slot, 'HOME_AFTER_LAUNCH')
-    } else if (this.attributes.HEARD_FIRST === 1 && slot.ordinal && slot.ordinal.value) {
-      let index;
-      let str = intentSlot.ordinal.value;
-      if (str === "second" || str === "second 1") {
-          index = 3;
-      } else {
-        str = str.substring(0, str.length - 2);
-      }
-      index = parseInt(str);
-      slot = {index: {value: index + 1}};
-      this.attributes.HEARD_FIRST = 0;
-      return this.emitWithState('PickItem', slot, 'HOME_AFTER_LAUNCH')
-    } else if (this.attributes.HEARD_FIRST === 1){
-      this.attributes.HEARD_FIRST = 0;
-      return this.emitWithState('PickItem', slot, 'HOME_AFTER_LAUNCH')
-    } else { // need a separate case to retain launch
+    } else { // need a separate case to retain launch to what's new
       return this.emitWithState('PickItem', slot, 'HOME_PAGE')
     }
   },
 
   'RequestExplainer' : function () {
-    console.log('request explainer in HOME PAGE - it is most likely from REQUESTING artifcat')
+    console.log('request explainer in HOME PAGE - it is most likely from REQUESTING artifact')
     var slot = slot || this.event.request.intent.slots;
     if (slot && slot.query && slot.query.value) { // since we can't change the goddamn thing if it uses elicit, if it has a query, probably after being elicited
-    // TODO: intentCheck
+      if (util.intentCheck(slot.query.value)) {
+        console.log(`REQUEST EXPL: got ${slot.query.value} in query.`)
+        return this.emitWithState(util.intentCheck(slot.query.value), slot)
+      } else {
+        return this.emitWithState('PickItem', slot)
+      }
 
-      return this.emitWithState('PickItem', slot)
     } else {
       this.handler.state = this.attributes.STATE = config.states.REQUEST;
       return this.emitWithState('RequestExplainer', {query: {value:null},userLocation: {value: null}, userName: {value: null}});
@@ -160,15 +146,16 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     this.emitWithState('ChangeMyInfo');
   },
   'ListExplainers': function () {
-    console.log('list explainers from HOME PAGE')
-
+    var slot = this.event.request.intent.slots;
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
-    this.attributes.HEARD_FIRST = 0;
-
+    console.log('s', slot);
+    if(slot && slot.query && slot.query.value) {
+      delete slot.query.value;
+    }
     console.log('list Explainers FROM HOME PAGE')
-
     console.log(JSON.stringify(this.event.request, null, 2));
+
     this.attributes.currentExplainerIndex = -1;
     this.attributes.indices.explainer = 0;
     this.attributes.HEARD_FIRST = 0;
@@ -210,7 +197,7 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
 
   'AMAZON.HelpIntent' : function () {
     console.log('Help in HOME PAGE')
-    var message = "Try using the numbers before the topics if you're having trouble. You can pick a topic or choose by number or say 'play all'.";
+    var message = "Try using the numbers before the topics if you're having trouble. You can pick a topic or choose by number or say play all.";
     this.response.speak(message).listen(message);
     if (this.event.context.System.device.supportedInterfaces.Display) {
       var links = "<action value='HomePage'>What's New</action> | <action value='ListExplainers'>List Explainers</action>";

@@ -453,72 +453,23 @@
                 {
                   "name": "HomePage",
                   "samples": [
+                    "a main menu",
+                    "the main menu",
+                    "start menu",
+                    "home menu",
+                    "main menu",
                     "home page",
                     "go home",
                     "start over",
                     "what's new",
                     "hear what's new",
+                    "tell me what's new",
+                    "tell me what is new",
                     "what is new",
                     "hear new explainers",
-                    "make me smart"
-                  ],
-                  "slots": [
-                    {
-                      "name": "query",
-                      "type": "AMAZON.SearchQuery"
-                    },
-                    {
-                      "name": "topic",
-                      "type": "TOPICS"
-                    },
-                    {
-                      "name": "userName",
-                      "type": "AMAZON.US_FIRST_NAME"
-                    },
-                    {
-                      "name": "userLocation",
-                      "type": "AMAZON.US_CITY"
-                    }
-                  ]
-                },
-                {
-                  "name": "EarlierExplainers",
-                  "samples": [
-                    "earlier",
-                    "earlier explainers",
-                    "before that",
-                    "further back",
-                    "older",
-                    "older explainers"
-                  ],
-                  "slots": [
-                    {
-                      "name": "query",
-                      "type": "AMAZON.SearchQuery"
-                    },
-                    {
-                      "name": "topic",
-                      "type": "TOPICS"
-                    },
-                    {
-                      "name": "userName",
-                      "type": "AMAZON.US_FIRST_NAME"
-                    },
-                    {
-                      "name": "userLocation",
-                      "type": "AMAZON.US_CITY"
-                    }
-                  ]
-                },
-                {
-                  "name": "LaterExplainers",
-                  "samples": [
-                    "later",
-                    "later explainers",
-                    "after that",
-                    "more recent",
-                    "newer",
-                    "newer explainers"
+                    "make me smart",
+                    "what I need to know",
+                    "what's happening in the world"
                   ],
                   "slots": [
                     {
@@ -543,9 +494,15 @@
                   "name": "ReplayExplainer",
                   "samples": [
                     "replay",
+                    "replay that",
                     "restart",
+                    "play again",
+                    "play that again",
+                    "again",
                     "let me hear that again",
-                    "start over"
+                    "start over",
+                    "replay explainer",
+                    "replay today's explainer"
                   ]
                 },
                 {
@@ -553,10 +510,83 @@
                   "samples": [
                     "play all",
                     "all of them",
+                    "play them all",
                     "play the latest",
                     "the latest",
-                    "all"
+                    "all",
+                    "latest topic",
+                    "latest explainer",
+                    "today's topic",
+                    "play today's topic",
+                    "today's explainer",
+                    "play today's explainer"
                   ]
+                },
+                {
+                  "name": "RequestExplainer",
+                  "slots": [
+                    {
+                      "name": "topic",
+                      "type": "TOPICS"
+                    },
+                    {
+                      "name": "userName",
+                      "type": "AMAZON.US_FIRST_NAME"
+                    },
+                    {
+                      "name": "userLocation",
+                      "type": "AMAZON.US_CITY"
+                    },
+                    {
+                      "name": "query",
+                      "type": "AMAZON.SearchQuery"
+                    }
+                  ],
+                  "samples": [
+                    "topic",
+                    "suggest",
+                    "make a suggestion",
+                    "suggest an explainer",
+                    "request explainer slot",
+                    "suggest a topic",
+                    "request an explainer",
+                    "request a topic",
+                    "pitch explainer",
+                    "pitch an explainer topic",
+                    "pitch a topic"
+                  ]
+                },
+                {
+                    "name":"ListExplainers",
+                    "slots" : [
+                      {
+                        "name": "topic",
+                        "type": "TOPICS"
+                      },
+                      {
+                        "name": "query",
+                        "type": "AMAZON.SearchQuery"
+                      }
+                    ],
+                    "samples":[
+                      "explainer menu",
+                      "what explainers it has",
+                      "list explainers",
+                      "list all our explainers",
+                      "list our explainers",
+                      "explore all",
+                      "explore all explainers",
+                      "all explainers",
+                      "see all explainers",
+                      "show all explainers",
+                      "show me all explainers",
+                      "show me all the explainers",
+                      "show me more",
+                      "ask for more",
+                      "more",
+                      "more please",
+                      "more explainers"
+                    ]
                 },
                 {
                   "name": "ChangeMyInfo",
@@ -589,10 +619,23 @@
                     }
                   ]
                 },
-
                 {
-                  "name": "RequestExplainer",
+                  "name": "EarlierExplainers",
+                  "samples": [
+                    "earlier",
+                    "earlier explainers",
+                    "before that",
+                    "further back",
+                    "older",
+                    "older explainers",
+                    "older explainer",
+                    "go back"
+                  ],
                   "slots": [
+                    {
+                      "name": "query",
+                      "type": "AMAZON.SearchQuery"
+                    },
                     {
                       "name": "topic",
                       "type": "TOPICS"
@@ -604,36 +647,38 @@
                     {
                       "name": "userLocation",
                       "type": "AMAZON.US_CITY"
-                    },
-                    {
-                      "name": "query",
-                      "type": "AMAZON.SearchQuery"
                     }
-                  ],
-                  "samples": [
-                    "request explainer slot",
-                    "suggest a topic",
-                    "request an explainer"
                   ]
                 },
                 {
-                    "name":"ListExplainers",
-                    "slots" : [
-                      {
-                        "name": "topic",
-                        "type": "TOPICS"
-                      },
-                      {
-                        "name": "query",
-                        "type": "AMAZON.SearchQuery"
-                      }
-                    ],
-                    "samples":[
-                        "what explainers it has",
-                        "list explainers",
-                        "all explainers",
-                        "show all explainers"
-                    ]
+                  "name": "LaterExplainers",
+                  "samples": [
+                    "later",
+                    "later explainers",
+                    "after that",
+                    "more recent",
+                    "newer",
+                    "newer explainers",
+                    "newer explainer"
+                  ],
+                  "slots": [
+                    {
+                      "name": "query",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "topic",
+                      "type": "TOPICS"
+                    },
+                    {
+                      "name": "userName",
+                      "type": "AMAZON.US_FIRST_NAME"
+                    },
+                    {
+                      "name": "userLocation",
+                      "type": "AMAZON.US_CITY"
+                    }
+                  ]
                 },
                 {
                   "name": "PickItem",

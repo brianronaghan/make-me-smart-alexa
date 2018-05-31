@@ -8,7 +8,84 @@ var config = {
       explainer: 3,
       episode: 3,
     },
-    intents:{
+    intents: {
+      HomePage: [
+        "a main menu",
+        "the main menu",
+        "start menu",
+        "home menu",
+        "main menu",
+        "home page",
+        "go home",
+        "start over",
+        "what's new",
+        "hear what's new",
+        "tell me what's new",
+        "tell me what is new",
+        "what is new",
+        "hear new explainers",
+        "make me smart",
+        "what I need to know",
+        "what's happening in the world"
+      ],
+      ReplayExplainer: [
+        "replay",
+        "replay that",
+        "restart",
+        "play again",
+        "play that again",
+        "again",
+        "let me hear that again",
+        "start over",
+        "replay explainer",
+        "replay today's explainer"
+      ],
+      PlayLatestExplainer: [
+        "play all",
+        "all of them",
+        "play them all",
+        "play the latest",
+        "the latest",
+        "all",
+        "latest topic",
+        "latest explainer",
+        "today's topic",
+        "play today’s topic",
+        "today's explainer",
+        "play today's explainer"
+      ],
+      RequestExplainer: [
+        "topic",
+        "suggest",
+        "make a suggestion",
+        "suggest an explainer",
+        "request explainer slot",
+        "suggest a topic",
+        "request an explainer",
+        "request a topic",
+        "pitch explainer",
+        "pitch an explainer topic",
+        "pitch a topic"
+      ],
+      ListExplainers: [
+        "explainer menu",
+        "what explainers it has",
+        "list explainers",
+        "list all our explainers",
+        "list our explainers",
+        "explore all",
+        "explore all explainers",
+        "all explainers",
+        "see all explainers",
+        "show all explainers",
+        "show me all explainers",
+        "show me all the explainers",
+        "show me more",
+        "ask for more",
+        "more",
+        "more please",
+        "more explainers"
+      ],
       ChangeMyInfo: [
         "change my name",
         "change my info",
@@ -23,51 +100,15 @@ var config = {
         "correct my location",
         "update my city"
       ],
-      ListExplainers: [
-        "what explainers it has",
-        "list explainers",
-        "all explainers",
-        "show all explainers"
-      ],
-      'AMAZON.StopIntent': [
-        "stop"
-      ],
-      HomePage: [
-        "home page",
-        "go home",
-        "start over",
-        "what's new",
-        "hear what's new",
-        "what is new",
-        "hear new explainers",
-        "make me smart"
-      ],
-      PlayLatestExplainer: [
-        "play all",
-        "all of them",
-        "play the latest",
-        "the latest",
-        "all"
-      ],
-      RequestExplainer: [
-        "request explainer slot",
-        "suggest a topic",
-        "request an explainer"
-      ],
-      PlayLatestExplainer: [
-        "play all",
-        "all of them",
-        "play the latest",
-        "the latest",
-        "all"
-      ],
       EarlierExplainers: [
         "earlier",
         "earlier explainers",
         "before that",
         "further back",
         "older",
-        "older explainers"
+        "older explainers",
+        "older explainer",
+        "go back"
       ],
       LaterExplainers: [
         "later",
@@ -75,10 +116,16 @@ var config = {
         "after that",
         "more recent",
         "newer",
-        "newer explainers"
+        "newer explainers",
+        "newer explainer"
+      ],
+      'AMAZON.StopIntent': [
+        "stop",
+        "cancel"
       ],
 
     },
+    defaultDescription: "Something else you want to get smart about? Try 'Alexa, suggest a topic' and Kai and Molly might use your idea!",
     states: {
       START: '',
       HOME_PAGE: '_HOME_PAGE',
