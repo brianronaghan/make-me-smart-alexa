@@ -26,21 +26,6 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     var payload = {}
     console.log("HITS PICK IN REQ - intent", JSON.stringify(this.event.request.intent, null, 2))
     // TODO: what if it has come from pick item and there is no userName/userLocation slots?
-    if (!slot.userName) {
-      console.log("REQUEST PickItem had to add userName")
-      slot.userName = {
-        name: 'userName',
-        confirmationStatus: 'NONE'
-      };
-    }
-    if (!slot.userLocation) {
-      console.log("REQUEST PickItem had to add userLocation")
-
-      slot.userLocation = {
-        name: 'userLocation',
-        confirmationStatus: 'NONE'
-      };
-    }
     if (slot.query && !slot.query.value) { // came here without a query
 
       message = "What would you like to get smart about?";
@@ -66,7 +51,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       suggestionString = `Hmmm, we don't have anything on ${suggestion}. But `
     }
     // TODO: check intent? or should we do it before
-    if (suggestion && this.attributes.userName && this.attributes.userLocation) {
+    if (suggestion && this.attributes.userName && this.attributes.userLocation && false) { // turn off for testing
       payload.requests = [{
         query: suggestion,
         time: this.event.request.timestamp,
