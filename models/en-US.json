@@ -118,6 +118,40 @@
      ]
    },
    {
+     "id": "Elicit.Intent-ListExpainers.IntentSlot-userName",
+     "variations": [
+       {
+         "type": "PlainText",
+         "value": "who should I say is calling?"
+       },
+       {
+         "type": "PlainText",
+         "value": "give me a name"
+       },
+       {
+         "type": "PlainText",
+         "value": "what's your name"
+       }
+     ]
+   },
+   {
+     "id": "Elicit.Intent-ListExpainers.IntentSlot-userLocation",
+     "variations": [
+       {
+         "type": "PlainText",
+         "value": "where are you from?"
+       },
+       {
+         "type": "PlainText",
+         "value": "what city"
+       },
+       {
+         "type": "PlainText",
+         "value": "tell me where "
+       }
+     ]
+   },
+   {
      "id": "Elicit.Intent-EarlierExplainers.IntentSlot-topic",
      "variations": [
        {
@@ -272,6 +306,24 @@
        "confirmationRequired": false,
        "prompts": {},
        "slots": [
+         {
+           "name": "userName",
+           "type": "AMAZON.US_FIRST_NAME",
+           "elicitationRequired": true,
+           "confirmationRequired": false,
+           "prompts": {
+             "elicitation": "Elicit.Intent-ListExpainers.IntentSlot-userName"
+           }
+         },
+         {
+           "name": "userLocation",
+           "type": "AMAZON.US_CITY",
+           "elicitationRequired": true,
+           "confirmationRequired": false,
+           "prompts": {
+             "elicitation": "Elicit.Intent-ListExpainers.IntentSlot-userLocation"
+           }
+         }.
          {
            "name": "topic",
            "type": "TOPICS",
@@ -512,13 +564,17 @@
                   "samples": [
                     "play all",
                     "all of them",
+                    "all of em",
+                    "all of 'em",
                     "play them all",
                     "play the latest",
                     "the latest",
                     "all",
                     "latest topic",
+                    "the latest explainer",
                     "latest explainer",
                     "today's topic",
+                    "the l"
                     "play today's topic",
                     "today's explainer",
                     "play today's explainer",
@@ -548,6 +604,7 @@
                   "samples": [
                     "topic",
                     "suggest",
+                    "suggestion",
                     "make a suggestion",
                     "suggest an explainer",
                     "request explainer slot",
@@ -560,6 +617,10 @@
                     "i want to suggest a topic",
                     "can i make a suggestion",
                     "suggestion",
+                    "make a request",
+                    "i want to mamke a request",
+                    "i want to suggest something",
+                    "i want to suggest a topic",
                     "request",
                     "new topic"
                   ]
@@ -574,6 +635,14 @@
                       {
                         "name": "query",
                         "type": "AMAZON.SearchQuery"
+                      },
+                      {
+                        "name": "userName",
+                        "type": "AMAZON.US_FIRST_NAME"
+                      },
+                      {
+                        "name": "userLocation",
+                        "type": "AMAZON.US_CITY"
                       }
                     ],
                     "samples":[
@@ -591,6 +660,7 @@
                       "show me all the explainers",
                       "show me more",
                       "ask for more",
+                      "more options",
                       "more",
                       "more please",
                       "more explainers"
