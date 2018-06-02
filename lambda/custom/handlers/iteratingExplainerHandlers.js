@@ -64,22 +64,22 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
       this.attributes.indices.explainer,
       config.items_per_prompt.explainer
     );
-    this.response.speak(data.itemsAudio).listen('Pick one or say older or earlier to move forward or backward through list.').cardRenderer(data.itemsCard);
-    if (this.event.context.System.device.supportedInterfaces.Display) {
-      this.response.renderTemplate(
-        util.templateListTemplate1(
-          'Explainers',
-          'list-explainers',
-          'Explainer',
-          'title',
-          explainers
-        )
-      );
-    }
-    this.emit(':responseReady');
+    // this.response.speak(data.itemsAudio).listen('Pick one or say older or earlier to move forward or backward through list.').cardRenderer(data.itemsCard);
+    // if (this.event.context.System.device.supportedInterfaces.Display) {
+    //   this.response.renderTemplate(
+    //     util.templateListTemplate1(
+    //       'Explainers',
+    //       'list-explainers',
+    //       'Explainer',
+    //       'title',
+    //       explainers
+    //     )
+    //   );
+    // }
+    // this.emit(':responseReady');
 
 
-    // this.emit(':elicitSlotWithCard', 'query', data.itemsAudio, "Pick one or say newer or older to move forward or backward through list.", 'List of Explainers', data.itemsCard, this.event.request.intent, util.cardImage(config.icon.full) );
+    this.emit(':elicitSlotWithCard', 'query', data.itemsAudio, "Pick one or say newer or older to move forward or backward through list.", 'List of Explainers', data.itemsCard, this.event.request.intent, util.cardImage(config.icon.full) );
   },
   // STATE TRANSITIONS
   'RequestExplainer' : function () {
