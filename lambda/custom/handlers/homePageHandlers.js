@@ -47,6 +47,11 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
         intro += `${message} `;
       }
       intro += "In the meantime, we're ";
+    } else if (condition === 'changed_info') {
+      if (message) {
+        intro += `${message} `;
+      }
+      intro += "Now that that's done, we're ";
     } else if (condition === 'no_welcome') {
       if (message) {
         intro += `${message} `;
@@ -86,7 +91,7 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
   },
 
   'RequestExplainer' : function () {
-    console.log('request explainer in HOME PAGE - POSSISBLY from REQUESTING artifact')
+    console.log('HOME_PAGE RequestExplainer - POSSISBLY from REQUESTING artifact');
     var slot = slot || this.event.request.intent.slots;
     if (slot && slot.query && slot.query.value) { // since we can't change the goddamn thing if it uses elicit, if it has a query, probably after being elicited
       let resolvedIntent = util.intentCheck(slot.query.value);
@@ -130,31 +135,6 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
 
     }
   },
-  // TOUCH EVENTS:
-  'ElementSelected': function () {
-    var deviceId = util.getDeviceId.call(this);
-    util.nullCheck.call(this, deviceId);
-
-    // handle play latest or pick episode actions
-    console.log('ElementSelected -- ', this.event.request)
-    var intentSlot,intentName;
-    if (this.event.request.token === 'PlayLatestExplainer' || this.event.request.token === 'ListExplainers') {
-      intentName = this.event.request.token;
-    } else if (this.event.request.token === 'RequestExplainer') {
-      intentName = this.event.request.token;
-      intentSlot = {query: {value:null},userLocation: {value: null}, userName: {value: null}};
-    } else {
-      var tokenData = this.event.request.token.split('_');
-      intentName = tokenData[0];
-      intentSlot = {
-        index: {
-          value: parseInt(tokenData[1]) + 1
-        }
-      }
-    }
-    console.log('PLAYING EXPLAINERS, TOUCH', intentName, intentSlot);
-    this.emitWithState(intentName, intentSlot, 'TOUCH_HOMEPAGE');
-  },
 
   'AMAZON.NextIntent': function () {
     // what should next even do here?
@@ -162,6 +142,24 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     this.emitWithState('PickItem', {index: {value: 1}}, 'HOMEPAGE_NEXT');
   },
   'ChangeMyInfo' : function () {
+    // TODO: changeMyInfo it's own state
+    var slot = slot || this.event.request.intent.slots;
+    if (slot && slot.query && slot.query.value) { // since we can't change the goddamn thing if it uses elicit, if it has a query, probably after being elicited
+      let resolvedIntent = util.intentCheck(slot.query.value);
+      if (resolvedIntent) {
+        console.log(`HOME_PAGE ChangeMyInfo: got ${slot.query.value} in query.`)
+        delete slot.query.value;
+        return this.emitWithState(resolvedIntent, slot)
+      } else {
+        console.log(`HOME_PAGE ChangeMyInfo: no intent, but query ${slot.query.value}. sending to PickItem`)
+        return this.emitWithState('PickItem', slot)
+      }
+    } else {
+      console.log("HOME_PAGE, ChangeMyInfo, no query, redirect to REQ state")
+      this.handler.state = this.attributes.STATE = config.states.REQUEST;
+      return this.emitWithState('ChangeMyInfo', {query: {value:null},userLocation: {value: null}, userName: {value: null}});
+    }
+
     this.handler.state = this.attributes.STATE = config.states.REQUEST;
     this.emitWithState('ChangeMyInfo');
   },

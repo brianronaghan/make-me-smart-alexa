@@ -134,13 +134,13 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
         var prompt;
         var links = "<action value='ReplayExplainer'>Replay</action> | <action value='ListExplainers'>List Explainers</action>";
         if (this.event.session.new) { // came directly here
-          prompt = `You can replay that, explore our explainers, or play the latest explainer. What would you like to do?`;
+          prompt = `You can replay that, explore our explainers, or play the latest. What would you like to do?`;
           links += " | <action value='HomePage'> What's New </action>";
         } else if (explainers[chosenExplainer.index+1]) { // THERE IS a next explainer
-          prompt = `You can replay that, say 'next' to learn about ${explainers[chosenExplainer.index+1].title}, or explore our explainers. What would you like to do?`;
+          prompt = `You can replay that, say 'next' to hear another, or explore our explainers. What would you like to do?`;
           links += " | <action value='Next'>Next</action>";
         } else { // end of the line
-          prompt = "And that's all we have right now. You can replay that, explore our explainers, or suggest a topic to give us an idea for our next explainer. What would you like to do?"
+          prompt = "And that's all we have right now. You can replay that, explore our explainers, or suggest a topic for our next explainer. What would you like to do?"
         }
 
         if (this.event.context.System.device.supportedInterfaces.Display) {

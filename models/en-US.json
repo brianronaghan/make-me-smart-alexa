@@ -456,7 +456,11 @@
 
                 {
                   "name": "AMAZON.NextIntent",
-                  "samples": []
+                  "samples": [
+                    "another",
+                    "another explainer",
+                    "next explainer"
+                  ]
                 },
                 {
                   "name": "AMAZON.PageDownIntent",
@@ -772,6 +776,10 @@
                     "add city"
                   ],
                   "slots": [
+                    {
+                      "name": "query",
+                      "type": "AMAZON.SearchQuery"
+                    },
                     {
                       "name": "topic",
                       "type": "TOPICS"

@@ -113,7 +113,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       console.time('UPDATE-DB-request-new-name');
       db.update.call(this, payload, function(err, response) {
         console.timeEnd('UPDATE-DB-request-new');
-        var confirmationMessage = `Okay, I'll tell Kai and Molly ${slot.userName.value} from ${slot.userLocation.value} asked for an explainer on ${suggestion}. If they use your suggestion, they'll thank you! If you want to change your name or city in the future you can say 'change my info'. `;
+        var confirmationMessage = `Okay, I'll tell Kai and Molly ${this.attributes.userName} from ${this.attributes.userLocation} asked for an explainer on ${suggestion}. If they use your suggestion, they'll thank you! If you want to change your name or city in the future you can say 'change my info'. `;
         if (this.event.context.System.device.supportedInterfaces.Display) {
           this.response.renderTemplate(
             util.templateBodyTemplate1(
@@ -305,27 +305,33 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
   },
 
   'ChangeMyInfo': function () {
+    console.log("REQUEST ChangeMyInfo", JSON.stringify(this.event.request.intent, null,2))
     var message = '';
     delete this.attributes.startedRequest;
-    var slot = slot || this.event.request.intent.slots;
     this.attributes.changingInfo = true;
+
+    var slot = slot || this.event.request.intent.slots;
     if (slot && slot.userName && !slot.userName.value) {
       message += `Okay, you'd like to change your information. What should I save your first name as for requests?`;
       this.emit(':elicitSlotWithCard', 'userName', message, "What name should I save?", 'Save a name',message, this.event.request.intent, util.cardImage(config.icon.full));
    } else if (slot && slot.userLocation && !slot.userLocation.value) {
      this.attributes.userName = slot.userName.value;
-     slot.query.value = 'change my info';
-     message = `Okay, whenever you leave a request I'll note it as from ${slot.userName.value}. We also give a location when citing you on the show. Where should I say you're from?`
+     if (slot && slot.query) {
+       slot.query.value = 'change my info';
+     }
+     message = `Okay, whenever you leave a request I'll note it as from ${slot.userName.value}. We also give a location when thanking you. Where should I say you're from?`
      this.emit(':elicitSlotWithCard', 'userLocation', message, "Where are you from?", 'Save your location',message, this.event.request.intent, util.cardImage(config.icon.full));
    } else {
      this.attributes.userLocation = slot.userLocation.value;
-     delete slot.query.value;
+     if (slot.query && slot.query.value) {
+       delete slot.query.value;
+     }
      delete slot.userLocation.value;
      delete slot.userName.value;
      delete this.attributes.changingInfo;
      console.log('NEW INFO : ', this.attributes.userName, this.attributes.userLocation)
 
-     message += `Okay, I've saved your information. If Kai and Molly use one of your suggestions they'll thank ${this.attributes.userName} from ${this.attributes.userLocation} on the show! `;
+     message += `Okay, I've saved your information. If Kai and Molly use one of your suggestions they'll thank ${this.attributes.userName} from ${this.attributes.userLocation}! `;
 
      this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
      if (this.event.context.System.device.supportedInterfaces.Display) {
@@ -338,6 +344,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
          )
        );
      }
+     var boundThis = this;
      return util.sendProgressive(
        this.event.context.System.apiEndpoint, // no need to add directives params
        this.event.request.requestId,
@@ -345,9 +352,9 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
        message,
        function (err) {
          if (err) {
-           boundThis.emitWithState('HomePage', 'requested', confirmationMessage);
+           boundThis.emitWithState('HomePage', 'changed_info', confirmationMessage);
          } else {
-           boundThis.emitWithState('HomePage', 'requested');
+           boundThis.emitWithState('HomePage', 'changed_info');
          }
        }
      );

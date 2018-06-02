@@ -14,7 +14,7 @@ module.exports = [
   {
     title: 'The Royal Wedding',
     author: 'Kai Ryssdal',
-    alts: ['royal wedding', 'royals', 'play the wedding', 'wedding', 'the wedding', 'royal'],
+    alts: ['royal wedding', 'royals', 'wedding', 'the wedding', 'royal'],
     tags: [],
     guid: 'royal_wedding_certification',
     date: "2018-05-24",
