@@ -2,7 +2,6 @@
 
 var config = {
     appId : "amzn1.ask.skill.20034481-27aa-4d91-8a6c-c52ea4a0d377",
-    // TODO Add an appropriate welcome message.
     items_per_prompt : {
       show: 3,
       explainer: 3,
@@ -16,7 +15,6 @@ var config = {
         "home menu",
         "main menu",
         "home page",
-        "go home",
         "start over",
         "what's new",
         "hear what's new",

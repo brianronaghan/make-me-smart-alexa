@@ -16,6 +16,28 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     this.handler.state = this.attributes.STATE = config.states.START;
     this.emitWithState('LaunchRequest');
   },
+  TopicOnly: function () {
+    console.log("ITERATING_EXPLAINER TopicOnly", JSON.stringify(this.event.request.intent, null,2))
+    var slot = slot || this.event.request.intent.slots;
+
+    this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
+    this.emitWithState('PickItem', slot, 'ITERATING');
+
+  },
+  IndexOnly: function () {
+    console.log("ITERATING_EXPLAINER IndexOnly", JSON.stringify(this.event.request.intent, null,2))
+    var slot = slot || this.event.request.intent.slots;
+
+    this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
+    this.emitWithState('PickItem', slot, 'ITERATING');
+
+  },
+  OrdinalOnly: function () {
+    console.log("ITERATING_EXPLAINER OrdinalOnly", JSON.stringify(this.event.request.intent, null,2))
+    var slot = slot || this.event.request.intent.slots;
+    this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
+    this.emitWithState('PickItem', slot, 'ITERATING');
+  },
   'ListExplainers': function (condition) {
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
@@ -42,6 +64,8 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
       this.attributes.indices.explainer,
       config.items_per_prompt.explainer
     );
+
+
 
     this.emit(':elicitSlotWithCard', 'query', data.itemsAudio, "Pick one or say newer or older to move forward or backward through list.", 'List of Explainers', data.itemsCard, this.event.request.intent, util.cardImage(config.icon.full) );
   },

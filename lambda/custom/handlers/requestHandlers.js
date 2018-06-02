@@ -192,6 +192,9 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     }
   },
   'RequestExplainer': function (slot) {
+    if (this.attributes.changingInfo) {
+      this.emitWithState('ChangeMyInfo');
+    }
     // NOTE: look at this immediately, I think I have some old code here
     console.log('REQUEST, RequestExplainer, slot passed?', slot)
     var deviceId = util.getDeviceId.call(this);
@@ -264,6 +267,9 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     }
   },
   'HomePage' : function () {
+    if (this.attributes.changingInfo) {
+      this.emitWithState('ChangeMyInfo');
+    }
     var slot = slot || this.event.request.intent.slots;
     if (slot && slot.query && slot.query.value) {
       let resolvedIntent = util.intentCheck(slot.query.value);
@@ -298,26 +304,30 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     this.emitWithState('PickItem', 'REPLAY_FROM_REQUEST');
   },
 
-  ChangeMyInfo: function () {
+  'ChangeMyInfo': function () {
     var message = '';
     delete this.attributes.startedRequest;
     var slot = slot || this.event.request.intent.slots;
-
+    this.attributes.changingInfo = true;
     if (slot && slot.userName && !slot.userName.value) {
       message += `Okay, you'd like to change your information. What should I save your first name as for requests?`;
       this.emit(':elicitSlotWithCard', 'userName', message, "What name should I save?", 'Save a name',message, this.event.request.intent, util.cardImage(config.icon.full));
    } else if (slot && slot.userLocation && !slot.userLocation.value) {
      this.attributes.userName = slot.userName.value;
+     slot.query.value = 'change my info';
      message = `Okay, whenever you leave a request I'll note it as from ${slot.userName.value}. We also give a location when citing you on the show. Where should I say you're from?`
      this.emit(':elicitSlotWithCard', 'userLocation', message, "Where are you from?", 'Save your location',message, this.event.request.intent, util.cardImage(config.icon.full));
    } else {
      this.attributes.userLocation = slot.userLocation.value;
-     delete slot.userLocation.value
-     delete slot.userName.value
-
-     message += `Okay, I've saved your information. If Kai and Molly use one of your suggestions they'll thank ${this.attributes.userName} from ${this.attributes.userLocation} on the show! If you want to change your information say 'change my info.' For now, you can play the latest explainer or hear what's new. What would you like to do?`;
+     delete slot.query.value;
+     delete slot.userLocation.value;
+     delete slot.userName.value;
+     delete this.attributes.changingInfo;
      console.log('NEW INFO : ', this.attributes.userName, this.attributes.userLocation)
 
+     message += `Okay, I've saved your information. If Kai and Molly use one of your suggestions they'll thank ${this.attributes.userName} from ${this.attributes.userLocation} on the show! `;
+
+     this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
      if (this.event.context.System.device.supportedInterfaces.Display) {
        this.response.renderTemplate(
          util.templateBodyTemplate1(
@@ -328,10 +338,19 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
          )
        );
      }
-     this.response.speak(message).listen("Would you like to play the latest or hear what's new?");
-     // this.emit(':elicitSlotWithCard', 'userLocation', message, "What location should I leave?", 'Request Explainer', cardMessage, this.event.request.intent, util.cardImage(config.icon.full) );
-     this.emit(':saveState');
-
+     return util.sendProgressive(
+       this.event.context.System.apiEndpoint, // no need to add directives params
+       this.event.request.requestId,
+       this.event.context.System.apiAccessToken,
+       message,
+       function (err) {
+         if (err) {
+           boundThis.emitWithState('HomePage', 'requested', confirmationMessage);
+         } else {
+           boundThis.emitWithState('HomePage', 'requested');
+         }
+       }
+     );
 
    }
   },

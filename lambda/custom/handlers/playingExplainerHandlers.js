@@ -20,7 +20,9 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
   },
 
   'PickItem': function (slot, source) {
-    console.log("WHAT'S MY SOURCE", slot, source)
+
+    console.log(`PLAYING_EXPLAINER, PickItem slot `, JSON.stringify(this.event.request.intent, null,2))
+
     // set spot in indices
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
@@ -81,8 +83,9 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
         );
       } else if (slot.ordinal && slot.ordinal.value) {
         console.log("NO EXPLAINER , but there is ORDINAL ", JSON.stringify(slot, null,2))
+        let theOrdinal = slot.ordinal.value;
         delete slot.ordinal.value;
-        var message = `We don't have a ${slot.ordinal.value}. Please choose between 1 and ${explainers.length}. I'll list the explainers again.`
+        var message = `We don't have a ${theOrdinal}. Please choose between 1 and ${explainers.length}. I'll list the explainers again.`
         return util.sendProgressive(
           boundThis.event.context.System.apiEndpoint, // no need to add directives params
           boundThis.event.request.requestId,
@@ -94,9 +97,9 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
           }
         );
       } else if (slot.topic && slot.topic.value) {
-        // convert to query
-        this.handler.state = config.states.REQUEST;
-        this.attributes.STATE = config.states.REQUEST;
+        // convert to query?
+        console.log("PLAYING_EXPLAINER, PickItem - slot.topic.value but could not find -- SHOULD I AUTO SEND TO REQUEST OR NO?");
+        this.handler.state = this.attributes.STATE = config.states.REQUEST;
         return this.emitWithState('PickItem', slot);
       } else {
         console.log("NO EXPLAINER, and no slot info I can use ", JSON.stringify(slot, null,2));
@@ -131,13 +134,13 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
         var prompt;
         var links = "<action value='ReplayExplainer'>Replay</action> | <action value='ListExplainers'>List Explainers</action>";
         if (this.event.session.new) { // came directly here
-          prompt = `You can replay that, list explainers, or play the latest explainer. What would you like to do?`;
+          prompt = `You can replay that, explore our explainers, or play the latest explainer. What would you like to do?`;
           links += " | <action value='HomePage'> What's New </action>";
         } else if (explainers[chosenExplainer.index+1]) { // THERE IS a next explainer
-          prompt = `You can replay that, say 'next' to learn about ${explainers[chosenExplainer.index+1].title}, or list explainers. What would you like to do?`;
+          prompt = `You can replay that, say 'next' to learn about ${explainers[chosenExplainer.index+1].title}, or explore our explainers. What would you like to do?`;
           links += " | <action value='Next'>Next</action>";
         } else { // end of the line
-          prompt = "And that's all we have right now. You can replay that, list explainers, or suggest a topic to give us an idea for our next explainer. What would you like to do?"
+          prompt = "And that's all we have right now. You can replay that, explore our explainers, or suggest a topic to give us an idea for our next explainer. What would you like to do?"
         }
 
         if (this.event.context.System.device.supportedInterfaces.Display) {
@@ -157,6 +160,9 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
       });
 
     }
+  },
+  TopicOnly: function () {
+    console.log("PLAYING_EXPLAINER TopicOnly", JSON.stringify(this.event.request.intent, null,2))
   },
   'PlayLatestExplainer': function () {
     // this is what 'play all would do'
@@ -230,8 +236,8 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     // handle next at end of list?
     if (explainers.length <= this.attributes.currentExplainerIndex +1) {
       // last spot
-      var message = "We don't have any more explainers right now. You can list explainers to explore all our explainers or hear what's new for the latest. What would you like to do?"
-      var prompt = "You can list explainers to explore all our explainers or hear what's new for the latest. What would you like to do?"
+      var message = "We don't have any more explainers right now. You can ask for more to explore all our explainers or hear what's new for the latest. What would you like to do?"
+      var prompt = "You can ask for more to explore all our explainers or hear what's new for the latest. What would you like to do?"
       var links = "<action value='ListExplainers'>List explainers</action> | <action value='ListShows'>Play full episodes</action>";
 
       if (this.event.context.System.device.supportedInterfaces.Display) {

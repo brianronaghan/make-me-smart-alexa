@@ -507,7 +507,6 @@
                     "home menu",
                     "main menu",
                     "home page",
-                    "go home",
                     "start over",
                     "what's new",
                     "hear what's new",
@@ -648,11 +647,33 @@
                     "samples":[
                       "explainer menu",
                       "what explainers it has",
+                      "what you got",
+                      "what you have",
+                      "list",
+                      "list all",
                       "list explainers",
                       "list all our explainers",
                       "list our explainers",
+                      "list your explainers",
+                      "list the explainers",
+                      "list all explainers",
+                      "everything",
+                      "explore",
+                      "explore explainers",
                       "explore all",
+                      "explore our explainers",
+                      "explore your explainers",
+                      "explore the explainers",
                       "explore all explainers",
+                      "explore all our explainers",
+                      "browse",
+                      "browse explainers",
+                      "browse all",
+                      "browse all explainers",
+                      "browse our explainers",
+                      "browse the explainers",
+                      "browse your explainers",
+                      "browse all our explainers",
                       "all explainers",
                       "see all explainers",
                       "show all explainers",
@@ -766,6 +787,78 @@
                   ]
                 },
                 {
+                  "name": "TopicOnly",
+                  "slots": [
+                    {
+                      "name": "query",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "topic",
+                      "type": "TOPICS"
+                    },
+                    {
+                      "name": "userName",
+                      "type": "AMAZON.US_FIRST_NAME"
+                    },
+                    {
+                      "name": "userLocation",
+                      "type": "AMAZON.US_CITY"
+                    }
+                  ],
+                  "samples": [
+                    "{topic}"
+                  ]
+                },
+                {
+                  "name": "IndexOnly",
+                  "slots": [
+                    {
+                      "name": "query",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "index",
+                      "type": "AMAZON.NUMBER"
+                    },
+                    {
+                      "name": "userName",
+                      "type": "AMAZON.US_FIRST_NAME"
+                    },
+                    {
+                      "name": "userLocation",
+                      "type": "AMAZON.US_CITY"
+                    }
+                  ],
+                  "samples": [
+                    "{index}"
+                  ]
+                },
+                {
+                  "name": "OrdinalOnly",
+                  "slots": [
+                    {
+                      "name": "query",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "ordinal",
+                      "type": "ORDINAL"
+                    },
+                    {
+                      "name": "userName",
+                      "type": "AMAZON.US_FIRST_NAME"
+                    },
+                    {
+                      "name": "userLocation",
+                      "type": "AMAZON.US_CITY"
+                    }
+                  ],
+                  "samples": [
+                    "{ordinal}"
+                  ]
+                },
+                {
                   "name": "PickItem",
                   "slots": [
                     {
@@ -794,9 +887,6 @@
                     }
                   ],
                   "samples": [
-                    "{index}",
-                    "{ordinal}",
-                    "{topic}",
                     "pick {topic}",
                     "pick topic {topic}",
                     "teach me about {topic}",
