@@ -10,7 +10,7 @@ var explainers = require('../explainers');
 
 var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
   'LaunchRequest': function (condition, message) {
-    console.log("LAUNCH REQUEST", this.event.request, "ATS", this.attributes)
+    console.log("START LaunchRequest", this.event.request);
     let welcome = '';
     let prompt = "You can replay that, hear what's new or suggest a topic. What would you like to do?"
     let latestExplainer = explainers[0];
@@ -39,7 +39,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
       }
       let fullSpeech = welcome + prompt;
       this.response.speak(fullSpeech).listen(prompt);
-      return this.emit(':responseReady');
+      return this.emit(':saveState');
     } else if (latestExplainer.audio.intro) {
       welcome =`<audio src="${latestExplainer.audio.intro}" /><audio src="${latestExplainer.audio.url}"/>`;
     } else {
@@ -75,12 +75,12 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     });
   },
   'HomePage': function (condition, message) {
-    console.log("HEY HOME PAGE REDIRECT")
+    console.log("START state HomePage")
     this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
     this.emitWithState('HomePage', 'from_launch');
   },
   'RequestExplainer' : function () {
-    console.log('request explainer FROM START')
+    console.log('START state RequestExplainer')
     this.handler.state = this.attributes.STATE = config.states.REQUEST;
     this.emitWithState('RequestExplainer');
   },

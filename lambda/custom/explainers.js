@@ -38,7 +38,7 @@ module.exports = [
   {
     title: 'The Unemployment Report',
     author: 'Kai Ryssdal',
-    alts: ['unemployment', 'unemployment rate', 'unemployment report','jobs report', 'an employment', 'un employment'],
+    alts: ['unemployment', 'unemployment rate', 'unemployment report','jobs report', 'an employment', 'un employment', 'uh no'],
     guid: 'unemployment_certification',
     date: "2018-05-24",
     description: "How the unemployment report is calculated and what it means for the economy.",

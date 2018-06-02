@@ -157,11 +157,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     let boundThis = this;
     var slot = slot || this.event.request.intent.slots;
 
-    // if (slot && slot.topic && slot.topic.value) {
-    //   console.log("SLOT EARLIER", slot)
-    //   return this.emitWithState('PickItem', slot)
-    // }
-    console.log(" EARLIER", this.event.request.intent)
+    console.log("ITERATING_EXPLAINERS EarlierExplainers", this.event.request.intent)
 
 
     if (this.attributes.indices.explainer + config.items_per_prompt.explainer >= explainers.length) {
@@ -180,20 +176,17 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
         }
       );
     }
+    if (!this.attributes.indices.explainer) {
+      this.attributes.indices.explainer = 0;
+    }
     this.attributes.indices.explainer += config.items_per_prompt.explainer;
     this.emitWithState('ListExplainers', 'earlier');
 
   },
 
   'LaterExplainers' : function () {
-    console.log("iterating explainers LATER")
+    console.log("ITERATING_EXPLAINERS LaterExplainers", this.event.request);
     var slot = slot || this.event.request.intent.slots;
-
-    // if (slot && slot.topic && slot.topic.value) {
-    //   console.log("SLOT LATER", slot)
-    //   return this.emitWithState('PickItem', slot)
-    // }
-
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     this.attributes.indices.explainer -= config.items_per_prompt.explainer;

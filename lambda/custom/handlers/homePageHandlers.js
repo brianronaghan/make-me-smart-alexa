@@ -14,7 +14,7 @@ var db = require('../db');
 
 module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
   'LaunchRequest': function () {
-    console.log("PLAYING LAUNCH REQ", this.handler.state)
+    console.log("HOME_PAGE LaunchRequest", this.handler.state)
     this.handler.state = this.attributes.STATE = config.states.START;
     this.emitWithState('LaunchRequest');
   },

@@ -38,25 +38,37 @@ var config = {
         "let me hear that again",
         "start over",
         "replay explainer",
-        "replay today's explainer"
+        "let's hear that again",
+        "repeat",
+        "begin again",
+        "begin that again",
+        "one more time",
+        "replay today's explainer",
+        "replay that exlplainer"
       ],
       PlayLatestExplainer: [
         "play all",
         "all of them",
+        "all of em",
+        "all of 'em",
         "play them all",
         "play the latest",
         "the latest",
         "all",
         "latest topic",
+        "the latest explainer",
         "latest explainer",
         "today's topic",
-        "play today’s topic",
+        "the latest",
+        "play today's topic",
         "today's explainer",
-        "play today's explainer"
+        "play today's explainer",
+        "play the latest explainer"
       ],
       RequestExplainer: [
         "topic",
         "suggest",
+        "suggestion",
         "make a suggestion",
         "suggest an explainer",
         "request explainer slot",
@@ -65,7 +77,16 @@ var config = {
         "request a topic",
         "pitch explainer",
         "pitch an explainer topic",
-        "pitch a topic"
+        "pitch a topic",
+        "i want to suggest a topic",
+        "can i make a suggestion",
+        "suggestion",
+        "make a request",
+        "i want to mamke a request",
+        "i want to suggest something",
+        "i want to suggest a topic",
+        "request",
+        "new topic"
       ],
       ListExplainers: [
         "explainer menu",
@@ -82,23 +103,10 @@ var config = {
         "show me all the explainers",
         "show me more",
         "ask for more",
+        "more options",
         "more",
         "more please",
         "more explainers"
-      ],
-      ChangeMyInfo: [
-        "change my name",
-        "change my info",
-        "correct name",
-        "update name",
-        "correct my name",
-        "update my name",
-        "change my city",
-        "change my location",
-        "correct location",
-        "update location",
-        "correct my location",
-        "update my city"
       ],
       EarlierExplainers: [
         "earlier",
@@ -106,6 +114,7 @@ var config = {
         "before that",
         "further back",
         "older",
+        "older 3",
         "older explainers",
         "older explainer",
         "go back"
@@ -115,9 +124,31 @@ var config = {
         "later explainers",
         "after that",
         "more recent",
+        "more recent 3",
         "newer",
         "newer explainers",
         "newer explainer"
+      ],
+      ChangeMyInfo: [
+        "change my name",
+        "change my info",
+        "correct name",
+        "update name",
+        "change info",
+        "correct my name",
+        "update my name",
+        "change my city",
+        "change my location",
+        "correct location",
+        "update location",
+        "correct my location",
+        "update my city",
+        "add my info",
+        "add my name",
+        "add my city",
+        "add info",
+        "add name",
+        "add city"
       ],
       'AMAZON.StopIntent': [
         "stop",
@@ -130,9 +161,7 @@ var config = {
         "can you help me",
         "what do i do",
         "help please"
-      ],
-
-
+      ]
     },
     defaultDescription: "Something else you want to get smart about? Try 'Alexa, suggest a topic' and Kai and Molly might use your idea!",
     states: {
