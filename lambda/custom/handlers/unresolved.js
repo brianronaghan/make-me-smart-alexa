@@ -34,7 +34,9 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
       unresolved = slot.topic.value;
       delete slot.topic.value
     }
-    this.attributes.UNRESOLVED = unresolved;
+    if (unresolved) {
+      this.attributes.UNRESOLVED = unresolved;
+    }
 
     if (intentObj.confirmationStatus !== 'CONFIRMED') {
       if (intentObj.confirmationStatus !== 'DENIED') { // neither
@@ -144,6 +146,7 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
           } else if (slot && slot.query && slot.query.value) {
             delete slot.topic.value
           }
+          // TODO: PROMPT NOT REDIRECT?
           this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
           return util.sendProgressive(
             this.event.context.System.apiEndpoint, // no need to add directives params
