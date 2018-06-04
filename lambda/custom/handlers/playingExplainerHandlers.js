@@ -33,7 +33,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
       addOneBool = true
     }
     var chosenExplainer = util.itemPicker(slot, explainers, 'title', 'topic', addOneBool);
-    console.log("CHOSEN EX valu ", chosenExplainer)
+    console.log("CHOSEN EXPLAINER value:  ", chosenExplainer)
     if (chosenExplainer === -1) {
       console.log("OUT OF BOUNDS, but by number")
       var theNumber;
@@ -63,12 +63,11 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     } else if (!chosenExplainer) {
       if (slot.query && slot.query.value) {
         // TODO: intentCheck ???
-        console.log("NO EXPLAINER , but there is QUERY ", JSON.stringify(slot, null,2));
-        this.handler.state = config.states.REQUEST;
-        this.attributes.STATE = config.states.REQUEST;
-        return this.emitWithState('PickItem', slot);
+        console.log("PLAYING_EXPLAINER, PickItem - slot.query.value but could not find -- SHOULD I AUTO SEND TO REQUEST OR NO?",);
+        this.handler.state = this.attributes.STATE = config.states.UNRESOLVED;
+        return this.emitWithState('PickItem');
       } else if (slot.index && slot.index.value) {
-        console.log("NO EXPLAINER , but there is INDEX ", JSON.stringify(slot, null,2))
+        console.log("NO EXPLAINER FOUND, but there is INDEX ", JSON.stringify(slot, null,2))
         var message = `${slot.index.value} is not a valid choice. Please choose between 1 and ${explainers.length}. I'll list the explainers again.`
         var boundThis = this;
         return util.sendProgressive(
@@ -99,7 +98,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
       } else if (slot.topic && slot.topic.value) {
         // convert to query?
         console.log("PLAYING_EXPLAINER, PickItem - slot.topic.value but could not find -- SHOULD I AUTO SEND TO REQUEST OR NO?");
-        this.handler.state = this.attributes.STATE = config.states.REQUEST;
+        this.handler.state = this.attributes.STATE = config.states.UNRESOLVED;
         return this.emitWithState('PickItem', slot);
       } else {
         console.log("NO EXPLAINER, and no slot info I can use ", JSON.stringify(slot, null,2));

@@ -50,7 +50,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
       console.log('IT EXP, LIST EXP, got a query', slot.query.value);
       let resolvedIntent = util.intentCheck(slot.query.value);
       if (resolvedIntent) {
-        console.log(`ITERATING_EXPLAINERS listExplainers: got ${slot.query.value} in query.`)
+        console.log(`ITERATING_EXPLAINER listExplainers: got ${slot.query.value} in query.`)
         delete slot.query.value;
         return this.emitWithState(resolvedIntent, slot);
       } else {
@@ -64,21 +64,6 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
       this.attributes.indices.explainer,
       config.items_per_prompt.explainer
     );
-    // this.response.speak(data.itemsAudio).listen('Pick one or say older or earlier to move forward or backward through list.').cardRenderer(data.itemsCard);
-    // if (this.event.context.System.device.supportedInterfaces.Display) {
-    //   this.response.renderTemplate(
-    //     util.templateListTemplate1(
-    //       'Explainers',
-    //       'list-explainers',
-    //       'Explainer',
-    //       'title',
-    //       explainers
-    //     )
-    //   );
-    // }
-    // this.emit(':responseReady');
-
-
     this.emit(':elicitSlotWithCard', 'query', data.itemsAudio, "Pick one or say newer or older to move forward or backward through list.", 'List of Explainers', data.itemsCard, this.event.request.intent, util.cardImage(config.icon.full) );
   },
   // STATE TRANSITIONS
@@ -88,15 +73,15 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     if (slot && slot.query && slot.query.value) {
       let resolvedIntent = util.intentCheck(slot.query.value);
       if (resolvedIntent) {
-        console.log(`ITERATING_EXPLAINERS requestExplainer: got ${slot.query.value} in query.`)
+        console.log(`ITERATING_EXPLAINER requestExplainer: got ${slot.query.value} in query.`)
         delete slot.query.value;
         return this.emitWithState(resolvedIntent, slot);
       } else {
-        console.log('ITERATING_EXPLAINERS, sending to pick ', slot)
+        console.log('ITERATING_EXPLAINER, sending to pick ', slot)
         return this.emitWithState('PickItem', slot)
       }
     } else {
-      console.log("ITERATING_EXPLAINERS , got requestExplainer with no slot. REDIRECTING")
+      console.log("ITERATING_EXPLAINER , got requestExplainer with no slot. REDIRECTING")
       this.handler.state = this.attributes.STATE = config.states.REQUEST;
       return this.emitWithState('RequestExplainer', {query: {value:null},userLocation: {value: null}, userName: {value: null}});
     }
@@ -128,15 +113,15 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     if (slot && slot.query && slot.query.value) {
       let resolvedIntent = util.intentCheck(slot.query.value);
       if (resolvedIntent) {
-        console.log(`ITERATING_EXPLAINERS homePage: got ${slot.query.value} in query.`)
+        console.log(`ITERATING_EXPLAINER homePage: got ${slot.query.value} in query.`)
         delete slot.query.value;
         return this.emitWithState(resolvedIntent, slot);
       } else {
-        console.log('ITERATING_EXPLAINERS homePage, sending to pick ', slot)
+        console.log('ITERATING_EXPLAINER homePage, sending to pick ', slot)
         return this.emitWithState('PickItem', slot)
       }
     } else {
-      console.log("ITERATING_EXPLAINERS , got HOME PAGE with no query. REDIRECTING")
+      console.log("ITERATING_EXPLAINER , got HOME PAGE with no query. REDIRECTING")
       this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
       return this.emitWithState('HomePage', 'no_welcome');
     }
@@ -193,7 +178,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     let boundThis = this;
     var slot = slot || this.event.request.intent.slots;
 
-    console.log("ITERATING_EXPLAINERS EarlierExplainers", this.event.request.intent)
+    console.log("ITERATING_EXPLAINER EarlierExplainers", this.event.request.intent)
 
 
     if (this.attributes.indices.explainer + config.items_per_prompt.explainer >= explainers.length) {
@@ -221,7 +206,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
   },
 
   'LaterExplainers' : function () {
-    console.log("ITERATING_EXPLAINERS LaterExplainers", this.event.request);
+    console.log("ITERATING_EXPLAINER LaterExplainers", this.event.request);
     var slot = slot || this.event.request.intent.slots;
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);

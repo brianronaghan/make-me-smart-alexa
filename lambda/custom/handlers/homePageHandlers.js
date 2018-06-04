@@ -142,7 +142,6 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     this.emitWithState('PickItem', {index: {value: 1}}, 'HOMEPAGE_NEXT');
   },
   'ChangeMyInfo' : function () {
-    // TODO: changeMyInfo it's own state
     var slot = slot || this.event.request.intent.slots;
     if (slot && slot.query && slot.query.value) { // since we can't change the goddamn thing if it uses elicit, if it has a query, probably after being elicited
       let resolvedIntent = util.intentCheck(slot.query.value);
@@ -156,7 +155,7 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
       }
     } else {
       console.log("HOME_PAGE, ChangeMyInfo, no query, redirect to REQ state")
-      this.handler.state = this.attributes.STATE = config.states.REQUEST;
+      this.handler.state = this.attributes.STATE = config.states.CHANGE_INFO;
       return this.emitWithState('ChangeMyInfo', {query: {value:null},userLocation: {value: null}, userName: {value: null}});
     }
 

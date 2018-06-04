@@ -7,6 +7,15 @@ var config = {
       explainer: 3,
       episode: 3,
     },
+    states: {
+      START: '',
+      HOME_PAGE: '_HOME_PAGE',
+      PLAYING_EXPLAINER: '_PLAYING_EXPLAINER',
+      ITERATING_EXPLAINER: '_ITERATING_EXPLAINER',
+      REQUEST: '_REQUEST',
+      CHANGE_INFO: '_CHANGE_INFO',
+      UNRESOLVED: '_UNRESOLVED'
+    },
     intents: {
       HomePage: [
         "a main menu",
@@ -162,13 +171,6 @@ var config = {
       ]
     },
     defaultDescription: "Something else you want to get smart about? Try 'Alexa, suggest a topic' and Kai and Molly might use your idea!",
-    states: {
-      START: '',
-      HOME_PAGE: '_HOME_PAGE',
-      PLAYING_EXPLAINER: '_PLAYING_EXPLAINER',
-      REQUEST: '_REQUEST',
-      ITERATING_EXPLAINER: '_ITERATING_EXPLAINER'
-    },
     newUserAudio: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/utils/Alexa+-+Ryssdal+-+Wood+-+Welcome+New+User+Message+-+MIXLEV_alexa.mp3',
     background: {
       show: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/1024x600_FINALB.png"

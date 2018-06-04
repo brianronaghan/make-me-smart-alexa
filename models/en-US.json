@@ -118,7 +118,7 @@
      ]
    },
    {
-     "id": "Elicit.Intent-ListExpainers.IntentSlot-userName",
+     "id": "Elicit.Intent-ListExplainers.IntentSlot-userName",
      "variations": [
        {
          "type": "PlainText",
@@ -135,7 +135,7 @@
      ]
    },
    {
-     "id": "Elicit.Intent-ListExpainers.IntentSlot-userLocation",
+     "id": "Elicit.Intent-ListExplainers.IntentSlot-userLocation",
      "variations": [
        {
          "type": "PlainText",
@@ -312,7 +312,7 @@
            "elicitationRequired": true,
            "confirmationRequired": false,
            "prompts": {
-             "elicitation": "Elicit.Intent-ListExpainers.IntentSlot-userName"
+             "elicitation": "Elicit.Intent-ListExplainers.IntentSlot-userName"
            }
          },
          {
@@ -321,7 +321,7 @@
            "elicitationRequired": true,
            "confirmationRequired": false,
            "prompts": {
-             "elicitation": "Elicit.Intent-ListExpainers.IntentSlot-userLocation"
+             "elicitation": "Elicit.Intent-ListExplainers.IntentSlot-userLocation"
            }
          },
          {
@@ -500,7 +500,19 @@
                 },
                 {
                   "name": "AMAZON.StopIntent",
-                  "samples": []
+                  "samples": [
+                    "I'm done",
+                    "I'm set",
+                    "I'm good",
+                    "I'm all set",
+                    "Enough",
+                    "That's enough",
+                    "I'm good thanks",
+                    "I'm all set",
+                    "All set",
+                    "I'm done",
+                    "I'm done thanks"
+                  ]
                 },
                 {
                   "name": "HomePage",
@@ -609,23 +621,27 @@
                     "suggest",
                     "suggestion",
                     "make a suggestion",
+                    "make a request",
+                    "request explainer",
+                    "request a topic",
+                    "i want to request something",
                     "suggest an explainer",
-                    "request explainer slot",
                     "suggest a topic",
                     "request an explainer",
-                    "request a topic",
                     "pitch explainer",
                     "pitch an explainer topic",
                     "pitch a topic",
                     "i want to suggest a topic",
                     "can i make a suggestion",
-                    "suggestion",
-                    "make a request",
-                    "i want to mamke a request",
+                    "i want to make a request",
                     "i want to suggest something",
                     "i want to suggest a topic",
                     "request",
-                    "new topic"
+                    "new topic",
+                    "new explainer",
+                    "I've got an idea",
+                    "I've got an idea for a topic",
+                    "I've got an idea for an explainer"
                   ]
                 },
                 {
