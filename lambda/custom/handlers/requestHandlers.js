@@ -28,7 +28,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     console.log(`REQUEST PickItem - intentname ${this.event.request.intent.name}... `, JSON.stringify(this.event.request.intent, null, 2))
 
     if (slot.query && !slot.query.value) { // came here without a query
-      message = "We get a lot of our ideas from you, the listeners. So what topic would you like to request an explainer on?";
+      message = "We get a lot of our ideas from you, our Alexa users! So what topic do you think Kai and Molly should do an explainer on?";
       return this.emit(':elicitSlotWithCard', 'query', message, "What topic would you like to request an explainer on?", 'Request Explainer',message, this.event.request.intent, util.cardImage(config.icon.full));
     }
     let suggestion;
@@ -46,7 +46,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     }
     let suggestionString = `${suggestion}! Great idea!`
 
-    if (suggestion && this.attributes.userName && this.attributes.userLocation) { // turn off for testing
+    if (suggestion && this.attributes.userName && this.attributes.userLocation && false) { // turn off for testing
       console.log("REQUEST PickItem using saved name/location", slot)
       payload.requests = [{
         query: suggestion,
@@ -131,8 +131,8 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       }
       console.time('UPDATE-DB-request-new-name');
       db.update.call(this, payload, function(err, response) {
-        console.timeEnd('UPDATE-DB-request-new');
-        var confirmationMessage = `Okay, I'll tell Kai and Molly ${this.attributes.userName} from ${this.attributes.userLocation} asked for an explainer on ${suggestion}. If they use your suggestion, they'll thank you! If you want to change your name or city in the future you can say 'change my info'. `;
+        console.timeEnd('UPDATE-DB-request-new-name');
+        var confirmationMessage = `Okay, I'll tell Kai and Molly ${this.attributes.userName} from ${this.attributes.userLocation} asked for an explainer on ${suggestion}. If they use your idea, they'll thank you! If you want to change your name or city in the future you can say 'change my info'. `;
         if (this.event.context.System.device.supportedInterfaces.Display) {
           this.response.renderTemplate(
             util.templateBodyTemplate1(

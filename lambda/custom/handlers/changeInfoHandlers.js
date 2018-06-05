@@ -42,7 +42,7 @@ module.exports = Alexa.CreateStateHandler(config.states.CHANGE_INFO, {
      let intentCheck = util.intentCheck(slot.userLocation.value);
 
      if (intentCheck) {
-       console.log("CHANGE_INFO ChangeInfo intentCheck -- slot.userName.value ", slot.userLocation.value)
+       console.log("CHANGE_INFO ChangeInfo intentCheck -- slot.userLocation.value ", slot.userLocation.value)
        if (slot.userLocation && slot.userLocation.value) {
          delete slot.userLocation.value;
        }
@@ -198,7 +198,7 @@ module.exports = Alexa.CreateStateHandler(config.states.CHANGE_INFO, {
 
      // Just go to start
      var message = "Sorry I couldn't quite understand that. ";
-     var prompt = "You can hear what's new or suggest a topic. Which would you like to do?";
+     var prompt = "You can hear what's new or submit an idea for an explainer. Which would you like to do?";
      this.response.speak(message + prompt).listen(prompt);
      if (this.event.context.System.device.supportedInterfaces.Display) {
        this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message + prompt, null, config.background.show));

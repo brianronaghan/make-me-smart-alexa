@@ -39,7 +39,7 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
 
     this.attributes.currentExplainerIndex = -1;
     var intro = '';
-    if (this.event.session.new) {
+    if (this.event.session.new && condition ) {
       this.attributes.HEARD_FIRST = 0;
       intro += "Welcome back to Make Me Smart. This week we're ";
     } else if (condition === 'requested') {
@@ -51,7 +51,7 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
       if (message) {
         intro += `${message} `;
       }
-      intro += "Now that that's done, we're ";
+      intro += "Now that we've updated your info, we're ";
     } else if (condition === 'no_welcome') {
       if (message) {
         intro += `${message} `;
@@ -60,6 +60,8 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     } else if (condition === 'from_launch') {
       intro += "We've also been ";
       this.attributes.HEARD_FIRST = 1;
+    } else if (condition === 'new_user_from_launch') {
+      intro += `<audio src="${config.newUserAudio}" /> This week we're `
     } else {
       intro += "This week we're "
     }

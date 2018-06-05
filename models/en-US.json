@@ -438,10 +438,6 @@
                 "samples": []
                 },
                 {
-                  "name": "AMAZON.HelpIntent",
-                  "samples": []
-                },
-                {
                   "name": "AMAZON.MoreIntent",
                   "samples": []
                 },
@@ -499,8 +495,21 @@
                   "samples": []
                 },
                 {
+                  "name": "AMAZON.HelpIntent",
+                  "samples": [
+                    "help",
+                    "help me",
+                    "can you help",
+                    "can you help me",
+                    "what do i do",
+                    "help please"
+                  ]
+                },
+                {
                   "name": "AMAZON.StopIntent",
                   "samples": [
+                    "stop",
+                    "cancel",
                     "I'm done",
                     "I'm set",
                     "I'm good",
@@ -510,6 +519,10 @@
                     "I'm good thanks",
                     "I'm all set",
                     "All set",
+                    "All set thanks",
+                    "All done thanks",
+                    "All done",
+                    "Done",
                     "I'm done",
                     "I'm done thanks"
                   ]
@@ -617,31 +630,74 @@
                     }
                   ],
                   "samples": [
-                    "topic",
+                    "pitch",
+                    "pitch explainer",
+                    "pitch an explainer",
+                    "pitch a new explainer",
+                    "pitch an explainer topic",
+                    "pitch a topic",
+                    "propose",
+                    "propose explainer",
+                    "propose an explainer",
+                    "propose a new explainer",
+                    "propose an explainer topic",
+                    "propose a topic",
+                    "propose an idea",
+                    "request",
+                    "make a request",
+                    "request an explainer",
+                    "request explainer",
+                    "request a topic",
+                    "request a new topic",
+                    "request a new explainer",
+                    "i want to request something",
+                    "i want to make a request",
+                    "i want to pitch something",
+                    "submit",
+                    "submission",
+                    "make a submission",
+                    "submit explainer",
+                    "submit an explainer",
+                    "submit my explainer",
+                    "submit my explainer idea",
+
+                    "submit my idea",
+                    "submit my idea",
+                    "submit an idea for your next one",
+                    "submit an idea for your next explainer",
+
+                    "submit an idea for what we should explain next",
+                    "submit my idea for what you should explain next",
+                    "submit idea",
+                    "submit your idea",
+                    "submit an idea",
+                    "submit an idea for an explainer",
+                    "submit an idea for a new explainer",
+
+                    "submit a topic",
+                    "submit a topic idea",
+                    "i want to submit a topic",
+                    "can i make a submission",
+                    "i want to submit something",
+                    "i want to submit a topic",
                     "suggest",
                     "suggestion",
                     "make a suggestion",
-                    "make a request",
-                    "request explainer",
-                    "request a topic",
-                    "i want to request something",
                     "suggest an explainer",
                     "suggest a topic",
-                    "request an explainer",
-                    "pitch explainer",
-                    "pitch an explainer topic",
-                    "pitch a topic",
                     "i want to suggest a topic",
                     "can i make a suggestion",
-                    "i want to make a request",
                     "i want to suggest something",
                     "i want to suggest a topic",
-                    "request",
-                    "new topic",
+                    "idea",
+                    "new idea",
                     "new explainer",
                     "I've got an idea",
-                    "I've got an idea for a topic",
-                    "I've got an idea for an explainer"
+                    "I've got an idea for an explainer",
+                    "I've got an explainer idea",
+                    "topic",
+                    "new topic",
+                    "I've got an idea for a topic"
                   ]
                 },
                 {
@@ -686,6 +742,7 @@
                       "explore the explainers",
                       "explore all explainers",
                       "explore all our explainers",
+                      "explore all the explainers",
                       "browse",
                       "browse explainers",
                       "browse all",
@@ -715,6 +772,7 @@
                     "before that",
                     "further back",
                     "older",
+                    "older three",
                     "older explainers",
                     "older explainer",
                     "go back"
@@ -745,7 +803,9 @@
                     "later explainers",
                     "after that",
                     "more recent",
+                    "more recent three",
                     "newer",
+                    "newer three",
                     "newer explainers",
                     "newer explainer"
                   ],

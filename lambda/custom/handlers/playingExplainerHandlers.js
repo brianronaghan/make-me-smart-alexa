@@ -63,7 +63,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     } else if (!chosenExplainer) {
       if (slot.query && slot.query.value) {
         // TODO: intentCheck ???
-        console.log("PLAYING_EXPLAINER, PickItem - slot.query.value but could not find -- SHOULD I AUTO SEND TO REQUEST OR NO?",);
+        console.log("PLAYING_EXPLAINER, PickItem - slot.query.value but could not find -- SENDING TO UNRESOLVED");
         this.handler.state = this.attributes.STATE = config.states.UNRESOLVED;
         return this.emitWithState('PickItem');
       } else if (slot.index && slot.index.value) {
@@ -97,7 +97,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
         );
       } else if (slot.topic && slot.topic.value) {
         // convert to query?
-        console.log("PLAYING_EXPLAINER, PickItem - slot.topic.value but could not find -- SHOULD I AUTO SEND TO REQUEST OR NO?");
+        console.log("PLAYING_EXPLAINER, PickItem - slot.topic.value but could not find -- SENDING TO UNRESOLVED");
         this.handler.state = this.attributes.STATE = config.states.UNRESOLVED;
         return this.emitWithState('PickItem', slot);
       } else {
@@ -129,17 +129,20 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
         if (author === 'Molly Wood') {
           author = `Molly '<emphasis level="strong"> Wood</emphasis>`;
         }
+        if (source && source === 'NEW_USER_LAUNCH_PICK') {
+          intro = `<audio src="${config.newUserAudio}" /> `;
+        }
         var intro = `Here's ${author} explaining ${chosenExplainer.title}. <break time = "500ms"/> <audio src="${chosenExplainer.audio.url}" /> `; // <break time = "200ms"/>
         var prompt;
         var links = "<action value='ReplayExplainer'>Replay</action> | <action value='ListExplainers'>List Explainers</action>";
         if (this.event.session.new) { // came directly here
-          prompt = `You can replay that, explore our explainers, or play the latest. What would you like to do?`;
+          prompt = `You can replay that, play the latest, or browse all our explainers. What would you like to do?`;
           links += " | <action value='HomePage'> What's New </action>";
         } else if (explainers[chosenExplainer.index+1]) { // THERE IS a next explainer
-          prompt = `You can replay that, say 'next' to hear another, or explore our explainers. What would you like to do?`;
+          prompt = `You can replay that, say 'next' to hear another, or browse all our explainers. What would you like to do?`;
           links += " | <action value='Next'>Next</action>";
         } else { // end of the line
-          prompt = "And that's all we have right now. You can replay that, explore our explainers, or suggest a topic for our next explainer. What would you like to do?"
+          prompt = "And that's all we have right now. You can replay that, browse all our explainers, or submit an idea for our next one. What would you like to do?"
         }
 
         if (this.event.context.System.device.supportedInterfaces.Display) {
@@ -235,8 +238,8 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     // handle next at end of list?
     if (explainers.length <= this.attributes.currentExplainerIndex +1) {
       // last spot
-      var message = "We don't have any more explainers right now. You can ask for more to explore all our explainers or hear what's new for the latest. What would you like to do?"
-      var prompt = "You can ask for more to explore all our explainers or hear what's new for the latest. What would you like to do?"
+      var message = "We don't have any more explainers right now. You can ask for more to browse all our explainers or hear what's new for the latest. What would you like to do?"
+      var prompt = "You can ask for more to browse all our explainers or hear what's new for the latest. What would you like to do?"
       var links = "<action value='ListExplainers'>List explainers</action> | <action value='ListShows'>Play full episodes</action>";
 
       if (this.event.context.System.device.supportedInterfaces.Display) {

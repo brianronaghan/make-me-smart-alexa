@@ -12,27 +12,26 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
   'LaunchRequest': function (condition, message) {
     console.log("START LaunchRequest", this.event.request);
     let welcome = '';
-    let prompt = "You can replay that, hear what's new or suggest a topic. What would you like to do?"
+    let prompt = "You can replay that, hear what's new or submit an idea for what we should explain next. What would you like to do?"
     let latestExplainer = explainers[0];
     let author = latestExplainer.author;
     if (author === 'Molly Wood') {
       author = `Molly '<emphasis level="strong"> Wood</emphasis>`;
     }
-    let links = "<action value='ReplayExplainer'>Replay</action> | <action value='HomePage'>Hear What's New</action> | <action value='RequestExplainer'> Suggest a Topic </action>";
 
     if (!this.attributes.deviceIds) {
       welcome =`<audio src="${config.newUserAudio}" /><audio src="${latestExplainer.audio.url}"/>`;
     } else if (this.attributes.LATEST_HEARD && this.attributes.LATEST_HEARD === latestExplainer.guid) {
       // user has heard todays
       welcome = `Welcome back to Make Me Smart. `
-      prompt =  `You can replay today's explainer on ${latestExplainer.title}, hear what's new or suggest a topic. Which would you like to do?`;
+      prompt =  `You can replay today's explainer on ${latestExplainer.title}, hear what's new or submit your explainer idea. Which would you like to do?`;
       if (this.event.context.System.device.supportedInterfaces.Display) {
         this.response.renderTemplate(
           util.templateBodyTemplate3(
             latestExplainer.title,
             latestExplainer.image || config.icon.full,
             latestExplainer.description,
-            "You can replay that, hear what's new or suggest a topic.",
+            "You can replay that, hear what's new or request a new explainer.",
             config.background.show
           )
         );
@@ -64,7 +63,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
             latestExplainer.title,
             latestExplainer.image || config.icon.full,
             latestExplainer.description,
-            "You can replay that, hear what's new or suggest a topic.",
+            "You can replay that, hear what's new or request a new explainer.",
             config.background.show
           )
         );
@@ -77,19 +76,40 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
   'HomePage': function (condition, message) {
     console.log("START state HomePage")
     this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
-    this.emitWithState('HomePage', 'from_launch');
+    if (!this.attributes.deviceIds) {
+      console.log("NEW USER -- HomePage")
+      var deviceId = util.getDeviceId.call(this);
+      util.nullCheck.call(this, deviceId);
+      return this.emitWithState('HomePage', 'new_user_from_launch');
+    } else {
+      return this.emitWithState('HomePage', 'from_launch');
+    }
   },
   'RequestExplainer' : function () {
     console.log('START state RequestExplainer')
     this.handler.state = this.attributes.STATE = config.states.REQUEST;
-    this.emitWithState('RequestExplainer');
+    if (!this.attributes.deviceIds) {
+      console.log("NEW USER -- RequestExplainer")
+      var deviceId = util.getDeviceId.call(this);
+      util.nullCheck.call(this, deviceId);
+      return this.emitWithState('RequestExplainer');
+    } else {
+      return this.emitWithState('RequestExplainer');
+    }
+
   },
   'PickItem' : function (slot) {
-    console.log("HEY PICK from start?")
-
-    // redirects from homepage to play explainer choice
+    console.log("START PickItem ")
+    // redirects from start to play explainer choice
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
-    this.emitWithState('PickItem', slot, 'LAUNCH_PICK');
+    if (!this.attributes.deviceIds) {
+      console.log("NEW USER -- PickItem")
+      var deviceId = util.getDeviceId.call(this);
+      util.nullCheck.call(this, deviceId);
+      return this.emitWithState('PickItem', slot, 'NEW_USER_LAUNCH_PICK');
+    } else {
+      return this.emitWithState('PickItem', slot, 'LAUNCH_PICK');
+    }
   },
   'ReplayExplainer': function () {
     var deviceId = util.getDeviceId.call(this);
@@ -121,27 +141,11 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     this.emitWithState('ListExplainers', 'from_launch');
   },
 
-  // TOUCH EVENTS:
-  'ElementSelected': function () {
-    var deviceId = util.getDeviceId.call(this);
-    util.nullCheck.call(this, deviceId);
-
-    // handle play latest or pick episode actions
-    console.log('ElementSelected -- ', this.event.request)
-    var intentSlot,intentName;
-    if (this.event.request.token === 'ReplayExplainer') {
-      intentName = this.event.request.token;
-    } else if (this.event.request.token === 'RequestExplainer' || this.event.request.token === 'HomePage') {
-      intentName = this.event.request.token;
-    }
-    console.log('PLAYING EXPLAINERS, TOUCH', intentName, intentSlot);
-    this.emitWithState(intentName, intentSlot, 'TOUCH_HOMEPAGE');
-  },
-
+  // BUILT IN
 
 
   'AMAZON.CancelIntent' : function() {
-    console.log('CANCEL START STATE')
+    console.log('START CancelIntent')
     // This needs to work for not playing as well
     delete this.attributes.STATE;
 
@@ -149,7 +153,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     this.emit(':saveState');
   },
   'AMAZON.StopIntent' : function() {
-    console.log('STOP EXPLAINER STATE')
+    console.log('START StopIntent')
     // This needs to work for not playing as well
     // SHOULD I CLEAR THE STATE?
     delete this.attributes.STATE;
@@ -168,7 +172,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     console.log('Help in START');
 
     // Handler for built-in HelpIntent
-    var message = "You can say replay, hear what's new, or suggest a topic. What would you like to do?";
+    var message = "You can replay that, hear what's new, or submit your idea for an explainer. What would you like to do?";
     this.response.speak(message).listen(message);
     if (this.event.context.System.device.supportedInterfaces.Display) {
       this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, null, config.background.show));
@@ -184,7 +188,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
    'Unhandled' : function () {
      console.log("START UNHANDLED ",JSON.stringify(this.event.request,null, 2));
      var message = "Sorry I couldn't quite understand that. ";
-     var prompt = "You can say replay, hear what's new, or suggest a topic. What would you like to do?";
+     var prompt = "You can say replay, hear what's new, or submit your explainer idea. What would you like to do?";
      this.response.speak(message + prompt).listen(prompt);
      if (this.event.context.System.device.supportedInterfaces.Display) {
        this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message + prompt, null, config.background.show));
