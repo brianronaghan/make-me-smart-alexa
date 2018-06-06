@@ -54,8 +54,8 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
         message = "Alright, let's try again.";
         delete this.attributes.UNRESOLVED;
         delete intentObj.confirmationStatus;
-        this.handler.state = this.attributes.STATE = this.attributes.PICK_SOURCE;
-        let redirectIntent = config.state_start_intents[this.attributes.PICK_SOURCE];
+        this.handler.state = this.attributes.STATE = this.attributes.PICK_SOURCE || config.states.HOME_PAGE;
+        let redirectIntent = config.state_start_intents[this.attributes.STATE];
         delete this.attributes.PICK_SOURCE;
         return util.sendProgressive(
           this.event.context.System.apiEndpoint, // no need to add directives params
@@ -87,13 +87,14 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
 
         db.update.call(this, payload, function(err, response) {
           console.timeEnd('DB-unresolved-saved');
-          message = `Okay, I'll tell Kai and Molly that ${this.attributes.userName} from ${this.attributes.userLocation} wants to get smart about ${this.attributes.UNRESOLVED}! You can also hear more from Kai and Molly by saying "alexa, play podcast Make Me Smart." `;
+          message = `Okay, I'll tell Kai and Molly that ${this.attributes.userName} from ${this.attributes.userLocation} wants to get smart about ${this.attributes.UNRESOLVED}! You can also hear more from Kai and Molly by saying "alexa, play podcast Make Me Smart." Now let's try again: `;
           //
           delete this.attributes.UNRESOLVED;
           delete intentObj.confirmationStatus
 
-          this.handler.state = this.attributes.STATE = this.attributes.PICK_SOURCE;
-          let redirectIntent = config.state_start_intents[this.attributes.PICK_SOURCE];
+
+          this.handler.state = this.attributes.STATE = this.attributes.PICK_SOURCE || config.states.HOME_PAGE;
+          let redirectIntent = config.state_start_intents[this.attributes.STATE];
           delete this.attributes.PICK_SOURCE;
 
           return util.sendProgressive(
@@ -183,8 +184,8 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
 
           // TODO: PROMPT NOT REDIRECT?
 
-          this.handler.state = this.attributes.STATE = this.attributes.PICK_SOURCE;
-          let redirectIntent = config.state_start_intents[this.attributes.PICK_SOURCE];
+          this.handler.state = this.attributes.STATE = this.attributes.PICK_SOURCE || config.states.HOME_PAGE;
+          let redirectIntent = config.state_start_intents[this.attributes.STATE];
           delete this.attributes.PICK_SOURCE;
 
           return util.sendProgressive(

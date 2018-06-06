@@ -162,24 +162,24 @@ module.exports = {
         itemsCard += `${x+1}) ${items[x][titleKey]}\n`;
       }
     }
-    itemsAudio += '. Choose one ';
+    itemsAudio += '. Choose one';
     itemsCard += '\n'
-    itemsCard += 'Choose one ';
+    itemsCard += 'Choose one';
     if (start == 0) {// if start is 0
       if (chunkLength < items.length) {// if chunk length is less than total length
         // add more
-        itemsAudio += `or say 'older' for older ${itemTitlePlural}`;
-        itemsCard += ` or say 'older' for older ${itemTitlePlural} `;
+        itemsAudio += ` or say 'older' for older ${itemTitlePlural}`;
+        itemsCard += ` or say 'older' for older ${itemTitlePlural}`;
       }
     } else {// start != 0
       if (start + chunkLength < items.length) {// if it is start + chunk is < total length
         // add more
-        itemsAudio += constants.breakTime['50'] + `or say 'older' for older ${itemTitlePlural}`;
-        itemsCard += ` or say 'older' for older ${itemTitlePlural} `;
+        itemsAudio += ` or say 'older' for older ${itemTitlePlural}`;
+        itemsCard += ` or say 'older' for older ${itemTitlePlural}`;
       }
       // always have previous (if we're gonna do previous)
-      itemsAudio += `or say 'newer' to hear the more recent ${chunkLength}`;
-      itemsCard += `or say 'newer' to hear the more recent ${chunkLength}`;
+      itemsAudio += ` or say 'newer' to hear the more recent ${chunkLength}`;
+      itemsCard += ` or say 'newer' to hear the more recent ${chunkLength}`;
     }
     itemsAudio += ". What would you like to do?"
     return {itemsAudio, itemsCard};
@@ -343,6 +343,9 @@ function prosodyToBold (text) {
 };
 
 function clearProsody (text) {
+  text = text.replace(/<break[^>]*>/gi, "")
+  text = text.replace(/<emphasis[^>]*>/gi, "")
+  text = text.replace(/<\/emphasis[^>]*>/gi, "")
   text = text.replace(/<prosody[^>]*>/gi, "")
   text = text.replace(/<\/prosody>/gi, "")
   text = text.replace(/<audio[^>]*>/gi, "")

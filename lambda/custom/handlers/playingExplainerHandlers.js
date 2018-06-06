@@ -131,10 +131,12 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
         if (author === 'Molly Wood') {
           author = `Molly <emphasis level="strong"> Wood</emphasis>`;
         }
+        console.log("SOURCE PICK ", source)
+        var intro = ''
         if (source && source === 'NEW_USER_LAUNCH_PICK') {
-          intro = `<audio src="${config.newUserAudio}" /> `;
+          intro += `<audio src="${config.newUserAudio}" /> `;
         }
-        var intro = `Here's ${author} explaining ${chosenExplainer.title}. <break time = "500ms"/> <audio src="${chosenExplainer.audio.url}" /> `; // <break time = "200ms"/>
+         intro += `Here's ${author} explaining ${chosenExplainer.title}. <break time = "500ms"/> <audio src="${chosenExplainer.audio.url}" /> `; // <break time = "200ms"/>
         var prompt;
         if (this.event.session.new) { // came directly here
           prompt = `You can replay that, play the latest, or browse all our explainers. What would you like to do?`;
@@ -200,33 +202,6 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     this.emitWithState('HomePage', 'no_welcome');
   },
 
-  // TOUCH EVENTS:
-  'ElementSelected': function () {
-    var deviceId = util.getDeviceId.call(this);
-    util.nullCheck.call(this, deviceId);
-
-    // handle play latest or pick episode actions
-    console.log('ElementSelected -- ', this.event.request)
-    var intentSlot,intentName;
-    if (this.event.request.token === 'PlayLatestExplainer' || this.event.request.token === 'ListExplainers') {
-      intentName = this.event.request.token;
-    } else if (this.event.request.token === 'RequestExplainer') {
-      intentName = this.event.request.token;
-      intentSlot = {query: {value:null},userLocation: {value: null}, userName: {value: null}};
-    } else if (this.event.request.token === 'Next' || this.event.request.token === 'Previous') {
-      intentName = `AMAZON.${this.event.request.token}Intent`;
-    } else {
-      var tokenData = this.event.request.token.split('_');
-      intentName = tokenData[0];
-      intentSlot = {
-        index: {
-          value: parseInt(tokenData[1]) + 1
-        }
-      }
-    }
-    console.log('PLAYING EXPLAINERS, TOUCH', intentName, intentSlot);
-    this.emitWithState(intentName, intentSlot, 'TOUCH_LIST_EXPLAINERS');
-  },
 
   // BUILT INS:
   'AMAZON.NextIntent' : function () {

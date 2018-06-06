@@ -80,9 +80,19 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
   },
 
   'PickItem': function (slot, source) {
-    console.log("PICK IN HOME PAGE", this.event.request.intent.slots)
+    console.log("HOME_PAGE PickItem", JSON.stringify(this.event.request.intent, null,2))
     // set spot in indices
+
     var slot = slot || this.event.request.intent.slots;
+    if (slot && slot.query && slot.query.value) { // since we can't change the goddamn thing if it uses elicit, if it has a query, probably after being elicited
+      let resolvedIntent = util.intentCheck(slot.query.value);
+      if (resolvedIntent) {
+        console.log(`HOME_PAGE PickItem: got ${slot.query.value} in query. REDIRECTING`)
+        delete slot.query.value;
+        return this.emitWithState(resolvedIntent, slot)
+      }
+    }
+    console.log("HOME_PAGE PickItem, normal")
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
     this.attributes.PICK_SOURCE = config.states.HOME_PAGE;
 
@@ -92,6 +102,8 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     } else { // need a separate case to retain launch to what's new
       return this.emitWithState('PickItem', slot, 'HOME_PAGE')
     }
+
+
   },
 
   'RequestExplainer' : function () {
