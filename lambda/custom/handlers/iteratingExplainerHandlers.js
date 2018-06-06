@@ -59,6 +59,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
       } else {
         return this.emitWithState('PickItem');
       }
+    }
 
     var data = util.itemLister(
       explainers,
