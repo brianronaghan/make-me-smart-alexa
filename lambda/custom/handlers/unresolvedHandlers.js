@@ -75,7 +75,7 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
     } else { // confirmed
       console.log("UNRESOLVED PickItem -- CONFIRMED", JSON.stringify(intentObj, null,2));
       // TODO OKAY: now it's confirmed. We gotta ge tthe info?
-      if (this.attributes.UNRESOLVED && this.attributes.userName && this.attributes.userLocation && false) { // turn off for testing
+      if (this.attributes.UNRESOLVED && this.attributes.userName && this.attributes.userLocation) { // turn off for testing
         console.log("REQUEST PickItem using saved name/location", slot)
         payload.requests = [{
           query: this.attributes.UNRESOLVED,
@@ -160,7 +160,7 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
 
         db.update.call(this, payload, function(err, response) {
           console.timeEnd('DB-unresolved-new-name');
-          var confirmationMessage = `Okay, I'll tell Kai and Molly ${this.attributes.userName} from ${this.attributes.userLocation} asked for an explainer on ${this.attributes.UNRESOLVED}. If they use your idea, they'll thank you! If you want to change your name or city in the future you can say 'change my info'. `;
+          var confirmationMessage = `Okay, I'll tell Kai and Molly ${this.attributes.userName} from ${this.attributes.userLocation} asked for an explainer on ${this.attributes.UNRESOLVED}. If they use your idea, they'll thank you! If you want to change your name or city in the future you can say 'change my info'. Now try choosing again. `;
           if (this.event.context.System.device.supportedInterfaces.Display) {
             this.response.renderTemplate(
               util.templateBodyTemplate1(

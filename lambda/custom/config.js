@@ -19,7 +19,7 @@ var config = {
     state_start_intents:{
       _ITERATING_EXPLAINER: 'ListExplainers',
       _HOME_PAGE: 'HomePage'
-    }
+    },
     intents: {
       'AMAZON.HelpIntent': [
         "help",

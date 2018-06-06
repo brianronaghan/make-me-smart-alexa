@@ -46,7 +46,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     }
     let suggestionString = `${suggestion}! Great idea!`
 
-    if (suggestion && this.attributes.userName && this.attributes.userLocation && false) { // turn off for testing
+    if (suggestion && this.attributes.userName && this.attributes.userLocation) { // turn off for testing
       console.log("REQUEST PickItem using saved name/location", slot)
       payload.requests = [{
         query: suggestion,

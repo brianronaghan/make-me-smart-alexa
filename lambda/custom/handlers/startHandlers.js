@@ -78,7 +78,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
   'HomePage': function (condition, message) {
     console.log("START state HomePage")
     this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
-    if (!this.attributes.deviceIds) {
+    if (!this.attributes.deviceIds || true) {
       console.log("NEW USER -- HomePage")
       var deviceId = util.getDeviceId.call(this);
       util.nullCheck.call(this, deviceId);
@@ -90,7 +90,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
   'RequestExplainer' : function () {
     console.log('START state RequestExplainer')
     this.handler.state = this.attributes.STATE = config.states.REQUEST;
-    if (!this.attributes.deviceIds) {
+    if (!this.attributes.deviceIds || true) {
       console.log("NEW USER -- RequestExplainer")
       var deviceId = util.getDeviceId.call(this);
       util.nullCheck.call(this, deviceId);
@@ -104,7 +104,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     console.log("START PickItem ")
     // redirects from start to play explainer choice
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
-    if (!this.attributes.deviceIds) {
+    if (!this.attributes.deviceIds || true) {
       console.log("NEW USER -- PickItem")
       var deviceId = util.getDeviceId.call(this);
       util.nullCheck.call(this, deviceId);

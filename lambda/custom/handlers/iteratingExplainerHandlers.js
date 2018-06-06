@@ -174,6 +174,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
       console.log("ITERATING_EXPLAINER -- ARTIFACT -- RequestExplainer, sending back")
       return this.emitWithState('ListExplainers');
     } else {
+      this.attributes.indices.explainer = 0;
       console.log("ACTUALLY RequestExplainer REDIRECTING", JSON.stringify(this.event.request.intent, null,2))
       this.handler.state = this.attributes.STATE = config.states.REQUEST;
       this.emitWithState('RequestExplainer');
@@ -187,6 +188,8 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
       console.log("ITERATING_EXPLAINER -- ARTIFACT -- HomePage, sending back")
       return this.emitWithState('ListExplainers');
     } else {
+      this.attributes.indices.explainer = 0;
+
       console.log("ACTUALLY HomePage REDIRECTING", JSON.stringify(this.event.request.intent, null,2))
       this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
       this.emitWithState('HomePage');
@@ -201,6 +204,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
       console.log("ITERATING_EXPLAINER -- ARTIFACT -- ChangeMyInfo, sending back")
       return this.emitWithState('ListExplainers');
     } else {
+      this.attributes.indices.explainer = 0;
       console.log("ACTUALLY ChangeMyInfo REDIRECTING", JSON.stringify(this.event.request.intent, null,2))
       this.handler.state = this.attributes.STATE = config.states.CHANGE_INFO;
       this.emitWithState('ChangeMyInfo');
@@ -214,6 +218,8 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
       console.log("ITERATING_EXPLAINER -- ARTIFACT -- PlayLatestExplainer, sending back")
       return this.emitWithState('ListExplainers');
     } else {
+      this.attributes.indices.explainer = 0;
+
       console.log("ACTUALLY PlayLatestExplainer REDIRECTING", JSON.stringify(this.event.request.intent, null,2))
       this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
       this.emitWithState('PickItem', {index: {value: 1}}, 'LATEST_FROM_ITERATING');
@@ -246,7 +252,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
    },
    'AMAZON.HelpIntent' : function () {
      console.log('ITERATING_EXPLAINER HelpIntent', JSON.stringify(this.event.request.intent, null,2));
-     var message = "You can choose an explainer by name or number or say 'older' or 'newer' to move through the list. Say browse to list the explainers again. What would you like to do?";
+     var message = "You can choose an explainer by name or number, or say 'older' or 'newer' to move through the list. Say browse to list the explainers again. What would you like to do?";
      this.response.speak(message).listen(message);
      if (this.event.context.System.device.supportedInterfaces.Display) {
        this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, null, config.background.show));
@@ -255,7 +261,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
    },
    'Unhandled' : function () {
      console.log('ITERATING_EXPLAINER Unhandled',JSON.stringify(this.event.request.intent, null, 2))
-     var message = "Sorry I couldn't quite understand that. You can choose an explainer by name or number or say 'older' or 'newer' to move through the list. Say browse to list the explainers again. What would you like to do?"
+     var message = "Sorry I couldn't quite understand that. You can choose an explainer by name or number, or say 'older' or 'newer' to move through the list. Say browse to list the explainers again. What would you like to do?"
 
      this.response.speak(message).listen("Would you like to 'browse' or 'play the latest'?");
      if (this.event.context.System.device.supportedInterfaces.Display) {
