@@ -263,10 +263,10 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
   },
   'AMAZON.HelpIntent' : function () {
     console.log('Help in REQUEST')
-    var message = "You can submit an idea for an explainer, change your info to correct your name or location, or hear what's new. Which would you like to do?";
+    var message = "You can submit an idea for an explainer, say change your info to correct your name or location, or hear what's new. Which would you like to do?";
     this.response.speak(message).listen(message);
     if (this.event.context.System.device.supportedInterfaces.Display) {
-      this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, links, config.background.show));
+      this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, null, config.background.show));
     }
     this.emit(':saveState', true);
   },

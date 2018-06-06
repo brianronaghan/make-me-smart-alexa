@@ -69,7 +69,7 @@ module.exports = {
     console.log(JSON.stringify(listTemplate, null,2));
     return listTemplate;
   },
-  templateBodyTemplate1: function (title, body, links, backgroundImage) {
+  templateBodyTemplate1: function (title, body, secondary, backgroundImage) {
     var bodyText = prosodyToBold(body)
     var template = {
          "type": "BodyTemplate1",
@@ -81,7 +81,7 @@ module.exports = {
            }
            // "secondaryText": {
            //   "type": "RichText",
-           //   "text": links
+           //   "text": secondary
            // },
          },
          "backgroundImage": makeImage(backgroundImage || config.background.show),

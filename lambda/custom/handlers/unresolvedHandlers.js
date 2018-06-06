@@ -43,7 +43,7 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
         console.log("UNRESOLVED PickItem -- NEITHER CONFIRM NOR DENY", JSON.stringify(intentObj, null,2));
 
         if (unresolved) {
-          message = `Hmmm, I couldn't find an explainer or understand ${this.attributes.UNRESOLVED}. Would you like to request an explainer on that?`;
+          message = `Hmmm, I couldn't quite understand ${this.attributes.UNRESOLVED}. Would you like to request an explainer on that?`;
           confirmMessage = `Would you like to request an explainer on ${this.attributes.UNRESOLVED}?`;
           return this.emit(':confirmIntentWithCard', message, confirmMessage, 'Explainer Not Found', message);
         }
@@ -276,8 +276,9 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
   },
   'AMAZON.HelpIntent' : function () {
     console.log('UNRESOLVED HelpIntent')
-    var message = "You can hear what's new or submit an idea or change your information. Which would you like to do?";
+    var message = "You can hear what's new, or browse explainers, or submit an idea for an explainer. Which would you like to do?";
     this.response.speak(message).listen(message);
+    delete this.attributes.UNRESOLVED;
     if (this.event.context.System.device.supportedInterfaces.Display) {
       this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, null, config.background.show));
     }
@@ -291,7 +292,7 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
 
      // Just go to start
      var message = "Sorry I couldn't quite understand that. ";
-     var prompt = "You can hear what's new or submit an idea or change your information. Which would you like to do?";
+     var prompt = "You can hear what's new, or browse explainers, or submit an idea for an explainer. Which would you like to do?";
      this.response.speak(message + prompt).listen(prompt);
      if (this.event.context.System.device.supportedInterfaces.Display) {
        this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message + prompt, null, config.background.show));

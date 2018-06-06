@@ -39,7 +39,7 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
 
     this.attributes.currentExplainerIndex = -1;
     var intro = '';
-    if (this.event.session.new && condition ) {
+    if (this.event.session.new && condition !== 'new_user_from_launch') { // and condition === to something?
       this.attributes.HEARD_FIRST = 0;
       intro += "Welcome back to Make Me Smart. This week we're ";
     } else if (condition === 'requested') {

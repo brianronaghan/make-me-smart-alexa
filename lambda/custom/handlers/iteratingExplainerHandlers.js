@@ -46,7 +46,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     }
     var slot = slot || this.event.request.intent.slots;
     console.log("LIST_EXPLAINERS ListExplainer, SLOT", slot, ' and condition ', condition)
-    if (slot && slot.query && slot.query.value && !condition) {
+    if (slot && slot.query && slot.query.value && !condition) { // TODO: the condition check is FUCKED. older and earlier will have this, and then I can't... HM. LOOK AT THIS LOGIC!
       console.log('IT EXP, LIST EXP, got a query', slot.query.value);
       let resolvedIntent = util.intentCheck(slot.query.value);
       if (resolvedIntent) {

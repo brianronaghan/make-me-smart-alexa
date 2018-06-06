@@ -70,6 +70,8 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
       }
       let fullSpeech = welcome + prompt;
       this.response.speak(fullSpeech).listen(prompt);
+      delete this.attributes.STATE;
+
       this.emit(':saveState');
     });
   },
@@ -147,17 +149,17 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
   'AMAZON.CancelIntent' : function() {
     console.log('START CancelIntent')
     // This needs to work for not playing as well
-    delete this.attributes.STATE;
 
     this.response.speak("See you later. Say 'Alexa, Make Me Smart' to get learning again.");
+    delete this.attributes.STATE;
     this.emit(':saveState');
   },
   'AMAZON.StopIntent' : function() {
     console.log('START StopIntent')
     // This needs to work for not playing as well
     // SHOULD I CLEAR THE STATE?
-    delete this.attributes.STATE;
     this.response.speak('See you later. Say alexa, Make Me Smart to get learning again.')
+    delete this.attributes.STATE;
     this.emit(':saveState');
   },
   'AMAZON.NextIntent' : function () {
@@ -177,6 +179,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     if (this.event.context.System.device.supportedInterfaces.Display) {
       this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, null, config.background.show));
     }
+    delete this.attributes.STATE;
     this.emit(':saveState', true);
   },
   // error handling
@@ -193,6 +196,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
      if (this.event.context.System.device.supportedInterfaces.Display) {
        this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message + prompt, null, config.background.show));
      }
+     delete this.attributes.STATE;
      this.emit(':saveState', true);
    }
 
