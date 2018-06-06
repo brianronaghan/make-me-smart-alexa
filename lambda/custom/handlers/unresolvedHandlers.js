@@ -255,7 +255,7 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
   'AMAZON.StopIntent' : function() {
     console.log('UNRESOLVED StopIntent')
     // This needs to work for not playing as well
-    delete this.attributes.startedRequest;
+    delete this.attributes.UNRESOLVED;
     delete this.attributes.STATE;
     this.response.speak('See you later. Say Alexa, Make Me Smart to get learning again.')
     this.emit(':saveState');
@@ -268,7 +268,7 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
     console.log('UNRESOLVED CancelIntent');
     // means they don't wnt to leave it.
     delete this.attributes.STATE;
-    delete this.attributes.startedRequest;
+    delete this.attributes.UNRESOLVED;
 
     this.response.speak('See you later. Say Alexa, Make Me Smart to get learning again.')
     this.emit(':saveState');
