@@ -142,6 +142,18 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
     this.emitWithState('ListExplainers', 'from_launch');
   },
+  'OlderExplainers' : function () {
+    console.log("OlderExplainers in HOME_PAGE");
+
+    this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
+    this.emitWithState('OlderExplainers', 'older_from_start');
+  },
+
+  'NewerExplainers' : function () {
+    console.log("NewerExplainers in HOME_PAGE");
+    this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
+    this.emitWithState('NewerExplainers', 'newer_from_start');
+  },
 
   // BUILT IN
 

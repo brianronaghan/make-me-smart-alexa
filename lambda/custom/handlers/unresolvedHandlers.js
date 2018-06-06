@@ -53,8 +53,10 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
         // TODO: okay: now we, um, go home?
         message = "Alright, let's try again.";
         delete this.attributes.UNRESOLVED;
-        delete intentObj.confirmationStatus
-        this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
+        delete intentObj.confirmationStatus;
+        this.handler.state = this.attributes.STATE = this.attributes.PICK_SOURCE;
+        let redirectIntent = config.state_start_intents[this.attributes.PICK_SOURCE];
+        delete this.attributes.PICK_SOURCE;
         return util.sendProgressive(
           this.event.context.System.apiEndpoint, // no need to add directives params
           this.event.request.requestId,
@@ -62,9 +64,9 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
           message,
           function (err) {
             if (err) {
-              boundThis.emitWithState('HomePage', 'unresolved_decline', message);
+              boundThis.emitWithState(redirectIntent, 'unresolved_decline', message);
             } else {
-              boundThis.emitWithState('HomePage', 'unresolved_decline');
+              boundThis.emitWithState(redirectIntent, 'unresolved_decline');
             }
           }
         );
@@ -89,7 +91,11 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
           //
           delete this.attributes.UNRESOLVED;
           delete intentObj.confirmationStatus
-          this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
+
+          this.handler.state = this.attributes.STATE = this.attributes.PICK_SOURCE;
+          let redirectIntent = config.state_start_intents[this.attributes.PICK_SOURCE];
+          delete this.attributes.PICK_SOURCE;
+
           return util.sendProgressive(
             this.event.context.System.apiEndpoint, // no need to add directives params
             this.event.request.requestId,
@@ -97,9 +103,9 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
             message,
             function (err) {
               if (err) {
-                boundThis.emitWithState('HomePage', 'unresolved_save', message);
+                boundThis.emitWithState(redirectIntent, 'unresolved_save', message);
               } else {
-                boundThis.emitWithState('HomePage', 'unresolved_save');
+                boundThis.emitWithState(redirectIntent, 'unresolved_save');
               }
             }
           );
@@ -151,6 +157,7 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
           location: this.attributes.userLocation
         }];
         console.time('DB-unresolved-new-name');
+
         db.update.call(this, payload, function(err, response) {
           console.timeEnd('DB-unresolved-new-name');
           var confirmationMessage = `Okay, I'll tell Kai and Molly ${this.attributes.userName} from ${this.attributes.userLocation} asked for an explainer on ${this.attributes.UNRESOLVED}. If they use your idea, they'll thank you! If you want to change your name or city in the future you can say 'change my info'. `;
@@ -175,7 +182,11 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
           }
 
           // TODO: PROMPT NOT REDIRECT?
-          this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
+
+          this.handler.state = this.attributes.STATE = this.attributes.PICK_SOURCE;
+          let redirectIntent = config.state_start_intents[this.attributes.PICK_SOURCE];
+          delete this.attributes.PICK_SOURCE;
+
           return util.sendProgressive(
             this.event.context.System.apiEndpoint, // no need to add directives params
             this.event.request.requestId,
@@ -183,9 +194,9 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
             confirmationMessage,
             function (err) {
               if (err) {
-                boundThis.emitWithState('HomePage', 'unresolved_save', confirmationMessage);
+                boundThis.emitWithState(redirectIntent, 'unresolved_save', confirmationMessage);
               } else {
-                boundThis.emitWithState('HomePage', 'unresolved_save');
+                boundThis.emitWithState(redirectIntent, 'unresolved_save');
               }
             }
           );
@@ -219,24 +230,24 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
       this.emitWithState('ListExlpainers');
     }
   },
-  'EarlierExplainers': function () {
-    console.log("UNRESOLVED EarlierExplainers")
+  'OlderExplainers': function () {
+    console.log("UNRESOLVED OlderExplainers")
     if (this.attributes.UNRESOLVED) {
-      console.log("UNRESOLVED -- ARTIFACT -- EarlierExplainers, sending back")
+      console.log("UNRESOLVED -- ARTIFACT -- OlderExplainers, sending back")
       this.emitWithState('PickItem');
     } else {
       this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
-      this.emitWithState('EarlierExplainers');
+      this.emitWithState('OlderExplainers');
     }
   },
-  'LaterExplainers': function () {
-    console.log("UNRESOLVED LaterExplainers")
+  'NewerExplainers': function () {
+    console.log("UNRESOLVED NewerExplainers")
     if (this.attributes.UNRESOLVED) {
-      console.log("UNRESOLVED -- ARTIFACT -- LaterExplainers, sending back")
+      console.log("UNRESOLVED -- ARTIFACT -- NewerExplainers, sending back")
       this.emitWithState('ChangeMyInfo');
     } else {
       this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
-      this.emitWithState('LaterExplainers');
+      this.emitWithState('NewerExplainers');
     }
   },
   'HomePage' : function () {

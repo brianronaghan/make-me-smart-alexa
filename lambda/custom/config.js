@@ -16,6 +16,10 @@ var config = {
       CHANGE_INFO: '_CHANGE_INFO',
       UNRESOLVED: '_UNRESOLVED'
     },
+    state_start_intents:{
+      _ITERATING_EXPLAINER: 'ListExplainers',
+      _HOME_PAGE: 'HomePage'
+    }
     intents: {
       'AMAZON.HelpIntent': [
         "help",
@@ -212,7 +216,7 @@ var config = {
         "more please",
         "more explainers"
       ],
-      EarlierExplainers: [
+      OlderExplainers: [
         "earlier",
         "earlier explainers",
         "before that",
@@ -223,7 +227,7 @@ var config = {
         "older explainer",
         "go back"
       ],
-      LaterExplainers: [
+      NewerExplainers: [
         "later",
         "later explainers",
         "after that",

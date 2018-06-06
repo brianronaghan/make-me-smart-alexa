@@ -84,6 +84,8 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     // set spot in indices
     var slot = slot || this.event.request.intent.slots;
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
+    this.attributes.PICK_SOURCE = config.states.HOME_PAGE;
+
     if (this.attributes.HEARD_FIRST === 1) {
       this.attributes.HEARD_FIRST = 0;
       return this.emitWithState('PickItem', slot, 'HOME_AFTER_LAUNCH')
@@ -112,17 +114,17 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     }
   },
 
-  'EarlierExplainers' : function () {
-    console.log("EARLIER in HOME_PAGE");
+  'OlderExplainers' : function () {
+    console.log("OlderExpainers in HOME_PAGE");
 
     this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
-    this.emitWithState('EarlierExplainers', 'earlier_from_homepage');
+    this.emitWithState('OlderExplainers', 'older_from_homepage');
   },
 
-  'LaterExplainers' : function () {
-    console.log("LATER in HOME_PAGE");
+  'NewerExplainers' : function () {
+    console.log("NewerExplainers in HOME_PAGE");
     this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
-    this.emitWithState('LaterExplainers', 'later_from_homepage');
+    this.emitWithState('NewerExplainers', 'newer_from_homepage');
   },
 
 
@@ -214,7 +216,6 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     // SHOULD I CLEAR THE STATE?
     this.attributes.HEARD_FIRST = 0;
     console.log("HOME PAGE session end", JSON.stringify(this.event.request, null,2));
-    this.response.speak('See you later. Say Alexa, Make Me Smart to get learning again.')
     this.emit(':saveState');
    },
    'Unhandled' : function () {

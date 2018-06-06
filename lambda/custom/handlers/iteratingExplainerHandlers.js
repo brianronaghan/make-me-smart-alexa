@@ -48,7 +48,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     this.attributes.ITERATING = true;
     var slot = slot || this.event.request.intent.slots;
     console.log("LIST_EXPLAINERS ListExplainer, SLOT", slot, ' and condition ', condition)
-    if (slot && slot.query && slot.query.value) { // TODO: the condition check is FUCKED. older and earlier will have this, and then I can't... HM. LOOK AT THIS LOGIC!
+    if (slot && slot.query && slot.query.value) { // TODO: the condition check is FUCKED.  will have this, and then I can't... HM. LOOK AT THIS LOGIC!
       console.log('IT EXP, LIST EXP, got a query', slot.query.value);
       let intentCheck = util.intentCheck(slot.query.value);
       if (intentCheck) {
@@ -57,6 +57,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
         delete this.attributes.ITERATING;
         return this.emitWithState(intentCheck);
       } else {
+        console.log("GOT a non-intent query on list explainers, so redirecting to pickItem")
         return this.emitWithState('PickItem');
       }
     }
@@ -73,74 +74,83 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
 
   // NAVIGATION
 
-  'EarlierExplainers' : function () {
+  'OlderExplainers' : function () {
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     let boundThis = this;
     var slot = slot || this.event.request.intent.slots;
-    console.log('ITERATING_EXPLAINER - EarlierExplainers', JSON.stringify(this.event.request.intent, null,2))
+    console.log('ITERATING_EXPLAINER - OlderExplainers', JSON.stringify(this.event.request.intent, null,2))
 
-    // if (this.attributes.ITERATING) {
-    //   console.log("ITERATING_EXPLAINER -- ARTIFACT -- HomePage, sending back")
-    //   return this.emitWithState('ListExplainers');
-    // } else {
-    //   console.log("ACTUALLY HomePage REDIRECTING", JSON.stringify(this.event.request.intent, null,2))
-    //   this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
-    //   this.emitWithState('HomePage');
-    // }
-    // console.log("ITERATING_EXPLAINER EarlierExplainers", this.event.request.intent)
-    //
-
-    if (this.attributes.indices.explainer + config.items_per_prompt.explainer >= explainers.length) {
-      let message = "This is the end of the list. Again, the choices are, "
-      return util.sendProgressive(
-        this.event.context.System.apiEndpoint, // no need to add directives params
-        this.event.request.requestId,
-        this.event.context.System.apiAccessToken,
-        message,
-        function (err) {
-          if (err) {
-            return boundThis.emitWithState('ListExplainers', 'end_list');
-          } else {
-            return boundThis.emitWithState('ListExplainers', 'end_list');
+    if (this.attributes.ITERATING) {
+      console.log("ITERATING_EXPLAINER -- ARTIFACT -- OlderExplainers, sending back")
+      return this.emitWithState('ListExplainers');
+    } else {
+      // NO ITERATING, which means, um, to actually do it?
+      console.log("OlderExplainers, NO ITERATING FLAG, so I guess it's real? ")
+      if (this.attributes.indices.explainer + config.items_per_prompt.explainer >= explainers.length) {
+        let message = "This is the end of the list. Again, the choices are, "
+        return util.sendProgressive(
+          this.event.context.System.apiEndpoint, // no need to add directives params
+          this.event.request.requestId,
+          this.event.context.System.apiAccessToken,
+          message,
+          function (err) {
+            if (err) {
+              return boundThis.emitWithState('ListExplainers', 'end_list');
+            } else {
+              return boundThis.emitWithState('ListExplainers', 'end_list');
+            }
           }
+        );
+      } else {
+        if (!this.attributes.indices.explainer) {
+          this.attributes.indices.explainer = 0;
         }
-      );
+        this.attributes.indices.explainer += config.items_per_prompt.explainer;
+        this.emitWithState('ListExplainers', 'older');
+
+      }
+
+
     }
-    if (!this.attributes.indices.explainer) {
-      this.attributes.indices.explainer = 0;
-    }
-    this.attributes.indices.explainer += config.items_per_prompt.explainer;
-    this.emitWithState('ListExplainers', 'earlier');
+
+
 
   },
 
-  'LaterExplainers' : function () {
-    console.log("ITERATING_EXPLAINER LaterExplainers", this.event.request);
+  'NewerExplainers' : function () {
+    let boundThis = this;
+    console.log("ITERATING_EXPLAINER NewerExplainers", this.event.request);
     var slot = slot || this.event.request.intent.slots;
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
-    this.attributes.indices.explainer -= config.items_per_prompt.explainer;
 
-    if (this.attributes.indices.explainer < 0) {
-      this.attributes.indices.explainer = 0;
-      let message = "You've reached the beginning of the list. Again, the choices are, "
-      return util.sendProgressive(
-        this.event.context.System.apiEndpoint, // no need to add directives params
-        this.event.request.requestId,
-        this.event.context.System.apiAccessToken,
-        message,
-        function (err) {
-          if (err) {
-            return boundThis.emitWithState('ListExplainers', 'beginning_list');
-          } else {
-            return boundThis.emitWithState('ListExplainers', 'beginning_list');
-          }
-        }
-      );
-
+    if (this.attributes.ITERATING) {
+      console.log("ITERATING_EXPLAINER -- ARTIFACT -- NewerExplainers, sending back")
+      return this.emitWithState('ListExplainers');
     } else {
-      this.emitWithState('ListExplainers', 'later');
+      console.log("NewerExplainers, NO ITERATING FLAG, so I guess it's real? ")
+      this.attributes.indices.explainer -= config.items_per_prompt.explainer;
+      if (this.attributes.indices.explainer < 0) {
+        this.attributes.indices.explainer = 0;
+        let message = "You've reached the beginning of the list. Again, "
+        return util.sendProgressive(
+          this.event.context.System.apiEndpoint, // no need to add directives params
+          this.event.request.requestId,
+          this.event.context.System.apiAccessToken,
+          message,
+          function (err) {
+            if (err) {
+              return boundThis.emitWithState('ListExplainers', 'beginning_list');
+            } else {
+              return boundThis.emitWithState('ListExplainers', 'beginning_list');
+            }
+          }
+        );
+
+      } else {
+        this.emitWithState('ListExplainers', 'newer');
+      }
     }
 
   },
@@ -149,9 +159,9 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
   'PickItem': function (slot) {
     // TODO: I BELIEVE that this will always be fine, right?
     var slot = slot || this.event.request.intent.slots;
-    console.log('ITERATING_EXPLAINER, PickItem');
-    console.log('alexa EVENT',JSON.stringify(this.event.request.intent, null,2));
-    delete this.state.ITERATING;
+    console.log('ITERATING_EXPLAINER, PickItem -- ',JSON.stringify(this.event.request.intent, null,2));
+    delete this.attributes.ITERATING;
+    this.attributes.PICK_SOURCE = config.states.ITERATING_EXPLAINER;
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
     this.emitWithState('PickItem', slot, 'ITERATING');
   },
@@ -235,7 +245,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     console.log("IT  EXPLAINER  session end", JSON.stringify(this.event.request, null,2));
    },
    'AMAZON.HelpIntent' : function () {
-     console.log('ITERATING_EXPLAINER HelpIntent')
+     console.log('ITERATING_EXPLAINER HelpIntent', JSON.stringify(this.event.request.intent, null,2));
      var message = "You can choose an explainer by name or number or say 'older' or 'newer' to move through the list. Say browse to list the explainers again. What would you like to do?";
      this.response.speak(message).listen(message);
      if (this.event.context.System.device.supportedInterfaces.Display) {

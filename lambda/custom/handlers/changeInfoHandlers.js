@@ -124,24 +124,24 @@ module.exports = Alexa.CreateStateHandler(config.states.CHANGE_INFO, {
       this.emitWithState('ListExlpainers');
     }
   },
-  'EarlierExplainers': function () {
-    console.log("CHANGE_INFO EarlierExplainers")
+  'OlderExplainers': function () {
+    console.log("CHANGE_INFO OlderExplainers")
     if (this.attributes.changingInfo) {
-      console.log("CHANGE_INFO -- ARTIFACT -- EarlierExplainers, sending back")
+      console.log("CHANGE_INFO -- ARTIFACT -- OlderExplainers, sending back")
       this.emitWithState('ChangeMyInfo');
     } else {
       this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
-      this.emitWithState('EarlierExplainers');
+      this.emitWithState('OlderExplainers');
     }
   },
-  'LaterExplainers': function () {
-    console.log("CHANGE_INFO LaterExplainers")
+  'NewerExplainers': function () {
+    console.log("CHANGE_INFO NewerExplainers")
     if (this.attributes.changingInfo) {
-      console.log("CHANGE_INFO -- ARTIFACT -- LaterExplainers, sending back")
+      console.log("CHANGE_INFO -- ARTIFACT -- NewerExplainers, sending back")
       this.emitWithState('ChangeMyInfo');
     } else {
       this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
-      this.emitWithState('LaterExplainers');
+      this.emitWithState('NewerExplainers');
     }
   },
 

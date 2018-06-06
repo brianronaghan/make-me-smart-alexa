@@ -152,7 +152,7 @@
      ]
    },
    {
-     "id": "Elicit.Intent-EarlierExplainers.IntentSlot-topic",
+     "id": "Elicit.Intent-OlderExplainers.IntentSlot-topic",
      "variations": [
        {
          "type": "PlainText",
@@ -166,7 +166,7 @@
      ]
    },
    {
-     "id": "Elicit.Intent-EarlierExplainers.IntentSlot-userName",
+     "id": "Elicit.Intent-OlderExplainers.IntentSlot-userName",
      "variations": [
        {
          "type": "PlainText",
@@ -183,7 +183,7 @@
      ]
    },
    {
-     "id": "Elicit.Intent-EarlierExplainers.IntentSlot-userLocation",
+     "id": "Elicit.Intent-OlderExplainers.IntentSlot-userLocation",
      "variations": [
        {
          "type": "PlainText",
@@ -200,7 +200,7 @@
      ]
    },
    {
-     "id": "Elicit.Intent-LaterExplainers.IntentSlot-topic",
+     "id": "Elicit.Intent-NewerExplainers.IntentSlot-topic",
      "variations": [
        {
          "type": "PlainText",
@@ -214,7 +214,7 @@
      ]
    },
    {
-     "id": "Elicit.Intent-LaterExplainers.IntentSlot-userName",
+     "id": "Elicit.Intent-NewerExplainers.IntentSlot-userName",
      "variations": [
        {
          "type": "PlainText",
@@ -231,7 +231,7 @@
      ]
    },
    {
-     "id": "Elicit.Intent-LaterExplainers.IntentSlot-userLocation",
+     "id": "Elicit.Intent-NewerExplainers.IntentSlot-userLocation",
      "variations": [
        {
          "type": "PlainText",
@@ -336,7 +336,7 @@
        ]
      },
      {
-       "name": "LaterExplainers",
+       "name": "NewerExplainers",
        "confirmationRequired": false,
        "prompts": {},
        "slots": [
@@ -346,7 +346,7 @@
            "elicitationRequired": true,
            "confirmationRequired": false,
            "prompts": {
-             "elicitation": "Elicit.Intent-LaterExplainers.IntentSlot-topic"
+             "elicitation": "Elicit.Intent-NewerExplainers.IntentSlot-topic"
            }
          },
          {
@@ -355,7 +355,7 @@
            "elicitationRequired": true,
            "confirmationRequired": false,
            "prompts": {
-             "elicitation": "Elicit.Intent-LaterExplainers.IntentSlot-userName"
+             "elicitation": "Elicit.Intent-NewerExplainers.IntentSlot-userName"
            }
          },
          {
@@ -364,13 +364,13 @@
            "elicitationRequired": true,
            "confirmationRequired": false,
            "prompts": {
-             "elicitation": "Elicit.Intent-LaterExplainers.IntentSlot-userLocation"
+             "elicitation": "Elicit.Intent-NewerExplainers.IntentSlot-userLocation"
            }
          }
        ]
      },
      {
-       "name": "EarlierExplainers",
+       "name": "OlderExplainers",
        "confirmationRequired": false,
        "prompts": {},
        "slots": [
@@ -380,7 +380,7 @@
            "elicitationRequired": true,
            "confirmationRequired": false,
            "prompts": {
-             "elicitation": "Elicit.Intent-EarlierExplainers.IntentSlot-topic"
+             "elicitation": "Elicit.Intent-OlderExplainers.IntentSlot-topic"
            }
          },
          {
@@ -389,7 +389,7 @@
            "elicitationRequired": true,
            "confirmationRequired": false,
            "prompts": {
-             "elicitation": "Elicit.Intent-EarlierExplainers.IntentSlot-userName"
+             "elicitation": "Elicit.Intent-OlderExplainers.IntentSlot-userName"
            }
          },
          {
@@ -398,7 +398,7 @@
            "elicitationRequired": true,
            "confirmationRequired": false,
            "prompts": {
-             "elicitation": "Elicit.Intent-EarlierExplainers.IntentSlot-userLocation"
+             "elicitation": "Elicit.Intent-OlderExplainers.IntentSlot-userLocation"
            }
          }
        ]
@@ -765,7 +765,7 @@
                     ]
                 },
                 {
-                  "name": "EarlierExplainers",
+                  "name": "OlderExplainers",
                   "samples": [
                     "earlier",
                     "earlier explainers",
@@ -797,7 +797,7 @@
                   ]
                 },
                 {
-                  "name": "LaterExplainers",
+                  "name": "NewerExplainers",
                   "samples": [
                     "later",
                     "later explainers",
