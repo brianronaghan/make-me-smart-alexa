@@ -19,7 +19,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
   TopicOnly: function () {
     console.log("ITERATING_EXPLAINER TopicOnly", JSON.stringify(this.event.request.intent, null,2))
     var slot = slot || this.event.request.intent.slots;
-
+    delete this.attributes.ITERATING;
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
     this.emitWithState('PickItem', slot, 'ITERATING');
 
@@ -27,7 +27,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
   IndexOnly: function () {
     console.log("ITERATING_EXPLAINER IndexOnly", JSON.stringify(this.event.request.intent, null,2))
     var slot = slot || this.event.request.intent.slots;
-
+    delete this.attributes.ITERATING;
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
     this.emitWithState('PickItem', slot, 'ITERATING');
 
@@ -35,6 +35,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
   OrdinalOnly: function () {
     console.log("ITERATING_EXPLAINER OrdinalOnly", JSON.stringify(this.event.request.intent, null,2))
     var slot = slot || this.event.request.intent.slots;
+    delete this.attributes.ITERATING;
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
     this.emitWithState('PickItem', slot, 'ITERATING');
   },
@@ -44,19 +45,21 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     if (this.event.session.new || (!this.attributes.indices.explainer)) { // is this logic correct?
       this.attributes.indices.explainer = 0;
     }
+    this.attributes.ITERATING = true;
     var slot = slot || this.event.request.intent.slots;
     console.log("LIST_EXPLAINERS ListExplainer, SLOT", slot, ' and condition ', condition)
-    if (slot && slot.query && slot.query.value && !condition) { // TODO: the condition check is FUCKED. older and earlier will have this, and then I can't... HM. LOOK AT THIS LOGIC!
+    if (slot && slot.query && slot.query.value) { // TODO: the condition check is FUCKED. older and earlier will have this, and then I can't... HM. LOOK AT THIS LOGIC!
       console.log('IT EXP, LIST EXP, got a query', slot.query.value);
-      let resolvedIntent = util.intentCheck(slot.query.value);
-      if (resolvedIntent) {
-        console.log(`ITERATING_EXPLAINER listExplainers: got ${slot.query.value} in query.`)
+      let intentCheck = util.intentCheck(slot.query.value);
+      if (intentCheck) {
+        console.log("ITERATING_EXPLAINER ListExplainers intentCheck -- slot.query.value ", slot.query.value)
         delete slot.query.value;
-        return this.emitWithState(resolvedIntent, slot);
+        delete this.attributes.ITERATING;
+        return this.emitWithState(intentCheck);
       } else {
-        return this.emitWithState('PickItem', slot)
+        return this.emitWithState('PickItem');
       }
-    }
+
     var data = util.itemLister(
       explainers,
       `explainers`,
@@ -66,77 +69,26 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     );
     this.emit(':elicitSlotWithCard', 'query', data.itemsAudio, "Pick one or say newer or older to move forward or backward through list.", 'List of Explainers', data.itemsCard, this.event.request.intent, util.cardImage(config.icon.full) );
   },
-  // STATE TRANSITIONS
-  'RequestExplainer' : function () {
-    console.log('request explainer test IN LIST EXPLAINERS!')
-    var slot = slot || this.event.request.intent.slots;
-    if (slot && slot.query && slot.query.value) {
-      let resolvedIntent = util.intentCheck(slot.query.value);
-      if (resolvedIntent) {
-        console.log(`ITERATING_EXPLAINER requestExplainer: got ${slot.query.value} in query.`)
-        delete slot.query.value;
-        return this.emitWithState(resolvedIntent, slot);
-      } else {
-        console.log('ITERATING_EXPLAINER, sending to pick ', slot)
-        return this.emitWithState('PickItem', slot)
-      }
-    } else {
-      console.log("ITERATING_EXPLAINER , got requestExplainer with no slot. REDIRECTING")
-      this.handler.state = this.attributes.STATE = config.states.REQUEST;
-      return this.emitWithState('RequestExplainer', {query: {value:null},userLocation: {value: null}, userName: {value: null}});
-    }
-    // if (util.intentCheck(slot.query.value)) {
-    //   if (util.intentCheck(slot.query.value) === 'RequestExplainer') {
-    //     console.log('got actual request via query on iterating. Damn.')
-    //     this.handler.state = this.attributes.STATE = config.states.REQUEST;
-    //     return this.emitWithState('RequestExplainer');
-    //   } else {
-    //     console.log("Got a req", util.intentCheck(slot.query.value))
-    //     return this.emitWithState(util.intentCheck(slot.query.value), 'req_in_it', slot)
-    //   }
-    // }
-  },
-  'PickItem': function (slot) {
-    console.log('ITERATING EXPLAINER, pick explainer');
-    console.log('manual slot', slot);
-    console.log('alexa EVENT',JSON.stringify(this.event.request));
 
-    this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
-    this.emitWithState('PickItem', slot, 'ITERATING');
-  },
+  // NAVIGATION
 
-  //
-  'HomePage': function () {
-    var slot = slot || this.event.request.intent.slots;
-    console.log("HOME PAGE in ITERATING?", JSON.stringify(this.event.request,null,2))
-
-    if (slot && slot.query && slot.query.value) {
-      let resolvedIntent = util.intentCheck(slot.query.value);
-      if (resolvedIntent) {
-        console.log(`ITERATING_EXPLAINER homePage: got ${slot.query.value} in query.`)
-        delete slot.query.value;
-        return this.emitWithState(resolvedIntent, slot);
-      } else {
-        console.log('ITERATING_EXPLAINER homePage, sending to pick ', slot)
-        return this.emitWithState('PickItem', slot)
-      }
-    } else {
-      console.log("ITERATING_EXPLAINER , got HOME PAGE with no query. REDIRECTING")
-      this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
-      return this.emitWithState('HomePage', 'no_welcome');
-    }
-  },
-
-
-  //BUILT IN
   'EarlierExplainers' : function () {
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     let boundThis = this;
     var slot = slot || this.event.request.intent.slots;
+    console.log('ITERATING_EXPLAINER - EarlierExplainers', JSON.stringify(this.event.request.intent, null,2))
 
-    console.log("ITERATING_EXPLAINER EarlierExplainers", this.event.request.intent)
-
+    // if (this.attributes.ITERATING) {
+    //   console.log("ITERATING_EXPLAINER -- ARTIFACT -- HomePage, sending back")
+    //   return this.emitWithState('ListExplainers');
+    // } else {
+    //   console.log("ACTUALLY HomePage REDIRECTING", JSON.stringify(this.event.request.intent, null,2))
+    //   this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
+    //   this.emitWithState('HomePage');
+    // }
+    // console.log("ITERATING_EXPLAINER EarlierExplainers", this.event.request.intent)
+    //
 
     if (this.attributes.indices.explainer + config.items_per_prompt.explainer >= explainers.length) {
       let message = "This is the end of the list. Again, the choices are, "
@@ -168,21 +120,94 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     this.attributes.indices.explainer -= config.items_per_prompt.explainer;
+
     if (this.attributes.indices.explainer < 0) {
       this.attributes.indices.explainer = 0;
+      let message = "You've reached the beginning of the list. Again, the choices are, "
+      return util.sendProgressive(
+        this.event.context.System.apiEndpoint, // no need to add directives params
+        this.event.request.requestId,
+        this.event.context.System.apiAccessToken,
+        message,
+        function (err) {
+          if (err) {
+            return boundThis.emitWithState('ListExplainers', 'beginning_list');
+          } else {
+            return boundThis.emitWithState('ListExplainers', 'beginning_list');
+          }
+        }
+      );
+
+    } else {
+      this.emitWithState('ListExplainers', 'later');
     }
-    this.emitWithState('ListExplainers', 'later');
 
   },
+  // STATE TRANSITIONS
+
+  'PickItem': function (slot) {
+    // TODO: I BELIEVE that this will always be fine, right?
+    var slot = slot || this.event.request.intent.slots;
+    console.log('ITERATING_EXPLAINER, PickItem');
+    console.log('alexa EVENT',JSON.stringify(this.event.request.intent, null,2));
+    delete this.state.ITERATING;
+    this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
+    this.emitWithState('PickItem', slot, 'ITERATING');
+  },
+
+
+  'RequestExplainer' : function () {
+    console.log('ITERATING_EXPLAINER - RequestExplainer')
+    var slot = slot || this.event.request.intent.slots;
+    if (this.attributes.ITERATING) {
+      console.log("ITERATING_EXPLAINER -- ARTIFACT -- RequestExplainer, sending back")
+      return this.emitWithState('ListExplainers');
+    } else {
+      console.log("ACTUALLY RequestExplainer REDIRECTING", JSON.stringify(this.event.request.intent, null,2))
+      this.handler.state = this.attributes.STATE = config.states.REQUEST;
+      this.emitWithState('RequestExplainer');
+    }
+  },
+  //
+  'HomePage': function () {
+    console.log('ITERATING_EXPLAINER - HomePage')
+    var slot = slot || this.event.request.intent.slots;
+    if (this.attributes.ITERATING) {
+      console.log("ITERATING_EXPLAINER -- ARTIFACT -- HomePage, sending back")
+      return this.emitWithState('ListExplainers');
+    } else {
+      console.log("ACTUALLY HomePage REDIRECTING", JSON.stringify(this.event.request.intent, null,2))
+      this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
+      this.emitWithState('HomePage');
+    }
+  },
+
+
   'ChangeMyInfo' : function () {
-    this.handler.state = this.attributes.STATE = config.states.REQUEST;
-    this.emitWithState('ChangeMyInfo');
+    console.log('ITERATING_EXPLAINER - ChangeMyInfo')
+    var slot = slot || this.event.request.intent.slots;
+    if (this.attributes.ITERATING) {
+      console.log("ITERATING_EXPLAINER -- ARTIFACT -- ChangeMyInfo, sending back")
+      return this.emitWithState('ListExplainers');
+    } else {
+      console.log("ACTUALLY ChangeMyInfo REDIRECTING", JSON.stringify(this.event.request.intent, null,2))
+      this.handler.state = this.attributes.STATE = config.states.CHANGE_INFO;
+      this.emitWithState('ChangeMyInfo');
+    }
   },
   'PlayLatestExplainer': function () {
     // this is what 'play all would do'
-    var deviceId = util.getDeviceId.call(this);
-    util.nullCheck.call(this, deviceId);
-    this.emitWithState('PickItem', {index: {value: 1}}, 'LATEST_FROM_ITERATING');
+    console.log('ITERATING_EXPLAINER - PlayLatestExplainer')
+    var slot = slot || this.event.request.intent.slots;
+    if (this.attributes.ITERATING) {
+      console.log("ITERATING_EXPLAINER -- ARTIFACT -- PlayLatestExplainer, sending back")
+      return this.emitWithState('ListExplainers');
+    } else {
+      console.log("ACTUALLY PlayLatestExplainer REDIRECTING", JSON.stringify(this.event.request.intent, null,2))
+      this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
+      this.emitWithState('PickItem', {index: {value: 1}}, 'LATEST_FROM_ITERATING');
+    }
+
   },
 
 
@@ -193,10 +218,6 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     this.attributes.indices.explainer = 0;
     this.response.speak('See you later. Say Alexa, Make Me Smart to get learning again.')
     this.emit(':saveState');
-
-    // this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
-    // this.emitWithState('HomePage', 'no_welcome', "Got it, I won't put in that request.");
-
   },
   'AMAZON.CancelIntent' : function() {
     console.log('CANCEL iterating');
@@ -213,8 +234,8 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     console.log("IT  EXPLAINER  session end", JSON.stringify(this.event.request, null,2));
    },
    'AMAZON.HelpIntent' : function () {
-     console.log('Help in ITERATING EXPLAINER')
-     var message = "You can choose an explainer by name or number or say 'older' or 'newer' to move through the list. Say browse to list the explainers again or 'play the latest' to hear our latest explainer. What would you like to do?";
+     console.log('ITERATING_EXPLAINER HelpIntent')
+     var message = "You can choose an explainer by name or number or say 'older' or 'newer' to move through the list. Say browse to list the explainers again. What would you like to do?";
      this.response.speak(message).listen(message);
      if (this.event.context.System.device.supportedInterfaces.Display) {
        this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, null, config.background.show));
@@ -222,10 +243,10 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
      this.emit(':saveState', true);
    },
    'Unhandled' : function () {
-     console.log('UNHANDLED ITERATING EXPLAINER',JSON.stringify(this.event, null, 2))
-     var message = "Sorry I couldn't quite understand that. You can choose an explainer by name or number or say 'older' or 'newer' to move through the list. Say browse to list the explainers  again or 'play the latest' to hear our latest explainer. What would you like to do?"
+     console.log('ITERATING_EXPLAINER Unhandled',JSON.stringify(this.event.request.intent, null, 2))
+     var message = "Sorry I couldn't quite understand that. You can choose an explainer by name or number or say 'older' or 'newer' to move through the list. Say browse to list the explainers again. What would you like to do?"
 
-     this.response.speak(message).listen("Would you like to 'list explainers' or 'play the latest'?");
+     this.response.speak(message).listen("Would you like to 'browse' or 'play the latest'?");
      if (this.event.context.System.device.supportedInterfaces.Display) {
        this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Unhandled', message, null, config.background.show));
      }
