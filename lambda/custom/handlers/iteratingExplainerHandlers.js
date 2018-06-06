@@ -125,51 +125,8 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
       this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
       return this.emitWithState('HomePage', 'no_welcome');
     }
-    // if (util.intentCheck(slot.query.value)) {
-    //   if (util.intentCheck(slot.query.value) === 'HomePage') {
-    //     console.log('got actual home page via query on iterating. Damn.')
-    //     this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
-    //     return this.emitWithState('HomePage', 'no_welcome');
-    //   } else {
-    //     console.log("Got a req", util.intentCheck(slot.query.value))
-    //     return this.emitWithState(util.intentCheck(slot.query.value), slot)
-    //   }
-    // } else {
-    //   return this.emitWithState('PickItem', slot)
-    // }
-    //
-    // this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
-    // this.emitWithState('HomePage', 'no_welcome');
   },
 
-
-  // TOUCH EVENTS
-  'ElementSelected': function () {
-    var deviceId = util.getDeviceId.call(this);
-    util.nullCheck.call(this, deviceId);
-
-    // handle play latest or pick episode actions
-    console.log('ElementSelected -- ', this.event.request)
-    var intentSlot,intentName;
-    if (this.event.request.token === 'PlayLatestEpisode' || this.event.request.token === 'ListEpisodes') { // I don't think I use either
-      intentName = this.event.request.token;
-      intentSlot = {
-        index: {
-          value: this.attributes.show
-        }
-      }
-    }  else if (this.event.request.token.indexOf('_') > -1) {
-      var tokenData = this.event.request.token.split('_');
-      intentName = tokenData[0];
-      intentSlot = {
-        index: {
-          value: parseInt(tokenData[1]) + 1
-        }
-      }
-    }
-    console.log('IT EXPLAIN TOUCH', intentName, intentSlot);
-    this.emitWithState(intentName, intentSlot);
-  },
 
   //BUILT IN
   'EarlierExplainers' : function () {
@@ -228,16 +185,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     this.emitWithState('PickItem', {index: {value: 1}}, 'LATEST_FROM_ITERATING');
   },
 
-  'AMAZON.HelpIntent' : function () {
-    console.log('Help in ITERATING EXPLAINER')
-    var message = "You can pick an item by number or say 'older' or 'newer' to move through the list.";
-    this.response.speak(message).listen(message);
-    if (this.event.context.System.device.supportedInterfaces.Display) {
-      var links = "<action value='HomePage'>What's New</action>";
-      this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, links, config.background.show));
-    }
-    this.emit(':saveState', true);
-  },
+
   'AMAZON.StopIntent' : function() {
     console.log('STOP, iterating')
     // This needs to work for not playing as well
@@ -264,13 +212,22 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
   'SessionEndedRequest' : function () {
     console.log("IT  EXPLAINER  session end", JSON.stringify(this.event.request, null,2));
    },
+   'AMAZON.HelpIntent' : function () {
+     console.log('Help in ITERATING EXPLAINER')
+     var message = "You can choose an explainer by name or number or say 'older' or 'newer' to move through the list. Say browse to list the explainers again or 'play the latest' to hear our latest explainer. What would you like to do?";
+     this.response.speak(message).listen(message);
+     if (this.event.context.System.device.supportedInterfaces.Display) {
+       this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, null, config.background.show));
+     }
+     this.emit(':saveState', true);
+   },
    'Unhandled' : function () {
      console.log('UNHANDLED ITERATING EXPLAINER',JSON.stringify(this.event, null, 2))
-     var message = "Sorry I couldn't quite understand that. Make sure to use the numbers before the topics if you're having trouble. Say 'list explainers' to hear the options again or 'play the latest' to hear our latest explainer."
+     var message = "Sorry I couldn't quite understand that. You can choose an explainer by name or number or say 'older' or 'newer' to move through the list. Say browse to list the explainers  again or 'play the latest' to hear our latest explainer. What would you like to do?"
 
      this.response.speak(message).listen("Would you like to 'list explainers' or 'play the latest'?");
      if (this.event.context.System.device.supportedInterfaces.Display) {
-       this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, null, config.background.show));
+       this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Unhandled', message, null, config.background.show));
      }
      this.emit(':saveState', true);
 

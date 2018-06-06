@@ -150,7 +150,7 @@ module.exports = {
     // TODO: add a listen feature as well... the hint thing we tell them, handles whether next or previous
     var itemsAudio, itemsCard;
     if (start === 0) {
-      itemsAudio = `Here are all the ${itemTitlePlural} we have: `
+      itemsAudio = `I'll list all ${items.length} ${itemTitlePlural}, ${chunkLength} at a time: `
       itemsCard = '';
     } else {
       itemsAudio = itemsCard = '';

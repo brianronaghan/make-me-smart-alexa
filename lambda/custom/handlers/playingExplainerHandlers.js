@@ -127,20 +127,17 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
         util.logExplainer.call(this, chosenExplainer);
         var author = chosenExplainer.author;
         if (author === 'Molly Wood') {
-          author = `Molly '<emphasis level="strong"> Wood</emphasis>`;
+          author = `Molly <emphasis level="strong"> Wood</emphasis>`;
         }
         if (source && source === 'NEW_USER_LAUNCH_PICK') {
           intro = `<audio src="${config.newUserAudio}" /> `;
         }
         var intro = `Here's ${author} explaining ${chosenExplainer.title}. <break time = "500ms"/> <audio src="${chosenExplainer.audio.url}" /> `; // <break time = "200ms"/>
         var prompt;
-        var links = "<action value='ReplayExplainer'>Replay</action> | <action value='ListExplainers'>List Explainers</action>";
         if (this.event.session.new) { // came directly here
           prompt = `You can replay that, play the latest, or browse all our explainers. What would you like to do?`;
-          links += " | <action value='HomePage'> What's New </action>";
         } else if (explainers[chosenExplainer.index+1]) { // THERE IS a next explainer
           prompt = `You can replay that, say 'next' to hear another, or browse all our explainers. What would you like to do?`;
-          links += " | <action value='Next'>Next</action>";
         } else { // end of the line
           prompt = "And that's all we have right now. You can replay that, browse all our explainers, or submit an idea for our next one. What would you like to do?"
         }
@@ -238,9 +235,8 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     // handle next at end of list?
     if (explainers.length <= this.attributes.currentExplainerIndex +1) {
       // last spot
-      var message = "We don't have any more explainers right now. You can ask for more to browse all our explainers or hear what's new for the latest. What would you like to do?"
-      var prompt = "You can ask for more to browse all our explainers or hear what's new for the latest. What would you like to do?"
-      var links = "<action value='ListExplainers'>List explainers</action> | <action value='ListShows'>Play full episodes</action>";
+      var message = "We don't have any more explainers right now. You can browse all our explainers or hear what's new for the latest. What would you like to do?"
+      var prompt = "You can browse all our explainers or hear what's new for the latest. What would you like to do?"
 
       if (this.event.context.System.device.supportedInterfaces.Display) {
         this.response.renderTemplate(
@@ -257,7 +253,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
       this.emit(':saveState');
 
     } else {
-      // currentExplainerIndex is 0 based, and PickItem expects 1-based
+      // currentExplainerIndex is 0 based, and PickItem expects 1-based, thus +2 to add 1
       return this.emitWithState('PickItem', {index: {value: this.attributes.currentExplainerIndex+2}}, 'NEXT');
 
     }
@@ -266,8 +262,29 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     // only in playing explainer mode, right?
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
-    // currentExplainerIndex is 0-indexed, and PickItem expects 1-indexed (b/c user input)
-    this.emitWithState('PickItem', {index: {value: this.attributes.currentExplainerIndex}});
+    if (this.attributes.currentExplainerIndex == 0) {
+      var message = "You've heard our most recent explainer. There's no previous! You can browse all our explainers or say next. What would you like to do?"
+      var prompt = "You can browse all our explainers or say next. What would you like to do?"
+
+      if (this.event.context.System.device.supportedInterfaces.Display) {
+        this.response.renderTemplate(
+          util.templateBodyTemplate3(
+            "Make Me Smart",
+            config.icon.full,
+            "You've reached the most recent explainer.",
+            config.defaultDescription,
+            config.background.show
+          )
+        );
+      }
+      this.response.speak(message).listen(prompt);
+      this.emit(':saveState');
+
+    } else {
+      // currentExplainerIndex is 0-indexed, and PickItem expects 1-indexed (it's user input) in the index slot, thus using the 0-based is the same as --
+      this.emitWithState('PickItem', {index: {value: this.attributes.currentExplainerIndex}});
+
+    }
 
 
   },
@@ -301,7 +318,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
   // DEFAULT:
   'AMAZON.HelpIntent' : function () {
     console.log('Help in PLAYING EXPLAINER')
-    var message = "You can say 'next' or 'previous', or 'what's new' to see our latest explainers.";
+    var message = "You can say replay, next, or 'what's new' to hear our latest explainers. What would you like to do?";
     this.response.speak(message).listen(message);
     if (this.event.context.System.device.supportedInterfaces.Display) {
       this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, null, config.background.show));
@@ -318,7 +335,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
    'Unhandled' : function () {
      console.log("UNHANDLED playing", JSON.stringify(this.event, null, 2))
      var message = "Sorry I couldn't quite understand that. ";
-     var prompt = "You can say 'replay' or 'next', or 'list explainers'.";
+     var message = "You can say replay, next, or 'what's new' to hear our latest explainers. What would you like to do?";
      this.response.speak(message + prompt).listen(prompt);
      if (this.event.context.System.device.supportedInterfaces.Display) {
        this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message + prompt, null, config.background.show));

@@ -187,7 +187,7 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     console.log('CANCEL HOME PAGE')
     // This needs to work for not playing as well
     delete this.attributes.STATE;
-
+    this.attributes.HEARD_FIRST = 0;
     this.response.speak("See you later. Say 'Alexa, Make Me Smart' to get learning again.");
     this.emit(':saveState');
   },
@@ -195,6 +195,7 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     console.log('STOP HOME PAGE STATE')
     // This needs to work for not playing as well
     // SHOULD I CLEAR THE STATE?
+    this.attributes.HEARD_FIRST = 0;
     delete this.attributes.STATE;
     this.response.speak('See you later. Say alexa, Make Me Smart to get learning again.')
     this.emit(':saveState');
@@ -202,11 +203,10 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
 
   'AMAZON.HelpIntent' : function () {
     console.log('Help in HOME PAGE')
-    var message = "Try using the numbers before the topics if you're having trouble. You can pick a topic or choose by number or say play all.";
+    var message = "You can pick an explainer by name or number, ask for more options, or play them all. What would you like to do?";
     this.response.speak(message).listen(message);
     if (this.event.context.System.device.supportedInterfaces.Display) {
-      var links = "<action value='HomePage'>What's New</action> | <action value='ListExplainers'>List Explainers</action>";
-      this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, links, config.background.show));
+      this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, null, config.background.show));
     }
     this.emit(':saveState', true);
   },
@@ -219,11 +219,10 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
    },
    'Unhandled' : function () {
      console.log('HOME PAGE  UNHANDLED',JSON.stringify(this.event, null, 2))
-     var message = "Sorry I couldn't quite understand that. Make sure to use the numbers before the topics if you're having trouble. ";
-     var prompt = "Say 'what's new' to hear the options or 'play the latest' to hear the latest explainer."
+     var message = "Sorry I couldn't quite understand that. ";
+     var prompt = "You can pick an explainer by name or number, ask for more options, or play them all. What would you like to do?";
      this.response.speak(message + prompt).listen(prompt);
      if (this.event.context.System.device.supportedInterfaces.Display) {
-       var links = "<action value='HomePage'>What's New</action> | <action value='ListExplainers'>List Explainers</action>";
        this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message + prompt, null, config.background.show));
      }
      this.emit(':saveState', true);

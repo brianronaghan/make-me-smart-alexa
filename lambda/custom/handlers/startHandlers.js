@@ -188,7 +188,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
    'Unhandled' : function () {
      console.log("START UNHANDLED ",JSON.stringify(this.event.request,null, 2));
      var message = "Sorry I couldn't quite understand that. ";
-     var prompt = "You can say replay, hear what's new, or submit your explainer idea. What would you like to do?";
+     var prompt = "You can replay, hear what's new, or submit your explainer idea. What would you like to do?";
      this.response.speak(message + prompt).listen(prompt);
      if (this.event.context.System.device.supportedInterfaces.Display) {
        this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message + prompt, null, config.background.show));
