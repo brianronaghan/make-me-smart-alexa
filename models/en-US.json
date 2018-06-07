@@ -630,6 +630,7 @@
                     }
                   ],
                   "samples": [
+                    "tell make me smart I’ve got an idea",
                     "pitch",
                     "pitch explainer",
                     "pitch an explainer",
@@ -665,7 +666,6 @@
                     "submit my idea",
                     "submit an idea for your next one",
                     "submit an idea for your next explainer",
-
                     "submit an idea for what we should explain next",
                     "submit my idea for what you should explain next",
                     "submit idea",

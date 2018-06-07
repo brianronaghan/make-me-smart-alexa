@@ -104,6 +104,7 @@ var config = {
         "play the latest explainer"
       ],
       RequestExplainer: [
+        "tell make me smart I’ve got an idea",
         "pitch",
         "pitch explainer",
         "pitch an explainer",
