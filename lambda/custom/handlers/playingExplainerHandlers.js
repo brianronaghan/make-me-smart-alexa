@@ -20,7 +20,6 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
   },
 
   'PickItem': function (slot, source) {
-
     console.log(`PLAYING_EXPLAINER, PickItem slot `, JSON.stringify(this.event.request.intent, null,2))
 
     // set spot in indices
@@ -136,7 +135,15 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
         if (source && source === 'NEW_USER_LAUNCH_PICK') {
           intro += `<audio src="${config.newUserAudio}" /> `;
         }
-         intro += `Here's ${author} explaining ${chosenExplainer.title}. <break time = "500ms"/> <audio src="${chosenExplainer.audio.url}" /> `; // <break time = "200ms"/>
+
+        intro += `Here's ${author} explaining ${chosenExplainer.title}`;
+        if (chosenExplainer.requestInformation && chosenExplainer.requestInformation.user) {
+          intro += `, as requested by ${chosenExplainer.requestInformation.user}`;
+          if (chosenExplainer.requestInformation.location) {
+            intro += ` from ${chosenExplainer.requestInformation.location}`
+          }
+        }
+        intro += `. <break time = "200ms"/> <audio src="${chosenExplainer.audio.url}" />`;
         var prompt;
         if (this.event.session.new) { // came directly here
           prompt = `You can replay that, play the latest, or browse all our explainers. What would you like to do?`;

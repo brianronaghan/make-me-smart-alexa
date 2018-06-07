@@ -31,7 +31,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
             latestExplainer.title,
             latestExplainer.image || config.icon.full,
             latestExplainer.description,
-            "You can replay that, hear what's new or request a new explainer.",
+            "You can replay that, hear what's new or submit an explainer idea.",
             config.background.show
           )
         );
@@ -42,7 +42,14 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     } else if (latestExplainer.audio.intro) {
       welcome =`<audio src="${latestExplainer.audio.intro}" /><audio src="${latestExplainer.audio.url}"/>`;
     } else {
-      welcome = `Welcome back to Make Me Smart. Today we're learning about ${latestExplainer.title}. Here's ${author} to make us smart. <audio src="${latestExplainer.audio.url}"/>`;
+      welcome = `Welcome back to Make Me Smart. Today we're learning about ${latestExplainer.title}`;
+      if (latestExplainer.requestInformation && latestExplainer.requestInformation.user) {
+        welcome += ` as requested by ${latestExplainer.requestInformation.user}`;
+        if (latestExplainer.requestInformation.location) {
+          welcome += ` from ${latestExplainer.requestInformation.location}`
+        }
+      }
+      welcome += `. Here's ${author} to make us smart. <audio src="${latestExplainer.audio.url}"/>`;
     }
     this.attributes.LATEST_HEARD = latestExplainer.guid;
     var deviceId = util.getDeviceId.call(this);

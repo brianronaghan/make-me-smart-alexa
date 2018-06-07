@@ -43,15 +43,14 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
         console.log("UNRESOLVED PickItem -- NEITHER CONFIRM NOR DENY", JSON.stringify(intentObj, null,2));
 
         if (unresolved) {
-          message = `Hmmm, I couldn't quite understand ${this.attributes.UNRESOLVED}. Would you like to request an explainer on that?`;
+          message = `Hmmm, I couldn't find anything on ${this.attributes.UNRESOLVED}. Would you like to request an explainer on that?`;
           confirmMessage = `Would you like to request an explainer on ${this.attributes.UNRESOLVED}?`;
           return this.emit(':confirmIntentWithCard', message, confirmMessage, 'Explainer Not Found', message);
         }
 
       } else { // denied
         console.log("UNRESOLVED PickItem -- DENIED", JSON.stringify(intentObj, null,2));
-        // TODO: okay: now we, um, go home?
-        message = "Alright, let's try again.";
+        message = "Alright, let's try again. ";
         delete this.attributes.UNRESOLVED;
         delete intentObj.confirmationStatus;
         this.handler.state = this.attributes.STATE = this.attributes.PICK_SOURCE || config.states.HOME_PAGE;
@@ -64,6 +63,7 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
           message,
           function (err) {
             if (err) {
+              console.log("FAILED PROGRESSIVE");
               boundThis.emitWithState(redirectIntent, 'unresolved_decline', message);
             } else {
               boundThis.emitWithState(redirectIntent, 'unresolved_decline');
@@ -87,7 +87,7 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
 
         db.update.call(this, payload, function(err, response) {
           console.timeEnd('DB-unresolved-saved');
-          message = `Okay, I'll tell Kai and Molly that ${this.attributes.userName} from ${this.attributes.userLocation} wants to get smart about ${this.attributes.UNRESOLVED}! You can also hear more from Kai and Molly by saying "alexa, play podcast Make Me Smart." Now let's try again: `;
+          message = `Okay, I'll tell Kai and Molly that you want to get smart about ${this.attributes.UNRESOLVED}! You can also hear more from Kai and Molly by saying "alexa, play podcast Make Me Smart." `;
           //
           delete this.attributes.UNRESOLVED;
           delete intentObj.confirmationStatus
@@ -161,7 +161,7 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
 
         db.update.call(this, payload, function(err, response) {
           console.timeEnd('DB-unresolved-new-name');
-          var confirmationMessage = `Okay, I'll tell Kai and Molly ${this.attributes.userName} from ${this.attributes.userLocation} asked for an explainer on ${this.attributes.UNRESOLVED}. If they use your idea, they'll thank you! If you want to change your name or city in the future you can say 'change my info'. Now try choosing again. `;
+          var confirmationMessage = `Okay, I'll tell Kai and Molly ${this.attributes.userName} from ${this.attributes.userLocation} asked for an explainer on ${this.attributes.UNRESOLVED}. If you want to change your name or city in the future you can say 'change my info'. `;
           if (this.event.context.System.device.supportedInterfaces.Display) {
             this.response.renderTemplate(
               util.templateBodyTemplate1(
@@ -181,9 +181,6 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
           } else if (slot && slot.query && slot.query.value) {
             delete slot.topic.value
           }
-
-          // TODO: PROMPT NOT REDIRECT?
-
           this.handler.state = this.attributes.STATE = this.attributes.PICK_SOURCE || config.states.HOME_PAGE;
           let redirectIntent = config.state_start_intents[this.attributes.STATE];
           delete this.attributes.PICK_SOURCE;

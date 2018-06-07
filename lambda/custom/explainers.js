@@ -6,6 +6,10 @@ module.exports = [
     guid: 'GDPR_certification-1',
     date: "2018-05-24",
     description: "G.D.P.R. is the European Union's new data law, the General Data Protection Regulation",
+    requestInformation: {
+      user: "Sitara",
+      location: "New York"
+    },
     audio: {
       intro: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/Alexa+-+Wood+-+GDPR+Intro+-+MIXLEV_alexa.mp3',
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Wood+-+GDPR+-+MIXLEV_alexa.mp3",
@@ -42,6 +46,10 @@ module.exports = [
     guid: 'unemployment_certification',
     date: "2018-05-24",
     description: "How the unemployment report is calculated and what it means for the economy.",
+    requestInformation: {
+      user: "Brian",
+      location: "Los Angeles"
+    },
     audio: {
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/Alexa+-+Ryssdal+-+UNEMPLOYMENT+RATE+INTRO+-+MIXLEV_alexa.mp3",
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Ryssdal+-+Unemployment+Rate+-+MIXLEV_alexa.mp3",

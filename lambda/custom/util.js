@@ -395,6 +395,7 @@ function stripArticles (searchTerm) {
   searchTerm = searchTerm.replace(/find\s/gi, " ")
   searchTerm = searchTerm.replace(/search\s/gi, " ")
   searchTerm = searchTerm.replace(/tell\s/gi, " ")
+  searchTerm = searchTerm.replace(/one\s/gi, " ")
 
   searchTerm = searchTerm.replace(/#/gi, " ")
 

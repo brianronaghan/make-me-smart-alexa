@@ -42,7 +42,7 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     if (this.event.session.new && condition !== 'new_user_from_launch') { // and condition === to something?
       this.attributes.HEARD_FIRST = 0;
       intro += "Welcome back to Make Me Smart. This week we're ";
-    } else if (condition === 'requested') {
+    } else if (condition === 'requested' || condition === 'unresolved_save') {
       if (message) {
         intro += `${message} `;
       }
@@ -62,16 +62,21 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
       this.attributes.HEARD_FIRST = 1;
     } else if (condition === 'new_user_from_launch') {
       intro += `<audio src="${config.newUserAudio}" /> This week we're `
+    } else if (condition === 'unresolved_decline') {
+      if (message) {
+        intro += `${message} `;
+      }
+      intro += "This week we're "
     } else {
       intro += "This week we're "
     }
     var topics = explainers.map(function(item) {
       return item.title
     });
-    if(!this.attributes.HEARD_FIRST) {
+    if (!this.attributes.HEARD_FIRST) {
       this.attributes.HEARD_FIRST = 0;
     }
-    intro += `learning about <prosody pitch="high" volume="x-loud">1) ${topics[this.attributes.HEARD_FIRST + 0]}</prosody>, <prosody volume="x-loud" pitch="high">2) ${topics[this.attributes.HEARD_FIRST + 1]}</prosody>, and <prosody volume="x-loud" pitch="high">3) ${topics[this.attributes.HEARD_FIRST + 2]}</prosody>. You can pick one, play them all, or ask for more. Which would you like to hear?`;
+    intro += `learning about <prosody pitch="high" volume="x-loud">1) ${topics[this.attributes.HEARD_FIRST + 0]}</prosody>, <prosody volume="x-loud" pitch="high">2) ${topics[this.attributes.HEARD_FIRST + 1]}</prosody>, and <prosody volume="x-loud" pitch="high">3) ${topics[this.attributes.HEARD_FIRST + 2]}</prosody>. You can pick one, play them all, or browse all our explainers. Which would you like to hear?`;
     /*
     ':elicitSlotWithCard': function (slotName, speechOutput, repromptSpeech, cardTitle, cardContent, updatedIntent, imageObj) {
     */
@@ -217,7 +222,7 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
 
   'AMAZON.HelpIntent' : function () {
     console.log('Help in HOME PAGE')
-    var message = "You can pick an explainer by name or number, ask for more options, or play them all. What would you like to do?";
+    var message = "You can pick an explainer by name or number, browse our explainers, or play them all. What would you like to do?";
     this.response.speak(message).listen(message);
     if (this.event.context.System.device.supportedInterfaces.Display) {
       this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, null, config.background.show));
@@ -233,7 +238,7 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
    'Unhandled' : function () {
      console.log('HOME PAGE  UNHANDLED',JSON.stringify(this.event, null, 2))
      var message = "Sorry I couldn't quite understand that. ";
-     var prompt = "You can pick an explainer by name or number, ask for more options, or play them all. What would you like to do?";
+     var prompt = "You can pick an explainer by name or number, browse our explainers, or play them all. What would you like to do?";
      this.response.speak(message + prompt).listen(prompt);
      if (this.event.context.System.device.supportedInterfaces.Display) {
        this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message + prompt, null, config.background.show));

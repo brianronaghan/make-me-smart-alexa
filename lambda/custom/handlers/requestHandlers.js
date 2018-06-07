@@ -25,10 +25,10 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     var boundThis = this;
     var payload = {}
     this.attributes.requestingExplainer = true;
-    console.log(`REQUEST PickItem - intentname ${this.event.request.intent.name}... `, JSON.stringify(this.event.request.intent, null, 2))
+    console.log(`REQUEST PickItem - intentname ${this.event.request.intent.name}... `, JSON.stringify(this.event.request.intent, null, 2));
 
     if (slot.query && !slot.query.value) { // came here without a query
-      message = `Some of our best ideas come from <break time="1ms"/> <prosody pitch="medium">you</prosody>, our Alexa users! So what topic do you think Kai and Molly should do an explainer on?`;
+      message = `Some of our best ideas come from you - our Alexa users - so thanks! What topic do you think Kai and Molly should do an explainer on?`;
       return this.emit(':elicitSlotWithCard', 'query', message, "What topic would you like to request an explainer on?", 'Request Explainer', util.clearProsody(message), this.event.request.intent, util.cardImage(config.icon.full));
     }
     let suggestion;
@@ -54,11 +54,11 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
         user: this.attributes.userName,
         location: this.attributes.userLocation
       }];
-      console.time('UPDATE-DB-request-saved');
+      console.time('DB-request-saved');
       delete this.attributes.requestingExplainer;
       // NOTE: CONFIRM WE WANT TO SAVE REQUEST?
       db.update.call(this, payload, function(err, response) {
-        console.timeEnd('UPDATE-DB-request-saved');
+        console.timeEnd('DB-request-saved');
         message = `${suggestionString} I'll tell Kai and Molly that ${this.attributes.userName} from ${this.attributes.userLocation} wants to get smart about that! You can also hear more from Kai and Molly by saying "alexa, play podcast Make Me Smart." `;
         //
         this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
@@ -129,10 +129,10 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       } else if (slot && slot.topic && slot.topic.value) {
         delete slot.topic.value
       }
-      console.time('UPDATE-DB-request-new-name');
+      console.time('DB-request-new-name');
       db.update.call(this, payload, function(err, response) {
-        console.timeEnd('UPDATE-DB-request-new-name');
-        var confirmationMessage = `Okay, I'll tell Kai and Molly ${this.attributes.userName} from ${this.attributes.userLocation} asked for an explainer on ${suggestion}. If they use your idea, they'll thank you! If you want to change your name or city in the future you can say 'change my info'. `;
+        console.timeEnd('DB-request-new-name');
+        var confirmationMessage = `Okay, I'll tell Kai and Molly ${this.attributes.userName} from ${this.attributes.userLocation} asked for an explainer on ${suggestion}. If you want to change your name or city in the future you can say 'change my info'. `;
         if (this.event.context.System.device.supportedInterfaces.Display) {
           this.response.renderTemplate(
             util.templateBodyTemplate1(
@@ -144,7 +144,6 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
           );
         }
 
-        //TODO: PROMPT NOT REDIRECT??
         this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
         return util.sendProgressive(
           this.event.context.System.apiEndpoint, // no need to add directives params
