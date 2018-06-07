@@ -47,6 +47,26 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     } else if (slot.topic && slot.topic.value) {
       suggestion = slot.topic.value;
     }
+    if (suggestion && util.expletiveCheck(suggestion)) {
+        let expletive = `<say-as interpret-as="expletive">${suggestion}</say-as>`;
+        message += `Come on. You think we're allowed to say ${expletive} on public radio? You gotta be kidding. What would you like an explainer on that we can actually use?`;
+        let cardMessage = `Come on. You think we're allowed to say THAT on public radio? You gotta be kidding. Try something we can actually say.`;
+
+        if (slot && slot.query && slot.query.value) {
+          delete slot.query.value
+        } else if (slot && slot.topic && slot.topic.value) {
+          delete slot.topic.value
+        }
+
+
+        return this.emit(':elicitSlotWithCard', 'query', message, "What topic would you like to request an explainer on?", 'Request a (clean) Explainer', cardMessage, this.event.request.intent, util.cardImage(config.icon.full));
+
+
+    }
+
+
+
+
     let suggestionString = `${suggestion}! Great idea!`
 
     if (suggestion && this.attributes.userName && this.attributes.userLocation) { // turn off for testing

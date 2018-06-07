@@ -10,7 +10,7 @@ var explainers = require('../explainers');
 
 var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
   'LaunchRequest': function (condition, message) {
-    console.log("START LaunchRequest", this.event.request);
+    console.log("START LaunchRequest", this.event.request.intent);
     let welcome = '';
     let prompt = "You can replay that, hear what's new or submit an idea for what we should explain next. What would you like to do?"
     let latestExplainer = explainers[0];
@@ -70,7 +70,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
             latestExplainer.title,
             latestExplainer.image || config.icon.full,
             latestExplainer.description,
-            "You can replay that, hear what's new or request a new explainer.",
+            "You can replay that, hear what's new or submit an idea for a new explainer.",
             config.background.show
           )
         );
@@ -83,7 +83,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     });
   },
   'HomePage': function (condition, message) {
-    console.log("START state HomePage")
+    console.log("START state HomePage", JSON.stringify(this.event.request.intent, null,2))
     this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
     if (!this.attributes.deviceIds) {
       console.log("NEW USER -- HomePage")
@@ -95,7 +95,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     }
   },
   'RequestExplainer' : function () {
-    console.log('START state RequestExplainer')
+    console.log('START state RequestExplainer', JSON.stringify(this.event.request.intent, null,2))
     this.handler.state = this.attributes.STATE = config.states.REQUEST;
     if (!this.attributes.deviceIds) {
       console.log("NEW USER -- RequestExplainer")

@@ -4,7 +4,6 @@ var Alexa = require('alexa-sdk');
 
 var config = require('../config');
 var util = require('../util');
-var blacklist = require('../blacklist');
 
 var explainers = require('../explainers')
 var db = require('../db');
@@ -39,9 +38,10 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
     }
     if (unresolved) {
       console.log("EXPLETIVE CHECK ", unresolved)
-      if (blacklist.indexOf(unresolved.toLowerCase()) > -1) {
-        console.log("INDEX ", blacklist.indexOf(unresolved.toLowerCase()))
-        message += `I must have heard you wrong, because I'm not old enough to hear <say-as interpret-as="expletive"><${unresolved}/say-as> Let's try that again. `;
+      if (util.expletiveCheck(unresolved)) {
+        message += `Come on. You think we're allowed to say <say-as interpret-as="expletive">${unresolved}</say-as> on public radio? Let's try that again. `;
+
+        console.log(message)
         delete intentObj.confirmationStatus;
         this.handler.state = this.attributes.STATE = this.attributes.PICK_SOURCE || config.states.HOME_PAGE;
         let redirectIntent = config.state_start_intents[this.attributes.STATE];
@@ -54,7 +54,7 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
           function (err) {
             if (err) {
               console.log("FAILED PROGRESSIVE");
-              boundThis.emitWithState(redirectIntent, 'unresolved_decline', message);
+              boundThis.emitWithState(redirectIntent, 'unresolved_decline', "I couldn't have heard what I thought I heard. ");
             } else {
               boundThis.emitWithState(redirectIntent, 'unresolved_decline');
             }

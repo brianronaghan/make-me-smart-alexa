@@ -1,6 +1,7 @@
 var Alexa = require("alexa-sdk");
 var config = require('./config')
 var constants = config.constants;
+var blacklist = require('./blacklist');
 
 const makeImage = Alexa.utils.ImageUtils.makeImage;
 const makePlainText = Alexa.utils.TextUtils.makePlainText;
@@ -45,6 +46,7 @@ module.exports = {
   clearProsody: clearProsody,
   cleanSlotName: cleanSlotName,
   intentCheck: intentCheck,
+  expletiveCheck: expletiveCheck,
   templateListTemplate1: function (title, token, itemLabel, itemTitleKey, items) {
     var listItemBuilder = new Alexa.templateBuilders.ListItemBuilder();
     var listTemplateBuilder = new Alexa.templateBuilders.ListTemplate1Builder();
@@ -406,6 +408,16 @@ function stripArticles (searchTerm) {
 
   return searchTerm;
 }
+
+function expletiveCheck (query) {
+  if (blacklist.indexOf(query.toLowerCase()) > -1) {
+    console.log(query, ' is a bad word with index ', blacklist.indexOf(query.toLowerCase()));
+    return true;
+  } else {
+    console.log("NOT PURE WHOLE WORD CHECK")
+  }
+
+};
 
 function cleanSlotName (showString) {
   var cleanedSlot = showString.toLowerCase();
