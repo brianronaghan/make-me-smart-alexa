@@ -4,9 +4,7 @@
       "locales": {
         "en-US": {
           "examplePhrases": [
-            "Alexa, Make Me Smart",
-            "Alexa, ask Make Me Smart to explain bitcoin",
-            "Alexa, ask Make Me Smart what I need to know"
+            "Alexa, Make Me Smart"
           ],
           "keywords": [
             "business",
