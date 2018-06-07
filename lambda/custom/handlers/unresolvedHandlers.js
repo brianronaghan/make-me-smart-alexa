@@ -4,6 +4,7 @@ var Alexa = require('alexa-sdk');
 
 var config = require('../config');
 var util = require('../util');
+var blacklist = require('../blacklist');
 
 var explainers = require('../explainers')
 var db = require('../db');
@@ -15,6 +16,7 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
     this.emitWithState('LaunchRequest');
   },
   'PickItem': function (slot) {
+
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     var slot = slot || this.event.request.intent.slots;
@@ -26,6 +28,7 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
 
     console.log(`UNRESOLVED PickItem - intentname ${this.event.request.intent.name}... `, JSON.stringify(this.event.request.intent, null, 2));
     console.log("UN ", this.attributes.UNRESOLVED);
+    console.log("PICK SOURCE? ", this.attributes.PICK_SOURCE);
     let unresolved;
     if (slot.query && slot.query.value) { // query or topic could be
       unresolved = slot.query.value;
@@ -35,8 +38,38 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
       delete slot.topic.value
     }
     if (unresolved) {
+      console.log("EXPLETIVE CHECK ", unresolved)
+      if (blacklist.indexOf(unresolved.toLowerCase()) > -1) {
+        console.log("INDEX ", blacklist.indexOf(unresolved.toLowerCase()))
+        message += `I must have heard you wrong, because I'm not old enough to hear <say-as interpret-as="expletive"><${unresolved}/say-as> Let's try that again. `;
+        delete intentObj.confirmationStatus;
+        this.handler.state = this.attributes.STATE = this.attributes.PICK_SOURCE || config.states.HOME_PAGE;
+        let redirectIntent = config.state_start_intents[this.attributes.STATE];
+        delete this.attributes.PICK_SOURCE;
+        return util.sendProgressive(
+          this.event.context.System.apiEndpoint, // no need to add directives params
+          this.event.request.requestId,
+          this.event.context.System.apiAccessToken,
+          message,
+          function (err) {
+            if (err) {
+              console.log("FAILED PROGRESSIVE");
+              boundThis.emitWithState(redirectIntent, 'unresolved_decline', message);
+            } else {
+              boundThis.emitWithState(redirectIntent, 'unresolved_decline');
+            }
+          }
+        );
+
+      }
       this.attributes.UNRESOLVED = unresolved;
     }
+
+    // if blacklist
+    // PITHY answer...
+
+
+
 
     if (intentObj.confirmationStatus !== 'CONFIRMED') {
       if (intentObj.confirmationStatus !== 'DENIED') { // neither
@@ -92,11 +125,11 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
           delete this.attributes.UNRESOLVED;
           delete intentObj.confirmationStatus
 
-
+          console.log("PCIK SOURCE ", this.attributes.PICK_SOURCE)
           this.handler.state = this.attributes.STATE = this.attributes.PICK_SOURCE || config.states.HOME_PAGE;
           let redirectIntent = config.state_start_intents[this.attributes.STATE];
           delete this.attributes.PICK_SOURCE;
-
+          console.log("redirectIntent", redirectIntent)
           return util.sendProgressive(
             this.event.context.System.apiEndpoint, // no need to add directives params
             this.event.request.requestId,
@@ -266,11 +299,11 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
     // This needs to work for not playing as well
     delete this.attributes.UNRESOLVED;
     delete this.attributes.STATE;
+    delete this.attributes.PICK_SOURCE;
+
     this.response.speak('See you later. Say Alexa, Make Me Smart to get learning again.')
     this.emit(':saveState');
 
-    // this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
-    // this.emitWithState('HomePage', 'no_welcome', "Got it, I won't put in that request.");
 
   },
   'AMAZON.CancelIntent' : function() {
@@ -278,6 +311,7 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
     // means they don't wnt to leave it.
     delete this.attributes.STATE;
     delete this.attributes.UNRESOLVED;
+    delete this.attributes.PICK_SOURCE;
 
     this.response.speak('See you later. Say Alexa, Make Me Smart to get learning again.')
     this.emit(':saveState');

@@ -70,7 +70,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
         } else if (slot && slot.query && slot.query.value) {
           delete slot.topic.value
         }
-        //TODO: no redirect?
+
         return util.sendProgressive(
           this.event.context.System.apiEndpoint, // no need to add directives params
           this.event.request.requestId,
