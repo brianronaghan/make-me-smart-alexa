@@ -28,7 +28,10 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     console.log(`REQUEST PickItem - intentname ${this.event.request.intent.name}... `, JSON.stringify(this.event.request.intent, null, 2));
 
     if (slot.query && !slot.query.value) { // came here without a query
-      message = `Some of our best ideas come from you - our Alexa users - so thanks! What topic do you think Kai and Molly should do an explainer on?`;
+      if (this.event.session.new) {
+        message += "Welcome to Make Me Smart! "
+      }
+      message += `Some of our best ideas come from you - our Alexa users - so thanks! What topic do you think Kai and Molly should do an explainer on?`;
       return this.emit(':elicitSlotWithCard', 'query', message, "What topic would you like to request an explainer on?", 'Request Explainer', util.clearProsody(message), this.event.request.intent, util.cardImage(config.icon.full));
     }
     let suggestion;
