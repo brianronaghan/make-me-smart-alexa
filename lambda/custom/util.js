@@ -9,9 +9,7 @@ const makePlainText = Alexa.utils.TextUtils.makePlainText;
 const makeRichText = Alexa.utils.TextUtils.makeRichText;
 
 let INTENT_DICT = undefined;
-console.time('ARRAY');
 const BLACKLIST_ARRAY = Object.keys(blacklist);
-console.timeEnd('ARRAY');
 
 module.exports = {
   sendProgressive: function (endpoint, requestId, accessToken, speech, cb) {
@@ -427,7 +425,7 @@ function expletiveCheck (query) {
   } else {
     for (var x = 0; x < BLACKLIST_ARRAY.length; x++) {
       if (cleaned.indexOf(BLACKLIST_ARRAY[x]) > -1) {
-        console.log(`${cleaned} contains word ${x}: BLACKLIST_ARRAY[x]`)
+        console.log(`${cleaned} contains word ${x}: ${BLACKLIST_ARRAY[x]}`)
         console.timeEnd('expletive');
         return true;
       }
