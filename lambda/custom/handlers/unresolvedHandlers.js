@@ -75,7 +75,7 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
       if (intentObj.confirmationStatus !== 'DENIED') { // neither
         console.log("UNRESOLVED PickItem -- NEITHER CONFIRM NOR DENY", JSON.stringify(intentObj, null,2));
 
-        if (unresolved) {
+        if (unresolved) { // NOTE: should this check the attributes version?
           message = `Hmmm, I couldn't find anything on ${this.attributes.UNRESOLVED}. Would you like to request an explainer on that?`;
           confirmMessage = `Would you like to request an explainer on ${this.attributes.UNRESOLVED}?`;
           return this.emit(':confirmIntentWithCard', message, confirmMessage, 'Explainer Not Found', message);
@@ -146,8 +146,8 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
         });
       } else if (slot.userName && !slot.userName.value) {
         console.log('Gotta get userName');
-        message += `Okay, I'll ask Kai and Molly to look into ${this.attributes.UNRESOLVED}. Who should I say is asking?`;
-        this.emit(':elicitSlotWithCard', 'userName', message, "What name should I leave?", 'Request Explainer',message, this.event.request.intent, util.cardImage(config.icon.full));
+        message += `Okay, I'll ask Kai and Molly to look into ${this.attributes.UNRESOLVED}. They'll want to thank you if they use your idea, so what's your first name?`;
+        this.emit(':elicitSlotWithCard', 'userName', message, "What first name should I leave?", 'Request Explainer',message, this.event.request.intent, util.cardImage(config.icon.full));
       } else if (slot.userLocation && !slot.userLocation.value ) {
         // TODO: intentCHeck?
         let intentCheck = util.intentCheck(slot.userName.value);
@@ -165,9 +165,9 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
         console.log('Gotta get userLocation');
         this.attributes.userName = slot.userName.value;
         var cardMessage = `I'll note that ${slot.userName.value} would like an explainer on ${this.attributes.UNRESOLVED}. `;
-        message += 'And where are you from?';
+        message += 'And what city or state are you from?';
         cardMessage += message;
-        this.emit(':elicitSlotWithCard', 'userLocation', message, "What location should I leave?", 'Request Explainer', cardMessage, this.event.request.intent, util.cardImage(config.icon.full) );
+        this.emit(':elicitSlotWithCard', 'userLocation', message, "What city or state should I leave?", 'Request Explainer', cardMessage, this.event.request.intent, util.cardImage(config.icon.full) );
       } else if (slot.userName && slot.userName.value && slot.userLocation && slot.userLocation.value) { // WE have filled in both in the cycle
         let intentCheck = util.intentCheck(slot.userName.value);
         if (intentCheck) {

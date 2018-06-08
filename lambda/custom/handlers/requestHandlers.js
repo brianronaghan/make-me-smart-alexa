@@ -68,8 +68,8 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
 
 
     let suggestionString = `${suggestion}! Great idea!`
-
-    if (suggestion && this.attributes.userName && this.attributes.userLocation && this.attributes.userId !== config.simulatorId) { // turn off for testing
+    console.log(Object.keys(config.testIds).indexOf(this.attributes.userId) < 0)
+    if (suggestion && this.attributes.userName && this.attributes.userLocation && (Object.keys(config.testIds).indexOf(this.attributes.userId) < 0)) {
       console.log("REQUEST PickItem using saved name/location", slot)
       payload.requests = [{
         query: suggestion,
@@ -107,8 +107,8 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       });
     } else if (slot.userName && !slot.userName.value) {
       console.log('Gotta get userName');
-      message += `${suggestionString} I'll ask Kai and Molly to look into it. Who should I say is asking?`;
-      this.emit(':elicitSlotWithCard', 'userName', message, "What name should I leave?", 'Request Explainer',message, this.event.request.intent, util.cardImage(config.icon.full));
+      message += `${suggestionString} I'll ask Kai and Molly to look into it. They'll want to thank you if they use your idea, so what's your first name?`;
+      this.emit(':elicitSlotWithCard', 'userName', message, "What first name should I leave?", 'Request Explainer',message, this.event.request.intent, util.cardImage(config.icon.full));
     } else if (slot.userLocation && !slot.userLocation.value ) {
       let intentCheck = util.intentCheck(slot.userName.value);
       if (intentCheck) {
@@ -121,9 +121,9 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       console.log('Gotta get userLocation');
       this.attributes.userName = slot.userName.value;
       var cardMessage = `I'll note that ${slot.userName.value} would like an explainer on ${suggestion}. `;
-      message += 'And where are you from?';
+      message += 'And what city or state are you from?';
       cardMessage += message;
-      this.emit(':elicitSlotWithCard', 'userLocation', message, "What location should I leave?", 'Request Explainer', cardMessage, this.event.request.intent, util.cardImage(config.icon.full) );
+      this.emit(':elicitSlotWithCard', 'userLocation', message, "What city or state should I leave?", 'Request Explainer', cardMessage, this.event.request.intent, util.cardImage(config.icon.full) );
     } else if (slot.userName && slot.userName.value && slot.userLocation && slot.userLocation.value) { // WE have filled in both in the cycle
       let intentCheck = util.intentCheck(slot.userLocation.value);
       if (intentCheck) {

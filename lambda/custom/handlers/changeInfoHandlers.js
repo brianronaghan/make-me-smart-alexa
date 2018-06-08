@@ -25,7 +25,7 @@ module.exports = Alexa.CreateStateHandler(config.states.CHANGE_INFO, {
     if (slot && slot.userName && !slot.userName.value) {
       // TODO: intentCheck
       message += `Okay, you'd like to change your information. What should I save your first name as for requests?`;
-      this.emit(':elicitSlotWithCard', 'userName', message, "What name should I save?", 'Save a name',message, this.event.request.intent, util.cardImage(config.icon.full));
+      this.emit(':elicitSlotWithCard', 'userName', message, "What first name should I save?", 'Save a name',message, this.event.request.intent, util.cardImage(config.icon.full));
    } else if (slot && slot.userLocation && !slot.userLocation.value) {
      let intentCheck = util.intentCheck(slot.userName.value);
      if (intentCheck) {
@@ -36,8 +36,8 @@ module.exports = Alexa.CreateStateHandler(config.states.CHANGE_INFO, {
      }
      console.log("Setting name as ", slot.userName.value)
      this.attributes.userName = slot.userName.value;
-     message = `Okay, whenever you leave a request I'll note it as from ${slot.userName.value}. We also give a location when thanking you. Where should I say you're from?`
-     this.emit(':elicitSlotWithCard', 'userLocation', message, "Where are you from?", 'Save your location',message, this.event.request.intent, util.cardImage(config.icon.full));
+     message = `Okay, whenever you leave a request I'll note it as from ${slot.userName.value}. We also give a location when thanking you. What city or state should I say you're from?`
+     this.emit(':elicitSlotWithCard', 'userLocation', message, "What city or state are you from?", 'Save your location',message, this.event.request.intent, util.cardImage(config.icon.full));
    } else {
      let intentCheck = util.intentCheck(slot.userLocation.value);
 

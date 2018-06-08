@@ -321,7 +321,7 @@ function searchByName (searchTerm, itemNames, itemAlts) { // takes names and alt
 
 function nullCheck(deviceId) {
   if (!this.attributes.userId) {
-    console.log('NULL THIS.event setting to ', this.event.session.user.userId);
+    console.log('NULL userId setting to ', this.event.session.user.userId);
     this.attributes.userId = this.event.session.user.userId;
   }
   if (this.attributes.deviceIds) {
