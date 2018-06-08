@@ -1,6 +1,7 @@
 var Alexa = require("alexa-sdk");
 var config = require('./config')
 var constants = config.constants;
+
 var blacklist = require('./blacklist');
 
 const makeImage = Alexa.utils.ImageUtils.makeImage;
@@ -8,6 +9,9 @@ const makePlainText = Alexa.utils.TextUtils.makePlainText;
 const makeRichText = Alexa.utils.TextUtils.makeRichText;
 
 let INTENT_DICT = undefined;
+console.time('ARRAY');
+const BLACKLIST_ARRAY = Object.keys(blacklist);
+console.timeEnd('ARRAY');
 
 module.exports = {
   sendProgressive: function (endpoint, requestId, accessToken, speech, cb) {
@@ -414,13 +418,24 @@ function stripArticles (searchTerm) {
 }
 
 function expletiveCheck (query) {
-  if (blacklist.indexOf(query.toLowerCase()) > -1) {
-    console.log(query, ' is a bad word with index ', blacklist.indexOf(query.toLowerCase()));
+  console.time('expletive');
+  let cleaned = query.toLowerCase();
+  if (blacklist[cleaned]) {
+    console.log(`${cleaned} is a direct bad word.`);
+    console.timeEnd('expletive');
     return true;
   } else {
-    console.log("NOT PURE WHOLE WORD CHECK")
+    for (var x = 0; x < BLACKLIST_ARRAY.length; x++) {
+      if (cleaned.indexOf(BLACKLIST_ARRAY[x]) > -1) {
+        console.log(`${cleaned} contains word ${x}: BLACKLIST_ARRAY[x]`)
+        console.timeEnd('expletive');
+        return true;
+      }
+    }
   }
-
+  console.log(`Cleared ${cleaned}`);
+  console.timeEnd('expletive');
+  return false;
 };
 
 function cleanSlotName (showString) {
