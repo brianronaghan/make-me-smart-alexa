@@ -25,7 +25,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     var boundThis = this;
     var payload = {}
     this.attributes.requestingExplainer = true;
-    console.log(`REQUEST PickItem - intentname ${this.event.request.intent.name}... `, JSON.stringify(this.event.request.intent, null, 2));
+    console.log(`REQUEST requestingExplainer - ENTRY intentName ${this.event.request.intent.name}... `, JSON.stringify(this.event.request, null, 2));
 
     if (slot.query && !slot.query.value) { // came here without a query
       if (this.event.session.new) {
@@ -123,7 +123,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       var cardMessage = `I'll note that ${slot.userName.value} would like an explainer on ${suggestion}. `;
       message += 'And what city or state are you from?';
       cardMessage += message;
-      this.emit(':elicitSlotWithCard', 'userLocation', message, "What city or state should I leave?", 'Request Explainer', cardMessage, this.event.request.intent, util.cardImage(config.icon.full) );
+      return this.emit(':elicitSlotWithCard', 'userLocation', message, "What city or state should I leave?", 'Request Explainer', cardMessage, this.event.request.intent, util.cardImage(config.icon.full));
     } else if (slot.userName && slot.userName.value && slot.userLocation && slot.userLocation.value) { // WE have filled in both in the cycle
       let intentCheck = util.intentCheck(slot.userLocation.value);
       if (intentCheck) {
@@ -203,7 +203,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
 
       if no flag, change state, emit to the correct intent
     */
-    console.log("REQUEST RequestExplainer")
+    console.log("REQUEST ListExplainers --> ", JSON.stringify(this.event.request, null,2))
     if (this.attributes.requestingExplainer) {
       console.log("REQUEST -- ARTIFACT -- ListExplainers, sending back")
       this.emitWithState('RequestExplainer');
@@ -293,6 +293,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     this.emit(':saveState', true);
   },
   'SessionEndedRequest' : function () {
+    // HANDLE FAILURE basically
     console.log("SESSION ENDED IN REQUEST", JSON.stringify(this.event, null,2))
    },
    'Unhandled' : function () {
