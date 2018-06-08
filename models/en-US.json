@@ -36,6 +36,40 @@
      ]
    },
    {
+     "id": "Elicit.Intent-ReplayExplainer.IntentSlot-userName",
+     "variations": [
+       {
+         "type": "PlainText",
+         "value": "who should I say is calling?"
+       },
+       {
+         "type": "PlainText",
+         "value": "give me a name"
+       },
+       {
+         "type": "PlainText",
+         "value": "what's your name"
+       }
+     ]
+   },
+   {
+     "id": "Elicit.Intent-ReplayExplainer.IntentSlot-userLocation",
+     "variations": [
+       {
+         "type": "PlainText",
+         "value": "where are you from?"
+       },
+       {
+         "type": "PlainText",
+         "value": "what city"
+       },
+       {
+         "type": "PlainText",
+         "value": "tell me where "
+       }
+     ]
+   },
+   {
      "id": "Elicit.Intent-ChangeMyInfo.IntentSlot-userName",
      "variations": [
        {
@@ -272,6 +306,31 @@
            "confirmationRequired": false,
            "prompts": {
              "elicitation": "Elicit.Intent-PickItem.IntentSlot-userLocation"
+           }
+         }
+       ]
+     },
+     {
+       "name": "ReplayExplainer",
+       "confirmationRequired": false,
+       "prompts": {},
+       "slots": [
+         {
+           "name": "userName",
+           "type": "AMAZON.US_FIRST_NAME",
+           "elicitationRequired": true,
+           "confirmationRequired": false,
+           "prompts": {
+             "elicitation": "Elicit.Intent-ReplayExplainer.IntentSlot-userName"
+           }
+         },
+         {
+           "name": "userLocation",
+           "type": "AMAZON.US_CITY",
+           "elicitationRequired": true,
+           "confirmationRequired": false,
+           "prompts": {
+             "elicitation": "Elicit.Intent-ReplayExplainer.IntentSlot-userLocation"
            }
          }
        ]
@@ -585,6 +644,20 @@
                     "one more time",
                     "replay today's explainer",
                     "replay that exlplainer"
+                  ],
+                  "slots" : [
+                    {
+                      "name": "query",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "userName",
+                      "type": "AMAZON.US_FIRST_NAME"
+                    },
+                    {
+                      "name": "userLocation",
+                      "type": "AMAZON.US_CITY"
+                    }
                   ]
                 },
                 {
