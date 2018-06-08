@@ -76,7 +76,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     if (condition && condition === 'unresolved_save') {
       listMessage += 'In the meantime, ';
       if (this.attributes.indices.explainer !== 0) {
-        listMessage += "I'll list the explainers again. "
+        listMessage += "I'll list the explainers again: "
       }
     }
     listMessage += data.itemsAudio;

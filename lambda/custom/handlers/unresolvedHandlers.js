@@ -49,9 +49,9 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
           function (err) {
             if (err) {
               console.log("FAILED PROGRESSIVE");
-              boundThis.emitWithState('ListExplainers', 'unresolved_decline', "I couldn't have heard what I thought I heard. ");
+              boundThis.emitWithState('ListExplainers', 'unresolved_expletive', "I couldn't have heard what I thought I heard. ");
             } else {
-              boundThis.emitWithState('ListExplainers', 'unresolved_decline');
+              boundThis.emitWithState('ListExplainers', 'unresolved_expletive');
             }
           }
         );
@@ -177,7 +177,8 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
           delete this.attributes.UNRESOLVED;
           delete slot.userName.value;
           delete slot.userLocation.value;
-          delete intentObj.confirmationStatus
+          delete intentObj.confirmationStatus;
+          this.attributes.indices.explainer = 0;
           if (slot.query && slot.query.value) {
             delete slot.query.value
           } else if (slot && slot.query && slot.query.value) {

@@ -120,6 +120,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
         guid: chosenExplainer.guid,
         timestamp: this.event.request.timestamp,
       }]
+      this.attributes.indices.explainer = 0; // if we're playing, might as well reset the list
       db.update.call(this, payload, function(err, resp) {
         console.timeEnd('UPDATE-DB');
         this.attributes.currentExplainerIndex = chosenExplainer.index;

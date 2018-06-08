@@ -36,7 +36,7 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
         return this.emitWithState('PickItem', slot)
       }
     }
-
+    this.attributes.indices.explainer = 0; // set page to 0
     this.attributes.currentExplainerIndex = -1;
     var intro = '';
     if (this.event.session.new && condition !== 'new_user_from_launch') { // and condition === to something?
