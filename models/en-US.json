@@ -694,16 +694,8 @@
                       "type": "AMAZON.US_FIRST_NAME"
                     },
                     {
-                      "name": "manualName",
-                      "type": "AMAZON.SearchQuery"
-                    },
-                    {
                       "name": "userLocation",
                       "type": "AMAZON.US_CITY"
-                    },
-                    {
-                      "name": "manualLocation",
-                      "type": "AMAZON.SearchQuery"
                     },
                     {
                       "name": "query",
