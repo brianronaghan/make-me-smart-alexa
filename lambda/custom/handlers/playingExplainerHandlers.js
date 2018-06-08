@@ -46,7 +46,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
         theNumber = slot.ordinal.value;
         delete slot.ordinal.value;
       }
-      var message = `${theNumber} is not a valid choice. Please choose between 1 and ${explainers.length}. I'll list the explainers again.`
+      var message = `${theNumber} is not a valid choice. Please choose between 1 and ${explainers.length}. Let's try again. `
       var boundThis = this;
       return util.sendProgressive(
         boundThis.event.context.System.apiEndpoint, // no need to add directives params
@@ -67,7 +67,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
         return this.emitWithState('PickItem');
       } else if (slot.index && slot.index.value) {
         console.log("NO EXPLAINER FOUND, but there is INDEX ", JSON.stringify(slot, null,2))
-        var message = `${slot.index.value} is not a valid choice. Please choose between 1 and ${explainers.length}. I'll list the explainers again.`
+        var message = `${slot.index.value} is not a valid choice. Please choose between 1 and ${explainers.length}. Let's try again. `
         var boundThis = this;
         return util.sendProgressive(
           boundThis.event.context.System.apiEndpoint, // no need to add directives params
@@ -83,7 +83,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
         console.log("NO EXPLAINER , but there is ORDINAL ", JSON.stringify(slot, null,2))
         let theOrdinal = slot.ordinal.value;
         delete slot.ordinal.value;
-        var message = `We don't have a ${theOrdinal}. Please choose between 1 and ${explainers.length}. I'll list the explainers again.`
+        var message = `We don't have a ${theOrdinal}. Please choose between 1 and ${explainers.length}. Let's try again. `
         return util.sendProgressive(
           boundThis.event.context.System.apiEndpoint, // no need to add directives params
           boundThis.event.request.requestId,

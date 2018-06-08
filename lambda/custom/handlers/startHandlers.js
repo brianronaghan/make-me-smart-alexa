@@ -140,7 +140,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     this.emitWithState('ChangeMyInfo');
   },
   'ListExplainers': function () {
-    console.log('list explainers from start')
+    console.log('START ListExplainers')
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     this.attributes.currentExplainerIndex = -1;
@@ -149,14 +149,14 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     this.emitWithState('ListExplainers', 'from_launch');
   },
   'OlderExplainers' : function () {
-    console.log("OlderExplainers in HOME_PAGE");
+    console.log("OlderExplainers in START");
 
     this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
     this.emitWithState('OlderExplainers', 'older_from_start');
   },
 
   'NewerExplainers' : function () {
-    console.log("NewerExplainers in HOME_PAGE");
+    console.log("NewerExplainers in START");
     this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
     this.emitWithState('NewerExplainers', 'newer_from_start');
   },
