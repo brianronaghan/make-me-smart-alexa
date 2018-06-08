@@ -2670,7 +2670,6 @@ module.exports = {
    "throating": true,
    "thrust": true,
    "thundercunt": true,
-   "ti": true,
    "tight white": true,
    "timber nigger": true,
    "timber niggers": true,

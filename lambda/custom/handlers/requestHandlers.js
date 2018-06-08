@@ -26,8 +26,8 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     var payload = {}
     this.attributes.requestingExplainer = true;
     console.log(`REQUEST requestingExplainer - ENTRY intentName ${this.event.request.intent.name}... `, JSON.stringify(this.event.request, null, 2));
-
-    if (slot.query && !slot.query.value && !this.attributes.SUGGESTION) { // BEGINNING OF PROCESS
+    console.log("ATTRIBUTES ", JSON.stringify(this.attributes, null,2));
+    if (slot.query && !slot.query.value && !this.attributes.SUGGESTION) { // BEGINNING OF PROCESS NOTE: i added the attributes.SUGGESTION. Not sure if that's what I want to do
       if (this.event.session.new) {
         message += "Welcome to Make Me Smart! "
       }
@@ -104,7 +104,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
           }
         );
       });
-    } else if (slot.userName && !slot.userName.value && !this.attributes.MANUAL_NAME) {
+    } else if (slot.userName && !slot.userName.value && !this.attributes.CAPTURED_NAME && !this.attributes.MANUAL_NAME) {
       console.log('Gotta get userName');
       if (!this.attributes.REQUESTING_NAME) {
         this.attributes.REQUESTING_NAME = true;
@@ -117,6 +117,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
         this.emit(':elicitSlotWithCard', 'manualName', message, "What first name should I leave?", 'First Name Entry - retry',message, this.event.request.intent, util.cardImage(config.icon.full));
       }
     } else if (slot.manualName && slot.manualName.value) {
+
       // we GOT the name through manual...
       // CHECK FOR INTENT
       let intentCheck = util.intentCheck(slot.manualName.value);
@@ -133,7 +134,10 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       // HAPPY CASE:
       // SAVE Name
       this.attributes.userName = slot.manualName.value;
+      // PUT name in CAPTURED
+      this.attributes.CAPTURED_NAME = slot.manualName.value;
       // CLEAR manualName from slot?
+      delete slot.manualName.value;
       // REMOVE REQUESTING NAME
       delete this.attributes.REQUESTING_NAME;
       // REMOVE MANUAL_NAME
@@ -141,6 +145,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       // SET REQUESTING_LOCATION
       this.attributes.REQUESTING_LOCATION = true;
       // NORMAL elicit userLocation ( I think)
+      console.log("CONDITION: slot.manualName && slot.manualName.value ||  got it through MANUAL NAME: ", JSON.stringify(this.attributes, null,2));
       var cardMessage = `I'll note that ${this.attributes.userName} would like an explainer on ${this.attributes.SUGGESTION}. `;
       message += 'And what city or state are you from?';
       cardMessage += message;
@@ -171,12 +176,17 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
         // set MANUAL LOCATION
         // elicit manualLocation
       console.log('Gotta get userLocation');
-      this.attributes.userName = slot.userName.value;
-      var cardMessage = `I'll note that ${slot.userName.value} would like an explainer on ${suggestion}. `;
+      if (!this.attributes.CAPTURED_NAME) {
+        if(slot.userName && slot.userName.value) {
+          this.attributes.userName = slot.userName.value;
+          this.attributes.CAPTURED_NAME = slot.userName.value;
+        }
+      }
+      var cardMessage = `I'll note that ${this.attributes.CAPTURED_NAME} would like an explainer on ${suggestion}. `;
       message += 'And what city or state are you from?';
       cardMessage += message;
       return this.emit(':elicitSlotWithCard', 'userLocation', message, "What city or state should I leave?", 'Request Explainer', cardMessage, this.event.request.intent, util.cardImage(config.icon.full));
-    } else if (slot.manualLocation && slot.manualLocation.value) {
+    } else if (this.attributes.CAPTURED_NAME && slot.manualLocation && slot.manualLocation.value) {
       // we got LOCATION through manual
       // CHECK FOR INTENT
       // HAPPY CASE:
@@ -185,7 +195,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       // REMOVE REQUESTING_LOCATION
       // REMOVE MANUAL_LOCATION
       // Now We Can Save!!!!
-    } else if (slot.userName && slot.userName.value && slot.userLocation && slot.userLocation.value) { // WE have filled in both in the cycle NOTE: will have to check basically... um attributes as well?
+    } else if (this.attributes.CAPTURED_NAME && slot.userLocation && slot.userLocation.value) { // WE have filled in both in the cycle NOTE: will have to check basically... um attributes as well?
       // TODO: a that first part, that userName is value, is not correct. It could be... could be from userName, or manualName, OR REALLY attrubutes too...
       let intentCheck = util.intentCheck(slot.userLocation.value);
       if (intentCheck) {
@@ -207,16 +217,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
         user: this.attributes.userName,
         location: this.attributes.userLocation
       }];
-      delete slot.userName.value;
-      delete slot.userLocation.value;
-      delete this.attributes.requestingExplainer;
-      delete this.attributes.SUGGESTION;
 
-      if (slot && slot.query && slot.query.value) {
-        delete slot.query.value
-      } else if (slot && slot.topic && slot.topic.value) {
-        delete slot.topic.value
-      }
       console.time('DB-request-new-name');
       db.update.call(this, payload, function(err, response) {
         console.timeEnd('DB-request-new-name');
@@ -231,7 +232,16 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
             )
           );
         }
-
+        delete slot.userName.value;
+        delete slot.userLocation.value;
+        delete this.attributes.requestingExplainer;
+        delete this.attributes.SUGGESTION;
+        delete this.attributes.CAPTURED_NAME;
+        if (slot && slot.query && slot.query.value) {
+          delete slot.query.value
+        } else if (slot && slot.topic && slot.topic.value) {
+          delete slot.topic.value
+        }
         this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
         return util.sendProgressive(
           this.event.context.System.apiEndpoint, // no need to add directives params
