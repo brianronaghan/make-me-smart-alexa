@@ -15,7 +15,6 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
     this.emitWithState('LaunchRequest');
   },
   'PickItem': function (slot) {
-
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     var slot = slot || this.event.request.intent.slots;
@@ -27,7 +26,6 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
 
     console.log(`UNRESOLVED PickItem - intentname ${this.event.request.intent.name}... `, JSON.stringify(this.event.request.intent, null, 2));
     console.log("UN ", this.attributes.UNRESOLVED);
-    console.log("PICK SOURCE? ", this.attributes.PICK_SOURCE);
     let unresolved;
     if (slot.query && slot.query.value) { // query or topic could be
       unresolved = slot.query.value;
@@ -41,11 +39,8 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
       if (util.expletiveCheck(unresolved)) {
         message += `Come on. You think we're allowed to say <say-as interpret-as="expletive">${unresolved}</say-as> on public radio? Let's try that again. `;
 
-        console.log(message)
         delete intentObj.confirmationStatus;
-        this.handler.state = this.attributes.STATE = this.attributes.PICK_SOURCE || config.states.HOME_PAGE;
-        let redirectIntent = config.state_start_intents[this.attributes.STATE];
-        delete this.attributes.PICK_SOURCE;
+        this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
         return util.sendProgressive(
           this.event.context.System.apiEndpoint, // no need to add directives params
           this.event.request.requestId,
@@ -54,9 +49,9 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
           function (err) {
             if (err) {
               console.log("FAILED PROGRESSIVE");
-              boundThis.emitWithState(redirectIntent, 'unresolved_decline', "I couldn't have heard what I thought I heard. ");
+              boundThis.emitWithState('ListExplainers', 'unresolved_decline', "I couldn't have heard what I thought I heard. ");
             } else {
-              boundThis.emitWithState(redirectIntent, 'unresolved_decline');
+              boundThis.emitWithState('ListExplainers', 'unresolved_decline');
             }
           }
         );
@@ -64,12 +59,6 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
       }
       this.attributes.UNRESOLVED = unresolved;
     }
-
-    // if blacklist
-    // PITHY answer...
-
-
-
 
     if (intentObj.confirmationStatus !== 'CONFIRMED') {
       if (intentObj.confirmationStatus !== 'DENIED') { // neither
@@ -86,24 +75,8 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
         message = "Alright, let's try again. ";
         delete this.attributes.UNRESOLVED;
         delete intentObj.confirmationStatus;
-        this.handler.state = this.attributes.STATE = this.attributes.PICK_SOURCE || config.states.HOME_PAGE;
-        let redirectIntent = config.state_start_intents[this.attributes.STATE];
-        delete this.attributes.PICK_SOURCE;
-        return util.sendProgressive(
-          this.event.context.System.apiEndpoint, // no need to add directives params
-          this.event.request.requestId,
-          this.event.context.System.apiAccessToken,
-          message,
-          function (err) {
-            if (err) {
-              console.log("FAILED PROGRESSIVE");
-              boundThis.emitWithState(redirectIntent, 'unresolved_decline', message);
-            } else {
-              boundThis.emitWithState(redirectIntent, 'unresolved_decline');
-            }
-          }
-        );
-
+        this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
+        return this.emitWithState('ListExplainers', 'unresolved_decline', message);
       }
     } else { // confirmed
       console.log("UNRESOLVED PickItem -- CONFIRMED", JSON.stringify(intentObj, null,2));
@@ -121,15 +94,11 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
         db.update.call(this, payload, function(err, response) {
           console.timeEnd('DB-unresolved-saved');
           message = `Okay, I'll tell Kai and Molly that you want to get smart about ${this.attributes.UNRESOLVED}! You can also hear more from Kai and Molly by saying "alexa, play podcast Make Me Smart." `;
-          //
+
           delete this.attributes.UNRESOLVED;
           delete intentObj.confirmationStatus
 
-          console.log("PCIK SOURCE ", this.attributes.PICK_SOURCE)
-          this.handler.state = this.attributes.STATE = this.attributes.PICK_SOURCE || config.states.HOME_PAGE;
-          let redirectIntent = config.state_start_intents[this.attributes.STATE];
-          delete this.attributes.PICK_SOURCE;
-          console.log("redirectIntent", redirectIntent)
+          this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
           return util.sendProgressive(
             this.event.context.System.apiEndpoint, // no need to add directives params
             this.event.request.requestId,
@@ -137,9 +106,9 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
             message,
             function (err) {
               if (err) {
-                boundThis.emitWithState(redirectIntent, 'unresolved_save', message);
+                boundThis.emitWithState('ListExplainers', 'unresolved_save', message);
               } else {
-                boundThis.emitWithState(redirectIntent, 'unresolved_save');
+                boundThis.emitWithState('ListExplainers', 'unresolved_save');
               }
             }
           );
@@ -214,9 +183,7 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
           } else if (slot && slot.query && slot.query.value) {
             delete slot.topic.value
           }
-          this.handler.state = this.attributes.STATE = this.attributes.PICK_SOURCE || config.states.HOME_PAGE;
-          let redirectIntent = config.state_start_intents[this.attributes.STATE];
-          delete this.attributes.PICK_SOURCE;
+          this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
 
           return util.sendProgressive(
             this.event.context.System.apiEndpoint, // no need to add directives params
@@ -225,9 +192,9 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
             confirmationMessage,
             function (err) {
               if (err) {
-                boundThis.emitWithState(redirectIntent, 'unresolved_save', confirmationMessage);
+                boundThis.emitWithState('ListExplainers', 'unresolved_save', confirmationMessage);
               } else {
-                boundThis.emitWithState(redirectIntent, 'unresolved_save');
+                boundThis.emitWithState('ListExplainers', 'unresolved_save');
               }
             }
           );
@@ -258,7 +225,7 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
       this.emitWithState('PickItem');
     } else {
       this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
-      this.emitWithState('ListExlpainers');
+      this.emitWithState('ListExplainers');
     }
   },
   'OlderExplainers': function () {
@@ -299,7 +266,6 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
     // This needs to work for not playing as well
     delete this.attributes.UNRESOLVED;
     delete this.attributes.STATE;
-    delete this.attributes.PICK_SOURCE;
 
     this.response.speak('See you later. Say Alexa, Make Me Smart to get learning again.')
     this.emit(':saveState');
@@ -311,7 +277,6 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
     // means they don't wnt to leave it.
     delete this.attributes.STATE;
     delete this.attributes.UNRESOLVED;
-    delete this.attributes.PICK_SOURCE;
 
     this.response.speak('See you later. Say Alexa, Make Me Smart to get learning again.')
     this.emit(':saveState');

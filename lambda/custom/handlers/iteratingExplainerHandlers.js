@@ -39,7 +39,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
     this.emitWithState('PickItem', slot, 'ITERATING');
   },
-  'ListExplainers': function (condition) {
+  'ListExplainers': function (condition, incomingMessage) {
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     if (this.event.session.new || (!this.attributes.indices.explainer)) { // is this logic correct?
@@ -69,7 +69,18 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
       this.attributes.indices.explainer,
       config.items_per_prompt.explainer
     );
-    this.emit(':elicitSlotWithCard', 'query', data.itemsAudio, "Pick one or say newer or older to move forward or backward through list.", 'List of Explainers', data.itemsCard, this.event.request.intent, util.cardImage(config.icon.full) );
+    let listMessage = '';
+    if (incomingMessage) {
+      listMessage += incomingMessage;
+    }
+    if (condition && condition === 'unresolved_save') {
+      listMessage += 'In the meantime, ';
+      if (this.attributes.indices.explainer !== 0) {
+        listMessage += "I'll list the explainers again. "
+      }
+    }
+    listMessage += data.itemsAudio;
+    this.emit(':elicitSlotWithCard', 'query', listMessage, "Pick one or say newer or older to move forward or backward through list.", 'List of Explainers', data.itemsCard, this.event.request.intent, util.cardImage(config.icon.full));
   },
 
   // NAVIGATION
@@ -161,7 +172,6 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     var slot = slot || this.event.request.intent.slots;
     console.log('ITERATING_EXPLAINER, PickItem -- ',JSON.stringify(this.event.request.intent, null,2));
     delete this.attributes.ITERATING;
-    this.attributes.PICK_SOURCE = config.states.ITERATING_EXPLAINER;
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
     this.emitWithState('PickItem', slot, 'ITERATING');
   },
@@ -243,9 +253,6 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     this.attributes.indices.explainer = 0;
     this.response.speak('See you later. Say Alexa, Make Me Smart to get learning again.')
     this.emit(':saveState');
-
-    // this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
-    // this.emitWithState('HomePage', 'no_welcome', "Got it, I won't put in that request.");
   },
   'SessionEndedRequest' : function () {
     console.log("IT  EXPLAINER  session end", JSON.stringify(this.event.request, null,2));

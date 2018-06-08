@@ -54,7 +54,6 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
         boundThis.event.context.System.apiAccessToken,
         message,
         function (err) {
-          delete boundThis.attributes.PICK_SOURCE;
           boundThis.handler.state = boundThis.attributes.STATE = config.states.ITERATING_EXPLAINER;
           boundThis.emitWithState('ListExplainers', 'invalid_number');
         }
@@ -121,7 +120,6 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
         guid: chosenExplainer.guid,
         timestamp: this.event.request.timestamp,
       }]
-      delete boundThis.attributes.PICK_SOURCE;
       db.update.call(this, payload, function(err, resp) {
         console.timeEnd('UPDATE-DB');
         this.attributes.currentExplainerIndex = chosenExplainer.index;

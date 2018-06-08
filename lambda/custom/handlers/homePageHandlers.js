@@ -99,7 +99,6 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     }
     console.log("HOME_PAGE PickItem, normal")
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
-    this.attributes.PICK_SOURCE = config.states.HOME_PAGE;
 
     if (this.attributes.HEARD_FIRST === 1) {
       this.attributes.HEARD_FIRST = 0;
