@@ -121,7 +121,7 @@ module.exports = Alexa.CreateStateHandler(config.states.CHANGE_INFO, {
       this.emitWithState('ChangeMyInfo');
     } else {
       this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
-      this.emitWithState('ListExlpainers');
+      this.emitWithState('ListExplainers');
     }
   },
   'OlderExplainers': function () {
