@@ -25,7 +25,7 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
     var boundThis = this;
 
     console.log(`UNRESOLVED PickItem - intentname ${this.event.request.intent.name}... `, JSON.stringify(this.event.request.intent, null, 2));
-    console.log("UNRESOLVE IN state: ", this.attributes.UNRESOLVED);
+    console.log("is there an UNRESOLVED IN state?: ", this.attributes.UNRESOLVED);
     let unresolved;
     if (slot.query && slot.query.value) { // query or topic could be
       unresolved = slot.query.value;

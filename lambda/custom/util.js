@@ -423,8 +423,10 @@ function expletiveCheck (query) {
     console.timeEnd('expletive');
     return true;
   } else {
+    let words = cleaned.split(' ');
+    console.log("words array", words);
     for (var x = 0; x < BLACKLIST_ARRAY.length; x++) {
-      if (cleaned.indexOf(BLACKLIST_ARRAY[x]) > -1) {
+      if (words.indexOf(BLACKLIST_ARRAY[x]) > -1) {
         console.log(`${cleaned} contains word ${x}: ${BLACKLIST_ARRAY[x]}`)
         console.timeEnd('expletive');
         return true;
