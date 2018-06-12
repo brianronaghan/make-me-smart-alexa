@@ -10,6 +10,8 @@ const makePlainText = Alexa.utils.TextUtils.makePlainText;
 const makeRichText = Alexa.utils.TextUtils.makeRichText;
 
 let INTENT_DICT = undefined;
+let DIRECT_DICT = undefined;
+
 const BLACKLIST_ARRAY = Object.keys(blacklist);
 
 module.exports = {
@@ -387,6 +389,21 @@ function intentCheck (text) {
   return INTENT_DICT[text]
 }
 
+function listNavCheck (text) {
+  if (!DIRECT_DICT) {
+    DIRECT_DICT = {};
+    for (let directionIntent of Object.keys(config.navDirections)) {
+      for (let utterance of config.navDirections[directionIntent]) {
+        DIRECT_DICT[utterance] = directionIntent;
+      }
+    }
+    console.log("BUITL LIST NAV");
+
+  }
+  return DIRECT_DICT[text]
+
+}
+
 function stripArticles (searchTerm) {
   console.log('raw', searchTerm)
   searchTerm = searchTerm.replace(/a\s/gi, " ")
@@ -432,6 +449,8 @@ function displayMessage () {
   }
   return config.messages[this.attributes.plays % config.messages.length];
 }
+
+
 
 function expletiveCheck (query) {
   console.time('expletive');
