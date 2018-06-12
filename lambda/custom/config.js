@@ -7,6 +7,16 @@ var config = {
       explainer: 3,
       episode: 3,
     },
+    defaultDescription: "Something else you want to get smart about? Try 'Alexa, submit an idea' and Kai and Molly might use your idea!",
+    messages: [
+      "Something else you want to get smart about? Try 'Alexa, submit an idea' and Kai and Molly might use your idea!",
+      "Completionist? Say 'Alexa, browse explainers' to list every single explainer we've done!",
+      "Help other people find our skill by rating Make Me Smart on the Amazon Alexa site.",
+      "If you want to hear more from Kai and Molly download the Make Me Smart podcast wherever you get that sort of thing.",
+      "Want to learn more about a topic? Goto: www.marketplace.org and get even smarter!",
+      "Hey, guess what? We also have a show on the actual radio. Find Marketpace on your local public radio station.",
+      "Brian Ronaghan built me. He's awesome."
+    ],
     testIds: {
       "amzn1.ask.account.AGXAI6THSPIDUPSEDUTAXRMH6NJJVZ57KZGR6MLRR2VRTFZV3FJ2VZWGHRQ33WLY5TPGN5UCWYRWE5CJW6HAT2LEJWJNV64UHVVR42RTNSIGRZBC572NR7CSY57B4FVSLD4APAKB7SB4KZHWE74DQPW7S4TDNILRWBIB3Q3CJ4YXRUAUYQ5ATDB7HVAVHYGOF2P5WUGL53RSY7I" : 'spot',
       "amzn1.ask.account.AGD4CGALBA72FJSNNU253ORGG6UQZQDKE2DLMRQQ4U6HASASRK32B24XYGLOIE5SO4XMTSVM3YODR5VSANAFBLTX5DKWS2PIJYO3DQYXRAEGXRI7TD6CDCPOHLIBCQLCJDOQUJTYUDWDXQCB4A3GUYCRCAALJLDRAVHFJIEKXJM2FV5CMZEL23C2RYJUKFAS2MPZLTSHDXXA4WQ": 'simulator',
@@ -342,7 +352,6 @@ var config = {
         "you have the wrong information"
       ]
     },
-    defaultDescription: "Something else you want to get smart about? Try 'Alexa, submit an idea' and Kai and Molly might use your idea!",
     newUserAudio: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/utils/Alexa+-+Ryssdal+-+Wood+-+Welcome+New+User+Message+-+MIXLEV_alexa.mp3',
     background: {
       show: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/1024x600_FINALB.png"

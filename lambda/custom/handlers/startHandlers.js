@@ -29,8 +29,8 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
           util.templateBodyTemplate3(
             latestExplainer.title,
             latestExplainer.image || config.icon.full,
-            latestExplainer.description,
-            "You can replay that, hear what's new or submit an explainer idea.",
+            '',
+            prompt,
             config.background.show
           )
         );
@@ -68,8 +68,8 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
           util.templateBodyTemplate3(
             latestExplainer.title,
             latestExplainer.image || config.icon.full,
-            latestExplainer.description,
-            "You can replay that, hear what's new or submit an idea for a new explainer.",
+            '',
+            `Today we're learning about ${latestExplainer.title}. You can replay that, hear what's new or submit an idea for a new explainer.`,
             config.background.show
           )
         );

@@ -3,6 +3,7 @@ var config = require('./config')
 var constants = config.constants;
 
 var blacklist = require('./blacklist');
+var EASTER_EGGS = require('./easter_eggs.js');
 
 const makeImage = Alexa.utils.ImageUtils.makeImage;
 const makePlainText = Alexa.utils.TextUtils.makePlainText;
@@ -35,13 +36,14 @@ module.exports = {
     return this.event.context.System.device.deviceId;
   },
   logExplainer: function (explainer) {
-    console.log('explainer log', explainer)
     // Should I switch playig?
     this.attributes.playing = {};
     this.attributes.playing.status = 'playing';
     this.attributes.playing.type = 'explainer';
     this.attributes.playing.token = explainer.guid;
     this.attributes.playing.url = explainer.audio.url;
+    this.attributes.plays = this.attributes.plays || 0;
+    this.attributes.plays++;
   },
   nullCheck: nullCheck,
   prosodyToBold: prosodyToBold,
@@ -49,6 +51,7 @@ module.exports = {
   cleanSlotName: cleanSlotName,
   intentCheck: intentCheck,
   expletiveCheck: expletiveCheck,
+  displayMessage: displayMessage,
   templateListTemplate1: function (title, token, itemLabel, itemTitleKey, items) {
     var listItemBuilder = new Alexa.templateBuilders.ListItemBuilder();
     var listTemplateBuilder = new Alexa.templateBuilders.ListTemplate1Builder();
@@ -190,8 +193,9 @@ module.exports = {
   },
 
   itemPicker: function (intentSlot, choices, choiceKey, slotKey, addOne) {
-    var itemNames = choices.map(function (choice) {return choice[choiceKey].toLowerCase()});
-    var itemAlts = choices.map(function (choice) {return choice.alts && choice.alts});
+    var itemNames = choices.map((choice) => choice[choiceKey].toLowerCase());
+    var itemAlts = choices.map((choice) => choice.alts && choice.alts);
+
     var index;
     if (intentSlot && intentSlot.index && intentSlot.index.value) {
         index = parseInt(intentSlot.index.value);
@@ -208,7 +212,6 @@ module.exports = {
         if (!addOne) {
           index--;
         }
-
     } else if (typeof intentSlot === 'string') { //NOTE:check alts
         index = searchByName(cleanSlotName(intentSlot), itemNames, itemAlts);
     } else if (intentSlot && intentSlot[slotKey] && intentSlot[slotKey].value) {
@@ -251,6 +254,16 @@ module.exports = {
       } else {
         console.log("WTF")
         return -1;
+      }
+    } else if (EASTER_EGGS && EASTER_EGGS.length && EASTER_EGGS.length > 0) {
+      var eggNames = EASTER_EGGS.map((egg) => egg.title.toLowerCase());
+      var eggAlts = EASTER_EGGS.map((egg) => egg.alts);
+      var eggIndex = searchByName(cleanSlotName(intentSlot.query.value), eggNames, eggAlts);
+      if (eggIndex > -1) {
+        var egg = EASTER_EGGS[eggIndex];
+        egg.index = 0;
+        console.log("FOUND A DAMN EASTER EGG", egg);
+        return egg;
       }
     }
     return chosen;
@@ -410,21 +423,24 @@ function stripArticles (searchTerm) {
   searchTerm = searchTerm.replace(/^\s+|\s+$/g, "");  // any leading or trailing whitespace
 
 
-  console.log("STRIPPED ", searchTerm)
-
   return searchTerm;
+}
+
+function displayMessage () {
+  if (!this.attributes.plays) {
+    this.attributes.plays = 1;
+  }
+  return config.messages[this.attributes.plays % config.messages.length];
 }
 
 function expletiveCheck (query) {
   console.time('expletive');
   let cleaned = query.toLowerCase();
   if (blacklist[cleaned]) {
-    console.log(`${cleaned} is a direct bad word.`);
     console.timeEnd('expletive');
     return true;
   } else {
     let words = cleaned.split(' ');
-    console.log("words array", words);
     for (var x = 0; x < BLACKLIST_ARRAY.length; x++) {
       if (words.indexOf(BLACKLIST_ARRAY[x]) > -1) {
         console.log(`${cleaned} contains word ${x}: ${BLACKLIST_ARRAY[x]}`)
@@ -433,7 +449,6 @@ function expletiveCheck (query) {
       }
     }
   }
-  console.log(`Cleared ${cleaned}`);
   console.timeEnd('expletive');
   return false;
 };

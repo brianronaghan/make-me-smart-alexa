@@ -5,7 +5,7 @@ module.exports = [
     alts: ['g.d.p.r', 'gdpr', 'g d p r', 'g.b.p.r', 'gbpr', 'g b p r'],
     guid: 'GDPR_certification-1',
     date: "2018-05-24",
-    description: "G.D.P.R. is the European Union's new data law, the General Data Protection Regulation",
+    description: "G.D.P.R. is the European Union's new data law, the General Data Protection Regulation.",
     requestInformation: {
       user: "Sitara",
       location: "New York"

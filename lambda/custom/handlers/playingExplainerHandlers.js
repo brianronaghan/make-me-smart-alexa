@@ -113,7 +113,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
         );
       }
     } else {
-      console.time('UPDATE-DB');
+      console.time('PLAY-DB');
       var payload = {};
       payload.explainers = [{
         source: source || 'EXTERNAL',
@@ -122,7 +122,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
       }]
       this.attributes.indices.explainer = 0; // if we're playing, might as well reset the list
       db.update.call(this, payload, function(err, resp) {
-        console.timeEnd('UPDATE-DB');
+        console.timeEnd('PLAY-DB');
         this.attributes.currentExplainerIndex = chosenExplainer.index;
         util.logExplainer.call(this, chosenExplainer);
         var author = chosenExplainer.author;
@@ -157,8 +157,8 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
             util.templateBodyTemplate3(
               chosenExplainer.title,
               chosenExplainer.image || config.icon.full,
-              chosenExplainer.description,
-              config.defaultDescription,
+              '',
+              util.displayMessage.call(this),
               config.background.show
             )
           );
@@ -227,7 +227,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
             "Make Me Smart",
             config.icon.full,
             "We don't have any more explainers right now.",
-            config.defaultDescription,
+            'Choose an explainer by name or number or say newer to hear more recent explainers.',
             config.background.show
           )
         );
@@ -255,7 +255,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
             "Make Me Smart",
             config.icon.full,
             "You've reached the most recent explainer.",
-            config.defaultDescription,
+            'Choose an explainer by name or number or say older to hear more explainers.',
             config.background.show
           )
         );
