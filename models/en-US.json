@@ -512,6 +512,7 @@
                 {
                   "name": "AMAZON.NextIntent",
                   "samples": [
+                    "play another",
                     "hear another",
                     "another",
                     "another explainer",
