@@ -48,14 +48,21 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     this.attributes.ITERATING = true;
     var slot = slot || this.event.request.intent.slots;
     console.log("LIST_EXPLAINERS ListExplainer, SLOT", slot, ' and condition ', condition)
-    if (slot && slot.query && slot.query.value) { // TODO: the condition check is FUCKED.  will have this, and then I can't... HM. LOOK AT THIS LOGIC!
+    if (slot && slot.query && slot.query.value) {
       console.log('IT EXP, LIST EXP, got a query', slot.query.value);
       let intentCheck = util.intentCheck(slot.query.value);
+      let directionCheck = util.directionCheck(slot.query.value);
+
       if (intentCheck) {
         console.log("ITERATING_EXPLAINER ListExplainers intentCheck -- slot.query.value ", slot.query.value)
         delete slot.query.value;
         delete this.attributes.ITERATING;
         return this.emitWithState(intentCheck);
+      } else if (directionCheck) {
+        console.log("ITERATING_EXPLAINER ListExplainers caught DIRECTION NAV")
+        delete slot.query.value;
+        delete this.attributes.ITERATING;
+        return this.emitWithState(directionCheck);
       } else {
         console.log("GOT a non-intent query on list explainers, so redirecting to pickItem")
         return this.emitWithState('PickItem');
