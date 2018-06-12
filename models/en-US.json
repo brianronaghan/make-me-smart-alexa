@@ -512,6 +512,7 @@
                 {
                   "name": "AMAZON.NextIntent",
                   "samples": [
+                    "hear another",
                     "another",
                     "another explainer",
                     "next explainer"
@@ -880,6 +881,7 @@
                     "after that",
                     "more recent",
                     "more recent three",
+                    "previous three",
                     "newer",
                     "newer three",
                     "newer explainers",
