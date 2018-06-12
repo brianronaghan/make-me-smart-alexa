@@ -59,7 +59,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
         delete this.attributes.ITERATING;
         return this.emitWithState(intentCheck);
       } else if (directionCheck) {
-        console.log("ITERATING_EXPLAINER ListExplainers caught DIRECTION NAV")
+        console.log("ITERATING_EXPLAINER ListExplainers caught DIRECTION NAV: ", slot.query.value);
         delete slot.query.value;
         delete this.attributes.ITERATING;
         return this.emitWithState(directionCheck);

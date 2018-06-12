@@ -54,6 +54,7 @@ module.exports = {
   intentCheck: intentCheck,
   expletiveCheck: expletiveCheck,
   displayMessage: displayMessage,
+  directionCheck: directionCheck,
   templateListTemplate1: function (title, token, itemLabel, itemTitleKey, items) {
     var listItemBuilder = new Alexa.templateBuilders.ListItemBuilder();
     var listTemplateBuilder = new Alexa.templateBuilders.ListTemplate1Builder();
@@ -389,7 +390,7 @@ function intentCheck (text) {
   return INTENT_DICT[text]
 }
 
-function listNavCheck (text) {
+function directionCheck (text) {
   if (!DIRECT_DICT) {
     DIRECT_DICT = {};
     for (let directionIntent of Object.keys(config.navDirections)) {
