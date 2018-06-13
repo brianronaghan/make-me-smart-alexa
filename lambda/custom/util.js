@@ -357,6 +357,8 @@ function nullCheck(deviceId) {
   this.attributes.playing = this.attributes.playing || {};
   this.attributes.iterating = this.attributes.iterating || -1;
   this.attributes.requests = this.attributes.requests || [];
+  this.attributes.plays = this.attributes.plays || 0
+  this.attributes.REQUESTS = this.attributes.REQUESTS || 0;
 }
 
 function prosodyToBold (text) {
