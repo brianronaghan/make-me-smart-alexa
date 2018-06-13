@@ -61,17 +61,26 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     let suggestionString = `${suggestion}! Great idea!`
     if (suggestion && this.attributes.userName && this.attributes.userLocation && (Object.keys(config.testIds).indexOf(this.attributes.userId) < 0)) {
       console.log("REQUEST PickItem using saved name/location", slot)
+      this.attributes.REQUESTS++;
       payload.requests = [{
         query: suggestion,
         time: this.event.request.timestamp,
         user: this.attributes.userName,
         location: this.attributes.userLocation
       }];
+      let userAcknowledge;
+      if (this.attributes.ANONYMOUS || (this.attributes.REQUESTS !== 1 && this.attributes.REQUESTS % 3 !== 0)) {
+        userAcknowledge = 'you want'
+      } else {
+        userAcknowledge = `${this.attributes.userName} from ${this.attributes.userLocation} wants`
+      }
+
       console.time('DB-request-saved');
       delete this.attributes.requestingExplainer;
+
       db.update.call(this, payload, function(err, response) {
         console.timeEnd('DB-request-saved');
-        message = `${suggestionString} I'll tell Kai and Molly that ${this.attributes.userName} from ${this.attributes.userLocation} wants to get smart about that! You can also hear more from Kai and Molly by saying "alexa, play podcast Make Me Smart." `;
+        message = `${suggestionString} I'll tell Kai and Molly that ${userAcknowledge} to get smart about that! You can also hear more from Kai and Molly by saying "alexa, play podcast Make Me Smart." `;
         //
         this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
         if (slot && slot.query && slot.query.value) {
