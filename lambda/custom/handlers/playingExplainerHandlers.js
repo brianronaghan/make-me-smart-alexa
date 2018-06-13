@@ -14,7 +14,7 @@ var db = require('../db');
 
 module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
   'LaunchRequest': function () {
-    delete this.attributes.EASTER_EGG_INDEX;
+    delete this.attributes.EASTER_EGG_TITLE;
     console.log("PLAYING LaunchRequest ", this.handler.state)
     this.handler.state = this.attributes.STATE = config.states.START;
     this.emitWithState('LaunchRequest');
@@ -118,8 +118,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
       if (chosenExplainer.EE) {
         // set THIS.EASTER_EGG to true
         // set index to 0 just incase
-        this.attributes.EASTER_EGG_INDEX = chosenExplainer.index;
-        chosenExplainer.index = 0;
+        this.attributes.EASTER_EGG_TITLE = chosenExplainer.title.toLowerCase();
       }
       console.time('PLAY-DB');
       var payload = {};
@@ -142,7 +141,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
         if (source && source === 'NEW_USER_LAUNCH_PICK') {
           intro += `<audio src="${config.newUserAudio}" /> `;
         }
-        if (this.attributes.EASTER_EGG_INDEX) {
+        if (chosenExplainer.EE) {
           intro += 'Congratulations, you found a secret easter egg. '
         }
         intro += `Here's ${author} explaining ${chosenExplainer.title}`;
@@ -154,7 +153,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
         }
         intro += `. <break time = "200ms"/> <audio src="${chosenExplainer.audio.url}" />`;
         var prompt;
-        if (this.attributes.EASTER_EGG_INDEX) {
+        if (chosenExplainer.EE) {
           prompt = `Thanks for listening! Now back to our normally scheduled programming. You can hear what's new, browse all our explainers or submit an idea. What would you like to do?`;
         } else if (this.event.session.new) { // came directly here
           prompt = `You can replay that, play the latest, or browse all our explainers. What would you like to do?`;
@@ -164,7 +163,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
           prompt = "And that's all we have right now. You can replay that, browse all our explainers, or submit an idea for our next one. What would you like to do?"
         }
         let displayMessage;
-        if (this.attributes.EASTER_EGG_INDEX) {
+        if (chosenExplainer.EE) {
           displayMessage = "Congrats! You found an easter egg! Thanks for being a power user!";
         } else {
           displayMessage = util.displayMessage.call(this);
@@ -181,7 +180,6 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
             )
           );
         }
-        delete this.attributes.EASTER_EGG_INDEX;
         var fullSpeech = intro + prompt;
         this.response.speak(fullSpeech).listen(prompt);
         this.emit(':saveState', true);
@@ -193,7 +191,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     console.log("PLAYING_EXPLAINER TopicOnly", JSON.stringify(this.event.request.intent, null,2))
   },
   'PlayLatestExplainer': function () {
-    delete this.attributes.EASTER_EGG_INDEX
+    delete this.attributes.EASTER_EGG_TITLE
     // this is what 'play all would do'
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
@@ -201,7 +199,9 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     this.emitWithState('PickItem', {index: {value: 1}}, 'LATEST_FROM_PLAY');
   },
   'ReplayExplainer': function () {
-    delete this.attributes.EASTER_EGG_INDEX;
+    if (this.attributes.EASTER_EGG_TITLE) {
+      return this.emitWithState('PickItem', {query: {value: this.attributes.EASTER_EGG_TITLE}}, 'REPLAY')
+    }
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     console.log('GOT REPLAY', this.handler.state)
@@ -211,12 +211,12 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
   // STATE TRANSITION:
   'RequestExplainer' : function () {
     console.log('request explainer test IN PLAYING')
-    delete this.attributes.EASTER_EGG_INDEX;
+    delete this.attributes.EASTER_EGG_TITLE;
     this.handler.state = this.attributes.STATE = config.states.REQUEST;
     this.emitWithState('RequestExplainer', {query: {value:null},userLocation: {value: null}, userName: {value: null}});
   },
   'ListExplainers': function () {
-    delete this.attributes.EASTER_EGG_INDEX
+    delete this.attributes.EASTER_EGG_TITLE
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     console.log('list Explainers FROM Playing explainers')
@@ -227,7 +227,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     this.emitWithState('ListExplainers');
   },
   'HomePage' : function () {
-    delete this.attributes.EASTER_EGG_INDEX;
+    delete this.attributes.EASTER_EGG_TITLE;
     this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
     this.emitWithState('HomePage', 'no_welcome');
   },
@@ -235,7 +235,25 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
 
   // BUILT INS:
   'AMAZON.NextIntent' : function () {
-    delete this.attributes.EASTER_EGG_INDEX;
+    if (this.attributes.EASTER_EGG_TITLE) {
+      let message = "If you could use next to hear more easter eggs, they wouldn't be easter eggs. Instead, ";
+      let prompt = "You can hear what's new, browse all our explainers or submit an idea. What would you like to do?"
+      if (this.event.context.System.device.supportedInterfaces.Display) {
+        this.response.renderTemplate(
+          util.templateBodyTemplate3(
+            "Make Me Smart",
+            config.icon.full,
+            "You can't use next when hearing an easter egg.",
+            "Instead: you can hear what's new, browse all our explainers or submit an idea.",
+            config.background.show
+          )
+        );
+      }
+      this.response.speak(message + prompt).listen(prompt);
+      this.emit(':saveState');
+    }
+    delete this.attributes.EASTER_EGG_TITLE;
+
     // only in explainer mode, right?
     console.log("NEXT!!!! EXPLAINER", this.handler.state)
     var deviceId = util.getDeviceId.call(this);
@@ -266,9 +284,24 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     }
   },
   'AMAZON.PreviousIntent' : function () {
-    // only in playing explainer mode, right?
-    delete this.attributes.EASTER_EGG_INDEX;
-
+    if (this.attributes.EASTER_EGG_TITLE) {
+      let message = "If you could use previous to hear more easter eggs, they wouldn't be easter eggs. Instead, ";
+      let prompt = "You can hear what's new, browse all our explainers or submit an idea. What would you like to do?"
+      if (this.event.context.System.device.supportedInterfaces.Display) {
+        this.response.renderTemplate(
+          util.templateBodyTemplate3(
+            "Make Me Smart",
+            config.icon.full,
+            "You can't use previous when hearing an easter egg.",
+            "Instead, you can hear what's new, browse all our explainers or submit an idea.",
+            config.background.show
+          )
+        );
+      }
+      this.response.speak(message + prompt).listen(prompt);
+      this.emit(':saveState');
+    }
+    delete this.attributes.EASTER_EGG_TITLE;
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     if (this.attributes.currentExplainerIndex == 0) {
@@ -298,13 +331,13 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
 
   },
   'ChangeMyInfo' : function () {
-    delete this.attributes.EASTER_EGG_INDEX;
+    delete this.attributes.EASTER_EGG_TITLE;
 
     this.handler.state = this.attributes.STATE = config.states.REQUEST;
     this.emitWithState('ChangeMyInfo');
   },
   'AMAZON.StopIntent' : function() {
-    delete this.attributes.EASTER_EGG_INDEX;
+    delete this.attributes.EASTER_EGG_TITLE;
 
     console.log('STOP PLAY EXPLAINER STATE')
     // This needs to work for not playing as well
@@ -314,7 +347,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     this.emit(':saveState');
   },
   'AMAZON.CancelIntent' : function() {
-    delete this.attributes.EASTER_EGG_INDEX;
+    delete this.attributes.EASTER_EGG_TITLE;
 
     console.log('CANCEL PLAY EXPLAINER STATE')
     // This needs to work for not playing as well
@@ -324,7 +357,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
   },
 
   'AMAZON.PauseIntent' : function() {
-    delete this.attributes.EASTER_EGG_INDEX;
+    delete this.attributes.EASTER_EGG_TITLE;
 
     console.log('PAUSE PLAY EXPLAINER STATE')
     // This needs to work for not playing as well
@@ -334,7 +367,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
 
   // DEFAULT:
   'AMAZON.HelpIntent' : function () {
-    delete this.attributes.EASTER_EGG_INDEX;
+    delete this.attributes.EASTER_EGG_TITLE;
 
     console.log('Help in PLAYING EXPLAINER')
     var message = "You can say replay, next, or 'what's new' to hear our latest explainers. What would you like to do?";
@@ -346,14 +379,14 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
   },
   'SessionEndedRequest' : function () {
     // SHOULD I CLEAR THE STATE?
-    delete this.attributes.EASTER_EGG_INDEX;
+    delete this.attributes.EASTER_EGG_TITLE;
 
     console.log("PLAYING EXPLAINER session end", JSON.stringify(this.event.request, null,2));
     this.response.speak('See you later. Say Alexa, Make Me Smart to get learning again.')
     this.emit(':saveState');
    },
    'Unhandled' : function () {
-     delete this.attributes.EASTER_EGG_INDEX;
+     delete this.attributes.EASTER_EGG_TITLE;
 
      console.log("UNHANDLED playing", JSON.stringify(this.event, null, 2))
      var message = "Sorry I couldn't quite understand that. ";

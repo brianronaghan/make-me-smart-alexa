@@ -265,7 +265,7 @@ module.exports = {
       if (eggIndex > -1) {
         var egg = EASTER_EGGS[eggIndex];
         egg.EE = true;
-        egg.index = eggIndex;
+        egg.index = 0;
         console.log("FOUND A DAMN EASTER EGG", egg);
         return egg;
       }

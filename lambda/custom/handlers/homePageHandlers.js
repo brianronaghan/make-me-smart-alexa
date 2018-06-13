@@ -19,8 +19,6 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     this.emitWithState('LaunchRequest');
   },
   'HomePage': function (condition, message) {
-    // TODO CHECK NEW USER
-    // why did what's new not go here?
     var slot = slot || this.event.request.intent.slots;
     console.log("HOME PAGE CONDITION ", condition, ' AND NAME: ', this.event.request.intent.name)
     if (slot && slot.topic && slot.topic.value && !condition) {
