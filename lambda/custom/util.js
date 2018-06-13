@@ -264,7 +264,8 @@ module.exports = {
       var eggIndex = searchByName(cleanSlotName(intentSlot.query.value), eggNames, eggAlts);
       if (eggIndex > -1) {
         var egg = EASTER_EGGS[eggIndex];
-        egg.index = 0;
+        egg.EE = true;
+        egg.index = eggIndex;
         console.log("FOUND A DAMN EASTER EGG", egg);
         return egg;
       }

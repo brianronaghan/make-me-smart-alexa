@@ -15,7 +15,6 @@ var config = {
       "If you want to hear more from Kai and Molly download the Make Me Smart podcast wherever you get that sort of thing.",
       "Want to learn more about a topic? Goto: www.marketplace.org and get even smarter!",
       "Hey, guess what? We also have a show on the actual radio. Find Marketpace on your local public radio station.",
-      "Brian Ronaghan built me. He's awesome."
     ],
     testIds: {
       "amzn1.ask.account.AGXAI6THSPIDUPSEDUTAXRMH6NJJVZ57KZGR6MLRR2VRTFZV3FJ2VZWGHRQ33WLY5TPGN5UCWYRWE5CJW6HAT2LEJWJNV64UHVVR42RTNSIGRZBC572NR7CSY57B4FVSLD4APAKB7SB4KZHWE74DQPW7S4TDNILRWBIB3Q3CJ4YXRUAUYQ5ATDB7HVAVHYGOF2P5WUGL53RSY7I" : 'spot',
