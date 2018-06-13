@@ -41,9 +41,17 @@ var config = {
         "help please",
         "I don't understand"
       ],
+      'AMAZON.CancelIntent': [
+        "cancel",
+        "exit",
+        "get out",
+        "exit exit",
+        "nevermind",
+        "no",
+        "I don't want to"
+      ],
       'AMAZON.StopIntent': [
         "stop",
-        "cancel",
         "I'm done",
         "I'm set",
         "I'm good",
