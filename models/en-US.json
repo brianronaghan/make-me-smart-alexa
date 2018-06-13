@@ -292,7 +292,7 @@
        "slots": [
          {
            "name": "userName",
-           "type": "AMAZON.US_FIRST_NAME",
+           "type": "AMAZON.SearchQuery",
            "elicitationRequired": true,
            "confirmationRequired": false,
            "prompts": {
@@ -301,7 +301,7 @@
          },
          {
            "name": "userLocation",
-           "type": "AMAZON.US_CITY",
+           "type": "AMAZON.SearchQuery",
            "elicitationRequired": true,
            "confirmationRequired": false,
            "prompts": {
@@ -317,7 +317,7 @@
        "slots": [
          {
            "name": "userName",
-           "type": "AMAZON.US_FIRST_NAME",
+           "type": "AMAZON.SearchQuery",
            "elicitationRequired": true,
            "confirmationRequired": false,
            "prompts": {
@@ -326,7 +326,7 @@
          },
          {
            "name": "userLocation",
-           "type": "AMAZON.US_CITY",
+           "type": "AMAZON.SearchQuery",
            "elicitationRequired": true,
            "confirmationRequired": false,
            "prompts": {
@@ -342,7 +342,7 @@
        "slots": [
          {
            "name": "userName",
-           "type": "AMAZON.US_FIRST_NAME",
+           "type": "AMAZON.SearchQuery",
            "elicitationRequired": true,
            "confirmationRequired": false,
            "prompts": {
@@ -351,7 +351,7 @@
          },
          {
            "name": "userLocation",
-           "type": "AMAZON.US_CITY",
+           "type": "AMAZON.SearchQuery",
            "elicitationRequired": true,
            "confirmationRequired": false,
            "prompts": {
@@ -367,7 +367,7 @@
        "slots": [
          {
            "name": "userName",
-           "type": "AMAZON.US_FIRST_NAME",
+           "type": "AMAZON.SearchQuery",
            "elicitationRequired": true,
            "confirmationRequired": false,
            "prompts": {
@@ -376,7 +376,7 @@
          },
          {
            "name": "userLocation",
-           "type": "AMAZON.US_CITY",
+           "type": "AMAZON.SearchQuery",
            "elicitationRequired": true,
            "confirmationRequired": false,
            "prompts": {
@@ -410,7 +410,7 @@
          },
          {
            "name": "userName",
-           "type": "AMAZON.US_FIRST_NAME",
+           "type": "AMAZON.SearchQuery",
            "elicitationRequired": true,
            "confirmationRequired": false,
            "prompts": {
@@ -419,7 +419,7 @@
          },
          {
            "name": "userLocation",
-           "type": "AMAZON.US_CITY",
+           "type": "AMAZON.SearchQuery",
            "elicitationRequired": true,
            "confirmationRequired": false,
            "prompts": {
@@ -444,7 +444,7 @@
          },
          {
            "name": "userName",
-           "type": "AMAZON.US_FIRST_NAME",
+           "type": "AMAZON.SearchQuery",
            "elicitationRequired": true,
            "confirmationRequired": false,
            "prompts": {
@@ -453,7 +453,7 @@
          },
          {
            "name": "userLocation",
-           "type": "AMAZON.US_CITY",
+           "type": "AMAZON.SearchQuery",
            "elicitationRequired": true,
            "confirmationRequired": false,
            "prompts": {
@@ -469,7 +469,7 @@
        "slots": [
          {
            "name": "userName",
-           "type": "AMAZON.US_FIRST_NAME",
+           "type": "AMAZON.SearchQuery",
            "elicitationRequired": true,
            "confirmationRequired": false,
            "prompts": {
@@ -478,7 +478,7 @@
          },
          {
            "name": "userLocation",
-           "type": "AMAZON.US_CITY",
+           "type": "AMAZON.SearchQuery",
            "elicitationRequired": true,
            "confirmationRequired": false,
            "prompts": {
@@ -619,11 +619,11 @@
                     },
                     {
                       "name": "userName",
-                      "type": "AMAZON.US_FIRST_NAME"
+                      "type": "AMAZON.SearchQuery"
                     },
                     {
                       "name": "userLocation",
-                      "type": "AMAZON.US_CITY"
+                      "type": "AMAZON.SearchQuery"
                     }
                   ]
                 },
@@ -654,11 +654,11 @@
                     },
                     {
                       "name": "userName",
-                      "type": "AMAZON.US_FIRST_NAME"
+                      "type": "AMAZON.SearchQuery"
                     },
                     {
                       "name": "userLocation",
-                      "type": "AMAZON.US_CITY"
+                      "type": "AMAZON.SearchQuery"
                     }
                   ]
                 },
@@ -693,11 +693,11 @@
                     },
                     {
                       "name": "userName",
-                      "type": "AMAZON.US_FIRST_NAME"
+                      "type": "AMAZON.SearchQuery"
                     },
                     {
                       "name": "userLocation",
-                      "type": "AMAZON.US_CITY"
+                      "type": "AMAZON.SearchQuery"
                     },
                     {
                       "name": "query",
@@ -791,11 +791,11 @@
                       },
                       {
                         "name": "userName",
-                        "type": "AMAZON.US_FIRST_NAME"
+                        "type": "AMAZON.SearchQuery"
                       },
                       {
                         "name": "userLocation",
-                        "type": "AMAZON.US_CITY"
+                        "type": "AMAZON.SearchQuery"
                       }
                     ],
                     "samples":[
@@ -866,11 +866,11 @@
                     },
                     {
                       "name": "userName",
-                      "type": "AMAZON.US_FIRST_NAME"
+                      "type": "AMAZON.SearchQuery"
                     },
                     {
                       "name": "userLocation",
-                      "type": "AMAZON.US_CITY"
+                      "type": "AMAZON.SearchQuery"
                     }
                   ]
                 },
@@ -899,11 +899,11 @@
                     },
                     {
                       "name": "userName",
-                      "type": "AMAZON.US_FIRST_NAME"
+                      "type": "AMAZON.SearchQuery"
                     },
                     {
                       "name": "userLocation",
-                      "type": "AMAZON.US_CITY"
+                      "type": "AMAZON.SearchQuery"
                     }
                   ]
                 },
@@ -1019,11 +1019,11 @@
                     },
                     {
                       "name": "userName",
-                      "type": "AMAZON.US_FIRST_NAME"
+                      "type": "AMAZON.SearchQuery"
                     },
                     {
                       "name": "userLocation",
-                      "type": "AMAZON.US_CITY"
+                      "type": "AMAZON.SearchQuery"
                     }
                   ]
                 },
@@ -1040,11 +1040,11 @@
                     },
                     {
                       "name": "userName",
-                      "type": "AMAZON.US_FIRST_NAME"
+                      "type": "AMAZON.SearchQuery"
                     },
                     {
                       "name": "userLocation",
-                      "type": "AMAZON.US_CITY"
+                      "type": "AMAZON.SearchQuery"
                     }
                   ],
                   "samples": [
@@ -1064,11 +1064,11 @@
                     },
                     {
                       "name": "userName",
-                      "type": "AMAZON.US_FIRST_NAME"
+                      "type": "AMAZON.SearchQuery"
                     },
                     {
                       "name": "userLocation",
-                      "type": "AMAZON.US_CITY"
+                      "type": "AMAZON.SearchQuery"
                     }
                   ],
                   "samples": [
@@ -1088,11 +1088,11 @@
                     },
                     {
                       "name": "userName",
-                      "type": "AMAZON.US_FIRST_NAME"
+                      "type": "AMAZON.SearchQuery"
                     },
                     {
                       "name": "userLocation",
-                      "type": "AMAZON.US_CITY"
+                      "type": "AMAZON.SearchQuery"
                     }
                   ],
                   "samples": [
@@ -1120,11 +1120,11 @@
                     },
                     {
                       "name": "userName",
-                      "type": "AMAZON.US_FIRST_NAME"
+                      "type": "AMAZON.SearchQuery"
                     },
                     {
                       "name": "userLocation",
-                      "type": "AMAZON.US_CITY"
+                      "type": "AMAZON.SearchQuery"
                     }
                   ],
                   "samples": [
