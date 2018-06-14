@@ -4,7 +4,7 @@ module.exports = [
     author: 'Molly Wood',
     alts: ['g.d.p.r', 'gdpr', 'g d p r', 'g.b.p.r', 'gbpr', 'g b p r'],
     guid: 'GDPR_certification-1',
-    date: "2018-05-24",
+    date: "2018-06-15T07:00:00Z",
     description: "G.D.P.R. is the European Union's new data law, the General Data Protection Regulation.",
     requestInformation: {
       user: "Sitara",
@@ -21,7 +21,7 @@ module.exports = [
     alts: ['royal wedding', 'royals', 'wedding', 'the wedding', 'royal'],
     tags: [],
     guid: 'royal_wedding_certification',
-    date: "2018-05-24",
+    date: "2018-06-14T18:55:00Z",
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Ryssdal+-+Royal+Wedding+-+MIXLEV_alexa.mp3",
       intro: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/Alexa+-+Ryssdal+-+ROYAL+WEDDING+INTRO+-+MIXLEV_alexa.mp3'
@@ -32,7 +32,7 @@ module.exports = [
     author: 'Molly Wood',
     alts: ['a cryptocurrency', 'a bitcoin', 'uh bitcoin', 'cryptocurrency', 'crypto', 'blockchain', 'flip coin'],
     guid: "bitcoin_certification",
-    date: null,
+    date: "2018-05-24",
     description: "Bitcoin is the best known cryptocurrency.",
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Wood+-+Bitcoin+-+MIXLEV_alexa.mp3",
@@ -85,7 +85,7 @@ module.exports = [
     author: 'Molly Wood',
     alts: ['5 g', '5G', 'five g', '5g', '5 G'],
     guid: "5G_certification",
-    date: null,
+    date: "2018-05-24",
     description: "5G is the fifth generation of wireless cellular network standard. But it's not quite here yet.",
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Wood+-+5g+-+MIXLEV_alexa.mp3",
@@ -115,4 +115,4 @@ module.exports = [
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Ryssdal+-+Productivity+-+MIXLEV_alexa.mp3",
     }
   },
-]
+];
