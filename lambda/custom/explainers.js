@@ -4,7 +4,7 @@ module.exports = [
     author: 'Molly Wood',
     alts: ['g.d.p.r', 'gdpr', 'g d p r', 'g.b.p.r', 'gbpr', 'g b p r'],
     guid: 'GDPR_certification-1',
-    date: "2018-06-15T07:00:00Z",
+    date: "2018-06-14T07:00:00Z",
     description: "G.D.P.R. is the European Union's new data law, the General Data Protection Regulation.",
     requestInformation: {
       user: "Sitara",
@@ -20,8 +20,8 @@ module.exports = [
     author: 'Kai Ryssdal',
     alts: ['royal wedding', 'royals', 'wedding', 'the wedding', 'royal'],
     tags: [],
-    guid: 'royal_wedding_certification',
-    date: "2018-06-14T18:55:00Z",
+    guid: 'royal_wedding_time',
+    date: "2018-06-14T19:45:00Z",
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Ryssdal+-+Royal+Wedding+-+MIXLEV_alexa.mp3",
       intro: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/Alexa+-+Ryssdal+-+ROYAL+WEDDING+INTRO+-+MIXLEV_alexa.mp3'
