@@ -32,11 +32,6 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     this.emitWithState('LaunchRequest');
   },
   'RequestExplainer': function (slot) {
-    let NAME_TESTING = false; //Object.keys(config.testIds).indexOf(this.attributes.userId) > -1;
-    if (NAME_TESTING) {
-      console.log("NAME TESTING ACCOUNT");
-    }
-    console.log('launch', JSON.stringify(this.event, null,2))
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     var slot = slot || this.event.request.intent.slots;
