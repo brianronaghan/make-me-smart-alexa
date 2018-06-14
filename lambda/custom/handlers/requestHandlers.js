@@ -9,8 +9,6 @@ var db = require('../db');
 
 module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
   'LaunchRequest': function () {
-    let NAME_TESTING = Object.keys(config.testIds).indexOf(this.attributes.userId) > -1;
-
     if (this.attributes.SUGGESTION) {
       console.log("THERE's an unfilled sugg ", this.attributes.SUGGESTION);
       var payload = {};
@@ -81,7 +79,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
 
     let upperFirst = this.attributes.SUGGESTION.charAt(0).toUpperCase() + this.attributes.SUGGESTION.slice(1);
     let suggestionString = `${upperFirst}! Great idea!`;
-    if (this.attributes.SUGGESTION && this.attributes.userName && this.attributes.userLocation && !NAME_TESTING) {
+    if (this.attributes.SUGGESTION && this.attributes.userName && this.attributes.userLocation) {
       console.log("REQUEST PickItem using saved name/location", slot)
       this.attributes.REQUESTS++;
       payload.requests = [{
@@ -125,13 +123,13 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
           }
         );
       });
-    } else if ((!this.attributes.userName || NAME_TESTING) && slot.userName && !slot.userName.value && !this.attributes.NAME_REQUESTED) {
+    } else if ((!this.attributes.userName) && slot.userName && !slot.userName.value && !this.attributes.NAME_REQUESTED) {
       // don't have normal name, haven't requested
       console.log('Gotta get userName');
       message += `${suggestionString} I'll ask Kai and Molly to look into it. They'll want to thank you if they use your idea, so what's your first name?`;
       this.attributes.NAME_REQUESTED = true;
       return this.emit(':elicitSlotWithCard', 'userName', message, "What first name should I leave?", 'Request Explainer',message, this.event.request.intent, util.cardImage(config.icon.full));
-    } else if ((!this.attributes.userName || NAME_TESTING) && slot.userName && slot.userName.value && this.attributes.NAME_REQUESTED) {
+    } else if ((!this.attributes.userName) && slot.userName && slot.userName.value && this.attributes.NAME_REQUESTED) {
       // GOT NORMAL NAME: request normal location
       console.log("GOT normal name," , slot.userName.value, 'asking for normallocation')
       this.attributes.userName = slot.userName.value;
@@ -141,7 +139,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       message += 'And what city or state are you from?';
       cardMessage += message;
       return this.emit(':elicitSlotWithCard', 'userLocation', message, "What city or state should I leave?", 'Request Explainer', cardMessage, this.event.request.intent, util.cardImage(config.icon.full));
-    } else if ((!this.attributes.userName || NAME_TESTING) && slot.userName && !slot.userName.value && this.attributes.NAME_REQUESTED && slot.manualName && !slot.manualName.value) {
+    } else if ((!this.attributes.userName) && slot.userName && !slot.userName.value && this.attributes.NAME_REQUESTED && slot.manualName && !slot.manualName.value) {
       // don't have normal name, but I HAVE requested it: REQUEST MANUAL
       console.log('asked for userName, didnt get it,  gotta get MANUAL NAME');
       // request manual name
@@ -154,7 +152,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       message += `Seems like I had trouble understanding your name. Kai and Molly will want to thank you for ${thankYou}, so what's your first name?`;
       return this.emit(':elicitSlotWithCard', 'manualName', message, "What first name should I leave?", 'Tell us your name',message, this.event.request.intent, util.cardImage(config.icon.full));
 
-    } else if ((!this.attributes.userName || NAME_TESTING) && slot.userName && !slot.userName.value && slot.manualName && slot.manualName.value) {
+    } else if ((!this.attributes.userName) && slot.userName && !slot.userName.value && slot.manualName && slot.manualName.value) {
       // got manual name, save, and request location
       console.log("OK, got manualName ", slot.manualName, " now  REQUEST normal LOCATION");
       this.attributes.userName = slot.manualName.value;
@@ -166,7 +164,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
 
       return this.emit(':elicitSlotWithCard', 'userLocation', message, "What city or state should I leave?", 'Request Explainer', cardMessage, this.event.request.intent, util.cardImage(config.icon.full));
 
-    } else if ((!this.attributes.userLocation || NAME_TESTING) && slot.userLocation && slot.userLocation.value) {
+    } else if ((!this.attributes.userLocation) && slot.userLocation && slot.userLocation.value) {
       // got normal location, good to go.
       console.log("GOT  normal userLocation  ", slot.userLocation.value, "SHOULD BE READY TO SAVE");
       this.attributes.userLocation = slot.userLocation.value;
@@ -222,13 +220,13 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
           }
         );
       });
-    } else if ((!this.attributes.userLocation || NAME_TESTING) && slot.userLocation && !slot.userLocation.value && this.attributes.LOCATION_REQUESTED && slot.manualLocation && !slot.manualLocation.value) {
+    } else if ((!this.attributes.userLocation) && slot.userLocation && !slot.userLocation.value && this.attributes.LOCATION_REQUESTED && slot.manualLocation && !slot.manualLocation.value) {
       // no userLocation and I have requested it: gotta get manual
       console.log('asked for userLocation, didnt get it,  gotta get manualLocation');
       var cardMessage = `Seems like I'm having trouble understanding your city. Let's try again. What city are you from?`;
       cardMessage += message;
       return this.emit(':elicitSlotWithCard', 'manualLocation', cardMessage, "What city or state should I leave?", "Where are you from?", cardMessage, this.event.request.intent, util.cardImage(config.icon.full));
-    } else if ((!this.attributes.userLocation && !NAME_TESTING) && slot.userLocation && !slot.userLocation.value && slot.manualLocation && slot.manualLocation.value) {
+    } else if ((!this.attributes.userLocation) && slot.userLocation && !slot.userLocation.value && slot.manualLocation && slot.manualLocation.value) {
       console.log("OK, got manualLocation ", slot.manualLocation, " WE SHOULD BE GOOD TO GO");
       this.attributes.userLocation = slot.manualLocation.value;
       this.attributes.REQUESTS++;

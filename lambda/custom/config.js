@@ -16,7 +16,7 @@ var config = {
       "If you want to hear more from Kai and Molly download the Make Me Smart podcast wherever you get that sort of thing.",
       "We're always looking for new ideas for explainers. Try 'Alexa, submit an idea' to give us one!",
       "Want to learn more about a topic? Goto: www.marketplace.org and get even smarter!",
-      "Hey, guess what? We also have a show on the actual radio. Find Marketpace on your local public radio station.",
+      "Hey, guess what? We also have a show on the actual radio. Find Marketplace on your local public radio station.",
       "You can always say 'Alexa, play the latest' to hear what we're getting smart about right now.",
       "Have a question? Found a bug? Email mms_support@marketplace.org and we might be able to help!"
     ],
