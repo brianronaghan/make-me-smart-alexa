@@ -5,8 +5,6 @@ var Alexa = require('alexa-sdk');
 var config = require('../config');
 var util = require('../util');
 
-var explainers = require('../explainers');
-
 var dynasty = require('dynasty')({ region: process.env.AWS_DEFAULT_REGION });
 var sessions = dynasty.table(config.sessionDBName);
 
@@ -20,7 +18,8 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
   },
   'HomePage': function (condition, message) {
     var slot = slot || this.event.request.intent.slots;
-    console.log("HOME PAGE CONDITION ", condition, ' AND NAME: ', this.event.request.intent.name)
+    // console.log("HOME PAGE CONDITION ", condition, ' AND NAME: ', this.event.request.intent.name);
+    console.log("HOME PAGE ATTRIBUTES" ,JSON.stringify(this.attributes, null,2));
     if (slot && slot.topic && slot.topic.value && !condition) {
       console.log("GOT topic home", slot)
       return this.emitWithState('PickItem', slot)
@@ -68,7 +67,7 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     } else {
       intro += "This week we're "
     }
-    var topics = explainers.map(function(item) {
+    var topics = util.liveExplainers().map(function(item) {
       return item.title
     });
     if (!this.attributes.HEARD_FIRST) {
@@ -219,6 +218,13 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
 
   'AMAZON.HelpIntent' : function () {
     console.log('Help in HOME PAGE')
+    let NAME_TESTING = Object.keys(config.testIds).indexOf(this.attributes.userId) > -1;
+    if (NAME_TESTING) {
+      console.log("EXPLAINERS : ");
+
+      console.log(JSON.stringify(util.liveExplainers(), null, 2))
+
+    }
     var message = "You can pick an explainer by name or number, browse our explainers, or play them all. What would you like to do?";
     this.response.speak(message).listen(message);
     if (this.event.context.System.device.supportedInterfaces.Display) {

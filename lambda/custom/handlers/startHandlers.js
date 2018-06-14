@@ -6,13 +6,11 @@ var config = require('../config');
 var util = require('../util');
 var db = require('../db');
 
-var explainers = require('../explainers');
-
 var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
   'LaunchRequest': function (condition, message) {
     let welcome = '';
     let prompt = "You can replay that, hear what's new or submit an idea for what we should explain next. What would you like to do?"
-    let latestExplainer = explainers[0];
+    let latestExplainer = util.liveExplainers()[0];
     let author = latestExplainer.author;
     if (author === 'Molly Wood') {
       author = `Molly '<emphasis level="strong"> Wood</emphasis>`;
@@ -190,6 +188,14 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
 
   'AMAZON.HelpIntent': function () {
     console.log('Help in START');
+    let NAME_TESTING = Object.keys(config.testIds).indexOf(this.attributes.userId) > -1;
+    if (NAME_TESTING) {
+      console.log("EXPLAINERS : ");
+
+      console.log(JSON.stringify(util.liveExplainers(), null, 2))
+
+    }
+
 
     // Handler for built-in HelpIntent
     var message = "You can replay that, hear what's new, or submit your idea for an explainer. What would you like to do?";
