@@ -3,8 +3,6 @@ var Alexa = require('alexa-sdk');
 var config = require('../config');
 var util = require('../util');
 
-var explainers = require('../explainers')
-
 var db = require('../db');
 
 module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
@@ -70,7 +68,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     }
 
     var data = util.itemLister(
-      explainers,
+      util.liveExplainers(),
       `explainers`,
       'title',
       this.attributes.indices.explainer,
@@ -105,7 +103,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     } else {
       // NO ITERATING, which means, um, to actually do it?
       console.log("OlderExplainers, NO ITERATING FLAG, so I guess it's real? ")
-      if (this.attributes.indices.explainer + config.items_per_prompt.explainer >= explainers.length) {
+      if (this.attributes.indices.explainer + config.items_per_prompt.explainer >= util.liveExplainers().length) {
         let message = "This is the end of the list. Again, the choices are, "
         return util.sendProgressive(
           this.event.context.System.apiEndpoint, // no need to add directives params
