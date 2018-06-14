@@ -5,7 +5,6 @@ var Alexa = require('alexa-sdk');
 var config = require('../config');
 var util = require('../util');
 
-var explainers = require('../explainers')
 var db = require('../db');
 
 module.exports = Alexa.CreateStateHandler(config.states.CHANGE_INFO, {
