@@ -700,6 +700,14 @@
                       "type": "AMAZON.US_CITY"
                     },
                     {
+                      "name": "manualName",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "manualLocation",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
                       "name": "query",
                       "type": "AMAZON.SearchQuery"
                     }
@@ -796,6 +804,14 @@
                       {
                         "name": "userLocation",
                         "type": "AMAZON.US_CITY"
+                      },
+                      {
+                        "name": "manualName",
+                        "type": "AMAZON.SearchQuery"
+                      },
+                      {
+                        "name": "manualLocation",
+                        "type": "AMAZON.SearchQuery"
                       }
                     ],
                     "samples":[
@@ -871,6 +887,14 @@
                     {
                       "name": "userLocation",
                       "type": "AMAZON.US_CITY"
+                    },
+                    {
+                      "name": "manualName",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "manualLocation",
+                      "type": "AMAZON.SearchQuery"
                     }
                   ]
                 },
@@ -904,6 +928,14 @@
                     {
                       "name": "userLocation",
                       "type": "AMAZON.US_CITY"
+                    },
+                    {
+                      "name": "manualName",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "manualLocation",
+                      "type": "AMAZON.SearchQuery"
                     }
                   ]
                 },
@@ -1024,6 +1056,14 @@
                     {
                       "name": "userLocation",
                       "type": "AMAZON.US_CITY"
+                    },
+                    {
+                      "name": "manualName",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "manualLocation",
+                      "type": "AMAZON.SearchQuery"
                     }
                   ]
                 },
@@ -1045,6 +1085,14 @@
                     {
                       "name": "userLocation",
                       "type": "AMAZON.US_CITY"
+                    },
+                    {
+                      "name": "manualName",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "manualLocation",
+                      "type": "AMAZON.SearchQuery"
                     }
                   ],
                   "samples": [
@@ -1069,6 +1117,14 @@
                     {
                       "name": "userLocation",
                       "type": "AMAZON.US_CITY"
+                    },
+                    {
+                      "name": "manualName",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "manualLocation",
+                      "type": "AMAZON.SearchQuery"
                     }
                   ],
                   "samples": [
@@ -1093,6 +1149,14 @@
                     {
                       "name": "userLocation",
                       "type": "AMAZON.US_CITY"
+                    },
+                    {
+                      "name": "manualName",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "manualLocation",
+                      "type": "AMAZON.SearchQuery"
                     }
                   ],
                   "samples": [
@@ -1125,6 +1189,14 @@
                     {
                       "name": "userLocation",
                       "type": "AMAZON.US_CITY"
+                    },
+                    {
+                      "name": "manualName",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "manualLocation",
+                      "type": "AMAZON.SearchQuery"
                     }
                   ],
                   "samples": [
