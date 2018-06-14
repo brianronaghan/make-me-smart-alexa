@@ -1,6 +1,7 @@
 var Alexa = require("alexa-sdk");
 var config = require('./config')
 var constants = config.constants;
+var explainers = require('./explainers')
 
 var blacklist = require('./blacklist');
 var EASTER_EGGS = require('./easter_eggs.js');
@@ -55,6 +56,7 @@ module.exports = {
   expletiveCheck: expletiveCheck,
   displayMessage: displayMessage,
   directionCheck: directionCheck,
+  liveExplainers: liveExplainers,
   templateListTemplate1: function (title, token, itemLabel, itemTitleKey, items) {
     var listItemBuilder = new Alexa.templateBuilders.ListItemBuilder();
     var listTemplateBuilder = new Alexa.templateBuilders.ListTemplate1Builder();
@@ -445,6 +447,10 @@ function stripArticles (searchTerm) {
 
 
   return searchTerm;
+}
+
+function liveExplainers() {
+  return explainers.filter(explainer => new Date(explainer.date) < Date.now())
 }
 
 function displayMessage () {
