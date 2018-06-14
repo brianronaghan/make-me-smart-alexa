@@ -17,8 +17,8 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       payload.requests = [{
         query: this.attributes.SUGGESTION,
         time: this.event.request.timestamp,
-        user: this.attributes.userName,
-        location: this.attributes.userLocation,
+        user: this.attributes.userName || this.attributes.userId,
+        location: this.attributes.userLocation || 'not_entered',
         condition: 'rescued_launch'
       }];
       return db.update.call(this, payload, function(err, response) {
@@ -72,12 +72,14 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       if (this.event.session.new) {
         message += "Welcome to Make Me Smart! "
       }
-      message += `Some of our best ideas come from you - our Alexa users - so thanks! What topic do you think Kai and Molly should do an explainer on?`;
+      if (this.attributes.REQUESTS === 0 || this.attributes.REQUESTS % 3 === 0) {
+        message += 'Some of our best ideas come from you - our Alexa users - so thanks! ';
+      }
+      message += 'What topic do you think Kai and Molly should do an explainer on?';
       return this.emit(':elicitSlotWithCard', 'query', message, "What topic would you like to request an explainer on?", 'Request Explainer', util.clearProsody(message), this.event.request.intent, util.cardImage(config.icon.full));
     }
 
     let upperFirst = this.attributes.SUGGESTION.charAt(0).toUpperCase() + this.attributes.SUGGESTION.slice(1);
-    console.log("UPPER ", upperFirst);
     let suggestionString = `${upperFirst}! Great idea!`;
     if (this.attributes.SUGGESTION && this.attributes.userName && this.attributes.userLocation && !NAME_TESTING) {
       console.log("REQUEST PickItem using saved name/location", slot)
@@ -89,7 +91,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
         location: this.attributes.userLocation
       }];
       let userAcknowledge;
-      if (this.attributes.ANONYMOUS || (this.attributes.REQUESTS !== 2 && this.attributes.REQUESTS % 3 !== 0)) {
+      if (this.attributes.ANONYMOUS || (this.attributes.REQUESTS > 2 && this.attributes.REQUESTS % 3 !== 0)) {
         userAcknowledge = 'you want'
       } else {
         userAcknowledge = `${this.attributes.userName} from ${this.attributes.userLocation} wants`
