@@ -5,8 +5,6 @@ var Alexa = require('alexa-sdk');
 var config = require('../config');
 var util = require('../util');
 
-var explainers = require('../explainers');
-
 var dynasty = require('dynasty')({ region: process.env.AWS_DEFAULT_REGION });
 var sessions = dynasty.table(config.sessionDBName);
 
@@ -32,7 +30,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     if (source === 'HOME_AFTER_LAUNCH') {
       addOneBool = true
     }
-    var chosenExplainer = util.itemPicker(slot, explainers, 'title', 'topic', addOneBool);
+    var chosenExplainer = util.itemPicker(slot, util.liveExplainers(), 'title', 'topic', addOneBool);
     console.log("CHOSEN EXPLAINER value:  ", chosenExplainer)
     if (chosenExplainer === -1) {
       console.log("OUT OF BOUNDS, but by number")
@@ -47,7 +45,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
         theNumber = slot.ordinal.value;
         delete slot.ordinal.value;
       }
-      var message = `${theNumber} is not a valid choice. Please choose between 1 and ${explainers.length}. Let's try again. `
+      var message = `${theNumber} is not a valid choice. Please choose between 1 and ${util.liveExplainers().length}. Let's try again. `
       var boundThis = this;
       return util.sendProgressive(
         boundThis.event.context.System.apiEndpoint, // no need to add directives params
@@ -68,7 +66,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
         return this.emitWithState('PickItem');
       } else if (slot.index && slot.index.value) {
         console.log("NO EXPLAINER FOUND, but there is INDEX ", JSON.stringify(slot, null,2))
-        var message = `${slot.index.value} is not a valid choice. Please choose between 1 and ${explainers.length}. Let's try again. `
+        var message = `${slot.index.value} is not a valid choice. Please choose between 1 and ${util.liveExplainers().length}. Let's try again. `
         var boundThis = this;
         return util.sendProgressive(
           boundThis.event.context.System.apiEndpoint, // no need to add directives params
@@ -84,7 +82,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
         console.log("NO EXPLAINER , but there is ORDINAL ", JSON.stringify(slot, null,2))
         let theOrdinal = slot.ordinal.value;
         delete slot.ordinal.value;
-        var message = `We don't have a ${theOrdinal}. Please choose between 1 and ${explainers.length}. Let's try again. `
+        var message = `We don't have a ${theOrdinal}. Please choose between 1 and ${util.liveExplainers().length}. Let's try again. `
         return util.sendProgressive(
           boundThis.event.context.System.apiEndpoint, // no need to add directives params
           boundThis.event.request.requestId,
@@ -157,7 +155,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
           prompt = `Thanks for listening! Now back to our normally scheduled programming. You can hear what's new, browse all our explainers or submit an idea. What would you like to do?`;
         } else if (this.event.session.new) { // came directly here
           prompt = `You can replay that, play the latest, or browse all our explainers. What would you like to do?`;
-        } else if (explainers[chosenExplainer.index+1]) { // THERE IS a next explainer
+        } else if (util.liveExplainers()[chosenExplainer.index+1]) { // THERE IS a next explainer
           prompt = `You can replay that, say 'next' to hear another, or browse all our explainers. What would you like to do?`;
         } else { // end of the line
           prompt = "And that's all we have right now. You can replay that, browse all our explainers, or submit an idea for our next one. What would you like to do?"
@@ -258,7 +256,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     console.log("NEXT!!!! EXPLAINER", this.handler.state)
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
-    if (explainers.length <= this.attributes.currentExplainerIndex +1) {
+    if (util.liveExplainers().length <= this.attributes.currentExplainerIndex +1) {
       // last spot
       var message = "We don't have any more explainers right now. You can browse all our explainers or hear what's new for the latest. What would you like to do?"
       var prompt = "You can browse all our explainers or hear what's new for the latest. What would you like to do?"
