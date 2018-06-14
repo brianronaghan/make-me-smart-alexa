@@ -152,7 +152,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       message += `Seems like I had trouble understanding your name. Kai and Molly will want to thank you for ${thankYou}, so what's your first name?`;
       return this.emit(':elicitSlotWithCard', 'manualName', message, "What first name should I leave?", 'Tell us your name',message, this.event.request.intent, util.cardImage(config.icon.full));
 
-    } else if ((!this.attributes.userName) && slot.userName && !slot.userName.value && slot.manualName && slot.manualName.value) {
+    } else if ((!this.attributes.userName) && slot.manualName && slot.manualName.value && this.attributes.NAME_REQUESTED) {
       // got manual name, save, and request location
       console.log("OK, got manualName ", slot.manualName, " now  REQUEST normal LOCATION");
       this.attributes.userName = slot.manualName.value;
@@ -183,6 +183,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       }
       delete slot.userLocation.value;
       delete this.attributes.requestingExplainer;
+
       if (slot && slot.query && slot.query.value) {
         delete slot.query.value
       } else if (slot && slot.topic && slot.topic.value) {
@@ -220,6 +221,12 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
           }
         );
       });
+    } else if ((!this.attributes.userLocation) && slot.userLocation && !slot.userLocation.value && !this.attributes.LOCATION_REQUESTED) {
+      // somehow got here without eliciting location?
+      this.attributes.LOCATION_REQUESTED = true;
+      var cardMessage = `Seems like I'm having trouble understanding your city. Let's try again. What city are you from?`;
+      return this.emit(':elicitSlotWithCard', 'manualLocation', cardMessage, "What city or state should I leave?", 'Request Explainer', cardMessage, this.event.request.intent, util.cardImage(config.icon.full));
+
     } else if ((!this.attributes.userLocation) && slot.userLocation && !slot.userLocation.value && this.attributes.LOCATION_REQUESTED && slot.manualLocation && !slot.manualLocation.value) {
       // no userLocation and I have requested it: gotta get manual
       console.log('asked for userLocation, didnt get it,  gotta get manualLocation');
@@ -283,7 +290,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
         );
       });
       // Got manual location. SAVE and you're good to go
-    } else if (false && slot.userName && slot.userName.value && slot.userLocation && slot.userLocation.value) { // WE have filled in both in the cycle
+    } else { // god help us how did we get here?
       // NOTE: I THINK that this should be moot... BASICALLY: to get to the end of the cycle you must have location previously
       // let intentCheck = util.intentCheck(slot.userLocation.value);
       // if (intentCheck) {
@@ -342,8 +349,8 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       //     }
       //   );
       // });
-    } else { // no userLocation or userName slot
-      console.log('REQUEST RequestExplainer at the no slot GENERAL ELSE AHHH:', JSON.stringify(this.event.request.intent, null, 2))
+      console.log('REQUEST RequestExplainer at  GENERAL ELSE AHHH:', JSON.stringify(this.event.request, null, 2))
+      return this.emitWithState('Unhandled');
     }
   },
   'PickItem': function () {

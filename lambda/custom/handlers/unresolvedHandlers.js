@@ -81,7 +81,7 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
       console.log("UNRESOLVED PickItem -- CONFIRMED", JSON.stringify(intentObj, null,2));
       // TODO OKAY: now it's confirmed. We gotta ge tthe info?
       if (this.attributes.UNRESOLVED && this.attributes.userName && this.attributes.userLocation) { // turn off for testing
-        console.log("REQUEST PickItem using saved name/location", slot)
+        console.log("UNRESOLVED saving saved name/location", slot)
         payload.requests = [{
           query: this.attributes.UNRESOLVED,
           time: this.event.request.timestamp,
