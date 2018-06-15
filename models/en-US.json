@@ -606,7 +606,14 @@
                     "hear new explainers",
                     "make me smart",
                     "what I need to know",
-                    "what's happening in the world"
+                    "what's happening in the world",
+                    "I want to hear what's new",
+                    "I want the main menu",
+                    "take me to the main menu",
+                    "go to the main menu",
+                    "I want to start over"
+
+
                   ],
                   "slots": [
                     {
@@ -826,30 +833,83 @@
                       "list our explainers",
                       "list your explainers",
                       "list the explainers",
+
                       "list all explainers",
+                      "list all the explainers",
+                      "list all our explainers",
+                      "list all your explainers",
+                      "list all the explainers",
+
+                      "list all of the explainers",
+                      "list all of our explainers",
+                      "list all of your explainers",
+
                       "everything",
+
                       "explore",
                       "explore explainers",
+
                       "explore all",
                       "explore our explainers",
                       "explore your explainers",
                       "explore the explainers",
+
                       "explore all explainers",
                       "explore all our explainers",
+                      "explore all your explainers",
                       "explore all the explainers",
+
+                      "explore all of our explainers",
+                      "explore all of your explainers",
+                      "explore all of the explainers",
+
                       "browse",
                       "browse explainers",
                       "browse all",
+                      "browse topics",
+
+                      "browse every one of your explainer",
+                      "browse every one of your explainers",
+                      "browse every one of our explainer",
+                      "browse every one of our explainers",
+                      "browse every one of the explainer",
+                      "browse every one of the explainers",
+
+                      "browse every explainer",
+                      "browse every single explainer",
                       "browse all explainers",
+                      "browse all our explainers",
+                      "browse all your explainers",
+                      "browse all the explainers",
+                      "browse all of the explainers",
+                      "browse all of our explainers",
+                      "browse all of your explainers",
                       "browse our explainers",
                       "browse the explainers",
                       "browse your explainers",
-                      "browse all our explainers",
+
+                      "browse every one of your topic",
+                      "browse every one of your topics",
+                      "browse every topic",
+                      "browse every single topic",
+                      "browse all topics",
+                      "browse all our topics",
+                      "browse all your topics",
+                      "browse all the topics",
+                      "browse all of the topics",
+                      "browse all of our topics",
+                      "browse all of your topics",
+                      "browse our topics",
+                      "browse the topics",
+                      "browse your topics",
+
                       "all explainers",
                       "see all explainers",
                       "show all explainers",
                       "show me all explainers",
                       "show me all the explainers",
+                      "show me all your explainers",
+
                       "show me more",
                       "ask for more",
                       "more options",
