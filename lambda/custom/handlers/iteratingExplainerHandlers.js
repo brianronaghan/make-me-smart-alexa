@@ -78,6 +78,9 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     if (incomingMessage) {
       listMessage += incomingMessage;
     }
+    if (this.event.session.new) {
+      listMessage += "Welcome to Make Me Smart! You want to do a deep dive, huh? Okay! ";
+    }
     if (condition && condition === 'unresolved_save') {
       listMessage += 'In the meantime, ';
       if (this.attributes.indices.explainer !== 0) {
