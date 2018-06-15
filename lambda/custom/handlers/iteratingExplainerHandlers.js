@@ -267,6 +267,17 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
    },
    'AMAZON.HelpIntent' : function () {
      console.log('ITERATING_EXPLAINER HelpIntent', JSON.stringify(this.event.request.intent, null,2));
+     let NAME_TESTING = Object.keys(config.testIds).indexOf(this.attributes.userId) > -1;
+     if (NAME_TESTING) {
+       console.log("ITERATING TEST DELETING name and location and req flags");
+       delete this.attributes.UNRESOLVED;
+       delete this.attributes.SUGGESTION;
+       delete this.attributes.userName;
+       delete this.attributes.userLocation;
+       delete this.attributes.NAME_REQUESTED;
+       delete this.attributes.LOCATION_REQUESTED;
+
+     }
      var message = "You can choose an explainer by name or number, or say 'older' or 'newer' to move through the list. Say browse to list the explainers again. What would you like to do?";
      this.response.speak(message).listen(message);
      if (this.event.context.System.device.supportedInterfaces.Display) {
