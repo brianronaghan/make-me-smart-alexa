@@ -267,7 +267,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
             "Make Me Smart",
             config.icon.full,
             "We don't have any more explainers right now.",
-            'Choose an explainer by name or number or say newer to hear more recent explainers.',
+            "You can browse all our explainers or hear what's new for the latest.",
             config.background.show
           )
         );
@@ -312,7 +312,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
             "Make Me Smart",
             config.icon.full,
             "You've reached the most recent explainer.",
-            'Choose an explainer by name or number or say older to hear more explainers.',
+            "You can browse all our explainers or hear what's new for the latest.",
             config.background.show
           )
         );
