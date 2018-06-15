@@ -36,6 +36,7 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     this.attributes.indices.explainer = 0; // set page to 0
     this.attributes.currentExplainerIndex = -1;
     var intro = '';
+
     if (this.event.session.new && condition !== 'new_user_from_launch') { // and condition === to something?
       this.attributes.HEARD_FIRST = 0;
       intro += "Welcome back to Make Me Smart. This week we're ";
@@ -67,6 +68,8 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     } else {
       intro += "This week we're "
     }
+    var deviceId = util.getDeviceId.call(this);
+    util.nullCheck.call(this, deviceId);
     var topics = util.liveExplainers().map(function(item) {
       return item.title
     });
