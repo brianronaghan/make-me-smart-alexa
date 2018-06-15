@@ -48,18 +48,21 @@ module.exports = Alexa.CreateStateHandler(config.states.CHANGE_INFO, {
        if (slot.userName && slot.userName.value) {
          delete slot.userName.value;
        }
-
-       delete slot.userLocation.value;
        delete this.attributes.changingInfo;
        return this.emitWithState(intentCheck);
      }
+
      console.log("Setting location as ", slot.userLocation.value)
      this.attributes.userLocation = slot.userLocation.value;
      if (slot.query && slot.query.value) {
        delete slot.query.value;
      }
-     delete slot.userLocation.value;
-     delete slot.userName.value;
+     if (slot.userLocation && slot.userLocation.value) {
+       delete slot.userLocation.value;
+     }
+     if (slot.userName && slot.userName.value) {
+       delete slot.userName.value;
+     }
      delete this.attributes.changingInfo;
 
      message += `Okay, I've saved your information. If Kai and Molly use one of your ideas they'll thank ${this.attributes.userName} from ${this.attributes.userLocation}! `;
@@ -75,7 +78,6 @@ module.exports = Alexa.CreateStateHandler(config.states.CHANGE_INFO, {
          )
        );
      }
-     // TODO: PROMPT NOT REDIRECT?
      return util.sendProgressive(
        this.event.context.System.apiEndpoint, // no need to add directives params
        this.event.request.requestId,
