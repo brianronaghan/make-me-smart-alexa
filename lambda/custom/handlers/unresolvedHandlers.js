@@ -26,7 +26,15 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
     console.log(`UNRESOLVED PickItem - intentname ${this.event.request.intent.name}... `, JSON.stringify(this.event.request.intent, null, 2));
     console.log("is there an UNRESOLVED IN state?: ", this.attributes.UNRESOLVED);
     let unresolved;
+
     if (slot.query && slot.query.value) { // query or topic could be
+      let intentCheck = util.intentCheck(slot.query.value);
+      if (intentCheck) {
+        console.log("UNRESOLVED intentCheck -- slot.query.value ", slot.query.value)
+        delete slot.query.value;
+        return this.emitWithState(intentCheck);
+      }
+
       unresolved = slot.query.value;
       delete slot.query.value
     } else if (slot.topic && slot.topic.value) {
@@ -58,7 +66,6 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
       }
       this.attributes.UNRESOLVED = unresolved;
     }
-
     if (intentObj.confirmationStatus !== 'CONFIRMED') {
       if (intentObj.confirmationStatus !== 'DENIED') { // neither
         console.log("UNRESOLVED PickItem -- NEITHER CONFIRM NOR DENY", JSON.stringify(intentObj, null,2));
