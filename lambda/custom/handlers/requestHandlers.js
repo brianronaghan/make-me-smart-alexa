@@ -131,7 +131,26 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       return this.emit(':elicitSlotWithCard', 'userName', message, "What first name should I leave?", 'Request Explainer',message, this.event.request.intent, util.cardImage(config.icon.full));
     } else if ((!this.attributes.userName) && slot.userName && slot.userName.value && this.attributes.NAME_REQUESTED) {
       // GOT NORMAL NAME: request normal location
-      console.log("GOT normal name," , slot.userName.value, 'asking for normallocation')
+
+      // make checks
+      let intentCheck = util.intentCheck(slot.userName.value);
+      let expletiveCheck = util.expletiveCheck(slot.userName.value);
+      if (intentCheck) { // intentCheck redirect
+        console.log("REQUEST RequestExplainer intentCheck -- slot.userName.value ", slot.userName.value)
+        delete slot.userName.value;
+        delete this.attributes.SUGGESTION;
+        delete this.attributes.requestingExplainer;
+        return this.emitWithState(intentCheck);
+      } else if (expletiveCheck) { // expletiveCheck redirect
+        console.log(`CAUGHT PROFANITY ON slot.userName.value -- ${slot.userName.value}`);
+        let expletive = `<say-as interpret-as="expletive">${slot.userName.value}</say-as>`;
+        message += `Your name is ${expletive}? That's rough. And something we can't repeat. Do you have a nickname that isn't a dirty word?`;
+        let cardMessage = `I must have misheard your name, because that sounded like profanity. Do you have a nickname that isn't a dirty word?`;
+        delete slot.userName.value
+        return this.emit(':elicitSlotWithCard', 'userName', message, "What first name should I leave?", 'Leave a (clean) First Name', cardMessage, this.event.request.intent, util.cardImage(config.icon.full));
+      }
+
+      console.log("GOT clean normal name," , slot.userName.value, 'asking for normallocation')
       this.attributes.userName = slot.userName.value;
       delete this.attributes.NAME_REQUESTED;
       this.attributes.LOCATION_REQUESTED = true;
@@ -154,6 +173,23 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
 
     } else if ((!this.attributes.userName) && slot.manualName && slot.manualName.value && this.attributes.NAME_REQUESTED) {
       // got manual name, save, and request location
+      // make checks
+      let intentCheck = util.intentCheck(slot.manualName.value);
+      let expletiveCheck = util.expletiveCheck(slot.manualName.value);
+      if (intentCheck) { // intentCheck redirect
+        console.log("REQUEST RequestExplainer intentCheck -- slot.manualName.value ", slot.manualName.value)
+        delete slot.manualName.value;
+        delete this.attributes.SUGGESTION;
+        delete this.attributes.requestingExplainer;
+        return this.emitWithState(intentCheck);
+      } else if (expletiveCheck) { // expletiveCheck redirect
+        console.log(`CAUGHT PROFANITY ON slot.manualName.value -- ${slot.manualName.value}`);
+        let expletive = `<say-as interpret-as="expletive">${slot.manualName.value}</say-as>`;
+        message += `Your name is ${expletive}? That's rough. And something we can't repeat. Do you have a nickname that isn't a dirty word?`;
+        let cardMessage = `I must have misheard your name, because that sounded like profanity. Do you have a nickname that isn't a dirty word?`;
+        delete slot.manualName.value
+        return this.emit(':elicitSlotWithCard', 'manualName', message, "What first name should I leave?", 'Leave a (clean) First Name', cardMessage, this.event.request.intent, util.cardImage(config.icon.full));
+      }
       console.log("OK, got manualName ", slot.manualName, " now  REQUEST normal LOCATION");
       this.attributes.userName = slot.manualName.value;
       delete this.attributes.NAME_REQUESTED;
@@ -167,6 +203,22 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     } else if ((!this.attributes.userLocation) && slot.userLocation && slot.userLocation.value) {
       // got normal location, good to go.
       console.log("GOT  normal userLocation  ", slot.userLocation.value, "SHOULD BE READY TO SAVE");
+      let intentCheck = util.intentCheck(slot.userLocation.value);
+      let expletiveCheck = util.expletiveCheck(slot.userLocation.value);
+      if (intentCheck) { // intentCheck redirect
+        console.log("REQUEST RequestExplainer intentCheck -- slot.userLocation.value ", slot.userLocation.value)
+        delete slot.userLocation.value;
+        delete this.attributes.SUGGESTION;
+        delete this.attributes.requestingExplainer;
+        return this.emitWithState(intentCheck);
+      } else if (expletiveCheck) { // expletiveCheck redirect
+        console.log(`CAUGHT PROFANITY ON slot.userLocation.value -- ${slot.userLocation.value}`);
+        let expletive = `<say-as interpret-as="expletive">${slot.userLocation.value}</say-as>`;
+        message += `You're from ${expletive}? What was your childhood like? Also, can you leave a city without profanity in it?`;
+        let cardMessage = `I must have misheard your location, because that sounded like profanity. Ever lived in a town that isn't a dirty word?`;
+        delete slot.userLocation.value;
+        return this.emit(':elicitSlotWithCard', 'userLocation', message, "What city should I leave?", 'Leave a (clean) City', cardMessage, this.event.request.intent, util.cardImage(config.icon.full));
+      }
       this.attributes.userLocation = slot.userLocation.value;
       this.attributes.REQUESTS++;
       payload.requests = [{
@@ -226,7 +278,6 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       this.attributes.LOCATION_REQUESTED = true;
       var cardMessage = `Seems like I'm having trouble understanding your city. Let's try again. What city are you from?`;
       return this.emit(':elicitSlotWithCard', 'manualLocation', cardMessage, "What city or state should I leave?", 'Request Explainer', cardMessage, this.event.request.intent, util.cardImage(config.icon.full));
-
     } else if ((!this.attributes.userLocation) && slot.userLocation && !slot.userLocation.value && this.attributes.LOCATION_REQUESTED && slot.manualLocation && !slot.manualLocation.value) {
       // no userLocation and I have requested it: gotta get manual
       console.log('asked for userLocation, didnt get it,  gotta get manualLocation');
@@ -235,6 +286,23 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       return this.emit(':elicitSlotWithCard', 'manualLocation', cardMessage, "What city or state should I leave?", "Where are you from?", cardMessage, this.event.request.intent, util.cardImage(config.icon.full));
     } else if ((!this.attributes.userLocation) && slot.userLocation && !slot.userLocation.value && slot.manualLocation && slot.manualLocation.value) {
       console.log("OK, got manualLocation ", slot.manualLocation, " WE SHOULD BE GOOD TO GO");
+      // make checks
+      let intentCheck = util.intentCheck(slot.manualLocation.value);
+      let expletiveCheck = util.expletiveCheck(slot.manualLocation.value);
+      if (intentCheck) { // intentCheck redirect
+        console.log("REQUEST RequestExplainer intentCheck -- slot.manualLocation.value ", slot.manualLocation.value)
+        delete slot.manualLocation.value;
+        delete this.attributes.SUGGESTION;
+        delete this.attributes.requestingExplainer;
+        return this.emitWithState(intentCheck);
+      } else if (expletiveCheck) { // expletiveCheck redirect
+        console.log(`CAUGHT PROFANITY ON slot.manualLocation.value -- ${slot.manualLocation.value}`);
+        let expletive = `<say-as interpret-as="expletive">${slot.manualLocation.value}</say-as>`;
+        message += `You're from ${expletive}? What was your childhood like? Also, can you leave a city without profanity in it?`;
+        let cardMessage = `I must have misheard your location, because that sounded like profanity. Ever lived in a town that isn't a dirty word?`;
+        delete slot.manualLocation.value;
+        return this.emit(':elicitSlotWithCard', 'manualLocation', message, "What city should I leave?", 'Leave a (clean) City', cardMessage, this.event.request.intent, util.cardImage(config.icon.full));
+    }
       this.attributes.userLocation = slot.manualLocation.value;
       this.attributes.REQUESTS++;
       payload.requests = [{
@@ -291,64 +359,6 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       });
       // Got manual location. SAVE and you're good to go
     } else { // god help us how did we get here?
-      // NOTE: I THINK that this should be moot... BASICALLY: to get to the end of the cycle you must have location previously
-      // let intentCheck = util.intentCheck(slot.userLocation.value);
-      // if (intentCheck) {
-      //   console.log("REQUEST RequestExplainer intentCheck -- slot.userLocation.value ", slot.userLocation.value)
-      //   delete slot.query.value;
-      //   delete slot.userName.value;
-      //   delete slot.userLocation.value;
-      //   delete this.attributes.requestingExplainer;
-      //   return this.emitWithState(intentCheck);
-      // }
-      //
-      // console.log("HAVE userLocation and userName ", slot);
-      //
-      // this.attributes.userLocation = slot.userLocation.value;
-      // payload.requests = [{
-      //   query: suggestion,
-      //   time: this.event.request.timestamp,
-      //   user: this.attributes.userName,
-      //   location: this.attributes.userLocation
-      // }];
-      // delete slot.userName.value;
-      // delete slot.userLocation.value;
-      // delete this.attributes.requestingExplainer;
-      // if (slot && slot.query && slot.query.value) {
-      //   delete slot.query.value
-      // } else if (slot && slot.topic && slot.topic.value) {
-      //   delete slot.topic.value
-      // }
-      // console.time('DB-request-new-name');
-      // db.update.call(this, payload, function(err, response) {
-      //   console.timeEnd('DB-request-new-name');
-      //   var confirmationMessage = `Okay, I'll tell Kai and Molly ${this.attributes.userName} from ${this.attributes.userLocation} asked for an explainer on ${suggestion}. If you want to change your name or city in the future you can say 'change my info'. `;
-      //   if (this.event.context.System.device.supportedInterfaces.Display) {
-      //     this.response.renderTemplate(
-      //       util.templateBodyTemplate1(
-      //         'Request Received!',
-      //         confirmationMessage,
-      //         '',
-      //         config.background.show
-      //       )
-      //     );
-      //   }
-      //
-      //   this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
-      //   return util.sendProgressive(
-      //     this.event.context.System.apiEndpoint, // no need to add directives params
-      //     this.event.request.requestId,
-      //     this.event.context.System.apiAccessToken,
-      //     confirmationMessage,
-      //     function (err) {
-      //       if (err) {
-      //         boundThis.emitWithState('HomePage', 'requested', confirmationMessage);
-      //       } else {
-      //         boundThis.emitWithState('HomePage', 'requested');
-      //       }
-      //     }
-      //   );
-      // });
       console.log('REQUEST RequestExplainer at  GENERAL ELSE AHHH:', JSON.stringify(this.event.request, null, 2))
       return this.emitWithState('Unhandled');
     }
