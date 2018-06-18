@@ -69,9 +69,8 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
 
     if (!this.attributes.SUGGESTION) { // came here without a query
       if (this.event.session.new) {
-        message += "Welcome to Make Me Smart! "
-      }
-      if (this.attributes.REQUESTS === 0 || this.attributes.REQUESTS % 3 === 0) {
+        message += "Welcome back to Make Me Smart! I'm glad you've got an idea to submit! ";
+      } else if (this.attributes.REQUESTS === 0 || this.attributes.REQUESTS % 3 === 0) {
         message += 'Some of our best ideas come from you - our Alexa users - so thanks! ';
       }
       message += 'What topic do you think Kai and Molly should do an explainer on?';
