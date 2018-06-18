@@ -34,11 +34,11 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
         delete slot.query.value;
         return this.emitWithState(intentCheck);
       }
-
-      unresolved = slot.query.value;
+      // do a clean
+      unresolved = util.stripActions(slot.query.value);
       delete slot.query.value
     } else if (slot.topic && slot.topic.value) {
-      unresolved = slot.topic.value;
+      unresolved = util.stripActions(slot.topic.value);
       delete slot.topic.value
     }
     if (unresolved) {

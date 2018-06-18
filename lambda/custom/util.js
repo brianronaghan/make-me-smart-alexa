@@ -52,6 +52,7 @@ module.exports = {
   prosodyToBold: prosodyToBold,
   clearProsody: clearProsody,
   cleanSlotName: cleanSlotName,
+  stripActions: stripActions,
   intentCheck: intentCheck,
   expletiveCheck: expletiveCheck,
   displayMessage: displayMessage,
@@ -417,6 +418,14 @@ function stripArticles (searchTerm) {
   searchTerm = searchTerm.replace(/the\s/gi, " ")
   searchTerm = searchTerm.replace(/an\s/gi, " ")
   searchTerm = searchTerm.replace(/uh\s/gi, " ")
+  searchTerm = searchTerm.replace(/on\s/gi, " ")
+  searchTerm = searchTerm.replace(/#/gi, " ")
+
+  return stripActions(searchTerm);
+}
+
+function stripActions (searchTerm) {
+  console.log('stripping actions from ', searchTerm)
   searchTerm = searchTerm.replace(/play\s/gi, " ")
   searchTerm = searchTerm.replace(/number\s/gi, " ")
   searchTerm = searchTerm.replace(/pick\s/gi, " ")
@@ -440,12 +449,10 @@ function stripArticles (searchTerm) {
   searchTerm = searchTerm.replace(/search\s/gi, " ")
   searchTerm = searchTerm.replace(/tell\s/gi, " ")
   searchTerm = searchTerm.replace(/one\s/gi, " ")
+  searchTerm = searchTerm.replace(/me\s/gi, " ")
 
-  searchTerm = searchTerm.replace(/#/gi, " ")
 
   searchTerm = searchTerm.replace(/^\s+|\s+$/g, "");  // any leading or trailing whitespace
-
-
   return searchTerm;
 }
 
