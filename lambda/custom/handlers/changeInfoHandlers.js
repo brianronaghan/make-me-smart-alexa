@@ -22,7 +22,6 @@ module.exports = Alexa.CreateStateHandler(config.states.CHANGE_INFO, {
     var boundThis = this;
     var slot = slot || this.event.request.intent.slots;
     if (slot && slot.userName && !slot.userName.value) {
-      // TODO: intentCheck
       message += `Okay, you'd like to change your information. What should I save your first name as for requests?`;
       this.emit(':elicitSlotWithCard', 'userName', message, "What first name should I save?", 'Save a name',message, this.event.request.intent, util.cardImage(config.icon.full));
    } else if (slot && slot.userLocation && !slot.userLocation.value) {
