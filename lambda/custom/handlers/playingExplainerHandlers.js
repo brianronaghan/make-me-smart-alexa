@@ -228,6 +228,8 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
   'NewerExplainers' : function () {
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
+    var slot = slot || this.event.request.intent.slots;
+
     console.log("NEWER EXPLAINERS from playing", this.attributes.indices.explainer)
 
     delete this.attributes.EASTER_EGG_TITLE;
@@ -240,6 +242,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
   'OlderExplainers' : function () {
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
+    var slot = slot || this.event.request.intent.slots;
     console.log("OLDER EXPLAINERS from playing", this.attributes.indices.explainer)
     delete this.attributes.EASTER_EGG_TITLE;
     this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
