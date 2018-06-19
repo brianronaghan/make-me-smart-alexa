@@ -3,7 +3,7 @@ module.exports = [
     title: 'G.D.P.R.',
     author: 'Molly Wood',
     alts: ['g.d.p.r', 'gdpr', 'g d p r', 'g.b.p.r', 'gbpr', 'g b p r'],
-    guid: 'GDPR_certification-1',
+    guid: 'GDPR_certification-7',
     date: "2018-06-14T07:00:00Z",
     description: "G.D.P.R. is the European Union's new data law, the General Data Protection Regulation.",
     requestInformation: {

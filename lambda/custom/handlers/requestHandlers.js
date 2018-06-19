@@ -414,13 +414,15 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
   },
   'ReplayExplainer': function () {
+    var slot = slot || this.event.request.intent.slots;
+
     console.log('REQUEST ReplayExplainer');
     if (this.attributes.requestingExplainer) {
       console.log("REQUEST -- ARTIFACT -- ReplayExplainer, sending back")
       this.emitWithState('RequestExplainer');
     } else {
       this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
-      this.emitWithState('PickItem', 'REPLAY_FROM_REQUEST');
+      this.emitWithState('PickItem', slot, 'REPLAY_FROM_REQUEST');
     }
   },
 

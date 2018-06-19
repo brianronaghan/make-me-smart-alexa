@@ -76,7 +76,7 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     if (!this.attributes.HEARD_FIRST) {
       this.attributes.HEARD_FIRST = 0;
     }
-    intro += `learning about <prosody pitch="high" volume="x-loud">1) ${topics[this.attributes.HEARD_FIRST + 0]}</prosody>, <prosody volume="x-loud" pitch="high">2) ${topics[this.attributes.HEARD_FIRST + 1]}</prosody>, and <prosody volume="x-loud" pitch="high">3) ${topics[this.attributes.HEARD_FIRST + 2]}</prosody>. You can pick one, play them all, or browse all our explainers. Which would you like to hear?`;
+    intro += `learning about <prosody volume="x-loud">1) ${topics[this.attributes.HEARD_FIRST + 0]}</prosody>, <prosody volume="x-loud" >2) ${topics[this.attributes.HEARD_FIRST + 1]}</prosody>, and <prosody volume="x-loud" >3) ${topics[this.attributes.HEARD_FIRST + 2]}</prosody>. You can pick one, play them all, or browse all our explainers. Which would you like to hear?`;
     /*
     ':elicitSlotWithCard': function (slotName, speechOutput, repromptSpeech, cardTitle, cardContent, updatedIntent, imageObj) {
     */

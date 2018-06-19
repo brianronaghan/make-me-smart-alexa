@@ -224,6 +224,31 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     // this just throws to the correct state version of itself
     this.emitWithState('ListExplainers');
   },
+
+  'NewerExplainers' : function () {
+    var deviceId = util.getDeviceId.call(this);
+    util.nullCheck.call(this, deviceId);
+    console.log("NEWER EXPLAINERS from playing", this.attributes.indices.explainer)
+
+    delete this.attributes.EASTER_EGG_TITLE;
+    this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
+    if (slot.query && slot.query.value) {
+      delete slot.query.value;
+    }
+    return this.emitWithState('NewerExplainers');
+  },
+  'OlderExplainers' : function () {
+    var deviceId = util.getDeviceId.call(this);
+    util.nullCheck.call(this, deviceId);
+    console.log("OLDER EXPLAINERS from playing", this.attributes.indices.explainer)
+    delete this.attributes.EASTER_EGG_TITLE;
+    this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
+    if (slot.query && slot.query.value) {
+      delete slot.query.value;
+    }
+    return this.emitWithState('OlderExplainers');
+
+  },
   'HomePage' : function () {
     delete this.attributes.EASTER_EGG_TITLE;
     this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
@@ -388,7 +413,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
 
      console.log("UNHANDLED playing", JSON.stringify(this.event, null, 2))
      var message = "Sorry I couldn't quite understand that. ";
-     var message = "You can say replay, next, or 'what's new' to hear our latest explainers. What would you like to do?";
+     var prompt = "You can say replay, next, or 'what's new' to hear our latest explainers. What would you like to do?";
      this.response.speak(message + prompt).listen(prompt);
      if (this.event.context.System.device.supportedInterfaces.Display) {
        this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message + prompt, null, config.background.show));
