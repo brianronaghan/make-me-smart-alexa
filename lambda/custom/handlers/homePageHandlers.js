@@ -65,6 +65,8 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
         intro += `${message} `;
       }
       intro += "This week we're "
+    } else if (condition === 'repeating') {
+      intro += "Okay, again, we're ";
     } else {
       intro += "This week we're "
     }
@@ -154,6 +156,11 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
       this.emitWithState('PickItem', {index: {value: 1}}, 'HOMEPAGE_LATEST');
 
     }
+  },
+
+  'ReplayExplainer': function () {
+    console.log("HOME_PAGE state, ReplayExplainer", JSON.stringify(this.event.request, null,2));
+    this.emitWithState('HomePage', 'repeating');
   },
 
   'AMAZON.NextIntent': function () {
