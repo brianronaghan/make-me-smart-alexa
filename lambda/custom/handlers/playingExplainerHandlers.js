@@ -154,11 +154,11 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
         if (chosenExplainer.EE) {
           prompt = `Thanks for listening! Now back to our normally scheduled programming. You can hear what's new, browse all our explainers or submit an idea. What would you like to do?`;
         } else if (this.event.session.new) { // came directly here
-          prompt = `You can replay that, play the latest, or browse all our explainers. What would you like to do?`;
+          prompt = `You can replay the explainer, play the latest, or browse all our explainers. What would you like to do?`;
         } else if (util.liveExplainers()[chosenExplainer.index+1]) { // THERE IS a next explainer
-          prompt = `You can replay that, say 'next' to hear another, or browse all our explainers. What would you like to do?`;
+          prompt = `You can replay the explainer, say 'next' to hear another, or browse all our explainers. What would you like to do?`;
         } else { // end of the line
-          prompt = "And that's all we have right now. You can replay that, browse all our explainers, or submit an idea for our next one. What would you like to do?"
+          prompt = "And that's all we have right now. You can replay the explainer, browse all our explainers, or submit an idea for our next one. What would you like to do?"
         }
         let displayMessage;
         if (chosenExplainer.EE) {
