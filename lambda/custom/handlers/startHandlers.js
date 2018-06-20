@@ -9,7 +9,7 @@ var db = require('../db');
 var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
   'LaunchRequest': function (condition, message) {
     let welcome = '';
-    let prompt = "You can replay that, hear what's new or submit an idea for what we should explain next. What would you like to do?"
+    let prompt = "You can replay the explainer, hear what's new or submit an idea for what we should explain next. What would you like to do?"
     let latestExplainer = util.liveExplainers()[0];
     let author = latestExplainer.author;
     if (author === 'Molly Wood') {
@@ -67,7 +67,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
             latestExplainer.title,
             latestExplainer.image || config.icon.full,
             '',
-            `Today we're learning about ${latestExplainer.title}. You can replay that, hear what's new or submit an idea for a new explainer.`,
+            `Today we're learning about ${latestExplainer.title}. You can replay it, hear what's new or submit an idea for a new explainer.`,
             config.background.show
           )
         );
@@ -198,7 +198,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
 
 
     // Handler for built-in HelpIntent
-    var message = "You can replay that, hear what's new, or submit your idea for an explainer. What would you like to do?";
+    var message = "You can replay the explainer, hear what's new, or submit your idea for an explainer. What would you like to do?";
     this.response.speak(message).listen(message);
     if (this.event.context.System.device.supportedInterfaces.Display) {
       this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, null, config.background.show));
@@ -215,7 +215,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
    'Unhandled' : function () {
      console.log("START UNHANDLED ",JSON.stringify(this.event.request,null, 2));
      var message = "Sorry I couldn't quite understand that. ";
-     var prompt = "You can replay that, hear what's new, or submit your explainer idea. What would you like to do?";
+     var prompt = "You can replay the explainer, hear what's new, or submit your explainer idea. What would you like to do?";
      this.response.speak(message + prompt).listen(prompt);
      if (this.event.context.System.device.supportedInterfaces.Display) {
        this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message + prompt, null, config.background.show));
