@@ -95,22 +95,48 @@ var config = {
         "I want to start over"
       ],
       ReplayExplainer: [
+        "repeat",
+        "repeat that",
+        "repeat explainer",
+        "repeat the explainer",
+        "repeat today's explainer",
+        "repeat that exlplainer",
+
         "replay",
         "replay that",
+        "replay explainer",
+        "replay the explainer",
+        "replay today's explainer",
+        "replay that exlplainer",
+
+
         "restart",
+        "restart that",
+        "restart explainer",
+        "restart the explainer",
+        "restart today's explainer",
+        "restart that exlplainer",
+
+        "begin again",
+        "begin that again",
+        "begin explainer again",
+        "begin the explainer again",
+        "begin today's explainer again",
+        "begin that exlplainer again",
+
         "play again",
         "play that again",
+        "play it again",
+        "play that explainer again",
+        "play the explainer again",
+
         "again",
         "let me hear that again",
         "start over",
-        "replay explainer",
         "let's hear that again",
-        "repeat",
-        "begin again",
-        "begin that again",
-        "one more time",
-        "replay today's explainer",
-        "replay that exlplainer"
+        "another time",
+        "one more time"
+
       ],
       PlayLatestExplainer: [
         "play all",
