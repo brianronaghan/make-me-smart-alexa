@@ -159,7 +159,17 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
   },
 
   'ReplayExplainer': function () {
+    this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
     console.log("HOME_PAGE state, ReplayExplainer", JSON.stringify(this.event.request, null,2));
+    if (!this.attributes.currentExplainerIndex) {
+      this.attributes.currentExplainerIndex = 0;
+    }
+    return this.emitWithState('PickItem', {index: {value: this.attributes.currentExplainerIndex + 1}}, 'REPLAY_FROM_HOME')
+
+  },
+
+  'RepeatOptions': function () {
+    console.log("HOME_PAGE state, RepeatOptions", JSON.stringify(this.event.request, null,2));
     this.emitWithState('HomePage', 'repeating');
   },
 
