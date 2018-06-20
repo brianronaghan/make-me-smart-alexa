@@ -631,12 +631,21 @@
                     {
                       "name": "userLocation",
                       "type": "AMAZON.US_CITY"
+                    },
+                    {
+                      "name": "manualName",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "manualLocation",
+                      "type": "AMAZON.SearchQuery"
                     }
                   ]
                 },
                 {
                   "name": "ReplayExplainer",
                   "samples": [
+                    "repeat",
                     "replay",
                     "replay that",
                     "restart",
@@ -666,6 +675,14 @@
                     {
                       "name": "userLocation",
                       "type": "AMAZON.US_CITY"
+                    },
+                    {
+                      "name": "manualName",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "manualLocation",
+                      "type": "AMAZON.SearchQuery"
                     }
                   ]
                 },
