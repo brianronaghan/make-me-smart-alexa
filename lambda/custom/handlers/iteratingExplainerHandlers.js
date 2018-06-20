@@ -245,6 +245,15 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
 
   },
 
+  'ReplayExplainer': function () {
+    console.log("ITERATING_EXPLAINER state, ReplayExplainer", JSON.stringify(this.event.request, null,2));
+    this.emitWithState('ListExplainers', 'repeating');
+  },
+
+  'RepeatOptions': function () {
+    console.log("ITERATING_EXPLAINER state, RepeatOptions", JSON.stringify(this.event.request, null,2));
+    this.emitWithState('ListExplainers', 'repeating');
+  },
 
   'AMAZON.StopIntent' : function() {
     console.log('STOP, iterating')
