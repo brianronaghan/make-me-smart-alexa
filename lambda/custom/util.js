@@ -264,7 +264,13 @@ module.exports = {
     } else if (EASTER_EGGS && EASTER_EGGS.length && EASTER_EGGS.length > 0) {
       var eggNames = EASTER_EGGS.map((egg) => egg.title.toLowerCase());
       var eggAlts = EASTER_EGGS.map((egg) => egg.alts);
-      var eggIndex = searchByName(cleanSlotName(intentSlot.query.value), eggNames, eggAlts);
+      var item;
+      if (intentSlot.query && intentSlot.query.value) {
+        item = intentSlot.query.value;
+      } else if (intentSlot.topic && intentSlot.topic.value) {
+        item = intentSlot.topic.value;
+      }
+      var eggIndex = searchByName(cleanSlotName(item), eggNames, eggAlts);
       if (eggIndex > -1) {
         var egg = EASTER_EGGS[eggIndex];
         egg.EE = true;
