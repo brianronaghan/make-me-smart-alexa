@@ -95,6 +95,8 @@ module.exports = [
   {
     title: 'Stock Buybacks',
     author: 'Kai Ryssdal',
+    alts: ['stock buy bags', 'buybacks', 'buy bags', 'buy backs'],
+
     tags: [],
     guid: 'stock_buybacks_certification',
     date: "2018-05-24",
