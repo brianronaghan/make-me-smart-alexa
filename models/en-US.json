@@ -495,7 +495,8 @@
                     "can you help",
                     "can you help me",
                     "what do i do",
-                    "help please"
+                    "help please",
+                    "I don't understand"
                   ]
                 },
                 {
@@ -543,8 +544,6 @@
                     "take me to the main menu",
                     "go to the main menu",
                     "I want to start over"
-
-
                   ],
                   "slots": [
                     {
@@ -762,6 +761,7 @@
                     "submit my idea",
                     "submit an idea for your next one",
                     "submit an idea for your next explainer",
+
                     "submit an idea for what we should explain next",
                     "submit my idea for what you should explain next",
                     "submit idea",

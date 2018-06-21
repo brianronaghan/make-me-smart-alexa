@@ -141,6 +141,7 @@ var config = {
         "repeat all",
         "repeat those",
         "repeat my options",
+
         "what were my options",
         "say again",
         "say that again",
@@ -173,7 +174,10 @@ var config = {
         "play the latest explainer"
       ],
       RequestExplainer: [
-        "tell make me smart I’ve got an idea",
+        "tell make me smart I've got an idea",
+        "tell make me smart I have got an idea",
+        "tell make me smart I have an idea",
+
         "pitch",
         "pitch explainer",
         "pitch an explainer",
@@ -247,6 +251,19 @@ var config = {
         "I've got an idea for a topic"
       ],
       ListExplainers: [
+        "everything",
+        "everything you got",
+        "everything its got",
+        "everything you have",
+        "everything it has",
+
+        "for everything",
+        "for everything you got",
+        "for everything its got",
+        "for everything you have",
+        "for everything it has",
+
+        "for all explainers",
         "explainer menu",
         "what explainers it has",
         "what you got",
@@ -269,7 +286,6 @@ var config = {
         "list all of our explainers",
         "list all of your explainers",
 
-        "everything",
 
         "explore",
         "explore explainers",
