@@ -54,8 +54,10 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
         delete this.attributes.ITERATING;
         return this.emitWithState(directionCheck);
       } else {
-        console.log("GOT a non-intent query on list explainers, so redirecting to pickItem")
-        return this.emitWithState('PickItem');
+        console.log("GOT a non-intent query on list explainers, so redirecting to PLAYING_EXPLAINER state")
+        delete this.attributes.ITERATING;
+        this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
+        return this.emitWithState('PickItem', slot, 'ITERATING');
       }
     }
 
@@ -71,13 +73,14 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
       listMessage += incomingMessage;
     }
     if (this.event.session.new) {
-      listMessage += "Welcome to Make Me Smart! You want to do a deep dive, huh? Okay! ";
+      listMessage += "Welcome to Make Me Smart! Let's do a deep dive! ";
     }
     if (condition && condition === 'unresolved_save') {
-      listMessage += 'In the meantime, ';
-      if (this.attributes.indices.explainer !== 0) {
-        listMessage += "I'll list the explainers again: "
-      }
+      listMessage += "In the meantime, I'll list the explainers again: ";
+    } else if (condition && condition === 'repeating') {
+      listMessage += "Here they are again: "
+    } else if (this.attribute.indices.explainer === 0) {
+      listMessage += `I'll list all ${util.liveExplainers().length} explainers, ${config.items_per_prompt.explainer} at a time: `;
     }
     listMessage += data.itemsAudio;
     this.emit(':elicitSlotWithCard', 'query', listMessage, "Pick one or say newer or older to move forward or backward through list.", 'List of Explainers', data.itemsCard, this.event.request.intent, util.cardImage(config.icon.full));
@@ -119,14 +122,8 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
         }
         this.attributes.indices.explainer += config.items_per_prompt.explainer;
         this.emitWithState('ListExplainers', 'older');
-
       }
-
-
     }
-
-
-
   },
 
   'NewerExplainers' : function () {
@@ -171,9 +168,17 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     // TODO: I BELIEVE that this will always be fine, right?
     var slot = slot || this.event.request.intent.slots;
     console.log('ITERATING_EXPLAINER, PickItem -- ',JSON.stringify(this.event.request.intent, null,2));
-    delete this.attributes.ITERATING;
-    this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
-    this.emitWithState('PickItem', slot, 'ITERATING');
+
+    if (this.attributes.ITERATING) {
+      console.log("ITERATING_EXPLAINER -- ARTIFACT -- PickItem, sending back")
+      return this.emitWithState('ListExplainers');
+    } else {
+      console.log("ITERATING_EXPLAINER -- NO FLAG -- no flag, so real?")
+      delete this.attributes.ITERATING;
+      this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
+      this.emitWithState('PickItem', slot, 'ITERATING');
+
+    }
   },
 
 
@@ -250,6 +255,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
   'AMAZON.StopIntent' : function() {
     console.log('STOP, iterating')
     // This needs to work for not playing as well
+    delete this.attributes.ITERATING
     delete this.attributes.STATE;
     this.attributes.indices.explainer = 0;
     this.response.speak('See you later. Say Alexa, Make Me Smart to get learning again.')
@@ -258,12 +264,17 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
   'AMAZON.CancelIntent' : function() {
     console.log('CANCEL iterating');
     // means they don't wnt to leave it.
+    delete this.attributes.ITERATING
     delete this.attributes.STATE;
     this.attributes.indices.explainer = 0;
     this.response.speak('Cancelled! Say Alexa, Make Me Smart to come back.')
     this.emit(':saveState');
   },
   'SessionEndedRequest' : function () {
+    delete this.attributes.ITERATING;
+    delete this.attributes.STATE;
+    this.attributes.indices.explainer = 0;
+
     console.log("IT  EXPLAINER  session end", JSON.stringify(this.event.request, null,2));
    },
    'AMAZON.HelpIntent' : function () {

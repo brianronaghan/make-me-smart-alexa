@@ -162,12 +162,14 @@ module.exports = {
   itemLister: function(items, itemTitlePlural, titleKey, start, chunkLength) {
     // TODO: add a listen feature as well... the hint thing we tell them, handles whether next or previous
     var itemsAudio, itemsCard;
-    if (start === 0) {
-      itemsAudio = `I'll list all ${items.length} ${itemTitlePlural}, ${chunkLength} at a time: `
-      itemsCard = '';
-    } else {
-      itemsAudio = itemsCard = '';
-    }
+    itemsAudio = itemsCard = '';
+
+    // if (start === 0) {
+    //   itemsAudio = `I'll list all ${items.length} ${itemTitlePlural}, ${chunkLength} at a time: `
+    //   itemsCard = '';
+    // } else {
+    //   itemsAudio = itemsCard = '';
+    // }
     for (var x = start; x < start + chunkLength; x++) {
       // console.log(x, items[x]);
       if (items[x]) {
