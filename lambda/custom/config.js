@@ -8,6 +8,8 @@ var config = {
       episode: 3,
     },
     ipaNumber: "<phoneme alphabet='ipa' ph='nʌmbɝ'>number</phoneme>",
+    stopMessage: 'See you later. Say Alexa, Make Me Smart to get learning again.',
+    cancelMessage: 'Cancelled! Come back by saying Alexa, Make Me Smart!',
     defaultDescription: "Something else you want to get smart about? Try 'Alexa, submit an idea' and Kai and Molly might use your idea!",
     messages: [
       "You can say 'change my info' if Alexa didn't correctly capture your name/location.",
