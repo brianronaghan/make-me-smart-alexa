@@ -70,7 +70,7 @@ module.exports = [
   {
     title: 'The Fed',
     author: 'Kai Ryssdal',
-    alts: ['the federal reserve', 'fed', 'the central bank', 'central bank'],
+    alts: ['the federal reserve', 'fed', 'the central bank', 'central bank', 'fit', 'the fit'],
     tags: [],
     guid: 'fed_certification',
     date: "2018-05-24",
