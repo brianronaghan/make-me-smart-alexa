@@ -203,6 +203,16 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     // currentExplainerIndex is 0 based, and PickItem expects 1-based
     this.emitWithState('PickItem', {index: {value: this.attributes.currentExplainerIndex + 1}}, 'REPLAY')
   },
+  'RepeatOptions': function () {
+    if (this.attributes.EASTER_EGG_TITLE) {
+      return this.emitWithState('PickItem', {query: {value: this.attributes.EASTER_EGG_TITLE}}, 'REPLAY')
+    }
+    var deviceId = util.getDeviceId.call(this);
+    util.nullCheck.call(this, deviceId);
+    console.log('GOT REPEAT', this.handler.state)
+    // currentExplainerIndex is 0 based, and PickItem expects 1-based
+    this.emitWithState('PickItem', {index: {value: this.attributes.currentExplainerIndex + 1}}, 'REPLAY')
+  },
   // STATE TRANSITION:
   'RequestExplainer' : function () {
     console.log('request explainer test IN PLAYING')
