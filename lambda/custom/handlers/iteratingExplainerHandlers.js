@@ -79,7 +79,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
       listMessage += "In the meantime, I'll list the explainers again: ";
     } else if (condition && condition === 'repeating') {
       listMessage += "Here they are again: "
-    } else if (this.attribute.indices.explainer === 0) {
+    } else if (this.attributes.indices.explainer === 0) {
       listMessage += `I'll list all ${util.liveExplainers().length} explainers, ${config.items_per_prompt.explainer} at a time: `;
     }
     listMessage += data.itemsAudio;
