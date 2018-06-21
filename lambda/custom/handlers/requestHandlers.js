@@ -95,12 +95,13 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       } else {
         userAcknowledge = `${this.attributes.userName} from ${this.attributes.userLocation} wants`
       }
+
       if (this.attributes.REQUESTS === 3 || this.attributes.REQUESTS % 5 === 0) {
         userAsk = config.reviewSolicitation;
       } else if (this.attributes.REQUESTS % 3 === 0) {
         userAsk = config.podcastPlug;
       }
-
+      console.log(this.attributes.REQUESTS, userAsk);
       console.time('DB-request-saved');
       delete this.attributes.requestingExplainer;
       delete this.attributes.SUGGESTION;

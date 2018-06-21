@@ -165,7 +165,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
         }
         let displayMessage;
         if (chosenExplainer.EE) {
-          displayMessage = "Congrats! You found an easter egg! Thanks for being a power user!";
+          displayMessage = "Congrats! You found an easter egg! Thanks for being a power user! Do us a favor and rate Make Me Smart on the Alexa Skill Store or Mobile App!";
         } else {
           displayMessage = util.displayMessage.call(this);
 
@@ -375,11 +375,11 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
   'AMAZON.StopIntent' : function() {
     delete this.attributes.EASTER_EGG_TITLE;
 
-    console.log('STOP PLAY EXPLAINER STATE')
+    console.log('STOP PLAY EXPLAINER STATE: ', this.attributes.plays)
     // This needs to work for not playing as well
     // SHOULD I CLEAR THE STATE?
     if (this.attributes.plays === 3 || this.attributes.plays === 6 || this.attributes.plays % 10 === 0) {
-      this.response.speak(config.reviewSolicitation);
+      this.response.speak(`Thanks for listening! ${config.reviewSolicitation}`);
     } else {
       this.response.speak(config.stopMessage)
     }
@@ -392,7 +392,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     // This needs to work for not playing as well
     // SHOULD I CLEAR THE STATE?
     if (this.attributes.plays === 3 || this.attributes.plays === 6 || this.attributes.plays % 10 === 0) {
-      this.response.speak(config.reviewSolicitation);
+      this.response.speak(`Thanks for listening! ${config.reviewSolicitation}`);
     } else {
       this.response.speak(config.cancelMessage);
     }
