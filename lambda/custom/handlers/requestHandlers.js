@@ -105,7 +105,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       }
       db.update.call(this, payload, function(err, response) {
         console.timeEnd('DB-request-saved');
-        message = `${suggestionString} I'll tell Kai and Molly that ${userAcknowledge} to get smart about that! You can also hear more from Kai and Molly by saying "alexa, play podcast Make Me Smart." `;
+        message = `${suggestionString} I'll tell Kai and Molly that ${userAcknowledge} to get smart about that! You can also hear more from Kai and Molly on their podcast Make Me Smart! `;
         //
         this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
 

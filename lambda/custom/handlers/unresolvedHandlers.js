@@ -81,27 +81,6 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
       return this.emit(':confirmIntentWithCard', message, confirmMessage, 'Explainer Not Found', message);
 
     }
-      // if(intentObj.confirmationStatus !== 'CONFIRMED') {
-      //   if (intentObj.confirmationStatus !== 'DENIED') { // neither
-      //     console.log("UNRESOLVED PickItem -- NEITHER CONFIRM NOR DENY", JSON.stringify(intentObj, null,2));
-      //     if (this.attributes.UNRESOLVED) { // NOTE: should this check the attributes version?
-      //       message = `Hmmm, I couldn't find anything on ${this.attributes.UNRESOLVED}. Would you like to request an explainer on that?`;
-      //       confirmMessage = `Would you like to request an explainer on ${this.attributes.UNRESOLVED}?`;
-      //       return this.emit(':confirmIntentWithCard', message, confirmMessage, 'Explainer Not Found', message);
-      //     } else {
-      //       console.log("NO ATTRIBUTE UNRESOLVED AND NO NEW ONE AND NO CONFIRM STATUS");
-      //       return this.emitWithState('Unhandled');
-      //     }
-      //   } else { // denied
-      //     console.log("UNRESOLVED PickItem -- DENIED", JSON.stringify(intentObj, null,2));
-      //     message = "Alright, let's try again. ";
-      //     delete this.attributes.UNRESOLVED;
-      //     delete intentObj.confirmationStatus;
-      //     this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
-      //     return this.emitWithState('ListExplainers', 'unresolved_decline', message);
-      //   }
-      // }
-    // } else { // OKAY: now it's confirmed. GET THE NAME AND LOC if we don't have it?
 
     console.log("UNRESOLVED PickItem -- passed DENIED/CONFIRMED", JSON.stringify(intentObj, null,2));
     if (this.attributes.UNRESOLVED && this.attributes.userName && this.attributes.userLocation) { // 1
@@ -116,7 +95,7 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
 
       db.update.call(this, payload, function(err, response) {
         console.timeEnd('DB-unresolved-savedinfo');
-        message = `Okay, I'll tell Kai and Molly that you want to get smart about ${this.attributes.UNRESOLVED}! You can also hear more from Kai and Molly by saying "alexa, play podcast Make Me Smart." `;
+        message = `Okay, I'll tell Kai and Molly that you want to get smart about ${this.attributes.UNRESOLVED}! You can also hear more from Kai and Molly on the podcast version of Make Me Smart, available everywhere! " `;
         if (slot.query && slot.query.value) {
           delete slot.query.value;
         }
