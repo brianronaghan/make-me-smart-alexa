@@ -138,20 +138,6 @@
      ]
    },
    {
-     "id": "Elicit.Intent-ListExplainers.IntentSlot-topic",
-     "variations": [
-       {
-         "type": "PlainText",
-         "value": "Which topic would you like to learn about?"
-       },
-       {
-         "type": "PlainText",
-         "value": "pick a topic"
-       }
-
-     ]
-   },
-   {
      "id": "Elicit.Intent-ListExplainers.IntentSlot-userName",
      "variations": [
        {
@@ -186,20 +172,6 @@
      ]
    },
    {
-     "id": "Elicit.Intent-OlderExplainers.IntentSlot-topic",
-     "variations": [
-       {
-         "type": "PlainText",
-         "value": "Which topic would you like to learn about?"
-       },
-       {
-         "type": "PlainText",
-         "value": "pick a topic"
-       }
-
-     ]
-   },
-   {
      "id": "Elicit.Intent-OlderExplainers.IntentSlot-userName",
      "variations": [
        {
@@ -231,20 +203,6 @@
          "type": "PlainText",
          "value": "tell me where "
        }
-     ]
-   },
-   {
-     "id": "Elicit.Intent-NewerExplainers.IntentSlot-topic",
-     "variations": [
-       {
-         "type": "PlainText",
-         "value": "Which topic would you like to learn about?"
-       },
-       {
-         "type": "PlainText",
-         "value": "pick a topic"
-       }
-
      ]
    },
    {
@@ -382,15 +340,6 @@
            "prompts": {
              "elicitation": "Elicit.Intent-ListExplainers.IntentSlot-userLocation"
            }
-         },
-         {
-           "name": "topic",
-           "type": "TOPICS",
-           "elicitationRequired": true,
-           "confirmationRequired": false,
-           "prompts": {
-             "elicitation": "Elicit.Intent-ListExplainers.IntentSlot-topic"
-           }
          }
        ]
      },
@@ -399,15 +348,6 @@
        "confirmationRequired": false,
        "prompts": {},
        "slots": [
-         {
-           "name": "topic",
-           "type": "TOPICS",
-           "elicitationRequired": true,
-           "confirmationRequired": false,
-           "prompts": {
-             "elicitation": "Elicit.Intent-NewerExplainers.IntentSlot-topic"
-           }
-         },
          {
            "name": "userName",
            "type": "AMAZON.US_FIRST_NAME",
@@ -433,15 +373,6 @@
        "confirmationRequired": false,
        "prompts": {},
        "slots": [
-         {
-           "name": "topic",
-           "type": "TOPICS",
-           "elicitationRequired": true,
-           "confirmationRequired": false,
-           "prompts": {
-             "elicitation": "Elicit.Intent-OlderExplainers.IntentSlot-topic"
-           }
-         },
          {
            "name": "userName",
            "type": "AMAZON.US_FIRST_NAME",
@@ -621,10 +552,6 @@
                       "type": "AMAZON.SearchQuery"
                     },
                     {
-                      "name": "topic",
-                      "type": "TOPICS"
-                    },
-                    {
                       "name": "userName",
                       "type": "AMAZON.US_FIRST_NAME"
                     },
@@ -775,10 +702,6 @@
                   "name": "RequestExplainer",
                   "slots": [
                     {
-                      "name": "topic",
-                      "type": "TOPICS"
-                    },
-                    {
                       "name": "userName",
                       "type": "AMAZON.US_FIRST_NAME"
                     },
@@ -879,10 +802,6 @@
                 {
                     "name":"ListExplainers",
                     "slots" : [
-                      {
-                        "name": "topic",
-                        "type": "TOPICS"
-                      },
                       {
                         "name": "query",
                         "type": "AMAZON.SearchQuery"
@@ -1031,10 +950,6 @@
                       "type": "AMAZON.SearchQuery"
                     },
                     {
-                      "name": "topic",
-                      "type": "TOPICS"
-                    },
-                    {
                       "name": "userName",
                       "type": "AMAZON.US_FIRST_NAME"
                     },
@@ -1070,10 +985,6 @@
                     {
                       "name": "query",
                       "type": "AMAZON.SearchQuery"
-                    },
-                    {
-                      "name": "topic",
-                      "type": "TOPICS"
                     },
                     {
                       "name": "userName",
@@ -1200,10 +1111,6 @@
                       "type": "AMAZON.SearchQuery"
                     },
                     {
-                      "name": "topic",
-                      "type": "TOPICS"
-                    },
-                    {
                       "name": "userName",
                       "type": "AMAZON.US_FIRST_NAME"
                     },
@@ -1219,38 +1126,6 @@
                       "name": "manualLocation",
                       "type": "AMAZON.SearchQuery"
                     }
-                  ]
-                },
-                {
-                  "name": "TopicOnly",
-                  "slots": [
-                    {
-                      "name": "query",
-                      "type": "AMAZON.SearchQuery"
-                    },
-                    {
-                      "name": "topic",
-                      "type": "TOPICS"
-                    },
-                    {
-                      "name": "userName",
-                      "type": "AMAZON.US_FIRST_NAME"
-                    },
-                    {
-                      "name": "userLocation",
-                      "type": "AMAZON.US_CITY"
-                    },
-                    {
-                      "name": "manualName",
-                      "type": "AMAZON.SearchQuery"
-                    },
-                    {
-                      "name": "manualLocation",
-                      "type": "AMAZON.SearchQuery"
-                    }
-                  ],
-                  "samples": [
-                    "{topic}"
                   ]
                 },
                 {
@@ -1323,10 +1198,6 @@
                     {
                       "name": "query",
                       "type": "AMAZON.SearchQuery"
-                    },
-                    {
-                      "name": "topic",
-                      "type": "TOPICS"
                     },
                     {
                       "name": "ordinal",
@@ -2735,41 +2606,6 @@
                 }
             ],
             "types":[
-              {
-                "name": "TOPICS",
-                "values" : [
-                  {
-                    "name": {
-                      "value": "the cloud"
-                    }
-                  },
-                  {
-                    "name": {
-                      "value": "cloud"
-                    }
-                  },
-                  {
-                    "name": {
-                      "value": "the fed"
-                    }
-                  },
-                  {
-                    "name": {
-                      "value": "productivity"
-                    }
-                  },
-                  {
-                    "name": {
-                      "value": "stocks"
-                    }
-                  },
-                  {
-                    "name": {
-                      "value": "interest rates"
-                    }
-                  }
-                ]
-              },
               {
                 "values": [
                   {
