@@ -44,6 +44,10 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
     if (unresolved) {
       console.log("EXPLETIVE CHECK ", unresolved)
       if (util.expletiveCheck(unresolved)) {
+        if (this.event.session.new) {
+          message = 'Welcome to Make Me Smart! ';
+        }
+
         message += `Come on. You think we're allowed to say <say-as interpret-as="expletive">${unresolved}</say-as> on public radio? Let's try that again. `;
 
         delete intentObj.confirmationStatus;
@@ -76,7 +80,12 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
       return this.emitWithState('ListExplainers', 'unresolved_decline', message);
     }
     if (intentObj.confirmationStatus !== 'CONFIRMED' && unresolved) {
-      message = `Hmmm, I couldn't find anything on ${this.attributes.UNRESOLVED}. Would you like to request an explainer on that?`;
+      if (this.event.session.new) {
+        message = 'Welcome to Make Me Smart! ';
+      } else {
+        message = 'Hmmm, ';
+      }
+      message += `I couldn't find anything on ${this.attributes.UNRESOLVED}. Would you like to request an explainer on that?`;
       confirmMessage = `Would you like to request an explainer on ${this.attributes.UNRESOLVED}?`;
       return this.emit(':confirmIntentWithCard', message, confirmMessage, 'Explainer Not Found', message);
 
