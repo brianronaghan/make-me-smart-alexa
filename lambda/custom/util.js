@@ -258,25 +258,27 @@ module.exports = {
         chosen = choices[index];
         chosen.index = index;
       } else {
-        console.log("WTF")
+        console.log("PICKED BY NUMBER, BUT OUT OF BOUNDS, ", index)
         return -1;
       }
-    } else if (EASTER_EGGS && EASTER_EGGS.length && EASTER_EGGS.length > 0) {
-      var eggNames = EASTER_EGGS.map((egg) => egg.title.toLowerCase());
-      var eggAlts = EASTER_EGGS.map((egg) => egg.alts);
+    } else {
       var item;
       if (intentSlot.query && intentSlot.query.value) {
         item = intentSlot.query.value;
       } else if (intentSlot.topic && intentSlot.topic.value) {
         item = intentSlot.topic.value;
       }
-      var eggIndex = searchByName(cleanSlotName(item), eggNames, eggAlts);
-      if (eggIndex > -1) {
-        var egg = EASTER_EGGS[eggIndex];
-        egg.EE = true;
-        egg.index = 0;
-        console.log("FOUND A DAMN EASTER EGG", egg);
-        return egg;
+      if (item && EASTER_EGGS && EASTER_EGGS.length && EASTER_EGGS.length > 0) {
+        var eggNames = EASTER_EGGS.map((egg) => egg.title.toLowerCase());
+        var eggAlts = EASTER_EGGS.map((egg) => egg.alts);
+        var eggIndex = searchByName(cleanSlotName(item), eggNames, eggAlts);
+        if (eggIndex > -1) {
+          var egg = EASTER_EGGS[eggIndex];
+          egg.EE = true;
+          egg.index = 0;
+          console.log("FOUND A DAMN EASTER EGG", egg);
+          return egg;
+        }
       }
     }
     return chosen;
