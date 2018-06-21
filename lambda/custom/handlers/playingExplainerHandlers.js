@@ -136,6 +136,9 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
         }
         console.log("SOURCE PICK ", source)
         var intro = ''
+        if (this.event.session.new) {
+          intro += 'Welcome to Make Me Smart! ';
+        }
         if (source && source === 'NEW_USER_LAUNCH_PICK') {
           intro += `<audio src="${config.newUserAudio}" /> `;
         }
