@@ -287,7 +287,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
        delete this.attributes.LOCATION_REQUESTED;
 
      }
-     var message = "You can choose an explainer by name or number, or say 'older' or 'newer' to move through the list. Say browse to list the explainers again. What would you like to do?";
+     var message = "You can choose an explainer by name or number, or say 'older' or 'newer' to move through the list. Say repeat to list the explainers again. What would you like to do?";
      this.response.speak(message).listen(message);
      if (this.event.context.System.device.supportedInterfaces.Display) {
        this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, null, config.background.show));
@@ -296,9 +296,9 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
    },
    'Unhandled' : function () {
      console.log('ITERATING_EXPLAINER Unhandled',JSON.stringify(this.event.request.intent, null, 2))
-     var message = "Sorry I couldn't quite understand that. You can choose an explainer by name or number, or say 'older' or 'newer' to move through the list. Say browse to list the explainers again. What would you like to do?"
+     var message = "Sorry I couldn't quite understand that. You can choose an explainer by name or number, or say 'older' or 'newer' to move through the list. Say repeat to list the explainers again. What would you like to do?"
 
-     this.response.speak(message).listen("Would you like to 'browse' or 'play the latest'?");
+     this.response.speak(message).listen("Would you like to repeat the options or play the latest?");
      if (this.event.context.System.device.supportedInterfaces.Display) {
        this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Unhandled', message, null, config.background.show));
      }
