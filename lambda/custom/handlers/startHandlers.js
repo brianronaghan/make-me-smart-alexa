@@ -166,7 +166,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     console.log('START CancelIntent')
     // This needs to work for not playing as well
 
-    this.response.speak('Cancelled! Say Alexa, Make Me Smart to come back.')
+    this.response.speak(config.cancelMessage);
     delete this.attributes.STATE;
     this.emit(':saveState');
   },
@@ -174,7 +174,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     console.log('START StopIntent')
     // This needs to work for not playing as well
     // SHOULD I CLEAR THE STATE?
-    this.response.speak('See you later. Say alexa, Make Me Smart to get learning again.')
+    this.response.speak(config.stopMessage)
     delete this.attributes.STATE;
     this.emit(':saveState');
   },
