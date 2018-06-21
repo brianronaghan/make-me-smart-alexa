@@ -240,10 +240,10 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
       console.log(JSON.stringify(util.liveExplainers(), null, 2))
 
     }
-    var message = "You can pick an explainer by name or number, browse our explainers, or play them all. What would you like to do?";
+    var message = `You can pick an explainer by name or ${config.ipaNumber}, browse our explainers, or play them all. What would you like to do?`;
     this.response.speak(message).listen(message);
     if (this.event.context.System.device.supportedInterfaces.Display) {
-      this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, null, config.background.show));
+      this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', util.clearProsody(message), null, config.background.show));
     }
     this.emit(':saveState', true);
   },
@@ -256,10 +256,11 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
    'Unhandled' : function () {
      console.log('HOME PAGE  UNHANDLED',JSON.stringify(this.event, null, 2))
      var message = "Sorry I couldn't quite understand that. ";
-     var prompt = "You can pick an explainer by name or number, browse our explainers, or play them all. What would you like to do?";
+     var prompt = `You can pick an explainer by name or ${config.ipaNumber}, browse our explainers, or play them all. What would you like to do?`;
      this.response.speak(message + prompt).listen(prompt);
+     var displayMessage = message + prompt;
      if (this.event.context.System.device.supportedInterfaces.Display) {
-       this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message + prompt, null, config.background.show));
+       this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', util.clearProsody(displayMessage), null, config.background.show));
      }
      this.emit(':saveState', true);
 
