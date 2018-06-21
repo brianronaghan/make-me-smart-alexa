@@ -453,7 +453,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     delete this.attributes.STATE;
     delete this.attributes.requestingExplainer;
     delete this.attributes.SUGGESTION;
-    this.response.speak('See you later. Say Alexa, Make Me Smart to get learning again.')
+    this.response.speak('Cancelled! Say Alexa, Make Me Smart to come back.')
     this.emit(':saveState');
 
   },

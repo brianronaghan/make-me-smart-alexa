@@ -378,7 +378,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     console.log('CANCEL PLAY EXPLAINER STATE')
     // This needs to work for not playing as well
     // SHOULD I CLEAR THE STATE?
-    this.response.speak('See you later. Say Alexa, Make Me Smart to get learning again.')
+    this.response.speak('Cancelled! Say Alexa, Make Me Smart to come back.')
     this.emit(':saveState');
   },
 

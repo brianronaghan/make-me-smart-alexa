@@ -97,7 +97,7 @@ module.exports = Alexa.CreateStateHandler(config.states.CHANGE_INFO, {
   'PickItem': function () {
     console.log("CHANGE_INFO PickItem", JSON.stringify(this.event.request.intent, null,2));
     if (this.attributes.changingInfo) {
-      delete this.attributes.changingInfo
+      delete this.attributes.changingInfo;
     }
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
     this.emitWithState('PickItem');
@@ -162,7 +162,7 @@ module.exports = Alexa.CreateStateHandler(config.states.CHANGE_INFO, {
   'AMAZON.StopIntent' : function() {
     console.log('CHANGE_INFO StopIntent')
     // This needs to work for not playing as well
-    delete this.attributes.startedRequest;
+    delete this.attributes.changingInfo;
     delete this.attributes.STATE;
     this.response.speak('See you later. Say Alexa, Make Me Smart to get learning again.')
     this.emit(':saveState');
@@ -175,9 +175,8 @@ module.exports = Alexa.CreateStateHandler(config.states.CHANGE_INFO, {
     console.log('CHANGE_INFO CancelIntent');
     // means they don't wnt to leave it.
     delete this.attributes.STATE;
-    delete this.attributes.startedRequest;
-
-    this.response.speak('See you later. Say Alexa, Make Me Smart to get learning again.')
+    delete this.attributes.changingInfo;
+    this.response.speak('Cancelled! Say Alexa, Make Me Smart to come back.')
     this.emit(':saveState');
 
   },

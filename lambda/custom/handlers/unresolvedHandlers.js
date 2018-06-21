@@ -434,7 +434,7 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
     delete this.attributes.STATE;
     delete this.attributes.UNRESOLVED;
 
-    this.response.speak('See you later. Say Alexa, Make Me Smart to get learning again.')
+    this.response.speak('Cancelled! Say Alexa, Make Me Smart to come back.')
     this.emit(':saveState');
 
   },
@@ -458,7 +458,7 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
 
      // Just go to start
      var message = "Sorry I couldn't quite understand that. ";
-     var prompt = "You can hear what's new,  browse explainers, or submit an idea for an explainer. Which would you like to do?";
+     var prompt = "You can hear what's new, browse explainers, or submit an idea for an explainer. Which would you like to do?";
      this.response.speak(message + prompt).listen(prompt);
      if (this.event.context.System.device.supportedInterfaces.Display) {
        this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message + prompt, null, config.background.show));
