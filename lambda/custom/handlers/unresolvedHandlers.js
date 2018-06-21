@@ -107,9 +107,11 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
         console.timeEnd('DB-unresolved-savedinfo');
         var plug = '';
         if (this.attributes.REQUESTS % 3 === 0) {
-          plug += "You can also hear more from Kai and Molly on the podcast version of Make Me Smart, available everywhere!"
+          plug = config.podcastPlug;
+        } else if (this.attributes.REQUESTS % 4 === 0) {
+          plug = config.reviewSolicitation;
         }
-        message = `Okay, I'll tell Kai and Molly that you want to get smart about ${this.attributes.UNRESOLVED}! ${plug} " `;
+        message = `Okay, I'll tell Kai and Molly that you want to get smart about ${this.attributes.UNRESOLVED}! ${plug} `;
         if (slot.query && slot.query.value) {
           delete slot.query.value;
         }

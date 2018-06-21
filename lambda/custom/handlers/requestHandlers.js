@@ -89,10 +89,16 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
         location: this.attributes.userLocation
       }];
       let userAcknowledge;
+      let userAsk = '';
       if (this.attributes.ANONYMOUS || (this.attributes.REQUESTS > 2 && this.attributes.REQUESTS % 3 !== 0)) {
         userAcknowledge = 'you want'
       } else {
         userAcknowledge = `${this.attributes.userName} from ${this.attributes.userLocation} wants`
+      }
+      if (this.attributes.REQUESTS === 3 || this.attributes.REQUESTS % 5 === 0) {
+        userAsk = config.reviewSolicitation;
+      } else if (this.attributes.REQUESTS % 3 === 0) {
+        userAsk = config.podcastPlug;
       }
 
       console.time('DB-request-saved');
@@ -105,7 +111,8 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       }
       db.update.call(this, payload, function(err, response) {
         console.timeEnd('DB-request-saved');
-        message = `${suggestionString} I'll tell Kai and Molly that ${userAcknowledge} to get smart about that! You can also hear more from Kai and Molly on their podcast Make Me Smart! `;
+
+        message = `${suggestionString} I'll tell Kai and Molly that ${userAcknowledge} to get smart about that! ${userAsk} `;
         //
         this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
 

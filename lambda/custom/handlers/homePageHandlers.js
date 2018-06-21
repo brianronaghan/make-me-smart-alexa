@@ -198,7 +198,6 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     var slot = this.event.request.intent.slots;
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
-    console.log('s', slot);
     // if(slot && slot.query && slot.query.value) {
     //   delete slot.query.value;
     // }

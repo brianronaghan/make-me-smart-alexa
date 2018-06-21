@@ -191,9 +191,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     let NAME_TESTING = Object.keys(config.testIds).indexOf(this.attributes.userId) > -1;
     if (NAME_TESTING) {
       console.log("EXPLAINERS : ");
-
       console.log(JSON.stringify(util.liveExplainers(), null, 2))
-
     }
 
 

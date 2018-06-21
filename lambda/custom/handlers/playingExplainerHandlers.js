@@ -155,7 +155,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
         intro += `. <break time = "200ms"/> <audio src="${chosenExplainer.audio.url}" />`;
         var prompt;
         if (chosenExplainer.EE) {
-          prompt = `Thanks for listening! Now back to our normally scheduled programming. You can hear what's new, browse all our explainers or submit an idea. What would you like to do?`;
+          prompt = `Thanks for listening! By the way, do us a favor and rate Make Me Smart on the Alexa Skill Store or Mobile App. You can hear what's new, browse all our explainers or submit an idea. What would you like to do?`;
         } else if (this.event.session.new) { // came directly here
           prompt = `You can replay the explainer, play the latest, or browse all our explainers. What would you like to do?`;
         } else if (util.liveExplainers()[chosenExplainer.index+1]) { // THERE IS a next explainer
@@ -378,9 +378,11 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     console.log('STOP PLAY EXPLAINER STATE')
     // This needs to work for not playing as well
     // SHOULD I CLEAR THE STATE?
-
-    this.response.speak(config.stopMessage)
-
+    if (this.attributes.plays === 3 || this.attributes.plays === 6 || this.attributes.plays % 10 === 0) {
+      this.response.speak(config.reviewSolicitation);
+    } else {
+      this.response.speak(config.stopMessage)
+    }
     this.emit(':saveState');
   },
   'AMAZON.CancelIntent' : function() {
@@ -389,7 +391,11 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     console.log('CANCEL PLAY EXPLAINER STATE')
     // This needs to work for not playing as well
     // SHOULD I CLEAR THE STATE?
-    this.response.speak(config.cancelMessage)
+    if (this.attributes.plays === 3 || this.attributes.plays === 6 || this.attributes.plays % 10 === 0) {
+      this.response.speak(config.reviewSolicitation);
+    } else {
+      this.response.speak(config.cancelMessage);
+    }
     this.emit(':saveState');
   },
 
