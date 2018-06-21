@@ -164,7 +164,7 @@ module.exports = Alexa.CreateStateHandler(config.states.CHANGE_INFO, {
     // This needs to work for not playing as well
     delete this.attributes.changingInfo;
     delete this.attributes.STATE;
-    this.response.speak('See you later. Say Alexa, Make Me Smart to get learning again.')
+    this.response.speak(config.stopMessage)
     this.emit(':saveState');
 
     // this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
@@ -176,7 +176,7 @@ module.exports = Alexa.CreateStateHandler(config.states.CHANGE_INFO, {
     // means they don't wnt to leave it.
     delete this.attributes.STATE;
     delete this.attributes.changingInfo;
-    this.response.speak('Cancelled! Say Alexa, Make Me Smart to come back.')
+    this.response.speak(config.cancelMessage);
     this.emit(':saveState');
 
   },

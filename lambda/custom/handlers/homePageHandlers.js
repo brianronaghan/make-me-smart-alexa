@@ -218,7 +218,7 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     // This needs to work for not playing as well
     delete this.attributes.STATE;
     this.attributes.HEARD_FIRST = 0;
-    this.response.speak('Cancelled! Say Alexa, Make Me Smart to come back.')
+    this.response.speak(config.cancelMessage);
     this.emit(':saveState');
   },
   'AMAZON.StopIntent' : function() {
@@ -227,7 +227,7 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     // SHOULD I CLEAR THE STATE?
     this.attributes.HEARD_FIRST = 0;
     delete this.attributes.STATE;
-    this.response.speak('See you later. Say alexa, Make Me Smart to get learning again.')
+    this.response.speak(config.stopMessage)
     this.emit(':saveState');
   },
 

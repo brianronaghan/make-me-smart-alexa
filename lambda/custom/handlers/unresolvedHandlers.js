@@ -406,8 +406,8 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
     // This needs to work for not playing as well
     delete this.attributes.UNRESOLVED;
     delete this.attributes.STATE;
+    this.response.speak(config.stopMessage)
 
-    this.response.speak('See you later. Say Alexa, Make Me Smart to get learning again.')
     this.emit(':saveState');
 
 
@@ -417,8 +417,8 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
     // means they don't wnt to leave it.
     delete this.attributes.STATE;
     delete this.attributes.UNRESOLVED;
+    this.response.speak(config.cancelMessage);
 
-    this.response.speak('Cancelled! Say Alexa, Make Me Smart to come back.')
     this.emit(':saveState');
 
   },

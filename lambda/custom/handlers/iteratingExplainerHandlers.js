@@ -258,7 +258,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     delete this.attributes.ITERATING
     delete this.attributes.STATE;
     this.attributes.indices.explainer = 0;
-    this.response.speak('See you later. Say Alexa, Make Me Smart to get learning again.')
+    this.response.speak(config.stopMessage)
     this.emit(':saveState');
   },
   'AMAZON.CancelIntent' : function() {
@@ -267,6 +267,8 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     delete this.attributes.ITERATING
     delete this.attributes.STATE;
     this.attributes.indices.explainer = 0;
+    this.response.speak(config.cancelMessage);
+
     this.response.speak('Cancelled! Say Alexa, Make Me Smart to come back.')
     this.emit(':saveState');
   },
