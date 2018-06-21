@@ -18,13 +18,14 @@ var config = {
       "You can say 'change my info' if Alexa didn't correctly capture your name/location.",
       "Something else you want to get smart about? Try 'Alexa, submit an idea' and Kai and Molly might use it!",
       "Completionist? Say 'Alexa, browse explainers' to list every single explainer we've done!",
-      "Help other people find our skill by rating Make Me Smart on the Amazon Alexa site.",
+      "Help other people find our skill by rating Make Me Smart on the Alexa Skill Store or Mobile App.",
       "If you want to hear more from Kai and Molly, download the Make Me Smart podcast wherever you get that sort of thing.",
       "We're always looking for new ideas for explainers. Try 'Alexa, submit an idea' to give us one!",
       "Want to learn more about a topic? Goto: www.marketplace.org and get even smarter!",
       "Hey, guess what? We also have a show on the actual radio. Find Marketplace on your local public radio station.",
       "You can always say 'Alexa, play the latest' to hear what we're getting smart about right now.",
-      "Have a question? Found a bug? Email testing@marketplace.org and we might be able to help!"
+      "Have a question? Found a bug? Email testing@marketplace.org and we might be able to help!",
+      "Rate Make Me Smart on the Alexa Skill Store or Mobile App."
     ],
     testIds: {
       "amzn1.ask.account.AGXAI6THSPIDUPSEDUTAXRMH6NJJVZ57KZGR6MLRR2VRTFZV3FJ2VZWGHRQ33WLY5TPGN5UCWYRWE5CJW6HAT2LEJWJNV64UHVVR42RTNSIGRZBC572NR7CSY57B4FVSLD4APAKB7SB4KZHWE74DQPW7S4TDNILRWBIB3Q3CJ4YXRUAUYQ5ATDB7HVAVHYGOF2P5WUGL53RSY7I" : 'spot',
