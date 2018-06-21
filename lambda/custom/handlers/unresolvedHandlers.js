@@ -92,10 +92,15 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
         location: this.attributes.userLocation
       }];
       console.time('DB-unresolved-savedinfo');
+      this.attributes.REQUESTS++;
 
       db.update.call(this, payload, function(err, response) {
         console.timeEnd('DB-unresolved-savedinfo');
-        message = `Okay, I'll tell Kai and Molly that you want to get smart about ${this.attributes.UNRESOLVED}! You can also hear more from Kai and Molly on the podcast version of Make Me Smart, available everywhere! " `;
+        var plug = '';
+        if (this.attributes.REQUESTS % 3 === 0) {
+          plug += "You can also hear more from Kai and Molly on the podcast version of Make Me Smart, available everywhere!"
+        }
+        message = `Okay, I'll tell Kai and Molly that you want to get smart about ${this.attributes.UNRESOLVED}! ${plug} " `;
         if (slot.query && slot.query.value) {
           delete slot.query.value;
         }
