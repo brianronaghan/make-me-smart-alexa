@@ -571,7 +571,6 @@
                   "name": "AMAZON.StopIntent",
                   "samples": [
                     "stop",
-                    "cancel",
                     "I'm done",
                     "I'm set",
                     "I'm good",
