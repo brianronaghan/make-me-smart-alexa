@@ -277,20 +277,21 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
    'AMAZON.HelpIntent' : function () {
      console.log('ITERATING_EXPLAINER HelpIntent', JSON.stringify(this.event.request.intent, null,2));
      let NAME_TESTING = Object.keys(config.testIds).indexOf(this.attributes.userId) > -1;
-     if (NAME_TESTING) {
-       console.log("ITERATING TEST DELETING name and location and req flags");
-       delete this.attributes.UNRESOLVED;
-       delete this.attributes.SUGGESTION;
-       delete this.attributes.userName;
-       delete this.attributes.userLocation;
-       delete this.attributes.NAME_REQUESTED;
-       delete this.attributes.LOCATION_REQUESTED;
-
-     }
-     var message = "You can choose an explainer by name or number, or say 'older' or 'newer' to move through the list. Say repeat to list the explainers again. What would you like to do?";
+     // if (NAME_TESTING) {
+     //   console.log("ITERATING TEST DELETING name and location and req flags");
+     //   delete this.attributes.UNRESOLVED;
+     //   delete this.attributes.SUGGESTION;
+     //   delete this.attributes.userName;
+     //   delete this.attributes.userLocation;
+     //   delete this.attributes.NAME_REQUESTED;
+     //   delete this.attributes.LOCATION_REQUESTED;
+     //
+     // }
+     var ipaNumber = "<phoneme alphabet='ipa' ph='nʌmbɝ'>number</phoneme>";
+     var message = `You can choose an explainer by name or ${ipaNumber}, or say 'older' or 'newer' to move through the list. Say repeat to list the explainers again. What would you like to do?`;
      this.response.speak(message).listen(message);
      if (this.event.context.System.device.supportedInterfaces.Display) {
-       this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, null, config.background.show));
+       this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', util.clearProsody(message), null, config.background.show));
      }
      this.emit(':saveState', true);
    },

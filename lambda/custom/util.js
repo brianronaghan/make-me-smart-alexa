@@ -386,6 +386,9 @@ function clearProsody (text) {
   text = text.replace(/<\/emphasis[^>]*>/gi, "")
   text = text.replace(/<prosody[^>]*>/gi, "")
   text = text.replace(/<\/prosody>/gi, "")
+  text = text.replace(/<phoneme[^>]*>/gi, "")
+  text = text.replace(/<\/phoneme>/gi, "")
+
   text = text.replace(/<audio[^>]*>/gi, "")
   return text;
 };
