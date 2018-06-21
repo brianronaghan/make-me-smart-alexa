@@ -159,13 +159,8 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
   },
 
   'ReplayExplainer': function () {
-    this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
     console.log("HOME_PAGE state, ReplayExplainer", JSON.stringify(this.event.request, null,2));
-    if (!this.attributes.currentExplainerIndex) {
-      this.attributes.currentExplainerIndex = 0;
-    }
-    return this.emitWithState('PickItem', {index: {value: this.attributes.currentExplainerIndex + 1}}, 'REPLAY_FROM_HOME')
-
+    this.emitWithState('HomePage', 'repeating');
   },
 
   'RepeatOptions': function () {
@@ -223,7 +218,7 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     // This needs to work for not playing as well
     delete this.attributes.STATE;
     this.attributes.HEARD_FIRST = 0;
-    this.response.speak("See you later. Say 'Alexa, Make Me Smart' to get learning again.");
+    this.response.speak('Cancelled! Say Alexa, Make Me Smart to come back.')
     this.emit(':saveState');
   },
   'AMAZON.StopIntent' : function() {
