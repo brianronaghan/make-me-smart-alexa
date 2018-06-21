@@ -36,13 +36,13 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
       console.log("OUT OF BOUNDS, but by number")
       var theNumber;
       if (slot.query && slot.query.value) {
-        theNumber = slot.query.value;
+        theNumber = util.stripActions(slot.query.value);
         delete slot.query.value;
       } else if (slot.index && slot.index.value) {
-        theNumber = slot.index.value;
+        theNumber = util.stripActions(slot.index.value);
         delete slot.index.value;
       } else if (slot.ordinal && slot.ordinal.value) {
-        theNumber = slot.ordinal.value;
+        theNumber = util.stripActions(slot.ordinal.value);
         delete slot.ordinal.value;
       }
       var message = `${theNumber} is not a valid choice. Please choose between 1 and ${util.liveExplainers().length}. Let's try again. `
