@@ -14,14 +14,6 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     this.handler.state = this.attributes.STATE = config.states.START;
     this.emitWithState('LaunchRequest');
   },
-  TopicOnly: function () {
-    console.log("ITERATING_EXPLAINER TopicOnly", JSON.stringify(this.event.request.intent, null,2))
-    var slot = slot || this.event.request.intent.slots;
-    delete this.attributes.ITERATING;
-    this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
-    this.emitWithState('PickItem', slot, 'ITERATING');
-
-  },
   IndexOnly: function () {
     console.log("ITERATING_EXPLAINER IndexOnly", JSON.stringify(this.event.request.intent, null,2))
     var slot = slot || this.event.request.intent.slots;

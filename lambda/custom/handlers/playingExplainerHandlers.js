@@ -185,9 +185,6 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
 
     }
   },
-  TopicOnly: function () {
-    console.log("PLAYING_EXPLAINER TopicOnly", JSON.stringify(this.event.request.intent, null,2))
-  },
   'PlayLatestExplainer': function () {
     delete this.attributes.EASTER_EGG_TITLE
     // this is what 'play all would do'
