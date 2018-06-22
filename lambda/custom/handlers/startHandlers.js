@@ -1,7 +1,7 @@
 'use strict';
 
 var Alexa = require('alexa-sdk');
-
+var allExplainers = require('../explainers');
 var config = require('../config');
 var util = require('../util');
 var db = require('../db');
@@ -190,8 +190,9 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     console.log('Help in START');
     let NAME_TESTING = Object.keys(config.testIds).indexOf(this.attributes.userId) > -1;
     if (NAME_TESTING) {
-      console.log("EXPLAINERS : ");
-      console.log(JSON.stringify(util.liveExplainers(), null, 2))
+      console.log("ALL EXPLAINERS :");
+      console.log(JSON.stringify(allExplainers, null, 2))
+      console.log('Live: ', util.liveExplainers().length, ' out of ', allExplainers.length);
     }
 
 
