@@ -508,10 +508,10 @@ var config = {
     },
     newUserAudio: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/utils/Alexa+-+Ryssdal+-+Wood+-+Welcome+New+User+Message+-+MIXLEV_alexa.mp3',
     background: {
-      show: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/1024x600_FINALB.png"
+      show: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/utils/icons/1024x600_FINALB.png"
     },
     icon : {
-      full: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/icon_full.png"
+      full: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/utils/icons/icon_full.png"
     },
     cacheExpiry: 1000 * 60 * 60 * 60 * 3, // 2 hour, but for this spin-up, right? should I persist?
     dynamoDBTableName: 'makeMeSmart',
