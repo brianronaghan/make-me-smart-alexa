@@ -6,7 +6,7 @@ module.exports = [
   //   guid: 'easter-inflation',
   //   date: "2018-05-24",
   //   audio: {
-  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/test-explainers/Alexa+-+Ryssdal+Inflation+-+MIXLEV_alexa.mp3",
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/utils/Alexa+-+Ryssdal+-+Wood+-+Welcome+New+User+Message+-+MIXLEV_alexa.mp3",
   //   },
   // },
   // {
