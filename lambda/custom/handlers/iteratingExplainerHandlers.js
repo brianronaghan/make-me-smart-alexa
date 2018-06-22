@@ -257,10 +257,11 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     // This needs to work for not playing as well
     delete this.attributes.ITERATING
     delete this.attributes.STATE;
-    if (this.attributes.indices.explainer > 10) {
+    if (this.attributes.indices.explainer > 10 && !this.attributes.SOLICITED_EXIT) {
+      this.attributes.SOLICITED_EXIT = true;
       this.response.speak(`Thanks for listening! ${config.reviewSolicitation}`);
     } else {
-      this.response.speak(config.stopMessage)
+      this.response.speak(config.stopMessage);
     }
     this.attributes.indices.explainer = 0;
 

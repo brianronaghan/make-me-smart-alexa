@@ -108,8 +108,6 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
         var plug = '';
         if (this.attributes.REQUESTS % 3 === 0) {
           plug = config.podcastPlug;
-        } else if (this.attributes.REQUESTS % 4 === 0) {
-          plug = config.reviewSolicitation;
         }
         message = `Okay, I'll tell Kai and Molly that you want to get smart about ${this.attributes.UNRESOLVED}! ${plug} `;
         if (slot.query && slot.query.value) {
