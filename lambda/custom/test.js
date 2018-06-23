@@ -32,6 +32,8 @@ var progressCB = (err) => {
     progress++;
     if (progress < explainers.length) {
       checkExplainer(explainers[progress], progressCB);
+    } else {
+      console.log("ALL PASSED!");
     }
   }
 }

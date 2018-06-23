@@ -1,6 +1,6 @@
 module.exports = [
   {
-    title: 'Royal Wedding',
+    title: 'The Royal Wedding',
     author: 'Kai Ryssdal',
     alts: ['royal wedding', 'royals', 'wedding', 'the wedding', 'royal'],
     guid: 'royal_wedding_launch',
@@ -72,7 +72,7 @@ module.exports = [
     guid: "productivity_launch",
     date: "2018-06-22T07:00:00Z",
     author: 'Kai Ryssdal',
-    alts: ['output', 'output per worker'],
+    alts: ['output', 'output per worker', 'productively'],
     tags: [],
     audio: {
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/Alexa+-+Ryssdal+-+PRODUCTIVITY+INTRO+-+MIXLEV_alexa.mp3",
@@ -111,9 +111,9 @@ module.exports = [
     },
   },
   {
-    title: 'Bonds',
+    title: 'The Bond Market',
     author: 'Kai Ryssdal',
-    alts: ['bond market', 'the bond market', 'bond'],
+    alts: ['bond market', 'the bond market', 'bond', 'bonds', 'bonds market', 'bombs'],
     guid: 'bonds_launch',
     date: "2018-06-22T07:00:00Z",
     requestInformation: {
