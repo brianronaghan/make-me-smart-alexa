@@ -456,16 +456,16 @@ function stripActions (searchTerm) {
   searchTerm = searchTerm.replace(/define\s/gi, " ")
   searchTerm = searchTerm.replace(/subject\s/gi, " ")
   searchTerm = searchTerm.replace(/hear\s/gi, " ")
-  searchTerm = searchTerm.replace(/discuss\s/gi, " ")
+  searchTerm = searchTerm.replace(/\<discuss\>\s/gi, " ")
   searchTerm = searchTerm.replace(/discussion\s/gi, " ")
   searchTerm = searchTerm.replace(/definition\s/gi, " ")
   searchTerm = searchTerm.replace(/conversation\s/gi, " ")
-  searchTerm = searchTerm.replace(/on\s/gi, " ")
+  searchTerm = searchTerm.replace(/\<on\>\s/gi, " ")
   searchTerm = searchTerm.replace(/find\s/gi, " ")
   searchTerm = searchTerm.replace(/search\s/gi, " ")
   searchTerm = searchTerm.replace(/tell\s/gi, " ")
-  searchTerm = searchTerm.replace(/one\s/gi, " ")
-  searchTerm = searchTerm.replace(/me\s/gi, " ")
+  searchTerm = searchTerm.replace(/\<one\>\s/gi, " ")
+  searchTerm = searchTerm.replace(/\<me\>\s/gi, " ")
 
 
   searchTerm = searchTerm.replace(/^\s+|\s+$/g, "");  // any leading or trailing whitespace
