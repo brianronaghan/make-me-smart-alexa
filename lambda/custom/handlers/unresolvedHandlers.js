@@ -73,6 +73,17 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
     // if denied
     if (intentObj.confirmationStatus === 'DENIED') { // denied
       console.log("UNRESOLVED PickItem -- DENIED", JSON.stringify(intentObj, null,2));
+      payload.requests = [{
+        query: this.attributes.UNRESOLVED,
+        time: this.event.request.timestamp,
+        user: this.attributes.userName,
+        location: this.attributes.userLocation
+        case: 'UNRESOLVED-no-request'
+      }];
+      // console.time('DB-unres-no-save')
+      db.update.call(this, payload, function(err, response) {
+        // console.timeEnd('DB-unres-no-save');
+      });
       message = "Alright, let's try again. ";
       delete this.attributes.UNRESOLVED;
       delete intentObj.confirmationStatus;
