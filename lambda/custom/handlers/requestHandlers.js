@@ -90,7 +90,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       }];
       let userAcknowledge;
       let userAsk = '';
-      if (this.attributes.ANONYMOUS || (this.attributes.REQUESTS > 2 && this.attributes.REQUESTS % 3 !== 0)) {
+      if (this.attributes.ANONYMOUS || (this.attributes.REQUESTS > 2 && this.attributes.REQUESTS % 4 !== 0)) {
         userAcknowledge = 'you want'
       } else {
         userAcknowledge = `${this.attributes.userName} from ${this.attributes.userLocation} wants`
