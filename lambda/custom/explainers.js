@@ -13,7 +13,7 @@ module.exports = [
   {
     title: 'Bitcoin',
     author: 'Molly Wood',
-    alts: ['a cryptocurrency', 'a bitcoin', 'uh bitcoin', 'cryptocurrency', 'crypto', 'blockchain', 'flip coin'],
+    alts: ['a cryptocurrency', 'the coin', 'a bitcoin', 'uh bitcoin', 'cryptocurrency', 'crypto', 'blockchain', 'flip coin', 'bid coin', 'bit coin'],
     guid: "bitcoin_launch",
     date: "2018-06-22T07:00:00Z",
     description: "Bitcoin is the best known cryptocurrency.",
@@ -40,7 +40,7 @@ module.exports = [
   {
     title: 'Household Debt',
     author: 'Kai Ryssdal',
-    alts: ['debt', 'household', 'what we owe', 'personal debt'],
+    alts: ['debt', 'dead', 'household', 'what we owe', 'personal debt', 'household dead', 'house hold deb', 'household deck'],
     guid: 'household_debt_launch',
     date: "2018-06-22T07:00:00Z",
     requestInformation: {
@@ -113,7 +113,7 @@ module.exports = [
   {
     title: 'The Bond Market',
     author: 'Kai Ryssdal',
-    alts: ['bond market', 'the bond market', 'bond', 'bonds', 'bonds market', 'bombs'],
+    alts: ['bond market', 'the bond market', 'bond', 'bonds', 'bonds market', 'bombs', 'the bomb market'],
     guid: 'bonds_launch',
     date: "2018-06-22T07:00:00Z",
     requestInformation: {
@@ -143,7 +143,7 @@ module.exports = [
   {
     title: 'VPN',
     author: 'Molly Wood',
-    alts: ['vpns', 'vpn', 'v.p.n.s', 'virtual private network', 'private network', 'v p n'],
+    alts: ['vpns', 'vpn', 'v.p.n.s', 'v p n', 'virtual private network', 'private network', 'b p n', 'dpn', 'bpn', 'd p n'],
     guid: 'vpn_launch',
     date: "2018-06-22T07:00:00Z",
     requestInformation: {
@@ -158,7 +158,7 @@ module.exports = [
   {
     title: 'Venture Capital',
     author: 'Molly Wood',
-    alts: ['VC', 'v c', 'v.c.', 'venture', 'venture funding'],
+    alts: ['VC', 'the sea', 'the C', 'vc', 'v c', 'v.c.', 'bc', 'b c', 'venture', 'venture funding'],
     guid: 'vc_launch',
     date: "2018-06-22T07:00:00Z",
     requestInformation: {
