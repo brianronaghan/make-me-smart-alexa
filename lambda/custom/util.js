@@ -201,6 +201,8 @@ module.exports = {
   },
 
   itemPicker: function (intentSlot, choices, choiceKey, slotKey, addOne) {
+    console.time('search');
+
     var itemNames = choices.map((choice) => choice[choiceKey].toLowerCase());
     var itemAlts = choices.map((choice) => choice.alts && choice.alts);
 
@@ -283,6 +285,7 @@ module.exports = {
         }
       }
     }
+    console.timeEnd('search');
     return chosen;
   },
 
