@@ -1,5 +1,82 @@
 module.exports = [
   {
+    title: 'Trade Wars',
+    author: 'Kai Ryssdal',
+    alts: ['trade war', 'raid war'],
+    guid: 'trade_war',
+    date: "2018-08-28T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/trade-war-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/trade-war-kai-intro-fix-mix.mp3"
+    },
+  },
+  {
+    title: 'Quits Rate',
+    author: 'Kai Ryssdal',
+    alts: ['quitting', 'hits rate', 'quits rape', 'quips rate'],
+    guid: 'quits_rate',
+    date: "2018-08-28T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/quits-rate-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/quits-rate-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Venmo',
+    author: 'Molly Wood',
+    alts: ['venmo', 'cash app', 'denmo','kenmo', 'benmo'],
+    guid: 'venmo',
+    date: "2018-08-28T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/venmo-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/venmo-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Two Dollar Bill',
+    author: 'Kai Ryssdal',
+    alts: ['dollar', '2 dollar bill', 'two buck bill', 'two dollar', '2 dollar'],
+    guid: 'two_dollar_bill',
+    date: "2018-08-28T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/two-dollar-bill-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/two-dollar-bill-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'GDP',
+    author: 'Kai Ryssdal',
+    alts: ['gdp', 'g d p', 'g.d.p.', 'gbp', 'g b p', 'g.b.p.', 'gross domestic product', 'gdp number',],
+    guid: 'gdp',
+    date: "2018-06-28T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/gdp-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/gdp-kai-intro-fix-mix.mp3"
+    },
+  },
+  {
+    title: 'Credit Score',
+    author: 'Kai Ryssdal',
+    alts: ['credit score', 'my credit score', 'your credit score', 'credit rating', 'credit number', 'credit sore', 'credit store'],
+    guid: 'credit_score',
+    date: "2018-06-27T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/credit-score-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/credit-score-kai-intro-2-mix.mp3"
+    },
+  },
+  {
+    title: 'Targeted Ads',
+    author: 'Molly Wood',
+    alts: ['targeted', 'target', 'ads', 'advertising', 'targeted advertising', 'directed ads'],
+    guid: 'targeted_ads',
+    date: "2018-06-26T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/targeted-ads-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/targeted-ads-molly-intro-fix-mix.mp3"
+    },
+  },
+  {
     title: 'Summer Blockbusters',
     author: 'Kai Ryssdal',
     alts: ['movies', 'summer movies', 'summer movie blockbusters', 'block busters', 'some her movies', 'summer block busters'],
@@ -13,7 +90,7 @@ module.exports = [
   {
     title: 'The Royal Wedding',
     author: 'Kai Ryssdal',
-    alts: ['royal wedding', 'royals', 'wedding', 'the wedding', 'royal'],
+    alts: ['royal wedding', 'royals', 'wedding', 'the wedding', 'the webbing', 'royal', 'royal webbing', 'royal weddings'],
     guid: 'royal_wedding_launch',
     date: "2018-06-22T07:00:00Z",
     audio: {
