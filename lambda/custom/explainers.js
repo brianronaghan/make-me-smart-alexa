@@ -1,5 +1,16 @@
 module.exports = [
   {
+    title: 'Summer Blockbusters',
+    author: 'Kai Ryssdal',
+    alts: ['movies', 'summer movies', 'summer movie blockbusters', 'block busters', 'some her movies', 'summer block busters'],
+    guid: 'summer_blockbusters',
+    date: "2018-06-25T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/summer-blockbusters-kai-explainer-mix.mp3",
+      intro: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/summer-blockbusters-kai-intro-fix-mix.mp3'
+    },
+  },
+  {
     title: 'The Royal Wedding',
     author: 'Kai Ryssdal',
     alts: ['royal wedding', 'royals', 'wedding', 'the wedding', 'royal'],
@@ -13,7 +24,7 @@ module.exports = [
   {
     title: 'Bitcoin',
     author: 'Molly Wood',
-    alts: ['a cryptocurrency', 'the coin', 'a bitcoin', 'uh bitcoin', 'cryptocurrency', 'crypto', 'blockchain', 'flip coin', 'bid coin', 'bit coin'],
+    alts: ['a cryptocurrency', 'the coin', 'a bitcoin', 'uh bitcoin', 'cryptocurrency', 'crypto', 'blockchain', 'flip coin', 'flip a coin', 'bid coin', 'bit coin'],
     guid: "bitcoin_launch",
     date: "2018-06-22T07:00:00Z",
     description: "Bitcoin is the best known cryptocurrency.",
