@@ -378,8 +378,8 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     console.log('STOP PLAY EXPLAINER STATE: ', this.attributes.plays)
     // This needs to work for not playing as well
     // SHOULD I CLEAR THE STATE?
-    if (this.attributes.plays > 5 && !this.attributes.SOLICITED_EXIT) {
-      this.attributes.SOLICITED_EXIT = true;
+    if (this.attributes.plays > 5 && !this.attributes.SOLICITED) {
+      this.attributes.SOLICITED = true;
       this.response.speak(`Thanks for listening! ${config.reviewSolicitation}`);
     } else {
       this.response.speak(config.stopMessage)
@@ -392,8 +392,8 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     console.log('CANCEL PLAY EXPLAINER STATE')
     // This needs to work for not playing as well
     // SHOULD I CLEAR THE STATE?
-    if (this.attributes.plays > 5 && !this.attributes.SOLICITED_EXIT) {
-      this.attributes.SOLICITED_EXIT = true;
+    if (this.attributes.plays > 5 && !this.attributes.SOLICITED) {
+      this.attributes.SOLICITED = true;
       this.response.speak(`Thanks for listening! ${config.reviewSolicitation}`);
     } else {
       this.response.speak(config.cancelMessage);

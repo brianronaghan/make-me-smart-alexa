@@ -96,8 +96,8 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
         userAcknowledge = `${this.attributes.userName} from ${this.attributes.userLocation} wants`
       }
 
-      if (this.attributes.REQUESTS > 3 && !this.attributes.SOLICITED_REQ) {
-        this.attributes.SOLICITED_REQ = true;
+      if (this.attributes.REQUESTS > 3 && !this.attributes.SOLICITED) {
+        this.attributes.SOLICITED = true;
         userAsk = `And hey, if you'd like to do us a favor, ${config.reviewSolicitation}`;
       } else if (this.attributes.REQUESTS % 3 === 0) {
         userAsk = config.podcastPlug;
