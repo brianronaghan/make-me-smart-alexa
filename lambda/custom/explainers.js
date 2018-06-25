@@ -3,7 +3,7 @@ module.exports = [
     title: 'Summer Blockbusters',
     author: 'Kai Ryssdal',
     alts: ['movies', 'summer movies', 'summer movie blockbusters', 'block busters', 'some her movies', 'summer block busters'],
-    guid: 'summer_blockbusters',
+    guid: 'summer_blockbusters-1',
     date: "2018-06-25T07:00:00Z",
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/summer-blockbusters-kai-explainer-mix.mp3",
@@ -93,9 +93,9 @@ module.exports = [
   {
     title: 'Machine Learning',
     author: 'Molly Wood',
-    alts: ['machine', 'learning', 'machine burning'],
+    alts: ['machine', 'learning', 'machine burning', 'my sheen learning'],
     guid: 'machine_learning_launch',
-    date: "2018-06-25T07:00:00Z",
+    date: "2018-06-24T07:00:00Z",
     requestInformation: {
       user: null,
       location: null

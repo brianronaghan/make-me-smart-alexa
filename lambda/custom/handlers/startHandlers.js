@@ -195,6 +195,8 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
       console.log("ALL EXPLAINERS :");
       console.log(JSON.stringify(allExplainers, null, 2))
       console.log('Live: ', util.liveExplainers().length, ' out of ', allExplainers.length);
+      console.log("CLEARING LATEST FOR TESTER: ");
+      delete this.attributes.LATEST_HEARD;
     }
 
 
