@@ -492,6 +492,8 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     // HANDLE FAILURE basically
     console.log("REQUEST session END with", this.attributes.SUGGESTION);
     console.log("SESSION ENDED IN REQUEST", JSON.stringify(this.event, null,2))
+    delete this.attributes.SUGGESTION;
+    delete this.attributes.STATE;
     this.emit(':saveState', true);
 
    },

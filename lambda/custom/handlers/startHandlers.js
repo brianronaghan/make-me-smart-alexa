@@ -80,6 +80,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     });
   },
   'HomePage': function (condition, message) {
+    // TODO: add query check because of goddamned amazon?
     console.log("START state HomePage", JSON.stringify(this.event.request.intent, null,2))
     this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
     if (!this.attributes.deviceIds) {
@@ -92,6 +93,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     }
   },
   'RequestExplainer' : function () {
+    // TODO: add query check because of goddamned amazon?
     console.log('START state RequestExplainer', JSON.stringify(this.event.request.intent, null,2))
     this.handler.state = this.attributes.STATE = config.states.REQUEST;
     if (!this.attributes.deviceIds) {
