@@ -79,6 +79,8 @@ var config = {
         "I'm done thanks"
       ],
       HomePage: [
+        "let's begin again",
+        "begin again",
         "a main menu",
         "the main menu",
         "start menu",
@@ -182,6 +184,16 @@ var config = {
         "tell make me smart I have got an idea",
         "tell make me smart I have an idea",
 
+        "ask make me smart to submit",
+        "tell make me smart to submit",
+        "tell me an idea",
+        "me an idea",
+        "get an idea",
+        "i'd like to scimitar explain are",
+        "i'd like to submit an idea",
+        "an explainer on india",
+        "simien idea",
+
         "pitch",
         "pitch explainer",
         "pitch an explainer",
@@ -229,6 +241,8 @@ var config = {
         "submit a topic",
         "submit a topic idea",
         "i want to submit a topic",
+        "i want to submit an idea",
+
         "can i make a submission",
         "i want to submit something",
         "i want to submit a topic",
@@ -312,6 +326,10 @@ var config = {
         "browse explainers",
         "browse all",
         "browse topics",
+        "browse explain is",
+        "browse alix venus",
+        "liners",
+        "xplain are",
 
         "browse every one of your explainer",
         "browse every one of your explainers",
@@ -363,8 +381,10 @@ var config = {
         "more explainers"
       ],
       OlderExplainers: [
+        "more explainers",
         "earlier",
         "earlier explainers",
+        "more explainers",
         "before that",
         "further back",
         "older",
@@ -382,7 +402,9 @@ var config = {
         "previous 3",
         "newer",
         "newer explainers",
-        "newer explainer"
+        "newer explainer",
+        "p. n. explainer"
+
       ],
       ChangeMyInfo: [
         "change my name",

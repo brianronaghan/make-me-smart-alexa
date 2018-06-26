@@ -523,6 +523,8 @@
                 {
                   "name": "HomePage",
                   "samples": [
+                    "let's begin again",
+                    "begin again",
                     "a main menu",
                     "the main menu",
                     "start menu",
@@ -725,8 +727,16 @@
                     "tell make me smart I've got an idea",
                     "tell make me smart I have got an idea",
                     "tell make me smart I have an idea",
+
                     "ask make me smart to submit",
                     "tell make me smart to submit",
+                    "tell me an idea",
+                    "me an idea",
+                    "get an idea",
+                    "i'd like to scimitar explain are",
+                    "i'd like to submit an idea",
+                    "an explainer on india",
+                    "simien idea",
 
                     "pitch",
                     "pitch explainer",
@@ -778,6 +788,8 @@
                     "can i make a submission",
                     "i want to submit something",
                     "i want to submit a topic",
+                    "i want to submit an idea",
+
                     "suggest",
                     "suggestion",
                     "make a suggestion",
@@ -883,6 +895,10 @@
                       "browse explainers",
                       "browse all",
                       "browse topics",
+                      "browse explain is",
+                      "browse alix venus",
+                      "liners",
+                      "xplain are",
 
                       "browse every one of your explainer",
                       "browse every one of your explainers",
@@ -937,6 +953,7 @@
                 {
                   "name": "OlderExplainers",
                   "samples": [
+                    "more explainers",
                     "earlier",
                     "earlier explainers",
                     "before that",
@@ -981,7 +998,8 @@
                     "newer",
                     "newer three",
                     "newer explainers",
-                    "newer explainer"
+                    "newer explainer",
+                    "p. n. explainer"
                   ],
                   "slots": [
                     {
@@ -1227,6 +1245,7 @@
                     }
                   ],
                   "samples": [
+                    "{query} explainer",
                     "pick {query}",
                     "pick topic {query}",
                     "teach me about {query}",
