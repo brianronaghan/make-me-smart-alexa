@@ -15,7 +15,10 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     if (author === 'Molly Wood') {
       author = `Molly '<emphasis level="strong"> Wood</emphasis>`;
     }
-
+    if (this.event.request.intent) {
+      console.log("PHANTOM INTENT on LR -- AMAZON BUG");
+      console.log(JSON.stringify(this.event.request.intent, null, 2))
+    }
     if (!this.attributes.deviceIds) {
       welcome =`<audio src="${config.newUserAudio}" /><audio src="${latestExplainer.audio.url}"/>`;
     } else if (this.attributes.LATEST_HEARD && this.attributes.LATEST_HEARD === latestExplainer.guid) {
@@ -80,8 +83,20 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     });
   },
   'HomePage': function (condition, message) {
-    // TODO: add query check because of goddamned amazon?
     console.log("START state HomePage", JSON.stringify(this.event.request.intent, null,2))
+    var slot;
+    if (this.event.request.intent) {
+      slot = this.event.request.intent.slots;
+      if (slot.query && slot.query.value) {
+        let intentCheck = util.intentCheck(slot.query.value);
+        if (intentCheck) {
+          console.log("START HomePage intentCheck -- slot.query.value ", slot.query.value)
+          delete slot.query.value;
+          return this.emitWithState(intentCheck);
+        }
+      }
+    }
+    console.log("START HomePage no query -> actual go to HomePage")
     this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
     if (!this.attributes.deviceIds) {
       console.log("NEW USER -- HomePage")
@@ -91,10 +106,23 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     } else {
       return this.emitWithState('HomePage', 'from_launch');
     }
+
   },
   'RequestExplainer' : function () {
-    // TODO: add query check because of goddamned amazon?
     console.log('START state RequestExplainer', JSON.stringify(this.event.request.intent, null,2))
+
+    var slot;
+    if (this.event.request.intent) {
+      slot = this.event.request.intent.slots;
+      if (slot.query && slot.query.value) {
+        let intentCheck = util.intentCheck(slot.query.value);
+        if (intentCheck) {
+          console.log("START RequestExplainer intentCheck -- slot.query.value ", slot.query.value)
+          delete slot.query.value;
+          return this.emitWithState(intentCheck);
+        }
+      }
+    }
     this.handler.state = this.attributes.STATE = config.states.REQUEST;
     if (!this.attributes.deviceIds) {
       console.log("NEW USER -- RequestExplainer")
@@ -104,11 +132,10 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     } else {
       return this.emitWithState('RequestExplainer');
     }
-
   },
   'PickItem' : function (slot) {
     console.log("START PickItem ")
-    // redirects from start to play explainer choice
+    // DO I NEED TO CHECK THIS ALSO?
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
     if (!this.attributes.deviceIds) {
       console.log("NEW USER -- PickItem")
@@ -122,52 +149,127 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
   'ReplayExplainer': function () {
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
+    var slot;
+    if (this.event.request.intent) {
+      slot = this.event.request.intent.slots;
+      if (slot.query && slot.query.value) {
+        let intentCheck = util.intentCheck(slot.query.value);
+        if (intentCheck) {
+          console.log("START ReplayExplainer intentCheck -- slot.query.value ", slot.query.value)
+          delete slot.query.value;
+          return this.emitWithState(intentCheck);
+        }
+      }
+    }
     console.log('GOT REPLAY', this.handler.state)
     // currentExplainerIndex is 0 based, and PickItem expects 1-based
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
     this.emitWithState('PickItem', {index: {value: 1}}, 'LAUNCH_REPLAY')
+
   },
 
   'PlayLatestExplainer': function () {
     // this is what 'play all would do'
+    var slot;
+    if (this.event.request.intent) {
+      slot = this.event.request.intent.slots;
+      if (slot.query && slot.query.value) {
+        let intentCheck = util.intentCheck(slot.query.value);
+        if (intentCheck) {
+          console.log("START PlayLatestExplainer intentCheck -- slot.query.value ", slot.query.value)
+          delete slot.query.value;
+          return this.emitWithState(intentCheck);
+        }
+      }
+    }
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     this.emitWithState('PlayLatestExplainer', {index: {value: 1}}, 'LAUNCH_LATEST');
+
+
   },
   'ChangeMyInfo' : function () {
-    this.handler.state = this.attributes.STATE = config.states.REQUEST;
+    var slot;
+    if (this.event.request.intent) {
+      slot = this.event.request.intent.slots;
+      if (slot.query && slot.query.value) {
+        let intentCheck = util.intentCheck(slot.query.value);
+        if (intentCheck) {
+          console.log("START ChangeMyInfo intentCheck -- slot.query.value ", slot.query.value)
+          delete slot.query.value;
+          return this.emitWithState(intentCheck);
+        }
+      }
+    }
+    this.handler.state = this.attributes.STATE = config.states.CHANGE_INFO;
     this.emitWithState('ChangeMyInfo');
+
   },
   'ListExplainers': function () {
     console.log('START ListExplainers')
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
+    var slot;
+    if (this.event.request.intent) {
+      slot = this.event.request.intent.slots;
+      if (slot.query && slot.query.value) {
+        let intentCheck = util.intentCheck(slot.query.value);
+        if (intentCheck) {
+          console.log("START ListExplainers intentCheck -- slot.query.value ", slot.query.value)
+          delete slot.query.value;
+          return this.emitWithState(intentCheck);
+        }
+      }
+    }
     this.attributes.currentExplainerIndex = -1;
     this.attributes.indices.explainer = 0;
     this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
     this.emitWithState('ListExplainers', 'from_launch');
+
   },
   'OlderExplainers' : function () {
     console.log("OlderExplainers in START");
-
+    var slot;
+    if (this.event.request.intent) {
+      slot = this.event.request.intent.slots;
+      if (slot.query && slot.query.value) {
+        let intentCheck = util.intentCheck(slot.query.value);
+        if (intentCheck) {
+          console.log("START OlderExplainers intentCheck -- slot.query.value ", slot.query.value)
+          delete slot.query.value;
+          return this.emitWithState(intentCheck);
+        }
+      }
+    }
     this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
     this.emitWithState('OlderExplainers', 'older_from_start');
+
   },
 
   'NewerExplainers' : function () {
     console.log("NewerExplainers in START");
+    if (this.event.request.intent) {
+      slot = this.event.request.intent.slots;
+      if (slot.query && slot.query.value) {
+        let intentCheck = util.intentCheck(slot.query.value);
+        if (intentCheck) {
+          console.log("START NewerExplainers intentCheck -- slot.query.value ", slot.query.value)
+          delete slot.query.value;
+          return this.emitWithState(intentCheck);
+        }
+      }
+    }
     this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
     this.emitWithState('NewerExplainers', 'newer_from_start');
+
   },
 
   // BUILT IN
 
-
   'AMAZON.CancelIntent' : function() {
     console.log('START CancelIntent')
     // This needs to work for not playing as well
-
     this.response.speak(config.cancelMessage);
     delete this.attributes.STATE;
     this.emit(':saveState');
