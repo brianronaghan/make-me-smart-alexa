@@ -70,7 +70,7 @@ module.exports = [
     author: 'Molly Wood',
     alts: ['targeted', 'target', 'ads', 'advertising', 'targeted advertising', 'directed ads'],
     guid: 'targeted_ads',
-    date: "2018-08-27T07:00:00Z",
+    date: "2018-07-02T07:00:00Z",
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/targeted-ads-molly-explainer-mix.mp3",
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/targeted-ads-molly-intro-fix-mix.mp3"
@@ -78,37 +78,37 @@ module.exports = [
   },
 
 
-  // {
-  //   title: 'The World Cup',
-  //   author: 'Kai Ryssdal',
-  //   alts: ['world cup', 'soccer', 'fifa', 'soccer tournament'],
-  //   guid: 'world_cup_launch',
-  //   date: "2018-06-25T07:00:00Z",
-  //   requestInformation: {
-  //     user: null,
-  //     location: null
-  //   },
-  //   audio: {
-  //     intro: null,
-  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Ryssdal+-+Unemployment+Rate+-+MIXLEV_alexa.mp3",
-  //   },
-  // },
+  {
+    title: 'The World Cup',
+    author: 'Kai Ryssdal',
+    alts: ['world cup', 'soccer', 'fifa', 'soccer tournament', 'world cut', 'work cut'],
+    guid: 'world_cup_launch',
+    date: "2018-06-29T07:00:00Z",
+    requestInformation: {
+      user: null,
+      location: null
+    },
+    audio: {
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/world-cup-kai-intro-mix.mp3",
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/world-cup-kai-explainer-mix.mp3",
+    },
+  },
 
-  // {
-  //   title: 'Taxes on a Postcard',
-  //   author: 'Kai Ryssdal',
-  //   alts: ['taxes', 'tax postcard', 'postcard', 'postcard form postcard tax form', 'tax form', 'taxes', 'pax', 'tax form', 'post card', 'texas on a post card', 'post guard', 'axes', 'axes on a toast card'],
-  //   guid: 'tax_postcard',
-  //   date: "2018-06-28T07:00:00Z",
-  //   requestInformation: {
-  //     user: null,
-  //     location: null
-  //   },
-  //   audio: {
-  //     intro: null,
-  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Ryssdal+-+Unemployment+Rate+-+MIXLEV_alexa.mp3",
-  //   },
-  // },
+  {
+    title: 'Taxes on a Postcard',
+    author: 'Kai Ryssdal',
+    alts: ['taxes', 'tax postcard', 'postcard', 'postcard form postcard tax form', 'pax', 'tax form', 'post card', 'texas on a post card', 'post guard', 'axes', 'axes on a toast card'],
+    guid: 'tax_postcard',
+    date: "2018-06-28T07:00:00Z",
+    requestInformation: {
+      user: null,
+      location: null
+    },
+    audio: {
+      intro:  "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/tax-postcard-kai-intro+2-mix.mp3",
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/tax-postcard-kai-explainer-mix.mp3",
+    },
+  },
 
   {
     title: '5G',
