@@ -15,21 +15,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     if (author === 'Molly Wood') {
       author = `Molly '<emphasis level="strong"> Wood</emphasis>`;
     }
-    this.attributes.HEARING_START = true;
-    if (slot && slot.query && slot.query.value) {
-      let intentCheck = util.intentCheck(slot.query.value);
-      if (intentCheck) {
-        console.log("START LaunchRequest intentCheck -- slot.query.value ", slot.query.value)
-        delete slot.query.value;
-        delete this.attributes.HEARING_START;
-        return this.emitWithState(intentCheck);
-      } else {
-        console.log("GOT a non-intent query on LaunchRequest, so redirecting to PLAYING_EXPLAINER state")
-        delete this.attributes.HEARING_START;
-        this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
-        return this.emitWithState('PickItem', slot, 'LAUNCH_WITH_QUERY');
-      }
-    }
+
     if (!this.attributes.deviceIds) {
       welcome =`<audio src="${config.newUserAudio}" /><audio src="${latestExplainer.audio.url}"/>`;
     } else if (this.attributes.LATEST_HEARD && this.attributes.LATEST_HEARD === latestExplainer.guid) {
@@ -94,43 +80,31 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     });
   },
   'HomePage': function (condition, message) {
+    // TODO: add query check because of goddamned amazon?
     console.log("START state HomePage", JSON.stringify(this.event.request.intent, null,2))
-
-    if (this.attributes.HEARING_START) {
-      console.log("START -- ARTIFACT -- HomePage, sending back")
-      this.emitWithState('LaunchRequest');
+    this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
+    if (!this.attributes.deviceIds) {
+      console.log("NEW USER -- HomePage")
+      var deviceId = util.getDeviceId.call(this);
+      util.nullCheck.call(this, deviceId);
+      return this.emitWithState('HomePage', 'new_user_from_launch');
     } else {
-      this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
-      if (!this.attributes.deviceIds) {
-        console.log("NEW USER -- HomePage")
-        var deviceId = util.getDeviceId.call(this);
-        util.nullCheck.call(this, deviceId);
-        return this.emitWithState('HomePage', 'new_user_from_launch');
-      } else {
-        return this.emitWithState('HomePage', 'from_launch');
-      }
+      return this.emitWithState('HomePage', 'from_launch');
     }
-
-
   },
   'RequestExplainer' : function () {
+    // TODO: add query check because of goddamned amazon?
     console.log('START state RequestExplainer', JSON.stringify(this.event.request.intent, null,2))
-
-    if (this.attributes.HEARING_START) {
-      console.log("START -- ARTIFACT -- RequestExplainer, sending back")
-      this.emitWithState('LaunchRequest');
+    this.handler.state = this.attributes.STATE = config.states.REQUEST;
+    if (!this.attributes.deviceIds) {
+      console.log("NEW USER -- RequestExplainer")
+      var deviceId = util.getDeviceId.call(this);
+      util.nullCheck.call(this, deviceId);
+      return this.emitWithState('RequestExplainer');
     } else {
-
-      this.handler.state = this.attributes.STATE = config.states.REQUEST;
-      if (!this.attributes.deviceIds) {
-        console.log("NEW USER -- RequestExplainer")
-        var deviceId = util.getDeviceId.call(this);
-        util.nullCheck.call(this, deviceId);
-        return this.emitWithState('RequestExplainer');
-      } else {
-        return this.emitWithState('RequestExplainer');
-      }
+      return this.emitWithState('RequestExplainer');
     }
+
   },
   'PickItem' : function (slot) {
     console.log("START PickItem ")
@@ -148,83 +122,53 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
   'ReplayExplainer': function () {
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
-    if (this.attributes.HEARING_START) {
-      console.log("START -- ARTIFACT -- ReplayExplainer, sending back")
-      this.emitWithState('LaunchRequest');
-    } else {
-      console.log('GOT REPLAY', this.handler.state)
-      // currentExplainerIndex is 0 based, and PickItem expects 1-based
-      this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
-      this.emitWithState('PickItem', {index: {value: 1}}, 'LAUNCH_REPLAY')
-    }
+    console.log('GOT REPLAY', this.handler.state)
+    // currentExplainerIndex is 0 based, and PickItem expects 1-based
+    this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
+    this.emitWithState('PickItem', {index: {value: 1}}, 'LAUNCH_REPLAY')
   },
 
   'PlayLatestExplainer': function () {
     // this is what 'play all would do'
-    if (this.attributes.HEARING_START) {
-      console.log("START -- ARTIFACT -- PlayLatestExplainer, sending back")
-      this.emitWithState('LaunchRequest');
-    } else {
-      this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
-      var deviceId = util.getDeviceId.call(this);
-      util.nullCheck.call(this, deviceId);
-      this.emitWithState('PlayLatestExplainer', {index: {value: 1}}, 'LAUNCH_LATEST');
-
-    }
+    this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
+    var deviceId = util.getDeviceId.call(this);
+    util.nullCheck.call(this, deviceId);
+    this.emitWithState('PlayLatestExplainer', {index: {value: 1}}, 'LAUNCH_LATEST');
   },
   'ChangeMyInfo' : function () {
-    if (this.attributes.HEARING_START) {
-      console.log("START -- ARTIFACT -- ChangeMyInfo, sending back")
-      this.emitWithState('LaunchRequest');
-    } else {
-      this.handler.state = this.attributes.STATE = config.states.CHANGE_INFO;
-      this.emitWithState('ChangeMyInfo');
-    }
+    this.handler.state = this.attributes.STATE = config.states.REQUEST;
+    this.emitWithState('ChangeMyInfo');
   },
   'ListExplainers': function () {
     console.log('START ListExplainers')
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
-    if (this.attributes.HEARING_START) {
-      console.log("START -- ARTIFACT -- ListExplainers, sending back")
-      this.emitWithState('LaunchRequest');
-    } else {
-      this.attributes.currentExplainerIndex = -1;
-      this.attributes.indices.explainer = 0;
-      this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
-      this.emitWithState('ListExplainers', 'from_launch');
-    }
+    this.attributes.currentExplainerIndex = -1;
+    this.attributes.indices.explainer = 0;
+    this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
+    this.emitWithState('ListExplainers', 'from_launch');
   },
   'OlderExplainers' : function () {
     console.log("OlderExplainers in START");
-    if (this.attributes.HEARING_START) {
-      console.log("START -- ARTIFACT -- OlderExplainers, sending back")
-      this.emitWithState('LaunchRequest');
-    } else {
-      this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
-      this.emitWithState('OlderExplainers', 'older_from_start');
 
-    }
+    this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
+    this.emitWithState('OlderExplainers', 'older_from_start');
   },
 
   'NewerExplainers' : function () {
     console.log("NewerExplainers in START");
-    if (this.attributes.HEARING_START) {
-      console.log("START -- ARTIFACT -- NewerExplainers, sending back")
-      this.emitWithState('LaunchRequest');
-    } else {
-      this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
-      this.emitWithState('NewerExplainers', 'newer_from_start');
-    }
+    this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
+    this.emitWithState('NewerExplainers', 'newer_from_start');
   },
 
   // BUILT IN
 
+
   'AMAZON.CancelIntent' : function() {
     console.log('START CancelIntent')
     // This needs to work for not playing as well
+
     this.response.speak(config.cancelMessage);
-    delete this.attributes.HEARING_START;
     delete this.attributes.STATE;
     this.emit(':saveState');
   },
@@ -233,7 +177,6 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     // This needs to work for not playing as well
     // SHOULD I CLEAR THE STATE?
     this.response.speak(config.stopMessage)
-    delete this.attributes.HEARING_START
     delete this.attributes.STATE;
     this.emit(':saveState');
   },
@@ -241,8 +184,6 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     console.log("start handler NEXT")
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
-    delete this.attributes.HEARING_START
-
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
     this.emitWithState('PickItem', {index: {value: 2}}, 'LAUNCH_NEXT'); // NOTE TEST 1 or 2?
   },
@@ -271,8 +212,6 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
   // error handling
   'SessionEndedRequest' : function () { // this gets purposeful exit as well
     delete this.attributes.STATE;
-    delete this.attributes.HEARING_START;
-
     console.log("SESSION ENDED IN START")
     this.emit(':saveState');
    },
