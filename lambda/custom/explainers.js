@@ -48,7 +48,7 @@ module.exports = [
     author: 'Kai Ryssdal',
     alts: ['gdp', 'g d p', 'g.d.p.', 'gbp', 'g b p', 'g.b.p.', 'gross domestic product', 'gdp number',],
     guid: 'gdp',
-    date: "2018-06-29T07:00:00Z",
+    date: "2018-08-29T07:00:00Z",
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/gdp-kai-explainer-mix.mp3",
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/gdp-kai-intro-fix-mix.mp3"
@@ -59,7 +59,7 @@ module.exports = [
     author: 'Kai Ryssdal',
     alts: ['credit score', 'my credit score', 'your credit score', 'credit rating', 'credit number', 'credit sore', 'credit store'],
     guid: 'credit_score',
-    date: "2018-06-28T07:00:00Z",
+    date: "2018-08-28T07:00:00Z",
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/credit-score-kai-explainer-mix.mp3",
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/credit-score-kai-intro-2-mix.mp3"
@@ -70,11 +70,56 @@ module.exports = [
     author: 'Molly Wood',
     alts: ['targeted', 'target', 'ads', 'advertising', 'targeted advertising', 'directed ads'],
     guid: 'targeted_ads',
-    date: "2018-06-27T07:00:00Z",
+    date: "2018-08-27T07:00:00Z",
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/targeted-ads-molly-explainer-mix.mp3",
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/targeted-ads-molly-intro-fix-mix.mp3"
     },
+  },
+
+
+  // {
+  //   title: 'The World Cup',
+  //   author: 'Kai Ryssdal',
+  //   alts: ['world cup', 'soccer', 'fifa', 'soccer tournament'],
+  //   guid: 'world_cup_launch',
+  //   date: "2018-06-25T07:00:00Z",
+  //   requestInformation: {
+  //     user: null,
+  //     location: null
+  //   },
+  //   audio: {
+  //     intro: null,
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Ryssdal+-+Unemployment+Rate+-+MIXLEV_alexa.mp3",
+  //   },
+  // },
+
+  // {
+  //   title: 'Taxes on a Postcard',
+  //   author: 'Kai Ryssdal',
+  //   alts: ['taxes', 'tax postcard', 'postcard', 'postcard form postcard tax form', 'tax form', 'taxes', 'pax', 'tax form', 'post card', 'texas on a post card', 'post guard', 'axes', 'axes on a toast card'],
+  //   guid: 'tax_postcard',
+  //   date: "2018-06-28T07:00:00Z",
+  //   requestInformation: {
+  //     user: null,
+  //     location: null
+  //   },
+  //   audio: {
+  //     intro: null,
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Ryssdal+-+Unemployment+Rate+-+MIXLEV_alexa.mp3",
+  //   },
+  // },
+
+  {
+    title: '5G',
+    author: 'Molly Wood',
+    alts: ['5 g', '5G', 'five g', '5g', '5 G'],
+    guid: "5G_launch",
+    date: "2018-06-27T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Wood+-+5g+-+MIXLEV_alexa.mp3",
+      intro: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/5G-molly-intro-fix-mix.mp3'
+    }
   },
   {
     title: 'Summer Blockbusters',
@@ -110,21 +155,36 @@ module.exports = [
       intro: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/Alexa+-+Wood+-+Bitcoin+Intro+-+MIXLEV_alexa.mp3'
     }
   },
-  // {
-  //   title: 'The World Cup',
-  //   author: 'Kai Ryssdal',
-  //   alts: ['world cup', 'soccer', 'fifa', 'soccer tournament'],
-  //   guid: 'world_cup_launch',
-  //   date: "2018-06-25T07:00:00Z",
-  //   requestInformation: {
-  //     user: null,
-  //     location: null
-  //   },
-  //   audio: {
-  //     intro: null,
-  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Ryssdal+-+Unemployment+Rate+-+MIXLEV_alexa.mp3",
-  //   },
-  // },
+  {
+    title: 'The Bond Market',
+    author: 'Kai Ryssdal',
+    alts: ['bond market', 'the bond market', 'bond', 'bonds', 'bonds market', 'bombs', 'the bomb market'],
+    guid: 'bonds_launch',
+    date: "2018-06-22T07:00:00Z",
+    requestInformation: {
+      user: null,
+      location: null
+    },
+    audio: {
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/bond-market-kai-intro-fix-mix.mp3",
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/bond-market-kai-explainer-mix.mp3",
+    },
+  },
+  {
+    title: 'Machine Learning',
+    author: 'Molly Wood',
+    alts: ['machine', 'learning', 'machine burning', 'my sheen learning'],
+    guid: 'machine_learning_launch',
+    date: "2018-06-24T07:00:00Z",
+    requestInformation: {
+      user: null,
+      location: null
+    },
+    audio: {
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/machine-learning-molly-intro-mix.mp3",
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/machine-learning-molly-explainer-mix.mp3",
+    },
+  },
   {
     title: 'Household Debt',
     author: 'Kai Ryssdal',
@@ -156,33 +216,6 @@ module.exports = [
     },
   },
   {
-    title: 'Productivity',
-    guid: "productivity_launch",
-    date: "2018-06-22T07:00:00Z",
-    author: 'Kai Ryssdal',
-    alts: ['output', 'output per worker', 'productively', 'bt', 'b.t', 'b t'],
-    tags: [],
-    audio: {
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/Alexa+-+Ryssdal+-+PRODUCTIVITY+INTRO+-+MIXLEV_alexa.mp3",
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Ryssdal+-+Productivity+-+MIXLEV_alexa.mp3",
-    }
-  },
-  {
-    title: 'Machine Learning',
-    author: 'Molly Wood',
-    alts: ['machine', 'learning', 'machine burning', 'my sheen learning'],
-    guid: 'machine_learning_launch',
-    date: "2018-06-24T07:00:00Z",
-    requestInformation: {
-      user: null,
-      location: null
-    },
-    audio: {
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/machine-learning-molly-intro-mix.mp3",
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/machine-learning-molly-explainer-mix.mp3",
-    },
-  },
-  {
     title: 'G.D.P.R.',
     author: 'Molly Wood',
     alts: ['g.d.p.r', 'gdpr', 'g d p r', 'g.b.p.r', 'gbpr', 'g b p r'],
@@ -199,19 +232,16 @@ module.exports = [
     },
   },
   {
-    title: 'The Bond Market',
-    author: 'Kai Ryssdal',
-    alts: ['bond market', 'the bond market', 'bond', 'bonds', 'bonds market', 'bombs', 'the bomb market'],
-    guid: 'bonds_launch',
+    title: 'Productivity',
+    guid: "productivity_launch",
     date: "2018-06-22T07:00:00Z",
-    requestInformation: {
-      user: null,
-      location: null
-    },
+    author: 'Kai Ryssdal',
+    alts: ['output', 'output per worker', 'productively', 'bt', 'b.t', 'b t'],
+    tags: [],
     audio: {
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/bond-market-kai-intro-fix-mix.mp3",
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/bond-market-kai-explainer-mix.mp3",
-    },
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/Alexa+-+Ryssdal+-+PRODUCTIVITY+INTRO+-+MIXLEV_alexa.mp3",
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Ryssdal+-+Productivity+-+MIXLEV_alexa.mp3",
+    }
   },
   {
     title: 'Augmented Reality',
@@ -258,17 +288,7 @@ module.exports = [
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/vc-molly-explainer-mix.mp3",
     },
   },
-  {
-    title: '5G',
-    author: 'Molly Wood',
-    alts: ['5 g', '5G', 'five g', '5g', '5 G'],
-    guid: "5G_launch",
-    date: "2018-06-22T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Wood+-+5g+-+MIXLEV_alexa.mp3",
-      intro: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/5G-molly-intro-fix-mix.mp3'
-    }
-  },
+
 
 
 
