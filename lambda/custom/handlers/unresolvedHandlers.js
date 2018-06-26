@@ -18,10 +18,11 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
     util.nullCheck.call(this, deviceId);
     var slot = slot || this.event.request.intent.slots;
     let message = '';
-    let case;
+    let caseText = '';
     let payload = {}
     var boundThis = this;
     let unresolved;
+
     console.log(`UNRESOLVED PickItem - intentname ${this.event.request.intent.name}... `, JSON.stringify(this.event.request.intent, null, 2));
     console.log("is there an UNRESOLVED IN state?: ", this.attributes.UNRESOLVED);
 
@@ -59,12 +60,11 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
         if (util.expletiveCheck(unresolved)) {
 
           message += `Come on. You think we're allowed to say <say-as interpret-as="expletive">${unresolved}</say-as> on public radio? Let's try that again. `;
-          case = 'unresolved_expletive'
+          caseText = 'unresolved_expletive'
         } else {
           message += `I couldn't find an explainer on ${unresolved}. Let's try again. `
-          case = 'unresolved';
+          caseText = 'unresolved';
         }
-        delete intentObj.confirmationStatus;
         delete this.attributes.UNRESOLVED;
         boundThis.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
         return util.sendProgressive(
@@ -75,9 +75,9 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
           function (err) {
             if (err) {
               console.log("FAILED PROGRESSIVE");
-              boundThis.emitWithState('ListExplainers', case, "Let's try that again. ");
+              boundThis.emitWithState('ListExplainers', caseText, "Let's try that again. ");
             } else {
-              boundThis.emitWithState('ListExplainers', case);
+              boundThis.emitWithState('ListExplainers', caseText);
             }
           }
         );
