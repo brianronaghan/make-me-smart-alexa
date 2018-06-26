@@ -15,6 +15,8 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     if (author === 'Molly Wood') {
       author = `Molly '<emphasis level="strong"> Wood</emphasis>`;
     }
+    console.log("--------- START state LaunchRequest --------")
+    console.log(JSON.stringify(this.event.request, null,2));
     if (this.event.request.intent) {
       console.log("PHANTOM INTENT on LR -- AMAZON BUG");
       console.log(JSON.stringify(this.event.request.intent, null, 2))
