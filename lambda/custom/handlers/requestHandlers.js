@@ -75,7 +75,9 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       }
       message += 'What topic do you think Kai and Molly should do an explainer on?';
       return this.emit(':elicitSlotWithCard', 'query', message, "What topic would you like to request an explainer on?", 'Request Explainer', util.clearProsody(message), this.event.request.intent, util.cardImage(config.icon.full));
-    } // if there is a suggestion, and no conf, ask them if it's correct
+    }
+
+    // if there is a suggestion, and no conf, ask them if it's correct
       // if denied, ask again
 
     if (this.attributes.SUGGESTION && this.attributes.userName && this.attributes.userLocation) { //1
@@ -109,7 +111,6 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
         message = `Great! I'll tell Kai and Molly you want to get smart about that! ${userAsk} `;
         //
         this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
-
         return util.sendProgressive(
           this.event.context.System.apiEndpoint, // no need to add directives params
           this.event.request.requestId,
@@ -127,7 +128,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     } else if ((!this.attributes.userName) && slot.manualName && !slot.manualName.value) { // 2 no userName
       // solicit manualName
       console.log('Gotta get userName');
-      message += `Okay, I'll ask Kai and Molly to look into that. They'll want to thank you if they use your idea, so what's your first name?`;
+      message += `Okay, I'll ask Kai and Molly to look into ${this.attributes.SUGGESTION}. They'll want to thank you if they use your idea, so what's your first name?`;
       this.attributes.NAME_REQUESTED = true;
       return this.emit(':elicitSlotWithCard', 'manualName', message, "What first name should I leave?", 'Tell us your name',message, this.event.request.intent, util.cardImage(config.icon.full));
 
