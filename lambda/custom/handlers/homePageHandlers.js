@@ -133,7 +133,7 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
   },
 
   'OlderExplainers' : function () {
-    console.log("OlderExpainers in HOME_PAGE");
+    console.log("OlderExplainers in HOME_PAGE");
 
     this.handler.state = this.attributes.STATE = config.states.ITERATING_EXPLAINER;
     this.emitWithState('OlderExplainers', 'older_from_homepage');
