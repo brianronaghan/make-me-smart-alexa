@@ -101,7 +101,7 @@ module.exports = [
   {
     title: 'Bitcoin',
     author: 'Molly Wood',
-    alts: ['a cryptocurrency', 'the coin', 'a bitcoin', 'uh bitcoin', 'cryptocurrency', 'crypto', 'blockchain', 'flip coin', 'flip a coin', 'bid coin', 'bit coin'],
+    alts: ['a cryptocurrency', 'the coin', 'a bitcoin', 'uh bitcoin', 'cryptocurrency', 'crypto', 'blockchain', 'flip coin', 'flip a coin', 'bid coin', 'bit coin', 'no become', 'echo fine', 'fine', 'what were'],
     guid: "bitcoin_launch",
     date: "2018-06-22T07:00:00Z",
     description: "Bitcoin is the best known cryptocurrency.",
@@ -128,7 +128,7 @@ module.exports = [
   {
     title: 'Household Debt',
     author: 'Kai Ryssdal',
-    alts: ['debt', 'dead', 'household', 'what we owe', 'personal debt', 'household dead', 'house hold deb', 'household deck', 'house hold it', 'house hold deck', 'house hole deck', 'house hole debt'],
+    alts: ['debt', 'dead', 'household', 'what we owe', 'personal debt', 'household dead', 'house hold deb', 'household deck', 'house hold it', 'house hold deck', 'house hole deck', 'house hole debt', 'household that', 'house hold that', 'household it', 'hold it'],
     guid: 'household_debt_launch',
     date: "2018-06-22T07:00:00Z",
     requestInformation: {
@@ -143,7 +143,7 @@ module.exports = [
   {
     title: 'Ransomware',
     author: 'Molly Wood',
-    alts: ['ransom', 'ransom ware', 'ransom where', 'ransom software', 'viruses', 'rancid where'],
+    alts: ['ransom', 'ransom ware', 'ransom where', 'ransom software', 'viruses', 'rancid where', 'read somewhere', 'and somewhere', 'ask for more'],
     guid: 'ransomeware_launch',
     date: "2018-06-22T07:00:00Z",
     requestInformation: {
@@ -160,7 +160,7 @@ module.exports = [
     guid: "productivity_launch",
     date: "2018-06-22T07:00:00Z",
     author: 'Kai Ryssdal',
-    alts: ['output', 'output per worker', 'productively'],
+    alts: ['output', 'output per worker', 'productively', 'bt', 'b.t', 'b t'],
     tags: [],
     audio: {
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/Alexa+-+Ryssdal+-+PRODUCTIVITY+INTRO+-+MIXLEV_alexa.mp3",
@@ -216,7 +216,7 @@ module.exports = [
   {
     title: 'Augmented Reality',
     author: 'Molly Wood',
-    alts: ['ar', 'a.r.', 'a r', 'a are', 'augmented', 'augmentation', 'reality'],
+    alts: ['ar', 'a.r.', 'a r', 'a are', 'augmented', 'augmentation', 'reality', 'open ted reality', 'integrity ality'],
     guid: 'augmented_reality_launch',
     date: "2018-06-22T07:00:00Z",
     requestInformation: {
@@ -231,7 +231,7 @@ module.exports = [
   {
     title: 'VPN',
     author: 'Molly Wood',
-    alts: ['vpns', 'vpn', 'v.p.n.s', 'v p n', 'virtual private network', 'private network', 'b p n', 'dpn', 'bpn', 'd p n'],
+    alts: ['vpns', 'vpn', 'v.p.n.s', 'v p n', 'virtual private network', 'private network', 'b p n', 'dpn', 'bpn', 'd p n', 'z p n', 'e n', 'e.n.', 'z.p.n'],
     guid: 'vpn_launch',
     date: "2018-06-22T07:00:00Z",
     requestInformation: {
@@ -246,7 +246,7 @@ module.exports = [
   {
     title: 'Venture Capital',
     author: 'Molly Wood',
-    alts: ['VC', 'the sea', 'the C', 'vc', 'v c', 'v.c.', 'bc', 'b c', 'venture', 'venture funding'],
+    alts: ['VC', 'the sea', 'the C', 'vc', 'v c', 'v.c.', 'bc', 'b c', 'venture', 'venture funding', 'lynshire capital'],
     guid: 'vc_launch',
     date: "2018-06-22T07:00:00Z",
     requestInformation: {
