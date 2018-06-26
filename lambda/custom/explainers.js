@@ -128,7 +128,7 @@ module.exports = [
   {
     title: 'Household Debt',
     author: 'Kai Ryssdal',
-    alts: ['debt', 'dead', 'household', 'what we owe', 'personal debt', 'household dead', 'house hold deb', 'household deck'],
+    alts: ['debt', 'dead', 'household', 'what we owe', 'personal debt', 'household dead', 'house hold deb', 'household deck', 'house hold it', 'house hold deck', 'house hole deck', 'house hole debt'],
     guid: 'household_debt_launch',
     date: "2018-06-22T07:00:00Z",
     requestInformation: {
