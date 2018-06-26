@@ -48,7 +48,7 @@ module.exports = [
     author: 'Kai Ryssdal',
     alts: ['gdp', 'g d p', 'g.d.p.', 'gbp', 'g b p', 'g.b.p.', 'gross domestic product', 'gdp number',],
     guid: 'gdp',
-    date: "2018-06-28T07:00:00Z",
+    date: "2018-06-29T07:00:00Z",
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/gdp-kai-explainer-mix.mp3",
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/gdp-kai-intro-fix-mix.mp3"
@@ -59,7 +59,7 @@ module.exports = [
     author: 'Kai Ryssdal',
     alts: ['credit score', 'my credit score', 'your credit score', 'credit rating', 'credit number', 'credit sore', 'credit store'],
     guid: 'credit_score',
-    date: "2018-06-27T07:00:00Z",
+    date: "2018-06-28T07:00:00Z",
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/credit-score-kai-explainer-mix.mp3",
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/credit-score-kai-intro-2-mix.mp3"
@@ -70,7 +70,7 @@ module.exports = [
     author: 'Molly Wood',
     alts: ['targeted', 'target', 'ads', 'advertising', 'targeted advertising', 'directed ads'],
     guid: 'targeted_ads',
-    date: "2018-06-26T07:00:00Z",
+    date: "2018-06-27T07:00:00Z",
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/targeted-ads-molly-explainer-mix.mp3",
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/targeted-ads-molly-intro-fix-mix.mp3"
