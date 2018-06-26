@@ -75,9 +75,10 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       }
       message += 'What topic do you think Kai and Molly should do an explainer on?';
       return this.emit(':elicitSlotWithCard', 'query', message, "What topic would you like to request an explainer on?", 'Request Explainer', util.clearProsody(message), this.event.request.intent, util.cardImage(config.icon.full));
-    } // if there is a suggestion, and no conf, ask them if it's correct
-      // if denied, ask again
+    }
 
+    let upperFirst = this.attributes.SUGGESTION.charAt(0).toUpperCase() + this.attributes.SUGGESTION.slice(1);
+    let suggestionString = `${upperFirst}! Great idea!`;
     if (this.attributes.SUGGESTION && this.attributes.userName && this.attributes.userLocation) { //1
       console.log("REQUEST PickItem using saved name/location", slot)
       this.attributes.REQUESTS++;
@@ -87,14 +88,21 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
         user: this.attributes.userName,
         location: this.attributes.userLocation
       }];
+      let userAcknowledge;
       let userAsk = '';
+      if (this.attributes.ANONYMOUS || (this.attributes.REQUESTS > 2 && this.attributes.REQUESTS % 4 !== 0)) {
+        userAcknowledge = 'you want'
+      } else {
+        userAcknowledge = `${this.attributes.userName} from ${this.attributes.userLocation} wants`
+      }
+
       if (this.attributes.REQUESTS > 3 && !this.attributes.SOLICITED) {
         this.attributes.SOLICITED = true;
         userAsk = `And hey, if you'd like to do us a favor, ${config.reviewSolicitation}`;
-      } else if (this.attributes.REQUESTS % 4 === 0) {
+      } else if (this.attributes.REQUESTS % 3 === 0) {
         userAsk = config.podcastPlug;
       }
-      // console.log(this.attributes.REQUESTS, userAsk);
+      console.log(this.attributes.REQUESTS, userAsk);
       console.time('DB-request-saved');
       delete this.attributes.requestingExplainer;
       delete this.attributes.SUGGESTION;
@@ -106,7 +114,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       db.update.call(this, payload, function(err, response) {
         console.timeEnd('DB-request-saved');
 
-        message = `Great! I'll tell Kai and Molly you want to get smart about that! ${userAsk} `;
+        message = `${suggestionString} I'll tell Kai and Molly that ${userAcknowledge} to get smart about that! ${userAsk} `;
         //
         this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
 
@@ -124,11 +132,52 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
           }
         );
       });
-    } else if ((!this.attributes.userName) && slot.manualName && !slot.manualName.value) { // 2
-      // solicit manualName
+    } else if ((!this.attributes.userName) && slot.userName && !slot.userName.value && !this.attributes.NAME_REQUESTED) { // 2
+      // don't have normal name, haven't requested
       console.log('Gotta get userName');
-      message += `Okay, I'll ask Kai and Molly to look into that. They'll want to thank you if they use your idea, so what's your first name?`;
+      message += `${suggestionString} I'll ask Kai and Molly to look into it. They'll want to thank you if they use your idea, so what's your first name?`;
       this.attributes.NAME_REQUESTED = true;
+      return this.emit(':elicitSlotWithCard', 'userName', message, "What first name should I leave?", 'Request Explainer',message, this.event.request.intent, util.cardImage(config.icon.full));
+    } else if ((!this.attributes.userName) && slot.userName && slot.userName.value && this.attributes.NAME_REQUESTED) { // 3
+      // GOT NORMAL NAME: request normal location
+
+      // make checks
+      let intentCheck = util.intentCheck(slot.userName.value);
+      let expletiveCheck = util.expletiveCheck(slot.userName.value);
+      if (intentCheck) { // intentCheck redirect
+        console.log("REQUEST RequestExplainer intentCheck -- slot.userName.value ", slot.userName.value)
+        delete slot.userName.value;
+        delete this.attributes.SUGGESTION;
+        delete this.attributes.requestingExplainer;
+        return this.emitWithState(intentCheck);
+      } else if (expletiveCheck) { // expletiveCheck redirect
+        console.log(`CAUGHT PROFANITY ON slot.userName.value -- ${slot.userName.value}`);
+        let expletive = `<say-as interpret-as="expletive">${slot.userName.value}</say-as>`;
+        message += `Your name is ${expletive}? That's rough. And something we can't repeat. Do you have a nickname that isn't a dirty word?`;
+        let cardMessage = `I must have misheard your name, because that sounded like profanity. Do you have a nickname that isn't a dirty word?`;
+        delete slot.userName.value
+        return this.emit(':elicitSlotWithCard', 'userName', message, "What first name should I leave?", 'Leave a (clean) First Name', cardMessage, this.event.request.intent, util.cardImage(config.icon.full));
+      }
+
+      console.log("GOT clean normal name," , slot.userName.value, 'asking for normallocation')
+      this.attributes.userName = slot.userName.value;
+      delete this.attributes.NAME_REQUESTED;
+      this.attributes.LOCATION_REQUESTED = true;
+      var cardMessage = `I'll note that ${this.attributes.userName} would like an explainer on ${this.attributes.SUGGESTION}. `;
+      message += 'And what city or state are you from?';
+      cardMessage += message;
+      return this.emit(':elicitSlotWithCard', 'userLocation', message, "What city or state should I leave?", 'Request Explainer', cardMessage, this.event.request.intent, util.cardImage(config.icon.full));
+    } else if ((!this.attributes.userName) && slot.userName && !slot.userName.value && this.attributes.NAME_REQUESTED && slot.manualName && !slot.manualName.value) { // 4
+      // don't have normal name, but I HAVE requested it: REQUEST MANUAL
+      console.log('asked for userName, didnt get it,  gotta get MANUAL NAME');
+      // request manual name
+      let thankYou;
+      if (this.attributes.SUGGESTION) {
+        thankYou = `for suggesting ${this.attributes.SUGGESTION}`
+      } else {
+        thankYou = 'for your ideas'
+      }
+      message += `Seems like I had trouble understanding your name. Kai and Molly will want to thank you ${thankYou}, so what's your first name?`;
       return this.emit(':elicitSlotWithCard', 'manualName', message, "What first name should I leave?", 'Tell us your name',message, this.event.request.intent, util.cardImage(config.icon.full));
 
     } else if ((!this.attributes.userName) && slot.manualName && slot.manualName.value && this.attributes.NAME_REQUESTED) { // 5
@@ -150,17 +199,101 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
         delete slot.manualName.value
         return this.emit(':elicitSlotWithCard', 'manualName', message, "What first name should I leave?", 'Leave a (clean) First Name', cardMessage, this.event.request.intent, util.cardImage(config.icon.full));
       }
-      console.log("OK, got manualName ", slot.manualName, " now  REQUEST manualLOCATION");
+      console.log("OK, got manualName ", slot.manualName, " now  REQUEST normal LOCATION");
       this.attributes.userName = slot.manualName.value;
       delete this.attributes.NAME_REQUESTED;
       this.attributes.LOCATION_REQUESTED = true;
-      var cardMessage = `Okay, I'll note that you requested an explainer! `;
+      var cardMessage = `Okay, I'll note that ${this.attributes.userName} would like an explainer on ${this.attributes.SUGGESTION}. `;
       message += 'And what city or state are you from?';
       cardMessage += message;
 
-      return this.emit(':elicitSlotWithCard', 'manualLocation', message, "What city or state should I leave?", 'Where are you from?', cardMessage, this.event.request.intent, util.cardImage(config.icon.full));
+      return this.emit(':elicitSlotWithCard', 'userLocation', message, "What city or state should I leave?", 'Request Explainer', cardMessage, this.event.request.intent, util.cardImage(config.icon.full));
 
-    } else if ((!this.attributes.userLocation) && slot.manualLocation && slot.manualLocation.value) { // 9
+    } else if ((!this.attributes.userLocation) && slot.userLocation && slot.userLocation.value) { // 6
+      // got normal location, good to go.
+      console.log("GOT  normal userLocation  ", slot.userLocation.value, "SHOULD BE READY TO SAVE");
+      let intentCheck = util.intentCheck(slot.userLocation.value);
+      let expletiveCheck = util.expletiveCheck(slot.userLocation.value);
+      if (intentCheck) { // intentCheck redirect
+        console.log("REQUEST RequestExplainer intentCheck -- slot.userLocation.value ", slot.userLocation.value)
+        delete slot.userLocation.value;
+        delete this.attributes.SUGGESTION;
+        delete this.attributes.requestingExplainer;
+        return this.emitWithState(intentCheck);
+      } else if (expletiveCheck) { // expletiveCheck redirect
+        console.log(`CAUGHT PROFANITY ON slot.userLocation.value -- ${slot.userLocation.value}`);
+        let expletive = `<say-as interpret-as="expletive">${slot.userLocation.value}</say-as>`;
+        message += `You're from ${expletive}? What was your childhood like? Also, can you leave a city without profanity in it?`;
+        let cardMessage = `I must have misheard your location, because that sounded like profanity. Ever lived in a town that isn't a dirty word?`;
+        delete slot.userLocation.value;
+        return this.emit(':elicitSlotWithCard', 'userLocation', message, "What city should I leave?", 'Leave a (clean) City', cardMessage, this.event.request.intent, util.cardImage(config.icon.full));
+      }
+      this.attributes.userLocation = slot.userLocation.value;
+      this.attributes.REQUESTS++;
+      payload.requests = [{
+        query: this.attributes.SUGGESTION,
+        time: this.event.request.timestamp,
+        user: this.attributes.userName,
+        location: this.attributes.userLocation
+      }];
+      if (slot.userName && slot.userName.value) {
+        delete slot.userName.value;
+      }
+      if (slot.manualName && slot.manualName.value) {
+        delete slot.manualName.value;
+      }
+      delete slot.userLocation.value;
+      delete this.attributes.requestingExplainer;
+
+      if (slot && slot.query && slot.query.value) {
+        delete slot.query.value
+      } else if (slot && slot.topic && slot.topic.value) {
+        delete slot.topic.value
+      }
+      console.time('DB-request-normal-location');
+      db.update.call(this, payload, function(err, response) {
+        console.timeEnd('DB-request-normal-location');
+        var confirmationMessage = `Okay, I'll tell Kai and Molly ${this.attributes.userName} from ${this.attributes.userLocation} asked for an explainer on ${this.attributes.SUGGESTION}. If you want to change your name or city in the future you can say 'change my info'. `;
+        if (this.event.context.System.device.supportedInterfaces.Display) {
+          this.response.renderTemplate(
+            util.templateBodyTemplate1(
+              'Request Received!',
+              confirmationMessage,
+              '',
+              config.background.show
+            )
+          );
+        }
+        delete this.attributes.NAME_REQUESTED;
+        delete this.attributes.LOCATION_REQUESTED;
+        delete this.attributes.SUGGESTION;
+        this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
+        return util.sendProgressive(
+          this.event.context.System.apiEndpoint, // no need to add directives params
+          this.event.request.requestId,
+          this.event.context.System.apiAccessToken,
+          confirmationMessage,
+          function (err) {
+            if (err) {
+              boundThis.emitWithState('HomePage', 'requested', confirmationMessage);
+            } else {
+              boundThis.emitWithState('HomePage', 'requested');
+            }
+          }
+        );
+      });
+    } else if ((!this.attributes.userLocation) && slot.userLocation && !slot.userLocation.value && !this.attributes.LOCATION_REQUESTED) { // 7
+      // somehow got here without eliciting location?
+      this.attributes.LOCATION_REQUESTED = true;
+      var cardMessage = `Seems like I'm having trouble understanding your city. Let's try again. What city are you from?`;
+      return this.emit(':elicitSlotWithCard', 'manualLocation', cardMessage, "What city or state should I leave?", 'Request Explainer', cardMessage, this.event.request.intent, util.cardImage(config.icon.full));
+    } else if ((!this.attributes.userLocation) && slot.userLocation && !slot.userLocation.value && this.attributes.LOCATION_REQUESTED && slot.manualLocation && !slot.manualLocation.value) { // 8
+      // no userLocation and I have requested it: gotta get manual
+      console.log('asked for userLocation, didnt get it,  gotta get manualLocation');
+      var cardMessage = `Seems like I'm having trouble understanding your city. Let's try again. What city are you from?`;
+      cardMessage += message;
+      return this.emit(':elicitSlotWithCard', 'manualLocation', cardMessage, "What city or state should I leave?", "Where are you from?", cardMessage, this.event.request.intent, util.cardImage(config.icon.full));
+    } else if ((!this.attributes.userLocation) && slot.userLocation && !slot.userLocation.value && slot.manualLocation && slot.manualLocation.value) { // 9
       console.log("OK, got manualLocation ", slot.manualLocation, " WE SHOULD BE GOOD TO GO");
       // make checks
       let intentCheck = util.intentCheck(slot.manualLocation.value);
@@ -204,7 +337,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       db.update.call(this, payload, function(err, response) {
         console.timeEnd('DB-request-manual-location');
 
-        var confirmationMessage = `Okay, I'll tell Kai and Molly that you asked for an explainer on ${this.attributes.SUGGESTION}. `;
+        var confirmationMessage = `Okay, I'll tell Kai and Molly ${this.attributes.userName} from ${this.attributes.userLocation} asked for an explainer on ${this.attributes.SUGGESTION}. If you want to change your name or city in the future you can say 'change my info'. `;
         if (this.event.context.System.device.supportedInterfaces.Display) {
           this.response.renderTemplate(
             util.templateBodyTemplate1(
@@ -334,7 +467,6 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
 
   },
   'AMAZON.HelpIntent' : function () {
-    console.log("HELP INT: ", this.attributes.userId);
     let NAME_TESTING = Object.keys(config.testIds).indexOf(this.attributes.userId) > -1;
     if (NAME_TESTING) {
       console.log("DELETEING name and location and req flags");
