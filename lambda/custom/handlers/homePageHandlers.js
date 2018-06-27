@@ -234,10 +234,9 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     console.log('Help in HOME PAGE')
     let NAME_TESTING = Object.keys(config.testIds).indexOf(this.attributes.userId) > -1;
     if (NAME_TESTING) {
-      console.log("EXPLAINERS : ");
-
-      console.log(JSON.stringify(util.liveExplainers(), null, 2))
-
+      console.log('clearing name and location for test')
+      delete this.attributes.userName;
+      delete this.attributes.userLocation;
     }
     var message = `You can pick an explainer by name or ${config.ipaNumber}, browse our explainers, or play them all. What would you like to do?`;
     this.response.speak(message).listen(message);
