@@ -68,6 +68,32 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
         return this.emit(':elicitSlotWithCard', 'query', message, "What topic would you like to request an explainer on?", 'Request a (clean) Explainer', cardMessage, this.event.request.intent, util.cardImage(config.icon.full));
     }
 
+    if (this.attributes.SUGGESTION) {
+      var chosenExplainer = util.itemPicker({query: {value: this.attributes.SUGGESTION}}, util.liveExplainers(), 'title', 'topic', false);
+      if (chosenExplainer) {
+        message += `Actually, we've got you covered there. `
+        var newWord = this.attributes.SUGGESTION;
+        delete this.attributes.SUGGESTION;
+        delete this.attributes.requestingExplainer;
+        delete intentObj.confirmationStatus;
+        this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
+        return util.sendProgressive(
+          this.event.context.System.apiEndpoint, // no need to add directives params
+          this.event.request.requestId,
+          this.event.context.System.apiAccessToken,
+          message,
+          function (err) {
+            if (err) {
+              boundThis.emitWithState('PickItem', {query: {value: newWord}})
+
+            } else {
+              boundThis.emitWithState('PickItem', {query: {value: newWord}})
+            }
+          }
+        );
+      }
+    }
+
 
     if (!this.attributes.SUGGESTION) { // came here without a query
       if (this.event.session.new) {
@@ -81,7 +107,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       // if denied, clear and ask again
       delete intentObj.confirmationStatus;
       delete this.attributes.SUGGESTION;
-      message += "Whoops, sorry. My hearing isn't perfect. Let's try again. What topic would you like to suggest?";
+      message += "Sorry, my hearing isn't perfect. Let's try again. What topic would you like to suggest?";
       return this.emit(':elicitSlotWithCard', 'query', message, "What topic would you like to request an explainer on?", 'Request Explainer', util.clearProsody(message), this.event.request.intent, util.cardImage(config.icon.full));
     } else if (!this.attributes.NAME_REQUESTED && !this.attributes.LOCATION_REQUESTED && intentObj.confirmationStatus && intentObj.confirmationStatus !== 'CONFIRMED') {
       // if NOT denied, and NOT confirmed, ask for confirmation
