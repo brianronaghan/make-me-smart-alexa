@@ -122,7 +122,7 @@ module.exports = [
   {
     title: 'Summer Blockbusters',
     author: 'Kai Ryssdal',
-    alts: ['movies', 'summer movies', 'summer movie blockbusters', 'block busters', 'some her movies', 'summer block busters'],
+    alts: ['movies', 'summer movies', 'summer movie blockbusters', 'block busters', 'some her movies', 'summer block busters', 'movie'],
     guid: 'summer_blockbusters-1',
     date: "2018-06-25T07:00:00Z",
     audio: {
@@ -144,7 +144,7 @@ module.exports = [
   {
     title: 'Bitcoin',
     author: 'Molly Wood',
-    alts: ['a cryptocurrency', 'the coin', 'a bitcoin', 'uh bitcoin', 'cryptocurrency', 'crypto', 'blockchain', 'flip coin', 'flip a coin', 'bid coin', 'bit coin', 'no become', 'echo fine', 'fine', 'what were'],
+    alts: ['a cryptocurrency', 'the coin', 'a bitcoin', 'uh bitcoin', 'cryptocurrency', 'crypto', 'blockchain', 'flip coin', 'flip a coin', 'bid coin', 'bit coin', 'no become', 'echo fine', 'fine', 'what were', 'big coin', 'coin'],
     guid: "bitcoin_launch",
     date: "2018-06-22T07:00:00Z",
     description: "Bitcoin is the best known cryptocurrency.",
@@ -156,7 +156,7 @@ module.exports = [
   {
     title: 'The Bond Market',
     author: 'Kai Ryssdal',
-    alts: ['bond market', 'the bond market', 'bond', 'bonds', 'bonds market', 'bombs', 'the bomb market'],
+    alts: ['bond market', 'the bond market', 'bond', 'bonds', 'bonds market', 'bombs', 'bomb', 'the bomb market', 'market'],
     guid: 'bonds_launch',
     date: "2018-06-22T07:00:00Z",
     requestInformation: {
@@ -171,7 +171,7 @@ module.exports = [
   {
     title: 'Machine Learning',
     author: 'Molly Wood',
-    alts: ['machine', 'learning', 'machine burning', 'my sheen learning'],
+    alts: ['machine', 'learning', 'machine burning', 'my sheen learning', 'uh sheen burning', 'sheen burning'],
     guid: 'machine_learning_launch',
     date: "2018-06-24T07:00:00Z",
     requestInformation: {
