@@ -3,6 +3,7 @@ module.exports = [
     title: 'Trade Wars',
     author: 'Kai Ryssdal',
     alts: ['trade war', 'raid war'],
+    keywords: ['trade', 'war', 'raid'],
     guid: 'trade_war',
     date: "2018-08-28T07:00:00Z",
     audio: {
@@ -14,6 +15,7 @@ module.exports = [
     title: 'Quits Rate',
     author: 'Kai Ryssdal',
     alts: ['quitting', 'hits rate', 'quits rape', 'quips rate'],
+    keywords: ['quit'],
     guid: 'quits_rate',
     date: "2018-08-28T07:00:00Z",
     audio: {
@@ -25,6 +27,8 @@ module.exports = [
     title: 'Venmo',
     author: 'Molly Wood',
     alts: ['venmo', 'cash app', 'denmo','kenmo', 'benmo'],
+    keywords: ['ven'],
+
     guid: 'venmo',
     date: "2018-08-28T07:00:00Z",
     audio: {
@@ -36,6 +40,7 @@ module.exports = [
     title: 'Two Dollar Bill',
     author: 'Kai Ryssdal',
     alts: ['dollar', '2 dollar bill', 'two buck bill', 'two dollar', '2 dollar'],
+    keywords: ['dollar'],
     guid: 'two_dollar_bill',
     date: "2018-08-28T07:00:00Z",
     audio: {
@@ -46,7 +51,8 @@ module.exports = [
   {
     title: 'GDP',
     author: 'Kai Ryssdal',
-    alts: ['gdp', 'g d p', 'g.d.p.', 'gbp', 'g b p', 'g.b.p.', 'gross domestic product', 'gdp number',],
+    alts: ['gdp', 'g d p', 'g.d.p.', 'gbp', 'g b p', 'g.b.p.', 'gross domestic product', 'gdp number'],
+    keywords: [null],
     guid: 'gdp',
     date: "2018-08-29T07:00:00Z",
     audio: {
@@ -58,6 +64,7 @@ module.exports = [
     title: 'Credit Score',
     author: 'Kai Ryssdal',
     alts: ['credit score', 'my credit score', 'your credit score', 'credit rating', 'credit number', 'credit sore', 'credit store'],
+    keywords: ['credit', 'score', 'store', 'rating'],
     guid: 'credit_score',
     date: "2018-08-28T07:00:00Z",
     audio: {
@@ -69,6 +76,7 @@ module.exports = [
     title: 'Targeted Ads',
     author: 'Molly Wood',
     alts: ['targeted', 'target', 'ads', 'advertising', 'targeted advertising', 'directed ads'],
+    keywords: ['target', 'advertising', 'ads'],
     guid: 'targeted_ads',
     date: "2018-07-02T07:00:00Z",
     audio: {
@@ -79,8 +87,9 @@ module.exports = [
   {
     title: 'The World Cup',
     author: 'Kai Ryssdal',
-    alts: ['world cup', 'soccer', 'fifa', 'soccer tournament', 'world cut', 'work cut'],
-    guid: 'world_cup_launch',
+    alts: ['world cup', 'soccer', 'fifa', 'soccer tournament', 'world cut', 'work cut', 'girl cup', 'girl cut'],
+    keywords: ['cup', 'soccer', 'world'],
+    guid: 'world_cup',
     date: "2018-06-29T07:00:00Z",
     requestInformation: {
       user: null,
@@ -96,6 +105,7 @@ module.exports = [
     title: 'Taxes on a Postcard',
     author: 'Kai Ryssdal',
     alts: ['taxes', 'tax postcard', 'postcard', 'postcard form postcard tax form', 'pax', 'tax form', 'post card', 'texas on a post card', 'post guard', 'axes', 'axes on a toast card'],
+    keywords: ['taxes', 'postcard', 'post', 'card', 'tax'],
     guid: 'tax_postcard',
     date: "2018-06-28T07:00:00Z",
     requestInformation: {
@@ -104,14 +114,14 @@ module.exports = [
     },
     audio: {
       intro:  "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/tax-postcard-kai-intro+2-mix.mp3",
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/tax-postcard-kai-explainer-mix.mp3",
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/tax-postcard-kai-explainer-fix-mix.mp3",
     },
   },
-
   {
     title: '5G',
     author: 'Molly Wood',
     alts: ['5 g', '5G', 'five g', '5g', '5 G'],
+    keywords: ['5g'],
     guid: "5G_launch",
     date: "2018-06-27T07:00:00Z",
     audio: {
@@ -123,6 +133,7 @@ module.exports = [
     title: 'Summer Blockbusters',
     author: 'Kai Ryssdal',
     alts: ['movies', 'summer movies', 'summer movie blockbusters', 'block busters', 'some her movies', 'summer block busters', 'movie'],
+    keywords: ['summer', 'movie', 'buster', 'blockbuster'],
     guid: 'summer_blockbusters-1',
     date: "2018-06-25T07:00:00Z",
     audio: {
@@ -134,6 +145,7 @@ module.exports = [
     title: 'The Royal Wedding',
     author: 'Kai Ryssdal',
     alts: ['royal wedding', 'royals', 'wedding', 'the wedding', 'the webbing', 'royal', 'royal webbing', 'royal weddings'],
+    keywords: ['wedding', 'royal', 'webbing'],
     guid: 'royal_wedding_launch',
     date: "2018-06-22T07:00:00Z",
     audio: {
@@ -145,6 +157,7 @@ module.exports = [
     title: 'Bitcoin',
     author: 'Molly Wood',
     alts: ['a cryptocurrency', 'the coin', 'a bitcoin', 'uh bitcoin', 'cryptocurrency', 'crypto', 'blockchain', 'flip coin', 'flip a coin', 'bid coin', 'bit coin', 'no become', 'echo fine', 'fine', 'what were', 'big coin', 'coin'],
+    keywords: ['coin', 'block chain', 'blockchain', 'crypto'],
     guid: "bitcoin_launch",
     date: "2018-06-22T07:00:00Z",
     description: "Bitcoin is the best known cryptocurrency.",
@@ -157,6 +170,7 @@ module.exports = [
     title: 'The Bond Market',
     author: 'Kai Ryssdal',
     alts: ['bond market', 'the bond market', 'bond', 'bonds', 'bonds market', 'bombs', 'bomb', 'the bomb market', 'market'],
+    keywords: ['market', 'bond', 'bomb', 'mark it'],
     guid: 'bonds_launch',
     date: "2018-06-22T07:00:00Z",
     requestInformation: {
@@ -172,6 +186,7 @@ module.exports = [
     title: 'Machine Learning',
     author: 'Molly Wood',
     alts: ['machine', 'learning', 'machine burning', 'my sheen learning', 'uh sheen burning', 'sheen burning'],
+    keywords: ['machine', 'learning', 'burning'],
     guid: 'machine_learning_launch',
     date: "2018-06-24T07:00:00Z",
     requestInformation: {
@@ -187,6 +202,7 @@ module.exports = [
     title: 'Household Debt',
     author: 'Kai Ryssdal',
     alts: ['debt', 'dead', 'household', 'what we owe', 'personal debt', 'household dead', 'house hold deb', 'household deck', 'house hold it', 'house hold deck', 'house hole deck', 'house hole debt', 'household that', 'house hold that', 'household it', 'hold it', 'house on debt', 'house debt'],
+    keywords: ['house', 'debt', 'dead', 'hold'],
     guid: 'household_debt_launch',
     date: "2018-06-22T07:00:00Z",
     requestInformation: {
@@ -202,6 +218,7 @@ module.exports = [
     title: 'Ransomware',
     author: 'Molly Wood',
     alts: ['ransom', 'ransom ware', 'ransom where', 'ransom software', 'viruses', 'rancid where', 'read somewhere', 'and somewhere', 'ask for more'],
+    keywords: ['ransom', 'ware'],
     guid: 'ransomeware_launch',
     date: "2018-06-22T07:00:00Z",
     requestInformation: {
@@ -217,6 +234,7 @@ module.exports = [
     title: 'G.D.P.R.',
     author: 'Molly Wood',
     alts: ['g.d.p.r', 'gdpr', 'g d p r', 'g.b.p.r', 'gbpr', 'g b p r'],
+    keywords: [null],
     guid: 'GDPR_certification_launch',
     date: "2018-06-22T07:00:00Z",
     description: "G.D.P.R. is the European Union's new data law, the General Data Protection Regulation.",
@@ -235,7 +253,7 @@ module.exports = [
     date: "2018-06-22T07:00:00Z",
     author: 'Kai Ryssdal',
     alts: ['output', 'output per worker', 'productively', 'bt', 'b.t', 'b t'],
-    tags: [],
+    keywords: ['product'],
     audio: {
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/Alexa+-+Ryssdal+-+PRODUCTIVITY+INTRO+-+MIXLEV_alexa.mp3",
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Ryssdal+-+Productivity+-+MIXLEV_alexa.mp3",
@@ -245,6 +263,7 @@ module.exports = [
     title: 'Augmented Reality',
     author: 'Molly Wood',
     alts: ['ar', 'a.r.', 'a r', 'a are', 'augmented', 'augmentation', 'reality', 'open ted reality', 'integrity ality'],
+    keywords: ['augment', 'reality'],
     guid: 'augmented_reality_launch',
     date: "2018-06-22T07:00:00Z",
     requestInformation: {
@@ -260,6 +279,7 @@ module.exports = [
     title: 'VPN',
     author: 'Molly Wood',
     alts: ['vpns', 'vpn', 'v.p.n.s', 'v p n', 'virtual private network', 'private network', 'b p n', 'dpn', 'bpn', 'd p n', 'z p n', 'e n', 'e.n.', 'z.p.n'],
+    keywords: [null],
     guid: 'vpn_launch',
     date: "2018-06-22T07:00:00Z",
     requestInformation: {
@@ -275,6 +295,7 @@ module.exports = [
     title: 'Venture Capital',
     author: 'Molly Wood',
     alts: ['VC', 'the sea', 'the C', 'vc', 'v c', 'v.c.', 'bc', 'b c', 'venture', 'venture funding', 'lynshire capital'],
+    keywords: ['venture', 'capital', 'capitol'],
     guid: 'vc_launch',
     date: "2018-06-22T07:00:00Z",
     requestInformation: {
