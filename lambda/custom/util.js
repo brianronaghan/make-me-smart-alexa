@@ -436,6 +436,7 @@ function stripArticles (searchTerm) {
   searchTerm = searchTerm.replace(/uh\s/gi, " ")
   searchTerm = searchTerm.replace(/on\s/gi, " ")
   searchTerm = searchTerm.replace(/#/gi, " ")
+  searchTerm = searchTerm.replace(/are\s/gi, " ")
 
   return stripActions(searchTerm);
 }
@@ -447,7 +448,7 @@ function stripActions (searchTerm) {
   searchTerm = searchTerm.replace(/pick\s/gi, " ")
   searchTerm = searchTerm.replace(/topic\s/gi, " ")
   searchTerm = searchTerm.replace(/choose\s/gi, " ")
-  searchTerm = searchTerm.replace(/explainer\s/gi, " ")
+  searchTerm = searchTerm.replace(/explainer/gi, " ")
   searchTerm = searchTerm.replace(/choice\s/gi, " ")
   searchTerm = searchTerm.replace(/item\s/gi, " ")
   searchTerm = searchTerm.replace(/option\s/gi, " ")
@@ -456,16 +457,17 @@ function stripActions (searchTerm) {
   searchTerm = searchTerm.replace(/define\s/gi, " ")
   searchTerm = searchTerm.replace(/subject\s/gi, " ")
   searchTerm = searchTerm.replace(/hear\s/gi, " ")
-  searchTerm = searchTerm.replace(/\<discuss\>\s/gi, " ")
-  searchTerm = searchTerm.replace(/discussion\s/gi, " ")
-  searchTerm = searchTerm.replace(/definition\s/gi, " ")
-  searchTerm = searchTerm.replace(/conversation\s/gi, " ")
-  searchTerm = searchTerm.replace(/\<on\>\s/gi, " ")
+  searchTerm = searchTerm.replace(/discussion/gi, " ")
+  searchTerm = searchTerm.replace(/discuss\s/gi, " ")
+  searchTerm = searchTerm.replace(/definition/gi, " ")
+  searchTerm = searchTerm.replace(/conversation/gi, " ")
+  searchTerm = searchTerm.replace(/\son\s/gi, " ")
   searchTerm = searchTerm.replace(/find\s/gi, " ")
   searchTerm = searchTerm.replace(/search\s/gi, " ")
   searchTerm = searchTerm.replace(/tell\s/gi, " ")
-  searchTerm = searchTerm.replace(/\<one\>\s/gi, " ")
-  searchTerm = searchTerm.replace(/\<me\>\s/gi, " ")
+  searchTerm = searchTerm.replace(/one\s/gi, " ")
+  searchTerm = searchTerm.replace(/me\s/gi, " ")
+  searchTerm = searchTerm.replace(/explain\s/gi, " ")
 
 
   searchTerm = searchTerm.replace(/^\s+|\s+$/g, "");  // any leading or trailing whitespace
