@@ -183,7 +183,7 @@ var config = {
         "tell make me smart I've got an idea",
         "tell make me smart I have got an idea",
         "tell make me smart I have an idea",
-
+        "Alexa, tell Make Me Smart I have an idea",
         "ask make me smart to submit",
         "tell make me smart to submit",
         "tell me an idea",
@@ -533,7 +533,7 @@ var config = {
       show: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/utils/icons/1024x600_FINALB.png"
     },
     icon : {
-      full: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/utils/icons/skill_icon_white.png"
+      full: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/utils/icons/340x340_white_preview.png"
     },
     cacheExpiry: 1000 * 60 * 60 * 60 * 3, // 2 hour, but for this spin-up, right? should I persist?
     dynamoDBTableName: 'makeMeSmart',
