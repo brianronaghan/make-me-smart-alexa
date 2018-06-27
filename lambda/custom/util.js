@@ -58,6 +58,7 @@ module.exports = {
   displayMessage: displayMessage,
   directionCheck: directionCheck,
   liveExplainers: liveExplainers,
+  searchByName: searchByName,
   templateListTemplate1: function (title, token, itemLabel, itemTitleKey, items) {
     var listItemBuilder = new Alexa.templateBuilders.ListItemBuilder();
     var listTemplateBuilder = new Alexa.templateBuilders.ListTemplate1Builder();
@@ -205,6 +206,7 @@ module.exports = {
 
     var itemNames = choices.map((choice) => choice[choiceKey].toLowerCase());
     var itemAlts = choices.map((choice) => choice.alts && choice.alts);
+    var itemKeywords = choices.map((choice) => choice.keywords && choice.keywords);
 
     var index;
     if (intentSlot && intentSlot.index && intentSlot.index.value) {
@@ -223,15 +225,15 @@ module.exports = {
           index--;
         }
     } else if (typeof intentSlot === 'string') { //NOTE:check alts
-        index = searchByName(cleanSlotName(intentSlot), itemNames, itemAlts);
+        index = searchByName(cleanSlotName(intentSlot), itemNames, itemAlts, itemKeywords);
     } else if (intentSlot && intentSlot[slotKey] && intentSlot[slotKey].value) {
-        index = searchByName(cleanSlotName(intentSlot[slotKey].value), itemNames, itemAlts);
+        index = searchByName(cleanSlotName(intentSlot[slotKey].value), itemNames, itemAlts, itemKeywords);
     } else if (intentSlot && intentSlot.query && intentSlot.query.value) {
       var asIndex = Number(intentSlot.query.value);
       if (isNaN(asIndex)) {
         console.log("Searching query via query", intentSlot.query.value)
         var cleanedQuery = cleanSlotName(intentSlot.query.value);
-        index = searchByName(cleanSlotName(intentSlot.query.value), itemNames, itemAlts);
+        index = searchByName(cleanSlotName(intentSlot.query.value), itemNames, itemAlts, itemKeywords);
         console.log("SEARCH BY NAME", index)
         if (index === -1) {
           // could not find a number based name
@@ -318,7 +320,7 @@ module.exports = {
   }
 }
 
-function searchByName (searchTerm, itemNames, itemAlts) { // takes names and alts and finds by name or alt
+function searchByName (searchTerm, itemNames, itemAlts, itemKeywords) { // takes names and alts and finds by name or alt
   var index = itemNames.indexOf(searchTerm);
   var stripped = stripArticles(searchTerm);
   var strippedIndex = itemNames.indexOf(stripped);
@@ -331,6 +333,18 @@ function searchByName (searchTerm, itemNames, itemAlts) { // takes names and alt
     return strippedIndex;
   } else {
     // check without articles
+    console.log("CHECKING for keywords in searchterm")
+    if (itemKeywords && itemKeywords.length) {
+      for (var x = 0; x < itemKeywords.length; x++) {
+        for (var y = 0; y < itemKeywords[x].length; y++) {
+          if (searchTerm.indexOf(itemKeywords[x][y]) > -1) {
+            console.log(`found KW ${itemKeywords[x][y]} as part of ${searchTerm} -- will choose ${itemNames[x]}.`);
+            return x;
+          }
+        }
+      }
+    }
+
     console.log("CHECKING ALTS with both stripped and normal")
     for (var i = 0; i < itemAlts.length; i++) {
       if (itemNames[i].indexOf(searchTerm) > -1) {
@@ -349,7 +363,7 @@ function searchByName (searchTerm, itemNames, itemAlts) { // takes names and alt
         }
       }
     }
-    console.log('not even by alt names')
+    console.log('not even by alt names or keywords')
     return -1;
   }
 }
