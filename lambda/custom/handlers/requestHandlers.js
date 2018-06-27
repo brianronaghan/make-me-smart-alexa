@@ -36,7 +36,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     var message = '';
     var boundThis = this;
     var payload = {}
-
+    var intentObj = this.event.request.intent;
     this.attributes.requestingExplainer = true;
     console.log(`REQUEST requestingExplainer - ENTRY intentName ${this.event.request.intent.name}... `, JSON.stringify(this.event.request, null, 2));
     if (slot.query && slot.query.value) {
@@ -46,6 +46,8 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
         delete slot.query.value;
         delete this.attributes.SUGGESTION;
         delete this.attributes.requestingExplainer;
+        delete intentObj.confirmationStatus
+
         return this.emitWithState(intentCheck);
       }
       this.attributes.SUGGESTION = slot.query.value;
@@ -75,10 +77,22 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       }
       message += 'What topic do you think Kai and Molly should do an explainer on?';
       return this.emit(':elicitSlotWithCard', 'query', message, "What topic would you like to request an explainer on?", 'Request Explainer', util.clearProsody(message), this.event.request.intent, util.cardImage(config.icon.full));
+    } else if (!this.attributes.NAME_REQUESTED && !this.attributes.LOCATION_REQUESTED && intentObj.confirmationStatus && intentObj.confirmationStatus === 'DENIED') {
+      // if denied, clear and ask again
+      delete intentObj.confirmationStatus;
+      delete this.attributes.SUGGESTION;
+      message += "Whoops, sorry. My hearing isn't perfect. Let's try again. What topic would you like to suggest?";
+      return this.emit(':elicitSlotWithCard', 'query', message, "What topic would you like to request an explainer on?", 'Request Explainer', util.clearProsody(message), this.event.request.intent, util.cardImage(config.icon.full));
+    } else if (!this.attributes.NAME_REQUESTED && !this.attributes.LOCATION_REQUESTED && intentObj.confirmationStatus && intentObj.confirmationStatus !== 'CONFIRMED') {
+      // if NOT denied, and NOT confirmed, ask for confirmation
+
+      message += `I heard ${this.attributes.SUGGESTION}. Is that right?`
+      var confirmMessage = `Do you want to request an explainer on ${this.attributes.SUGGESTION}?`;
+
+      return this.emit(':confirmIntentWithCard', message, confirmMessage, 'Confirm topic', message);
     }
 
     // if there is a suggestion, and no conf, ask them if it's correct
-      // if denied, ask again
 
     if (this.attributes.SUGGESTION && this.attributes.userName && this.attributes.userLocation) { //1
       console.log("REQUEST PickItem using saved name/location", slot)
@@ -99,6 +113,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       // console.log(this.attributes.REQUESTS, userAsk);
       console.time('DB-request-saved');
       delete this.attributes.requestingExplainer;
+      delete intentObj.confirmationStatus
       delete this.attributes.SUGGESTION;
       if (slot && slot.query && slot.query.value) {
         delete slot.query.value
@@ -142,6 +157,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
         delete slot.manualName.value;
         delete this.attributes.SUGGESTION;
         delete this.attributes.requestingExplainer;
+        delete intentObj.confirmationStatus;
         return this.emitWithState(intentCheck);
       } else if (expletiveCheck) { // expletiveCheck redirect
         console.log(`CAUGHT PROFANITY ON slot.manualName.value -- ${slot.manualName.value}`);
@@ -179,6 +195,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
         delete slot.manualLocation.value;
         delete this.attributes.SUGGESTION;
         delete this.attributes.requestingExplainer;
+        delete intentObj.confirmationStatus
         return this.emitWithState(intentCheck);
       } else if (expletiveCheck) { // expletiveCheck redirect
         console.log(`CAUGHT PROFANITY ON slot.manualLocation.value -- ${slot.manualLocation.value}`);
@@ -201,6 +218,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       }
       delete slot.manualLocation.value;
       delete this.attributes.requestingExplainer;
+      delete intentObj.confirmationStatus
       if (slot && slot.query && slot.query.value) {
         delete slot.query.value
       } else if (slot && slot.topic && slot.topic.value) {
@@ -223,7 +241,8 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
         }
         delete this.attributes.SUGGESTION;
         delete this.attributes.LOCATION_REQUESTED;
-        delete this.attributes.NAME_REQUESTED
+        delete this.attributes.NAME_REQUESTED;
+        delete intentObj.confirmationStatus;
         this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
         return util.sendProgressive(
           this.event.context.System.apiEndpoint, // no need to add directives params
@@ -250,7 +269,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     //TODO confirm this ???
     console.log("REQUEST PickItem", JSON.stringify(this.event.request.intent, null,2));
     if (this.attributes.requestingExplainer) {
-      delete this.attributes.requestingExplainer
+      delete this.attributes.requestingExplainer;
     }
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
     this.emitWithState('PickItem');
@@ -332,9 +351,9 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
   'AMAZON.CancelIntent' : function() {
     console.log('CANCEL REQUEST STATE');
     // means they don't wnt to leave it.
-    delete this.attributes.STATE;
     delete this.attributes.requestingExplainer;
     delete this.attributes.SUGGESTION;
+    delete this.attributes.STATE;
     this.response.speak(config.cancelMessage);
     this.emit(':saveState');
 
