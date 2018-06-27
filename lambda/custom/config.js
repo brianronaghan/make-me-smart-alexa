@@ -15,7 +15,6 @@ var config = {
     defaultDescription: "Something else you want to get smart about? Try 'Alexa, submit an idea' and Kai and Molly might use your idea!",
 
     messages: [
-      "You can say 'change my info' if Alexa didn't correctly capture your name/location.",
       "Something else you want to get smart about? Try 'Alexa, submit an idea' and Kai and Molly might use it!",
       "Completionist? Say 'Alexa, browse explainers' to list every single explainer we've done!",
       "Help other people find our skill by rating Make Me Smart on the Alexa Skill Store or Mobile App.",
@@ -183,6 +182,7 @@ var config = {
         "tell make me smart I've got an idea",
         "tell make me smart I have got an idea",
         "tell make me smart I have an idea",
+        "Alexa, ask Make Me Smart to submit",
         "Alexa, tell Make Me Smart I have an idea",
         "ask make me smart to submit",
         "tell make me smart to submit",
