@@ -449,10 +449,11 @@ function stripActions (searchTerm) {
   searchTerm = searchTerm.replace(/topic\s/gi, " ")
   searchTerm = searchTerm.replace(/choose\s/gi, " ")
   searchTerm = searchTerm.replace(/explainer/gi, " ")
+  searchTerm = searchTerm.replace(/explain are/gi, " ")
+
   searchTerm = searchTerm.replace(/choice\s/gi, " ")
   searchTerm = searchTerm.replace(/item\s/gi, " ")
   searchTerm = searchTerm.replace(/option\s/gi, " ")
-  searchTerm = searchTerm.replace(/explain\s/gi, " ")
   searchTerm = searchTerm.replace(/about\s/gi, " ")
   searchTerm = searchTerm.replace(/define\s/gi, " ")
   searchTerm = searchTerm.replace(/subject\s/gi, " ")
