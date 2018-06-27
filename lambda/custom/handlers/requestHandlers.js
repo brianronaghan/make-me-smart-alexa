@@ -68,7 +68,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
         return this.emit(':elicitSlotWithCard', 'query', message, "What topic would you like to request an explainer on?", 'Request a (clean) Explainer', cardMessage, this.event.request.intent, util.cardImage(config.icon.full));
     }
 
-    if (this.attributes.SUGGESTION) {
+    if (this.attributes.SUGGESTION && !this.attributes.NAME_REQUESTED && !this.attributes.LOCATION_REQUESTED) {
       var chosenExplainer = util.itemPicker({query: {value: this.attributes.SUGGESTION}}, util.liveExplainers(), 'title', 'topic', false);
       if (chosenExplainer) {
         message += `Actually, we've got you covered there. `
@@ -83,12 +83,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
           this.event.context.System.apiAccessToken,
           message,
           function (err) {
-            if (err) {
-              boundThis.emitWithState('PickItem', {query: {value: newWord}})
-
-            } else {
-              boundThis.emitWithState('PickItem', {query: {value: newWord}})
-            }
+            boundThis.emitWithState('PickItem', {query: {value: newWord}})
           }
         );
       }
