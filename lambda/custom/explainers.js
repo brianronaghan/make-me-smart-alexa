@@ -253,7 +253,7 @@ module.exports = [
     date: "2018-06-22T07:00:00Z",
     author: 'Kai Ryssdal',
     alts: ['output', 'output per worker', 'productively', 'bt', 'b.t', 'b t'],
-    keywords: ['product'],
+    keywords: [null],
     audio: {
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/Alexa+-+Ryssdal+-+PRODUCTIVITY+INTRO+-+MIXLEV_alexa.mp3",
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Ryssdal+-+Productivity+-+MIXLEV_alexa.mp3",

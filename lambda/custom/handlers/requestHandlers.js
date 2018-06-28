@@ -38,6 +38,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     var payload = {}
     var intentObj = this.event.request.intent;
     this.attributes.requestingExplainer = true;
+    let NAME_TESTING = Object.keys(config.testIds).indexOf(this.attributes.userId) > -1;
     console.log(`REQUEST requestingExplainer - ENTRY intentName ${this.event.request.intent.name}... `, JSON.stringify(this.event.request, null, 2));
     if (slot.query && slot.query.value) {
       let intentCheck = util.intentCheck(slot.query.value);
@@ -115,7 +116,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
 
     // if there is a suggestion, and no conf, ask them if it's correct
 
-    if (this.attributes.SUGGESTION && this.attributes.userName && this.attributes.userLocation) { //1
+    if (this.attributes.SUGGESTION && this.attributes.userName && this.attributes.userLocation && !NAME_TESTING) { //1
       console.log("REQUEST PickItem using saved name/location", slot)
       this.attributes.REQUESTS++;
       payload.requests = [{
@@ -161,14 +162,14 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
           }
         );
       });
-    } else if ((!this.attributes.userName) && slot.manualName && !slot.manualName.value) { // 2 no userName
+    } else if ((!this.attributes.userName || NAME_TESTING) && slot.manualName && !slot.manualName.value) { // 2 no userName
       // solicit manualName
       console.log('Gotta get userName');
       message += `Okay, I'll ask Kai and Molly to look into ${this.attributes.SUGGESTION}. They'll want to thank you if they use your idea, so what's your first name?`;
       this.attributes.NAME_REQUESTED = true;
       return this.emit(':elicitSlotWithCard', 'manualName', message, "What first name should I leave?", 'Tell us your name',message, this.event.request.intent, util.cardImage(config.icon.full));
 
-    } else if ((!this.attributes.userName) && slot.manualName && slot.manualName.value && this.attributes.NAME_REQUESTED) { // 3 got manualName
+    } else if ((!this.attributes.userName || NAME_TESTING) && slot.manualName && slot.manualName.value && this.attributes.NAME_REQUESTED) { // 3 got manualName
       // got manual name, save, and request location
       // make checks
       let intentCheck = util.intentCheck(slot.manualName.value);
@@ -197,7 +198,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       cardMessage += message;
 
       return this.emit(':elicitSlotWithCard', 'manualLocation', message, "What city or state should I leave?", 'Where are you from?', cardMessage, this.event.request.intent, util.cardImage(config.icon.full));
-    } else if ((!this.attributes.userLocation) && slot.manualLocation && !slot.manualLocation.value) { // 4 no manualLocation
+    } else if ((!this.attributes.userLocation || NAME_TESTING) && slot.manualLocation && !slot.manualLocation.value) { // 4 no manualLocation
       console.log("SOMEHOW HAVE no manualLocation");
       this.attributes.LOCATION_REQUESTED = true;
       var cardMessage = `Okay, I'll note that you requested an explainer! `;
@@ -206,7 +207,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
 
       return this.emit(':elicitSlotWithCard', 'manualLocation', message, "What city or state should I leave?", 'Where are you from?', cardMessage, this.event.request.intent, util.cardImage(config.icon.full));
 
-    } else if ((!this.attributes.userLocation) && slot.manualLocation && slot.manualLocation.value) { // 5 got manualName
+    } else if ((!this.attributes.userLocation || NAME_TESTING) && slot.manualLocation && slot.manualLocation.value) { // 5 got manualName
       console.log("OK, got manualLocation ", slot.manualLocation, " WE SHOULD BE GOOD TO GO");
       // make checks
       let intentCheck = util.intentCheck(slot.manualLocation.value);
