@@ -50,8 +50,8 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
       payload.requests = [{
         query: `UNRES: ${unresolved}`,
         time: this.event.request.timestamp,
-        user: this.attributes.userName,
-        location: this.attributes.userLocation,
+        user: this.attributes.userName || 'none',
+        location: this.attributes.userLocation || 'none',
       }];
       console.time('DB-unres')
       return db.update.call(this, payload, function(err, response) {
