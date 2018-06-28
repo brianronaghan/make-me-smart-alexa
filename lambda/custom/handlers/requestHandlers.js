@@ -367,6 +367,8 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     delete this.attributes.requestingExplainer;
     delete this.attributes.SUGGESTION;
     delete this.attributes.STATE;
+    delete this.attributes.LOCATION_REQUESTED;
+    delete this.attributes.NAME_REQUESTED;
     this.response.speak(config.stopMessage)
     this.emit(':saveState');
   },
@@ -376,6 +378,8 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     delete this.attributes.requestingExplainer;
     delete this.attributes.SUGGESTION;
     delete this.attributes.STATE;
+    delete this.attributes.LOCATION_REQUESTED;
+    delete this.attributes.NAME_REQUESTED;
     this.response.speak(config.cancelMessage);
     this.emit(':saveState');
 
@@ -409,6 +413,9 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     console.log("SESSION ENDED IN REQUEST", JSON.stringify(this.event, null,2))
     delete this.attributes.SUGGESTION;
     delete this.attributes.STATE;
+    delete this.attributes.LOCATION_REQUESTED;
+    delete this.attributes.NAME_REQUESTED;
+
     this.emit(':saveState', true);
 
    },
