@@ -83,6 +83,7 @@ var config = {
       HomePage: [
         "let's begin again",
         "begin again",
+        "bets begin again",
         "a main menu",
         "the main menu",
         "start menu",
@@ -163,29 +164,54 @@ var config = {
 
       ],
       PlayLatestExplainer: [
-        "play all",
+        "all",
         "all of them",
         "all of em",
+        "all the explainers",
+        "all egg spiders",
+        "all the spiders",
+        "all explainers",
+        "all explanations",
+
+
+        "hear them all",
+        "hear em all",
+        "hear all",
+
+        "hear all of them",
+        "hear all of em",
+        "hear all explainers",
+        "hear all the explainers",
+        "hear all of the explainers",
+        "hear all explanations",
+        "hear latest explainer",
+        "hear today's explainer",
+        "hear the latest",
+        "hear latest",
+
+        "latest",
+        "latest topic",
+
+        "play all",
+        "play today's explainer",
+        "play the latest explainer",
         "play all of em",
         "play them all",
         "play the latest",
+
+
         "the latest",
-        "all",
         "latest topic",
         "the latest explainer",
         "latest explainer",
-        "today's topic",
         "the latest",
         "play today's topic",
+
+        "today",
+        "today's",
         "today's explainer",
-        "play today's explainer",
-        "play the latest explainer",
-        "hear them all",
-        "hear all",
-        "hear all of them",
-        "hear all of em",
-        "hear latest explainer",
-        "hear today's explainer"
+        "today's topic",
+        "today's explanation",
       ],
       RequestExplainer: [
         "tell make me smart I've got an idea",
