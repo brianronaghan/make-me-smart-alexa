@@ -228,6 +228,7 @@ var config = {
         "i'd like to submit an idea",
         "an explainer on india",
         "simien idea",
+        "an idea",
 
         "pitch",
         "pitch explainer",
