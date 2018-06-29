@@ -196,27 +196,27 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
 
 
   },
-  'ChangeMyInfo': function () {
-    console.log('START state ChangeMyInfo', JSON.stringify(this.event.request.intent, null,2))
-
-    var slot;
-    if (this.event.request.intent) {
-      slot = this.event.request.intent.slots;
-      if (slot.query && slot.query.value) {
-        let intentCheck = util.intentCheck(slot.query.value);
-        if (intentCheck) {
-          console.log("START ChangeMyInfo intentCheck -- got: ", slot.query.value)
-          delete slot.query.value;
-          return this.emitWithState(intentCheck);
-        }
-      }
-    }
-    console.log("START ChangeMyInfo no query -> actual go to ChangeMyInfo")
-
-    this.handler.state = this.attributes.STATE = config.states.CHANGE_INFO;
-    this.emitWithState('ChangeMyInfo');
-
-  },
+  // 'ChangeMyInfo': function () {
+  //   console.log('START state ChangeMyInfo', JSON.stringify(this.event.request.intent, null,2))
+  //
+  //   var slot;
+  //   if (this.event.request.intent) {
+  //     slot = this.event.request.intent.slots;
+  //     if (slot.query && slot.query.value) {
+  //       let intentCheck = util.intentCheck(slot.query.value);
+  //       if (intentCheck) {
+  //         console.log("START ChangeMyInfo intentCheck -- got: ", slot.query.value)
+  //         delete slot.query.value;
+  //         return this.emitWithState(intentCheck);
+  //       }
+  //     }
+  //   }
+  //   console.log("START ChangeMyInfo no query -> actual go to ChangeMyInfo")
+  //
+  //   this.handler.state = this.attributes.STATE = config.states.CHANGE_INFO;
+  //   this.emitWithState('ChangeMyInfo');
+  //
+  // },
   'ListExplainers': function () {
     console.log('START state ListExplainers', JSON.stringify(this.event.request.intent, null,2))
     var deviceId = util.getDeviceId.call(this);
@@ -318,6 +318,9 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
 
     if (NAME_TESTING) {
       console.log('Live: ', util.liveExplainers().length, ' out of ', allExplainers.length);
+      this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
+      return this.emitWithState('HomePage', 'launch_heard_all');
+
       let LATEST_UNHEARD = util.latestUnheard.call(this);
       if (!LATEST_UNHEARD) {
         // TODO: handle heard all
