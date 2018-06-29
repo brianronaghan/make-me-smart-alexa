@@ -40,11 +40,8 @@ module.exports = {
   },
   logExplainer: function (explainer) {
     // Should I switch playig?
-    this.attributes.playing = {};
-    this.attributes.playing.status = 'playing';
-    this.attributes.playing.type = 'explainer';
-    this.attributes.playing.token = explainer.guid;
-    this.attributes.playing.url = explainer.audio.url;
+    this.attributes.heard = this.attributes.heard || {};
+    this.attributes.heard[explainer.guid] = new Date().toTimeString();
     this.attributes.plays = this.attributes.plays || 0;
     this.attributes.plays++;
   },
@@ -384,6 +381,7 @@ function nullCheck(deviceId) {
     this.attributes.deviceIds = [];
     this.attributes.deviceIds.push(deviceId);
   }
+  this.attributes.heard = this.attributes.heard || {};
   this.attributes.indices = this.attributes.indices || {};
   this.attributes.playing = this.attributes.playing || {};
   this.attributes.iterating = this.attributes.iterating || -1;
