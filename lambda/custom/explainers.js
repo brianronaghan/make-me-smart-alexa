@@ -88,7 +88,7 @@ module.exports = [
     title: 'The World Cup',
     author: 'Kai Ryssdal',
     alts: ['world cup', 'soccer', 'fifa', 'soccer tournament', 'world cut', 'work cut', 'girl cup', 'girl cut'],
-    keywords: ['cup', 'soccer', 'world'],
+    keywords: ['cup', 'soccer', 'world', 'fifa', 'cut'],
     guid: 'world_cup',
     date: "2018-06-29T07:00:00Z",
     requestInformation: {
