@@ -316,13 +316,18 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     console.log('Help in START');
     let NAME_TESTING = Object.keys(config.testIds).indexOf(this.attributes.userId) > -1;
     if (NAME_TESTING) {
-      for (let exp of util.liveExplainers()) {
-        console.log(`explainer guid ${exp.guid} : ${this.attributes.heard[exp.guid]}`)
-        if (!this.attributes.heard[exp.guid]) {
-          console.log("FOUND MOST RECENT UNHEARD! ");
-          console.log(`Welcome back to Make Me Smart. You've heard today's explainer, but here's ${util.authorName(exp.author)} explaining ${exp.title}`);
+      console.log('HEARD OBJ', this.attributes.heard)
+      let LATEST_UNHEARD = null;
+      let explainers = util.liveExplainers();
+      for (var x = 0; x < explainers.length; x++) {
+        console.log(`${explainers[x]} : ${this.attributes.heard[explainers[x].guid]}`)
+        if (this.attributes.heard[explainers[x].guid]) {
+          console.log("already heard ! ", explainers[x].guid);
+        } else if (!LATEST_UNHEARD) {
+          LATEST_UNHEARD = explainers[x]
         }
       }
+      console.log(`Welcome back to Make Me Smart. You've heard today's explainer, but here's ${util.authorName(LATEST_UNHEARD.author)} explaining ${LATEST_UNHEARD.title}`);
       console.log('Live: ', util.liveExplainers().length, ' out of ', allExplainers.length);
     }
 
