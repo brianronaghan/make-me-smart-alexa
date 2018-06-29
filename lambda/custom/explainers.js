@@ -120,7 +120,7 @@ module.exports = [
   {
     title: '5G',
     author: 'Molly Wood',
-    alts: ['5 g', '5G', 'five g', '5g', '5 G'],
+    alts: ['5 g', '5G', 'five g', '5g', '5 G', 'fine g', 'find g'],
     keywords: ['5g'],
     guid: "5G_launch",
     date: "2018-06-27T07:00:00Z",
