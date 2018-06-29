@@ -81,7 +81,7 @@ module.exports = [
     date: "2018-07-02T07:00:00Z",
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/targeted-ads-molly-explainer-mix.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/targeted-ads-molly-intro-fix-mix.mp3"
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/targeted-ads-molly-intro-fixfixmix.mp3"
     },
   },
   {
