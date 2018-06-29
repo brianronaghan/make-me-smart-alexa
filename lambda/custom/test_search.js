@@ -4,6 +4,7 @@ var util = require('./util.js');
 
 var exits = [
   "I'm good",
+  "i am good",
   "off",
   "turn off",
   "turn off please",
@@ -11,7 +12,13 @@ var exits = [
   'exit please',
   'please exit',
   'cool',
-  'interest rates'
+  'interest rates',
+  'None',
+  'none of em',
+  'npr',
+  'drake radio',
+  'play this american life',
+  'play WBEZ'
 ]
 
 var searches = [

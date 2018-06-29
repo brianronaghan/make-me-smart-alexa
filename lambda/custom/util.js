@@ -432,6 +432,9 @@ function intentCheck (text) {
   if (exitCheck(text)) {
     return 'AMAZON.CancelIntent'
   }
+  if (externalCheck(text)) {
+    return 'AMAZON.CancelIntent'
+  }
   console.log(`DOUBLE CHECKING ${text} against utterances.`)
   if (!INTENT_DICT) {
     INTENT_DICT = {};
@@ -462,19 +465,24 @@ function directionCheck (text) {
 
 function exitCheck (text) {
   let exits = [
-    /off\b/,
-    /done/,
-    /I'm good/,
-    /go away/,
-    /end/,
-    /bye/,
-    /stop/,
-    /\bexit\b/,
+    /off\b/i,
+    /done/i,
+    /I'm good/i,
+    /go away/i,
+    /end/i,
+    /bye/i,
+    /stop/i,
+    /\bexit\b/i,
     /dismiss\b/,
     /nevermind/,
     /enough/,
     /all set/,
-    /that's it/
+    /that's it/,
+    /none/i,
+    /finish/i,
+    /nothing/,
+    /no thank you/,
+    /cancel/
   ]
   for (var x = 0; x < exits.length; x++) {
     var currentRegex = RegExp(exits[x]);
@@ -483,6 +491,43 @@ function exitCheck (text) {
       return('AMAZON.CancelIntent');
     }
   }
+}
+
+function externalCheck (text) {
+  // TODO: give user exit notice?
+  let externals = [
+    /spotify/i,
+    /sirius/i,
+    /NPR/i,
+    /pandora/i,
+    /national public radio/i,
+    /jeopary/i,
+    /radio/i,
+    /music/i,
+    /wnyc/i,
+    /wbxu/i,
+    /wvxu/i,
+    /wuft/i,
+    /nnpr/i,
+    /kcrw/i,
+    /kpcc/i,
+    /wbez/i,
+    /wabe/i,
+    /wgn/i,
+    /WHYY/i,
+    /pod save america/i,
+    /this american life/i
+
+  ]
+  for (var x = 0; x < externals.length; x++) {
+    var currentRegex = RegExp(externals[x]);
+    if (currentRegex.test(text)) {
+      console.log("EXTERNAL CAUGHT")
+      return('AMAZON.CancelIntent');
+    }
+  }
+
+
 }
 
 function stripArticles (searchTerm) {
