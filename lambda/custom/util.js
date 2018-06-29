@@ -519,14 +519,15 @@ function externalCheck (text) {
     /WHYY/i,
     /pod save america/i,
     /this american life/i,
-    /songs/i
+    /songs/i,
+    /pikachū/
 
   ]
   for (var x = 0; x < externals.length; x++) {
     var currentRegex = RegExp(externals[x]);
     if (currentRegex.test(text)) {
       console.log("EXTERNAL CAUGHT")
-      return('ExternalRequestHandler');
+      return('AMAZON.CancelIntent');
     }
   }
 

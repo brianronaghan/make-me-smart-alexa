@@ -252,19 +252,11 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     this.emitWithState('ListExplainers', 'repeating');
   },
 
-  'ExternalRequestHandler': function () {
-    console.log("HITTIN EXTERNAL")
-    this.emitWithState('AMAZON.StopIntent', "Make Me Smart can't handle that. Bye!")
-  },
-
-  'AMAZON.StopIntent' : function(message) {
-    console.log('STOP, iterating')
+  'AMAZON.StopIntent' : function() {
     // This needs to work for not playing as well
     delete this.attributes.ITERATING
     delete this.attributes.STATE;
-    if (message) {
-     this.response.speak(message);
-    } else if (this.attributes.indices.explainer > 10 && !this.attributes.SOLICITED) {
+    if (this.attributes.indices.explainer > 10 && !this.attributes.SOLICITED) {
       this.attributes.SOLICITED = true;
       this.response.speak(`Thanks for listening! ${config.reviewSolicitation}`);
     } else {
