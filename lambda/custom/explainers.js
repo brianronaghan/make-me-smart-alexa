@@ -73,6 +73,18 @@ module.exports = [
     },
   },
   {
+    title: 'Credit Score',
+    author: 'Kai Ryssdal',
+    alts: ['credit score', 'my credit score', 'your credit score', 'credit rating', 'credit number', 'credit sore', 'credit store'],
+    keywords: ['credit', 'score', 'store', 'rating'],
+    guid: 'credit_score',
+    date: "2018-08-28T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/credit-score-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/credit-score-kai-intro-2-mix.mp3"
+    },
+  },
+  {
     title: 'Targeted Ads',
     author: 'Molly Wood',
     alts: ['targeted', 'target', 'ads', 'advertising', 'targeted advertising', 'directed ads'],
@@ -104,8 +116,8 @@ module.exports = [
   {
     title: 'Taxes on a Postcard',
     author: 'Kai Ryssdal',
-    alts: ['taxes', 'tax postcard', 'postcard', 'postcard form postcard tax form', 'pax', 'tax form', 'post card', 'texas on a post card', 'post guard', 'axes', 'axes on a toast card'],
-    keywords: ['taxes', 'postcard', 'post', 'card', 'tax'],
+    alts: ['taxes', 'tax postcard', 'postcard', 'postcard form postcard tax form', 'pax', 'tax form', 'post card', 'texas on a post card', 'post guard', 'axes', 'axes on a toast card', 'texas on a coast guard', 'texas on the coast guard'],
+    keywords: ['taxes', 'postcard', 'post', 'card', 'tax', 'coast guard', 'texas on'],
     guid: 'tax_postcard',
     date: "2018-06-28T07:00:00Z",
     requestInformation: {
