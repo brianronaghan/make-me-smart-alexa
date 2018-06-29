@@ -18,7 +18,7 @@ var exits = [
   'npr',
   'drake radio',
   'play this american life',
-  'play WBEZ'
+  'play WBEZ',
 ]
 
 var searches = [
