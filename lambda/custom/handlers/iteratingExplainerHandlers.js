@@ -274,6 +274,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
   },
   'AMAZON.CancelIntent' : function(message) {
     console.log('CANCEL iterating');
+    console.log("MESS", message)
     // means they don't wnt to leave it.
     delete this.attributes.ITERATING
     delete this.attributes.STATE;
