@@ -45,6 +45,12 @@ module.exports = {
     this.attributes.plays = this.attributes.plays || 0;
     this.attributes.plays++;
   },
+  authorName: function (text) {
+    if (text === 'Molly Wood') {
+      return `Molly '<emphasis level="strong"> Wood</emphasis>`;
+    }
+    return text;
+  },
   nullCheck: nullCheck,
   prosodyToBold: prosodyToBold,
   clearProsody: clearProsody,

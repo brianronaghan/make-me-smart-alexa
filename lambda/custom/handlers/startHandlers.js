@@ -316,14 +316,14 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     console.log('Help in START');
     let NAME_TESTING = Object.keys(config.testIds).indexOf(this.attributes.userId) > -1;
     if (NAME_TESTING) {
-      console.log("ALL EXPLAINERS :");
-      console.log(JSON.stringify(allExplainers, null, 2))
+      for (let exp of util.liveExplainers()) {
+        console.log(`explainer guid ${exp.guid} : ${this.attributes.heard[exp.guid]}`)
+        if (!this.attributes.heard[exp.guid]) {
+          console.log("FOUND MOST RECENT UNHEARD! ");
+          console.log(`Welcome back to Make Me Smart. You've heard today's explainer, but here's ${util.authorName(exp.author)} explaining ${exp.title}`);
+        }
+      }
       console.log('Live: ', util.liveExplainers().length, ' out of ', allExplainers.length);
-      console.log("CLEARING latest, name, location: ");
-      delete this.attributes.LATEST_HEARD;
-      delete this.attributes.userName;
-      delete this.attributes.userLocation;
-
     }
 
 
