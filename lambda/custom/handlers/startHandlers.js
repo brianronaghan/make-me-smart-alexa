@@ -318,8 +318,6 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
 
     if (NAME_TESTING) {
       console.log('Live: ', util.liveExplainers().length, ' out of ', allExplainers.length);
-      this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
-      return this.emitWithState('HomePage', 'launch_heard_all');
 
       let LATEST_UNHEARD = util.latestUnheard.call(this);
       if (!LATEST_UNHEARD) {
