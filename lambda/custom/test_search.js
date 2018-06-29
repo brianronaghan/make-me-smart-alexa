@@ -2,20 +2,52 @@ var explainers = require('./explainers.js');
 
 var util = require('./util.js');
 
+var exits = [
+  "I'm good",
+  "off",
+  "turn off",
+  "turn off please",
+  'brexit',
+  'exit please',
+  'please exit',
+  'cool',
+  'interest rates'
+]
+
+var searches = [
+  'house hold it',
+  'market',
+  'bomb market',
+  'house hold explain are',
+  'household explainer',
+  'households are'
+];
+
 searchFor(process.env.SEARCH_TERM);
-function searchFor (term) {
+function searchFor () {
   var itemNames = explainers.map((choice) => choice.title.toLowerCase());
   var itemAlts = explainers.map((choice) => choice.alts && choice.alts);
   var itemKeywords = explainers.map((choice) => choice.keywords && choice.keywords);
 
-  console.log(`Running search TERM: ${term} on ${explainers.length} records.`);
+  console.log(`RUNNING intentChecks for ${exits.length} utterances`);
+  for (let utt of exits) {
+    if (util.intentCheck(utt) === 'AMAZON.CancelIntent') {
+      console.log(`CANCELLED BY : ${utt}`);
+
+    } else {
+      console.log(`INTENT ${utt} passes`)
+    }
+  }
 
 
-  let index = util.searchByName(term, itemNames, itemAlts);
-  if (index < 0) {
-    console.log("NO EXPLAINER FOUND")
-  } else {
-    console.log(`${term} resolved to: `)
-    console.log(JSON.stringify(explainers[index], null,2))
+  console.log(`RUNNING searches for ${searches.length} utterances`);
+  for (let search of searches) {
+    let index = util.searchByName(search, itemNames, itemAlts, itemKeywords);
+    if (index < 0) {
+      console.log("NO EXPLAINER FOUND")
+    } else {
+      console.log(`${search} resolved to: ${explainers[index].title}`)
+    }
+
   }
 }

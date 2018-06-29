@@ -413,6 +413,9 @@ function clearProsody (text) {
 };
 
 function intentCheck (text) {
+  if (exitCheck(text)) {
+    return 'AMAZON.CancelIntent'
+  }
   console.log(`DOUBLE CHECKING ${text} against utterances.`)
   if (!INTENT_DICT) {
     INTENT_DICT = {};
@@ -421,7 +424,7 @@ function intentCheck (text) {
         INTENT_DICT[utterance] = intent;
       }
     }
-    console.log("BUILT DICT ", JSON.stringify(INTENT_DICT, null,2))
+    console.log("BUILT DICT")
   }
   return INTENT_DICT[text]
 }
@@ -439,6 +442,31 @@ function directionCheck (text) {
   }
   return DIRECT_DICT[text]
 
+}
+
+function exitCheck (text) {
+  let exits = [
+    /off\b/,
+    /done/,
+    /I'm good/,
+    /go away/,
+    /end/,
+    /bye/,
+    /stop/,
+    /\bexit\b/,
+    /dismiss\b/,
+    /nevermind/,
+    /enough/,
+    /all set/,
+    /that's it/
+  ]
+  for (var x = 0; x < exits.length; x++) {
+    var currentRegex = RegExp(exits[x]);
+    if (currentRegex.test(text)) {
+      console.log(`YO: ${text} fails ${currentRegex}.`)
+      return('AMAZON.CancelIntent');
+    }
+  }
 }
 
 function stripArticles (searchTerm) {
