@@ -381,7 +381,9 @@ var config = {
         "more options",
         "more",
         "more please",
-        "more explainers"
+        "more explainers",
+        "more spiders",
+        "all the spiders"
       ],
       OlderExplainers: [
         "more explainers",

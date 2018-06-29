@@ -278,7 +278,7 @@ module.exports = [
   {
     title: 'VPN',
     author: 'Molly Wood',
-    alts: ['vpns', 'vpn', 'v.p.n.s', 'v p n', 'virtual private network', 'private network', 'b p n', 'dpn', 'bpn', 'd p n', 'z p n', 'e n', 'e.n.', 'z.p.n'],
+    alts: ['vpns', 'vpn', 'v.p.n.s', 'v p n', 'virtual private network', 'private network', 'b p n', 'dpn', 'bpn', 'd p n', 'z p n', 'e n', 'e.n.', 'z.p.n', 'dtm'],
     keywords: [null],
     guid: 'vpn_launch',
     date: "2018-06-22T07:00:00Z",
