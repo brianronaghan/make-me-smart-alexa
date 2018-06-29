@@ -20,7 +20,9 @@ var searches = [
   'bomb market',
   'house hold explain are',
   'household explainer',
-  'households are'
+  'households are',
+  'are',
+  'what',
 ];
 
 searchFor(process.env.SEARCH_TERM);
