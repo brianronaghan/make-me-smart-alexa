@@ -105,7 +105,7 @@ module.exports = [
     title: 'Taxes on a Postcard',
     author: 'Kai Ryssdal',
     alts: ['taxes', 'tax postcard', 'postcard', 'postcard form postcard tax form', 'pax', 'tax form', 'post card', 'texas on a post card', 'post guard', 'axes', 'axes on a toast card', 'texas on a coast guard', 'texas on the coast guard'],
-    keywords: ['taxes', 'postcard', 'post', 'card', 'tax', 'coast guard', 'texas on'],
+    keywords: ['taxes', 'postcard', 'post', 'card', 'tax', 'coast guard', 'texas on', 'texas'],
     guid: 'tax_postcard',
     date: "2018-06-28T07:00:00Z",
     requestInformation: {
