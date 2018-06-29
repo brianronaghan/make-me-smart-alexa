@@ -253,6 +253,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
   },
 
   'ExternalRequestHandler': function () {
+    console.log("HITTIN EXTERNAL")
     this.emitWithState('AMAZON.CancelIntent', "Make Me Smart can't handle that. Bye!")
   },
 
