@@ -482,7 +482,9 @@ function exitCheck (text) {
     /finish/i,
     /nothing/,
     /no thank you/,
-    /cancel/
+    /cancel/,
+    /quiet/,
+    /shut up/
   ]
   for (var x = 0; x < exits.length; x++) {
     var currentRegex = RegExp(exits[x]);
@@ -516,7 +518,8 @@ function externalCheck (text) {
     /wgn/i,
     /WHYY/i,
     /pod save america/i,
-    /this american life/i
+    /this american life/i,
+    /songs/i
 
   ]
   for (var x = 0; x < externals.length; x++) {
