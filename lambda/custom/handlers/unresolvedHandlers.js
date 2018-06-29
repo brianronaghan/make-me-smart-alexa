@@ -164,7 +164,7 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
     // means they don't wnt to leave it.
     delete this.attributes.STATE;
     delete this.attributes.UNRESOLVED;
-    this.response.speak(config.cancelMessage);
+    // this.response.speak(config.cancelMessage);
 
     this.emit(':saveState');
 

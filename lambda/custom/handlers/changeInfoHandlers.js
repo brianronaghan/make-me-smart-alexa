@@ -176,7 +176,7 @@ module.exports = Alexa.CreateStateHandler(config.states.CHANGE_INFO, {
     // means they don't wnt to leave it.
     delete this.attributes.STATE;
     delete this.attributes.changingInfo;
-    this.response.speak(config.cancelMessage);
+    // this.response.speak(config.cancelMessage);
     this.emit(':saveState');
 
   },

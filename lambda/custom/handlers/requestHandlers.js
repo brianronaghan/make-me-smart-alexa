@@ -380,7 +380,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     delete this.attributes.STATE;
     delete this.attributes.LOCATION_REQUESTED;
     delete this.attributes.NAME_REQUESTED;
-    this.response.speak(config.cancelMessage);
+    // this.response.speak(config.cancelMessage);
     this.emit(':saveState');
 
   },

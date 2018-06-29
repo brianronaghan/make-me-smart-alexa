@@ -290,7 +290,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
   'AMAZON.CancelIntent' : function() {
     console.log('START CancelIntent')
     // This needs to work for not playing as well
-    this.response.speak(config.cancelMessage);
+    // this.response.speak(config.cancelMessage);
     delete this.attributes.STATE;
     this.emit(':saveState');
   },

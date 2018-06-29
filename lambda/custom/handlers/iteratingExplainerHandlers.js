@@ -273,9 +273,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     delete this.attributes.ITERATING
     delete this.attributes.STATE;
     this.attributes.indices.explainer = 0;
-    this.response.speak(config.cancelMessage);
-
-    this.response.speak('Cancelled! Say Alexa, Make Me Smart to come back.')
+    // this.response.speak(config.cancelMessage);
     this.emit(':saveState');
   },
   'SessionEndedRequest' : function () {

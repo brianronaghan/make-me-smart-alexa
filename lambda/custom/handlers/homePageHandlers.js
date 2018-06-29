@@ -217,7 +217,7 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     // This needs to work for not playing as well
     delete this.attributes.STATE;
     this.attributes.HEARD_FIRST = 0;
-    this.response.speak(config.cancelMessage);
+    // this.response.speak(config.cancelMessage);
     this.emit(':saveState');
   },
   'AMAZON.StopIntent' : function() {

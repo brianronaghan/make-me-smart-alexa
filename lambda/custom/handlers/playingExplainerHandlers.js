@@ -396,7 +396,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
       this.attributes.SOLICITED = true;
       this.response.speak(`Thanks for listening! ${config.reviewSolicitation}`);
     } else {
-      this.response.speak(config.cancelMessage);
+      // this.response.speak(config.cancelMessage);
     }
     this.emit(':saveState');
   },
