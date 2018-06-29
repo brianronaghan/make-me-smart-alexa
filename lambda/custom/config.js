@@ -63,6 +63,8 @@ var config = {
       'AMAZON.StopIntent': [
         "stop",
         "I'm done",
+        "I'm good thank you",
+        "I'm done thank you",
         "I'm set",
         "I'm good",
         "I'm all set",
