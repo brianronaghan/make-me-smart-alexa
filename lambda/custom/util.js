@@ -41,7 +41,7 @@ module.exports = {
   logExplainer: function (explainer) {
     // Should I switch playig?
     this.attributes.heard = this.attributes.heard || {};
-    this.attributes.heard[explainer.guid] = new Date().toTimeString();
+    this.attributes.heard[explainer.guid] = new Date().toUTCString();
     this.attributes.plays = this.attributes.plays || 0;
     this.attributes.plays++;
   },
@@ -50,6 +50,18 @@ module.exports = {
       return `Molly '<emphasis level="strong"> Wood</emphasis>`;
     }
     return text;
+  },
+  latestUnheard: function () {
+    console.log('HEARD OBJ', this.attributes.heard)
+    let explainers = liveExplainers();
+    for (var x = 0; x < explainers.length; x++) {
+      if (this.attributes.heard[explainers[x].guid]) {
+        console.log("already heard ", explainers[x].guid);
+      } else {
+        return explainers[x];
+      }
+    }
+
   },
   nullCheck: nullCheck,
   prosodyToBold: prosodyToBold,
