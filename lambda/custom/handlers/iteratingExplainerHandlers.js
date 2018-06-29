@@ -254,15 +254,17 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
 
   'ExternalRequestHandler': function () {
     console.log("HITTIN EXTERNAL")
-    this.emitWithState('AMAZON.CancelIntent', "Make Me Smart can't handle that. Bye!")
+    this.emitWithState('AMAZON.StopIntent', "Make Me Smart can't handle that. Bye!")
   },
 
-  'AMAZON.StopIntent' : function() {
+  'AMAZON.StopIntent' : function(message) {
     console.log('STOP, iterating')
     // This needs to work for not playing as well
     delete this.attributes.ITERATING
     delete this.attributes.STATE;
-    if (this.attributes.indices.explainer > 10 && !this.attributes.SOLICITED) {
+    if (message) {
+     this.response.speak(message);
+    } else if (this.attributes.indices.explainer > 10 && !this.attributes.SOLICITED) {
       this.attributes.SOLICITED = true;
       this.response.speak(`Thanks for listening! ${config.reviewSolicitation}`);
     } else {
@@ -272,16 +274,12 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
 
     this.emit(':saveState');
   },
-  'AMAZON.CancelIntent' : function(message) {
+  'AMAZON.CancelIntent' : function() {
     console.log('CANCEL iterating');
-    console.log("MESS", message)
-    // means they don't wnt to leave it.
+    // means they  wnt to leave it.
     delete this.attributes.ITERATING
     delete this.attributes.STATE;
     this.attributes.indices.explainer = 0;
-    if (message) {
-      this.response.speak(message);
-    }
     this.emit(':saveState');
   },
   'SessionEndedRequest' : function () {
