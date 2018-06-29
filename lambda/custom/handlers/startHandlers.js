@@ -9,7 +9,7 @@ var db = require('../db');
 var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
   'LaunchRequest': function (condition, message) {
     let welcome = '';
-    let prompt = "You can replay the explainer, hear what's new or submit an idea for what we should explain next. What would you like to do?"
+    let prompt = "You can replay the explainer, hear what's new or submit an idea. What would you like to do?"
     let latestExplainer = util.liveExplainers()[0];
     let author = latestExplainer.author;
     if (author === 'Molly Wood') {
@@ -315,20 +315,51 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
   'AMAZON.HelpIntent': function () {
     console.log('Help in START');
     let NAME_TESTING = Object.keys(config.testIds).indexOf(this.attributes.userId) > -1;
+
     if (NAME_TESTING) {
-      console.log('HEARD OBJ', this.attributes.heard)
-      let LATEST_UNHEARD = null;
-      let explainers = util.liveExplainers();
-      for (var x = 0; x < explainers.length; x++) {
-        console.log(`${explainers[x]} : ${this.attributes.heard[explainers[x].guid]}`)
-        if (this.attributes.heard[explainers[x].guid]) {
-          console.log("already heard ! ", explainers[x].guid);
-        } else if (!LATEST_UNHEARD) {
-          LATEST_UNHEARD = explainers[x]
+      console.log('Live: ', util.liveExplainers().length, ' out of ', allExplainers.length);
+      let LATEST_UNHEARD = util.latestUnheard.call(this);
+      if (!LATEST_UNHEARD) {
+        // TODO: handle heard all
+        console.log("HANDLE HEARD ALL")
+      }
+      let welcome = `Welcome back to Make Me Smart. You've heard our latest explainer, but here's ${util.authorName(LATEST_UNHEARD.author)} explaining ${LATEST_UNHEARD.title}`;
+
+      if (LATEST_UNHEARD.requestInformation && LATEST_UNHEARD.requestInformation.user) {
+        welcome += ` as requested by ${LATEST_UNHEARD.requestInformation.user}`;
+        if (LATEST_UNHEARD.requestInformation.location) {
+          welcome += ` from ${LATEST_UNHEARD.requestInformation.location}`
         }
       }
-      console.log(`Welcome back to Make Me Smart. You've heard today's explainer, but here's ${util.authorName(LATEST_UNHEARD.author)} explaining ${LATEST_UNHEARD.title}`);
-      console.log('Live: ', util.liveExplainers().length, ' out of ', allExplainers.length);
+      welcome += `.  <audio src="${LATEST_UNHEARD.audio.url}"/> `;
+      let prompt = "You can replay that, hear what's new or submit an idea. What would you like to do?"
+      util.logExplainer.call(this, LATEST_UNHEARD);
+      var payload = {};
+      payload.explainers = [{
+        source: "LAUNCH_PLAY_OLDER",
+        guid: LATEST_UNHEARD.guid,
+        timestamp: this.event.request.timestamp,
+      }]
+      console.time('LAUNCH-PLAY-OLDER');
+      return db.update.call(this, payload, function(err, resp) {
+        console.timeEnd('LAUNCH-PLAY-OLDER');
+        if (this.event.context.System.device.supportedInterfaces.Display) {
+          this.response.renderTemplate(
+            util.templateBodyTemplate3(
+              LATEST_UNHEARD.title,
+              LATEST_UNHEARD.image || config.icon.full,
+              '',
+              `Playing an explainer on ${LATEST_UNHEARD.title}. You can replay it, hear what's new or submit an idea for a new explainer.`,
+              config.background.show
+            )
+          );
+        }
+        let fullSpeech = welcome + prompt;
+        this.response.speak(fullSpeech).listen(prompt);
+        delete this.attributes.STATE;
+
+        this.emit(':saveState');
+      });
     }
 
 
