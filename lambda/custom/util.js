@@ -496,26 +496,26 @@ function exitCheck (text) {
 function externalCheck (text) {
   // TODO: give user exit notice?
   let externals = [
-    /spotify/i,
-    /sirius/i,
-    /NPR/i,
-    /pandora/i,
-    /national public radio/i,
-    /jeopary/i,
-    /radio/i,
-    /music/i,
-    /wnyc/i,
-    /wbxu/i,
-    /wvxu/i,
-    /wuft/i,
-    /nnpr/i,
-    /kcrw/i,
-    /kpcc/i,
-    /wbez/i,
-    /wabe/i,
-    /wgn/i,
-    /WHYY/i,
-    /pod save america/i,
+    // /spotify/i,
+    // /sirius/i,
+    // /NPR/i,
+    // /pandora/i,
+    // /national public radio/i,
+    // /jeopary/i,
+    // /radio/i,
+    // /music/i,
+    // /wnyc/i,
+    // /wbxu/i,
+    // /wvxu/i,
+    // /wuft/i,
+    // /nnpr/i,
+    // /kcrw/i,
+    // /kpcc/i,
+    // /wbez/i,
+    // /wabe/i,
+    // /wgn/i,
+    // /WHYY/i,
+    // /pod save america/i,
     /this american life/i
 
   ]
@@ -523,7 +523,7 @@ function externalCheck (text) {
     var currentRegex = RegExp(externals[x]);
     if (currentRegex.test(text)) {
       console.log("EXTERNAL CAUGHT")
-      return('AMAZON.CancelIntent');
+      return('ExternalRequestHandler');
     }
   }
 

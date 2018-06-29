@@ -252,6 +252,10 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     this.emitWithState('ListExplainers', 'repeating');
   },
 
+  'ExternalRequestHandler': function () {
+    this.emitWithState('AMAZON.CancelIntent', "Make Me Smart can't handle that. Bye!")
+  },
+
   'AMAZON.StopIntent' : function() {
     console.log('STOP, iterating')
     // This needs to work for not playing as well
@@ -267,13 +271,15 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
 
     this.emit(':saveState');
   },
-  'AMAZON.CancelIntent' : function() {
+  'AMAZON.CancelIntent' : function(message) {
     console.log('CANCEL iterating');
     // means they don't wnt to leave it.
     delete this.attributes.ITERATING
     delete this.attributes.STATE;
     this.attributes.indices.explainer = 0;
-    // this.response.speak(config.cancelMessage);
+    if (message) {
+      this.response.speak(message);
+    }
     this.emit(':saveState');
   },
   'SessionEndedRequest' : function () {
