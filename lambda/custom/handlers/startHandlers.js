@@ -21,6 +21,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
       welcome =`<audio src="${config.newUserAudio}" /><audio src="${latestExplainer.audio.url}"/>`;
     } else if (this.attributes.LATEST_HEARD && this.attributes.LATEST_HEARD === latestExplainer.guid) {
       // user has heard todays
+      // TODO: instead find one the user hasn't heard, play that
       welcome = `Welcome back to Make Me Smart. `
       prompt =  `You can replay today's explainer on ${latestExplainer.title}, hear what's new or submit your explainer idea. Which would you like to do?`;
       if (this.event.context.System.device.supportedInterfaces.Display) {
@@ -37,9 +38,9 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
       let fullSpeech = welcome + prompt;
       this.response.speak(fullSpeech).listen(prompt);
       return this.emit(':saveState');
-    } else if (latestExplainer.audio.intro) {
+    } else if (latestExplainer.audio.intro) { // hasn't heard latest, there's intro
       welcome =`<audio src="${latestExplainer.audio.intro}" /><audio src="${latestExplainer.audio.url}"/>`;
-    } else {
+    } else { // hasn't heard latest, no intro
       welcome = `Welcome back to Make Me Smart. Today we're learning about ${latestExplainer.title}`;
       if (latestExplainer.requestInformation && latestExplainer.requestInformation.user) {
         welcome += ` as requested by ${latestExplainer.requestInformation.user}`;
@@ -52,6 +53,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     this.attributes.LATEST_HEARD = latestExplainer.guid;
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
+    util.logExplainer.call(this, latestExplainer);
 
     var payload = {};
     payload.explainers = [{
