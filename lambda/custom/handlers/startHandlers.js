@@ -171,12 +171,12 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
   },
 
   'PlayLatestExplainer': function () {
-    console.log('START state PlayLatestExplainer', JSON.stringify(this.event.request.intent, null,2))
+    console.log('START state PlayLatestExplainer', JSON.stringify(this.event.request, null,2))
 
     var slot;
     if (this.event.request.intent) {
       slot = this.event.request.intent.slots;
-      if (slot.query && slot.query.value) {
+      if (slot && slot.query && slot.query.value) {
         let intentCheck = util.intentCheck(slot.query.value);
         if (intentCheck) {
           console.log("START PlayLatestExplainer intentCheck -- got: ", slot.query.value)
