@@ -179,7 +179,13 @@ var config = {
         "play today's topic",
         "today's explainer",
         "play today's explainer",
-        "play the latest explainer"
+        "play the latest explainer",
+        "hear them all",
+        "hear all",
+        "hear all of them",
+        "hear all of em",
+        "hear latest explainer",
+        "hear today's explainer"
       ],
       RequestExplainer: [
         "tell make me smart I've got an idea",
