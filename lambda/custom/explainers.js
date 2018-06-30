@@ -156,7 +156,7 @@ module.exports = [
   {
     title: 'Bitcoin',
     author: 'Molly Wood',
-    alts: ['a cryptocurrency', 'the coin', 'a bitcoin', 'uh bitcoin', 'cryptocurrency', 'crypto', 'blockchain', 'flip coin', 'flip a coin', 'bid coin', 'bit coin', 'no become', 'echo fine', 'fine', 'what were', 'big coin', 'coin'],
+    alts: ['a cryptocurrency', 'the coin', 'a bitcoin', 'uh bitcoin', 'cryptocurrency', 'crypto', 'blockchain', 'flip coin', 'flip a coin', 'bid coin', 'bit coin', 'no become', 'echo fine', 'big coin', 'coin'],
     keywords: ['coin', 'block chain', 'blockchain', 'crypto'],
     guid: "bitcoin_launch",
     date: "2018-06-22T07:00:00Z",
@@ -217,7 +217,7 @@ module.exports = [
   {
     title: 'Ransomware',
     author: 'Molly Wood',
-    alts: ['ransom', 'ransom ware', 'ransom where', 'ransom software', 'viruses', 'rancid where', 'read somewhere', 'and somewhere', 'ask for more', 'manson where', 'end scene where'],
+    alts: ['ransom', 'ransom ware', 'ransom where', 'ransom software', 'viruses', 'rancid where', 'read somewhere', 'and somewhere', 'manson where', 'end scene where'],
     keywords: ['ransom', 'ware', 'manson'],
     guid: 'ransomeware_launch',
     date: "2018-06-22T07:00:00Z",
@@ -233,7 +233,7 @@ module.exports = [
   {
     title: 'G.D.P.R.',
     author: 'Molly Wood',
-    alts: ['g.d.p.r', 'gdpr', 'g d p r', 'g.b.p.r', 'gbpr', 'g b p r'],
+    alts: ['g.d.p.r', 'gdpr', 'g d p r', 'g.b.p.r', 'gbpr', 'g b p r', 'gdr','gee are'],
     keywords: [null],
     guid: 'GDPR_certification_launch',
     date: "2018-06-22T07:00:00Z",

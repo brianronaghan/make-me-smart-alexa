@@ -484,7 +484,20 @@ function exitCheck (text) {
     /no thank you/,
     /cancel/,
     /quiet/,
-    /shut up/
+    /shut up/,
+    /pause/,
+    /home/,
+    /something else/,
+    /no way/i,
+    /never/i,
+    /finished/i,
+    /dumb/i,
+    /quit/i,
+    /good night/i,
+    /stupid/
+
+
+
   ]
   for (var x = 0; x < exits.length; x++) {
     var currentRegex = RegExp(exits[x]);
@@ -498,6 +511,8 @@ function exitCheck (text) {
 function externalCheck (text) {
   // TODO: give user exit notice?
   let externals = [
+    /wait wait/i,
+    /youtube/i,
     /spotify/i,
     /sirius/i,
     /NPR/i,
@@ -506,6 +521,10 @@ function externalCheck (text) {
     /jeopary/i,
     /radio/i,
     /music/i,
+    /cnn/i,
+    /the daily/i,
+    /kunc/i,
+    /kjzz/i,
     /wnyc/i,
     /wbxu/i,
     /wvxu/i,
@@ -516,11 +535,27 @@ function externalCheck (text) {
     /wbez/i,
     /wabe/i,
     /wgn/i,
+    /wlw/i,
+    /wdet/i,
     /WHYY/i,
+    /KQED/i,
     /pod save america/i,
     /this american life/i,
     /songs/i,
-    /pikachū/
+    /pikachū/,
+    /alarm/i,
+    /playlist/i,
+    /briefing/i,
+    /today's hits/i,
+    /today's top/i,
+    /KUR/i,
+    /KERA/i,
+    /KUOW/i,
+    /WJCT/i,
+    /station/i,
+    /would you rather/i,
+    /weather/i,
+
 
   ]
   for (var x = 0; x < externals.length; x++) {
