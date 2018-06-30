@@ -36,7 +36,7 @@ var update = function (payload, cb) {
       } else {
         console.log("NO REC")
         newPayload = payload;
-        newPayload.timestamp = new Date().toTimeString();
+        newPayload.timestamp = new Date().toUTCString();
       }
       console.log("NEW PAYLOAD  ", newPayload);
       sessions.update(keys, newPayload)

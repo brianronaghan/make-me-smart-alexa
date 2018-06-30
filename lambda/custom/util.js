@@ -486,7 +486,6 @@ function exitCheck (text) {
     /quiet/,
     /shut up/,
     /pause/,
-    /home/,
     /something else/,
     /no way/i,
     /never/i,
@@ -494,7 +493,9 @@ function exitCheck (text) {
     /dumb/i,
     /quit/i,
     /good night/i,
-    /stupid/
+    /stupid/,
+    /shut down/i,
+    /no more/,
 
 
 
