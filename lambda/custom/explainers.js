@@ -27,7 +27,7 @@ module.exports = [
     title: 'Venmo',
     author: 'Molly Wood',
     alts: ['venmo', 'cash app', 'denmo','kenmo', 'benmo'],
-    keywords: ['ven'],
+    keywords: ['ven', 'venmo'],
 
     guid: 'venmo',
     date: "2018-08-28T07:00:00Z",
@@ -169,8 +169,8 @@ module.exports = [
   {
     title: 'The Bond Market',
     author: 'Kai Ryssdal',
-    alts: ['bond market', 'the bond market', 'bond', 'bonds', 'bonds market', 'bombs', 'bomb', 'the bomb market', 'market'],
-    keywords: ['market', 'bond', 'bomb', 'mark it'],
+    alts: ['bond market', 'the bond market', 'bond', 'bonds', 'bonds market', 'bombs', 'bomb', 'the bomb market', 'market', 'bond prices', 'bon prices'],
+    keywords: ['market', 'bond', 'bomb', 'mark it', 'bon prices'],
     guid: 'bonds_launch',
     date: "2018-06-22T07:00:00Z",
     requestInformation: {
@@ -217,8 +217,8 @@ module.exports = [
   {
     title: 'Ransomware',
     author: 'Molly Wood',
-    alts: ['ransom', 'ransom ware', 'ransom where', 'ransom software', 'viruses', 'rancid where', 'read somewhere', 'and somewhere', 'ask for more'],
-    keywords: ['ransom', 'ware'],
+    alts: ['ransom', 'ransom ware', 'ransom where', 'ransom software', 'viruses', 'rancid where', 'read somewhere', 'and somewhere', 'ask for more', 'manson where', 'end scene where'],
+    keywords: ['ransom', 'ware', 'manson'],
     guid: 'ransomeware_launch',
     date: "2018-06-22T07:00:00Z",
     requestInformation: {
@@ -314,7 +314,7 @@ module.exports = [
   // POST LAUNCH:
   // {
   //   title: 'The Cloud',
-  //   guid: "cloud_certification",
+  //   guid: "cloud",
   //   date: "2018-07-1107:00:00Z",
   //   alts: ['cloud', 'cloud computing', 'clouds'],
   //   author: 'Molly Wood',
