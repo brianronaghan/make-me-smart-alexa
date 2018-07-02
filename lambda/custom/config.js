@@ -80,6 +80,10 @@ var config = {
         "I'm done thanks"
       ],
       HomePage: [
+        "make  smart",
+        "make  smarter",
+        "make smart",
+        "make smarter",
         "let's begin again",
         "begin again",
         "bets begin again",
