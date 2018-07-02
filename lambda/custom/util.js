@@ -516,6 +516,7 @@ function externalCheck (text) {
     /youtube/i,
     /spotify/i,
     /sirius/i,
+    /iHeartRadio/i,
     /NPR/i,
     /pandora/i,
     /national public radio/i,
@@ -540,6 +541,7 @@ function externalCheck (text) {
     /wdet/i,
     /WHYY/i,
     /KQED/i,
+    /WUWM/i,
     /pod save america/i,
     /this american life/i,
     /songs/i,
@@ -548,7 +550,6 @@ function externalCheck (text) {
     /playlist/i,
     /briefing/i,
     /today's hits/i,
-    /today's top/i,
     /KUR/i,
     /KERA/i,
     /KUOW/i,
@@ -556,6 +557,8 @@ function externalCheck (text) {
     /station/i,
     /would you rather/i,
     /weather/i,
+    /Scooby/i,
+
 
 
   ]
