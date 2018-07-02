@@ -18,12 +18,15 @@ var config = {
     messages: [
       "Something else you want to get smart about? Try 'Alexa, submit an idea' and Kai and Molly might use it!",
       "Completionist? Say 'Alexa, browse explainers' to list every single explainer we've done!",
+      "To leave, say, 'Alexa, exit.'",
       "Help other people find our skill by rating Make Me Smart on the Alexa Skill Store or Mobile App.",
       "If you want to hear more from Kai and Molly, download the Make Me Smart podcast wherever you get that sort of thing.",
       "We're always looking for new ideas for explainers. Try 'Alexa, submit an idea' to give us one!",
+      "Before using other skills, say, 'Alexa, exit.'",
       "Want to learn more about a topic? Goto: www.marketplace.org and get even smarter!",
       "Hey, guess what? We also have a show on the actual radio. Find Marketplace on your local public radio station.",
       "You can always say 'Alexa, play the latest' to hear what we're getting smart about right now.",
+      "Before using to Pandora, turning on your lights, or using other skills, say 'Alexa, exit' to leave Make Me Smart.",
       "Have a question? Found a bug? Email testing@marketplace.org and we might be able to help!",
       "Rate Make Me Smart on the Alexa Skill Store or Mobile App."
     ],
