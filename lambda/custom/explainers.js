@@ -73,6 +73,18 @@ module.exports = [
     },
   },
   {
+    title: 'Fireworks',
+    author: 'Kai Ryssdal',
+    alts: ['fire works', 'fire wood', 'hire good', 'higher good', 'higher wood', 'fire irks', 'ire irks'],
+    keywords: ['fire', 'works', 'irks', 'ire'],
+    guid: 'fireworks',
+    date: "2018-07-03T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/fireworks-kai-explainer-fixmix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/fireworks-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Targeted Ads',
     author: 'Molly Wood',
     alts: ['targeted', 'target', 'ads', 'advertising', 'targeted advertising', 'directed ads', 'target dads'],
