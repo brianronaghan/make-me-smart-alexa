@@ -164,7 +164,12 @@ module.exports = Alexa.CreateStateHandler(config.states.CHANGE_INFO, {
     // This needs to work for not playing as well
     delete this.attributes.changingInfo;
     delete this.attributes.STATE;
-    this.response.speak(config.stopMessage)
+    this.attributes.STOPS = this.attributes.STOPS || 0;
+    this.attributes.STOPS++;
+    if (this.attributes.STOPS === 1 || (this.attributes.STOPS % config.stopMessageFrequency === 0)) {
+      this.response.speak(config.stopMessage)
+    }
+
     this.emit(':saveState');
 
     // this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;

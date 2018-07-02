@@ -151,9 +151,14 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
   'AMAZON.StopIntent' : function() {
     console.log('UNRESOLVED StopIntent')
     // This needs to work for not playing as well
+
     delete this.attributes.UNRESOLVED;
     delete this.attributes.STATE;
-    this.response.speak(config.stopMessage)
+    this.attributes.STOPS = this.attributes.STOPS || 0;
+    this.attributes.STOPS++;
+    if (this.attributes.STOPS === 1 || (this.attributes.STOPS % config.stopMessageFrequency === 0)) {
+      this.response.speak(config.stopMessage)
+    }
 
     this.emit(':saveState');
 
