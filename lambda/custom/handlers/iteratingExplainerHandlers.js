@@ -211,20 +211,6 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     }
   },
 
-
-  // 'ChangeMyInfo' : function () {
-  //   console.log('ITERATING_EXPLAINER - ChangeMyInfo')
-  //   var slot = slot || this.event.request.intent.slots;
-  //   if (this.attributes.ITERATING) {
-  //     console.log("ITERATING_EXPLAINER -- ARTIFACT -- ChangeMyInfo, sending back")
-  //     return this.emitWithState('ListExplainers');
-  //   } else {
-  //     this.attributes.indices.explainer = 0;
-  //     console.log("ACTUALLY ChangeMyInfo REDIRECTING", JSON.stringify(this.event.request.intent, null,2))
-  //     this.handler.state = this.attributes.STATE = config.states.CHANGE_INFO;
-  //     this.emitWithState('ChangeMyInfo');
-  //   }
-  // },
   'PlayLatestExplainer': function () {
     // this is what 'play all would do'
     console.log('ITERATING_EXPLAINER - PlayLatestExplainer')
