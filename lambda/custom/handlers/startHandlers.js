@@ -300,11 +300,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     console.log('START StopIntent')
     // This needs to work for not playing as well
     // SHOULD I CLEAR THE STATE?
-    this.attributes.STOPS = this.attributes.STOPS || 0;
-    this.attributes.STOPS++;
-    if (this.attributes.STOPS === 1 || (this.attributes.STOPS % config.stopMessageFrequency === 0)) {
-      this.response.speak(config.stopMessage)
-    }
+    this.response.speak(config.stopMessage)
     delete this.attributes.STATE;
     this.emit(':saveState');
   },
