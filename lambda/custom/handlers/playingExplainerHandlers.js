@@ -378,10 +378,13 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     console.log('STOP PLAY EXPLAINER STATE: ', this.attributes.plays)
     // This needs to work for not playing as well
     // SHOULD I CLEAR THE STATE?
+    this.attributes.STOPS = this.attributes.STOPS || 0;
+    this.attributes.STOPS++;
+
     if (this.attributes.plays > 5 && !this.attributes.SOLICITED) {
       this.attributes.SOLICITED = true;
       this.response.speak(`Thanks for listening! ${config.reviewSolicitation}`);
-    } else {
+    } else if (this.attributes.STOPS === 1 || (this.attributes.STOPS % config.stopMessageFrequency === 0)) {
       this.response.speak(config.stopMessage)
     }
     this.emit(':saveState');

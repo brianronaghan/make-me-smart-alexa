@@ -226,7 +226,11 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     // SHOULD I CLEAR THE STATE?
     this.attributes.HEARD_FIRST = 0;
     delete this.attributes.STATE;
-    this.response.speak(config.stopMessage)
+    this.attributes.STOPS = this.attributes.STOPS || 0;
+    this.attributes.STOPS++;
+    if (this.attributes.STOPS === 1 || (this.attributes.STOPS % config.stopMessageFrequency === 0)) {
+      this.response.speak(config.stopMessage)
+    }
     this.emit(':saveState');
   },
 

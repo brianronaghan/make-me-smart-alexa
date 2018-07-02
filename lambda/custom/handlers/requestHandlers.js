@@ -369,7 +369,11 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     delete this.attributes.STATE;
     delete this.attributes.LOCATION_REQUESTED;
     delete this.attributes.NAME_REQUESTED;
-    this.response.speak(config.stopMessage)
+    this.attributes.STOPS = this.attributes.STOPS || 0;
+    this.attributes.STOPS++;
+    if (this.attributes.STOPS === 1 || (this.attributes.STOPS % config.stopMessageFrequency === 0)) {
+      this.response.speak(config.stopMessage)
+    }
     this.emit(':saveState');
   },
   'AMAZON.CancelIntent' : function() {
