@@ -216,6 +216,7 @@ var config = {
         "tell make me smart I've got an idea",
         "tell make me smart I have got an idea",
         "tell make me smart I have an idea",
+        "Alexa, I have an idea",
         "Alexa, ask Make Me Smart to submit",
         "Alexa, tell Make Me Smart I have an idea",
         "ask make me smart to submit",
