@@ -75,8 +75,8 @@ module.exports = [
   {
     title: 'Targeted Ads',
     author: 'Molly Wood',
-    alts: ['targeted', 'target', 'ads', 'advertising', 'targeted advertising', 'directed ads'],
-    keywords: ['target', 'advertising', 'ads'],
+    alts: ['targeted', 'target', 'ads', 'advertising', 'targeted advertising', 'directed ads', 'target dads'],
+    keywords: ['target', 'advertising', 'ads', 'dads'],
     guid: 'targeted_ads',
     date: "2018-07-02T07:00:00Z",
     audio: {
@@ -201,8 +201,8 @@ module.exports = [
   {
     title: 'Household Debt',
     author: 'Kai Ryssdal',
-    alts: ['debt', 'dead', 'household', 'what we owe', 'personal debt', 'household dead', 'house hold deb', 'household deck', 'house hold it', 'house hold deck', 'house hole deck', 'house hole debt', 'household that', 'house hold that', 'household it', 'hold it', 'house on debt', 'house debt', 'how hold it'],
-    keywords: ['house', 'debt', 'dead', 'hold'],
+    alts: ['debt', 'dead', 'household', 'what we owe', 'personal debt', 'household dead', 'house hold deb', 'household deck', 'house hold it', 'house hold deck', 'house hole deck', 'house hole debt', 'household that', 'house hold that', 'household it', 'hold it', 'house on debt', 'house debt', 'how hold it',  'how cold it'],
+    keywords: ['house', 'debt', 'dead', 'hold', 'cold'],
     guid: 'household_debt_launch',
     date: "2018-06-22T07:00:00Z",
     requestInformation: {

@@ -554,10 +554,23 @@ function externalCheck (text) {
     /KERA/i,
     /KUOW/i,
     /WJCT/i,
+    /KJZZ/i,
+    /KUNC/i,
+    /WDET/i,
+    /NBC/i,
+    /NHPR/i,
     /station/i,
     /would you rather/i,
     /weather/i,
+    /forecast/i,
     /Scooby/i,
+    /Sarah McLachlan/i,
+    /KCLUFM/i,
+    /Jonny Lang/i,
+    /jay Z/i,
+    /imagine dragons/i,
+    /harry potter/i,
+    /little mermaid/i,
 
 
 
