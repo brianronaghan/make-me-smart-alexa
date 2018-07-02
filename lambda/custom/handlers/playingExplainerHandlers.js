@@ -61,6 +61,12 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     } else if (!chosenExplainer) {
       if (slot.query && slot.query.value) {
         // TODO: intentCheck ???
+        let intentCheck = util.intentCheck(slot.query.value);
+        if (intentCheck) {
+          console.log("Playing Explainer PickItem intentCheck -- slot.query.value ", slot.query.value)
+          delete slot.query.value;
+          return this.emitWithState(intentCheck);
+        }
         console.log("PLAYING_EXPLAINER, PickItem - slot.query.value but could not find -- SENDING TO UNRESOLVED");
         this.handler.state = this.attributes.STATE = config.states.UNRESOLVED;
         return this.emitWithState('PickItem');
