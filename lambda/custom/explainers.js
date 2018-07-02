@@ -104,7 +104,7 @@ module.exports = [
   {
     title: 'Taxes on a Postcard',
     author: 'Kai Ryssdal',
-    alts: ['taxes', 'tax postcard', 'postcard', 'postcard form postcard tax form', 'pax', 'tax form', 'post card', 'texas on a post card', 'post guard', 'axes', 'axes on a toast card', 'texas on a coast guard', 'texas on the coast guard'],
+    alts: ['taxes', 'tax postcard', 'postcard', 'postcard form postcard tax form', 'pax', 'tax form', 'post card', 'texas on a post card', 'post guard', 'axes', 'axes on a toast card', 'texas on a coast guard', 'texas on the coast guard', 'ask kids on the cold called'],
     keywords: ['taxes', 'postcard', 'post', 'card', 'tax', 'coast guard', 'texas on', 'texas'],
     guid: 'tax_postcard',
     date: "2018-06-28T07:00:00Z",
@@ -120,7 +120,7 @@ module.exports = [
   {
     title: '5G',
     author: 'Molly Wood',
-    alts: ['5 g', '5G', 'five g', '5g', '5 G', 'fine g', 'find g'],
+    alts: ['5 g', '5G', 'five g', '5g', '5 G', 'fine g', 'find g', 'why g', '5 g.', 'by g', 'side g'],
     keywords: ['5g'],
     guid: "5G_launch",
     date: "2018-06-27T07:00:00Z",
@@ -201,7 +201,7 @@ module.exports = [
   {
     title: 'Household Debt',
     author: 'Kai Ryssdal',
-    alts: ['debt', 'dead', 'household', 'what we owe', 'personal debt', 'household dead', 'house hold deb', 'household deck', 'house hold it', 'house hold deck', 'house hole deck', 'house hole debt', 'household that', 'house hold that', 'household it', 'hold it', 'house on debt', 'house debt'],
+    alts: ['debt', 'dead', 'household', 'what we owe', 'personal debt', 'household dead', 'house hold deb', 'household deck', 'house hold it', 'house hold deck', 'house hole deck', 'house hole debt', 'household that', 'house hold that', 'household it', 'hold it', 'house on debt', 'house debt', 'how hold it'],
     keywords: ['house', 'debt', 'dead', 'hold'],
     guid: 'household_debt_launch',
     date: "2018-06-22T07:00:00Z",
