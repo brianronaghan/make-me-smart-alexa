@@ -55,9 +55,7 @@ module.exports = {
     console.log('HEARD OBJ', this.attributes.heard)
     let explainers = liveExplainers();
     for (var x = 0; x < explainers.length; x++) {
-      if (this.attributes.heard[explainers[x].guid]) {
-        console.log("already heard ", explainers[x].guid);
-      } else {
+      if (!this.attributes.heard[explainers[x].guid]) {
         return explainers[x];
       }
     }
