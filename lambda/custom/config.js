@@ -7,11 +7,11 @@ var config = {
       explainer: 3,
       episode: 3,
     },
-    stopMessageFrequency: 4,
+    stopMessageFrequency: 5,
     ipaNumber: "<phoneme alphabet='ipa' ph='nʌmbɝ'>number</phoneme>",
     reviewSolicitation: "Help others find our skill by rating Make Me Smart on the Alexa Skill Store or Mobile App.",
     podcastPlug: "You can also hear more from Kai and Molly on their podcast Make Me Smart!",
-    stopMessage: 'Bye! Say Alexa, Make Me Smart to come back!',
+    stopMessage: 'Goodbye! Say Alexa, Make Me Smart to come back!',
     cancelMessage: 'Cancelled! Come back by saying Alexa, Make Me Smart!',
     defaultDescription: "Something else you want to get smart about? Try 'Alexa, submit an idea' and Kai and Molly might use your idea!",
 
