@@ -17,7 +17,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     } else if (this.attributes.LATEST_HEARD && this.attributes.LATEST_HEARD === latestExplainer.guid) { // has heard latest
       let LATEST_UNHEARD = util.latestUnheard.call(this);
       if (LATEST_UNHEARD) { // has heard latest, but I found an UNHEARD, so will play it
-        welcome = `Welcome back to Make Me Smart. You've heard our latest explainer, but here's ${util.authorName(LATEST_UNHEARD.author)} explaining ${LATEST_UNHEARD.title}`;
+        welcome = `Welcome back to Make Me Smart. You've heard our latest topic, but here's ${util.authorName(LATEST_UNHEARD.author)} explaining ${LATEST_UNHEARD.title}`;
 
         if (LATEST_UNHEARD.requestInformation && LATEST_UNHEARD.requestInformation.user) {
           welcome += ` as requested by ${LATEST_UNHEARD.requestInformation.user}`;
