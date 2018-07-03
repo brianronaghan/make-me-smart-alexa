@@ -28,6 +28,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
         welcome += `. <audio src="${LATEST_UNHEARD.audio.url}"/> `;
         prompt = "You can say next, hear what's new, or submit an idea. What would you like to do?"
         util.logExplainer.call(this, LATEST_UNHEARD);
+        // this.attributes.currentExplainerIndex = LATEST_UNHEARD.index;
         var payload = {};
         payload.explainers = [{
           source: "LAUNCH_ALREADY_HEARD",
@@ -52,6 +53,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
           this.emit(':saveState');
         });
       } else { // has heard latest + has HEARD ALL
+        this.attributes.currentExplainerIndex = 0;
         welcome = `Welcome back to Make Me Smart. Thanks for being a power user! `;
         prompt =  `You can replay our latest on ${latestExplainer.title}, browse all or submit your idea. Which would you like to do?`;
         if (this.event.context.System.device.supportedInterfaces.Display) {
@@ -82,6 +84,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
       welcome += `. Here's ${author} to make us smart. <audio src="${latestExplainer.audio.url}"/>`;
     }
     this.attributes.LATEST_HEARD = latestExplainer.guid;
+    this.attributes.currentExplainerIndex = 0;
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     util.logExplainer.call(this, latestExplainer);
@@ -199,6 +202,9 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
 
     // currentExplainerIndex is 0 based, and PickItem expects 1-based
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
+    // NOTE: gotta do it based on what the user is listening tolet explainerIndex = this.attributes.currentExplainerIndex;
+    // this.emitWithState('PickItem', {index: {value: this.attributes.currentExplainerIndex + 1}}, 'REPLAY')
+    // 'LAUNCH_UNHEARD_REPLAY'
     this.emitWithState('PickItem', {index: {value: 1}}, 'LAUNCH_REPLAY')
 
   },
@@ -324,6 +330,11 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     console.log("start handler NEXT")
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
+    let NAME_TESTING = Object.keys(config.testIds).indexOf(this.attributes.userId) > -1;
+    if (NAME_TESTING) {
+      let LATEST_UNHEARD = util.latestUnheard.call(this);
+      console.log('BRIAN LATEST', LATEST_UNHEARD);
+    }
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
     this.emitWithState('PickItem', {index: {value: 2}}, 'LAUNCH_NEXT'); // NOTE you could make a case, if it's an old one... we should move in that spot in the list, OR it should always try for one you havent heard. There's some case logic i need to consider
   },
