@@ -52,8 +52,9 @@ module.exports = {
     return text;
   },
   latestUnheard: function () {
-    console.log('HEARD OBJ', this.attributes.heard)
+
     let explainers = liveExplainers();
+    this.attributes.heard = this.attributes.heard || {};
     for (var x = 0; x < explainers.length; x++) {
       if (!this.attributes.heard[explainers[x].guid]) {
         return explainers[x];
