@@ -118,7 +118,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     var slot;
     if (this.event.request.intent) {
       slot = this.event.request.intent.slots;
-      if (slot.query && slot.query.value) {
+      if (slot && slot.query && slot.query.value) {
         let intentCheck = util.intentCheck(slot.query.value);
         if (intentCheck) {
           console.log("START HomePage intentCheck -- got: ", slot.query.value)
@@ -144,7 +144,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     var slot;
     if (this.event.request.intent) {
       slot = this.event.request.intent.slots;
-      if (slot.query && slot.query.value) {
+      if (slot && slot.query && slot.query.value) {
         let intentCheck = util.intentCheck(slot.query.value);
         if (intentCheck) {
           console.log("START RequestExplainer intentCheck -- got: ", slot.query.value)
@@ -186,7 +186,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     var slot;
     if (this.event.request.intent) {
       slot = this.event.request.intent.slots;
-      if (slot.query && slot.query.value) {
+      if (slot && slot.query && slot.query.value) {
         let intentCheck = util.intentCheck(slot.query.value);
         if (intentCheck) {
           console.log("START ReplayExplainer intentCheck -- got: ", slot.query.value)
@@ -235,7 +235,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     var slot;
     if (this.event.request.intent) {
       slot = this.event.request.intent.slots;
-      if (slot.query && slot.query.value) {
+      if (slot && slot.query && slot.query.value) {
         let intentCheck = util.intentCheck(slot.query.value);
         if (intentCheck) {
           console.log("START ListExplainers intentCheck -- ", slot.query.value)
@@ -256,7 +256,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     var slot;
     if (this.event.request.intent) {
       slot = this.event.request.intent.slots;
-      if (slot.query && slot.query.value) {
+      if (slot && slot.query && slot.query.value) {
         let intentCheck = util.intentCheck(slot.query.value);
         if (intentCheck) {
           console.log("START OlderExplainers intentCheck -- ", slot.query.value)
@@ -274,9 +274,10 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
 
   'NewerExplainers' : function () {
     console.log('START state NewerExplainers', JSON.stringify(this.event.request.intent, null,2))
+    var slot;
     if (this.event.request.intent) {
       slot = this.event.request.intent.slots;
-      if (slot.query && slot.query.value) {
+      if (slot && slot.query && slot.query.value) {
         let intentCheck = util.intentCheck(slot.query.value);
         if (intentCheck) {
           console.log("START NewerExplainers intentCheck -- ", slot.query.value)
