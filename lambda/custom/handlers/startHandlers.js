@@ -348,7 +348,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
-    this.emitWithState('PickItem', {index: {value: 2}}, 'LAUNCH_NEXT'); // NOTE TEST 1 or 2?
+    this.emitWithState('PickItem', {index: {value: 2}}, 'LAUNCH_NEXT'); // NOTE you could make a case, if it's an old one... we should move in that spot in the list, OR it should always try for one you havent heard. There's some case logic i need to consider
   },
 
   'AMAZON.HelpIntent': function () {
