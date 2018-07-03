@@ -56,7 +56,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
             this.emit(':saveState');
           });
         } else { // has heard latest + has HEARD ALL
-          welcome = `Welcome back to Make Me Smart, you power user! You've heard all our explainers.`;
+          welcome = `Welcome back to Make Me Smart. Thanks for being a power user! `;
           prompt =  `You can replay our latest on ${latestExplainer.title}, browse all or submit your idea. Which would you like to do?`;
           if (this.event.context.System.device.supportedInterfaces.Display) {
             this.response.renderTemplate(
