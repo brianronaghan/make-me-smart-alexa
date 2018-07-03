@@ -15,34 +15,34 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     if (!this.attributes.deviceIds) { // NEW USER
       welcome =`<audio src="${config.newUserAudio}" /><audio src="${latestExplainer.audio.url}"/>`;
     } else if (this.attributes.LATEST_HEARD && this.attributes.LATEST_HEARD === latestExplainer.guid) { // has heard latest
-      let LATEST_UNHEARD = util.latestUnheard.call(this);
-      if (LATEST_UNHEARD) { // has heard latest, but I found an UNHEARD, so will play it
-        welcome = `Welcome back to Make Me Smart. You've heard our latest topic, but here's ${util.authorName(LATEST_UNHEARD.author)} explaining ${LATEST_UNHEARD.title}`;
+      let latestUnheardExplainer = util.latestUnheard.call(this);
+      if (latestUnheardExplainer) { // has heard latest, but I found an UNHEARD, so will play it
+        welcome = `Welcome back to Make Me Smart. You've heard our latest topic, but here's ${util.authorName(latestUnheardExplainer.author)} explaining ${latestUnheardExplainer.title}`;
 
-        if (LATEST_UNHEARD.requestInformation && LATEST_UNHEARD.requestInformation.user) {
-          welcome += ` as requested by ${LATEST_UNHEARD.requestInformation.user}`;
-          if (LATEST_UNHEARD.requestInformation.location) {
-            welcome += ` from ${LATEST_UNHEARD.requestInformation.location}`
+        if (latestUnheardExplainer.requestInformation && latestUnheardExplainer.requestInformation.user) {
+          welcome += ` as requested by ${latestUnheardExplainer.requestInformation.user}`;
+          if (latestUnheardExplainer.requestInformation.location) {
+            welcome += ` from ${latestUnheardExplainer.requestInformation.location}`
           }
         }
-        welcome += `. <audio src="${LATEST_UNHEARD.audio.url}"/> `;
+        welcome += `. <audio src="${latestUnheardExplainer.audio.url}"/> `;
         prompt = "You can say next, hear what's new, or submit an idea. What would you like to do?"
-        util.logExplainer.call(this, LATEST_UNHEARD);
-        // this.attributes.currentExplainerIndex = LATEST_UNHEARD.index;
+        util.logExplainer.call(this, latestUnheardExplainer);
+        this.attributes.currentExplainerIndex = latestUnheardExplainer.index;
         var payload = {};
         payload.explainers = [{
           source: "LAUNCH_ALREADY_HEARD",
-          guid: LATEST_UNHEARD.guid,
+          guid: latestUnheardExplainer.guid,
           timestamp: this.event.request.timestamp,
         }]
         return db.update.call(this, payload, function(err, resp) {
           if (this.event.context.System.device.supportedInterfaces.Display) {
             this.response.renderTemplate(
               util.templateBodyTemplate3(
-                LATEST_UNHEARD.title,
-                LATEST_UNHEARD.image || config.icon.full,
+                latestUnheardExplainer.title,
+                latestUnheardExplainer.image || config.icon.full,
                 '',
-                `Playing an explainer on ${LATEST_UNHEARD.title}. You can say replay or next, hear what's new or submit an idea for a new explainer.`,
+                `Playing an explainer on ${latestUnheardExplainer.title}. You can say replay or next, hear what's new or submit an idea for a new explainer.`,
                 config.background.show
               )
             );
@@ -202,11 +202,12 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
 
     // currentExplainerIndex is 0 based, and PickItem expects 1-based
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
-    // NOTE: gotta do it based on what the user is listening tolet explainerIndex = this.attributes.currentExplainerIndex;
-    // this.emitWithState('PickItem', {index: {value: this.attributes.currentExplainerIndex + 1}}, 'REPLAY')
-    // 'LAUNCH_UNHEARD_REPLAY'
-    this.emitWithState('PickItem', {index: {value: 1}}, 'LAUNCH_REPLAY')
-
+    // NOTE: want to have replay a) always play what the user heard even if UNHEARD b) track how often they replay a new or launch-unheard one
+    if (this.currentExplainerIndex !== 0) {
+      this.emitWithState('PickItem', {index: {value: this.attributes.currentExplainerIndex + 1}}, 'LAUNCH_UNHEARD_REPLAY')
+    } else {
+      this.emitWithState('PickItem', {index: {value: 1}}, 'LAUNCH_REPLAY')
+    }
   },
 
   'PlayLatestExplainer': function () {
@@ -330,19 +331,19 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     console.log("start handler NEXT")
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
-    let NAME_TESTING = Object.keys(config.testIds).indexOf(this.attributes.userId) > -1;
-    if (NAME_TESTING) {
-      let LATEST_UNHEARD = util.latestUnheard.call(this);
-      console.log('BRIAN LATEST', LATEST_UNHEARD);
-    }
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
-    this.emitWithState('PickItem', {index: {value: 2}}, 'LAUNCH_NEXT'); // NOTE you could make a case, if it's an old one... we should move in that spot in the list, OR it should always try for one you havent heard. There's some case logic i need to consider
+
+    let latestUnheardExplainer = util.latestUnheard.call(this);
+    if (latestUnheardExplainer) {
+      console.log("BRIAN - hasn't heard ", latestUnheardExplainer.guid);
+      this.emitWithState('PickItem', {index: {value: latestUnheardExplainer.index + 1}}, 'LAUNCH_NEXT_TO_UNHEARD');
+    } else {
+      this.emitWithState('PickItem', {index: {value: 2}}, 'LAUNCH_NEXT_HEARDALL');
+    }
   },
 
   'AMAZON.HelpIntent': function () {
     console.log('Help in START');
-
-
     // Handler for built-in HelpIntent
     var message = "You can say next or replay, hear what's new, or submit your idea for an explainer. What would you like to do?";
     this.response.speak(message).listen(message);

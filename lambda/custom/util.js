@@ -52,15 +52,11 @@ module.exports = {
     return text;
   },
   latestUnheard: function () {
-    let NAME_TESTING = Object.keys(config.testIds).indexOf(this.attributes.userId) > -1;
-
     let explainers = liveExplainers();
     this.attributes.heard = this.attributes.heard || {};
     for (var x = 0; x < explainers.length; x++) {
       if (!this.attributes.heard[explainers[x].guid]) {
-        if (NAME_TESTING) {
-          explainers[x].index = x;
-        }
+        explainers[x].index = x;
         return explainers[x];
       }
     }
