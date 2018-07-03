@@ -38,7 +38,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     var payload = {}
     var intentObj = this.event.request.intent;
     this.attributes.requestingExplainer = true;
-    let NAME_TESTING = Object.keys(config.testIds).indexOf(this.attributes.userId) > -1;
+    let NAME_TESTING = false; // Object.keys(config.testIds).indexOf(this.attributes.userId) > -1;
     console.log(`REQUEST requestingExplainer - ENTRY intentName ${this.event.request.intent.name}... `, JSON.stringify(this.event.request, null, 2));
     if (slot.query && slot.query.value) {
       let intentCheck = util.intentCheck(slot.query.value);
