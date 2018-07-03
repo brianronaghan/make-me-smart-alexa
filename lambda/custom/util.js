@@ -532,6 +532,7 @@ function externalCheck (text) {
     /wuft/i,
     /nnpr/i,
     /kcrw/i,
+    /bbc/i,
     /kpcc/i,
     /wbez/i,
     /wabe/i,
@@ -570,9 +571,6 @@ function externalCheck (text) {
     /imagine dragons/i,
     /harry potter/i,
     /little mermaid/i,
-
-
-
   ]
   for (var x = 0; x < externals.length; x++) {
     var currentRegex = RegExp(externals[x]);
