@@ -88,7 +88,7 @@ module.exports = [
     title: 'Targeted Ads',
     author: 'Molly Wood',
     alts: ['targeted', 'target', 'ads', 'advertising', 'targeted advertising', 'directed ads', 'target dads'],
-    keywords: ['target', 'advertising', 'ads', 'dads'],
+    keywords: ['target', 'advertising', 'ads', 'dads', 'target it', 'targeted', 'tar get', 'hard get'],
     guid: 'targeted_ads',
     date: "2018-07-02T07:00:00Z",
     audio: {
