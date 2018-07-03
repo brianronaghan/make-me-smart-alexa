@@ -73,6 +73,18 @@ module.exports = [
     },
   },
   {
+    title: 'Airline Fees',
+    author: 'Kai Ryssdal',
+    alts: ['airline fees', 'airline mes', 'air line ease', 'airline gouging', 'air mine tease', 'air line tease'],
+    keywords: ['airline', 'air line', 'fees', 'hairline', 'error line', 'tease', 'ease', 'air mine', 'tees'],
+    guid: 'airline_fees',
+    date: "2018-07-04T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/airline-fees-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/airline-fees-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Fireworks',
     author: 'Kai Ryssdal',
     alts: ['fire works', 'fire wood', 'hire good', 'higher good', 'higher wood', 'fire irks', 'ire irks'],

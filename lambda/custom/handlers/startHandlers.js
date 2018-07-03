@@ -335,7 +335,6 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
 
     let latestUnheardExplainer = util.latestUnheard.call(this);
     if (latestUnheardExplainer) {
-      console.log("BRIAN - hasn't heard ", latestUnheardExplainer.guid);
       this.emitWithState('PickItem', {index: {value: latestUnheardExplainer.index + 1}}, 'LAUNCH_NEXT_TO_UNHEARD');
     } else {
       this.emitWithState('PickItem', {index: {value: 2}}, 'LAUNCH_NEXT_HEARDALL');

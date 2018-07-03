@@ -32,6 +32,8 @@ var searches = [
   'households are',
   'are',
   'what',
+  'airline fees',
+  'airline'
 ];
 
 searchFor(process.env.SEARCH_TERM);
