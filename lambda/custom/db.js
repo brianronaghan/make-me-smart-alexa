@@ -34,18 +34,15 @@ var update = function (payload, cb) {
         delete newPayload.sessionId;
         delete newPayload.userId;
       } else {
-        console.log("NO REC")
         newPayload = payload;
         newPayload.timestamp = new Date().toUTCString();
       }
-      console.log("NEW PAYLOAD  ", newPayload);
       sessions.update(keys, newPayload)
       .then(function (data) {
-        console.log("RESP ",data)
         cb.call(boundThis, null, data)
       })
       .catch(function (err) {
-        console.log('ERR', err)
+        console.log('dynamo-err', JSON.stringify(err,null,2))
         cb.call(boundThis, err)
       })
 
