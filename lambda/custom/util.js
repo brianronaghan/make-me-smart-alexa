@@ -47,7 +47,7 @@ module.exports = {
   },
   authorName: function (text) {
     if (text === 'Molly Wood') {
-      return `Molly '<emphasis level="strong"> Wood</emphasis>`;
+      return `Molly <emphasis level="strong"> Wood</emphasis>`;
     }
     return text;
   },
