@@ -494,6 +494,7 @@ function exitCheck (text) {
     /stupid/,
     /shut down/i,
     /no more/,
+    /not now/i,
 
 
 
