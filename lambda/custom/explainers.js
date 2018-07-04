@@ -73,6 +73,18 @@ module.exports = [
     },
   },
   {
+    title: 'Online Sales Tax',
+    author: 'Molly Wood',
+    alts: ['online sales', 'on line tax', 'un line tacs', 'on-line tacs', 'online axis', 'online tax'],
+    keywords: ['online', 'on line', 'sales', 'online sales', 'on line tax', 'online tax', 'tax is', 'web', 'sale', 'tacs'],
+    guid: 'online_sales_tax',
+    date: "2018-07-05T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/retail-tax-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/retail-tax-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Airline Fees',
     author: 'Kai Ryssdal',
     alts: ['airline fees', 'airline mes', 'air line ease', 'airline gouging', 'air mine tease', 'air line tease'],
@@ -128,8 +140,8 @@ module.exports = [
   {
     title: 'Taxes on a Postcard',
     author: 'Kai Ryssdal',
-    alts: ['taxes', 'tax postcard', 'postcard', 'postcard form postcard tax form', 'pax', 'tax form', 'post card', 'texas on a post card', 'post guard', 'axes', 'axes on a toast card', 'texas on a coast guard', 'texas on the coast guard', 'ask kids on the cold called'],
-    keywords: ['taxes', 'postcard', 'post', 'card', 'tax', 'coast guard', 'texas on', 'texas'],
+    alts: ['taxes', 'tax postcard', 'postcard', 'postcard form postcard tax form', 'pax', 'tax form', 'post card', 'texas on a post card', 'post guard', 'axes', 'axes on a toast card', 'texas on a coast guard', 'texas on the coast guard', 'ask kids on the cold called', 'taxes on postcard', 'tax is on postcard', 'tax is on a post guard', 'tax is on a postcard','taxes on', 'postcard tacs', 'post guard tacs', 'coast guard tacs'],
+    keywords: ['postcard', 'post', 'card', 'coast guard', 'texas on', 'texas', 'taxes'],
     guid: 'tax_postcard',
     date: "2018-06-28T07:00:00Z",
     requestInformation: {
