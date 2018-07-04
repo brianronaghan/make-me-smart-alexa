@@ -347,18 +347,6 @@ function searchByName (searchTerm, itemNames, itemAlts, itemKeywords) { // takes
     return strippedIndex;
   } else {
     // check without articles
-    console.log("CHECKING for keywords in searchterm")
-    if (itemKeywords && itemKeywords.length) {
-      for (var x = 0; x < itemKeywords.length; x++) {
-        for (var y = 0; y < itemKeywords[x].length; y++) {
-          if (searchTerm.indexOf(itemKeywords[x][y]) > -1) {
-            console.log(`found KW ${itemKeywords[x][y]} as part of ${searchTerm} -- will choose ${itemNames[x]}.`);
-            return x;
-          }
-        }
-      }
-    }
-
     console.log("CHECKING ALTS with both stripped and normal")
     for (var i = 0; i < itemAlts.length; i++) {
       if (itemNames[i].indexOf(searchTerm) > -1) {
@@ -373,6 +361,17 @@ function searchByName (searchTerm, itemNames, itemAlts, itemKeywords) { // takes
             // if i do index of on each string with stripped, any title with a number in it will always catch
             console.log(`found STRIPPED direct ${itemAlts[i][j]}`)
             return i;
+          }
+        }
+      }
+    }
+    console.log("CHECKING for keywords in searchterm")
+    if (itemKeywords && itemKeywords.length) {
+      for (var x = 0; x < itemKeywords.length; x++) {
+        for (var y = 0; y < itemKeywords[x].length; y++) {
+          if (searchTerm.indexOf(itemKeywords[x][y]) > -1) {
+            console.log(`found KW ${itemKeywords[x][y]} as part of ${searchTerm} -- will choose ${itemNames[x]}.`);
+            return x;
           }
         }
       }
