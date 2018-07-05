@@ -156,7 +156,7 @@ module.exports = [
   {
     title: '5G',
     author: 'Molly Wood',
-    alts: ['5 g', '5G', 'five g', '5g', '5 G', 'fine g', 'find g', 'why g', '5 g.', 'by g', 'side g', 'fire t', 'fart g', 'fire g', 'g.', 'by g', "I'm GE"],
+    alts: ['5 g', '5G', 'five g', '5g', '5 G', 'fine g', 'find g', 'why g', '5 g.', 'side g', 'fire t', 'fart g', 'fire g', 'g.', 'by g', "I'm GE"],
     keywords: ['5g'],
     guid: "5G_launch",
     date: "2018-06-27T07:00:00Z",
