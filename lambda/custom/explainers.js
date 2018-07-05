@@ -73,6 +73,30 @@ module.exports = [
     },
   },
   {
+    title: 'Emoji',
+    author: 'Molly Wood',
+    alts: ['emojis', 'e moji', 'emoji', 'be moji', 'emo'],
+    keywords: ['emoji', 'emo bee', 'emo', 'emo g'],
+    guid: 'emoji',
+    date: "2018-07-09T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/emoji-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/emoji-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Movie Subscriptions',
+    author: 'Kai Ryssdal',
+    alts: ['movie subscriptions', 'movie pass', 'moviepass', 'sub scriptions', 'subscription', 'movie subs', 'addiction', 'sub diction', 'sub missing', ],
+    keywords: ['subscription', 'movie', 'moo vee', 'move e', 'addiction', 'sub diction', 'sub missing'],
+    guid: 'movie_subscriptions',
+    date: "2018-07-06T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/movie-subscriptions-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/movie-subscriptions-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Online Sales Tax',
     author: 'Molly Wood',
     alts: ['online sales', 'on line tax', 'un line tacs', 'on-line tacs', 'online axis', 'online tax'],
@@ -169,7 +193,7 @@ module.exports = [
     title: 'Summer Blockbusters',
     author: 'Kai Ryssdal',
     alts: ['movies', 'summer movies', 'summer movie blockbusters', 'block busters', 'some her movies', 'summer block busters', 'movie'],
-    keywords: ['summer', 'movie', 'buster', 'blockbuster'],
+    keywords: ['summer', 'movies', 'buster', 'blockbuster'],
     guid: 'summer_blockbusters-1',
     date: "2018-06-25T07:00:00Z",
     audio: {
