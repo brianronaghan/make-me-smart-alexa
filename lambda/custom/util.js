@@ -486,6 +486,7 @@ function exitCheck (text) {
     /off\b/i,
     /done/i,
     /I'm good/i,
+    /I am good/i,
     /go away/i,
     /end/i,
     /bye/i,
