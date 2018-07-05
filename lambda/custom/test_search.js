@@ -92,6 +92,24 @@ var searchResults = {
     'market',
     'bomb market',
   ],
+  movie_subscriptions: [
+    'movie subs',
+    'movie pass',
+    'movie',
+    'moviepass',
+    'subscriptions',
+    'subscription movies',
+    'movies pass'
+  ],
+  'summer_blockbusters-1': [
+    'movies',
+    'summer movies',
+    'summer movie blockbusters',
+    'block busters',
+    'some her movies',
+    'summer block busters',
+    'summer movie'
+  ],
   household_debt_launch: [
     'house hold explain are',
     'household explainer',
