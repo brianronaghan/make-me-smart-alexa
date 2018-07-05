@@ -25,7 +25,16 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
       return this.emitWithState('PickItem', slot)
     } else if (slot && slot.query && slot.query.value && !condition) {
       let resolvedIntent = util.intentCheck(slot.query.value);
-      if (resolvedIntent) {
+      let externalCheck = util.externalCheck(slot.query.value);
+      if (externalCheck) {
+        this.attributes.EXTERNALS = this.attributes.EXTERNALS || 0;
+        this.attributes.EXTERNALS++;
+        if (this.attributes.EXTERNALS === 1 || (this.attributes.EXTERNALS % config.externalMessageFrequency === 0)) {
+          return this.emitWithState('AMAZON.StopIntent', config.externalMessage);
+        } else {
+          return this.emitWithState('AMAZON.CancelIntent');
+        }
+      } else if (resolvedIntent) {
         console.log(`HOME_PAGE Home Page: got ${slot.query.value} in query.`)
         delete slot.query.value;
         return this.emitWithState(resolvedIntent, slot)
@@ -93,7 +102,16 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     var slot = slot || this.event.request.intent.slots;
     if (slot && slot.query && slot.query.value) { // since we can't change the goddamn thing if it uses elicit, if it has a query, probably after being elicited
       let resolvedIntent = util.intentCheck(slot.query.value);
-      if (resolvedIntent) {
+      let externalCheck = util.externalCheck(slot.query.value);
+      if (externalCheck) {
+        this.attributes.EXTERNALS = this.attributes.EXTERNALS || 0;
+        this.attributes.EXTERNALS++;
+        if (this.attributes.EXTERNALS === 1 || (this.attributes.EXTERNALS % config.externalMessageFrequency === 0)) {
+          return this.emitWithState('AMAZON.StopIntent', config.externalMessage);
+        } else {
+          return this.emitWithState('AMAZON.CancelIntent');
+        }
+      } else if (resolvedIntent) {
         console.log(`HOME_PAGE PickItem: got ${slot.query.value} in query. REDIRECTING`)
         delete slot.query.value;
         return this.emitWithState(resolvedIntent, slot)
@@ -117,7 +135,16 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     var slot = slot || this.event.request.intent.slots;
     if (slot && slot.query && slot.query.value) { // since we can't change the goddamn thing if it uses elicit, if it has a query, probably after being elicited
       let resolvedIntent = util.intentCheck(slot.query.value);
-      if (resolvedIntent) {
+      let externalCheck = util.externalCheck(slot.query.value);
+      if (externalCheck) {
+        this.attributes.EXTERNALS = this.attributes.EXTERNALS || 0;
+        this.attributes.EXTERNALS++;
+        if (this.attributes.EXTERNALS === 1 || (this.attributes.EXTERNALS % config.externalMessageFrequency === 0)) {
+          return this.emitWithState('AMAZON.StopIntent', config.externalMessage);
+        } else {
+          return this.emitWithState('AMAZON.CancelIntent');
+        }
+      } else if (resolvedIntent) {
         console.log(`HOME_PAGE RequestExplainer: got ${slot.query.value} in query.`)
         delete slot.query.value;
         return this.emitWithState(resolvedIntent, slot)
@@ -173,27 +200,6 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
     this.emitWithState('PickItem', {index: {value: 1}}, 'HOMEPAGE_NEXT');
   },
-  'ChangeMyInfo' : function () {
-    var slot = slot || this.event.request.intent.slots;
-    if (slot && slot.query && slot.query.value) { // since we can't change the goddamn thing if it uses elicit, if it has a query, probably after being elicited
-      let resolvedIntent = util.intentCheck(slot.query.value);
-      if (resolvedIntent) {
-        console.log(`HOME_PAGE ChangeMyInfo: got ${slot.query.value} in query.`)
-        delete slot.query.value;
-        return this.emitWithState(resolvedIntent, slot)
-      } else {
-        console.log(`HOME_PAGE ChangeMyInfo: no intent, but query ${slot.query.value}. sending to PickItem`)
-        return this.emitWithState('PickItem', slot)
-      }
-    } else {
-      console.log("HOME_PAGE, ChangeMyInfo, no query, redirect to REQ state")
-      this.handler.state = this.attributes.STATE = config.states.CHANGE_INFO;
-      return this.emitWithState('ChangeMyInfo', {query: {value:null},userLocation: {value: null}, userName: {value: null}});
-    }
-
-    this.handler.state = this.attributes.STATE = config.states.REQUEST;
-    this.emitWithState('ChangeMyInfo');
-  },
   'ListExplainers': function () {
     var slot = this.event.request.intent.slots;
     var deviceId = util.getDeviceId.call(this);
@@ -220,7 +226,7 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     // this.response.speak(config.cancelMessage);
     this.emit(':saveState');
   },
-  'AMAZON.StopIntent' : function() {
+  'AMAZON.StopIntent' : function(sentMessage) {
     console.log('STOP HOME PAGE STATE')
     // This needs to work for not playing as well
     // SHOULD I CLEAR THE STATE?
@@ -228,7 +234,9 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     delete this.attributes.STATE;
     this.attributes.STOPS = this.attributes.STOPS || 0;
     this.attributes.STOPS++;
-    if (this.attributes.STOPS === 1 || (this.attributes.STOPS % config.stopMessageFrequency === 0)) {
+    if (sentMessage) {
+      this.response.speak(sentMessage)
+    } else if (this.attributes.STOPS === 1 || (this.attributes.STOPS % config.stopMessageFrequency === 0)) {
       this.response.speak(config.stopMessage)
     }
     this.emit(':saveState');

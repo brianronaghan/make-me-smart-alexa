@@ -28,7 +28,16 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
 
     if (slot.query && slot.query.value) { // query or topic could be
       let intentCheck = util.intentCheck(slot.query.value);
-      if (intentCheck) {
+      let externalCheck = util.externalCheck(slot.query.value);
+      if (externalCheck) {
+        this.attributes.EXTERNALS = this.attributes.EXTERNALS || 0;
+        this.attributes.EXTERNALS++;
+        if (this.attributes.EXTERNALS === 1 || (this.attributes.EXTERNALS % config.externalMessageFrequency === 0)) {
+          return this.emitWithState('AMAZON.StopIntent', config.externalMessage);
+        } else {
+          return this.emitWithState('AMAZON.CancelIntent');
+        }
+      } else if (intentCheck) {
         console.log("UNRESOLVED intentCheck -- slot.query.value ", slot.query.value)
         delete slot.query.value;
         delete this.attributes.UNRESOLVED;
@@ -148,7 +157,7 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
 
   // BUILT IN
 
-  'AMAZON.StopIntent' : function() {
+  'AMAZON.StopIntent' : function(sentMessage) {
     console.log('UNRESOLVED StopIntent')
     // This needs to work for not playing as well
 
@@ -156,7 +165,9 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
     delete this.attributes.STATE;
     this.attributes.STOPS = this.attributes.STOPS || 0;
     this.attributes.STOPS++;
-    if (this.attributes.STOPS === 1 || (this.attributes.STOPS % config.stopMessageFrequency === 0)) {
+    if (sentMessage) {
+      this.response.speak(sentMessage)
+    } if (this.attributes.STOPS === 1 || (this.attributes.STOPS % config.stopMessageFrequency === 0)) {
       this.response.speak(config.stopMessage)
     }
 

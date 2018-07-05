@@ -60,9 +60,17 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
 
     } else if (!chosenExplainer) {
       if (slot.query && slot.query.value) {
-        // TODO: intentCheck ???
         let intentCheck = util.intentCheck(slot.query.value);
-        if (intentCheck) {
+        let externalCheck = util.externalCheck(slot.query.value);
+        if (externalCheck) {
+          this.attributes.EXTERNALS = this.attributes.EXTERNALS || 0;
+          this.attributes.EXTERNALS++;
+          if (this.attributes.EXTERNALS === 1 || (this.attributes.EXTERNALS % config.externalMessageFrequency === 0)) {
+            return this.emitWithState('AMAZON.StopIntent', config.externalMessage);
+          } else {
+            return this.emitWithState('AMAZON.CancelIntent');
+          }
+        } else if (intentCheck) {
           console.log("Playing Explainer PickItem intentCheck -- slot.query.value ", slot.query.value)
           delete slot.query.value;
           return this.emitWithState(intentCheck);
@@ -378,7 +386,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     this.handler.state = this.attributes.STATE = config.states.REQUEST;
     this.emitWithState('ChangeMyInfo');
   },
-  'AMAZON.StopIntent' : function() {
+  'AMAZON.StopIntent' : function(sentMessage) {
     delete this.attributes.EASTER_EGG_TITLE;
 
     console.log('STOP PLAY EXPLAINER STATE: ', this.attributes.plays)
@@ -386,8 +394,9 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     // SHOULD I CLEAR THE STATE?
     this.attributes.STOPS = this.attributes.STOPS || 0;
     this.attributes.STOPS++;
-
-    if (this.attributes.plays > 5 && !this.attributes.SOLICITED) {
+    if (sentMessage) {
+      this.response.speak(sentMessage)
+    } else if (this.attributes.plays > 5 && !this.attributes.SOLICITED) {
       this.attributes.SOLICITED = true;
       this.response.speak(`Thanks for listening! ${config.reviewSolicitation}`);
     } else if (this.attributes.STOPS === 1 || (this.attributes.STOPS % config.stopMessageFrequency === 0)) {

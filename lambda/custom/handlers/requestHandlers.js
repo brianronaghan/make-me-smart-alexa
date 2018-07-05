@@ -42,7 +42,16 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     console.log(`REQUEST requestingExplainer - ENTRY intentName ${this.event.request.intent.name}... `, JSON.stringify(this.event.request, null, 2));
     if (slot.query && slot.query.value) {
       let intentCheck = util.intentCheck(slot.query.value);
-      if (intentCheck) {
+      let externalCheck = util.externalCheck(slot.query.value);
+      if (externalCheck) {
+        this.attributes.EXTERNALS = this.attributes.EXTERNALS || 0;
+        this.attributes.EXTERNALS++;
+        if (this.attributes.EXTERNALS === 1 || (this.attributes.EXTERNALS % config.externalMessageFrequency === 0)) {
+          return this.emitWithState('AMAZON.StopIntent', config.externalMessage);
+        } else {
+          return this.emitWithState('AMAZON.CancelIntent');
+        }
+      } else if (intentCheck) {
         console.log("REQUEST RequestExplainer intentCheck -- slot.query.value ", slot.query.value)
         delete slot.query.value;
         delete this.attributes.SUGGESTION;
@@ -174,7 +183,16 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       // make checks
       let intentCheck = util.intentCheck(slot.manualName.value);
       let expletiveCheck = util.expletiveCheck(slot.manualName.value);
-      if (intentCheck) { // intentCheck redirect
+      let externalCheck = util.externalCheck(slot.query.value);
+      if (externalCheck) {
+        this.attributes.EXTERNALS = this.attributes.EXTERNALS || 0;
+        this.attributes.EXTERNALS++;
+        if (this.attributes.EXTERNALS === 1 || (this.attributes.EXTERNALS % config.externalMessageFrequency === 0)) {
+          return this.emitWithState('AMAZON.StopIntent', config.externalMessage);
+        } else {
+          return this.emitWithState('AMAZON.CancelIntent');
+        }
+      } else if (intentCheck) { // intentCheck redirect
         console.log("REQUEST RequestExplainer intentCheck -- slot.manualName.value ", slot.manualName.value)
         delete slot.manualName.value;
         delete this.attributes.SUGGESTION;
@@ -212,7 +230,16 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       // make checks
       let intentCheck = util.intentCheck(slot.manualLocation.value);
       let expletiveCheck = util.expletiveCheck(slot.manualLocation.value);
-      if (intentCheck) { // intentCheck redirect
+      let externalCheck = util.externalCheck(slot.query.value);
+      if (externalCheck) {
+        this.attributes.EXTERNALS = this.attributes.EXTERNALS || 0;
+        this.attributes.EXTERNALS++;
+        if (this.attributes.EXTERNALS === 1 || (this.attributes.EXTERNALS % config.externalMessageFrequency === 0)) {
+          return this.emitWithState('AMAZON.StopIntent', config.externalMessage);
+        } else {
+          return this.emitWithState('AMAZON.CancelIntent');
+        }
+      } else if (intentCheck) { // intentCheck redirect
         console.log("REQUEST RequestExplainer intentCheck -- slot.manualLocation.value ", slot.manualLocation.value)
         delete slot.manualLocation.value;
         delete this.attributes.SUGGESTION;
@@ -361,7 +388,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
 
   // BUILT IN
 
-  'AMAZON.StopIntent' : function() {
+  'AMAZON.StopIntent' : function(sentMessage) {
     console.log('built in STOP, request')
     // This needs to work for not playing as well
     delete this.attributes.requestingExplainer;
@@ -371,7 +398,9 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
     delete this.attributes.NAME_REQUESTED;
     this.attributes.STOPS = this.attributes.STOPS || 0;
     this.attributes.STOPS++;
-    if (this.attributes.STOPS === 1 || (this.attributes.STOPS % config.stopMessageFrequency === 0)) {
+    if (sentMessage) {
+      this.response.speak(sentMessage)
+    } else if (this.attributes.STOPS === 1 || (this.attributes.STOPS % config.stopMessageFrequency === 0)) {
       this.response.speak(config.stopMessage);
     }
     this.emit(':saveState');
