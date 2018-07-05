@@ -73,6 +73,7 @@ module.exports = {
   directionCheck: directionCheck,
   liveExplainers: liveExplainers,
   searchByName: searchByName,
+  externalCheck: externalCheck,
   templateListTemplate1: function (title, token, itemLabel, itemTitleKey, items) {
     var listItemBuilder = new Alexa.templateBuilders.ListItemBuilder();
     var listTemplateBuilder = new Alexa.templateBuilders.ListTemplate1Builder();
@@ -530,13 +531,23 @@ function exitCheck (text) {
 }
 
 function externalCheck (text) {
-  // TODO: give user exit notice?
   let externals = [
+    /tunein/i,
+    /the daily news briefing/i,
+    /flash briefing/i,
+    /play a game/i,
     /wait wait/i,
+    /greatest hits/i,
+    /Simon and Garfunkel/i,
+    /classic rock/i,
+    /gmail/i,
     /youtube/i,
     /spotify/i,
     /sirius/i,
     /iHeartRadio/i,
+    /Etta James/i,
+    /light jazz/i,
+    /Pokémon/i,
     /NPR/i,
     /pandora/i,
     /national public radio/i,
@@ -565,7 +576,7 @@ function externalCheck (text) {
     /WUWM/i,
     /pod save america/i,
     /this american life/i,
-    /songs/i,
+    /song/i,
     /pikachū/,
     /alarm/i,
     /playlist/i,
@@ -592,11 +603,22 @@ function externalCheck (text) {
     /imagine dragons/i,
     /harry potter/i,
     /little mermaid/i,
+    /guess my name/i,
+    /adele/i,
+    /temperature/i,
+    /nysnc/i,
+    /IWRL/i,
+    /dungeon master/i,
+    /what does the fox say/i,
+    /WUSA/i,
+    /music mix/i,
+    /morning edition/i,
+
   ]
   for (var x = 0; x < externals.length; x++) {
     var currentRegex = RegExp(externals[x]);
     if (currentRegex.test(text)) {
-      console.log("EXTERNAL CAUGHT")
+      console.log("EXTERNAL-CAUGHT")
       return('AMAZON.CancelIntent');
     }
   }
