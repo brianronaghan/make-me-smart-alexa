@@ -350,9 +350,9 @@ function searchByName (searchTerm, itemNames, itemAlts, itemKeywords) { // takes
     // check without articles
     console.log("CHECKING ALTS with both stripped and normal")
     for (var i = 0; i < itemAlts.length; i++) {
-      if (itemNames[i].indexOf(searchTerm) > -1) {
-        console.log('found ', searchTerm, ' as partial of ', itemNames[i], ' but not resolving b/c 5 would always pick 5g')
-      }
+      // if (itemNames[i].indexOf(searchTerm) > -1) {
+      //   console.log('found ', searchTerm, ' as partial of ', itemNames[i], ' but not resolving b/c 5 would always pick 5g')
+      // }
       if(itemAlts[i]) {
         for (var j = 0; j < itemAlts[i].length; j++) {
           if (itemAlts[i][j].indexOf(searchTerm) > -1) {
@@ -366,7 +366,6 @@ function searchByName (searchTerm, itemNames, itemAlts, itemKeywords) { // takes
         }
       }
     }
-    console.log("CHECKING for keywords in searchterm")
     if (itemKeywords && itemKeywords.length) {
       for (var x = 0; x < itemKeywords.length; x++) {
         for (var y = 0; y < itemKeywords[x].length; y++) {
@@ -634,7 +633,7 @@ function stripArticles (searchTerm) {
   searchTerm = searchTerm.replace(/the\s/gi, " ")
   searchTerm = searchTerm.replace(/an\s/gi, " ")
   searchTerm = searchTerm.replace(/uh\s/gi, " ")
-  searchTerm = searchTerm.replace(/on\s/gi, " ")
+  searchTerm = searchTerm.replace(/\bon\b/gi, " ")
   searchTerm = searchTerm.replace(/#/gi, " ")
   searchTerm = searchTerm.replace(/are\s/gi, " ")
 
