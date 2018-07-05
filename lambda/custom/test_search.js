@@ -23,6 +23,26 @@ var exits = [
   'UNRES:'
 ]
 
+let directions = {
+  OlderExplainers: [
+    'older older',
+    'next',
+    'more please',
+    'more explainers',
+    'older explainers'
+  ],
+  NewerExplainers: [
+    'previous',
+    'go back',
+    'back please'
+  ],
+  'undefined': [
+    'uptown girl'
+  ]
+
+};
+
+
 // TODO: collision testing by setting list of searches and how they should resolve
 
 var searchResults = {
@@ -73,6 +93,18 @@ function runSearch () {
 
     } else {
       console.log(`INTENT ${utt} passes`)
+    }
+  }
+  for (let direction in directions) {
+    for (let term of directions[direction]) {
+      if (direction === 'undefined') {
+        if (util.directionCheck(term)) {
+          throw new Error(`direction FALSE POSITIVE  - ${term} produced ${util.directionCheck(term)}`);
+        }
+      } else if (util.directionCheck(term) !== direction) {
+        throw new Error(`direction didn't resolve - ${term}`);
+
+      }
     }
   }
 
