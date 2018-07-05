@@ -18,7 +18,15 @@ var exits = {
     'play this american life',
     'play WBEZ',
     'set my alarm',
-    "Pokémon"
+    "Pokémon",
+  ],
+  'ShouldExternal': [
+    'npr',
+    'drake radio',
+    'play this american life',
+    'play WBEZ',
+    'set my alarm',
+    "Pokémon",
   ],
   'ShouldNotExit': [
     'brexit',
@@ -102,10 +110,13 @@ function runSearch () {
   console.log(`RUNNING exit checks`);
   for (let behavior in exits) {
     for (let utt of exits[behavior]) {
-      console.log(behavior)
       if (behavior === 'ShouldExit') {
         if (util.intentCheck(utt) !== 'AMAZON.CancelIntent') {
           throw new Error(`${utt} didnt cancel -- instead got: ${util.intentCheck(utt)}`);
+        }
+      } else if (behavior === 'ShouldExternal') {
+        if (util.externalCheck(utt) !== 'AMAZON.CancelIntent') {
+          throw new Error(`${utt} didnt hit EXTERNAL -- instead got: ${util.intentCheck(utt)}`);
         }
       } else {
         if (util.intentCheck(utt) === 'AMAZON.CancelIntent') {
