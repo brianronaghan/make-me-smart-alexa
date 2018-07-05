@@ -88,7 +88,7 @@ module.exports = [
     title: 'Airline Fees',
     author: 'Kai Ryssdal',
     alts: ['airline fees', 'airline mes', 'air line ease', 'airline gouging', 'air mine tease', 'air line tease', 'airline seats', 'line fees'],
-    keywords: ['airline', 'air line', 'fees', 'hairline', 'error line', 'tease', 'ease', 'air mine', 'tees', 'airport'],
+    keywords: ['airline', 'air line', 'fees', 'hairline', 'err line', 'tease', 'ease', 'air mine', 'tees', 'airport'],
     guid: 'airline_fees',
     date: "2018-07-04T07:00:00Z",
     audio: {
