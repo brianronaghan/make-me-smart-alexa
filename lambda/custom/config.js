@@ -8,12 +8,14 @@ var config = {
       episode: 3,
     },
     stopMessageFrequency: 5,
+    externalMessageFrequency: 5,
     ipaNumber: "<phoneme alphabet='ipa' ph='nʌmbɝ'>number</phoneme>",
     reviewSolicitation: "Help others find our skill by rating Make Me Smart on the Alexa Skill Store or Mobile App.",
     podcastPlug: "You can also hear more from Kai and Molly on their podcast Make Me Smart!",
     stopMessage: 'Goodbye! Say Alexa, Make Me Smart to come back!',
     cancelMessage: 'Cancelled! Come back by saying Alexa, Make Me Smart!',
     defaultDescription: "Something else you want to get smart about? Try 'Alexa, submit an idea' and Kai and Molly might use your idea!",
+    externalMessage: "Make Me Smart can't handle that request. Next time, say 'Alexa, exit' before using another skill. Bye!",
 
     messages: [
       "Something else you want to get smart about? Try 'Alexa, submit an idea' and Kai and Molly might use it!",
@@ -64,6 +66,7 @@ var config = {
         "I don't want to"
       ],
       'AMAZON.NextIntent': [
+        "what's next",
         "explain something random",
         "give me something random",
         "play another",
@@ -186,10 +189,14 @@ var config = {
         "let me hear that again",
         "let's hear that again",
         "another time",
-        "one more time"
+        "one more time",
+        "can you repat the options",
+        "repeat the options"
 
       ],
       PlayLatestExplainer: [
+        "today's make  smart",
+        "today's make me smart",
         "all",
         "all of them",
         "all of em",
@@ -240,6 +247,7 @@ var config = {
         "today's explanation",
       ],
       RequestExplainer: [
+        "my idea",
         "tell make me smart I've got an idea",
         "tell make me smart I have got an idea",
         "tell make me smart I have an idea",
