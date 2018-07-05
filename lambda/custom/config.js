@@ -63,6 +63,25 @@ var config = {
         "no",
         "I don't want to"
       ],
+      'AMAZON.NextIntent': [
+        "explain something random",
+        "give me something random",
+        "play another",
+        "hear another",
+        "another",
+        "another explainer",
+        "next explainer",
+        "I'd like to hear another",
+        "next",
+        "next please",
+        "next explainer",
+        "play an explainer",
+        "play another explainer",
+        "play the next explainer",
+        "play the next episode",
+        "next episode",
+        "next episode please"
+      ],
       'AMAZON.StopIntent': [
         "stop",
         "I'm done",
