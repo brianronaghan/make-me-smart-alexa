@@ -83,7 +83,8 @@ var config = {
         "play the next explainer",
         "play the next episode",
         "next episode",
-        "next episode please"
+        "next episode please",
+        "another topic",
       ],
       'AMAZON.StopIntent': [
         "stop",
@@ -477,29 +478,6 @@ var config = {
         "newer explainers",
         "newer explainer",
         "p. n. explainer"
-      ]
-    },
-    navDirections:  {
-      OlderExplainers: [
-        "more",
-        "more explainers",
-        "next",
-        "next explainers",
-        "down",
-        "page down",
-        "before that",
-        "further back",
-      ],
-      NewerExplainers: [
-        "forward",
-        "up",
-        "scroll up",
-        "previous",
-        "previous page",
-        "back",
-        "back up",
-        "go back up",
-        "page down"
       ]
     },
     newUserAudio: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/utils/Alexa+-+Ryssdal+-+Wood+-+Welcome+New+User+Message+-+MIXLEV_alexa.mp3',
