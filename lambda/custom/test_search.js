@@ -18,6 +18,7 @@ var exits = {
     'play this american life',
     'play WBEZ',
     'set my alarm',
+    "Pokémon"
   ],
   'ShouldNotExit': [
     'brexit',
