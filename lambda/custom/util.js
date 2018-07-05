@@ -533,6 +533,7 @@ function exitCheck (text) {
 function externalCheck (text) {
   let externals = [
     /tunein/i,
+    /drake/,
     /the daily news briefing/i,
     /flash briefing/i,
     /play a game/i,
