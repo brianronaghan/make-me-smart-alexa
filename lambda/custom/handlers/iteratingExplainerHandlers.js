@@ -43,9 +43,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
       let intentCheck = util.intentCheck(slot.query.value);
       let directionCheck = util.directionCheck(slot.query.value);
       let externalCheck = util.externalCheck(slot.query.value);
-      let TESTING = Object.keys(config.testIds).indexOf(this.attributes.userId) > -1;
-
-      if (TESTING && externalCheck) {
+      if (externalCheck) {
         this.attributes.EXTERNALS = this.attributes.EXTERNALS || 0;
         this.attributes.EXTERNALS++;
         if (this.attributes.EXTERNALS === 1 || (this.attributes.EXTERNALS % config.externalMessageFrequency === 0)) {
@@ -254,8 +252,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     delete this.attributes.STATE;
     this.attributes.STOPS = this.attributes.STOPS || 0;
     this.attributes.STOPS++;
-    let TESTING = Object.keys(config.testIds).indexOf(this.attributes.userId) > -1;
-    if (TESTING && sentMessage) {
+    if (sentMessage) {
       this.response.speak(sentMessage);
     } else if (this.attributes.indices.explainer > 10 && !this.attributes.SOLICITED) {
       this.attributes.SOLICITED = true;
