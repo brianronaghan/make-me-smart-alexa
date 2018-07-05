@@ -447,17 +447,37 @@ function intentCheck (text) {
 }
 
 function directionCheck (text) {
-  if (!DIRECT_DICT) {
-    DIRECT_DICT = {};
-    for (let directionIntent of Object.keys(config.navDirections)) {
-      for (let utterance of config.navDirections[directionIntent]) {
-        DIRECT_DICT[utterance] = directionIntent;
+  let directions = {
+    OlderExplainers: [
+      /more/i,
+      /next/i,
+      /\bdown\b/i,
+      /page down/i,
+      /before that/i,
+      /further back/i,
+      /older/i,
+    ],
+    NewerExplainers: [
+      /forward/i,
+      /\bup\b/i,
+      /scroll up/i,
+      /previous/i,
+      /previous page/i,
+      /\bback\b/i,
+      /back up/,
+      /go back up/i,
+      /page down/i,
+    ]
+  }
+  for (let direction in directions) {
+    for (let regEx of directions[direction]) {
+      var currentRegex = RegExp(regEx);
+      if (currentRegex.test(text)) {
+        console.log(`${text} directionCheck ${direction}`)
+        return direction;
       }
     }
-    console.log("BUITL LIST NAV");
-
   }
-  return DIRECT_DICT[text]
 
 }
 
