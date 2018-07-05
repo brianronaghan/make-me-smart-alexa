@@ -52,10 +52,6 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
       delete slot.topic.value
     }
     if (unresolved) {
-      if (this.event.session.new) {
-        message = 'Welcome to Make Me Smart! ';
-      }
-
       payload.requests = [{
         query: `UNRES: ${unresolved}`,
         time: this.event.request.timestamp,
@@ -67,9 +63,11 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
         console.timeEnd('DB-unres');
         console.log("EXPLETIVE CHECK ", unresolved)
         if (util.expletiveCheck(unresolved)) {
-
           message += `Come on. You think we're allowed to say <say-as interpret-as="expletive">${unresolved}</say-as> on public radio? Let's try that again. `;
           caseText = 'unresolved_expletive'
+        } else if (this.event.session.new) {
+          message = `Welcome to Make Me Smart! I couldn't find an explainer on ${unresolved}. Let's try again. `;
+          caseText = 'unres_external'
         } else {
           message += `I couldn't find an explainer on ${unresolved}. Let's try again. `
           caseText = 'unresolved';
@@ -84,7 +82,7 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
           function (err) {
             if (err) {
               console.log("FAILED PROGRESSIVE");
-              boundThis.emitWithState('ListExplainers', caseText, "Let's try that again. ");
+              boundThis.emitWithState('ListExplainers', caseText, "Let's try again. ");
             } else {
               boundThis.emitWithState('ListExplainers', caseText);
             }

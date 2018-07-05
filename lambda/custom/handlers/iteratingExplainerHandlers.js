@@ -81,11 +81,11 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
       listMessage += incomingMessage;
     }
     if (this.event.session.new) {
-      listMessage += "Welcome to Make Me Smart! Let's do a deep dive! ";
+      if (!condition || condition !== 'unres_external') {
+        listMessage += "Welcome to Make Me Smart! Let's do a deep dive! ";
+      }
     }
-    if (condition && condition === 'unresolved_save') {
-      listMessage += "In the meantime, I'll list the explainers again: ";
-    } else if (condition && condition === 'repeating') {
+    if (condition && condition === 'repeating') {
       listMessage += "Here they are again: "
     } else if (this.attributes.indices.explainer === 0) {
       listMessage += `I'll list all ${util.liveExplainers().length} explainers, ${config.items_per_prompt.explainer} at a time: `;
