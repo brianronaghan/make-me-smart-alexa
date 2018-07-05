@@ -2,26 +2,38 @@ var explainers = require('./explainers.js');
 
 var util = require('./util.js');
 
-var exits = [
-  "I'm good",
-  "i am good",
-  "off",
-  "turn off",
-  "turn off please",
-  'brexit',
-  'exit please',
-  'please exit',
-  'cool',
-  'interest rates',
-  'None',
-  'none of em',
-  'npr',
-  'drake radio',
-  'play this american life',
-  'play WBEZ',
-  'set my alarm',
-  'UNRES:'
-]
+var exits = {
+  'ShouldExit': [
+    "I'm good",
+    "i am good",
+    "off",
+    "turn off",
+    "turn off please",
+    'exit please',
+    'please exit',
+    'None',
+    'none of em',
+    'npr',
+    'drake radio',
+    'play this american life',
+    'play WBEZ',
+    'set my alarm',
+  ],
+  'ShouldNotExit': [
+    'brexit',
+    'cool',
+    'UNRES:',
+    'interest rates',
+  ]
+}
+
+var intentResolutions = {
+  'AMAZON.NextIntent': [
+    "I'd like to hear another",
+    "next please",
+    "another please"
+  ]
+}
 
 let directions = {
   OlderExplainers: [
@@ -86,16 +98,32 @@ function runSearch () {
   var itemNames = explainers.map((choice) => choice.title.toLowerCase());
   var itemAlts = explainers.map((choice) => choice.alts && choice.alts);
   var itemKeywords = explainers.map((choice) => choice.keywords && choice.keywords);
+  console.log(`RUNNING exit checks`);
+  for (let behavior in exits) {
+    for (let utt of exits[behavior]) {
+      console.log(behavior)
+      if (behavior === 'ShouldExit') {
+        if (util.intentCheck(utt) !== 'AMAZON.CancelIntent') {
+          throw new Error(`${utt} didnt cancel -- instead got: ${util.intentCheck(utt)}`);
+        }
+      } else {
+        if (util.intentCheck(utt) === 'AMAZON.CancelIntent') {
+          throw new Error(`${utt} got false positive: ${util.intentCheck(utt)}`);
 
-  console.log(`RUNNING intentChecks for ${exits.length} utterances`);
-  for (let utt of exits) {
-    if (util.intentCheck(utt) === 'AMAZON.CancelIntent') {
-      console.log(`CANCELLED BY : ${utt}`);
+        }
+      }
 
-    } else {
-      console.log(`INTENT ${utt} passes`)
     }
+
   }
+  // for (let utt of exits) {
+  //   if (util.intentCheck(utt) !== 'AMAZON.CancelIntent') {
+  //     throw new Error(`utt didn't cancel - ${utt} -- instead got: ${util.intentCheck(utt)}`);
+  //   }
+  // }
+
+
+
   for (let direction in directions) {
     for (let term of directions[direction]) {
       if (direction === 'undefined') {
