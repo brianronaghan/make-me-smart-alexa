@@ -8,7 +8,7 @@ var config = {
       episode: 3,
     },
     stopMessageFrequency: 5,
-    externalMessageFrequency: 3,
+    externalMessageFrequency: 2,
     ipaNumber: "<phoneme alphabet='ipa' ph='nʌmbɝ'>number</phoneme>",
     reviewSolicitation: "Help others find our skill by rating Make Me Smart on the Alexa Skill Store or Mobile App.",
     podcastPlug: "You can also hear more from Kai and Molly on their podcast Make Me Smart!",
