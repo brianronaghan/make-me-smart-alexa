@@ -34,7 +34,8 @@ let directions = {
   NewerExplainers: [
     'previous',
     'go back',
-    'back please'
+    'back please',
+    'up please'
   ],
   'undefined': [
     'uptown girl'
