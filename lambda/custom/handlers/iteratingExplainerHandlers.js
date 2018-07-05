@@ -42,8 +42,18 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
       console.log('IT EXP, LIST EXP, got a query', slot.query.value);
       let intentCheck = util.intentCheck(slot.query.value);
       let directionCheck = util.directionCheck(slot.query.value);
+      let externalCheck = util.externalCheck(slot.query.value);
+      let TESTING = Object.keys(config.testIds).indexOf(this.attributes.userId) > -1;
 
-      if (intentCheck) {
+      if (TESTING && externalCheck) {
+        this.attributes.EXTERNALS = this.attributes.EXTERNALS || 0;
+        this.attributes.EXTERNALS++;
+        if (this.attributes.EXTERNALS === 1 || (this.attributes.EXTERNALS % config.externalMessageFrequency === 0)) {
+          return this.emitWithState('AMAZON.StopIntent', config.externalMessage);
+        } else {
+          return this.emitWithState('AMAZON.CancelIntent');
+        }
+      } else if (intentCheck) {
         console.log("ITERATING_EXPLAINER ListExplainers intentCheck -- slot.query.value ", slot.query.value)
         delete slot.query.value;
         delete this.attributes.ITERATING;
@@ -238,14 +248,16 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     this.emitWithState('ListExplainers', 'repeating');
   },
 
-  'AMAZON.StopIntent' : function() {
+  'AMAZON.StopIntent' : function(sentMessage) {
     // This needs to work for not playing as well
     delete this.attributes.ITERATING
     delete this.attributes.STATE;
     this.attributes.STOPS = this.attributes.STOPS || 0;
     this.attributes.STOPS++;
-
-    if (this.attributes.indices.explainer > 10 && !this.attributes.SOLICITED) {
+    let TESTING = Object.keys(config.testIds).indexOf(this.attributes.userId) > -1;
+    if (TESTING && sentMessage) {
+      this.response.speak(sentMessage);
+    } else if (this.attributes.indices.explainer > 10 && !this.attributes.SOLICITED) {
       this.attributes.SOLICITED = true;
       this.response.speak(`Thanks for listening! ${config.reviewSolicitation}`);
     } else if (this.attributes.STOPS === 1 || (this.attributes.STOPS % config.stopMessageFrequency === 0)) {
