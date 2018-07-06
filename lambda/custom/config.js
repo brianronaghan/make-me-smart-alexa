@@ -8,14 +8,14 @@ var config = {
       episode: 3,
     },
     stopMessageFrequency: 5,
-    externalMessageFrequency: 2,
+    externalMessageFrequency: 3,
     ipaNumber: "<phoneme alphabet='ipa' ph='nʌmbɝ'>number</phoneme>",
     reviewSolicitation: "Help others find our skill by rating Make Me Smart on the Alexa Skill Store or Mobile App.",
     podcastPlug: "You can also hear more from Kai and Molly on their podcast Make Me Smart!",
     stopMessage: 'Goodbye! Say Alexa, Make Me Smart to come back!',
     cancelMessage: 'Cancelled! Come back by saying Alexa, Make Me Smart!',
     defaultDescription: "Something else you want to get smart about? Try 'Alexa, submit an idea' and Kai and Molly might use your idea!",
-    externalMessage: "Make Me Smart can't handle that request. Next time say 'Alexa, exit' before using another skill. Bye!",
+    externalMessage: "Sorry, Make Me Smart can't handle that. Next time, say 'Alexa, exit' before using another skill. Goodbye.",
 
     messages: [
       "Something else you want to get smart about? Try 'Alexa, submit an idea' and Kai and Molly might use it!",
