@@ -85,6 +85,18 @@ module.exports = [
     },
   },
   {
+    title: 'Super Soakers',
+    author: 'Kai Ryssdal',
+    alts: ['super suckers', 'super', 'water gun', 'super soakers'],
+    keywords: ['super', 'soaker', 'water gun', 'so car', 'so occur', 'soak her', 'sue her', 'so curse', 'so hers'],
+    guid: 'super_soakers',
+    date: "2018-07-07T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/super-soaker-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/super-soaker-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Movie Subscriptions',
     author: 'Kai Ryssdal',
     alts: ['movie subscriptions', 'movie pass', 'moviepass', 'sub scriptions', 'subscription', 'movie subs', 'addiction', 'sub diction', 'sub missing', ],

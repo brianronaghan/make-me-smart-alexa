@@ -92,6 +92,14 @@ var searchResults = {
     'market',
     'bomb market',
   ],
+  super_soakers: [
+    'super soaker',
+    'sue her soaker',
+    'water gun',
+    'super',
+    'so curse',
+    'so cursed'
+  ],
   movie_subscriptions: [
     'movie subs',
     'movie pass',
