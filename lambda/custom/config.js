@@ -15,7 +15,7 @@ var config = {
     stopMessage: 'Goodbye! Say Alexa, Make Me Smart to come back!',
     cancelMessage: 'Cancelled! Come back by saying Alexa, Make Me Smart!',
     defaultDescription: "Something else you want to get smart about? Try 'Alexa, submit an idea' and Kai and Molly might use your idea!",
-    externalMessage: "I'm sorry, the Make Me Smart skill can't handle that request. Next time, you can try saying: 'Alexa, exit' first. Goodbye, and hope you come back.",
+    externalMessage: "I'm sorry, the Make Me Smart skill can't handle that request. Next time, you can try saying: 'Alexa, exit', first. Goodbye, and hope you come back.",
 
     messages: [
       "Something else you want to get smart about? Try 'Alexa, submit an idea' and Kai and Molly might use it!",
