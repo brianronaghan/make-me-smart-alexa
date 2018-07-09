@@ -12,18 +12,6 @@ module.exports = [
     },
   },
   {
-    title: 'Quits Rate',
-    author: 'Kai Ryssdal',
-    alts: ['quitting', 'hits rate', 'quits rape', 'quips rate'],
-    keywords: ['quit'],
-    guid: 'quits_rate',
-    date: "2018-08-28T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/quits-rate-kai-explainer-mix.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/quits-rate-kai-intro-mix.mp3"
-    },
-  },
-  {
     title: 'Venmo',
     author: 'Molly Wood',
     alts: ['venmo', 'cash app', 'denmo','kenmo', 'benmo'],
@@ -70,6 +58,18 @@ module.exports = [
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/credit-score-kai-explainer-mix.mp3",
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/credit-score-kai-intro-2-mix.mp3"
+    },
+  },
+  {
+    title: 'Quits Rate',
+    author: 'Kai Ryssdal',
+    alts: ['quitting', 'hits rate', 'quits rape', 'quips rate', 'hits rake', 'quit your job', 'quips rake'],
+    keywords: ['quit', 'rate', 'rake', 'rape', 'quick', 'quip', 'quik', 'kit'],
+    guid: 'quits_rate',
+    date: "2018-07-10T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/quits-rate-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/quits-rate-kai-intro-mix.mp3"
     },
   },
   {
