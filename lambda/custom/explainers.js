@@ -61,6 +61,30 @@ module.exports = [
     },
   },
   {
+    title: 'Wimbledon',
+    author: 'Kai Ryssdal',
+    alts: ['tennis', 'wimbledon', 'women'],
+    keywords: ['wimbledon', 'tennis'],
+    guid: 'wimbledon',
+    date: "2018-07-13T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/wimbledon-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/wimbledon-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Billboard Charts',
+    author: 'Kai Ryssdal',
+    alts: ['bill board charts', 'billboard sharks', 'bill bored charts', 'bill born chart', 'billboard char', 'billboard art', 'bill bored dart'],
+    keywords: ['billboard', 'chart', 'bill board', 'bill', 'ill board'],
+    guid: 'billboard',
+    date: "2018-07-11T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/billboard-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/billboard-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Quits Rate',
     author: 'Kai Ryssdal',
     alts: ['quitting', 'hits rate', 'quits rape', 'quips rate', 'hits rake', 'quit your job', 'quips rake'],
