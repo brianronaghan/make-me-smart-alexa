@@ -73,6 +73,19 @@ module.exports = [
     },
   },
   {
+    title: 'The Cloud',
+    author: 'Molly Wood',
+    guid: 'cloud',
+    date: "2018-07-1207:00:00Z",
+    alts: ['cloud', 'cloud computing', 'clouds', 'a cloud'],
+    keywords: ['cloud', 'computing', 'clout', 'cowed', 'clown', 'crown', 'cow', 'cown', 'ow and'],
+    audio: {
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/Alexa+-+Wood+-+The+Cloud+Intro+-+MIXLEV_alexa.mp3",
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Wood+-+The+Cloud+-+MIXLEV_alexa.mp3",
+    }
+  },
+
+  {
     title: 'Billboard Charts',
     author: 'Kai Ryssdal',
     alts: ['bill board charts', 'billboard sharks', 'bill bored charts', 'bill born chart', 'billboard char', 'billboard art', 'bill bored dart'],
@@ -407,17 +420,6 @@ module.exports = [
 
 
 
-  // POST LAUNCH:
-  // {
-  //   title: 'The Cloud',
-  //   guid: "cloud",
-  //   date: "2018-07-1107:00:00Z",
-  //   alts: ['cloud', 'cloud computing', 'clouds'],
-  //   author: 'Molly Wood',
-  //   description: 'Cloud computing is a paradigm where computing resources (servers, storage, etc.) are offered as a utility via the Internet.',
-  //   audio: {
-  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/Alexa+-+Wood+-+The+Cloud+Intro+-+MIXLEV_alexa.mp3",
-  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Wood+-+The+Cloud+-+MIXLEV_alexa.mp3",
-  //   }
-  // },
+  // TONIGHT ONLY:
+  // https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/billboard-kai-explainer-fixmix.mp3
 ];
