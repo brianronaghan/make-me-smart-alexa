@@ -76,7 +76,7 @@ module.exports = [
     title: 'The Cloud',
     author: 'Molly Wood',
     guid: 'cloud',
-    date: "2018-07-1207:00:00Z",
+    date: "2018-07-12T07:00:00Z",
     alts: ['cloud', 'cloud computing', 'clouds', 'a cloud'],
     keywords: ['cloud', 'computing', 'clout', 'cowed', 'clown', 'crown', 'cow', 'cown', 'ow and'],
     audio: {
