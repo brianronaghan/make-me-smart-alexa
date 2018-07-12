@@ -73,6 +73,18 @@ module.exports = [
     },
   },
   {
+    title: 'The Fed',
+    author: 'Kai Ryssdal',
+    guid: 'the_fed',
+    date: "2018-07-12T20:59:00Z",
+    alts: ['the fed', 'the dead', 'fed', 'the fit', 'central bank', 'the federal reserve'],
+    keywords: ['federal', 'reserve', 'fed', 'the fed', 'bank', 'central'],
+    audio: {
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/fed-kai-intro-mix.mp3",
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/fed-kai-explainer-mix.mp3",
+    }
+  },
+  {
     title: 'The Cloud',
     author: 'Molly Wood',
     guid: 'cloud',
