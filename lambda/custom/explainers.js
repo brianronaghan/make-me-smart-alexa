@@ -1,17 +1,5 @@
 module.exports = [
   {
-    title: 'Trade Wars',
-    author: 'Kai Ryssdal',
-    alts: ['trade war', 'raid war'],
-    keywords: ['trade', 'war', 'raid'],
-    guid: 'trade_war',
-    date: "2018-08-28T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/trade-war-kai-explainer-mix.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/trade-war-kai-intro-fix-mix.mp3"
-    },
-  },
-  {
     title: 'Venmo',
     author: 'Molly Wood',
     alts: ['venmo', 'cash app', 'denmo','kenmo', 'benmo'],
@@ -61,10 +49,22 @@ module.exports = [
     },
   },
   {
+    title: 'Trade War',
+    author: 'Kai Ryssdal',
+    alts: ['trade war', 'raid war'],
+    keywords: ['trade', 'war', 'raid', 'wars'],
+    guid: 'trade_war',
+    date: "2018-07-16T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/trade-war-washing-machines-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/trade-war-washing-machines-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Wimbledon',
     author: 'Kai Ryssdal',
-    alts: ['tennis', 'wimbledon', 'women'],
-    keywords: ['wimbledon', 'tennis'],
+    alts: ['tennis', 'wimbledon', 'women', 'whim bull done', 'when bull done'],
+    keywords: ['wimbledon', 'tennis', 'whim bull done', 'whim bull', 'bull done', 'when bull done'],
     guid: 'wimbledon',
     date: "2018-07-13T07:00:00Z",
     audio: {
@@ -105,7 +105,7 @@ module.exports = [
     guid: 'billboard',
     date: "2018-07-11T07:00:00Z",
     audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/billboard-kai-explainer-mix.mp3",
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/billboard-kai-explainer-fixmix.mp3",
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/billboard-kai-intro-mix.mp3"
     },
   },
@@ -429,9 +429,4 @@ module.exports = [
     },
   },
 
-
-
-
-  // TONIGHT ONLY:
-  // https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/billboard-kai-explainer-fixmix.mp3
 ];
