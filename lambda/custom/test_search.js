@@ -100,6 +100,14 @@ var searchResults = {
     'so curse',
     'so cursed'
   ],
+  pokemon: [
+    'mom',
+    'hokey nam',
+    'pokemon',
+    'pokey man',
+    'poke the non',
+    'Pokémon'
+  ],
   movie_subscriptions: [
     'movie subs',
     'movie pass',

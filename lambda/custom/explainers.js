@@ -49,6 +49,18 @@ module.exports = [
     },
   },
   {
+    title: 'Pokémon Go',
+    author: 'Molly Wood',
+    alts: ['pokeymon', 'hokey mon', 'pokey on', 'pokey', 'pokey mom', 'hokey non', 'poke the mom'],
+    keywords: ['pokemon', 'pokey man', 'mon', 'pokémon', 'mom', 'non', 'poke', 'hokey'],
+    guid: 'pokemon',
+    date: "2018-07-17T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/pokemongo-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/pokemongo-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Trade War',
     author: 'Kai Ryssdal',
     alts: ['trade war', 'raid war'],
