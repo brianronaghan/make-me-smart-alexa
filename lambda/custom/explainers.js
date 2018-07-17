@@ -39,10 +39,10 @@ module.exports = [
   {
     title: 'Credit Score',
     author: 'Kai Ryssdal',
-    alts: ['credit score', 'my credit score', 'your credit score', 'credit rating', 'credit number', 'credit sore', 'credit store'],
-    keywords: ['credit', 'score', 'store', 'rating'],
+    alts: ['credit score', 'my credit score', 'your credit score', 'credit rating', 'credit number', 'credit sore', 'credit store', 'reddit sore'],
+    keywords: ['credit', 'score', 'store', 'rating', 'sore', 'reddit'],
     guid: 'credit_score',
-    date: "2018-08-28T07:00:00Z",
+    date: "2018-07-18T07:00:00Z",
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/credit-score-kai-explainer-mix.mp3",
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/credit-score-kai-intro-2-mix.mp3"
