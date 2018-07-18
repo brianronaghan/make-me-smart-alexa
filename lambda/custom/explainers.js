@@ -13,18 +13,6 @@ module.exports = [
     },
   },
   {
-    title: 'Two Dollar Bill',
-    author: 'Kai Ryssdal',
-    alts: ['dollar', '2 dollar bill', 'two buck bill', 'two dollar', '2 dollar'],
-    keywords: ['dollar'],
-    guid: 'two_dollar_bill',
-    date: "2018-08-28T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/two-dollar-bill-kai-explainer-mix.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/two-dollar-bill-kai-intro-mix.mp3"
-    },
-  },
-  {
     title: 'GDP',
     author: 'Kai Ryssdal',
     alts: ['gdp', 'g d p', 'g.d.p.', 'gbp', 'g b p', 'g.b.p.', 'gross domestic product', 'gdp number'],
@@ -34,6 +22,42 @@ module.exports = [
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/gdp-kai-explainer-mix.mp3",
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/gdp-kai-intro-fix-mix.mp3"
+    },
+  },
+  {
+    title: 'Cardboard',
+    author: 'Molly Wood',
+    alts: ['card bored', 'card board', 'cardboard'],
+    keywords: ['card board', 'cardboard', 'car bored', 'are board', 'board', 'bored', 'charred'],
+    guid: 'cardboard',
+    date: "2018-07-23T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/cardboard-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/cardboard-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Two Dollar Bill',
+    author: 'Kai Ryssdal',
+    alts: ['dollar', 'two dollar bill', 'two buck bill', 'two dollar', '2 dollar'],
+    keywords: ['dollar', 'doll or', 'doll', 'two'],
+    guid: 'two_dollar_bill',
+    date: "2018-07-20T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/two-dollar-bill-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/two-dollar-bill-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Scooter Craze',
+    author: 'Molly Wood',
+    alts: ['scooter craze', 'scoot', 'scooters'],
+    keywords: ['scooter', 'craze', 'crays', 'cooter'],
+    guid: 'scooter_craze',
+    date: "2018-07-19T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/micromobility-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/micromobility-molly-intro-mix.mp3"
     },
   },
   {
@@ -238,7 +262,7 @@ module.exports = [
     title: 'Taxes on a Postcard',
     author: 'Kai Ryssdal',
     alts: ['taxes', 'tax postcard', 'postcard', 'postcard form postcard tax form', 'pax', 'tax form', 'post card', 'texas on a post card', 'post guard', 'axes', 'axes on a toast card', 'texas on a coast guard', 'texas on the coast guard', 'ask kids on the cold called', 'taxes on postcard', 'tax is on postcard', 'tax is on a post guard', 'tax is on a postcard','taxes on', 'postcard tacs', 'post guard tacs', 'coast guard tacs'],
-    keywords: ['postcard', 'post', 'card', 'coast guard', 'texas on', 'texas', 'taxes'],
+    keywords: ['postcard', 'post', 'coast guard', 'texas on', 'texas', 'taxes'],
     guid: 'tax_postcard',
     date: "2018-06-28T07:00:00Z",
     requestInformation: {
@@ -254,7 +278,7 @@ module.exports = [
     title: '5G',
     author: 'Molly Wood',
     alts: ['5 g', '5G', 'five g', '5g', '5 G', 'fine g', 'find g', 'why g', '5 g.', 'side g', 'fire t', 'fart g', 'fire g', 'g.', 'by g', "I'm GE"],
-    keywords: ['5g'],
+    keywords: ['5g', '5G'],
     guid: "5G_launch",
     date: "2018-06-27T07:00:00Z",
     audio: {

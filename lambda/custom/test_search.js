@@ -132,7 +132,22 @@ var searchResults = {
     'households are',
     'house hold it',
 
+  ],
+  "5G_launch": [
+    'fine g',
+    '5G'
+  ],
+  two_dollar_bill: [
+    'two dollar',
+    'dollar',
+    'two',
+    '2',
+  ],
+  cardboard: [
+    'card board',
+    'car bored',
   ]
+
 
 }
 
