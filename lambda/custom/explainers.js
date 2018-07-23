@@ -25,6 +25,18 @@ module.exports = [
     },
   },
   {
+    title: 'Fortnite',
+    author: 'Molly Wood',
+    alts: ['fort nine', 'fourth night', 'four nine', 'fort night', 'fort nite'],
+    keywords: ['fort', 'night', 'nite', 'forth'],
+    guid: 'fortnite',
+    date: "2018-07-24T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/fortnite-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/fortnite-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Cardboard',
     author: 'Molly Wood',
     alts: ['card bored', 'card board', 'cardboard'],
