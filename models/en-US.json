@@ -23,7 +23,7 @@
      "variations": [
        {
          "type": "PlainText",
-         "value": "where are you from? "
+         "value": "where are you from?"
        },
        {
          "type": "PlainText",
@@ -36,14 +36,210 @@
      ]
    },
    {
-     "id": "Elicit.Intent-PickItem.IntentSlot-wildcard",
+     "id": "Elicit.Intent-ReplayExplainer.IntentSlot-userName",
      "variations": [
        {
          "type": "PlainText",
-         "value": "what do you wanna get smart about? "
+         "value": "who should I say is calling?"
+       },
+       {
+         "type": "PlainText",
+         "value": "give me a name"
+       },
+       {
+         "type": "PlainText",
+         "value": "what's your name"
+       }
+     ]
+   },
+   {
+     "id": "Elicit.Intent-ReplayExplainer.IntentSlot-userLocation",
+     "variations": [
+       {
+         "type": "PlainText",
+         "value": "where are you from?"
+       },
+       {
+         "type": "PlainText",
+         "value": "what city"
+       },
+       {
+         "type": "PlainText",
+         "value": "tell me where "
+       }
+     ]
+   },
+   {
+     "id": "Elicit.Intent-ChangeMyInfo.IntentSlot-userName",
+     "variations": [
+       {
+         "type": "PlainText",
+         "value": "who should I say is calling?"
+       },
+       {
+         "type": "PlainText",
+         "value": "give me a name"
+       },
+       {
+         "type": "PlainText",
+         "value": "what's your name"
+       }
+     ]
+   },
+   {
+     "id": "Elicit.Intent-ChangeMyInfo.IntentSlot-userLocation",
+     "variations": [
+       {
+         "type": "PlainText",
+         "value": "where are you from?"
+       },
+       {
+         "type": "PlainText",
+         "value": "what city"
+       },
+       {
+         "type": "PlainText",
+         "value": "tell me where "
+       }
+     ]
+   },
+   {
+     "id": "Elicit.Intent-HomePage.IntentSlot-userName",
+     "variations": [
+       {
+         "type": "PlainText",
+         "value": "who should I say is calling?"
+       },
+       {
+         "type": "PlainText",
+         "value": "give me a name"
+       },
+       {
+         "type": "PlainText",
+         "value": "what's your name"
+       }
+     ]
+   },
+   {
+     "id": "Elicit.Intent-HomePage.IntentSlot-userLocation",
+     "variations": [
+       {
+         "type": "PlainText",
+         "value": "where are you from?"
+       },
+       {
+         "type": "PlainText",
+         "value": "what city"
+       },
+       {
+         "type": "PlainText",
+         "value": "tell me where "
+       }
+     ]
+   },
+   {
+     "id": "Elicit.Intent-ListExplainers.IntentSlot-userName",
+     "variations": [
+       {
+         "type": "PlainText",
+         "value": "who should I say is calling?"
+       },
+       {
+         "type": "PlainText",
+         "value": "give me a name"
+       },
+       {
+         "type": "PlainText",
+         "value": "what's your name"
+       }
+     ]
+   },
+   {
+     "id": "Elicit.Intent-ListExplainers.IntentSlot-userLocation",
+     "variations": [
+       {
+         "type": "PlainText",
+         "value": "where are you from?"
+       },
+       {
+         "type": "PlainText",
+         "value": "what city"
+       },
+       {
+         "type": "PlainText",
+         "value": "tell me where "
+       }
+     ]
+   },
+   {
+     "id": "Elicit.Intent-OlderExplainers.IntentSlot-userName",
+     "variations": [
+       {
+         "type": "PlainText",
+         "value": "who should I say is calling?"
+       },
+       {
+         "type": "PlainText",
+         "value": "give me a name"
+       },
+       {
+         "type": "PlainText",
+         "value": "what's your name"
+       }
+     ]
+   },
+   {
+     "id": "Elicit.Intent-OlderExplainers.IntentSlot-userLocation",
+     "variations": [
+       {
+         "type": "PlainText",
+         "value": "where are you from?"
+       },
+       {
+         "type": "PlainText",
+         "value": "what city"
+       },
+       {
+         "type": "PlainText",
+         "value": "tell me where "
+       }
+     ]
+   },
+   {
+     "id": "Elicit.Intent-NewerExplainers.IntentSlot-userName",
+     "variations": [
+       {
+         "type": "PlainText",
+         "value": "who should I say is calling?"
+       },
+       {
+         "type": "PlainText",
+         "value": "give me a name"
+       },
+       {
+         "type": "PlainText",
+         "value": "what's your name"
+       }
+     ]
+   },
+   {
+     "id": "Elicit.Intent-NewerExplainers.IntentSlot-userLocation",
+     "variations": [
+       {
+         "type": "PlainText",
+         "value": "where are you from?"
+       },
+       {
+         "type": "PlainText",
+         "value": "what city"
+       },
+       {
+         "type": "PlainText",
+         "value": "tell me where "
        }
      ]
    }
+
  ],
  "dialog": {
    "intents": [
@@ -69,14 +265,155 @@
            "prompts": {
              "elicitation": "Elicit.Intent-PickItem.IntentSlot-userLocation"
            }
-         },
+         }
+       ]
+     },
+     {
+       "name": "ReplayExplainer",
+       "confirmationRequired": false,
+       "prompts": {},
+       "slots": [
          {
-           "name": "wildcard",
-           "type": "TITLES_WILDCARD",
+           "name": "userName",
+           "type": "AMAZON.US_FIRST_NAME",
            "elicitationRequired": true,
            "confirmationRequired": false,
            "prompts": {
-             "elicitation": "Elicit.Intent-PickItem.IntentSlot-wildcard"
+             "elicitation": "Elicit.Intent-ReplayExplainer.IntentSlot-userName"
+           }
+         },
+         {
+           "name": "userLocation",
+           "type": "AMAZON.US_CITY",
+           "elicitationRequired": true,
+           "confirmationRequired": false,
+           "prompts": {
+             "elicitation": "Elicit.Intent-ReplayExplainer.IntentSlot-userLocation"
+           }
+         }
+       ]
+     },
+     {
+       "name": "ChangeMyInfo",
+       "confirmationRequired": false,
+       "prompts": {},
+       "slots": [
+         {
+           "name": "userName",
+           "type": "AMAZON.US_FIRST_NAME",
+           "elicitationRequired": true,
+           "confirmationRequired": false,
+           "prompts": {
+             "elicitation": "Elicit.Intent-ChangeMyInfo.IntentSlot-userName"
+           }
+         },
+         {
+           "name": "userLocation",
+           "type": "AMAZON.US_CITY",
+           "elicitationRequired": true,
+           "confirmationRequired": false,
+           "prompts": {
+             "elicitation": "Elicit.Intent-ChangeMyInfo.IntentSlot-userLocation"
+           }
+         }
+       ]
+     },
+     {
+       "name": "ListExplainers",
+       "confirmationRequired": false,
+       "prompts": {},
+       "slots": [
+         {
+           "name": "userName",
+           "type": "AMAZON.US_FIRST_NAME",
+           "elicitationRequired": true,
+           "confirmationRequired": false,
+           "prompts": {
+             "elicitation": "Elicit.Intent-ListExplainers.IntentSlot-userName"
+           }
+         },
+         {
+           "name": "userLocation",
+           "type": "AMAZON.US_CITY",
+           "elicitationRequired": true,
+           "confirmationRequired": false,
+           "prompts": {
+             "elicitation": "Elicit.Intent-ListExplainers.IntentSlot-userLocation"
+           }
+         }
+       ]
+     },
+     {
+       "name": "NewerExplainers",
+       "confirmationRequired": false,
+       "prompts": {},
+       "slots": [
+         {
+           "name": "userName",
+           "type": "AMAZON.US_FIRST_NAME",
+           "elicitationRequired": true,
+           "confirmationRequired": false,
+           "prompts": {
+             "elicitation": "Elicit.Intent-NewerExplainers.IntentSlot-userName"
+           }
+         },
+         {
+           "name": "userLocation",
+           "type": "AMAZON.US_CITY",
+           "elicitationRequired": true,
+           "confirmationRequired": false,
+           "prompts": {
+             "elicitation": "Elicit.Intent-NewerExplainers.IntentSlot-userLocation"
+           }
+         }
+       ]
+     },
+     {
+       "name": "OlderExplainers",
+       "confirmationRequired": false,
+       "prompts": {},
+       "slots": [
+         {
+           "name": "userName",
+           "type": "AMAZON.US_FIRST_NAME",
+           "elicitationRequired": true,
+           "confirmationRequired": false,
+           "prompts": {
+             "elicitation": "Elicit.Intent-OlderExplainers.IntentSlot-userName"
+           }
+         },
+         {
+           "name": "userLocation",
+           "type": "AMAZON.US_CITY",
+           "elicitationRequired": true,
+           "confirmationRequired": false,
+           "prompts": {
+             "elicitation": "Elicit.Intent-OlderExplainers.IntentSlot-userLocation"
+           }
+         }
+       ]
+     },
+     {
+       "name": "HomePage",
+       "confirmationRequired": false,
+       "prompts": {},
+       "slots": [
+         {
+           "name": "userName",
+           "type": "AMAZON.US_FIRST_NAME",
+           "elicitationRequired": true,
+           "confirmationRequired": false,
+           "prompts": {
+             "elicitation": "Elicit.Intent-HomePage.IntentSlot-userName"
+           }
+         },
+         {
+           "name": "userLocation",
+           "type": "AMAZON.US_CITY",
+           "elicitationRequired": true,
+           "confirmationRequired": false,
+           "prompts": {
+             "elicitation": "Elicit.Intent-HomePage.IntentSlot-userLocation"
            }
          }
        ]
@@ -89,10 +426,6 @@
                 {
                 "name": "AMAZON.CancelIntent",
                 "samples": []
-                },
-                {
-                  "name": "AMAZON.HelpIntent",
-                  "samples": []
                 },
                 {
                   "name": "AMAZON.MoreIntent",
@@ -109,7 +442,14 @@
 
                 {
                   "name": "AMAZON.NextIntent",
-                  "samples": []
+                  "samples": [
+                    "play another",
+                    "hear another",
+                    "another",
+                    "another explainer",
+                    "next explainer",
+                    "I'd like to hear another"
+                  ]
                 },
                 {
                   "name": "AMAZON.PageDownIntent",
@@ -148,34 +488,193 @@
                   "samples": []
                 },
                 {
+                  "name": "AMAZON.HelpIntent",
+                  "samples": [
+                    "help",
+                    "help me",
+                    "can you help",
+                    "can you help me",
+                    "what do i do",
+                    "help please",
+                    "I don't understand"
+                  ]
+                },
+                {
                   "name": "AMAZON.StopIntent",
-                  "samples": []
+                  "samples": [
+                    "stop",
+                    "I'm done",
+                    "I'm set",
+                    "I'm good",
+                    "I'm all set",
+                    "Enough",
+                    "That's enough",
+                    "I'm good thanks",
+                    "I'm all set",
+                    "All set",
+                    "All set thanks",
+                    "All done thanks",
+                    "All done",
+                    "Done",
+                    "I'm done",
+                    "I'm done thanks"
+                  ]
                 },
                 {
                   "name": "HomePage",
                   "samples": [
+                    "let's begin again",
+                    "begin again",
+                    "a main menu",
+                    "the main menu",
+                    "start menu",
+                    "home menu",
+                    "main menu",
                     "home page",
-                    "go home",
                     "start over",
                     "what's new",
                     "hear what's new",
+                    "tell me what's new",
+                    "tell me what is new",
                     "what is new",
-                    "hear new explainers"
+                    "hear new explainers",
+                    "make me smart",
+                    "what I need to know",
+                    "what's happening in the world",
+                    "I want to hear what's new",
+                    "I want the main menu",
+                    "take me to the main menu",
+                    "go to the main menu",
+                    "I want to start over"
                   ],
                   "slots": [
                     {
-                      "name": "topic",
-                      "type": "TOPICS"
+                      "name": "query",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "userName",
+                      "type": "AMAZON.US_FIRST_NAME"
+                    },
+                    {
+                      "name": "userLocation",
+                      "type": "AMAZON.US_CITY"
+                    },
+                    {
+                      "name": "manualName",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "manualLocation",
+                      "type": "AMAZON.SearchQuery"
                     }
                   ]
                 },
                 {
                   "name": "ReplayExplainer",
                   "samples": [
+
+                    "repeat explainer",
+                    "repeat the explainer",
+                    "repeat that exlplainer",
+
                     "replay",
+                    "replay that",
+                    "replay explainer",
+                    "replay the explainer",
+                    "replay today's explainer",
+                    "replay that exlplainer",
+
+
                     "restart",
+                    "restart that",
+                    "restart explainer",
+                    "restart the explainer",
+                    "restart today's explainer",
+                    "restart that exlplainer",
+
+                    "begin again",
+                    "begin that again",
+                    "begin explainer again",
+                    "begin the explainer again",
+                    "begin today's explainer again",
+                    "begin that exlplainer again",
+
+                    "start over",
+                    "start that over",
+
+                    "play again",
+                    "play that again",
+                    "play it again",
+                    "play that explainer again",
+                    "play the explainer again"
+                  ],
+                  "slots" : [
+                    {
+                      "name": "query",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "userName",
+                      "type": "AMAZON.US_FIRST_NAME"
+                    },
+                    {
+                      "name": "userLocation",
+                      "type": "AMAZON.US_CITY"
+                    },
+                    {
+                      "name": "manualName",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "manualLocation",
+                      "type": "AMAZON.SearchQuery"
+                    }
+                  ]
+                },
+                {
+                  "name": "RepeatOptions",
+                  "samples": [
+                    "repeat",
+                    "repeat that",
+                    "repeat options",
+                    "repeat all",
+                    "repeat those",
+                    "repeat my options",
+
+                    "what were my options",
+                    "say again",
+                    "say that again",
+                    "say that one more time",
+
+                    "again",
                     "let me hear that again",
-                    "start over"
+                    "let's hear that again",
+                    "another time",
+                    "one more time"
+
+                  ],
+                  "slots" : [
+                    {
+                      "name": "query",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "userName",
+                      "type": "AMAZON.US_FIRST_NAME"
+                    },
+                    {
+                      "name": "userLocation",
+                      "type": "AMAZON.US_CITY"
+                    },
+                    {
+                      "name": "manualName",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "manualLocation",
+                      "type": "AMAZON.SearchQuery"
+                    }
                   ]
                 },
                 {
@@ -183,7 +682,534 @@
                   "samples": [
                     "play all",
                     "all of them",
-                    "all"
+                    "all of em",
+                    "play all of em",
+                    "play them all",
+                    "play the latest",
+                    "the latest",
+                    "all",
+                    "latest topic",
+                    "the latest explainer",
+                    "latest explainer",
+                    "today's topic",
+                    "the latest",
+                    "play today's topic",
+                    "today's explainer",
+                    "play today's explainer",
+                    "play the latest explainer"
+                  ]
+                },
+                {
+                  "name": "RequestExplainer",
+                  "slots": [
+                    {
+                      "name": "userName",
+                      "type": "AMAZON.US_FIRST_NAME"
+                    },
+                    {
+                      "name": "userLocation",
+                      "type": "AMAZON.US_CITY"
+                    },
+                    {
+                      "name": "manualName",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "manualLocation",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "query",
+                      "type": "AMAZON.SearchQuery"
+                    }
+                  ],
+                  "samples": [
+                    "tell make me smart I've got an idea",
+                    "tell make me smart I have got an idea",
+                    "tell make me smart I have an idea",
+
+                    "ask make me smart to submit",
+                    "tell make me smart to submit",
+                    "tell me an idea",
+                    "me an idea",
+                    "get an idea",
+                    "i'd like to scimitar explain are",
+                    "i'd like to submit an idea",
+                    "an explainer on india",
+                    "simien idea",
+
+                    "pitch",
+                    "pitch explainer",
+                    "pitch an explainer",
+                    "pitch a new explainer",
+                    "pitch an explainer topic",
+                    "pitch a topic",
+                    "propose",
+                    "propose explainer",
+                    "propose an explainer",
+                    "propose a new explainer",
+                    "propose an explainer topic",
+                    "propose a topic",
+                    "propose an idea",
+                    "request",
+                    "make a request",
+                    "request an explainer",
+                    "request explainer",
+                    "request a topic",
+                    "request a new topic",
+                    "request a new explainer",
+                    "i want to request something",
+                    "i want to make a request",
+                    "i want to pitch something",
+                    "submit",
+                    "submission",
+                    "make a submission",
+                    "submit explainer",
+                    "submit an explainer",
+                    "submit my explainer",
+                    "submit my explainer idea",
+
+                    "submit my idea",
+                    "submit my idea",
+                    "submit an idea for your next one",
+                    "submit an idea for your next explainer",
+
+                    "submit an idea for what we should explain next",
+                    "submit my idea for what you should explain next",
+                    "submit idea",
+                    "submit your idea",
+                    "submit an idea",
+                    "submit an idea for an explainer",
+                    "submit an idea for a new explainer",
+
+                    "submit a topic",
+                    "submit a topic idea",
+                    "i want to submit a topic",
+                    "can i make a submission",
+                    "i want to submit something",
+                    "i want to submit a topic",
+                    "i want to submit an idea",
+
+                    "suggest",
+                    "suggestion",
+                    "make a suggestion",
+                    "suggest an explainer",
+                    "suggest a topic",
+                    "i want to suggest a topic",
+                    "can i make a suggestion",
+                    "i want to suggest something",
+                    "i want to suggest a topic",
+                    "idea",
+                    "new idea",
+                    "new explainer",
+                    "I've got an idea",
+                    "I've got an idea for",
+                    "I have an idea",
+
+                    "I've got an idea for an explainer",
+                    "I've got an explainer idea",
+                    "topic",
+                    "new topic",
+                    "I've got an idea for a topic"
+                  ]
+                },
+                {
+                    "name":"ListExplainers",
+                    "slots" : [
+                      {
+                        "name": "query",
+                        "type": "AMAZON.SearchQuery"
+                      },
+                      {
+                        "name": "userName",
+                        "type": "AMAZON.US_FIRST_NAME"
+                      },
+                      {
+                        "name": "userLocation",
+                        "type": "AMAZON.US_CITY"
+                      },
+                      {
+                        "name": "manualName",
+                        "type": "AMAZON.SearchQuery"
+                      },
+                      {
+                        "name": "manualLocation",
+                        "type": "AMAZON.SearchQuery"
+                      }
+                    ],
+                    "samples":[
+                      "everything",
+                      "everything you got",
+                      "everything its got",
+                      "everything you have",
+                      "everything it has",
+
+                      "for everything",
+                      "for everything you got",
+                      "for everything its got",
+                      "for everything you have",
+                      "for everything it has",
+
+                      "for all explainers",
+                      "explainer menu",
+                      "what explainers it has",
+                      "what you got",
+                      "what you have",
+                      "list",
+                      "list all",
+                      "list explainers",
+                      "list all our explainers",
+                      "list our explainers",
+                      "list your explainers",
+                      "list the explainers",
+
+                      "list all explainers",
+                      "list all the explainers",
+                      "list all our explainers",
+                      "list all your explainers",
+                      "list all the explainers",
+
+                      "list all of the explainers",
+                      "list all of our explainers",
+                      "list all of your explainers",
+
+
+                      "explore",
+                      "explore explainers",
+
+                      "explore all",
+                      "explore our explainers",
+                      "explore your explainers",
+                      "explore the explainers",
+
+                      "explore all explainers",
+                      "explore all our explainers",
+                      "explore all your explainers",
+                      "explore all the explainers",
+
+                      "explore all of our explainers",
+                      "explore all of your explainers",
+                      "explore all of the explainers",
+
+                      "browse",
+                      "browse explainers",
+                      "browse all",
+                      "browse topics",
+                      "browse explain is",
+                      "browse alix venus",
+                      "liners",
+                      "xplain are",
+
+                      "browse every one of your explainer",
+                      "browse every one of your explainers",
+                      "browse every one of our explainer",
+                      "browse every one of our explainers",
+                      "browse every one of the explainer",
+                      "browse every one of the explainers",
+
+                      "browse every explainer",
+                      "browse every single explainer",
+                      "browse all explainers",
+                      "browse all our explainers",
+                      "browse all your explainers",
+                      "browse all the explainers",
+                      "browse all of the explainers",
+                      "browse all of our explainers",
+                      "browse all of your explainers",
+                      "browse our explainers",
+                      "browse the explainers",
+                      "browse your explainers",
+
+                      "browse every one of your topic",
+                      "browse every one of your topics",
+                      "browse every topic",
+                      "browse every single topic",
+                      "browse all topics",
+                      "browse all our topics",
+                      "browse all your topics",
+                      "browse all the topics",
+                      "browse all of the topics",
+                      "browse all of our topics",
+                      "browse all of your topics",
+                      "browse our topics",
+                      "browse the topics",
+                      "browse your topics",
+
+                      "all explainers",
+                      "see all explainers",
+                      "show all explainers",
+                      "show me all explainers",
+                      "show me all the explainers",
+                      "show me all your explainers",
+
+                      "show me more",
+                      "ask for more",
+                      "more options",
+                      "more",
+                      "more please",
+                      "more explainers"
+                    ]
+                },
+                {
+                  "name": "OlderExplainers",
+                  "samples": [
+                    "more explainers",
+                    "earlier",
+                    "earlier explainers",
+                    "before that",
+                    "further back",
+                    "older",
+                    "older three",
+                    "older explainers",
+                    "older explainer"
+                  ],
+                  "slots": [
+                    {
+                      "name": "query",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "userName",
+                      "type": "AMAZON.US_FIRST_NAME"
+                    },
+                    {
+                      "name": "userLocation",
+                      "type": "AMAZON.US_CITY"
+                    },
+                    {
+                      "name": "manualName",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "manualLocation",
+                      "type": "AMAZON.SearchQuery"
+                    }
+                  ]
+                },
+                {
+                  "name": "NewerExplainers",
+                  "samples": [
+                    "later",
+                    "later explainers",
+                    "after that",
+                    "more recent",
+                    "more recent three",
+                    "previous three",
+                    "newer",
+                    "newer three",
+                    "newer explainers",
+                    "newer explainer",
+                    "p. n. explainer"
+                  ],
+                  "slots": [
+                    {
+                      "name": "query",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "userName",
+                      "type": "AMAZON.US_FIRST_NAME"
+                    },
+                    {
+                      "name": "userLocation",
+                      "type": "AMAZON.US_CITY"
+                    },
+                    {
+                      "name": "manualName",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "manualLocation",
+                      "type": "AMAZON.SearchQuery"
+                    }
+                  ]
+                },
+                {
+                  "name": "ChangeMyInfo",
+                  "samples": [
+                    "change my name",
+                    "change my info",
+                    "change my city",
+                    "change my location",
+                    "change my information",
+                    "change name",
+                    "change info",
+                    "change city",
+                    "change location",
+                    "change information",
+
+                    "correct my name",
+                    "correct my info",
+                    "correct my city",
+                    "correct my location",
+                    "correct my information",
+                    "correct name",
+                    "correct info",
+                    "correct city",
+                    "correct location",
+                    "correct information",
+
+                    "fix my name",
+                    "fix my info",
+                    "fix my city",
+                    "fix my location",
+                    "fix my information",
+                    "fix name",
+                    "fix info",
+                    "fix city",
+                    "fix location",
+                    "fix information",
+
+                    "update my name",
+                    "update my info",
+                    "update my city",
+                    "update my location",
+                    "update my information",
+                    "update name",
+                    "update info",
+                    "update city",
+                    "update location",
+                    "update information",
+
+                    "add my name",
+                    "add my info",
+                    "add my city",
+                    "add my location",
+                    "add my information",
+                    "add name",
+                    "add info",
+                    "add city",
+                    "add location",
+                    "add information",
+
+                    "input my name",
+                    "input my info",
+                    "input my city",
+                    "input my location",
+                    "input my information",
+                    "input name",
+                    "input info",
+                    "input city",
+                    "input location",
+                    "input information",
+
+                    "enter my name",
+                    "enter my info",
+                    "enter my city",
+                    "enter my location",
+                    "enter my information",
+                    "enter name",
+                    "enter info",
+                    "enter city",
+                    "enter location",
+                    "enter information",
+
+                    "wrong my name",
+                    "wrong my info",
+                    "wrong my city",
+                    "wrong my location",
+                    "wrong my information",
+                    "wrong name",
+                    "wrong info",
+                    "wrong city",
+                    "wrong location",
+                    "wrong information",
+                    "that's the wrong name",
+                    "that's the wrong info",
+                    "that's the wrong city",
+                    "that's the wrong location",
+                    "wrong information",
+                    "you have the wrong name",
+                    "you have the wrong info",
+                    "you have the wrong city",
+                    "you have the wrong location",
+                    "you have the wrong information"
+                  ],
+                  "slots": [
+                    {
+                      "name": "query",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "userName",
+                      "type": "AMAZON.US_FIRST_NAME"
+                    },
+                    {
+                      "name": "userLocation",
+                      "type": "AMAZON.US_CITY"
+                    },
+                    {
+                      "name": "manualName",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "manualLocation",
+                      "type": "AMAZON.SearchQuery"
+                    }
+                  ]
+                },
+                {
+                  "name": "IndexOnly",
+                  "slots": [
+                    {
+                      "name": "query",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "index",
+                      "type": "AMAZON.NUMBER"
+                    },
+                    {
+                      "name": "userName",
+                      "type": "AMAZON.US_FIRST_NAME"
+                    },
+                    {
+                      "name": "userLocation",
+                      "type": "AMAZON.US_CITY"
+                    },
+                    {
+                      "name": "manualName",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "manualLocation",
+                      "type": "AMAZON.SearchQuery"
+                    }
+                  ],
+                  "samples": [
+                    "{index}"
+                  ]
+                },
+                {
+                  "name": "OrdinalOnly",
+                  "slots": [
+                    {
+                      "name": "query",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "ordinal",
+                      "type": "ORDINAL"
+                    },
+                    {
+                      "name": "userName",
+                      "type": "AMAZON.US_FIRST_NAME"
+                    },
+                    {
+                      "name": "userLocation",
+                      "type": "AMAZON.US_CITY"
+                    },
+                    {
+                      "name": "manualName",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "manualLocation",
+                      "type": "AMAZON.SearchQuery"
+                    }
+                  ],
+                  "samples": [
+                    "{ordinal}"
                   ]
                 },
                 {
@@ -192,10 +1218,6 @@
                     {
                       "name": "query",
                       "type": "AMAZON.SearchQuery"
-                    },
-                    {
-                      "name": "topic",
-                      "type": "TOPICS"
                     },
                     {
                       "name": "ordinal",
@@ -214,29 +1236,33 @@
                       "type": "AMAZON.US_CITY"
                     },
                     {
-                      "name": "wildcard",
-                      "type": "TITLES_WILDCARD"
+                      "name": "manualName",
+                      "type": "AMAZON.SearchQuery"
+                    },
+                    {
+                      "name": "manualLocation",
+                      "type": "AMAZON.SearchQuery"
                     }
                   ],
                   "samples": [
-                    "{index}",
-                    "{ordinal}",
-                    "{topic}",
-                    "{wildcard}",
-                    "pick topic {topic}",
-                    "teach me about {topic}",
-                    "explain {topic}",
-                    "topic {topic}",
+                    "{query} explainer",
+                    "pick {query}",
+                    "pick topic {query}",
+                    "teach me about {query}",
+                    "explain {query}",
+                    "topic {query}",
                     "number {index}",
                     "pick topic {index}",
                     "pick the {ordinal} topic",
-                    "play explainer called {topic}",
+                    "play explainer called {query}",
+                    "play explainer on {query}",
+                    "find {query}",
                     "play the {ordinal} topic",
                     "pick the {ordinal} topic",
                     "choose topic {index}",
                     "choose the {ordinal} topic",
-                    "choose topic called {topic}",
-                    "topic titled {topic}",
+                    "choose topic called {query}",
+                    "topic titled {query}",
                     "topic number {index}",
                     "the {ordinal} topic",
                     "make me smart about {query}",
@@ -473,6 +1499,7 @@
                     "play us an explainer about {query}",
                     "play us the explainer with {query}",
                     "play us an explainer with {query}",
+                    "play {query}",
                     "play topic {query}",
                     "play the topic {query}",
                     "play topic for {query}",
@@ -1596,124 +2623,10 @@
                     "tell us a conversation about {query}",
                     "tell us the conversation with {query}",
                     "tell us a conversation with {query}"
-
                   ]
-                },
-                {
-                  "name": "RequestExplainer",
-                  "slots": [
-                    {
-                      "name": "userName",
-                      "type": "AMAZON.US_FIRST_NAME"
-                    },
-                    {
-                      "name": "userLocation",
-                      "type": "AMAZON.US_CITY"
-                    },
-                    {
-                      "name": "query",
-                      "type": "AMAZON.SearchQuery"
-                    }
-                  ],
-                  "samples": [
-                    "request explainer slot",
-                    "suggest a topic",
-                    "request an explainer"
-                  ]
-                },
-                {
-                    "name":"ListExplainers",
-                    "slots" : [],
-                    "samples":[
-                        "what explainers it has",
-                        "list explainers",
-                        "all explainers",
-                        "show all explainers"
-                    ]
                 }
             ],
             "types":[
-              {
-                "name": "PREPOSITIONS",
-                "values": [
-                  {
-                    "name": {
-                      "value": "for info on"
-                    }
-                  },
-                  {
-                    "name": {
-                      "value": "about"
-                    }
-                  },
-                  {
-                    "name": {
-                      "value": "what it knows on"
-                    }
-                  },
-                  {
-                    "name": {
-                      "value": "what it knows about"
-                    }
-                  }
-                ]
-              },
-              {
-                "values" : [
-                  {
-                    "name": {
-                      "value": "something"
-                    }
-                  }
-
-                ],
-                "name": "TITLES_WILDCARD"
-              },
-              {
-                "name": "TOPICS",
-                "values" : [
-                  {
-                    "name": {
-                      "value": "the cloud"
-                    }
-                  },
-                  {
-                    "name": {
-                      "value": "cloud"
-                    }
-                  },
-                  {
-                    "name": {
-                      "value": "the fed"
-                    }
-                  },
-                  {
-                    "name": {
-                      "value": "productivity"
-                    }
-                  },
-                  {
-                    "name": {
-                      "value": "inflation"
-                    }
-                  },
-                  {
-                    "name": {
-                      "value": "bonds"
-                    }
-                  },
-                  {
-                    "name": {
-                      "value": "stocks"
-                    }
-                  },
-                  {
-                    "name": {
-                      "value": "interest rates"
-                    }
-                  }
-                ]
-              },
               {
                 "values": [
                   {

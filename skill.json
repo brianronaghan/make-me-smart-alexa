@@ -3,19 +3,29 @@
     "publishingInformation": {
       "locales": {
         "en-US": {
-          "summary": "Make Me Smart",
           "examplePhrases": [
             "Alexa, Make Me Smart",
-            "Alexa, ask Make Me Smart to explain interest rates",
-            "Alexa, ask Make Me Smart what I need to know"
+            "Alexa, ask Make Me Smart what's new",
+            "Alexa, tell Make Me Smart I have an idea"
           ],
           "keywords": [
-            "business"
+            "business",
+            "economics",
+            "news",
+            "technology",
+            "tech",
+            "fun facts",
+            "novelty",
+            "finance",
+            "markets",
+            "education",
+            "learning"
           ],
-          "name": "make me smart",
-          "smallIconUri": "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/108X108.png",
-          "description": "From Marketplace, we're making you smart",
-          "largeIconUri": "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/512X512.png"
+          "name": "Make Me Smart",
+          "smallIconUri": "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/utils/icons/108.png",
+          "summary": "Say 'Alexa, Make Me Smart' to learn something surprising and timely about the economy, pop culture, and tech from Marketplace’s Kai Ryssdal and Molly Wood.",
+          "description": "The world moves fast. Make Me Smart from Marketplace™ helps you keep up. Marketplace hosts Kai Ryssdal and Molly Wood tell you what you need to know about the economy, pop culture, tech and current events in this daily skill. All you have to do is say: “Alexa, make me smart!” and we’ll tell you what you need to know – and why it matters. For example, you’ll find out how 5G works, how the economics of a summer blockbuster have changed, and why household debt it isn’t always a bad thing. \n\nAnd if there’s something you need to get smart about, tell us! Submit your ideas directly in the skill about what you’d like Marketplace to explain. If we don’t have the answer, Alexa will relay your message to Kai and Molly, and we’ll get to work. \n\nSay “Alexa, Make Me Smart” every weekday and we’ll keep you up to speed in this fast-paced world! \n\nHelp other people find our skill by rating Make Me Smart on the Alexa Skill Store or mobile app.",
+          "largeIconUri": "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/utils/icons/512.png"
         }
       },
       "isAvailableWorldwide": true,
@@ -39,6 +49,12 @@
     "manifestVersion": "1.0",
     "privacyAndCompliance": {
       "allowsPurchases": false,
+      "locales": {
+        "en-US": {
+          "termsOfUseUrl": "https://www.marketplace.org/terms",
+          "privacyPolicyUrl": "https://www.marketplace.org/privacy"
+        }
+      },
       "isExportCompliant": true,
       "containsAds": false,
       "isChildDirected": false,
