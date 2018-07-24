@@ -141,12 +141,17 @@ var searchResults = {
     'two dollar',
     'dollar',
     'two',
-    '2',
   ],
   cardboard: [
     'card board',
     'car bored',
+  ],
+  shark_week: [
+    'shark',
+    'chart week',
+    'card week'
   ]
+
 
 
 }

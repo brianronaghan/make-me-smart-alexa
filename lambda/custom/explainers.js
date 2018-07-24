@@ -25,6 +25,18 @@ module.exports = [
     },
   },
   {
+    title: 'Shark Week',
+    author: 'Molly Wood',
+    alts: ['shark wheat', 'chart week', 'shart week', 'card week'],
+    keywords: ['shark', 'week'],
+    guid: 'shark_week',
+    date: "2018-07-25T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/sharkweek-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/sharkweek-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Fortnite',
     author: 'Molly Wood',
     alts: ['fort nine', 'fourth night', 'four nine', 'fort night', 'fort nite'],
