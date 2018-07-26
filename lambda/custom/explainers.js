@@ -25,6 +25,30 @@ module.exports = [
     },
   },
   {
+    title: 'Vanilla',
+    author: 'Kai Ryssdal',
+    alts: ['va neeya', 'van ella', 'fan ill uh', 'van el ah', 'ban l ahh', 'ban ill a'],
+    keywords: ['vanilla','van illa', 'ban', 'fan', 'van'],
+    guid: 'vanilla',
+    date: "2018-07-27T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/vanilla-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/vanilla-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Wifi on Planes',
+    author: 'Kai Ryssdal',
+    alts: ['why fi in plaines', 'wifey in plain'],
+    keywords: ['wifi','why fi', 'wi-fi', 'plane'],
+    guid: 'wifi_plane',
+    date: "2018-07-26T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/airplanewifi-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/airplanewifi-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Shark Week',
     author: 'Molly Wood',
     alts: ['shark wheat', 'chart week', 'shart week', 'card week'],
