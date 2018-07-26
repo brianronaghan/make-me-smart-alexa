@@ -25,9 +25,21 @@ module.exports = [
     },
   },
   {
+    title: 'Summer Vacation',
+    author: 'Kai Ryssdal',
+    alts: ['summer location', 'some her vacation'],
+    keywords: ['vacation','summer', 'some her', 'sum ur'],
+    guid: 'summer_vacation',
+    date: "2018-07-30T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/summer+vacation-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/summer+vacation-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Vanilla',
     author: 'Kai Ryssdal',
-    alts: ['va neeya', 'van ella', 'fan ill uh', 'van el ah', 'ban l ahh', 'ban ill a'],
+    alts: ['va neeya', 'van ella', 'fun ella', 'van ill uh', 'fan ill uh', 'van el ah', 'ban l ahh', 'ban ill a'],
     keywords: ['vanilla','van illa', 'ban', 'fan', 'van'],
     guid: 'vanilla',
     date: "2018-07-27T07:00:00Z",
@@ -338,7 +350,7 @@ module.exports = [
     title: 'Summer Blockbusters',
     author: 'Kai Ryssdal',
     alts: ['movies', 'summer movies', 'summer movie blockbusters', 'block busters', 'some her movies', 'summer block busters', 'movie'],
-    keywords: ['summer', 'movies', 'buster', 'blockbuster'],
+    keywords: ['movies', 'buster', 'blockbuster'],
     guid: 'summer_blockbusters-1',
     date: "2018-06-25T07:00:00Z",
     audio: {
