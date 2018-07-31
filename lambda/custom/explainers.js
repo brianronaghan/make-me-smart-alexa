@@ -25,6 +25,18 @@ module.exports = [
     },
   },
   {
+    title: 'Avocado',
+    author: 'Kai Ryssdal',
+    alts: ['avocado', 'ah vo kah dough', 'avoh ka doh', 'ahh bo cah doe', 'av oh ca dough', 'uh voke ah doe'],
+    keywords: ['avocado','av oh ka do', 'toast', 'avo', 'avo kado'],
+    guid: 'avocado',
+    date: "2018-07-31T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/avocado-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/avocado-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Summer Vacation',
     author: 'Kai Ryssdal',
     alts: ['summer location', 'some her vacation'],
