@@ -150,6 +150,13 @@ var searchResults = {
     'shark',
     'chart week',
     'card week'
+  ],
+  call_list: [
+    'do not call',
+    'no call',
+    'call list',
+    'call us',
+    'call is'
   ]
 
 

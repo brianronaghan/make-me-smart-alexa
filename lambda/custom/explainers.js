@@ -25,6 +25,18 @@ module.exports = [
     },
   },
   {
+    title: 'Do Not Call List',
+    author: 'Kai Ryssdal',
+    alts: ['do not call', 'call list', 'do not call us', ],
+    keywords: ['call', 'list', 'do not', 'call us', 'call is', "don't call"],
+    guid: 'call_list',
+    date: "2018-08-01T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/donotcall-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/donotcall-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Avocado',
     author: 'Kai Ryssdal',
     alts: ['avocado', 'ah vo kah dough', 'avoh ka doh', 'ahh bo cah doe', 'av oh ca dough', 'uh voke ah doe'],
