@@ -28,7 +28,7 @@ module.exports = [
     title: 'Avocado',
     author: 'Kai Ryssdal',
     alts: ['avocado', 'ah vo kah dough', 'avoh ka doh', 'ahh bo cah doe', 'av oh ca dough', 'uh voke ah doe'],
-    keywords: ['avocado','av oh ka do', 'toast', 'avo', 'avo kado'],
+    keywords: ['avocado','av oh ka do', 'toast', 'avo', 'avo kado', 'a vote ka dough', 'ah oh ka do'],
     guid: 'avocado',
     date: "2018-07-31T07:00:00Z",
     audio: {
