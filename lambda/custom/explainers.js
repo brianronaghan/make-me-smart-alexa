@@ -25,6 +25,18 @@ module.exports = [
     },
   },
   {
+    title: 'Influencers',
+    author: 'Molly Wood',
+    alts: ['fame', 'influencers', 'influencer'],
+    keywords: ['in flu ands', 'in flu', 'flu', 'influence', 'in flu ants', 'an flew ents', 'flew', 'flu'],
+    guid: 'influencer',
+    date: "2018-08-02T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/influencer-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/influencer-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Do Not Call List',
     author: 'Kai Ryssdal',
     alts: ['do not call', 'call list', 'do not call us', ],
