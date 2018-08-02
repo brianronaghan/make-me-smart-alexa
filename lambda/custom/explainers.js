@@ -25,10 +25,22 @@ module.exports = [
     },
   },
   {
+    title: 'Song of the Summer',
+    author: 'Kai Ryssdal',
+    alts: ['song', 'song of the some her', 'song of summer', 'song of sum or'],
+    keywords: ['song', 'of summer', 'some ore', 'sum her', 'sum or', 'of sum or'],
+    guid: 'song_of_summer',
+    date: "2018-08-03T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/songofsummer-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/songofsummer-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Influencers',
     author: 'Molly Wood',
     alts: ['fame', 'influencers', 'influencer'],
-    keywords: ['in flu ands', 'in flu', 'flu', 'influence', 'in flu ants', 'an flew ents', 'flew', 'flu'],
+    keywords: ['in flu ands', 'in flu', 'flu', 'influence', 'in flu ants', 'an flew ents', 'flew'],
     guid: 'influencer',
     date: "2018-08-02T07:00:00Z",
     audio: {
@@ -63,8 +75,8 @@ module.exports = [
   {
     title: 'Summer Vacation',
     author: 'Kai Ryssdal',
-    alts: ['summer location', 'some her vacation'],
-    keywords: ['vacation','summer', 'some her', 'sum ur'],
+    alts: ['summer location', 'some her vacation', 'sum her vacation', 'summer caucasion'],
+    keywords: ['vacation','summer', 'some her', 'sum ur', 'some or'],
     guid: 'summer_vacation',
     date: "2018-07-30T07:00:00Z",
     audio: {
