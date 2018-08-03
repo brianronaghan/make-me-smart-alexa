@@ -25,6 +25,18 @@ module.exports = [
     },
   },
   {
+    title: 'Screen Time',
+    author: 'Molly Wood',
+    alts: ['seen time', 'scene time', 'serene time', 'scream time', 'scrim time'],
+    keywords: ['screen', 'time', 'scream', 'seen', 'scene'],
+    guid: 'screentime',
+    date: "2018-08-06T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/screentime-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/screentime-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Song of the Summer',
     author: 'Kai Ryssdal',
     alts: ['song', 'song of the some her', 'song of summer', 'song of sum or'],
