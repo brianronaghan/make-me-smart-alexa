@@ -410,28 +410,13 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
   'AMAZON.HelpIntent': function () {
     console.log('Help in START');
     // Handler for built-in HelpIntent
-    let NAME_TESTING = Object.keys(config.testIds).indexOf(this.attributes.userId) > -1;
-    if (NAME_TESTING) {
-      console.log('rose');
-      var message = "You can say next or replay, hear what's new, or have a nice Rosé. What would you like to do?";
-      this.response.speak(message).listen(message);
-      if (this.event.context.System.device.supportedInterfaces.Display) {
-        this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, null, config.background.show));
-      }
-      delete this.attributes.STATE;
-      return this.emit(':saveState', true);
-    } else {
-      var message = "You can say next or replay, hear what's new, or submit your idea for an explainer. What would you like to do?";
-      this.response.speak(message).listen(message);
-      if (this.event.context.System.device.supportedInterfaces.Display) {
-        this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, null, config.background.show));
-      }
-      delete this.attributes.STATE;
-      return this.emit(':saveState', true);
+    var message = "You can say next or replay, hear what's new, or submit your idea for an explainer. What would you like to do?";
+    this.response.speak(message).listen(message);
+    if (this.event.context.System.device.supportedInterfaces.Display) {
+      this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, null, config.background.show));
     }
-
-
-
+    delete this.attributes.STATE;
+    this.emit(':saveState', true);
   },
   // error handling
   'SessionEndedRequest' : function () { // this gets purposeful exit as well
