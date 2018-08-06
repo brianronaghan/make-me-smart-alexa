@@ -25,6 +25,30 @@ module.exports = [
     },
   },
   {
+    title: 'Speech on the Internet',
+    author: 'Molly Wood',
+    alts: ['speech on the internet', 'peach on the intranet', 'speak on the internet', 'each on the internet'],
+    keywords: ['speech', 'peach', 'internet', 'peace', 'intranet', 'inter net', 'intern et', 'internment'],
+    guid: 'internet_speech',
+    date: "2018-08-08T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/speech-internet-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/speech-internet-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Rosé',
+    author: 'Kai Ryssdal',
+    alts: ['rose a', 'rows a', 'rose hey'],
+    keywords: ['rose', 'rosé', 'row say', 'roe zay', 'rosey', 'wine'],
+    guid: 'rose',
+    date: "2018-08-07T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/rose-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/rose-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Screen Time',
     author: 'Molly Wood',
     alts: ['seen time', 'scene time', 'serene time', 'scream time', 'scrim time'],
