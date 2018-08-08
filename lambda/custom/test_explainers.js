@@ -33,16 +33,18 @@ var progressCB = (err) => {
   } else {
     progress++;
     if (progress < explainers.length) {
-      checkExplainer(explainers[progress], progressCB);
+      checkUrls(explainers[progress], progressCB);
     } else {
       console.log("ALL PASSED!");
     }
   }
 }
+explainers.forEach(checkExplainer);
+console.log("DONE sync")
+checkUrls(explainers[progress], progressCB);
 
-checkExplainer(explainers[progress], progressCB);
 
-function checkExplainer (ex, cb) {
+function checkExplainer (ex) {
   console.log("STARTING ", ex.title);
   Object.keys(REQUIREMENTS).forEach((req) => {
     if (!ex[req]) {
@@ -78,42 +80,43 @@ function checkExplainer (ex, cb) {
         }
       }
       console.log(`Pass ${req}`);
-    } else if (req === 'audio') {
-      if (ex.audio.url.indexOf('https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers') < 0) {
-        throw new Error(`AUDIO not in AUDIO ${ex.audio.url}`);
+    }
+  });
+
+}
+
+function checkUrls(ex, cb) {
+  if (ex.audio.url.indexOf('https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers') < 0) {
+    throw new Error(`AUDIO not in AUDIO ${ex.audio.url}`);
+  }
+  request(ex.audio.url, (error, response, body) => {
+    if (error) {
+      throw new Error(`error from ${ex.audio.url} ${JSON.stringify(error, null,2)}`);
+    } else if (response.statusCode !== 200) {
+      throw new Error(`bad response ${response.statusCode} from ${ex.audio.url}`);
+    } else if (ex.audio.intro) {
+      console.log(`200 explainer ${ex.title}`)
+      // explainer
+      if (ex.audio.intro.indexOf('https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros') < 0) {
+        throw new Error(`INTRO not in INTRO fold ${ex.audio.intro}`);
       }
-      request(ex.audio.url, (error, response, body) => {
+      request(ex.audio.intro, (error, response, body) => {
         if (error) {
-          throw new Error(`error from ${ex.audio.url} ${JSON.stringify(error, null,2)}`);
+          throw new Error(`error from ${ex.audio.intro} ${JSON.stringify(error, null,2)}`);
         } else if (response.statusCode !== 200) {
-          throw new Error(`bad response ${response.statusCode} from ${ex.audio.url}`);
-        } else if (ex.audio.intro) {
-          console.log(`200 explainer ${ex.title}`)
-          // explainer
-          if (ex.audio.intro.indexOf('https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros') < 0) {
-            throw new Error(`INTRO not in INTRO fold ${ex.audio.intro}`);
-          }
-          request(ex.audio.intro, (error, response, body) => {
-            if (error) {
-              throw new Error(`error from ${ex.audio.intro} ${JSON.stringify(error, null,2)}`);
-            } else if (response.statusCode !== 200) {
-              throw new Error(`bad response ${response.statusCode} from ${ex.audio.intro}`);
-            } else {
-              console.log(`200 intro ${ex.title}`)
-              return cb(null)
-              // happy case
-            }
-          })
-
+          throw new Error(`bad response ${response.statusCode} from ${ex.audio.intro}`);
         } else {
-          console.log(`200 explainer only ${ex.title}`)
-
+          console.log(`200 intro ${ex.title}`)
           return cb(null)
           // happy case
         }
       })
 
-   }
-  });
+    } else {
+      console.log(`200 explainer only ${ex.title}`)
 
+      return cb(null)
+      // happy case
+    }
+  })
 }
