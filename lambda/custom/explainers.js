@@ -25,6 +25,18 @@ module.exports = [
     },
   },
   {
+    title: 'Vacation Days',
+    author: 'Kai Ryssdal',
+    alts: ['vacation days'],
+    keywords: ['vacation', 'days', 'daze'],
+    guid: 'vacation_days',
+    date: "2018-08-09T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/novacation-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/novacation-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Speech on the Internet',
     author: 'Molly Wood',
     alts: ['speech on the internet', 'peach on the intranet', 'speak on the internet', 'each on the internet'],
@@ -112,7 +124,7 @@ module.exports = [
     title: 'Summer Vacation',
     author: 'Kai Ryssdal',
     alts: ['summer location', 'some her vacation', 'sum her vacation', 'summer caucasion'],
-    keywords: ['vacation','summer', 'some her', 'sum ur', 'some or'],
+    keywords: ['summer', 'some her', 'sum ur', 'some or'],
     guid: 'summer_vacation',
     date: "2018-07-30T07:00:00Z",
     audio: {
