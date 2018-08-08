@@ -139,7 +139,6 @@ var searchResults = {
   ],
   two_dollar_bill: [
     'two dollar',
-    'dollar',
     'two',
   ],
   cardboard: [

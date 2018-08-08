@@ -1,27 +1,51 @@
 module.exports = [
+  // {
+  //   title: 'Venmo',
+  //   author: 'Molly Wood',
+  //   alts: ['venmo', 'cash app', 'denmo','kenmo', 'benmo'],
+  //   keywords: ['ven', 'venmo'],
+  //
+  //   guid: 'venmo',
+  //   date: "2018-09-28T07:00:00Z",
+  //   audio: {
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/venmo-molly-explainer-mix.mp3",
+  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/venmo-molly-intro-mix.mp3"
+  //   },
+  // },
+  // {
+  //   title: 'GDP',
+  //   author: 'Kai Ryssdal',
+  //   alts: ['gdp', 'g d p', 'g.d.p.', 'gbp', 'g b p', 'g.b.p.', 'gross domestic product', 'gdp number'],
+  //   keywords: [null],
+  //   guid: 'gdp',
+  //   date: "2018-09-29T07:00:00Z",
+  //   audio: {
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/gdp-kai-explainer-mix.mp3",
+  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/gdp-kai-intro-fix-mix.mp3"
+  //   },
+  // },
   {
-    title: 'Venmo',
+    title: 'Last Mile',
     author: 'Molly Wood',
-    alts: ['venmo', 'cash app', 'denmo','kenmo', 'benmo'],
-    keywords: ['ven', 'venmo'],
-
-    guid: 'venmo',
-    date: "2018-08-28T07:00:00Z",
+    alts: ['last mile', 'last while'],
+    keywords: ['mile', 'last', 'my l'],
+    guid: 'last_mile',
+    date: "2018-08-13T07:00:00Z",
     audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/venmo-molly-explainer-mix.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/venmo-molly-intro-mix.mp3"
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/lastmile-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/lastmile-molly-intro-mix.mp3"
     },
   },
   {
-    title: 'GDP',
+    title: '1000 Dollar Bill',
     author: 'Kai Ryssdal',
-    alts: ['gdp', 'g d p', 'g.d.p.', 'gbp', 'g b p', 'g.b.p.', 'gross domestic product', 'gdp number'],
-    keywords: [null],
-    guid: 'gdp',
-    date: "2018-08-29T07:00:00Z",
+    alts: ['one thousand dollar bill', 'thousand dollar bill', '1000 dollar bill'],
+    keywords: ['thousand', 'thousand dollar'],
+    guid: '1000_dollar_bill',
+    date: "2018-08-10T07:00:00Z",
     audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/gdp-kai-explainer-mix.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/gdp-kai-intro-fix-mix.mp3"
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/1000bill-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/1000bill-kai-intro-mix.mp3"
     },
   },
   {
