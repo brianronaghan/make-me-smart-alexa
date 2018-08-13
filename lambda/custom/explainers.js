@@ -25,6 +25,18 @@ module.exports = [
   //   },
   // },
   {
+    title: 'Summer Jobs',
+    author: 'Kai Ryssdal',
+    alts: ['some her job', 'sum her job'],
+    keywords: ['summer job', 'sum or job', 'sum her job'],
+    guid: 'summer_jobs',
+    date: "2018-08-14T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/summerjob-kai-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/summerjob-kai-intro+MIX.mp3"
+    },
+  },
+  {
     title: 'Last Mile',
     author: 'Molly Wood',
     alts: ['last mile', 'last while'],
