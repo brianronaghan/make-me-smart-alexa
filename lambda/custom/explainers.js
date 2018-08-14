@@ -25,6 +25,18 @@ module.exports = [
   //   },
   // },
   {
+    title: 'Business Clusters',
+    author: 'Kai Ryssdal',
+    alts: ['business clusters', 'districts', 'bid miss'],
+    keywords: ['business', 'cluster', 'bid miss', 'cussed her'],
+    guid: 'business_clusters',
+    date: "2018-08-15T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/businessclusters-kai-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/businessclusters-kai-intro+MIX.mp3"
+    },
+  },
+  {
     title: 'Summer Jobs',
     author: 'Kai Ryssdal',
     alts: ['some her job', 'sum her job'],
