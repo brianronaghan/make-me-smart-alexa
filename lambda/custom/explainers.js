@@ -25,6 +25,18 @@ module.exports = [
   //   },
   // },
   {
+    title: 'Consumer Confidence',
+    author: 'Kai Ryssdal',
+    alts: ['consumer confidence', 'on sooner confidence'],
+    keywords: ['consumer', 'confidence', 'con dents', 'con for dents', 'con fit dense'],
+    guid: 'consumer_confidence',
+    date: "2018-08-16T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/consumer-confidence-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/retrack-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Business Clusters',
     author: 'Kai Ryssdal',
     alts: ['business clusters', 'districts', 'bid miss'],
