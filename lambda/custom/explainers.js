@@ -25,6 +25,18 @@ module.exports = [
   //   },
   // },
   {
+    title: 'Award Shows',
+    author: 'Kai Ryssdal',
+    alts: ['a ward shows', 'a ward show', 'award show', 'awards shows', 'awards ohs'],
+    keywords: ['award', 'ward', 'show'],
+    guid: 'award_shows',
+    date: "2018-08-17T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/awardshows-kai-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/awardshows-kai-intro+MIX.mp3"
+    },
+  },
+  {
     title: 'Consumer Confidence',
     author: 'Kai Ryssdal',
     alts: ['consumer confidence', 'on sooner confidence'],
