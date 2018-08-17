@@ -25,6 +25,18 @@ module.exports = [
   //   },
   // },
   {
+    title: 'Cable TV',
+    author: 'Kai Ryssdal',
+    alts: ['k bull tv', 'kay bull television'],
+    keywords: ['tv', 'TV', 'T.V.', 'cable', 'k bull', 'television', 't.v.'],
+    guid: 'cable_tv',
+    date: "2018-08-20T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/cabletv-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/cabletv-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Award Shows',
     author: 'Kai Ryssdal',
     alts: ['a ward shows', 'a ward show', 'award show', 'awards shows', 'awards ohs'],
