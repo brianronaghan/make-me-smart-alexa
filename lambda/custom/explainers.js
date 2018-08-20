@@ -25,6 +25,31 @@ module.exports = [
   //   },
   // },
   {
+    title: 'Fantasy Football',
+    author: 'Molly Wood',
+    alts: ['fantasy football', 'fan to see football'],
+    keywords: ['fantasy', 'football', 'fan to see', 'fan 2 c'],
+    guid: 'fantasy_football',
+    date: "2018-08-22T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/fantasyfootball-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/fantasyfootball-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Crowdfunding',
+    author: 'Molly Wood',
+    alts: ['crowd funding', 'kickstarter', 'funding'],
+    keywords: ['crowd', 'fund'],
+    guid: 'crowdfunding',
+    date: "2018-08-21T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/crowdfunding-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/crowdfunding-molly-intro-mix.mp3"
+    },
+  },
+  //
+  {
     title: 'Cable TV',
     author: 'Kai Ryssdal',
     alts: ['k bull tv', 'kay bull television'],
