@@ -25,6 +25,18 @@ module.exports = [
   //   },
   // },
   {
+    title: 'Actor Insurance',
+    author: 'Kai Ryssdal',
+    alts: ['act or insurance', "actors insurance", "actor's insurance", 'actors injury', "actor's assurance", "actors in currents"],
+    keywords: ['insurance', 'actor', 'in currents', 'occurrence'],
+    guid: 'actor_insurance',
+    date: "2018-08-23T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/actorinsurance-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/actorinsurance-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Fantasy Football',
     author: 'Molly Wood',
     alts: ['fantasy football', 'fan to see football'],
