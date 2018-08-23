@@ -25,6 +25,18 @@ module.exports = [
   //   },
   // },
   {
+    title: 'The Cubicle',
+    author: 'Kai Ryssdal',
+    alts: ["cube", 'cubicle', 'the cube', 'the cubicle', 'the cubicles'],
+    keywords: ['cube', 'cubicle'],
+    guid: 'cubicle',
+    date: "2018-08-24T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/cubicles-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/cubicles-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Actor Insurance',
     author: 'Kai Ryssdal',
     alts: ['act or insurance', "actors insurance", "actor's insurance", 'actors injury', "actor's assurance", "actors in currents"],
