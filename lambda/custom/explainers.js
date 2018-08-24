@@ -25,6 +25,18 @@ module.exports = [
   //   },
   // },
   {
+    title: 'Moving',
+    author: 'Kai Ryssdal',
+    alts: ["moving", 'relocation'],
+    keywords: ['move', 'moo', 'moving'],
+    guid: 'moving',
+    date: "2018-08-27T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/moving-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/moving-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'The Cubicle',
     author: 'Kai Ryssdal',
     alts: ["cube", 'cubicle', 'the cube', 'the cubicle', 'the cubicles'],
