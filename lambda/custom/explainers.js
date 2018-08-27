@@ -25,6 +25,18 @@ module.exports = [
   //   },
   // },
   {
+    title: 'Busses',
+    author: 'Kai Ryssdal',
+    alts: ['bus', 'bussing', 'bus popularity', 'bus is', 'busses', 'buzzes'],
+    keywords: ['bus', 'buzz'],
+    guid: 'bus',
+    date: "2018-08-28T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/bus-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/bus-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Moving',
     author: 'Kai Ryssdal',
     alts: ["moving", 'relocation'],
