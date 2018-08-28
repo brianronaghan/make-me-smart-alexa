@@ -89,7 +89,7 @@ var searchResults = {
     'airline',
   ],
   bonds_launch: [
-    'market',
+    'bond market',
     'bomb market',
   ],
   super_soakers: [
@@ -105,7 +105,7 @@ var searchResults = {
     'hokey nam',
     'pokemon',
     'pokey man',
-    'poke the non',
+    'poke the',
     'Pokémon'
   ],
   movie_subscriptions: [

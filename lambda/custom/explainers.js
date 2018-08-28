@@ -25,6 +25,30 @@ module.exports = [
   //   },
   // },
   {
+    title: 'Non Compete Clause',
+    author: 'Molly Wood',
+    alts: ['non compete', 'not compete', 'not complete', 'none compete', 'nun compete', 'non comp eat'],
+    keywords: ['non', 'compete', 'clause', 'nun'],
+    guid: 'non_compete',
+    date: "2018-08-30T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/noncompete-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/noncompete-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Global Phone Market',
+    author: 'Molly Wood',
+    alts: ['phone market', 'global phone mark it', 'phone mark it'],
+    keywords: ['phone', 'global'],
+    guid: 'global_phones',
+    date: "2018-08-29T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/globalphonemarket-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/globalphonemarket-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Busses',
     author: 'Kai Ryssdal',
     alts: ['bus', 'bussing', 'bus popularity', 'bus is', 'busses', 'buzzes'],
@@ -389,7 +413,7 @@ module.exports = [
     title: 'Pokémon Go',
     author: 'Molly Wood',
     alts: ['pokeymon', 'hokey mon', 'pokey on', 'pokey', 'pokey mom', 'hokey non', 'poke the mom'],
-    keywords: ['pokemon', 'pokey man', 'mon', 'pokémon', 'mom', 'non', 'poke', 'hokey'],
+    keywords: ['pokemon', 'pokey man', 'mon', 'pokémon', 'mom', 'poke', 'hokey'],
     guid: 'pokemon',
     date: "2018-07-17T07:00:00Z",
     audio: {
