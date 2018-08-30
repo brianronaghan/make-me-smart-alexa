@@ -1,18 +1,5 @@
 module.exports = [
   // {
-  //   title: 'Venmo',
-  //   author: 'Molly Wood',
-  //   alts: ['venmo', 'cash app', 'denmo','kenmo', 'benmo'],
-  //   keywords: ['ven', 'venmo'],
-  //
-  //   guid: 'venmo',
-  //   date: "2018-09-28T07:00:00Z",
-  //   audio: {
-  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/venmo-molly-explainer-mix.mp3",
-  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/venmo-molly-intro-mix.mp3"
-  //   },
-  // },
-  // {
   //   title: 'GDP',
   //   author: 'Kai Ryssdal',
   //   alts: ['gdp', 'g d p', 'g.d.p.', 'gbp', 'g b p', 'g.b.p.', 'gross domestic product', 'gdp number'],
@@ -24,6 +11,18 @@ module.exports = [
   //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/gdp-kai-intro-fix-mix.mp3"
   //   },
   // },
+  {
+    title: 'Venmo',
+    author: 'Molly Wood',
+    alts: ['venmo', 'cash app', 'denmo','kenmo', 'benmo', 'an mo'],
+    keywords: ['ven', 'venmo'],
+    guid: 'venmo',
+    date: "2018-08-31T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/venmo-molly-fix-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/venmo-molly-intro-mix.mp3"
+    },
+  },
   {
     title: 'Non Compete Clause',
     author: 'Molly Wood',
