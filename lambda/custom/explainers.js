@@ -12,6 +12,42 @@ module.exports = [
   //   },
   // },
   {
+    title: 'Apples',
+    author: 'Kai Ryssdal',
+    alts: ['apple', 'app l'],
+    keywords: ['apple', 'app'],
+    guid: 'apples',
+    date: "2018-09-05T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/apple-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/apple-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'ATMs',
+    author: 'Kai Ryssdal',
+    alts: ['a d m', 'adm', 'adn', 'a d n', 'atn', 'a t n', 'a.t.m.', 'a.t.n', 'a.d.m', 'a.d.n'],
+    keywords: ['a t m', 'atm', 'atn', 'adm', 'a d m', 'a t n'],
+    guid: 'atms',
+    date: "2018-09-04T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/atm-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/atm-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: '40 Hour Work Week',
+    author: 'Kai Ryssdal',
+    alts: ['40 hour work week', 'forty hour work week', 'forty our work weak', 'forty our work week', '4 t our work week'],
+    keywords: ['forty', '40', 'hour', 'week', 'weak', '4 t', 'four t', '4t'],
+    guid: '40_hour_workweek',
+    date: "2018-09-03T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/40hrworkweek-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/40hrworkweek-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Venmo',
     author: 'Molly Wood',
     alts: ['venmo', 'cash app', 'denmo','kenmo', 'benmo', 'an mo'],
@@ -340,7 +376,7 @@ module.exports = [
     title: 'Shark Week',
     author: 'Molly Wood',
     alts: ['shark wheat', 'chart week', 'shart week', 'card week'],
-    keywords: ['shark', 'week'],
+    keywords: ['shark', 'shart'],
     guid: 'shark_week',
     date: "2018-07-25T07:00:00Z",
     audio: {
