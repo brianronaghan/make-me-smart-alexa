@@ -14,8 +14,8 @@ module.exports = [
   {
     title: 'Equifax Breach',
     author: 'Molly Wood',
-    alts: ['eek with fax', 'each with facts'],
-    keywords: ['equifax'],
+    alts: ['eek with fax beat', 'each with facts beach', 'equifax breeze', 'eek with facts breech'],
+    keywords: ['equifax', 'breach', 'beach'],
     guid: 'equifax',
     date: "2018-09-07T07:00:00Z",
     audio: {
