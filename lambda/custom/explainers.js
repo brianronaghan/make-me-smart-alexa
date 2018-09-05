@@ -12,6 +12,30 @@ module.exports = [
   //   },
   // },
   {
+    title: 'Equifax Breach',
+    author: 'Molly Wood',
+    alts: ['eek with fax', 'each with facts'],
+    keywords: ['equifax'],
+    guid: 'equifax',
+    date: "2018-09-07T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/equifax-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/equifax-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Privacy',
+    author: 'Molly Wood',
+    alts: ['privacy', 'pry vicky'],
+    keywords: ['privacy'],
+    guid: 'privacy',
+    date: "2018-09-06T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/privacy-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/privacy-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Apples',
     author: 'Kai Ryssdal',
     alts: ['apple', 'app l'],
