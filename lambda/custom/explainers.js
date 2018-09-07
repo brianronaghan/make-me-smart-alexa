@@ -12,6 +12,42 @@ module.exports = [
   //   },
   // },
   {
+    title: 'Lehman Brothers',
+    author: 'Kai Ryssdal',
+    alts: ['lehman bros', 'layman bothers', 'lay man brothers'],
+    keywords: ['laymen', 'layman', 'lehman', 'lay man', 'lay men', 'lame un'],
+    guid: 'lehman',
+    date: "2018-09-12T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/ryssdal-lehman-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/ryssdal-lehman-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Unlimited Vacation',
+    author: 'Kai Ryssdal',
+    alts: ['unlimited vacation', 'un limited vacation'],
+    keywords: ['unlimited', 'vacation', 'un limited'],
+    guid: 'unlimited_vacation',
+    date: "2018-09-11T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/ryssdal-unlimited-vacation-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/ryssdal-unlimited-vacation-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Sears',
+    author: 'Kai Ryssdal',
+    alts: ['sears', 'seers', 'c rs'],
+    keywords: ['sears'],
+    guid: 'sears',
+    date: "2018-09-10T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/ryssdal-sears-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/ryssdal-sears-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Equifax Breach',
     author: 'Molly Wood',
     alts: ['eek with fax beat', 'each with facts beach', 'equifax breeze', 'eek with facts breech'],
@@ -268,7 +304,7 @@ module.exports = [
     title: 'Vacation Days',
     author: 'Kai Ryssdal',
     alts: ['vacation days'],
-    keywords: ['vacation', 'days', 'daze'],
+    keywords: ['days', 'daze'],
     guid: 'vacation_days',
     date: "2018-08-09T07:00:00Z",
     audio: {
