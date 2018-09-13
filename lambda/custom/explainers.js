@@ -12,6 +12,18 @@ module.exports = [
   //   },
   // },
   {
+    title: 'Space Force',
+    author: 'Molly Wood',
+    alts: ['space force', 'space fourth', 'space forced', 'space fort'],
+    keywords: ['space', 'force', 'fourth', 'fort'],
+    guid: 'space_force',
+    date: "2018-09-13T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/spaceforce-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/spaceforce-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Lehman Brothers',
     author: 'Kai Ryssdal',
     alts: ['lehman bros', 'layman bothers', 'lay man brothers'],
