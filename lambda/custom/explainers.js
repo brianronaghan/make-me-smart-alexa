@@ -12,6 +12,18 @@ module.exports = [
   //   },
   // },
   {
+    title: 'Blockchain',
+    author: 'Molly Wood',
+    alts: ['blockchain', 'block chain', 'block change', 'block jane'],
+    keywords: ['block', 'chain', 'bock', 'bach', 'jane', 'change'],
+    guid: 'blockchain',
+    date: "2018-09-17T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/blockchain-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/blockchain-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'The Emmys',
     author: 'Molly Wood',
     alts: ['emmys', 'emmies', 'm es', 'em es'],
@@ -769,8 +781,8 @@ module.exports = [
   {
     title: 'Bitcoin',
     author: 'Molly Wood',
-    alts: ['a cryptocurrency', 'the coin', 'a bitcoin', 'uh bitcoin', 'cryptocurrency', 'crypto', 'blockchain', 'flip coin', 'flip a coin', 'bid coin', 'bit coin', 'no become', 'echo fine', 'big coin', 'coin'],
-    keywords: ['coin', 'block chain', 'blockchain', 'crypto'],
+    alts: ['a cryptocurrency', 'the coin', 'a bitcoin', 'uh bitcoin', 'cryptocurrency', 'crypto', 'flip coin', 'flip a coin', 'bid coin', 'bit coin', 'no become', 'echo fine', 'big coin', 'coin'],
+    keywords: ['coin', 'bit', 'crypto'],
     guid: "bitcoin_launch",
     date: "2018-06-22T07:00:00Z",
     description: "Bitcoin is the best known cryptocurrency.",
