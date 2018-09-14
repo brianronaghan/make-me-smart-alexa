@@ -12,10 +12,22 @@ module.exports = [
   //   },
   // },
   {
+    title: 'The Emmys',
+    author: 'Molly Wood',
+    alts: ['emmys', 'emmies', 'm es', 'em es'],
+    keywords: ['emmys', 'ME', 'me', 'm e', 'm es', 'mes'],
+    guid: 'emmy',
+    date: "2018-09-14T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/emmys-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/emmys-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Space Force',
     author: 'Molly Wood',
     alts: ['space force', 'space fourth', 'space forced', 'space fort'],
-    keywords: ['space', 'force', 'fourth', 'fort'],
+    keywords: ['space', 'force', 'fourth'],
     guid: 'space_force',
     date: "2018-09-13T07:00:00Z",
     audio: {
