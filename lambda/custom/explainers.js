@@ -12,6 +12,30 @@ module.exports = [
   //   },
   // },
   {
+    title: 'Flu Season',
+    author: 'Kai Ryssdal',
+    alts: ['flu shots', 'fu shots', 'foo shots', 'flu season', 'flu sees on', 'fu season'],
+    keywords: ['flew', 'flu', 'foo', 'fu', 'dew', 'few', 'season', 'sees on'],
+    guid: 'flu_season',
+    date: "2018-09-19T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/fluseason-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/fluseason-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'VW Bug',
+    author: 'Kai Ryssdal',
+    alts: ['vw bug', 'bw bug', 'v w bug'],
+    keywords: ['vw', 'bug', 'bw', 'dw', 'ew', 'volkswagen', 'volkswagon', 'v w', 'fee w', 'b w', 'd w', 'e w', 'v double you', 'v double u'],
+    guid: 'vw_bug',
+    date: "2018-09-18T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/vwbug-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/vwbug-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Blockchain',
     author: 'Molly Wood',
     alts: ['blockchain', 'block chain', 'block change', 'block jane'],
@@ -400,7 +424,7 @@ module.exports = [
     title: 'Influencers',
     author: 'Molly Wood',
     alts: ['fame', 'influencers', 'influencer'],
-    keywords: ['in flu ands', 'in flu', 'flu', 'influence', 'in flu ants', 'an flew ents', 'flew'],
+    keywords: ['in flu ands', 'in flu', 'influence', 'in flu ants', 'an flew ents'],
     guid: 'influencer',
     date: "2018-08-02T07:00:00Z",
     audio: {
