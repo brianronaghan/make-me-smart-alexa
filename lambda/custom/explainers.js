@@ -12,6 +12,18 @@ module.exports = [
   //   },
   // },
   {
+    title: 'Peak Smartphone',
+    author: 'Molly Wood',
+    alts: ['peak smart phone', 'peek smart fone', 'pee start tone'],
+    keywords: ['peak', 'peek', 'smartphone', 'phone'],
+    guid: 'peak_smartphone',
+    date: "2018-09-20T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/peaksmartphone-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/peaksmartphone-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Flu Season',
     author: 'Kai Ryssdal',
     alts: ['flu shots', 'fu shots', 'foo shots', 'flu season', 'flu sees on', 'fu season'],
@@ -195,7 +207,7 @@ module.exports = [
     title: 'Global Phone Market',
     author: 'Molly Wood',
     alts: ['phone market', 'global phone mark it', 'phone mark it'],
-    keywords: ['phone', 'global'],
+    keywords: ['global',],
     guid: 'global_phones',
     date: "2018-08-29T07:00:00Z",
     audio: {
