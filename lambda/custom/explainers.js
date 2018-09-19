@@ -15,7 +15,7 @@ module.exports = [
     title: 'Peak Smartphone',
     author: 'Molly Wood',
     alts: ['peak smart phone', 'peek smart fone', 'pee start tone'],
-    keywords: ['peak', 'peek', 'smartphone', 'phone'],
+    keywords: ['peak', 'peek', 'smartphone', 'phone', 'peet', 'peat', 'smart phone'],
     guid: 'peak_smartphone',
     date: "2018-09-20T07:00:00Z",
     audio: {
