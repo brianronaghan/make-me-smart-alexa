@@ -12,6 +12,18 @@ module.exports = [
   //   },
   // },
   {
+    title: 'NFL',
+    author: 'Kai Ryssdal',
+    alts: ['NFL', 'N F L', 'the N F L', 'M F L', 'and s l', 'national football league', 'and f hell', 'end f el', 'an f ell'],
+    keywords: ['football', 'foot ball', 'nfl', 'n f l', 'm f l', 'mfl', 'league', 'and f hell'],
+    guid: 'NFL',
+    date: "2018-09-21T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/nfl-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/nfl-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Peak Smartphone',
     author: 'Molly Wood',
     alts: ['peak smart phone', 'peek smart fone', 'pee start tone'],
@@ -267,7 +279,7 @@ module.exports = [
     title: 'Fantasy Football',
     author: 'Molly Wood',
     alts: ['fantasy football', 'fan to see football'],
-    keywords: ['fantasy', 'football', 'fan to see', 'fan 2 c'],
+    keywords: ['fantasy football', 'fan to see', 'fan 2 c'],
     guid: 'fantasy_football',
     date: "2018-08-22T07:00:00Z",
     audio: {
