@@ -12,6 +12,30 @@ module.exports = [
   //   },
   // },
   {
+    title: 'Ephemeral Marketing',
+    author: 'Molly Wood',
+    alts: ['ephemeral mark it in', 'e femme r all marketing'],
+    keywords: ['ephemeral', 'marketing', 'efemeral', 'e femme', 'femme', 'mark it in'],
+    guid: 'ephemeral_marketing',
+    date: "2018-09-25T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/ephemeralmarketing-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/ephemeralmarketing-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Electric Cars',
+    author: 'Molly Wood',
+    alts: ['eel ectric cars', 'eclectic cars'],
+    keywords: ['electric', 'eclectic', 'e lectic', 'carb', 'card', 'car'],
+    guid: 'electric_cars',
+    date: "2018-09-24T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/tesla-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/tesla-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'NFL',
     author: 'Kai Ryssdal',
     alts: ['NFL', 'N F L', 'the N F L', 'M F L', 'and s l', 'national football league', 'and f hell', 'end f el', 'an f ell'],
