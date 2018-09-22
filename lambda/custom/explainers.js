@@ -27,7 +27,7 @@ module.exports = [
     title: 'Electric Cars',
     author: 'Molly Wood',
     alts: ['eel ectric cars', 'eclectic cars'],
-    keywords: ['electric', 'eclectic', 'e lectic', 'carb', 'card', 'car'],
+    keywords: ['electric', 'eclectic', 'e lectic', 'carb', 'car'],
     guid: 'electric_cars',
     date: "2018-09-24T07:00:00Z",
     audio: {
@@ -568,7 +568,7 @@ module.exports = [
     title: 'Cardboard',
     author: 'Molly Wood',
     alts: ['card bored', 'card board', 'cardboard'],
-    keywords: ['card board', 'cardboard', 'car bored', 'are board', 'board', 'bored', 'charred'],
+    keywords: ['card board', 'cardboard', 'card bored', 'are board', 'board', 'bored', 'charred'],
     guid: 'cardboard',
     date: "2018-07-23T07:00:00Z",
     audio: {

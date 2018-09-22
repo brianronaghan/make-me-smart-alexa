@@ -70,7 +70,6 @@ let directions = {
 var searchResults = {
   tax_postcard: [
     'taxes on postcard',
-    'postcard taxes',
     'taxes',
     'texas',
     'postcard tax',
@@ -143,7 +142,6 @@ var searchResults = {
   ],
   cardboard: [
     'card board',
-    'car bored',
   ],
   shark_week: [
     'shark',
