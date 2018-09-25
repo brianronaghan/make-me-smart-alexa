@@ -12,6 +12,30 @@ module.exports = [
   //   },
   // },
   {
+    title: 'Tech Tariffs',
+    author: 'Molly Wood',
+    alts: ['tech tar if', 'tech tariff', 'test tariff'],
+    keywords: ['tech', 'tariff', 'tar if'],
+    guid: 'tech_tariffs',
+    date: "2018-09-27T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/tradewar-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/tradewar-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Rocky Horror',
+    author: 'Molly Wood',
+    alts: ['rock e horror', 'rocky hard or', 'rockie hoar or'],
+    keywords: ['rock', 'horror'],
+    guid: 'rocky_horror',
+    date: "2018-09-26T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/rockyhorror-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/rockyhorror-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Ephemeral Marketing',
     author: 'Molly Wood',
     alts: ['ephemeral mark it in', 'e femme r all marketing'],
