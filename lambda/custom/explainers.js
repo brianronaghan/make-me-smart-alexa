@@ -12,6 +12,54 @@ module.exports = [
   //   },
   // },
   {
+    title: 'Fall TV',
+    author: 'Kai Ryssdal',
+    alts: ['fall tv', 'fall tb', 'fall to me', 'fall to v', 'fall e v'],
+    keywords: ['fall', 't.v.','tv', 'TV', 'T.V.', 't v', 't fee'],
+    guid: 'fall_tv',
+    date: "2018-10-03T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/falltv-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/falltv-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Self Driving Cars',
+    author: 'Molly Wood',
+    alts: ['self driving cars', 'self driving card', 'sell driving car'],
+    keywords: ['self', 'driving', 'drying'],
+    guid: 'self_driving_cars',
+    date: "2018-10-02T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/selfdrivingcars-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/selfdrivingcars-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Corporate Branding',
+    author: 'Kai Ryssdal',
+    alts: ['corporate brand in', 'core put band in', 'cork put bran ding'],
+    keywords: ['corporate', 'branding', 'name', 'core'],
+    guid: 'corporate_branding',
+    date: "2018-10-01T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/corporatename-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/corporatename-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Baseball',
+    author: 'Kai Ryssdal',
+    alts: ['baseball', 'base ball', 'bass ball', 'base all'],
+    keywords: ['base', 'ball'],
+    guid: 'baseball',
+    date: "2018-09-28T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/baseball-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/baseball-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Tech Tariffs',
     author: 'Molly Wood',
     alts: ['tech tar if', 'tech tariff', 'test tariff'],
@@ -352,7 +400,7 @@ module.exports = [
     title: 'Cable TV',
     author: 'Kai Ryssdal',
     alts: ['k bull tv', 'kay bull television'],
-    keywords: ['tv', 'TV', 'T.V.', 'cable', 'k bull', 'television', 't.v.'],
+    keywords: [ 'cable', 'k bull', 'television'],
     guid: 'cable_tv',
     date: "2018-08-20T07:00:00Z",
     audio: {
