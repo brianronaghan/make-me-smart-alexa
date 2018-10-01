@@ -36,11 +36,11 @@ module.exports = [
     },
   },
   {
-    title: 'Corporate Branding',
+    title: 'Rebranding',
     author: 'Kai Ryssdal',
-    alts: ['corporate brand in', 'core put band in', 'cork put bran ding'],
-    keywords: ['corporate', 'branding', 'name', 'core'],
-    guid: 'corporate_branding',
+    alts: ['re branding', 'e branding', 'corporate brand in', 'core put band in', 'cork put bran ding'],
+    keywords: ['corporate', 'branding', 'name', 'core', 'rebrand'],
+    guid: 'rebranding',
     date: "2018-10-01T07:00:00Z",
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/corporatename-kai-explainer-mix.mp3",
