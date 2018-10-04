@@ -12,6 +12,42 @@ module.exports = [
   //   },
   // },
   {
+    title: 'Artifical Intelligence',
+    author: 'Molly Wood',
+    alts: ['Artifical Intelligence', 'AI', 'artificial intel'],
+    keywords: ['artificial', 'intelligence', 'intel', 'intelligents', 'fish ill'],
+    guid: 'artificial_intelligence',
+    date: "2018-10-08T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/AI-molly-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/AI-molly-intro+MIX.mp3"
+    },
+  },
+  {
+    title: 'Data Portability',
+    author: 'Molly Wood',
+    alts: ['data portability', 'data port ability'],
+    keywords: ['data', 'portability', 'portable', 'port'],
+    guid: 'data_portability',
+    date: "2018-10-05T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/dataportability-molly-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/dataportability-molly-intro+MIX.mp3"
+    },
+  },
+  {
+    title: 'Underwater Internet',
+    author: 'Molly Wood',
+    alts: ['under water internet', 'underwear inter net', 'under what or in or net'],
+    keywords: ['under', 'water', 'inter', 'net', 'what or', 'un door'],
+    guid: 'underwater_internet',
+    date: "2018-10-04T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/underwaterinternet-molly-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/underwaterinternet-molly-intro+MIX.mp3"
+    },
+  },
+  {
     title: 'Fall TV',
     author: 'Kai Ryssdal',
     alts: ['fall tv', 'fall tb', 'fall to me', 'fall to v', 'fall e v'],
