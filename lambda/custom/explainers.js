@@ -12,6 +12,30 @@ module.exports = [
   //   },
   // },
   {
+    title: 'Foreclosure',
+    author: 'Kai Ryssdal',
+    alts: ['foreclosure', 'four closure', '4 closure', '4 cloture', '4 closer' ],
+    keywords: ['foreclosure', 'fore', 'closure', 'closer', 'four'],
+    guid: 'foreclosure',
+    date: "2018-10-10T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/foreclosure-kai-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/foreclosure-kai-intro+MIX.mp3"
+    },
+  },
+  {
+    title: 'Fast Food',
+    author: 'Kai Ryssdal',
+    alts: ['fass food', 'fast foo', 'fassed' ],
+    keywords: ['fast', 'food', 'fass' ],
+    guid: 'fast_food',
+    date: "2018-10-09T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/fastfood-kai-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/fastfood-kai-intro+MIX.mp3"
+    },
+  },
+  {
     title: 'Artifical Intelligence',
     author: 'Molly Wood',
     alts: ['Artifical Intelligence', 'AI', 'artificial intel'],
