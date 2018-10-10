@@ -12,6 +12,18 @@ module.exports = [
   //   },
   // },
   {
+    title: 'Pet Tech',
+    author: 'Molly Wood',
+    alts: ['pet tech', 'ped tech', 'pet tac', 'fit bark', 'pet activity'],
+    keywords: ['ped', 'pet', 'tech', 'ted'],
+    guid: 'pet_tech',
+    date: "2018-10-12T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/pettech-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/pettech-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Razor Blades',
     author: 'Kai Ryssdal',
     alts: ['razor blaze', 'razorblades', 'rays or blades', 'raze or blades', 'raze or blaze'],
@@ -135,7 +147,7 @@ module.exports = [
     title: 'Tech Tariffs',
     author: 'Molly Wood',
     alts: ['tech tar if', 'tech tariff', 'test tariff'],
-    keywords: ['tech', 'tariff', 'tar if'],
+    keywords: ['tariff', 'tar if'],
     guid: 'tech_tariffs',
     date: "2018-09-27T07:00:00Z",
     audio: {
