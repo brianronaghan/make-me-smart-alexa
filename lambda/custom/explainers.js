@@ -12,6 +12,18 @@ module.exports = [
   //   },
   // },
   {
+    title: '5G Race',
+    author: 'Molly Wood',
+    alts: ['5 g', '5G', 'five g', '5g', '5 G', 'fine g', 'find g', 'why g', '5 g.', 'side g', 'fire t', 'fart g', 'fire g', 'g.', 'by g', "I'm GE", "5g race", '5 g rate', '5 G raise'],
+    keywords: ['5g', '5G', 'race', 'raise', '5 g', '5 G', 'five g'],
+    guid: '5g_race',
+    date: "2018-10-15T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/5Grace-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/5Grace-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Pet Tech',
     author: 'Molly Wood',
     alts: ['pet tech', 'ped tech', 'pet tac', 'fit bark', 'pet activity'],
@@ -970,18 +982,18 @@ module.exports = [
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/tax-postcard-kai-explainer-fix-mix.mp3",
     },
   },
-  {
-    title: '5G',
-    author: 'Molly Wood',
-    alts: ['5 g', '5G', 'five g', '5g', '5 G', 'fine g', 'find g', 'why g', '5 g.', 'side g', 'fire t', 'fart g', 'fire g', 'g.', 'by g', "I'm GE"],
-    keywords: ['5g', '5G'],
-    guid: "5G_launch",
-    date: "2018-06-27T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Wood+-+5g+-+MIXLEV_alexa.mp3",
-      intro: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/5G-molly-intro-fix-mix.mp3'
-    }
-  },
+  // {
+  //   title: '5G',
+  //   author: 'Molly Wood',
+  //   alts: ['5 g', '5G', 'five g', '5g', '5 G', 'fine g', 'find g', 'why g', '5 g.', 'side g', 'fire t', 'fart g', 'fire g', 'g.', 'by g', "I'm GE"],
+  //   keywords: ['5g', '5G'],
+  //   guid: "5G_launch",
+  //   date: "2018-06-27T07:00:00Z",
+  //   audio: {
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Wood+-+5g+-+MIXLEV_alexa.mp3",
+  //     intro: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/5G-molly-intro-fix-mix.mp3'
+  //   }
+  // },
   {
     title: 'Summer Blockbusters',
     author: 'Kai Ryssdal',

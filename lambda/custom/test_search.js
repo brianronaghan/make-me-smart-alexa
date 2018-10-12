@@ -132,7 +132,7 @@ var searchResults = {
     'house hold it',
 
   ],
-  "5G_launch": [
+  "5g_race": [
     'fine g',
     '5G'
   ],
