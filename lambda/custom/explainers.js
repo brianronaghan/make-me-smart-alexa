@@ -12,6 +12,18 @@ module.exports = [
   //   },
   // },
   {
+    title: 'Data Safety',
+    author: 'Molly Wood',
+    alts: ['data safe t', 'data hacked', 'date uh safe t', 'data safety'],
+    keywords: ['data', 'safety', 'safe t', 'date', 'safe'],
+    guid: 'hacked',
+    date: "2018-10-16T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/hacked-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/hacked-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: '5G Race',
     author: 'Molly Wood',
     alts: ['5 g', '5G', 'five g', '5g', '5 G', 'fine g', 'find g', 'why g', '5 g.', 'side g', 'fire t', 'fart g', 'fire g', 'g.', 'by g', "I'm GE", "5g race", '5 g rate', '5 G raise'],
@@ -87,7 +99,7 @@ module.exports = [
     title: 'Data Portability',
     author: 'Molly Wood',
     alts: ['data portability', 'data port ability'],
-    keywords: ['data', 'portability', 'portable', 'port'],
+    keywords: ['portability', 'portable', 'port'],
     guid: 'data_portability',
     date: "2018-10-05T07:00:00Z",
     audio: {
