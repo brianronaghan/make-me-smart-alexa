@@ -72,7 +72,7 @@ module.exports = [
     },
   },
   {
-    title: 'Artifical Intelligence',
+    title: 'Artificial Intelligence',
     author: 'Molly Wood',
     alts: ['Artifical Intelligence', 'AI', 'artificial intel'],
     keywords: ['artificial', 'intelligence', 'intel', 'intelligents', 'fish ill'],
