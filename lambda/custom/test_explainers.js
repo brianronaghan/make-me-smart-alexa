@@ -19,7 +19,7 @@ const REQUIREMENTS = {
   'author': ['Kai Ryssdal', 'Molly Wood'],
   'guid': {},
   'alts': true,
-  'keywords': true,
+  // 'keywords': true,
   'audio': true,
 //   'audio.url': 'uniq',
   'date': true,

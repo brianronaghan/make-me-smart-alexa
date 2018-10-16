@@ -12,6 +12,44 @@ module.exports = [
   //   },
   // },
   {
+    title: 'Fortnite Dances',
+    author: 'Molly Wood',
+    alts: ['fort night dances', 'four nite dance is'],
+    keywords: ['fortnite', 'fort night', 'nite', 'dance', 'fort', 'night'],
+    guid: 'fortnite_dances',
+    date: "2018-10-19T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/fortnitedance-molly-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/fortnitedance-molly-intro+MIX.mp3"
+    },
+  },
+  //
+  {
+    title: 'Targeted TV Commercials',
+    author: 'Molly Wood',
+    alts: ['targeted tv commercials', 'target id tee vee commercials'],
+    keywords: ['commercials', 'target', 'tv', 't.v.', 't v'],
+    guid: 'targeted_tv_commercials',
+    date: "2018-10-18T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/tvtargetedads-molly-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/tvtargetedads-molly-intro+MIX.mp3"
+    },
+  },
+  {
+    title: 'China Automation',
+    author: 'Molly Wood',
+    alts: ['china auto mate on', 'shy nah auto nation', 'china ought to nation'],
+    keywords: ['china', 'automation', 'auto nation', 'auto', 'mation'],
+    guid: 'china_automation',
+    date: "2018-10-17T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/chinaautomation-molly-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/chinaautomation-molly-intro+MIX.mp3"
+    },
+  },
+
+  {
     title: 'Data Safety',
     author: 'Molly Wood',
     alts: ['data safe t', 'data hacked', 'date uh safe t', 'data safety'],
@@ -99,7 +137,7 @@ module.exports = [
     title: 'Data Portability',
     author: 'Molly Wood',
     alts: ['data portability', 'data port ability'],
-    keywords: ['portability', 'portable', 'port'],
+    keywords: ['data', 'portability', 'portable', 'port'],
     guid: 'data_portability',
     date: "2018-10-05T07:00:00Z",
     audio: {
