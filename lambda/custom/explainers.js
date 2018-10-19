@@ -12,6 +12,18 @@ module.exports = [
   //   },
   // },
   {
+    title: 'The Lebron Economy',
+    author: 'Kai Ryssdal',
+    alts: ['lebronomy', 'lebron o me', 'lebron econ o me', 'the lebron economy', 'lebron econ', 'a lebron economy'],
+    keywords: ['lebron', 'lebronomy', 'lebron o me', 'economy', 'lebron economy'],
+    guid: 'lebronomy',
+    date: "2018-10-22T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/lebronomy-kai-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/lebronomy-kai-intro+MIX.mp3"
+    },
+  },
+  {
     title: 'Fortnite Dances',
     author: 'Molly Wood',
     alts: ['fort night dances', 'four nite dance is'],
