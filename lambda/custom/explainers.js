@@ -1,16 +1,28 @@
 module.exports = [
-  // {
-  //   title: 'GDP',
-  //   author: 'Kai Ryssdal',
-  //   alts: ['gdp', 'g d p', 'g.d.p.', 'gbp', 'g b p', 'g.b.p.', 'gross domestic product', 'gdp number'],
-  //   keywords: [null],
-  //   guid: 'gdp',
-  //   date: "2018-09-29T07:00:00Z",
-  //   audio: {
-  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/gdp-kai-explainer-mix.mp3",
-  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/gdp-kai-intro-fix-mix.mp3"
-  //   },
-  // },
+  {
+    title: 'Inflation',
+    author: 'Kai Ryssdal',
+    alts: ['inflation', 'in flay shun', 'in '],
+    keywords: ['inflation', 'inflate', 'flay shun'],
+    guid: 'inflation',
+    date: "2018-10-24T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/inflation-kai-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/inflation-kai-intro+MIX.mp3"
+    },
+  },
+  {
+    title: 'Pet Insurance',
+    author: 'Kai Ryssdal',
+    alts: ['pet insurance', 'ped insure ends', 'pet insure ants'],
+    keywords: ['pet', 'insure', 'insurance'],
+    guid: 'pet_insurance',
+    date: "2018-10-23T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/petinsurance-kai-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/petinsurance-kai-intro+MIX.mp3"
+    },
+  },
   {
     title: 'The Lebron Economy',
     author: 'Kai Ryssdal',
