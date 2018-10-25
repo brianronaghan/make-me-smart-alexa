@@ -1,8 +1,44 @@
 module.exports = [
   {
+    title: 'Genetic Testing',
+    author: 'Molly Wood',
+    alts: ['genetic test in', 'gene edit test thing', 'genetic test'],
+    keywords: ['genetic', 'test', 'gene', 'genetic'],
+    guid: 'genetic_testing',
+    date: "2018-10-29T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/genetictesting-molly-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/genetictesting-molly-intro+MIX.mp3"
+    },
+  },
+  {
+    title: 'Halloween Popup Stores',
+    author: 'Kai Ryssdal',
+    alts: ['halloween pop up store', 'halloween pop up scores', 'holler ween pop up'],
+    keywords: ['halloween', 'pop', 'stores', 'hallow'],
+    guid: 'halloween_popups',
+    date: "2018-10-26T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/halloweenpopupstores-kai-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/halloweenpopupstores-kai-intro+MIX.mp3"
+    },
+  },
+  {
+    title: 'Electronic Voting',
+    author: 'Molly Wood',
+    alts: ['electronic voting ', 'elect tonic vote in', 'electron eek vote'],
+    keywords: ['voting', 'electronic', 'elect', 'election', 'vote'],
+    guid: 'electronic_voting',
+    date: "2018-10-25T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/electronicvoting-molly-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/electronicvoting-molly-intro+MIX.mp3"
+    },
+  },
+  {
     title: 'Inflation',
     author: 'Kai Ryssdal',
-    alts: ['inflation', 'in flay shun', 'in '],
+    alts: ['inflation', 'in flay shun', 'inflate shun'],
     keywords: ['inflation', 'inflate', 'flay shun'],
     guid: 'inflation',
     date: "2018-10-24T07:00:00Z",
