@@ -1,5 +1,29 @@
 module.exports = [
   {
+    title: 'Candy',
+    author: 'Kai Ryssdal',
+    alts: ['candy', 'can d'],
+    keywords: ['candy'],
+    guid: 'candy',
+    date: "2018-10-31T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/candy-kai-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/candy-kai-intro+MIX.mp3"
+    },
+  },
+  {
+    title: 'Hallmark Movies',
+    author: 'Kai Ryssdal',
+    alts: ['hallmark movies', 'hall mark moo v', 'hall mark move e'],
+    keywords: ['hallmark', 'movie'],
+    guid: 'hallmark_movies',
+    date: "2018-10-30T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/hallmarkmovies-kai-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/hallmarkmovies-kai-intro+MIX.mp3"
+    },
+  },
+  {
     title: 'Genetic Testing',
     author: 'Molly Wood',
     alts: ['genetic test in', 'gene edit test thing', 'genetic test'],
