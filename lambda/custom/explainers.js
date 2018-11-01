@@ -1,5 +1,29 @@
 module.exports = [
   {
+    title: 'Daylight Savings Time',
+    author: 'Kai Ryssdal',
+    alts: ['daylight savings time', 'day light save ins tying'],
+    keywords: ['daylight', 'savings', 'time'],
+    guid: 'daylight_savings',
+    date: "2018-11-02T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/daylightsavingstime-kai-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/daylightsavingstime-kai-intro+MIX.mp3"
+    },
+  },
+  {
+    title: 'Kepler Telescope',
+    author: 'Molly Wood',
+    alts: ['kepler tell a scope', 'kept her telescope'],
+    keywords: ['kep', 'kepler', 'telescope', 'tell a scope'],
+    guid: 'kepler',
+    date: "2018-11-01T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/kepler-molly-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/kepler-molly-intro+MIX.mp3"
+    },
+  },
+  {
     title: 'Candy',
     author: 'Kai Ryssdal',
     alts: ['candy', 'can d'],
