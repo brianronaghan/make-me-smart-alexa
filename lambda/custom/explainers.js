@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: 'Phone Repair',
+    author: 'Molly Wood',
+    alts: ['phone re pair', 'phony pare', 'phone r'],
+    keywords: ['phone', 'repair', 'pare'],
+    guid: 'phone_repair',
+    date: "2018-11-05T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/phonerepair-molly-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/phonerepair-molly-intro+MIX.mp3"
+    },
+  },
+  {
     title: 'Daylight Savings Time',
     author: 'Kai Ryssdal',
     alts: ['daylight savings time', 'day light save ins tying'],
