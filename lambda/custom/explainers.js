@@ -1,5 +1,29 @@
 module.exports = [
   {
+    title: 'No Cashier Stores',
+    author: 'Kai Ryssdal',
+    alts: ['no cash here stores', 'no cashier stores', 'no cash ear stores'],
+    keywords: ['cashier', 'stores', 'cash ear', 'cash here'],
+    guid: 'no_cashier',
+    date: "2018-11-07T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/autocashiers-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/autocashiers-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Election Day',
+    author: 'Kai Ryssdal',
+    alts: ['elect shun day', 'elect ton day', 'election day'],
+    keywords: ['elect', 'day'],
+    guid: 'election_day',
+    date: "2018-11-06T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/electionday-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/electionday-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Phone Repair',
     author: 'Molly Wood',
     alts: ['phone re pair', 'phony pare', 'phone r'],
