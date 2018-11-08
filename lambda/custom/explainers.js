@@ -1,5 +1,41 @@
 module.exports = [
   {
+    title: 'Kids Apps',
+    author: 'Molly Wood',
+    alts: ['kids apps', 'kid apps', 'kids acts', 'kid acts', 'kid app'],
+    keywords: ['kid', 'apps', 'kids', 'apps'],
+    guid: 'kids_apps',
+    date: "2018-11-12T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/kidsapps-molly-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/kidsapps-molly-intro+MIX.mp3"
+    },
+  },
+  {
+    title: 'Holiday Drinks',
+    author: 'Kai Ryssdal',
+    alts: ['holiday drinks', 'holler day drink', 'holoday drinks'],
+    keywords: ['holiday', 'drinks', 'pumpkin', 'spice', 'holo day'],
+    guid: 'holiday_drinks',
+    date: "2018-11-09T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/holidaydrink-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/holidaydrink-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Spam Calls',
+    author: 'Molly Wood',
+    alts: ['spam call', 'sam calls', 'phone call'],
+    keywords: ['spam', 'calls', 'span'],
+    guid: 'spam_calls',
+    date: "2018-11-08T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/robocalls-molly-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/robocalls-molly-intro+MIX.mp3"
+    },
+  },
+  {
     title: 'No Cashier Stores',
     author: 'Kai Ryssdal',
     alts: ['no cash here stores', 'no cashier stores', 'no cash ear stores'],
