@@ -1,5 +1,29 @@
 module.exports = [
   {
+    title: 'Hotel Art',
+    author: 'Kai Ryssdal',
+    alts: ['ho tell art', 'ho tell arc', 'hotel arm', 'hotel arc', 'hotel are'],
+    keywords: ['hotel', 'ho tell', 'art', 'motel'],
+    guid: 'hotel_art',
+    date: "2018-11-14T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/hotelart-kai-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/hotelart-kai-intro+MIX.mp3"
+    },
+  },
+  {
+    title: 'Myers Briggs',
+    author: 'Kai Ryssdal',
+    alts: ['my urns briggs', 'my ors briggs', 'myers briggs' ],
+    keywords: ['myers', 'briggs', 'meyers', 'rigs'],
+    guid: 'myers_briggs',
+    date: "2018-11-13T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/myersbriggs-kai-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/myersbriggs-kai-intro+MIX.mp3"
+    },
+  },
+  {
     title: 'Kids Apps',
     author: 'Molly Wood',
     alts: ['kids apps', 'kid apps', 'kids acts', 'kid acts', 'kid app'],
