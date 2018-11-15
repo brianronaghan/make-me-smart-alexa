@@ -42,7 +42,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
                 latestUnheardExplainer.title,
                 latestUnheardExplainer.image || config.icon.full,
                 '',
-                `Playing an explainer on ${latestUnheardExplainer.title}. You can say replay or next, hear what's new or submit an idea for a new explainer.`,
+                `Explaining ${latestUnheardExplainer.title}. You can say replay or next, hear what's new or submit an idea for a new explainer.`,
                 config.background.show
               )
             );

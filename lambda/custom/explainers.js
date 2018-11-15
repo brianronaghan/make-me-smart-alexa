@@ -1,5 +1,29 @@
 module.exports = [
   {
+    title: 'Shopping Carts',
+    author: 'Molly Wood',
+    alts: ['shop in cards', 'shop in carts',  'shop in cars', 'shoppin', 'shopping carts'],
+    keywords: ['shopping', 'carts', 'cards', 'cars'],
+    guid: 'shopping_carts',
+    date: "2018-11-16T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/onlineshoppingcart-molly-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/onlineshoppingcart-molly-intro+MIX.mp3"
+    },
+  },
+  {
+    title: 'Startups',
+    author: 'Molly Wood',
+    alts: ['start ups', 'startups', 'star dups'],
+    keywords: ['start', 'ups'],
+    guid: 'startups',
+    date: "2018-11-15T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/startups-molly-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/kidsapps-molly-intro+MIX.mp3"
+    },
+  },
+  {
     title: 'Hotel Art',
     author: 'Kai Ryssdal',
     alts: ['ho tell art', 'ho tell arc', 'hotel arm', 'hotel arc', 'hotel are'],
