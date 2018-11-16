@@ -121,13 +121,18 @@ module.exports = {
 
 
   },
-  templateBodyTemplate2: function (title, image, description, help, background) {
+  templateBodyTemplate2: function (title, image, background) {
     let helpText = '';
 
     var template = {
          "type": "BodyTemplate2",
          "backButton": "HIDDEN",
-         "title" : title,
+         "textContent": {
+           "primaryText": {
+             "type": "RichText",
+             "text": `<font size='5'>${title}</font>`
+           },
+         },
          "image": makeImage(image, 340,340),
          // "backgroundImage": makeImage(background || config.background.show),
          "backButton": "HIDDEN",

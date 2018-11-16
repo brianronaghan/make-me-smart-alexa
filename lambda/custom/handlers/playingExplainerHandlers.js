@@ -184,17 +184,29 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
           displayMessage = util.displayMessage.call(this);
 
         }
+        // if (this.event.context.System.device.supportedInterfaces.Display) {
+        //   this.response.renderTemplate(
+        //     util.templateBodyTemplate3(
+        //       chosenExplainer.title,
+        //       chosenExplainer.image || config.icon.full,
+        //       '',
+        //       displayMessage,
+        //       config.background.show
+        //     )
+        //   );
+        // }
+        // TODO: find image based on host
         if (this.event.context.System.device.supportedInterfaces.Display) {
           this.response.renderTemplate(
-            util.templateBodyTemplate3(
+            util.templateBodyTemplate2(
               chosenExplainer.title,
               chosenExplainer.image || config.icon.full,
-              '',
-              displayMessage,
               config.background.show
             )
           );
         }
+        // display message to hint: displayMessage,
+
         var fullSpeech = intro + prompt;
         this.response.speak(fullSpeech).listen(prompt);
         this.emit(':saveState', true);
