@@ -51,6 +51,15 @@ module.exports = {
     }
     return text;
   },
+  imageForExplainer: function (explainer) {
+    if (explainer.author === 'Molly Wood') {
+      return config.icon.molly;
+    } else if (explainer.author === 'Kai Ryssdal') {
+      return config.icon.kai;
+    } else {
+      return config.icon.full;
+    }
+  },
   latestUnheard: function () {
     let explainers = liveExplainers();
     this.attributes.heard = this.attributes.heard || {};
