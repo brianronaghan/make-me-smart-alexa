@@ -40,9 +40,9 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
             this.response.renderTemplate(
               util.templateBodyTemplate3(
                 latestUnheardExplainer.title,
-                latestUnheardExplainer.image || config.icon.full,
+                util.imageForExplainer(latestUnheardExplainer),
                 '',
-                `Explaining ${latestUnheardExplainer.title}. You can say replay or next, hear what's new or submit an idea for a new explainer.`,
+                `You can say replay or next, hear what's new or submit an idea for a new explainer.`,
                 config.background.show
               )
             );
@@ -60,7 +60,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
           this.response.renderTemplate(
             util.templateBodyTemplate3(
               latestExplainer.title,
-              latestExplainer.image || config.icon.full,
+              util.imageForExplainer(latestExplainer),
               '',
               prompt,
               config.background.show
@@ -102,9 +102,9 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
         this.response.renderTemplate(
           util.templateBodyTemplate3(
             latestExplainer.title,
-            latestExplainer.image || config.icon.full,
+            util.imageForExplainer(latestExplainer),
             '',
-            `Today we're learning about ${latestExplainer.title}. You can say next or replay, hear what's new or submit an idea for a new explainer.`,
+            `You can say next or replay, hear what's new or submit an idea for a new explainer.`,
             config.background.show
           )
         );
@@ -400,7 +400,6 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     let latestUnheardExplainer = util.latestUnheard.call(this);
     if (latestUnheardExplainer) {
       //NOTE temp sanity check
-      console.log('ONLY-0-AT-MIDNIGHT', latestUnheardExplainer.index);
       this.emitWithState('PickItem', {index: {value: latestUnheardExplainer.index + 1}}, 'LAUNCH_NEXT_TO_UNHEARD');
     } else {
       this.emitWithState('PickItem', {index: {value: 2}}, 'LAUNCH_NEXT_HEARDALL');

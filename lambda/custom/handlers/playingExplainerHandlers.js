@@ -195,17 +195,6 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
             )
           );
         }
-        // if (this.event.context.System.device.supportedInterfaces.Display) {
-        //   this.response.renderTemplate(
-        //     util.templateBodyTemplate2(
-        //       chosenExplainer.title,
-        //       chosenExplainer.image || config.icon.full,
-        //       config.background.show
-        //     )
-        //   );
-        // }
-        // display message to hint: displayMessage,
-
         var fullSpeech = intro + prompt;
         this.response.speak(fullSpeech).listen(prompt);
         this.emit(':saveState', true);
