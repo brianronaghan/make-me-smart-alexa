@@ -121,6 +121,22 @@ module.exports = {
 
 
   },
+  templateBodyTemplate2: function (title, image, description, help, background) {
+    let helpText = '';
+
+    var template = {
+         "type": "BodyTemplate2",
+         "backButton": "HIDDEN",
+         "title" : title,
+         "image": makeImage(image, 340,340),
+         // "backgroundImage": makeImage(background || config.background.show),
+         "backButton": "HIDDEN",
+    }
+    // console.log('body', JSON.stringify(template));
+    return template;
+
+
+  },
 
   templateBodyTemplate3: function (title, image, description, help, background) {
     let helpText = '';
