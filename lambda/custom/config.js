@@ -487,7 +487,7 @@ var config = {
     icon : {
       full: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/utils/icons/340x340_white_preview.png",
       kai: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/utils/icons/kai_512.png",
-      molly: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/utils/icons/molly_512.png"
+      molly: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/utils/icons/molly_prof_340.png"
 
     },
     cacheExpiry: 1000 * 60 * 60 * 60 * 3, // 2 hour, but for this spin-up, right? should I persist?
