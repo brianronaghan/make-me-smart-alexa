@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: 'Bio Hacking',
+    author: 'Molly Wood',
+    alts: ['bio hack in', 'bi oh hacking', 'by o hacking', 'bio hack ing'],
+    keywords: ['bio', 'hack', 'bye', 'by o'],
+    guid: 'biohacking',
+    date: "2018-11-19T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/biohacking-molly-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/biohacking-molly-intro+MIX.mp3"
+    },
+  },
+  {
     title: 'Shopping Carts',
     author: 'Molly Wood',
     alts: ['shop in cards', 'shop in carts',  'shop in cars', 'shoppin', 'shopping carts'],
