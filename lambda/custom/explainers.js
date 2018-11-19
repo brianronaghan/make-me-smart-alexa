@@ -1,5 +1,29 @@
 module.exports = [
   {
+    title: 'Butterball Hotline',
+    author: 'Kai Ryssdal',
+    alts: ['butter ball hot line', 'butterball hot line', 'better ball'],
+    keywords: ['butter', 'ball', 'hotline', 'hot line'],
+    guid: 'butterball',
+    date: "2018-11-21T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/butterball-kai-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/butterball-kai-intro+MIX.mp3"
+    },
+  },
+  {
+    title: 'Turkey Economy',
+    author: 'Kai Ryssdal',
+    alts: ['turkey economy', 'tour key economy', 'turk e '],
+    keywords: ['turkey', 'turk', 'turn key', 'tour key'],
+    guid: 'turkey_economy',
+    date: "2018-11-20T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/turkey-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/turkey-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Bio Hacking',
     author: 'Molly Wood',
     alts: ['bio hack in', 'bi oh hacking', 'by o hacking', 'bio hack ing'],
