@@ -188,7 +188,7 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
           this.response.renderTemplate(
             util.templateBodyTemplate3(
               chosenExplainer.title,
-              chosenExplainer.image || config.icon.full,
+              util.imageForExplainer(chosenExplainer),
               '',
               displayMessage,
               config.background.show
