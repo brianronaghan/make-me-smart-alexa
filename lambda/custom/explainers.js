@@ -1,5 +1,29 @@
 module.exports = [
   {
+    title: 'Mars Mission',
+    author: 'Molly Wood',
+    alts: ['mars mission', 'mission to mars', 'mars space'],
+    keywords: ['mars', 'mar', 'mission', 'miss on'],
+    guid: 'mars_mission',
+    date: "2018-11-26T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/marsmission-molly-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/marsmission-molly-intro+MIX.mp3"
+    },
+  },
+  {
+    title: 'Black Friday',
+    author: 'Molly Wood',
+    alts: ['black friday', 'black fry day', 'black fly day'],
+    keywords: ['black', 'friday', 'fry day'],
+    guid: 'black_friday',
+    date: "2018-11-23T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/blackfriday-molly-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/blackfriday-molly-intro+MIX.mp3"
+    },
+  },
+  {
     title: 'Butterball Hotline',
     author: 'Kai Ryssdal',
     alts: ['butter ball hot line', 'butterball hot line', 'better ball'],
