@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: 'Kilogram',
+    author: 'Molly Wood',
+    alts: ['kill oh gram', 'kill o graham', 'kill oh graham', 'kilo gram', 'kilo graham'],
+    keywords: ['kilo', 'gram', 'kill o', 'graham'],
+    guid: 'kilogram',
+    date: "2018-11-27T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/kilogram-molly-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/kilogram-molly-intro+MIX.mp3"
+    },
+  },
+  {
     title: 'Mars Mission',
     author: 'Molly Wood',
     alts: ['mars mission', 'mission to mars', 'mars space'],
