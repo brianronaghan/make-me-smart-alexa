@@ -1,5 +1,41 @@
 module.exports = [
   {
+    title: 'Holiday Seasonal Jobs',
+    author: 'Molly Wood',
+    alts: ['holiday seasonal jobs', 'holiday jobs', 'see son l jobs', 'seas on l jobs'],
+    keywords: ['holiday', 'season', 'seas on'],
+    guid: 'holiday_jobs',
+    date: "2018-12-03T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/seasonaljobs-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/seasonaljobs-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Pet Influencers',
+    author: 'Molly Wood',
+    alts: ['pet in flu embers', 'pet in flu enders', 'pet influencer', ],
+    keywords: ['pet', 'influence'],
+    guid: 'pet_influencers',
+    date: "2018-11-30T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/petinfluencers-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/petinfluencers-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Rating Customers',
+    author: 'Molly Wood',
+    alts: ['rating customers', 'rate in custom or', 'rate in customer', 'customer ratings', 'customer rankings', 'custom or rating'],
+    keywords: ['customer', 'custom or', 'ratings'],
+    guid: 'rating_customers',
+    date: "2018-11-29T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/customertracking-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/customertracking-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'FICO Score',
     author: 'Kai Ryssdal',
     alts: ['fico score', 'fico sore', 'fi co store', 'new credit score', 'fy go score', 'fy co store'],
