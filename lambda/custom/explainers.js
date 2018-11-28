@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: 'FICO Score',
+    author: 'Kai Ryssdal',
+    alts: ['fico score', 'fico sore', 'fi co store', 'new credit score', 'fy go score', 'fy co store'],
+    keywords: ['fico', 'FICO', 'score', 'fi co', 'fy co'],
+    guid: 'ficoscore',
+    date: "2018-11-28T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/ficoscore-kai-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/ficoscore-kai-intro+MIX.mp3"
+    },
+  },
+  {
     title: 'Kilogram',
     author: 'Molly Wood',
     alts: ['kill oh gram', 'kill o graham', 'kill oh graham', 'kilo gram', 'kilo graham'],
