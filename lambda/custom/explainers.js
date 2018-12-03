@@ -1,5 +1,41 @@
 module.exports = [
   {
+    title: 'Holiday Album',
+    author: 'Kai Ryssdal',
+    alts: ['holiday album', 'holiday alum', 'holler day album'],
+    keywords: ['album', 'holiday'],
+    guid: 'holiday_album',
+    date: "2018-12-07T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/holidayalbum-kai-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/holidayalbum-kai-intro+MIX.mp3"
+    },
+  },
+  {
+    title: 'Christmas Tree Farms',
+    author: 'Kai Ryssdal',
+    alts: ['christmas tea farm', 'christmas three farm'],
+    keywords: ['christmas', 'tree', 'farm'],
+    guid: 'christmas_tree_farms',
+    date: "2018-12-05T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/christmastreefarms-kai-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/christmastreefarms-kai-intro+MIX.mp3"
+    },
+  },
+  {
+    title: 'Sedans',
+    author: 'Kai Ryssdal',
+    alts: ['see dans', 'c Dans', 'sedans'],
+    keywords: ['sedan', 'american'],
+    guid: 'sedans',
+    date: "2018-12-04T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/sedans-kai-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/sedans-kai-intro+MIX.mp3"
+    },
+  },
+  {
     title: 'Holiday Seasonal Jobs',
     author: 'Molly Wood',
     alts: ['holiday seasonal jobs', 'holiday jobs', 'see son l jobs', 'seas on l jobs'],
