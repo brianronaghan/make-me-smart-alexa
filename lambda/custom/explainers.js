@@ -1,14 +1,50 @@
 module.exports = [
+  // {
+  //   title: 'Holiday Album',
+  //   author: 'Kai Ryssdal',
+  //   alts: ['holiday album', 'holiday alum', 'holler day album'],
+  //   keywords: ['album', 'holiday'],
+  //   guid: 'holiday_album',
+  //   date: "2018-12-25T07:00:00Z",
+  //   audio: {
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/holidayalbum-kai-explainer+MIX.mp3",
+  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/holidayalbum-kai-intro+MIX.mp3"
+  //   },
+  // },
   {
-    title: 'Holiday Album',
-    author: 'Kai Ryssdal',
-    alts: ['holiday album', 'holiday alum', 'holler day album'],
-    keywords: ['album', 'holiday'],
-    guid: 'holiday_album',
+    title: 'Voice Over I.P.',
+    author: 'Molly Wood',
+    alts: ['voiceover I pee', 'voice over i p', 'voice over i pee'],
+    keywords: ['voice', 'i p', 'i.p.', 'voiceover', 'i pee'],
+    guid: 'voip',
+    date: "2018-12-10T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/voip-molly-explainer.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/voip-molly-intro.mp3"
+    },
+  },
+  {
+    title: 'Pause Ad',
+    author: 'Molly Wood',
+    alts: ['pause ad', 'pause add', 'paws ad', 'paws add'],
+    keywords: ['pause', 'paws'],
+    guid: 'pause_ad',
     date: "2018-12-07T07:00:00Z",
     audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/holidayalbum-kai-explainer+MIX.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/holidayalbum-kai-intro+MIX.mp3"
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/pausead-molly-explainer.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/pausead-molly-intro.mp3"
+    },
+  },
+  {
+    title: 'Biometric Airport',
+    author: 'Molly Wood',
+    alts: ['bio metric air port', 'biomet rick airport', 'bio met rick err port'],
+    keywords: ['bio', 'metric', 'air', 'port'],
+    guid: 'biometric_airport',
+    date: "2018-12-06T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/biometricair-molly-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/biometricair-molly-intro+MIX.mp3"
     },
   },
   {
