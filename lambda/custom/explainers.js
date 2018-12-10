@@ -1,16 +1,28 @@
 module.exports = [
-  // {
-  //   title: 'Holiday Album',
-  //   author: 'Kai Ryssdal',
-  //   alts: ['holiday album', 'holiday alum', 'holler day album'],
-  //   keywords: ['album', 'holiday'],
-  //   guid: 'holiday_album',
-  //   date: "2018-12-25T07:00:00Z",
-  //   audio: {
-  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/holidayalbum-kai-explainer+MIX.mp3",
-  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/holidayalbum-kai-intro+MIX.mp3"
-  //   },
-  // },
+  {
+    title: 'Holiday Album',
+    author: 'Kai Ryssdal',
+    alts: ['holiday album', 'holiday alum', 'holler day album'],
+    keywords: ['album', 'holiday'],
+    guid: 'holiday_album',
+    date: "2018-12-14T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/holidayalbum-kai-explainer+FIX+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/holidayalbum-kai-intro+MIX.mp3"
+    },
+  },
+  {
+    title: 'Two Liter Bottle',
+    author: 'Kai Ryssdal',
+    alts: ['two leader bottle', 'two lead or bot l', 'two leader bot old', 'too liter bot l', 'too liter bottle'],
+    keywords: ['liter', 'bottle'],
+    guid: 'two_liter',
+    date: "2018-12-11T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/twoliter-kai-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/twoliter-kai-intro+MIX.mp3"
+    },
+  },
   {
     title: 'Voice Over I.P.',
     author: 'Molly Wood',
