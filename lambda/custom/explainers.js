@@ -12,6 +12,30 @@ module.exports = [
     },
   },
   {
+    title: 'Space Worms',
+    author: 'Molly Wood',
+    alts: ['space warns', 'space warms'],
+    keywords: ['space', 'worm', 'warm'],
+    guid: 'space_worms',
+    date: "2018-12-13T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/spaceworms-molly-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/spaceworms-molly-intro+MIX.mp3"
+    },
+  },
+  {
+    title: 'Soap Opera Effect',
+    author: 'Molly Wood',
+    alts: ['soap op ra effect', 'soap op reflex', 'soap op draw feck'],
+    keywords: ['soap', 'opera'],
+    guid: 'soap_opera',
+    date: "2018-12-12T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/soapoperaeffect-molly-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/soapoperaeffect-molly-intro+MIX.mp3"
+    },
+  },
+  {
     title: 'Two Liter Bottle',
     author: 'Kai Ryssdal',
     alts: ['two leader bottle', 'two lead or bot l', 'two leader bot old', 'too liter bot l', 'too liter bottle'],
