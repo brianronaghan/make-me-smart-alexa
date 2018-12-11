@@ -14,7 +14,7 @@ module.exports = [
   {
     title: 'Space Worms',
     author: 'Molly Wood',
-    alts: ['space warns', 'space warms'],
+    alts: ['space warns', 'space warms', 'space worm', 'spay swarm'],
     keywords: ['space', 'worm', 'warm'],
     guid: 'space_worms',
     date: "2018-12-13T07:00:00Z",
@@ -26,8 +26,8 @@ module.exports = [
   {
     title: 'Soap Opera Effect',
     author: 'Molly Wood',
-    alts: ['soap op ra effect', 'soap op reflex', 'soap op draw feck'],
-    keywords: ['soap', 'opera'],
+    alts: ['soap op ra effect', 'soap op reflex', 'soap op draw feck', 'soup op era'],
+    keywords: ['soap', 'opera', 'op era'],
     guid: 'soap_opera',
     date: "2018-12-12T07:00:00Z",
     audio: {
