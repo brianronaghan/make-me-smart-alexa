@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: 'Christmas Carol',
+    author: 'Kai Ryssdal',
+    alts: ['christmas carol', 'christ mass carol', 'chris miss carrol'],
+    keywords: ['carol', 'carrol', 'chris miss', 'chris mass car old'],
+    guid: 'christmas_carol',
+    date: "2018-12-17T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/christmascarol-kai-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/christmascarol-kai-intro+MIX.mp3"
+    },
+  },
+  {
     title: 'Holiday Album',
     author: 'Kai Ryssdal',
     alts: ['holiday album', 'holiday alum', 'holler day album'],
