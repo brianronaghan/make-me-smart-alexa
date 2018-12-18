@@ -1,9 +1,33 @@
 module.exports = [
   {
+    title: 'Wrapping Paper',
+    author: 'Kai Ryssdal',
+    alts: ['wrapping paper', 'rapping pay per', 'rap in paper'],
+    keywords: ['wrap', 'rap', 'paper', 'pay per'],
+    guid: 'wrapping_paper',
+    date: "2018-12-19T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/giftwrap-kia-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/giftwrap-kai-intro+MIX.mp3"
+    },
+  },
+  {
+    title: 'Email Bankruptcy',
+    author: 'Molly Wood',
+    alts: ['email bankrupt c', 'email bank rut c'],
+    keywords: ['email', 'bankrupt', 'bank rup', 'bank rut'],
+    guid: 'email_bankruptcy',
+    date: "2018-12-18T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/emailbankruptcy-molly-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/emailbankruptcy-molly-intro+MIX.mp3"
+    },
+  },
+  {
     title: 'Christmas Carol',
     author: 'Kai Ryssdal',
     alts: ['christmas carol', 'christ mass carol', 'chris miss carrol'],
-    keywords: ['carol', 'carrol', 'chris miss', 'chris mass car old'],
+    keywords: ['carol', 'carrol', 'chris miss', 'chris mass car old', 'christmas'],
     guid: 'christmas_carol',
     date: "2018-12-17T07:00:00Z",
     audio: {
