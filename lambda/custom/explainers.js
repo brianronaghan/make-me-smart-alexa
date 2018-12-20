@@ -1,5 +1,29 @@
 module.exports = [
   {
+    title: 'Far Out',
+    author: 'Molly Wood',
+    alts: ['far out'],
+    keywords: ['far out', 'farout', 'faroot'],
+    guid: 'farout',
+    date: "2018-12-21T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/farout-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/farout-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'User Data',
+    author: 'Molly Wood',
+    alts: ['use r data', 'user date a', 'use our data'],
+    keywords: ['user', 'data', 'date a', 'date uh', 'dat uh'],
+    guid: 'user_data',
+    date: "2018-12-20T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/userdata-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/userdata-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Wrapping Paper',
     author: 'Kai Ryssdal',
     alts: ['wrapping paper', 'rapping pay per', 'rap in paper'],
