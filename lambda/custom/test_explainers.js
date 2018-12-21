@@ -56,13 +56,13 @@ function checkExplainer (ex) {
       }
       console.log(`Pass ${req}`);
     } else if (typeof REQUIREMENTS[req] === 'object') {
-      if (REQUIREMENTS[req][ex[req]]) {
+      if (REQUIREMENTS[req][ex[req]] ) {
         throw new Error(`Duplicate ${req} ${ex[req]}`);
       } else {
         console.log(`Pass ${req}`);
         REQUIREMENTS[req][ex[req]] = true;
       }
-    } else if (req === 'alts') {
+    } else if (req === 'alts' && ex.guid.indexOf('bestof') < 0 ) {
       for (let alt of ex.alts) {
         if (ALTS.indexOf(alt) > -1) {
           throw new Error(`COLLIDING ALT TERM ${alt}`);
@@ -71,7 +71,7 @@ function checkExplainer (ex) {
         }
       }
       console.log(`Pass ${req}`);
-    } else if (req === 'keywords') {
+    } else if (req === 'keywords' && ex.guid.indexOf('bestof') < 0) {
       for (let keyword of ex.keywords) {
         if (keyword && KEYS.indexOf(keyword) > -1) {
           throw new Error(`KW taken ${keyword}`);

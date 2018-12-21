@@ -1,6 +1,6 @@
 module.exports = [
   {
-    title: 'Emoji',
+    title: 'Emoji (Best of)',
     author: 'Molly Wood',
     alts: ['emojis', 'e moji', 'emoji', 'be moji', 'emo'],
     keywords: ['emoji', 'emo bee', 'emo', 'emo g'],
@@ -12,7 +12,7 @@ module.exports = [
     },
   },
   {
-    title: 'Credit Score',
+    title: 'Credit Score (Best of)',
     author: 'Kai Ryssdal',
     alts: ['credit score', 'my credit score', 'your credit score', 'credit rating', 'credit number', 'credit sore', 'credit store', 'reddit sore'],
     keywords: ['credit', 'score', 'store', 'rating', 'sore', 'reddit'],
@@ -24,7 +24,7 @@ module.exports = [
     },
   },
   {
-    title: 'Scooter Craze',
+    title: 'Scooter Craze (Best of)',
     author: 'Molly Wood',
     alts: ['scooter craze', 'scoot', 'scooters'],
     keywords: ['scooter', 'craze', 'crays', 'cooter'],
@@ -36,7 +36,7 @@ module.exports = [
     },
   },
   {
-    title: 'Two Dollar Bill',
+    title: 'Two Dollar Bill (Best of)',
     author: 'Kai Ryssdal',
     alts: ['dollar', 'two dollar bill', 'two buck bill', 'two dollar', '2 dollar'],
     keywords: ['dollar', 'doll or', 'doll', 'two'],
@@ -48,7 +48,7 @@ module.exports = [
     },
   },
   {
-    title: 'Billboard Charts',
+    title: 'Billboard Charts (Best of)',
     author: 'Kai Ryssdal',
     alts: ['bill board charts', 'billboard sharks', 'bill bored charts', 'bill born chart', 'billboard char', 'billboard art', 'bill bored dart'],
     keywords: ['billboard', 'chart', 'bill board', 'bill', 'ill board'],
