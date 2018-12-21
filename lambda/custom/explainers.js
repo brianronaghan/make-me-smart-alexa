@@ -1,5 +1,65 @@
 module.exports = [
   {
+    title: 'Emoji',
+    author: 'Molly Wood',
+    alts: ['emojis', 'e moji', 'emoji', 'be moji', 'emo'],
+    keywords: ['emoji', 'emo bee', 'emo', 'emo g'],
+    guid: 'bestof_emoji',
+    date: "2018-12-28T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/emoji-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/bestof1-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Credit Score',
+    author: 'Kai Ryssdal',
+    alts: ['credit score', 'my credit score', 'your credit score', 'credit rating', 'credit number', 'credit sore', 'credit store', 'reddit sore'],
+    keywords: ['credit', 'score', 'store', 'rating', 'sore', 'reddit'],
+    guid: 'bestof_credit_score',
+    date: "2018-12-27T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/credit-score-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/explainerhighlightsihaveanidea-kai-intro+MIX.mp3"
+    },
+  },
+  {
+    title: 'Scooter Craze',
+    author: 'Molly Wood',
+    alts: ['scooter craze', 'scoot', 'scooters'],
+    keywords: ['scooter', 'craze', 'crays', 'cooter'],
+    guid: 'bestof_scooter_craze',
+    date: "2018-12-26T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/micromobility-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/bestof2-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Two Dollar Bill',
+    author: 'Kai Ryssdal',
+    alts: ['dollar', 'two dollar bill', 'two buck bill', 'two dollar', '2 dollar'],
+    keywords: ['dollar', 'doll or', 'doll', 'two'],
+    guid: 'bestof_two_dollar_bill',
+    date: "2018-12-25T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/two-dollar-bill-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/explainerhighlightsbrowse-kai-intro+MIX.mp3"
+    },
+  },
+  {
+    title: 'Billboard Charts',
+    author: 'Kai Ryssdal',
+    alts: ['bill board charts', 'billboard sharks', 'bill bored charts', 'bill born chart', 'billboard char', 'billboard art', 'bill bored dart'],
+    keywords: ['billboard', 'chart', 'bill board', 'bill', 'ill board'],
+    guid: 'bestof_billboard',
+    date: "2018-12-24T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/billboard-kai-explainer-fixmix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/explainerhighlightsihaveanidea-kai-intro+MIX.mp3"
+    },
+  },
+  {
     title: 'Far Out',
     author: 'Molly Wood',
     alts: ['far out'],
@@ -1406,7 +1466,6 @@ module.exports = [
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Wood+-+The+Cloud+-+MIXLEV_alexa.mp3",
     }
   },
-
   {
     title: 'Billboard Charts',
     author: 'Kai Ryssdal',
