@@ -99,14 +99,14 @@ var searchResults = {
     'so curse',
     'so cursed'
   ],
-  pokemon: [
-    'mom',
-    'hokey nam',
-    'pokemon',
-    'pokey man',
-    'poke the',
-    'Pokémon'
-  ],
+  // pokemon: [
+  //   'mom',
+  //   'hokey nam',
+  //   'pokemon',
+  //   'pokey man',
+  //   'poke the',
+  //   'Pokémon'
+  // ],
 
   household_debt_launch: [
     'house hold explain are',
@@ -119,14 +119,14 @@ var searchResults = {
     'fine g',
     '5G'
   ],
-  two_dollar_bill: [
+  bestof_two_dollar_bill: [
     'two dollar',
   ],
   cardboard: [
     'card board',
   ],
   shark_week: [
-    'shark',
+    // 'shark',
     'chart week',
     'card week'
   ],
