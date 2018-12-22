@@ -5,7 +5,7 @@ module.exports = [
     alts: ['young adult movies', 'y a', 'y.a.', 'young adult move e'],
     keywords: ['young', 'adult', 'movies', 'y.a.', 'YA', 'why a'],
     guid: 'ya_movies',
-    date: "2018-01-04T07:00:00Z",
+    date: "2019-01-04T07:00:00Z",
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/booksandmovies-kai-explainer-mix.mp3",
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/booksandmovies-kai-intro-mix.mp3"
@@ -17,7 +17,7 @@ module.exports = [
     alts: ['recession', 're says shun'],
     keywords: ['recession', 're session', 're says shun'],
     guid: 'recession',
-    date: "2018-01-03T07:00:00Z",
+    date: "2019-01-03T07:00:00Z",
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/recession-kai-explainer-mix.mp3",
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/recession-kai-intro-mix.mp3"
