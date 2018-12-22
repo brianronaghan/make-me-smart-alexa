@@ -1,5 +1,53 @@
 module.exports = [
   {
+    title: 'Young Adult Movies',
+    author: 'Kai Ryssdal',
+    alts: ['young adult movies', 'y a', 'y.a.', 'young adult move e'],
+    keywords: ['young', 'adult', 'movies', 'y.a.', 'YA', 'why a'],
+    guid: 'ya_movies',
+    date: "2018-01-04T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/booksandmovies-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/booksandmovies-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Recession',
+    author: 'Kai Ryssdal',
+    alts: ['recession', 're says shun'],
+    keywords: ['recession', 're session', 're says shun'],
+    guid: 'recession',
+    date: "2018-01-03T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/recession-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/recession-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Gym Memberships',
+    author: 'Kai Ryssdal',
+    alts: ['gym member ship', 'jim member ship', 'jim member chip'],
+    keywords: ['gym', 'member', 'ship', 'jim', 'chip'],
+    guid: 'gym_memberships',
+    date: "2019-01-01T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/gymmemberships-kai-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/gymmemberships-kai-intro+MIX.mp3"
+    },
+  },
+  {
+    title: 'Flexible Spending Accounts',
+    author: 'Kai Ryssdal',
+    alts: ['flexible spending account', 'federal spending account', 'flexible spending a count'],
+    keywords: ['flex', 'spend', 'account', 'a count'],
+    guid: 'fsa',
+    date: "2018-12-31T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/flexiblespendingaccount-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/flexiblespendingaccount-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Emoji (Best of)',
     author: 'Molly Wood',
     alts: ['emojis', 'e moji', 'emoji', 'be moji', 'emo'],
