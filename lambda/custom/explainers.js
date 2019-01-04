@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: 'Electric Car Rebate',
+    author: 'Molly Wood',
+    alts: ['electric car re bait', 'elect rick car re bait', 'elect rick card re bake'],
+    keywords: ['electric', 'rebate', 're bait', 'elect rick'],
+    guid: 'electric_rebate',
+    date: "2019-01-07T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/electriccar-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/electriccar-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Young Adult Movies',
     author: 'Kai Ryssdal',
     alts: ['young adult movies', 'y a', 'y.a.', 'young adult move e'],
