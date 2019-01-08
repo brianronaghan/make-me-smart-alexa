@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: 'Copyright Expiration',
+    author: 'Kai Ryssdal',
+    alts: ['copy write ex per a shun', 'copy write x per asian', 'copy wry x per a shun'],
+    keywords: ['copy', 'write', 'right', 'expiration', 'ex per ration'],
+    guid: 'copyright_expiration',
+    date: "2019-01-08T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/copyright-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/copyright-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Electric Car Rebate',
     author: 'Molly Wood',
     alts: ['electric car re bait', 'elect rick car re bait', 'elect rick card re bake'],
