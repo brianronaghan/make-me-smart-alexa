@@ -1,5 +1,29 @@
 module.exports = [
   {
+    title: 'NFL Scoring',
+    author: 'Kai Ryssdal',
+    alts: ['n f l score in', 'nfl scoring'],
+    keywords: ['nfl', 'score in', 'scoring', 'n f l', 'n.f.l.'],
+    guid: 'nfl_scoring',
+    date: "2019-01-11T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/nfl-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/nfl-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: '5G Rollout',
+    author: 'Molly Wood',
+    alts: ['find g roll out', 'five g role out', '5 g roll out'],
+    keywords: ['5g', 'roll','out'],
+    guid: '5g_rollout',
+    date: "2019-01-10T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/5grollout-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/5grollout-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'China Space Race',
     author: 'Molly Wood',
     alts: ['china space race', 'shy na space rays'],
