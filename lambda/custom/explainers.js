@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: 'China Space Race',
+    author: 'Molly Wood',
+    alts: ['china space race', 'shy na space rays'],
+    keywords: ['china', 'space', 'race', 'rays'],
+    guid: 'china_space',
+    date: "2019-01-09T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/chinaspace-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/chinaspace-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Copyright Expiration',
     author: 'Kai Ryssdal',
     alts: ['copy write ex per a shun', 'copy write x per asian', 'copy wry x per a shun'],
