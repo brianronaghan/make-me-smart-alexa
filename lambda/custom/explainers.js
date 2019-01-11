@@ -1,5 +1,29 @@
 module.exports = [
   {
+    title: 'Blue Chip',
+    author: 'Kai Ryssdal',
+    alts: ['blue chip', 'blue ship', 'blew ship'],
+    keywords: ['blue', 'chip', 'ship', 'blew', 'blu'],
+    guid: 'blue_chip',
+    date: "2019-01-15T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/bluechip-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/bluechip-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Infinity Inbox',
+    author: 'Kai Ryssdal',
+    alts: ['infinity in box', 'ininite e in box', 'infinite inbox'],
+    keywords: ['infinity', 'in box', 'inbox', 'infinite e'],
+    guid: 'infinity_inbox',
+    date: "2019-01-14T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/inboxinfinity-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/inboxinfinity-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'NFL Scoring',
     author: 'Kai Ryssdal',
     alts: ['n f l score in', 'nfl scoring'],
