@@ -1,5 +1,41 @@
 module.exports = [
   {
+    title: 'Trademark',
+    author: 'Kai Ryssdal',
+    alts: ['tray d mark', 'trade mark', 'raid mart'],
+    keywords: ['trade', 'mark', 'mart'],
+    guid: 'trademark',
+    date: "2019-01-18T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/trademark-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/trademark-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Netflix Model',
+    author: 'Molly Wood',
+    alts: ['netflix model', 'net flicks model', 'net flix model', 'net fix mod l'],
+    keywords: ['netflix', 'net flicks', 'net flix', 'model', 'mod l'],
+    guid: 'netflix_model',
+    date: "2019-01-17T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/netflixmodel-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/netflixmodel-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Verified Calls',
+    author: 'Molly Wood',
+    alts: ['verified calls', 'very find calls', 'veri'],
+    keywords: ['verified', 'call', 'very'],
+    guid: 'verified_calls',
+    date: "2019-01-16T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/verifiedcalls-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/verifiedcalls-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Blue Chip',
     author: 'Kai Ryssdal',
     alts: ['blue chip', 'blue ship', 'blew ship'],
