@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: 'Birdbox Challenge',
+    author: 'Molly Wood',
+    alts: ['bird box challenge', 'birdbox cal end', 'bird box shall end'],
+    keywords: ['bird', 'box', 'challenge', 'cal end'],
+    guid: 'birdbox_challenge',
+    date: "2019-01-22T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/youtubebirdbox-molly-explainer-submix-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/youtubebirdbox-molly-intro-submix-mix.mp3"
+    },
+  },
+  {
     title: 'Trademark',
     author: 'Kai Ryssdal',
     alts: ['tray d mark', 'trade mark', 'raid mart'],
