@@ -1,5 +1,65 @@
 module.exports = [
   {
+    title: 'Internet Doorbell',
+    author: 'Molly Wood',
+    alts: ['inter net door bell', 'inter net doorbell', 'inter neck door bell'],
+    keywords: ['internet', 'door', 'bell'],
+    guid: 'internet_doorbell',
+    date: "2019-01-29T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/doorbell-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/doorbell-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Teen Driving',
+    author: 'Kai Ryssdal',
+    alts: ['teen drive in', 'teen driving', 'teen drive-in', 'teen drive and'],
+    keywords: ['teen', 'driving', 'drive'],
+    guid: 'teen_driving',
+    date: "2019-01-28T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/teendriving-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/teendriving-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Grocery Store Robot',
+    author: 'Molly Wood',
+    alts: ['grocery store robot', 'grocer e store row bot', 'grocer e store robot'],
+    keywords: ['grocery', 'robot', 'store', 'grocer e'],
+    guid: 'grocery_robot',
+    date: "2019-01-25T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/storerobots-molly-explainer-submix-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/storerobots-molly-intro-submix-mix.mp3"
+    },
+  },
+  {
+    title: 'Whatsapp',
+    author: 'Molly Wood',
+    alts: ["what's app", 'whats app', 'whats ap', 'what sap'],
+    keywords: ['what', 'app', 'whatsapp'],
+    guid: 'whatsapp',
+    date: "2019-01-24T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/whatsapp-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/whatsapp-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Federal Workers',
+    author: 'Kai Ryssdal',
+    alts: ['fed or real worker', 'federal work or', 'federal workers', 'fed oral workers'],
+    keywords: ['federal', 'worker'],
+    guid: 'federal_workers',
+    date: "2019-01-23T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/federalworkers-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/federalworkers-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Birdbox Challenge',
     author: 'Molly Wood',
     alts: ['bird box challenge', 'birdbox cal end', 'bird box shall end'],
