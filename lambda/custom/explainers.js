@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: 'Reusables',
+    author: 'Kai Ryssdal',
+    alts: ['reuse able', 'refuse able', 're use ables'],
+    keywords: ['reuse', 'reuseable', 'reusable', 're use'],
+    guid: 'reusables',
+    date: "2019-01-30T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/resuables-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/resuables-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Internet Doorbell',
     author: 'Molly Wood',
     alts: ['inter net door bell', 'inter net doorbell', 'inter neck door bell'],
