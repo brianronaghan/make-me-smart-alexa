@@ -1,5 +1,29 @@
 module.exports = [
   {
+    title: 'Superbowl Tee Shirts',
+    author: 'Molly Wood',
+    alts: ['super bowl tee shirts', 'super ball tee shirt', 'super bowl t shirt'],
+    keywords: ['superbowl', 'tee', 'super bowl', 'shirts', 'super'],
+    guid: 'superbowl_tees',
+    date: "2019-02-01T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/championshiptshirts-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/championshiptshirts-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Netflix Streaming',
+    author: 'Molly Wood',
+    alts: ['net flix streaming', 'netflix streaming', 'net flicks screaming'],
+    keywords: ['net', 'flicks', 'flix', 'stream', 'netflix', 'scream'],
+    guid: 'netflix_numbers',
+    date: "2019-01-31T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/netflix-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/netflix-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Reusables',
     author: 'Kai Ryssdal',
     alts: ['reuse able', 'refuse able', 're use ables'],

@@ -91,14 +91,14 @@ var searchResults = {
     'bond market',
     'bomb market',
   ],
-  super_soakers: [
-    'super soaker',
-    'sue her soaker',
-    'water gun',
-    'super',
-    'so curse',
-    'so cursed'
-  ],
+  // super_soakers: [
+  //   'super soaker',
+  //   'sue her soaker',
+  //   'water gun',
+  //   'super',
+  //   'so curse',
+  //   'so cursed'
+  // ],
   // pokemon: [
   //   'mom',
   //   'hokey nam',
