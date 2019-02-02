@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: 'Conversation Hearts',
+    author: 'Kai Ryssdal',
+    alts: ['converse ate shun hearts', 'conversation hearts', 'conversation hards', 'conversation harks'],
+    keywords: ['conversation', 'heart', 'candy', 'candies', 'converse ate shun'],
+    guid: 'conversation_hearts',
+    date: "2019-02-04T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/conversation-hearts-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/conversation-hearts-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Superbowl Tee Shirts',
     author: 'Molly Wood',
     alts: ['super bowl tee shirts', 'super ball tee shirt', 'super bowl t shirt'],
