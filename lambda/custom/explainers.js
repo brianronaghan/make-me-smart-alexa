@@ -1,5 +1,30 @@
 module.exports = [
   {
+    title: 'Equal Pay Act',
+    author: 'Kai Ryssdal',
+    alts: ['equal pay act', 'equals paid act'],
+    keywords: ['equal', 'pay', 'act', 'paid'],
+    guid: 'equal_pay_act',
+    date: "2019-02-06T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/equal-pay-kai-explainer.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/equal-pay-act-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'State of the Union',
+    author: 'Kai Ryssdal',
+    alts: ['state of the union', 'slate of the union', 'sate of the union', 'state of union'],
+    keywords: ['state', 'union'],
+    guid: 'sotu',
+    date: "2019-02-05T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/sotu-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/sotu-kai-intro-mix.mp3"
+    },
+  },
+
+  {
     title: 'Conversation Hearts',
     author: 'Kai Ryssdal',
     alts: ['converse ate shun hearts', 'conversation hearts', 'conversation hards', 'conversation harks'],
