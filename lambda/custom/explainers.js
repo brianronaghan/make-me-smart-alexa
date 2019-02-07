@@ -1,5 +1,41 @@
 module.exports = [
   {
+    title: 'Fake Meat',
+    author: 'Molly Wood',
+    alts: ['fake meat', 'fake me', 'fake meet', 'face meek'],
+    keywords: ['fake', 'meat', 'meet'],
+    guid: 'fake_meat',
+    date: "2019-02-11T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/fake-meat-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/fake-meat-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Grammy Award',
+    author: 'Kai Ryssdal',
+    alts: ['gram me award', 'graham me a ward', 'grab me a war'],
+    keywords: ['gram', 'graham', 'grammy', 'award'],
+    guid: 'grammy_award',
+    date: "2019-02-08T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/grammys-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/grammys-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Lego Movie',
+    author: 'Molly Wood',
+    alts: ['lego movie too', 'lego move e too', 'lego movie two'],
+    keywords: ['lego', 'movie', 'leg'],
+    guid: 'lego_movie',
+    date: "2019-02-07T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/legos-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/legos-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Equal Pay Act',
     author: 'Kai Ryssdal',
     alts: ['equal pay act', 'equals paid act'],
@@ -11,6 +47,7 @@ module.exports = [
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/equal-pay-act-kai-intro-mix.mp3"
     },
   },
+
   {
     title: 'State of the Union',
     author: 'Kai Ryssdal',
