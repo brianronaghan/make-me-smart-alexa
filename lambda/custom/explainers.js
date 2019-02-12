@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: 'World Bank',
+    author: 'Kai Ryssdal',
+    alts: ['world bank', 'world bang','whirl bank'],
+    keywords: ['world', 'bank', 'bang', 'whirl'],
+    guid: 'world_bank',
+    date: "2019-02-12T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/world-bank-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/world-bank-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Fake Meat',
     author: 'Molly Wood',
     alts: ['fake meat', 'fake me', 'fake meet', 'face meek'],
