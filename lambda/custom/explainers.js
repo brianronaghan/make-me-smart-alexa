@@ -1,5 +1,29 @@
 module.exports = [
   {
+    title: 'National Days',
+    author: 'Kai Ryssdal',
+    alts: ['national days', 'national day', 'nash on old days'],
+    keywords: ['national', 'days', 'day', 'daze', 'nash'],
+    guid: 'national_days',
+    date: "2019-02-14T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/national-days-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/national-days-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Quantum Computing',
+    author: 'Molly Wood',
+    alts: ['quantum compute in', 'quant a computing', 'quant um compute or'],
+    keywords: ['quantum', 'compute', 'computing', 'quant'],
+    guid: 'quantum_computing',
+    date: "2019-02-13T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/quantum-computing-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/quantum-computing-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'World Bank',
     author: 'Kai Ryssdal',
     alts: ['world bank', 'world bang','whirl bank'],
