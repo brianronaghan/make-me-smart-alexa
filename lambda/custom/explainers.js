@@ -1,5 +1,29 @@
 module.exports = [
   {
+    title: 'Unicorn Startups',
+    author: 'Molly Wood',
+    alts: ['unique corn start up', 'you need corn start up', 'unicorn start up'],
+    keywords: ['unicorn', 'startup', 'start-up', 'unique corn', 'corn'],
+    guid: 'unicorn_startups',
+    date: "2019-02-18T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/unicorn-startups-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/unicorn-startups-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Oscars for Geeks',
+    author: 'Molly Wood',
+    alts: ['oz cars for geeks', 'oscars for geeks', 'a scar for geek'],
+    keywords: ['oscar', 'geek', 'oz car'],
+    guid: 'oscars_geeks',
+    date: "2019-02-15T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/oscars-for-geeks-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/oscars-for-geeks-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'National Days',
     author: 'Kai Ryssdal',
     alts: ['national days', 'national day', 'nash on old days'],
