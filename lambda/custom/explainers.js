@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: 'Dating Apps',
+    author: 'Molly Wood',
+    alts: ['dating apps', 'day tin apps', 'date in apps'],
+    keywords: ['dating', 'app'],
+    guid: 'dating_apps',
+    date: "2019-02-20T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/dating-apps-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/dating-apps-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Unicorn Startups',
     author: 'Molly Wood',
     alts: ['unique corn start up', 'you need corn start up', 'unicorn start up'],
