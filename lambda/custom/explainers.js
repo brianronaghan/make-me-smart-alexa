@@ -1,5 +1,42 @@
 module.exports = [
   {
+    title: 'Green New Deal',
+    author: 'Molly Wood',
+    alts: ['green new deal', 'green knew deal', 'green new eel'],
+    keywords: ['green', 'new', 'deal'],
+    guid: 'green_new_deal',
+    date: "2019-02-25T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/green-new-deal-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/green-new-deal-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Oscar Cost',
+    author: 'Kai Ryssdal',
+    alts: ['oscar cost', 'oscar cause'],
+    keywords: ['oscar', 'cost', 'price'],
+    guid: 'oscar_cost',
+    date: "2019-02-22T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/oscar-cost-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/oscar-cost-kai-intro-mix.mp3"
+    },
+  },
+
+  {
+    title: 'Pet Spending',
+    author: 'Kai Ryssdal',
+    alts: ['pet spending', 'pet spend in', 'bet spend in'],
+    keywords: ['pet', 'spend'],
+    guid: 'pet_spending',
+    date: "2019-02-21T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/pet-spending-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/pet-spending-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Dating Apps',
     author: 'Molly Wood',
     alts: ['dating apps', 'day tin apps', 'date in apps'],
