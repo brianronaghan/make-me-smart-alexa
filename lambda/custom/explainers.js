@@ -14,8 +14,8 @@ module.exports = [
   {
     title: 'Oscar Cost',
     author: 'Kai Ryssdal',
-    alts: ['oscar cost', 'oscar cause'],
-    keywords: ['oscar', 'cost', 'price'],
+    alts: ['oscar cost', 'oscar cause', 'oz car cost'],
+    keywords: ['oscar', 'cost', 'price', 'oz car'],
     guid: 'oscar_cost',
     date: "2019-02-22T07:00:00Z",
     audio: {
@@ -23,7 +23,6 @@ module.exports = [
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/oscar-cost-kai-intro-mix.mp3"
     },
   },
-
   {
     title: 'Pet Spending',
     author: 'Kai Ryssdal',
