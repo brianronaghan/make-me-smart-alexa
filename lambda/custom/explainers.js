@@ -1,5 +1,66 @@
 module.exports = [
   {
+    title: 'Electric Car History',
+    author: 'Kai Ryssdal',
+    alts: ['elect rick car his story', 'electric car history'],
+    keywords: ['electric', 'car', 'history', 'elect rick'],
+    guid: 'electric_car_hist',
+    date: "2019-03-04T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/electric-cars-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/electric-cars-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Addressable TV Ads',
+    author: 'Molly Wood',
+    alts: ['address able ad', 'address able as', 'addressable ads', 'addressable abs'],
+    keywords: ['address', 'TV', 'T.V.', 'ads'],
+    guid: 'addressable_tv_ads',
+    date: "2019-03-01T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/addressable-tv-ads-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/addressable-tv-ads-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Tipping By State',
+    author: 'Kai Ryssdal',
+    alts: ['tipping by state', 'tip in by stayed', 'tipping by staid', 'tipping by stay'],
+    keywords: ['tipping', 'tip in', 'state'],
+    guid: 'tipping_state',
+    date: "2019-02-28T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/state-tipping-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/state-tipping-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Supersonic Flight',
+    author: 'Molly Wood',
+    alts: ['supersonic flight', 'super sonic flight', 'supersonic flied'],
+    keywords: ['super', 'sonic', 'flight'],
+    guid: 'supersonic_flight',
+    date: "2019-02-27T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/supersonic-flight-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/supersonic-flight-molly-intro-mix.mp3"
+    },
+  },
+
+  {
+    title: 'National Emergency',
+    author: 'Kai Ryssdal',
+    alts: ['national emergent sea', 'national emergence see', 'nation l emergency'],
+    keywords: ['national', 'emerge', 'emergent', 'emergence', 'emergency'],
+    guid: 'national_emergency',
+    date: "2019-02-26T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/national-emergencies-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/national-emergencies-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Green New Deal',
     author: 'Molly Wood',
     alts: ['green new deal', 'green knew deal', 'green new eel'],
