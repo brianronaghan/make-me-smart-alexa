@@ -1,5 +1,53 @@
 module.exports = [
   {
+    title: 'Feminist Economics',
+    author: 'Molly Wood',
+    alts: ['feminist economics', 'feminine econ on micks', 'feminist economists'],
+    keywords: ['fem', 'econ'],
+    guid: 'feminist_economics',
+    date: "2019-03-08T08:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/feminist-economics-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/feminist-economics-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Deep Fakes',
+    author: 'Molly Wood',
+    alts: ['deep fake', 'deep faze', 'deep'],
+    keywords: ['deep', 'fake'],
+    guid: 'deep_fakes',
+    date: "2019-03-07T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/deep-fakes-molly-explainer-fix-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/deep-fakes-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Digital Undertakers',
+    author: 'Molly Wood',
+    alts: ['digit l under taker', 'digital under taker', 'digi tul under take or'],
+    keywords: ['digital', 'under', 'takers'],
+    guid: 'digital_undertakers',
+    date: "2019-03-06T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/digital-undertakers-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/digital-undertakers-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Diversity',
+    author: 'Kai Ryssdal',
+    alts: ['diver city', 'diverse city', 'diverse it e'],
+    keywords: ['diverse', 'diversity', 'diver', 'city'],
+    guid: 'diversity',
+    date: "2019-03-05T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/diversity-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/diversity-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Electric Car History',
     author: 'Kai Ryssdal',
     alts: ['elect rick car his story', 'electric car history'],
