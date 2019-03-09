@@ -1,8 +1,20 @@
 module.exports = [
   {
+    title: 'Rise of Breakfast',
+    author: 'Kai Ryssdal',
+    alts: ['rise of break fast', 'rise of brick fast', 'rise f breakfast'],
+    keywords: ['rise', 'break', 'fast'],
+    guid: 'rise_of_breakfast',
+    date: "2019-03-11T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/rise-of-breakfast-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/rise-of-breakfast-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Feminist Economics',
     author: 'Molly Wood',
-    alts: ['feminist economics', 'feminine econ on micks', 'feminist economists'],
+    alts: ['feminist economics', 'feminine econ on micks', 'feminist economist'],
     keywords: ['fem', 'econ'],
     guid: 'feminist_economics',
     date: "2019-03-08T08:00:00Z",
