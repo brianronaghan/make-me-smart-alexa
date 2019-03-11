@@ -1,5 +1,65 @@
 module.exports = [
   {
+    title: 'Filter Bubbles',
+    author: 'Kai Ryssdal',
+    alts: ['filter bubble', 'fill to bubble', 'filter bub l' ],
+    keywords: ['fill', 'filter', 'bubble', 'bub l'],
+    guid: 'filter_bubbles',
+    date: "2019-03-18T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/filter-bubbles-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/filter-bubbles-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Overton Window',
+    author: 'Molly Wood',
+    alts: ['over ton win dough', 'over ton window', 'overton win dough'],
+    keywords: ['over', 'ton', 'win', 'dough', 'window'],
+    guid: 'overton_window',
+    date: "2019-03-15T08:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/overton-window-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/overton-window-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Sanctions',
+    author: 'Kai Ryssdal',
+    alts: ['sanctions', 'sank shuns', 'sang tons', 'sane chun'],
+    keywords: ['sanction', 'sank', 'shun'],
+    guid: 'sanctions',
+    date: "2019-03-11T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/sanctions-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/sanctions-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Hundred Dollar Bills',
+    author: 'Molly Wood',
+    alts: ['hundred dollar bill', '100 dollar bill', '100 dollar bill'],
+    keywords: ['100', 'hundred', 'dollar', 'bill'],
+    guid: '100_bills',
+    date: "2019-03-13T08:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/hundred-dollar-bills-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/hundred-dollar-bills-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Forbes Billionaires',
+    author: 'Kai Ryssdal',
+    alts: ['forbes billion airs', 'for billion airs', 'four billion errs'],
+    keywords: ['forbes', 'billion', 'billionaire'],
+    guid: 'forbes_billionaires',
+    date: "2019-03-12T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/forbes-billionaires-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/forbes-billionaires-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Rise of Breakfast',
     author: 'Kai Ryssdal',
     alts: ['rise of break fast', 'rise of brick fast', 'rise f breakfast'],
