@@ -1,5 +1,53 @@
 module.exports = [
   {
+    title: 'Movie Ticket Prices',
+    author: 'Kai Ryssdal',
+    alts: ['movie ticket prices', 'move e tickets', 'movie ticket price is'],
+    keywords: ['movie', 'ticket', 'move e', 'price', 'tick it'],
+    guid: 'movie_ticket_prices',
+    date: "2019-03-22T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/movie-ticket-prices-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/movie-ticket-prices-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'A.I. Race',
+    author: 'Kai Ryssdal',
+    alts: ['ai race', 'a.i race', 'ai raise' ],
+    keywords: ['a i', 'a.i.', 'AI', 'A.I.', 'race', 'raise', 'rays'],
+    guid: 'ai_race',
+    date: "2019-03-21T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/ai-race-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/ai-race-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Beige Book',
+    author: 'Kai Ryssdal',
+    alts: ['beige book', 'bay' ],
+    keywords: ['beige', 'book', 'bays', 'bage'],
+    guid: 'beige_book',
+    date: "2019-03-20T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/beige-book-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/beige-book-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Data Brokers',
+    author: 'Molly Wood',
+    alts: ['data broke ors', 'data broke rs', 'data brokers'],
+    keywords: ['data', 'broke'],
+    guid: 'data_brokers',
+    date: "2019-03-19T08:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/data-brokers-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/data-brokers-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Filter Bubbles',
     author: 'Kai Ryssdal',
     alts: ['filter bubble', 'fill to bubble', 'filter bub l' ],
@@ -29,7 +77,7 @@ module.exports = [
     alts: ['sanctions', 'sank shuns', 'sang tons', 'sane chun'],
     keywords: ['sanction', 'sank', 'shun'],
     guid: 'sanctions',
-    date: "2019-03-11T07:00:00Z",
+    date: "2019-03-14T07:00:00Z",
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/sanctions-kai-explainer-mix.mp3",
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/sanctions-kai-intro-mix.mp3"
@@ -38,7 +86,7 @@ module.exports = [
   {
     title: 'Hundred Dollar Bills',
     author: 'Molly Wood',
-    alts: ['hundred dollar bill', '100 dollar bill', '100 dollar bill'],
+    alts: ['hundred dollar bill', '100 dollar bill'],
     keywords: ['100', 'hundred', 'dollar', 'bill'],
     guid: '100_bills',
     date: "2019-03-13T08:00:00Z",
