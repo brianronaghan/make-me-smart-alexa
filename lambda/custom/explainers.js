@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: 'A.I. Race',
+    author: 'Kai Ryssdal',
+    alts: ['ai race', 'a.i race', 'ai raise' ],
+    keywords: ['a i', 'a.i.', 'AI', 'A.I.', 'race', 'raise', 'rays'],
+    guid: 'ai_race',
+    date: "2019-03-25T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/ai-race-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/ai-race-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Movie Ticket Prices',
     author: 'Kai Ryssdal',
     alts: ['movie ticket prices', 'move e tickets', 'movie ticket price is'],
@@ -12,15 +24,15 @@ module.exports = [
     },
   },
   {
-    title: 'A.I. Race',
-    author: 'Kai Ryssdal',
-    alts: ['ai race', 'a.i race', 'ai raise' ],
-    keywords: ['a i', 'a.i.', 'AI', 'A.I.', 'race', 'raise', 'rays'],
-    guid: 'ai_race',
+    title: 'March Madness',
+    author: 'Molly Wood',
+    alts: ['march mad nuss', 'march madness', 'march mad is'],
+    keywords: ['march', 'mad'],
+    guid: 'march_madness',
     date: "2019-03-21T07:00:00Z",
     audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/ai-race-kai-explainer-mix.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/ai-race-kai-intro-mix.mp3"
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/march-madness-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/march-madness-molly-intro-mix.mp3"
     },
   },
   {
