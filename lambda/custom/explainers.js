@@ -1,5 +1,65 @@
 module.exports = [
   {
+    title: 'Soccer in the U.S.',
+    author: 'Molly Wood',
+    alts: ['sock or in the you s', 'soccer in the u.s.', 'soccer in us'],
+    keywords: ['soccer', 'sock', 'the u.s.' ],
+    guid: 'soccer_us',
+    date: "2019-04-01T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/us-soccer-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/us-soccer-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Brexit Rocky Relationship',
+    author: 'Kai Ryssdal',
+    alts: ['brexit rock e relationship', 'rocky relate ship', 'brexit rocky relationship'],
+    keywords: ['rock', 'relation'],
+    guid: 'brexit_rocky_relationship',
+    date: "2019-03-29T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/brexit-rocky-relationship-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/brexit-rocky-relationship-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Brexit Why UK Joined',
+    author: 'Kai Ryssdal',
+    alts: ['brexit uk joined', 'brexit why U.K. joined', 'brexit why you kay' ],
+    keywords: ['uk', 'u k', 'u.k.', 'bre', 'u.s.'],
+    guid: 'brexit_why_UK_joined',
+    date: "2019-03-28T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/brexit-why-uk-joined-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/brexit-why-uk-joined-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Brexit U.S. Impact',
+    author: 'Kai Ryssdal',
+    alts: ['brexit impact', 'brexit u s impact', 'brexit u.s. intact' ],
+    keywords: ['brexit', 'impact', 'u s', 'in pack', 'intact', 'u.s.'],
+    guid: 'brexit_us_impact',
+    date: "2019-03-27T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/brexit-us-impact-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/brexit-us-impacts-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Baseball Mud',
+    author: 'Molly Wood',
+    alts: ['base ball mud', 'baseball mud', 'bass ball mug'],
+    keywords: ['base', 'ball', 'mud', 'baseball', 'mlb'],
+    guid: 'baseball_mud',
+    date: "2019-03-26T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/baseball-mud-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/baseball-mud-molly-intro-fix-mix.mp3"
+    },
+  },
+  {
     title: 'A.I. Race',
     author: 'Kai Ryssdal',
     alts: ['ai race', 'a.i race', 'ai raise' ],
