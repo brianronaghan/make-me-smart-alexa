@@ -1,5 +1,29 @@
 module.exports = [
   {
+    title: 'A.S.M.R. Videos',
+    author: 'Molly Wood',
+    alts: ['a s m r video', 'a.s.m.r vid', 'a x m r vid', 'a ess m r'],
+    keywords: ['asmr', 'a s m r', 'a.s.m.r', 'video'],
+    guid: 'asmr',
+    date: "2019-04-03T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/asmr-videos-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/asmr-videos-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Silicon Roundabout',
+    author: 'Molly Wood',
+    alts: ['silicon val e round about', 'sill e con round e bout'],
+    keywords: ['silicon', 'round', 'sil', 'still'],
+    guid: 'silicon_roundabout',
+    date: "2019-04-02T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/silicon-roundabout-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/silicon-roundabout-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Soccer in the U.S.',
     author: 'Molly Wood',
     alts: ['sock or in the you s', 'soccer in the u.s.', 'soccer in us'],
