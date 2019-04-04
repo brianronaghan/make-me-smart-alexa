@@ -1,5 +1,29 @@
 module.exports = [
   {
+    title: 'Bamboo Ceiling',
+    author: 'Molly Wood',
+    alts: ['bamboo ceiling', 'bam boo ceiling', 'bam boo sealing'],
+    keywords: ['bamboo', 'ceiling', 'seal in', 'sealing', 'bam boo'],
+    guid: 'bamboo_ceiling',
+    date: "2019-04-05T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/bamboo-ceiling-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/bamboo-ceiling-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Born Royal',
+    author: 'Molly Wood',
+    alts: ['born royal','royal baby', 'born a royal'],
+    keywords: ['born', 'royal'],
+    guid: 'born_royal',
+    date: "2019-04-04T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/born-royal-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/born-royal-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'A.S.M.R. Videos',
     author: 'Molly Wood',
     alts: ['a s m r video', 'a.s.m.r vid', 'a x m r vid', 'a ess m r'],
