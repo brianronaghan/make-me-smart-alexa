@@ -1,5 +1,29 @@
 module.exports = [
   {
+    title: 'Surveillance Capitalism',
+    author: 'Molly Wood',
+    alts: ['survey lance capitalism', 'surveil ans capital is m', 'surveillance capitalism'],
+    keywords: ['surveil', 'surveillance', 'capital'],
+    guid: 'surveillance_capitalism',
+    date: "2019-04-09T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/surveillance-capitalism-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/surveillance-capitalism-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Bluetooth',
+    author: 'Molly Wood',
+    alts: ['blue tooth', 'blew tooth', 'blu tooth', 'blew too'],
+    keywords: ['blue', 'blew', 'tooth'],
+    guid: 'bluetooth',
+    date: "2019-04-08T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/bluetooth-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/bluetooth-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Bamboo Ceiling',
     author: 'Molly Wood',
     alts: ['bamboo ceiling', 'bam boo ceiling', 'bam boo sealing'],
