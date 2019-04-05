@@ -25,7 +25,7 @@ module.exports = [
   },
   {
     title: 'Bamboo Ceiling',
-    author: 'Molly Wood',
+    author: 'Kai Ryssdal',
     alts: ['bamboo ceiling', 'bam boo ceiling', 'bam boo sealing'],
     keywords: ['bamboo', 'ceiling', 'seal in', 'sealing', 'bam boo'],
     guid: 'bamboo_ceiling',
