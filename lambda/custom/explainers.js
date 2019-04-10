@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: 'Batman Numbers',
+    author: 'Molly Wood',
+    alts: ['bat man', 'bad man', 'bat mann', 'batman numbers', 'bat man number', 'bad man number'],
+    keywords: ['bat', 'man', 'batman', 'bad man'],
+    guid: 'batman_numbers',
+    date: "2019-04-10T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/batman-numbers-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/batman-numbers-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Surveillance Capitalism',
     author: 'Molly Wood',
     alts: ['survey lance capitalism', 'surveil ans capital is m', 'surveillance capitalism'],
