@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: 'Opioid Impact',
+    author: 'Molly Wood',
+    alts: ['opioid impact', 'opie oid impact','o p oy impact'],
+    keywords: ['opioid', 'o p oy', 'opy oid', 'bad man', 'opie', 'impat', 'impact'],
+    guid: 'opioid_impact',
+    date: "2019-04-11T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/opioid-impact-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/opioid-impact-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Batman Numbers',
     author: 'Molly Wood',
     alts: ['bat man', 'bad man', 'bat mann', 'batman numbers', 'bat man number', 'bad man number'],
