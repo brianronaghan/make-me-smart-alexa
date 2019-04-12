@@ -1,5 +1,29 @@
 module.exports = [
   {
+    title: 'Tax Day',
+    author: 'Kai Ryssdal',
+    alts: ['tax day', 'tacks day', 'tax d', 'tack day', 'tack stay'],
+    keywords: ['tax', 'tacks', 'tack', 'tac'],
+    guid: 'tax_day',
+    date: "2019-04-15T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/tax-day-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/tax-day-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Masters Concessions',
+    author: 'Molly Wood',
+    alts: ['mast hers concessions', 'masters con sessions', 'mass hers confessions'],
+    keywords: ['concession', 'con session', 'master', 'confession', 'mast', 'mass her'],
+    guid: 'masters_concessions',
+    date: "2019-04-12T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/masters-concessions-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/masters-concessions-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Opioid Impact',
     author: 'Molly Wood',
     alts: ['opioid impact', 'opie oid impact','o p oy impact'],
