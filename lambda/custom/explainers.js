@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: 'Congestion Pricing',
+    author: 'Molly Wood',
+    alts: ['congestion pricing', 'congestion ricing', 'con jesting price king', 'con jest shun rice king'],
+    keywords: ['congestion', 'con gesture', 'con jesting', 'pricing', 'price king', 'ice rink', 'con jest shun'],
+    guid: 'congestion_pricing',
+    date: "2019-04-16T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/congestion-pricing-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/congestion-pricing-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Tax Day',
     author: 'Kai Ryssdal',
     alts: ['tax day', 'tacks day', 'tax d', 'tack day', 'tack stay'],
