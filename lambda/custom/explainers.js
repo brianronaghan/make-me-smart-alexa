@@ -1,5 +1,18 @@
 module.exports = [
   {
+    title: 'Homework Gap',
+    author: 'Kai Ryssdal',
+    alts: ['home work gap', 'homework gap', 'home worth gap'],
+    keywords: ['home', 'work', 'gap'],
+    guid: 'homework_gap',
+    date: "2019-04-18T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/homework-gap-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/homework-gap-kai-intro-mix.mp3"
+    },
+  },
+
+  {
     title: 'Demonetization',
     author: 'Molly Wood',
     alts: ['demon i zation', 'demonetize nation', 'demonet citation', 'demonetization'],
