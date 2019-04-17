@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: 'Demonetization',
+    author: 'Molly Wood',
+    alts: ['demon i zation', 'demonetize nation', 'demonet citation', 'demonetization'],
+    keywords: ['demonetize', 'demon', 'demonitization', 'demonetization', 'monetize', 'citation'],
+    guid: 'demonetization',
+    date: "2019-04-17T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/demonitization-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/demonitization-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Congestion Pricing',
     author: 'Molly Wood',
     alts: ['congestion pricing', 'congestion ricing', 'con jesting price king', 'con jest shun rice king'],
