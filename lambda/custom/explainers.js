@@ -1,5 +1,77 @@
 module.exports = [
   {
+    title: 'Prom',
+    author: 'Molly Wood',
+    alts: ['prom', 'promo', 'pron', 'pawn'],
+    keywords: ['prom', 'prawn', 'prong', 'pom'],
+    guid: 'prom',
+    date: "2019-04-26T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/prom-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/prom-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Sports Betting',
+    author: 'Molly Wood',
+    alts: ['spore bedding ', 'sport bedding', 'sport betting', 'spore bedding', 'sport bed in'],
+    keywords: ['sport', 'bet', 'spore', 'bed'],
+    guid: 'sports_betting',
+    date: "2019-04-25T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/sports-betting-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/sports-betting-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Big Tech and Cars',
+    author: 'Kai Ryssdal',
+    alts: ['big tech and cars', 'bit tech and car', 'big tech anchors'],
+    keywords: ['tech', 'car', 'big', 'bit tech'],
+    guid: 'tech_cars',
+    date: "2019-04-24T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/big-tech-and-cars-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/big-tech-and-cars-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Innovation Economics',
+    author: 'Molly Wood',
+    alts: ['innovation economics', 'innovation economist', 'innovate shun economics', 'in ovation'],
+    keywords: ['innovation', 'innovate', 'in no', 'in o', 'n o', 'ovation'],
+    guid: 'innovation_economics',
+    date: "2019-04-23T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/innovation-economics-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/innovation-economics-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'CPI and Inflation',
+    author: 'Kai Ryssdal',
+    alts: ['cpi and a nation', 'see pee i an inflation'],
+    keywords: ['cpi', 'see p i', 'inflay shun', 'see pee i', 'c p i', 'inflate', 'inflation'],
+    guid: 'cpi_inflation',
+    date: "2019-04-22T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/cpi-and-inflation-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/cpi-and-inflation-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Peeps',
+    author: 'Kai Ryssdal',
+    alts: ['peeps', 'petes', 'peaks', 'pees', 'pee'],
+    keywords: ['peep', 'peek', 'pete', 'pee'],
+    guid: 'peeps',
+    date: "2019-04-19T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/peeps-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/peeps-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Homework Gap',
     author: 'Kai Ryssdal',
     alts: ['home work gap', 'homework gap', 'home worth gap'],
@@ -11,7 +83,6 @@ module.exports = [
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/homework-gap-kai-intro-mix.mp3"
     },
   },
-
   {
     title: 'Demonetization',
     author: 'Molly Wood',
