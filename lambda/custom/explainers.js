@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: 'Innovation Economics',
+    author: 'Molly Wood',
+    alts: ['innovation economics', 'innovation economist', 'innovate shun economics', 'in ovation'],
+    keywords: ['innovation', 'innovate', 'in no', 'in o', 'n o', 'ovation'],
+    guid: 'innovation_economics',
+    date: "2019-04-29T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/innovation-economics-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/innovation-economics-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Prom',
     author: 'Molly Wood',
     alts: ['prom', 'promo', 'pron', 'pawn'],
@@ -36,15 +48,15 @@ module.exports = [
     },
   },
   {
-    title: 'Innovation Economics',
-    author: 'Molly Wood',
-    alts: ['innovation economics', 'innovation economist', 'innovate shun economics', 'in ovation'],
-    keywords: ['innovation', 'innovate', 'in no', 'in o', 'n o', 'ovation'],
-    guid: 'innovation_economics',
+    title: 'Beyoncé',
+    author: 'Kai Ryssdal',
+    alts: ['be on say', 'b on say', 'bee on say', 'beyonce', 'bey on say', 'beyoncé'],
+    keywords: ['beyonce', 'beyoncé', 'fiancé', 'b on say', 'be on say', 'bee on say'],
+    guid: 'beyonce_numbers',
     date: "2019-04-23T07:00:00Z",
     audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/innovation-economics-molly-explainer-mix.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/innovation-economics-molly-intro-mix.mp3"
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/beyonce-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/beyonce-kai-intro-mix.mp3"
     },
   },
   {
