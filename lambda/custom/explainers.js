@@ -1,5 +1,77 @@
 module.exports = [
   {
+    title: 'Platform Cooperatives',
+    author: 'Molly Wood',
+    alts: ['plat form coop native', 'plat form cooperative', 'platform co op rative'],
+    keywords: ['plat', 'form', 'cooperative', 'co-op', 'co op'],
+    guid: 'platform_cooperatives',
+    date: "2019-05-10T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/platform-cooperatives-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/platform-cooperatives-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Green Shoots',
+    author: 'Kai Ryssdal',
+    alts: ['green shoes', 'green shoots', 'green shoo'],
+    keywords: ['green', 'shoot', 'shoe', 'shoo'],
+    guid: 'green_shoots',
+    date: "2019-05-06T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/green-shoots-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/green-shoots-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'May the 4th',
+    author: 'Molly Wood',
+    alts: ['may the 4th', 'may the force', 'may of 4s', 'maybe fourth'],
+    keywords: ['may', 'fourth', 'forth', 'may the'],
+    guid: 'may_the_4th',
+    date: "2019-05-03T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/star-wars-numbers-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/star-wars-numbers-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Asteroid Drill',
+    author: 'Molly Wood',
+    alts: ['aster oid drill', 'as to roid dill', 'easter oid real', 'asteroid ill', 'asteroid drill'],
+    keywords: ['ass', 'astor', 'asteroid', 'roid', 'drill', 'real', 'dill'],
+    guid: 'asteroids',
+    date: "2019-05-02T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/asteroid-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/asteroid-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Vest Bro Culture',
+    author: 'Molly Wood',
+    alts: ['vest bro culture', 'westboro culture', 'west below cult tour'],
+    keywords: ['vest', 'bro', 'cult', 'row', 'west'],
+    guid: 'vest',
+    date: "2019-05-01T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/vest-bro-culture-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/vest-bro-culture-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Wages and Race',
+    author: 'Kai Ryssdal',
+    alts: ['wages and raise', 'wage is and race', 'wage is an race'],
+    keywords: ['wage', 'race', 'raise'],
+    guid: 'wages_and_race',
+    date: "2019-04-30T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/wages-and-race-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/wages-and-race-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Innovation Economics',
     author: 'Molly Wood',
     alts: ['innovation economics', 'innovation economist', 'innovate shun economics', 'in ovation'],
