@@ -12,6 +12,18 @@ module.exports = [
     },
   },
   {
+    title: 'Instant Offers',
+    author: 'Kai Ryssdal',
+    alts: ['in stan offer', 'instant offer'],
+    keywords: ['instant', 'off', 'her', 'offer'],
+    guid: 'instant_offers',
+    date: "2019-05-07T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/instant-offers-kai-explainers-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/instant-offers-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Green Shoots',
     author: 'Kai Ryssdal',
     alts: ['green shoes', 'green shoots', 'green shoo'],
