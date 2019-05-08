@@ -5,7 +5,7 @@ module.exports = [
     alts: ['plat form coop native', 'plat form cooperative', 'platform co op rative'],
     keywords: ['plat', 'form', 'cooperative', 'co-op', 'co op'],
     guid: 'platform_cooperatives',
-    date: "2019-05-10T07:00:00Z",
+    date: "2019-05-08T07:00:00Z",
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/platform-cooperatives-molly-explainer-mix.mp3",
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/platform-cooperatives-molly-intro-mix.mp3"
