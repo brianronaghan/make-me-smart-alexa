@@ -1,5 +1,29 @@
 module.exports = [
   {
+    title: "Peas",
+    author: 'Kai Ryssdal',
+    alts: ['peas', 'pleas', 'please'],
+    keywords: ['peas', 'ps', 'pee', 'pea', 'p.e.'],
+    guid: 'peas',
+    date: "2019-05-13T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/peas-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/peas-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Mother's Day",
+    author: 'Kai Ryssdal',
+    alts: ['mother day', 'mothers day'],
+    keywords: ['mother', 'moth', 'mother'],
+    guid: 'mothers_day',
+    date: "2019-05-10T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/mothers-day-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/mothers-day-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Platform Cooperatives',
     author: 'Molly Wood',
     alts: ['plat form coop native', 'plat form cooperative', 'platform co op rative'],
