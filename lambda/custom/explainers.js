@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: "Stable Coin",
+    author: 'Molly Wood',
+    alts: ['stay bull coin', 'stable coin'],
+    keywords: ['stable', 'coin', 'stay bull', 'stay bell'],
+    guid: 'stable_coin',
+    date: "2019-05-20T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/stablecoin-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/stablecoin-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: "Climate Intelligence",
     author: 'Molly Wood',
     alts: ['climate intelligence', 'climb at intell gents'],
