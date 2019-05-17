@@ -1,5 +1,41 @@
 module.exports = [
   {
+    title: "Climate Intelligence",
+    author: 'Molly Wood',
+    alts: ['climate intelligence', 'climb at intell gents'],
+    keywords: ['climate', 'climb at', 'intel'],
+    guid: 'climate_intelligence',
+    date: "2019-05-17T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/nasacarbon-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/nasacarbon-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Raises",
+    author: 'Molly Wood',
+    alts: ['raise is', 'races', 'raze is', 'ray cs',],
+    keywords: ['raise', 'race', 'rays', 'ray', 'rae'],
+    guid: 'raises',
+    date: "2019-05-16T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/raises-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/raises-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Popcorn Farmers",
+    author: 'Kai Ryssdal',
+    alts: ['popcorn', 'pop corn', 'pop orn', 'pacorn farmers'],
+    keywords: ['pop', 'corn', 'popcorn'],
+    guid: 'popcorn_farmers',
+    date: "2019-05-15T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/popcorn-farmers-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/popcorn-farmers-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: "Peas",
     author: 'Kai Ryssdal',
     alts: ['peas', 'pleas', 'please'],
