@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: "Livestream Shopping",
+    author: 'Molly Wood',
+    alts: ['live stream shop in', 'livestream shopping', 'lie stream chopping' ],
+    keywords: ['live', 'stream', 'shop', 'chopin', 'chopping'],
+    guid: 'livestream_shopping',
+    date: "2019-05-21T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/livestreamshopping-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/livestreamshopping-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: "Stable Coin",
     author: 'Molly Wood',
     alts: ['stay bull coin', 'stable coin'],
