@@ -1,5 +1,53 @@
 module.exports = [
   {
+    title: "Wall Street",
+    author: 'Kai Ryssdal',
+    alts: ['wall street', 'all streak'],
+    keywords: ['wall', 'street', 'sweet', 'wool', 'streak' ],
+    guid: 'wall_street',
+    date: "2019-05-29T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/wallstreet-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/wallstreet-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: "2020 Friendraising",
+    author: 'Kai Ryssdal',
+    alts: ['20 20 friend raise in', 'friend raising', 'friend raisin'],
+    keywords: ['friend', 'raising', 'raisin', 'brazen', 'friend raising', '2020'],
+    guid: 'friendraising',
+    date: "2019-05-28T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/friendraising-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/friendraising-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Snapchat Dysmorphia",
+    author: 'Molly Wood',
+    alts: ['snap chat dysmorphia', 'snack chat dysmorphia', 'snap back dis morphia' ],
+    keywords: ['snapchat', 'snap', 'chat', 'diss', 'dysmorphia', 'morph'],
+    guid: 'snapchat_dysmorphia',
+    date: "2019-05-27T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/snapchatdysmorphia-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/snapchatdysmorphia-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: "China Trade War",
+    author: 'Kai Ryssdal',
+    alts: ['china trade war', 'shy na trade war'],
+    keywords: ['china', 'trade', 'raid', 'war' ],
+    guid: 'china_trade_war',
+    date: "2019-05-23T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/tradewar-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/tradewar-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: "Livestream Shopping",
     author: 'Molly Wood',
     alts: ['live stream shop in', 'livestream shopping', 'lie stream chopping' ],
