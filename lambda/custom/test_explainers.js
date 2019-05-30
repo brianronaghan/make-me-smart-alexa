@@ -86,7 +86,7 @@ function checkExplainer (ex) {
 }
 
 function checkUrls(ex, cb) {
-  if (ex.audio.url.indexOf('https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers') < 0) {
+  if (ex.audio.url.indexOf('/explainers') < 0) {
     throw new Error(`AUDIO not in AUDIO ${ex.audio.url}`);
   }
   request(ex.audio.url, (error, response, body) => {
@@ -97,7 +97,7 @@ function checkUrls(ex, cb) {
     } else if (ex.audio.intro) {
       console.log(`200 explainer ${ex.title}`)
       // explainer
-      if (ex.audio.intro.indexOf('https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros') < 0) {
+      if (ex.audio.intro.indexOf('/intros') < 0) {
         throw new Error(`INTRO not in INTRO fold ${ex.audio.intro}`);
       }
       request(ex.audio.intro, (error, response, body) => {

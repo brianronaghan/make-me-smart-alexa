@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: "Paid Streamers",
+    author: 'Molly Wood',
+    alts: ['pay streamer', 'paid streamer', 'pay stream or', 'payed stream or'],
+    keywords: ['paid', 'stream', 'pay', 'street'],
+    guid: 'paid_streamers',
+    date: "2019-05-30T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/paidstreamers-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/paidstreamers-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: "Wall Street",
     author: 'Kai Ryssdal',
     alts: ['wall street', 'all streak'],
