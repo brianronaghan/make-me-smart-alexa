@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: "Working Mom",
+    author: 'Molly Wood',
+    alts: ['mother hood', 'mother good cost', 'working mom', 'working mother'],
+    keywords: ['mom', 'mother', 'work', 'hood', 'cost', 'working'],
+    guid: 'mom_work',
+    date: "2019-05-31T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/momcost-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/momcost-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: "Paid Streamers",
     author: 'Molly Wood',
     alts: ['pay streamer', 'paid streamer', 'pay stream or', 'payed stream or'],
