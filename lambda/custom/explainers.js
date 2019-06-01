@@ -1,14 +1,38 @@
 module.exports = [
   {
+    title: "Wedding Season",
+    author: 'Kai Ryssdal',
+    alts: ["wed in see son", 'wedding see son', 'wed hinge sea son'],
+    keywords: ['wed', 'wedding', 'wedding season', 'see son', 'season', 'seas' ],
+    guid: 'wedding_season',
+    date: "2019-06-05T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/weddingseason-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/weddingseason-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: "Blind Video Game",
     author: 'Molly Wood',
     alts: ['blind video game', 'bind video gain', 'bline video game'],
     keywords: ['blind', 'video', 'game', 'access', 'videogame' ],
     guid: 'blind_videogame',
-    date: "2019-06-03T07:00:00Z",
+    date: "2019-06-04T07:00:00Z",
     audio: {
       url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/blindvideogames-molly-explainer-mix.mp3",
       intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/blindvideogames-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Overtourism",
+    author: 'Kai Ryssdal',
+    alts: ["over tour isn't", 'over tourism', 'oh her tour isms'],
+    keywords: ['over', 'tourism', 'tourists', 'oh her', 'tour' ],
+    guid: 'overtourism',
+    date: "2019-06-03T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/overtourism-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/overtourism-kai-intro-mix.mp3"
     },
   },
   {
