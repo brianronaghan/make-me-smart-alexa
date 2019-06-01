@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: "Blind Video Game",
+    author: 'Molly Wood',
+    alts: ['blind video game', 'bind video gain', 'bline video game'],
+    keywords: ['blind', 'video', 'game', 'access', 'videogame' ],
+    guid: 'blind_videogame',
+    date: "2019-06-03T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/blindvideogames-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/blindvideogames-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: "Working Mom",
     author: 'Molly Wood',
     alts: ['mother hood', 'mother good cost', 'working mom', 'working mother'],
