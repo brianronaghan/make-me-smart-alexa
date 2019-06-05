@@ -15,7 +15,7 @@ var config = {
     stopMessage: "Goodbye! Say 'Make Me Smart' to come back!",
     cancelMessage: 'Cancelled! Come back soon!',
     defaultDescription: "Something else you want to get smart about? Try 'Alexa, submit an idea' and Kai and Molly might use your idea!",
-    externalMessage: "I'm sorry, the Make Me Smart skill can't handle that request. Next time, you can try saying: 'exit', first. Goodbye, and hope you come back.",
+    externalMessage: "I'm sorry, the Make Me Smart skill can't handle that request. Next time, you can try saying: 'exit', first. Goodbye.",
 
     messages: [
       "Something else you want to get smart about? Try 'Alexa, submit an idea' and Kai and Molly might use it!",
@@ -30,7 +30,6 @@ var config = {
       "You can always say 'Alexa, play the latest' to hear what we're getting smart about right now.",
       "Before using Pandora, turning on your lights, or using other skills, say 'Alexa, exit' to leave Make Me Smart.",
       "Have a question? Found a bug? Email testing@marketplace.org and we might be able to help!",
-      "Rate Make Me Smart on the Alexa Skill Store or Mobile App."
     ],
     testIds: {
       "amzn1.ask.account.AGTQJ6UTU4PWTHCYYI4Z443Q5UO2KNAGTGIB23QIN36QISFFEXIDUYVLIBINT5QCI2DWKDJ7E6NQXA4BHCOS3JRCC4YNKJWUXWSEINHOQYHBMTQBAXRPJKWWUEHQQV6JG6IWAADB3JKYZDWBH55ZRTUPRT3EBMSVZITPX34K3BHXO2NLLLU6U4JXTFQELUALTQODUUH6IHX4GRQ" : 'spot',

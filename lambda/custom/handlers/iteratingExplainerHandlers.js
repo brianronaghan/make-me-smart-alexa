@@ -254,9 +254,6 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     this.attributes.STOPS++;
     if (sentMessage) {
       this.response.speak(sentMessage);
-    } else if (this.attributes.indices.explainer > 10 && !this.attributes.SOLICITED) {
-      this.attributes.SOLICITED = true;
-      this.response.speak(`Thanks for listening! ${config.reviewSolicitation}`);
     } else if (this.attributes.STOPS === 1 || (this.attributes.STOPS % config.stopMessageFrequency === 0)) {
       this.response.speak(config.stopMessage);
     }

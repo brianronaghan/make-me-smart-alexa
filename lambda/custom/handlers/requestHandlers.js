@@ -133,15 +133,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
         time: this.event.request.timestamp,
         user: this.attributes.userName,
         location: this.attributes.userLocation
-      }];
-      let userAsk = '';
-      if (this.attributes.REQUESTS > 3 && !this.attributes.SOLICITED) {
-        this.attributes.SOLICITED = true;
-        userAsk = `And hey, if you'd like to do us a favor, ${config.reviewSolicitation}`;
-      } else if (this.attributes.REQUESTS % 4 === 0) {
-        userAsk = config.podcastPlug;
-      }
-      // console.log(this.attributes.REQUESTS, userAsk);
+      }];      
       console.time('DB-request-saved');
       delete this.attributes.requestingExplainer;
       delete intentObj.confirmationStatus
@@ -154,7 +146,7 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
       db.update.call(this, payload, function(err, response) {
         console.timeEnd('DB-request-saved');
 
-        message = `Great! I'll tell Kai and Molly you want to get smart about that! ${userAsk} `;
+        message = `Thanks! I'll tell Kai and Molly!`;
         //
         this.handler.state = this.attributes.STATE = config.states.HOME_PAGE;
         return util.sendProgressive(

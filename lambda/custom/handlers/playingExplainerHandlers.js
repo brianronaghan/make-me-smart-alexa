@@ -396,9 +396,6 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
     this.attributes.STOPS++;
     if (sentMessage) {
       this.response.speak(sentMessage)
-    } else if (this.attributes.plays > 5 && !this.attributes.SOLICITED) {
-      this.attributes.SOLICITED = true;
-      this.response.speak(`Thanks for listening! ${config.reviewSolicitation}`);
     } else if (this.attributes.STOPS === 1 || (this.attributes.STOPS % config.stopMessageFrequency === 0)) {
       this.response.speak(config.stopMessage)
     }
@@ -406,16 +403,6 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
   },
   'AMAZON.CancelIntent' : function() {
     delete this.attributes.EASTER_EGG_TITLE;
-
-    console.log('CANCEL PLAY EXPLAINER STATE')
-    // This needs to work for not playing as well
-    // SHOULD I CLEAR THE STATE?
-    if (this.attributes.plays > 5 && !this.attributes.SOLICITED) {
-      this.attributes.SOLICITED = true;
-      this.response.speak(`Thanks for listening! ${config.reviewSolicitation}`);
-    } else {
-      // this.response.speak(config.cancelMessage);
-    }
     this.emit(':saveState');
   },
 
