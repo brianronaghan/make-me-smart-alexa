@@ -1,9 +1,45 @@
 module.exports = [
   {
-    title: "Wedding Season",
+    title: "Ethical Hacker",
+    author: 'Molly Wood',
+    alts: ['ethical hack or', 'ethic all hack or', 'ethic ole hacker'],
+    keywords: ['ethic', 'hack', 'f a call'],
+    guid: 'ethical_hacker',
+    date: "2019-06-10T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/ethicalhackers-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/ethicalhackers-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Gaming Disorder",
+    author: 'Molly Wood',
+    alts: ['game in dis order', 'gaining disorder', 'game in disorder'],
+    keywords: ['game', 'game in', 'gaming', 'disorder', 'dis order'],
+    guid: 'gaming_disorder',
+    date: "2019-06-07T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/gamingdisorder-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/gamingdisorder-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Hurricane Season",
     author: 'Kai Ryssdal',
-    alts: ["wed in see son", 'wedding see son', 'wed hinge sea son'],
-    keywords: ['wed', 'wedding', 'wedding season', 'see son', 'season', 'seas' ],
+    alts: ["hurricane sea son", 'hurry cane see son', 'hurricane sea son', 'her a cane see son'],
+    keywords: ['her', 'hurricane', 'season', 'see son', 'season', 'seas' ],
+    guid: 'hurricane_season',
+    date: "2019-06-06T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/hurricaneseason-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/hurricaneseason-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Wedding Costs",
+    author: 'Kai Ryssdal',
+    alts: ["wed in cost", 'wedding cause', 'wed hinge coss'],
+    keywords: ['wed', 'wedding', 'wedding cost' ],
     guid: 'wedding_season',
     date: "2019-06-05T07:00:00Z",
     audio: {
