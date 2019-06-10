@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: "Golden Internships",
+    author: 'Kai Ryssdal',
+    alts: ["goal den intern ship", 'go l den internship', 'golden intern chips'],
+    keywords: ['intern', 'gold', 'internship', 'enter ship', 'goal den'],
+    guid: 'golden_internships',
+    date: "2019-06-11T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/summerinternships-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/summerinternships-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: "Ethical Hacker",
     author: 'Molly Wood',
     alts: ['ethical hack or', 'ethic all hack or', 'ethic ole hacker'],
@@ -26,7 +38,7 @@ module.exports = [
   {
     title: "Hurricane Season",
     author: 'Kai Ryssdal',
-    alts: ["hurricane sea son", 'hurry cane see son', 'hurricane sea son', 'her a cane see son'],
+    alts: ["hurricane sea son", 'hurry cane see son', 'her a cane see son'],
     keywords: ['her', 'hurricane', 'season', 'see son', 'season', 'seas' ],
     guid: 'hurricane_season',
     date: "2019-06-06T07:00:00Z",
