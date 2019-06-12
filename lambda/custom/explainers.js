@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: "Virtual Assistants",
+    author: 'Molly Wood',
+    alts: ['virtual as is tan', 'virtual assistant', 'fur chew all assistance'],
+    keywords: ['virtual', 'assist', 'assistant', 'assistance'],
+    guid: 'virtual_assistants',
+    date: "2019-06-12T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/virtualassistants-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/virtualassistants-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: "Golden Internships",
     author: 'Kai Ryssdal',
     alts: ["goal den intern ship", 'go l den internship', 'golden intern chips'],
