@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: "Insta Grannies",
+    author: 'Molly Wood',
+    alts: ['in sta granny', 'instant grannies', 'insta gran ease', 'insta granny'],
+    keywords: ['insta', 'gran', 'granny', 'grannies', 'grandy', 'instagram', 'grandma'],
+    guid: 'insta_grannies',
+    date: "2019-06-13T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/instagrannies-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/instagrannies-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: "Virtual Assistants",
     author: 'Molly Wood',
     alts: ['virtual as is tan', 'virtual assistant', 'fur chew all assistance'],
