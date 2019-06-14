@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: "Perfect Popsicle",
+    author: 'Kai Ryssdal',
+    alts: ["perfect popsicle", "perfect pop sickle", "pop's ick l" ],
+    keywords: ['pop', 'popsicle', 'perfect', 'per feck', 'pop sickle'],
+    guid: 'perfect_popsicle',
+    date: "2019-06-14T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/perfectpopsicle-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/perfectpopsicle-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: "Insta Grannies",
     author: 'Molly Wood',
     alts: ['in sta granny', 'instant grannies', 'insta gran ease', 'insta granny'],
