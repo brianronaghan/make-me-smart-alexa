@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: "Route 66",
+    author: 'Kai Ryssdal',
+    alts: ["route 66", "rout 6 6", "route six t six" ],
+    keywords: ['route', 'six', 'rout', 'out', 'sixty', '66', '6','60'],
+    guid: 'route_66',
+    date: "2019-06-17T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/route-66-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/route-66-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: "Perfect Popsicle",
     author: 'Kai Ryssdal',
     alts: ["perfect popsicle", "perfect pop sickle", "pop's ick l" ],
