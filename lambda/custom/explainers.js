@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: "Women's World Cup",
+    author: 'Kai Ryssdal',
+    alts: ["women's world cup", "woman's world cup", "womans whirl cup" ],
+    keywords: ['woman', 'women', 'world cup', 'cup', 'world', 'whirl'],
+    guid: 'womens_world_cup',
+    date: "2019-06-19T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/woman's-world-cup-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/woman's-world-cup-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: "Do Not Track",
     author: 'Molly Wood',
     alts: ['do not track', 'do not rack', 'do not crack', "don't rack"],
