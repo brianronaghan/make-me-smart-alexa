@@ -1,5 +1,29 @@
 module.exports = [
   {
+    title: "Mansion Glut",
+    author: 'Kai Ryssdal',
+    alts: ['mansion glut', 'man shun glut', 'manned shun glut'],
+    keywords: ['mansion', 'man shun', 'glut', 'glute' ],
+    guid: 'mansion_glut',
+    date: "2019-06-21T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/mansions-glut-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/mansions-glut-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Mukbang",
+    author: 'Molly Wood',
+    alts: ['muck bang',  'muk bang', 'muck ang'],
+    keywords: ['muk', 'muck', 'uck', 'bang', 'bong'],
+    guid: 'mukbang',
+    date: "2019-06-20T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/muckbank-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/muckbank-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: "Women's World Cup",
     author: 'Kai Ryssdal',
     alts: ["women's world cup", "woman's world cup", "womans whirl cup" ],
