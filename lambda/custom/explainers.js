@@ -1,5 +1,77 @@
 module.exports = [
   {
+    title: "Debt Impact",
+    author: 'Kai Ryssdal',
+    alts: ['debt impact', 'debt in act', 'debt in pact'],
+    keywords: ['debt', 'dead', 'impact', 'intact' ],
+    guid: 'debt_impact',
+    date: "2019-07-01T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/debt-impact-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/debt-impact-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Super Commuters",
+    author: 'Kai Ryssdal',
+    alts: ['super commuter', 'super commute or', 'super computer'],
+    keywords: ['super', 'commute', 'commune', 'commuter'],
+    guid: 'super_commuters',
+    date: "2019-06-28T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/super-commuters-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/super-commuters-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Screenome",
+    author: 'Molly Wood',
+    alts: ['screen gnome', 'screed ome', 'screen dome', 'screen home'],
+    keywords: ['screen', 'gnome', 'screenome', 'screendome'],
+    guid: 'screenome',
+    date: "2019-06-27T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/screendome-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/screendome-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: "SAT Reinvented",
+    author: 'Kai Ryssdal',
+    alts: ['essay tea reinvented', 's a tea reinvented', 'S.A.T. reinvented'],
+    keywords: ['SAT', 'S A T', 'essay', 'tea', 'reinvent', 's.a.t.', 's a t', 'S.A.T.'],
+    guid: 'SAT_reinvented',
+    date: "2019-06-26T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/sat-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/sat-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Youtube Camp",
+    author: 'Molly Wood',
+    alts: ['youtube camp', 'youtube cam', 'you tube camp'],
+    keywords: ['you tube', 'youtube', 'u2', 'you too', 'camp', 'tube'],
+    guid: 'youtube_camp',
+    date: "2019-06-25T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/youtube-camp-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/youtube-camp-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Bright Satellites",
+    author: 'Molly Wood',
+    alts: ['bright sat a light', 'brite satellite', 'bright sat alight'],
+    keywords: ['sat', 'bright', 'right', 'light', 'satellite'],
+    guid: 'bright_satellite',
+    date: "2019-06-24T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/bright-satellites-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/bright-satellites-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: "Mansion Glut",
     author: 'Kai Ryssdal',
     alts: ['mansion glut', 'man shun glut', 'manned shun glut'],
