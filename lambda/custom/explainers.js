@@ -1,5 +1,18 @@
 module.exports = [
   {
+    title: "The Golden Hour",
+    author: 'Kai Ryssdal',
+    alts: ['cold and hour', 'golden our', 'golden hour', 'gold an hour'],
+    keywords: ['gold', 'golden', 'hour', 'cold' ],
+    guid: 'golden_hour',
+    date: "2019-07-02T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/golden-hour-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/golden-hour-kai-intro-mix.mp3"
+    },
+  },
+
+  {
     title: "Debt Impact",
     author: 'Kai Ryssdal',
     alts: ['debt impact', 'debt in act', 'debt in pact'],
