@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: "Digital Detox",
+    author: 'Molly Wood',
+    alts: ['digital detox', 'digit all d tox',],
+    keywords: ['digital', 'detox', 'd talks', 'de tox', 'tocks'],
+    guid: 'digital_detox',
+    date: "2019-07-03T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/digital-detox-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/digital-detox-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: "The Golden Hour",
     author: 'Kai Ryssdal',
     alts: ['cold and hour', 'golden our', 'golden hour', 'gold an hour'],
