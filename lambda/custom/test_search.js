@@ -82,10 +82,6 @@ var searchResults = {
   //   'sales tax',
   //   'online sales',
   // ],
-  airline_fees: [
-    'airline fees',
-    'airline',
-  ],
   bonds_launch: [
     'bond market',
     'bomb market',

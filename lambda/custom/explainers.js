@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: 'Airline Fees',
+    author: 'Kai Ryssdal',
+    alts: ['airline fees', 'airline mes', 'air line ease', 'airline gouging', 'air mine tease', 'air line tease', 'airline seats', 'line fees'],
+    keywords: ['airline', 'air line', 'fees', 'hairline', 'err line', 'tease', 'ease', 'air mine', 'tees', 'airport'],
+    guid: 'airline_fees_rerun',
+    date: "2019-07-04T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/airline-fees-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/airline-fees-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: "Digital Detox",
     author: 'Molly Wood',
     alts: ['digital detox', 'digit all d tox',],
@@ -3054,18 +3066,18 @@ module.exports = [
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/retail-tax-molly-intro-mix.mp3"
     },
   },
-  {
-    title: 'Airline Fees',
-    author: 'Kai Ryssdal',
-    alts: ['airline fees', 'airline mes', 'air line ease', 'airline gouging', 'air mine tease', 'air line tease', 'airline seats', 'line fees'],
-    keywords: ['airline', 'air line', 'fees', 'hairline', 'err line', 'tease', 'ease', 'air mine', 'tees', 'airport'],
-    guid: 'airline_fees',
-    date: "2018-07-04T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/airline-fees-kai-explainer-mix.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/airline-fees-kai-intro-mix.mp3"
-    },
-  },
+  // {
+  //   title: 'Airline Fees',
+  //   author: 'Kai Ryssdal',
+  //   alts: ['airline fees', 'airline mes', 'air line ease', 'airline gouging', 'air mine tease', 'air line tease', 'airline seats', 'line fees'],
+  //   keywords: ['airline', 'air line', 'fees', 'hairline', 'err line', 'tease', 'ease', 'air mine', 'tees', 'airport'],
+  //   guid: 'airline_fees',
+  //   date: "2018-07-04T07:00:00Z",
+  //   audio: {
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/airline-fees-kai-explainer-mix.mp3",
+  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/airline-fees-kai-intro-mix.mp3"
+  //   },
+  // },
   {
     title: 'Fireworks',
     author: 'Kai Ryssdal',
