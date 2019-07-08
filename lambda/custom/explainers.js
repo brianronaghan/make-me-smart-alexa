@@ -1,5 +1,41 @@
 module.exports = [
   {
+    title: "Mall Homes",
+    author: 'Kai Ryssdal',
+    alts: ['mall homes', 'mall hone'],
+    keywords: ['mall', 'home', 'homes' ],
+    guid: 'mall_homes',
+    date: "2019-07-11T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/mall-homes-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/mall-homes-kai-intro-explainer-mix.mp3"
+    },
+  },
+  {
+    title: "Seeing Eye Robots",
+    author: 'Molly Wood',
+    alts: ['seeing eye robot', 'see in eye row bot','seeing I robot'],
+    keywords: ['see', 'c', 'see in', 'seeing', 'sea', 'seeing', 'eye', 'I', 'robot', 'row bot'],
+    guid: 'seeing_eye_robots',
+    date: "2019-07-10T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/seeing-eye-robots-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/seeing-eye-robots-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Office Phone Booth",
+    author: 'Kai Ryssdal',
+    alts: ['office phone booth', 'off is phone booth', ],
+    keywords: ['office', 'phone', 'booth', 'off is', 'boot', 'boo' ],
+    guid: 'office_phone_booth',
+    date: "2019-07-08T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/office-phonebooths-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/office-phonebooths-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Airline Fees',
     author: 'Kai Ryssdal',
     alts: ['airline fees', 'airline mes', 'air line ease', 'airline gouging', 'air mine tease', 'air line tease', 'airline seats', 'line fees'],
