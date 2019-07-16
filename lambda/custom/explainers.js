@@ -1,5 +1,65 @@
 module.exports = [
   {
+    title: "Moon Shots",
+    author: 'Molly Wood',
+    alts: ['moon shot', 'moon shoot', 'moon shots'],
+    keywords: ['moon', 'shot', 'shots'],
+    guid: 'moon_shots',
+    date: "2019-07-19T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/moonshots-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/moonshots-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Blended Burger",
+    author: 'Molly Wood',
+    alts: ['blended burger', 'blend id burger', 'blend in burger', 'blended burg or'],
+    keywords: ['blend', 'burger', 'burg'],
+    guid: 'blended_burger',
+    date: "2019-07-18T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/half-meatless-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/half-meatless-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Why 65",
+    author: 'Kai Ryssdal',
+    alts: ['why 6 5', 'why sixty five', 'y 6 5', 'y sixty-five' ],
+    keywords: ['why', '65', 'sixty-five', 'y', '6 5'],
+    guid: 'why_65',
+    date: "2019-07-17T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/why-65-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/why-65-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Fake Instagram",
+    author: 'Molly Wood',
+    alts: ['finsta', 'fake insta', 'fake instagram'],
+    keywords: ['fake', 'instagram', 'insta', 'finsta', 'fake'],
+    guid: 'fake_instagram',
+    date: "2019-07-16T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/finstagrams-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/finstagrams-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Digital Shopping Holidays",
+    author: 'Kai Ryssdal',
+    alts: ['digital shop in holiday', 'digital shopping holiday'],
+    keywords: ['shop', 'holiday', 'holidays', 'digital'],
+    guid: 'digital_shopping_holiday',
+    date: "2019-07-15T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/digital-shopping-holidays-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/digital-shopping-holidays-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: "Mall Homes",
     author: 'Kai Ryssdal',
     alts: ['mall homes', 'mall hone'],
