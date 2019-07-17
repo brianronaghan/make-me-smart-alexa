@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: "Virgin Galactic",
+    author: 'Molly Wood',
+    alts: ['virgin galactic', 'version galactic', 'virgin gull act it', 'virgin gull axis'],
+    keywords: ['virgin', 'galactic', 'version', 'gull act ik', 'gull axis'],
+    guid: 'virgin_galactic',
+    date: "2019-07-22T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/virgin-galactic-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/virgin-galactic-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: "Moon Shots",
     author: 'Molly Wood',
     alts: ['moon shot', 'moon shoot', 'moon shots'],
