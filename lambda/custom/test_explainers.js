@@ -65,6 +65,7 @@ function checkExplainer (ex) {
     } else if (req === 'alts' && ex.guid.indexOf('bestof') < 0 ) {
       for (let alt of ex.alts) {
         if (ALTS.indexOf(alt) > -1) {
+          console.log(`COLLIDING ALT TERM ${alt}`);
           throw new Error(`COLLIDING ALT TERM ${alt}`);
         } else {
           ALTS.push(alt)

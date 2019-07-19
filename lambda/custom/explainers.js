@@ -1,5 +1,65 @@
 module.exports = [
   {
+    title: "DNA Tourism",
+    author: 'Kai Ryssdal',
+    alts: ['dna tour is m', 'DNA tourism', 'the n a tourism', "the NA tourism" ],
+    keywords: ['d n a', 'dna', 'd.n.a.', 'tourism', 'tour is m', 'DNA', 'D.N.A', 'D N A', 'tourist'],
+    guid: 'dna_tourism',
+    date: "2019-07-29T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/dna-tourism-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/dna-tourism-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Space Cookies",
+    author: 'Molly Wood',
+    alts: ['space cook e', 'space cooky', 'space cook he'],
+    keywords: ['space', 'cookie', 'cook e',],
+    guid: 'space_cookies',
+    date: "2019-07-26T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/space-cookies-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/space-cookies-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Bright Satellites",
+    author: 'Molly Wood',
+    alts: ['bright sat a light', 'brite satellite', 'bright sat alight'],
+    keywords: ['sat', 'bright', 'right', 'light', 'satellite'],
+    guid: 'bright_satellite_reair_72519',
+    date: "2019-07-25T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/bright-satellites-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/bright-satellites-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Golden Record",
+    author: 'Kai Ryssdal',
+    alts: ['golden record', 'gold and record', 'goad n record' ],
+    keywords: ['gold', 'record', 'wrecker', 'goad', 'wreck or'],
+    guid: 'golden_record',
+    date: "2019-07-24T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/golden-record-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/golden-record-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Who Qwns the Moon",
+    author: 'Kai Ryssdal',
+    alts: ['who owns the moon', 'who owes the moon', 'hoo oh then moon' ],
+    keywords: ['who', 'owns', 'moon', 'owes'],
+    guid: 'who_owns_moon',
+    date: "2019-07-23T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/who-owns-moon-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/who-owns-moon-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: "Virgin Galactic",
     author: 'Molly Wood',
     alts: ['virgin galactic', 'version galactic', 'virgin gull act it', 'virgin gull axis'],
@@ -10,7 +70,7 @@ module.exports = [
       url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/virgin-galactic-molly-explainer-mix.mp3",
       intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/virgin-galactic-molly-intro-mix.mp3"
     },
-  },
+  },  
   {
     title: "Moon Shots",
     author: 'Molly Wood',
@@ -204,18 +264,18 @@ module.exports = [
       intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/youtube-camp-molly-intro-mix.mp3"
     },
   },
-  {
-    title: "Bright Satellites",
-    author: 'Molly Wood',
-    alts: ['bright sat a light', 'brite satellite', 'bright sat alight'],
-    keywords: ['sat', 'bright', 'right', 'light', 'satellite'],
-    guid: 'bright_satellite',
-    date: "2019-06-24T07:00:00Z",
-    audio: {
-      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/bright-satellites-molly-explainer-mix.mp3",
-      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/bright-satellites-molly-intro-mix.mp3"
-    },
-  },
+  // {
+  //   title: "Bright Satellites",
+  //   author: 'Molly Wood',
+  //   alts: ['bright sat a light', 'brite satellite', 'bright sat alight'],
+  //   keywords: ['sat', 'bright', 'right', 'light', 'satellite'],
+  //   guid: 'bright_satellite',
+  //   date: "2019-06-24T07:00:00Z",
+  //   audio: {
+  //     url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/bright-satellites-molly-explainer-mix.mp3",
+  //     intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/bright-satellites-molly-intro-mix.mp3"
+  //   },
+  // },
   {
     title: "Mansion Glut",
     author: 'Kai Ryssdal',
