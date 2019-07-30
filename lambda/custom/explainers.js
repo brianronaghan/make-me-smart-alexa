@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: "Online Reservations",
+    author: 'Molly Wood',
+    alts: ['online reservation', 'on line reservation', 'on lime reserve a shun'],
+    keywords: ['online', 'res', 'reservation'],
+    guid: 'online_reservations',
+    date: "2019-07-30T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/online-reservations-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/online-reservations-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: "DNA Tourism",
     author: 'Kai Ryssdal',
     alts: ['dna tour is m', 'DNA tourism', 'the n a tourism', "the NA tourism" ],
