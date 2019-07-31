@@ -1,5 +1,41 @@
 module.exports = [
   {
+    title: 'Camping',
+    author: 'Kai Ryssdal',
+    alts: ['camping', 'camp in', 'cam in', 'camp ping', 'cam ping'],
+    keywords: ['camp', 'cam', 'ping', 'camping' ],
+    guid: 'camping',
+    date: "2019-08-02T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/camping-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/camping-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Rosé',
+    author: 'Kai Ryssdal',
+    alts: ['rose a', 'rows a', 'rose hey'],
+    keywords: ['rose', 'rosé', 'row say', 'roe zay', 'rosey', 'wine'],
+    guid: 'rose_rerun_2019_08_01',
+    date: "2019-08-01T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/rose-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/rose-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Biomimicry",
+    author: 'Molly Wood',
+    alts: ['bio mimicry', 'biomimicry', 'by oh mimic re', 'bio ministry' ],
+    keywords: ['biomimicry', 'by oh', 'bio', 'mimic', 're', 'by' ],
+    guid: 'biomimicry',
+    date: "2019-07-31T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/biomimicry-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/biomimicry-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: "Online Reservations",
     author: 'Molly Wood',
     alts: ['online reservation', 'on line reservation', 'on lime reserve a shun'],
@@ -2932,18 +2968,6 @@ module.exports = [
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/speech-internet-molly-explainer-mix.mp3",
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/speech-internet-molly-intro-mix.mp3"
-    },
-  },
-  {
-    title: 'Rosé',
-    author: 'Kai Ryssdal',
-    alts: ['rose a', 'rows a', 'rose hey'],
-    keywords: ['rose', 'rosé', 'row say', 'roe zay', 'rosey', 'wine'],
-    guid: 'rose',
-    date: "2018-08-07T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/rose-kai-explainer-mix.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/rose-kai-intro-mix.mp3"
     },
   },
   {

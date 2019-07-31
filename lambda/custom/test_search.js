@@ -103,13 +103,7 @@ var searchResults = {
   //   'Pokémon'
   // ],
 
-  household_debt_launch: [
-    'house hold explain are',
-    'household explainer',
-    'households are',
-    'house hold it',
 
-  ],
   "5g_race": [
     'fine g',
     '5G'
