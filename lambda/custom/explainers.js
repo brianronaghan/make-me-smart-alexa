@@ -1,5 +1,89 @@
 module.exports = [
   {
+    title: 'Youth Sports',
+    author: 'Kai Ryssdal',
+    alts: ['youth sport', 'u sport', 'youth spores'],
+    keywords: ['you', 'youth', 'sport', 'spore'],
+    guid: 'youth_sports',
+    date: "2019-08-13T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/youth-sports-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/youth-sports-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: '1000 Dollar Bill',
+    author: 'Kai Ryssdal',
+    alts: ['one thousand dollar bill', 'thousand dollar bill', '1000 dollar bill'],
+    keywords: ['thousand', 'thousand dollar'],
+    guid: '1000_dollar_bill_REAIR_81219',
+    date: "2019-08-12T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/1000bill-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/1000bill-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Ambient Computing",
+    author: 'Molly Wood',
+    alts: ['ambient computing', 'ambient compute in', 'ambien computing'],
+    keywords: ['ambien', 'ambient', 'an being', 'am being', 'compute in', 'computing', 'come putin'],
+    guid: 'ambient_computing',
+    date: "2019-08-09T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/ambient-computing-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/ambient-computing-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Stay Interview',
+    author: 'Kai Ryssdal',
+    alts: ['stay interview', 'stay inter view', 'stay into view' ],
+    keywords: ['stay', 'inter', 'view'],
+    guid: 'stay_interview',
+    date: "2018-08-08T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/stay-interview-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/stay-interview-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Municipal Broadband",
+    author: 'Molly Wood',
+    alts: ['moon is a pal broad band', 'municipal broad band', 'municipal broadband' ],
+    keywords: ['municipal', 'broad', 'band', 'mune is a pal'],
+    guid: 'municipal_broadband',
+    date: "2019-08-07T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/municipal-broadband-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/municipal-broadband-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Instagram Therapists",
+    author: 'Molly Wood',
+    alts: ['instagram there a piss', 'insta graham therapist', 'instant gram therapist' ],
+    keywords: ['instagram', 'gram', 'therapist', 'instant', 'graham', 'insta', 'in stu' ],
+    guid: 'instagram_therapists',
+    date: "2019-08-06T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/instagram-therapists-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/instagram-therapists-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Super Soakers',
+    author: 'Kai Ryssdal',
+    alts: ['super suckers', 'super', 'water gun', 'super soakers'],
+    keywords: ['super', 'soaker', 'water gun', 'so car', 'so occur', 'soak her', 'sue her', 'so curse', 'so hers'],
+    guid: 'super_soakers_80519',
+    date: "2018-08-05T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/super-soaker-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/super-soaker-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Camping',
     author: 'Kai Ryssdal',
     alts: ['camping', 'camp in', 'cam in', 'camp ping', 'cam ping'],
@@ -2935,18 +3019,6 @@ module.exports = [
     },
   },
   {
-    title: '1000 Dollar Bill',
-    author: 'Kai Ryssdal',
-    alts: ['one thousand dollar bill', 'thousand dollar bill', '1000 dollar bill'],
-    keywords: ['thousand', 'thousand dollar'],
-    guid: '1000_dollar_bill',
-    date: "2018-08-10T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/1000bill-kai-explainer-mix.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/1000bill-kai-intro-mix.mp3"
-    },
-  },
-  {
     title: 'Vacation Days',
     author: 'Kai Ryssdal',
     alts: ['vacation days'],
@@ -3232,18 +3304,6 @@ module.exports = [
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/emoji-molly-explainer-mix.mp3",
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/emoji-molly-intro-mix.mp3"
-    },
-  },
-  {
-    title: 'Super Soakers',
-    author: 'Kai Ryssdal',
-    alts: ['super suckers', 'super', 'water gun', 'super soakers'],
-    keywords: ['super', 'soaker', 'water gun', 'so car', 'so occur', 'soak her', 'sue her', 'so curse', 'so hers'],
-    guid: 'super_soakers',
-    date: "2018-07-07T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/super-soaker-kai-explainer-mix.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/super-soaker-kai-intro-mix.mp3"
     },
   },
   {
