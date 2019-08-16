@@ -108,9 +108,7 @@ var searchResults = {
     'fine g',
     '5G'
   ],
-  bestof_two_dollar_bill: [
-    'two dollar',
-  ],
+
   cardboard: [
     'card board',
   ],

@@ -1,5 +1,53 @@
 module.exports = [
   {
+    title: 'Two Dollar Bill (Best of)',
+    author: 'Kai Ryssdal',
+    alts: ['dollar', 'two dollar bill', 'two buck bill', 'two dollar', '2 dollar'],
+    keywords: ['dollar', 'doll or', 'doll', 'two'],
+    guid: 'reair_two_dollar_bill',
+    date: "2019-08-19T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/two-dollar-bill-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/explainerhighlightsbrowse-kai-intro+MIX.mp3"
+    },
+  },
+  {
+    title: "Biohacking Hospital",
+    author: 'Molly Wood',
+    alts: ['biohacking hospital', 'biohack in hospital'],
+    keywords: ['bio', 'hacking', 'hospital', 'hack'],
+    guid: 'biohacking_hospital',
+    date: "2019-08-16T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/biohack-village-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/biohack-village-molly-intro-mix.mp3"
+    },
+  },  
+  {
+    title: 'Canned Cocktails',
+    author: 'Kai Ryssdal',
+    alts: ['can cocktail', 'candy cocktails', 'candid cock tales', 'canned cock tale'],
+    keywords: ['canned', "can't", 'can', 'kant', 'cocktail', 'cock tale'],
+    guid: 'canned_cocktails',
+    date: "2019-08-15T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/canned-cocktails-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/canned-cocktails-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Doordash vs Grubhub",
+    author: 'Molly Wood',
+    alts: ['door dash vs. grub hub', 'doordash verse grubhub'],
+    keywords: ['door', 'dash', 'grub', 'hub', 'verse', 'versus', 'version'],
+    guid: 'doordash_vs_grubhub',
+    date: "2019-08-14T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/food-delivery-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/food-delivery-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Youth Sports',
     author: 'Kai Ryssdal',
     alts: ['youth sport', 'u sport', 'youth spores'],
@@ -7,7 +55,7 @@ module.exports = [
     guid: 'youth_sports',
     date: "2019-08-13T07:00:00Z",
     audio: {
-      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/youth-sports-kai-explainer-mix.mp3",
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/youth-sports-kai-explainer-mix2.mp3",
       intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/youth-sports-kai-intro-mix.mp3"
     },
   },
@@ -1863,18 +1911,7 @@ module.exports = [
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/bestof2-molly-intro-mix.mp3"
     },
   },
-  {
-    title: 'Two Dollar Bill (Best of)',
-    author: 'Kai Ryssdal',
-    alts: ['dollar', 'two dollar bill', 'two buck bill', 'two dollar', '2 dollar'],
-    keywords: ['dollar', 'doll or', 'doll', 'two'],
-    guid: 'bestof_two_dollar_bill',
-    date: "2018-12-25T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/two-dollar-bill-kai-explainer-mix.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/explainerhighlightsbrowse-kai-intro+MIX.mp3"
-    },
-  },
+
   {
     title: 'Billboard Charts (Best of)',
     author: 'Kai Ryssdal',
@@ -3172,18 +3209,6 @@ module.exports = [
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/cardboard-molly-explainer-mix.mp3",
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/cardboard-molly-intro-mix.mp3"
-    },
-  },
-  {
-    title: 'Two Dollar Bill',
-    author: 'Kai Ryssdal',
-    alts: ['dollar', 'two dollar bill', 'two buck bill', 'two dollar', '2 dollar'],
-    keywords: ['dollar', 'doll or', 'doll', 'two'],
-    guid: 'two_dollar_bill',
-    date: "2018-07-20T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/two-dollar-bill-kai-explainer-mix.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/two-dollar-bill-kai-intro-mix.mp3"
     },
   },
   {
