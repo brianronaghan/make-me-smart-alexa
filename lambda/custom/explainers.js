@@ -1,5 +1,41 @@
 module.exports = [
   {
+    title: 'Subscription Economy',
+    author: 'Kai Ryssdal',
+    alts: ['subscription economics', 'sub script shun economics', ],
+    keywords: ['subscription', 'sub script shun', 'subscript shun', 'economic', 'subs crypt shun'],
+    guid: 'subscription_economics',
+    date: "2019-08-23T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/subscriber-economy-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/subscriber-economy-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Twinfluencers",
+    author: 'Molly Wood',
+    alts: ['twin fluent sirs', 'twinfluencers'],
+    keywords: ['twin', 'flew', 'flu', 'twinfluencers', 'twin fluent sir'],
+    guid: 'twinfluencers',
+    date: "2019-08-22T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/twinfluencers-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/twinfluencers-molly-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: "Drive Thrus",
+    author: 'Molly Wood',
+    alts: ['drive through', 'dry view'],
+    keywords: ['drive', 'through', 'thru', 'threw', 'dry'],
+    guid: 'drivethrus',
+    date: "2019-08-21T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/future-of-drive-throughs-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/future-of-drive-throughs-molly-intro-mix.mp3"
+    },
+  }, 
+  {
     title: "Old Town Road",
     author: 'Molly Wood',
     alts: ['old town road', 'old town rhodes', 'ole town rode'],
