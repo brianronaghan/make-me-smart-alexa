@@ -1,5 +1,29 @@
 module.exports = [
   {
+    title: "Pumpkin Spice Stinks",
+    author: 'Kai Ryssdal',
+    alts: ['pumpkin spice stink', 'pump kin spice stink'],
+    keywords: ['pump', 'kin', 'spice', 'spies', 'stink'],
+    guid: 'pumpkin_against',
+    date: "2019-08-27T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/psl-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/psl-kai-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: "Pumpkin Spice Everything",
+    author: 'Molly Wood',
+    alts: ['pumpkin spice everything', 'pump kin spice every thing'],
+    keywords: ['pump', 'kin', 'spice', 'spies', 'every', 'thing'],
+    guid: 'pumpkin_for',
+    date: "2019-08-26T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/pumpkin-spice-latte-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/pumpkin-spice-latte-molly-intro-mix.mp3"
+    },
+  }, 
+  {
     title: 'Subscription Economy',
     author: 'Kai Ryssdal',
     alts: ['subscription economics', 'sub script shun economics', ],
