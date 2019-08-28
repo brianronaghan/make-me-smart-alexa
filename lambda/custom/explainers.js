@@ -1,5 +1,18 @@
 module.exports = [
   {
+    title: "Fog Cam",
+    author: 'Molly Wood',
+    alts: ['fog cam', 'fob cam', 'fog am', 'fog can'],
+    keywords: ['fog', 'cam', 'can'],
+    guid: 'fog_cam',
+    date: "2019-08-28T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/fogcam-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/fogcam-molly-intro-mix.mp3"
+    },
+  }, 
+
+  {
     title: "Pumpkin Spice Stinks",
     author: 'Kai Ryssdal',
     alts: ['pumpkin spice stink', 'pump kin spice stink'],
