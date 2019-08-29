@@ -1,5 +1,41 @@
 module.exports = [
   {
+    title: "Back to School Spending",
+    author: 'Kai Ryssdal',
+    alts: ['back to school spending', 'back to school spend in'],
+    keywords: ['school','spend','back' ],
+    guid: 'back_to_school',
+    date: "2019-09-02T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/school-spending-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/school-spending-kai-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: "School Uniforms",
+    author: 'Kai Ryssdal',
+    alts: ['school uniforms', 'cool uniforms'],
+    keywords: ['school','uniform', ],
+    guid: 'school_uniforms',
+    date: "2019-08-30T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/school-uniforms-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/school-uniforms-kai-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: "Fall TV Streaming",
+    author: 'Molly Wood',
+    alts: ['fall tv', 'fall t.v.'],
+    keywords: ['fall', 'tv', 't.v.', 'streaming', 'stream in'],
+    guid: 'fall_tv_streaming',
+    date: "2019-08-29T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/fall-tv-and-streaming-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/fall-tv-and-streaming-molly-intro-mix.mp3"
+    },
+  }, 
+  {
     title: "Fog Cam",
     author: 'Molly Wood',
     alts: ['fog cam', 'fob cam', 'fog am', 'fog can'],
@@ -2683,18 +2719,18 @@ module.exports = [
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/underwaterinternet-molly-intro+MIX.mp3"
     },
   },
-  {
-    title: 'Fall TV',
-    author: 'Kai Ryssdal',
-    alts: ['fall tv', 'fall tb', 'fall to me', 'fall to v', 'fall e v'],
-    keywords: ['fall', 't.v.','tv', 'TV', 'T.V.', 't v', 't fee'],
-    guid: 'fall_tv',
-    date: "2018-10-03T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/falltv-kai-explainer-mix.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/falltv-kai-intro-mix.mp3"
-    },
-  },
+  // {
+  //   title: 'Fall TV',
+  //   author: 'Kai Ryssdal',
+  //   alts: ['fall tv', 'fall tb', 'fall to me', 'fall to v', 'fall e v'],
+  //   keywords: ['fall', 't.v.','tv', 'TV', 'T.V.', 't v', 't fee'],
+  //   guid: 'fall_tv',
+  //   date: "2018-10-03T07:00:00Z",
+  //   audio: {
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/falltv-kai-explainer-mix.mp3",
+  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/falltv-kai-intro-mix.mp3"
+  //   },
+  // },
   {
     title: 'Self Driving Cars',
     author: 'Molly Wood',
