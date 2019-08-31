@@ -1,5 +1,54 @@
 module.exports = [
   {
+    title: "Shadow Profiles",
+    author: 'Molly Wood',
+    alts: ['shadow pro file', 'had oh pro file', 'had o pro file'],
+    keywords: ['shadow', 'pro', 'file'],
+    guid: 'shadow_profiles',
+    date: "2019-09-06T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/shadow-profiles-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/shadow-profiles-molly-intro.mp3"
+    },
+  }, 
+
+  {
+    title: "Ghost Work",
+    author: 'Molly Wood',
+    alts: ['ghost work', 'ghosts work', 'ghost were'],
+    keywords: ['ghost', 'work'],
+    guid: 'ghost_work',
+    date: "2019-09-05T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/ghost-work-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/ghost-work-molly-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: "Zombie Debt",
+    author: 'Kai Ryssdal',
+    alts: ['zom be debt', 'zombie debt', 'zom be dead'],
+    keywords: ['zombie','debt','zom' ],
+    guid: 'zombie_debt',
+    date: "2019-09-04T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/zombie-debt-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/zombie-debt-kai-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: "Fantasy Football",
+    author: 'Kai Ryssdal',
+    alts: ['fantasy football', 'fan tussle foot ball'],
+    keywords: ['fantasy','foot','ball' ],
+    guid: 'fantasy_football',
+    date: "2019-09-03T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/fantasy-football-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/fantasy-football-kai-intro-mix.mp3"
+    },
+  }, 
+  {
     title: "Back to School Spending",
     author: 'Kai Ryssdal',
     alts: ['back to school spending', 'back to school spend in'],
@@ -3079,18 +3128,18 @@ module.exports = [
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/actorinsurance-kai-intro-mix.mp3"
     },
   },
-  {
-    title: 'Fantasy Football',
-    author: 'Molly Wood',
-    alts: ['fantasy football', 'fan to see football'],
-    keywords: ['fantasy football', 'fan to see', 'fan 2 c'],
-    guid: 'fantasy_football',
-    date: "2018-08-22T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/fantasyfootball-molly-explainer-mix.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/fantasyfootball-molly-intro-mix.mp3"
-    },
-  },
+  // {
+  //   title: 'Fantasy Football',
+  //   author: 'Molly Wood',
+  //   alts: ['fantasy football', 'fan to see football'],
+  //   keywords: ['fantasy football', 'fan to see', 'fan 2 c'],
+  //   guid: 'fantasy_football',
+  //   date: "2018-08-22T07:00:00Z",
+  //   audio: {
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/fantasyfootball-molly-explainer-mix.mp3",
+  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/fantasyfootball-molly-intro-mix.mp3"
+  //   },
+  // },
   {
     title: 'Crowdfunding',
     author: 'Molly Wood',
