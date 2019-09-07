@@ -1,4 +1,66 @@
 module.exports = [
+  // {
+  //   title: "Tech Ambassador",
+  //   author: 'Molly Wood',
+  //   alts: ['tech ambassador', ''],
+  //   keywords: ['tech', 'ambassador', ''],
+  //   guid: 'tech_ambassador',
+  //   date: "2019-09-13T07:00:00Z",
+  //   audio: {
+  //     url: "",
+  //     intro: ""
+  //   },
+  // }, 
+  // {
+  //   title: "Democratic Debate",
+  //   author: 'Kai Ryssdal',
+  //   alts: ['democrat it d bait'],
+  //   keywords: ['democrat','debate','zom', 'bait' ],
+  //   guid: 'democratic_debates',
+  //   date: "2019-09-12T07:00:00Z",
+  //   audio: {
+  //     url: "",
+  //     intro: ""
+  //   },
+  // },
+  // {
+  //   title: "Deficit",
+  //   author: 'Kai Ryssdal',
+  //   alts: ['deaf i sit', 'deficit', 'deaf is it'],
+  //   keywords: ['deficit','deaf','sit', 'death', 'is it' ],
+  //   guid: 'deficit',
+  //   date: "2019-09-11T07:00:00Z",
+  //   audio: {
+  //     url: "",
+  //     intro: ""
+  //   },
+  // },
+
+  {
+    title: "Black Hole Star",
+    author: 'Molly Wood',
+    alts: ['black hole star', 'black hold star'],
+    keywords: ['black', 'hole', 'star', 'hold'],
+    guid: 'blackhole_star',
+    date: "2019-09-10T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/black-hole-star-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/black-hole-star-molly-intro.mp3"
+    },
+  }, 
+  {
+    title: "Apple Event",
+    author: 'Molly Wood',
+    alts: ['apple event', 'app l event'],
+    keywords: ['app', 'apple', 'event'],
+    guid: 'apple_event',
+    date: "2019-09-09T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/apple-event-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/apple-event-molly-intro-mix.mp3"
+    },
+  }, 
+
   {
     title: "Shadow Profiles",
     author: 'Molly Wood',
