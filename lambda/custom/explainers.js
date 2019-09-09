@@ -1,41 +1,112 @@
 module.exports = [
-  // {
-  //   title: "Tech Ambassador",
-  //   author: 'Molly Wood',
-  //   alts: ['tech ambassador', ''],
-  //   keywords: ['tech', 'ambassador', ''],
-  //   guid: 'tech_ambassador',
-  //   date: "2019-09-13T07:00:00Z",
-  //   audio: {
-  //     url: "",
-  //     intro: ""
-  //   },
-  // }, 
-  // {
-  //   title: "Democratic Debate",
-  //   author: 'Kai Ryssdal',
-  //   alts: ['democrat it d bait'],
-  //   keywords: ['democrat','debate','zom', 'bait' ],
-  //   guid: 'democratic_debates',
-  //   date: "2019-09-12T07:00:00Z",
-  //   audio: {
-  //     url: "",
-  //     intro: ""
-  //   },
-  // },
-  // {
-  //   title: "Deficit",
-  //   author: 'Kai Ryssdal',
-  //   alts: ['deaf i sit', 'deficit', 'deaf is it'],
-  //   keywords: ['deficit','deaf','sit', 'death', 'is it' ],
-  //   guid: 'deficit',
-  //   date: "2019-09-11T07:00:00Z",
-  //   audio: {
-  //     url: "",
-  //     intro: ""
-  //   },
-  // },
-
+  {
+    title: "Kid Ride Shares",
+    author: 'Molly Wood',
+    alts: ['kid ride share', 'kids ride sharing', 'kids ride sharon'],
+    keywords: ['kid', 'ride', 'share'],
+    guid: 'kid_ride_shares',
+    date: "2019-09-23T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/kid-ride-shares-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/kid-ride-shares-molly-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: "Emmy Campaigns",
+    author: 'Kai Ryssdal',
+    alts: ['emmy cam pain', 'm camp n', 'm e camping'],
+    keywords: ['emmy','m.e.','m e', 'campaign', 'em e', 'cam pain', 'camping' ],
+    guid: 'emmy_campaigns',
+    date: "2019-09-20T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/emmy-campaigns-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/emmy-campaigns-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Space Law",
+    author: 'Molly Wood',
+    alts: ['spay slaw', 'space lull', 'space law', 'spays law'],
+    keywords: ['space', 'law', 'spay', 'slaw', 'lull'],
+    guid: 'space_law',
+    date: "2019-09-19T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/space-law-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/space-law-molly-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: "Celebrity Book Clubs",
+    author: 'Kai Ryssdal',
+    alts: ['celebrity book club', 'celebrity book love'],
+    keywords: ['celebrity','celebrate','celibate', 'sell a braid', 'book', 'club' ],
+    guid: 'celebrity_book_clubs',
+    date: "2019-09-18T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/celebrity-book-club-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/celebrity-book-club-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Google Dead People",
+    author: 'Molly Wood',
+    alts: ['google dead people', 'goo girl debt pee pull'],
+    keywords: ['google', 'dead', 'people', 'pee pull', 'pea pole', 'goo gull'],
+    guid: 'google_dead_people',
+    date: "2019-09-17T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/google-dead-people-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/google-dead-people-molly-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: "Pet Adoptions",
+    author: 'Molly Wood',
+    alts: ['pet adoption', 'pet adopt shun', 'pet add option '],
+    keywords: ['pet', 'adopt', 'adopt shun', 'add option'],
+    guid: 'pet_adoptions',
+    date: "2019-09-16T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/pet-adoptions-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/pet-adoptions-molly-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: "Tech Ambassador",
+    author: 'Molly Wood',
+    alts: ['tech ambassador', 'tech amb ass door'],
+    keywords: ['tech', 'ambassador', 'bass a door', 'adore', 'ass door'],
+    guid: 'tech_ambassador',
+    date: "2019-09-13T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/tech-ambassador-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/tech-ambassador-molly-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: "Democratic Debate",
+    author: 'Kai Ryssdal',
+    alts: ['democrat it d bait', 'demo crap d bait'],
+    keywords: ['democrat','debate', 'bait'],
+    guid: 'democratic_debates',
+    date: "2019-09-12T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/democratic-debates-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/democratic-debates-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Deficit",
+    author: 'Kai Ryssdal',
+    alts: ['deaf i sit', 'deficit', 'deaf is it', 'deaf e sit'],
+    keywords: ['deficit','deaf','sit', 'death' ],
+    guid: 'deficit',
+    date: "2019-09-11T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/deficit-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/deficit-kai-intro-mix.mp3"
+    },
+  },
   {
     title: "Black Hole Star",
     author: 'Molly Wood',
