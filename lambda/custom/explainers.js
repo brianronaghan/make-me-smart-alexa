@@ -1,4 +1,16 @@
 module.exports = [
+  // {
+  //   title: "Google Dead People",
+  //   author: 'Molly Wood',
+  //   alts: ['google dead people', 'goo girl debt pee pull'],
+  //   keywords: ['google', 'dead', 'people', 'pee pull', 'pea pole', 'goo gull'],
+  //   guid: 'google_dead_people',
+  //   date: "2019-09-17T07:00:00Z",
+  //   audio: {
+  //     url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/google-dead-people-molly-explainer-mix.mp3",
+  //     intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/google-dead-people-molly-intro-mix.mp3"
+  //   },
+  // }, 
   {
     title: "Kid Ride Shares",
     author: 'Molly Wood',
@@ -48,17 +60,19 @@ module.exports = [
     },
   },
   {
-    title: "Google Dead People",
-    author: 'Molly Wood',
-    alts: ['google dead people', 'goo girl debt pee pull'],
-    keywords: ['google', 'dead', 'people', 'pee pull', 'pea pole', 'goo gull'],
-    guid: 'google_dead_people',
+    title: "The Fed Cut",
+    author: 'Kai Ryssdal',
+    alts: ['the fed', 'the dead', 'fed', 'the fit', 'central bank', 'the federal reserve'],
+    keywords: ['federal', 'reserve', 'fed', 'the fed', 'bank', 'central'],
+    guid: 'the_fed_cut_2019',
     date: "2019-09-17T07:00:00Z",
     audio: {
-      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/google-dead-people-molly-explainer-mix.mp3",
-      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/google-dead-people-molly-intro-mix.mp3"
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/fed-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/fed-kai-intro-mix.mp3"
     },
-  }, 
+  },
+
+
   {
     title: "Pet Adoptions",
     author: 'Molly Wood',
@@ -3574,18 +3588,18 @@ module.exports = [
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/wimbledon-kai-intro-mix.mp3"
     },
   },
-  {
-    title: 'The Fed',
-    author: 'Kai Ryssdal',
-    guid: 'the_fed',
-    date: "2018-07-12T20:59:00Z",
-    alts: ['the fed', 'the dead', 'fed', 'the fit', 'central bank', 'the federal reserve'],
-    keywords: ['federal', 'reserve', 'fed', 'the fed', 'bank', 'central'],
-    audio: {
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/fed-kai-intro-mix.mp3",
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/fed-kai-explainer-mix.mp3",
-    }
-  },
+  // {
+  //   title: 'The Fed',
+  //   author: 'Kai Ryssdal',
+  //   guid: 'the_fed',
+  //   date: "2018-07-12T20:59:00Z",
+  //   alts: ['the fed', 'the dead', 'fed', 'the fit', 'central bank', 'the federal reserve'],
+  //   keywords: ['federal', 'reserve', 'fed', 'the fed', 'bank', 'central'],
+  //   audio: {
+  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/fed-kai-intro-mix.mp3",
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/fed-kai-explainer-mix.mp3",
+  //   }
+  // },
   {
     title: 'The Cloud',
     author: 'Molly Wood',
