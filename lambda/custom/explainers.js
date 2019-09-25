@@ -12,6 +12,30 @@ module.exports = [
   //   },
   // }, 
   {
+    title: "Gig Worker Law",
+    author: 'Kai Ryssdal',
+    alts: ['gig work or law', 'gig worker low', 'gig work are law'],
+    keywords: ['gig', 'work', 'law'],
+    guid: 'gig_worker_law',
+    date: "2019-09-25T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/ab5-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/ab5-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Repo Market",
+    author: 'Kai Ryssdal',
+    alts: ['repo mark it', 're poe mark it', 're poe market'],
+    keywords: ['re','poe', 'repo', 'market', 'mark it'],
+    guid: 'repo_market',
+    date: "2019-09-24T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/repo-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/repo-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: "Kid Ride Shares",
     author: 'Molly Wood',
     alts: ['kid ride share', 'kids ride sharing', 'kids ride sharon'],
@@ -71,8 +95,6 @@ module.exports = [
       intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/fed-kai-intro-mix.mp3"
     },
   },
-
-
   {
     title: "Pet Adoptions",
     author: 'Molly Wood',
