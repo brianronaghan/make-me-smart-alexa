@@ -12,6 +12,18 @@ module.exports = [
   //   },
   // }, 
   {
+    title: "Labor Unions",
+    author: 'Molly Wood',
+    alts: ['lay bore union', 'labor union', 'lay bore you ands'],
+    keywords: ['lay bore', 'labor', 'union', 'you n', 'you and', 'lay burr'],
+    guid: 'labor_unions',
+    date: "2019-09-26T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/unions-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/unions-molly-intro-mix.mp3"
+    },
+  }, 
+  {
     title: "Gig Worker Law",
     author: 'Kai Ryssdal',
     alts: ['gig work or law', 'gig worker low', 'gig work are law'],
