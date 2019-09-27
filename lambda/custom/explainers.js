@@ -12,6 +12,30 @@ module.exports = [
   //   },
   // }, 
   {
+    title: "CRISPR",
+    author: 'Molly Wood',
+    alts: ['crisp or', 'chris per', 'whisper', 'chris or', 'chris spur'],
+    keywords: ['crisp', 'or', 'cri', 'chris', 'per', 'spur' ],
+    guid: 'crispr',
+    date: "2019-09-30T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/crispr-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/crispr-molly-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: "Wi-fi turns 20",
+    author: 'Molly Wood',
+    alts: ['why fi turns 20', 'wifi turns 20', 'wi-fly turn ten tee'],
+    keywords: ['why', 'fi', 'wifi', 'wi-fi', 'turn', 'twenty', '20', 'ten e' ],
+    guid: 'wifi_turns_20',
+    date: "2019-09-27T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/WiFi-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/WiFi-molly-intro-mix.mp3"
+    },
+  }, 
+  {
     title: "Labor Unions",
     author: 'Molly Wood',
     alts: ['lay bore union', 'labor union', 'lay bore you ands'],
