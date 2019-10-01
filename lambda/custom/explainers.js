@@ -1,16 +1,16 @@
 module.exports = [
-  // {
-  //   title: "Google Dead People",
-  //   author: 'Molly Wood',
-  //   alts: ['google dead people', 'goo girl debt pee pull'],
-  //   keywords: ['google', 'dead', 'people', 'pee pull', 'pea pole', 'goo gull'],
-  //   guid: 'google_dead_people',
-  //   date: "2019-09-17T07:00:00Z",
-  //   audio: {
-  //     url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/google-dead-people-molly-explainer-mix.mp3",
-  //     intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/google-dead-people-molly-intro-mix.mp3"
-  //   },
-  // }, 
+  {
+    title: "Google Dead People",
+    author: 'Molly Wood',
+    alts: ['google dead people', 'goo girl debt pee pull'],
+    keywords: ['google', 'dead', 'people', 'pee pull', 'pea pole', 'goo gull'],
+    guid: 'google_dead_people',
+    date: "2019-10-01T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/google-dead-people-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/google-dead-people-molly-intro-mix.mp3"
+    },
+  }, 
   {
     title: "CRISPR",
     author: 'Molly Wood',
