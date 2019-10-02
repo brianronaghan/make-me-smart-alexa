@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: "Hotel Interviews",
+    author: 'Kai Ryssdal',
+    alts: ['hotel interviews', 'hotel inter views', 'ho tell into views'],
+    keywords: ['ho', 'hotel', 'ho tell', 'inter', 'interview', 'in her view'],
+    guid: 'hotel_interviews',
+    date: "2019-10-02T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/hotel-room-interviews-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/hotel-room-interviews-kai-intro-mix.mp3"
+    },
+  }, 
+  {
     title: "Google Dead People",
     author: 'Molly Wood',
     alts: ['google dead people', 'goo girl debt pee pull'],
