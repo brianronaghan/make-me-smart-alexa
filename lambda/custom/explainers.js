@@ -1,5 +1,41 @@
 module.exports = [
   {
+    title: "Net Neutrality",
+    author: 'Molly Wood',
+    alts: ['net neutrality', 'net neutral e', 'net new travel t'],
+    keywords: ['net', 'neutral','new tral'],
+    guid: 'net_neutrality',
+    date: "2019-10-07T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/net-neutrality-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/net-neutrality-molly-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: "Playoff Baseball",
+    author: 'Kai Ryssdal',
+    alts: ['play off base ball', 'playoffs baseball'],
+    keywords: ['play', 'off', 'base', 'ball'],
+    guid: 'playoff_baseball',
+    date: "2019-10-04T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/playoffbaseball-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/playoffbaseball-kai-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: "Micro Plastics",
+    author: 'Molly Wood',
+    alts: ['my crow plastic','micro plastic'],
+    keywords: ['my crow', 'micro', 'mike row', 'plastic', 'tick'],
+    guid: 'micro_plastics',
+    date: "2019-10-03T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/microplastics-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/microplastics-molly-intro-mix.mp3"
+    },
+  }, 
+  {
     title: "Hotel Interviews",
     author: 'Kai Ryssdal',
     alts: ['hotel interviews', 'hotel inter views', 'ho tell into views'],
