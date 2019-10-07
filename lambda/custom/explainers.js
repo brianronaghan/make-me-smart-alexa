@@ -1,5 +1,65 @@
 module.exports = [
   {
+    title: "Initial Public Offerings",
+    author: 'Kai Ryssdal',
+    alts: ['initial pub', 'initial public offering'],
+    keywords: ['initial', 'public', 'offer'],
+    guid: 'ipos',
+    date: "2019-10-14T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/ipos-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/ipos-kai-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: "Fermi Paradox",
+    author: 'Molly Wood',
+    alts: ['fermi pair of docs', 'fermi paradox', 'fermi para of docks'],
+    keywords: ['fermi', 'paradox','pair of docs', 'docks'],
+    guid: 'fermi_paradox',
+    date: "2019-10-11T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/fermi-paradox-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/fermi-paradox-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Trucking",
+    author: 'Kai Ryssdal',
+    alts: ['truck in', 'truck', 'tuck in'],
+    keywords: ['truck', 'tuck'],
+    guid: 'trucking',
+    date: "2019-10-10T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/trucking-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/trucking-kai-intro-mix.mp3"
+    },
+  },  
+  {
+    title: "Fast Fashion",
+    author: 'Kai Ryssdal',
+    alts: ['fast fast in', 'fast fas shun', 'vast fashion'],
+    keywords: ['fast', 'fashion', 'shun'],
+    guid: 'fast_fashion',
+    date: "2019-10-09T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/fastfashion-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/fastfashion-kai-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: "Flood Maps",
+    author: 'Molly Wood',
+    alts: ['flood map', 'flood nap', 'flood app'],
+    keywords: ['flood', 'map','mud', 'flub'],
+    guid: 'flood_maps',
+    date: "2019-10-08T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/flood-maps-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/flood-maps-molly-intro-mix.mp3"
+    },
+  }, 
+  {
     title: "Net Neutrality",
     author: 'Molly Wood',
     alts: ['net neutrality', 'net neutral e', 'net new travel t'],
