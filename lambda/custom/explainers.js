@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: "Huawei",
+    author: 'Molly Wood',
+    alts: ['hoo way', 'who a', 'hua wei', 'wa way' ],
+    keywords: ['who', 'way','why', 'hoo', 'ha', 'how', 'wha'],
+    guid: 'huawei',
+    date: "2019-10-15T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/Huawei-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/Huawei-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: "Initial Public Offerings",
     author: 'Kai Ryssdal',
     alts: ['initial pub', 'initial public offering'],

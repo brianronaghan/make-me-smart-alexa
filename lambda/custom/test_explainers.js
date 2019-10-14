@@ -87,7 +87,7 @@ function checkExplainer (ex) {
 }
 
 function checkUrls(ex, cb) {
-  if (ex.audio.url.indexOf('/explainers') < 0) {
+  if (ex.audio.url.indexOf('/explainers') < 0 && ex.audio.url.indexOf('mms-explainers-new') < 0) {
     throw new Error(`AUDIO not in AUDIO ${ex.audio.url}`);
   }
   request(ex.audio.url, (error, response, body) => {
@@ -98,7 +98,7 @@ function checkUrls(ex, cb) {
     } else if (ex.audio.intro) {
       console.log(`200 explainer ${ex.title}`)
       // explainer
-      if (ex.audio.intro.indexOf('/intros') < 0) {
+      if (ex.audio.intro.indexOf('/intros') < 0 && ex.audio.intro.indexOf('mms-explainers-new') < 0) {
         throw new Error(`INTRO not in INTRO fold ${ex.audio.intro}`);
       }
       request(ex.audio.intro, (error, response, body) => {
