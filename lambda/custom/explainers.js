@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: "Virtual Currency",
+    author: 'Molly Wood',
+    alts: ['virtual current see', 'virtual curry c' ],
+    keywords: ['virtual', 'currency','current', 'core and see'],
+    guid: 'virtual_currency',
+    date: "2019-10-16T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/virtual-currency-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/virtual-currency-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: "Huawei",
     author: 'Molly Wood',
     alts: ['hoo way', 'who a', 'hua wei', 'wa way' ],
