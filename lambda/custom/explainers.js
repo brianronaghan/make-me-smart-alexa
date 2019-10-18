@@ -1,5 +1,41 @@
 module.exports = [
   {
+    title: "Consumer Confidence",
+    author: 'Kai Ryssdal',
+    alts: ['consumer conference', 'consume or diffidence', 'consume or confidents'],
+    keywords: ['consume', 'con', 'consumer', 'confident', 'confidence'],
+    guid: 'consumer_confidence',
+    date: "2019-10-21T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/consumerconfidence-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/consumerconfidence-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: "NBA Salary Cap",
+    author: 'Molly Wood',
+    alts: ['nba salary cap', 'n b a salary cat', 'anyway salary cap' ],
+    keywords: ['nba', 'n.b.a', 'N B A', 'NBA', 'salary', 'cap'],
+    guid: 'nba_cap',
+    date: "2019-10-18T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/NBA-salary-cap-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/NBA-salary-cap-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Children's Online Privacy",
+    author: 'Molly Wood',
+    alts: ['children online piracy', 'children on line private see' ],
+    keywords: ['children', 'chill', 'den', 'ren', 'wren', 'pry', 'private', 'privacy'],
+    guid: 'coppa',
+    date: "2019-10-17T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/COPPA-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/COPPA-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: "Virtual Currency",
     author: 'Molly Wood',
     alts: ['virtual current see', 'virtual curry c' ],
@@ -3514,18 +3550,18 @@ module.exports = [
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/awardshows-kai-intro+MIX.mp3"
     },
   },
-  {
-    title: 'Consumer Confidence',
-    author: 'Kai Ryssdal',
-    alts: ['consumer confidence', 'on sooner confidence'],
-    keywords: ['consumer', 'confidence', 'con dents', 'con for dents', 'con fit dense'],
-    guid: 'consumer_confidence',
-    date: "2018-08-16T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/consumer-confidence-kai-explainer-mix.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/retrack-kai-intro-mix.mp3"
-    },
-  },
+  // {
+  //   title: 'Consumer Confidence',
+  //   author: 'Kai Ryssdal',
+  //   alts: ['consumer confidence', 'on sooner confidence'],
+  //   keywords: ['consumer', 'confidence', 'con dents', 'con for dents', 'con fit dense'],
+  //   guid: 'consumer_confidence',
+  //   date: "2018-08-16T07:00:00Z",
+  //   audio: {
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/consumer-confidence-kai-explainer-mix.mp3",
+  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/retrack-kai-intro-mix.mp3"
+  //   },
+  // },
   {
     title: 'Business Clusters',
     author: 'Kai Ryssdal',
