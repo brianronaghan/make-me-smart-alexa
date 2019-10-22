@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: "Debt vs Deficit",
+    author: 'Kai Ryssdal',
+    alts: ['debt vs deaf is it', 'debt verse deaf i sit', 'debt vs deficit'],
+    keywords: ['debt', 'deaf', 'deft', 'def', 'deficit', 'dent', 'verse', 'versus', 'deaf is it'],
+    guid: 'debt_vs_deficit',
+    date: "2019-10-22T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/debtvdeficit-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/debtvdeficit-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: "Consumer Confidence",
     author: 'Kai Ryssdal',
     alts: ['consumer conference', 'consume or diffidence', 'consume or confidents'],
