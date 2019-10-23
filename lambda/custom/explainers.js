@@ -1,4 +1,17 @@
 module.exports = [
+    
+  {
+    title: "10 year T-note",
+    author: 'Kai Ryssdal',
+    alts: ['tenure tee note', 'tend your t node', 'ten yor teen ode'],
+    keywords: ['ten', '10', 'year', 'tee', 't', 'note', 'tea', 'node', 'tenure', 'tend'],
+    guid: '10_yr_tnote',
+    date: "2019-10-23T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/10yeartnote-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/10yeartnote-kai-intro-mix.mp3"
+    },
+  },
   {
     title: "Debt vs Deficit",
     author: 'Kai Ryssdal',
