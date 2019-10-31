@@ -1,4 +1,100 @@
 module.exports = [
+  {
+    title: 'NBA Sneaker Deals',
+    author: 'Molly Wood',
+    alts: ['nba sneak or deal', 'anyway sneaker d l', 'n b a sneak r d', 'nba sneaker deal'],
+    keywords: ['nba', 'n.b.a.', 'n b a', 'sneak', 'deal'],
+    guid: 'nba_sneaker_deals',
+    date: "2019-11-04T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/NBA-sneaker-deals-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/NBA-sneaker-deals-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Monthly Jobs Report',
+    author: 'Kai Ryssdal',
+    alts: ['month lee job re port', 'monthly job re port'],
+    keywords: ['month', 'job', 'report', 'port'],
+    guid: 'jobs_report',
+    date: "2019-11-01T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/monthly-jobs-report-kai-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/monthly-jobs-report-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Candy',
+    author: 'Kai Ryssdal',
+    alts: ['candy', 'can d'],
+    keywords: ['candy'],
+    guid: 'candy_halloween_19',
+    date: "2019-10-31T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/candy-kai-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/candy-kai-intro+MIX.mp3"
+    },
+  },
+  {
+    title: "Halloween Costumes",
+    author: 'Molly Wood',
+    alts: ['halloween costume', 'hallow e cost zoom' ],
+    keywords: ['hallow', 'costumes', 'halloween'],
+    guid: 'halloween_costumes',
+    date: "2019-10-30T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/Halloween-costumes-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/Halloween-costumes-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Pumpkin Pie Filling",
+    author: 'Molly Wood',
+    alts: ['pump kin pie fill in', 'pumpkin pie', 'pumpkin puree' ],
+    keywords: ['pump', 'kin', 'pure', 'pie', 'pi', 'fill'],
+    guid: 'pumpkin_puree',
+    date: "2019-10-29T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/Pumpkin-pie-filling-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/Pumpkin-pie-filling-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Horror Movies',
+    author: 'Kai Ryssdal',
+    alts: ['horror move e', 'horror movie'],
+    keywords: ['horror', 'move', 'movie'],
+    guid: 'horror_movies',
+    date: "2019-10-28T07:00:00Z",
+    audio: {
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/scary-movies-kai-intro-mix.mp3",
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/scary-movies-kai-explainer-mix.mp3",
+    },
+  },
+  {
+    title: 'Stock Market',
+    author: 'Kai Ryssdal',
+    alts: ['stock mark it', 'stock market', 'stalk mark it'],
+    keywords: ['stock', 'mark', 'stalk'],
+    guid: 'stock_market',
+    date: "2019-10-25T07:00:00Z",
+    audio: {
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/stock-market-kai-intro-mix.mp3",
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/stock-market-kai-explainer-mix.mp3",
+    },
+  },
+  {
+    title: 'Household Debt',
+    author: 'Kai Ryssdal',
+    alts: ['debt', 'dead', 'household', 'what we owe', 'personal debt', 'household dead', 'house hold deb', 'household deck', 'house hold it', 'house hold deck', 'house hole deck', 'house hole debt', 'household that', 'house hold that', 'household it', 'hold it', 'house on debt', 'house debt', 'how hold it',  'how cold it'],
+    keywords: ['house', 'debt', 'dead', 'hold', 'cold'],
+    guid: 'household_debt_2019',
+    date: "2019-10-24T07:00:00Z",
+    audio: {
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/household-debt-kai-new-intro-mix.mp3",
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/householddebt-kai-explainer-mix.mp3",
+    },
+  },
     
   {
     title: "10 year T-note",
@@ -2924,18 +3020,18 @@ module.exports = [
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/kepler-molly-intro+MIX.mp3"
     },
   },
-  {
-    title: 'Candy',
-    author: 'Kai Ryssdal',
-    alts: ['candy', 'can d'],
-    keywords: ['candy'],
-    guid: 'candy',
-    date: "2018-10-31T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/candy-kai-explainer+MIX.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/candy-kai-intro+MIX.mp3"
-    },
-  },
+  // {
+  //   title: 'Candy',
+  //   author: 'Kai Ryssdal',
+  //   alts: ['candy', 'can d'],
+  //   keywords: ['candy'],
+  //   guid: 'candy',
+  //   date: "2018-10-31T07:00:00Z",
+  //   audio: {
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/candy-kai-explainer+MIX.mp3",
+  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/candy-kai-intro+MIX.mp3"
+  //   },
+  // },
   {
     title: 'Hallmark Movies',
     author: 'Kai Ryssdal',
@@ -4073,22 +4169,22 @@ module.exports = [
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/machine-learning-molly-explainer-mix.mp3",
     },
   },
-  {
-    title: 'Household Debt',
-    author: 'Kai Ryssdal',
-    alts: ['debt', 'dead', 'household', 'what we owe', 'personal debt', 'household dead', 'house hold deb', 'household deck', 'house hold it', 'house hold deck', 'house hole deck', 'house hole debt', 'household that', 'house hold that', 'household it', 'hold it', 'house on debt', 'house debt', 'how hold it',  'how cold it'],
-    keywords: ['house', 'debt', 'dead', 'hold', 'cold'],
-    guid: 'household_debt_launch',
-    date: "2018-06-22T07:00:00Z",
-    requestInformation: {
-      user: null,
-      location: null
-    },
-    audio: {
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/household-debt-kai-intro-mix.mp3",
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/household-debt-kai-explainer-mix.mp3",
-    },
-  },
+  // {
+  //   title: 'Household Debt',
+  //   author: 'Kai Ryssdal',
+  //   alts: ['debt', 'dead', 'household', 'what we owe', 'personal debt', 'household dead', 'house hold deb', 'household deck', 'house hold it', 'house hold deck', 'house hole deck', 'house hole debt', 'household that', 'house hold that', 'household it', 'hold it', 'house on debt', 'house debt', 'how hold it',  'how cold it'],
+  //   keywords: ['house', 'debt', 'dead', 'hold', 'cold'],
+  //   guid: 'household_debt_launch',
+  //   date: "2018-06-22T07:00:00Z",
+  //   requestInformation: {
+  //     user: null,
+  //     location: null
+  //   },
+  //   audio: {
+  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/household-debt-kai-intro-mix.mp3",
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/household-debt-kai-explainer-mix.mp3",
+  //   },
+  // },
   {
     title: 'Ransomware',
     author: 'Molly Wood',
