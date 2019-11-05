@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: 'Santa Ana Winds',
+    author: 'Kai Ryssdal',
+    alts: ['sand to and a wins', 'santa and a wind', 'santa anna wins', 'santa and a win'],
+    keywords: ['san', 'santa', 'ana', 'anna', 'anne a', 'win'],
+    guid: 'santa_ana',
+    date: "2019-11-05T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/santa-ana-winds-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/santa-ana-winds-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'NBA Sneaker Deals',
     author: 'Molly Wood',
     alts: ['nba sneak or deal', 'anyway sneaker d l', 'n b a sneak r d', 'nba sneaker deal'],
@@ -20,7 +32,7 @@ module.exports = [
     date: "2019-11-01T07:00:00Z",
     audio: {
       url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/monthly-jobs-report-kai-mix.mp3",
-      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/monthly-jobs-report-kai-intro-mix.mp3"
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/new-jobs-report-kai-intro-mix.mp3"
     },
   },
   {
