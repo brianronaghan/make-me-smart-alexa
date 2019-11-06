@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: 'Hurricane Hunters',
+    author: 'Molly Wood',
+    alts: ['hurry cane hunt ors', 'her e cane hunt r', 'hurricane hunter'],
+    keywords: ['her', 'hurry cane', 'her e', 'cain', 'hunt'],
+    guid: 'hurricane_hunters',
+    date: "2019-11-06T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/hurricane-hunter-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/hurricane-hunter-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Santa Ana Winds',
     author: 'Kai Ryssdal',
     alts: ['sand to and a wins', 'santa and a wind', 'santa anna wins', 'santa and a win'],
