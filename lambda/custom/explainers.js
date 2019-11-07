@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: 'Inflation',
+    author: 'Kai Ryssdal',
+    alts: ['inflation', 'in flay shun', 'inflate shun'],
+    keywords: ['inflation', 'inflate', 'flay shun'],
+    guid: 'inflation_2019',
+    date: "2019-11-07T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/inflation-kai-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/inflation-kai-intro+MIX.mp3"
+    },
+  },
+  {
     title: 'Hurricane Hunters',
     author: 'Molly Wood',
     alts: ['hurry cane hunt ors', 'her e cane hunt r', 'hurricane hunter'],
@@ -3102,18 +3114,6 @@ module.exports = [
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/electronicvoting-molly-explainer+MIX.mp3",
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/electronicvoting-molly-intro+MIX.mp3"
-    },
-  },
-  {
-    title: 'Inflation',
-    author: 'Kai Ryssdal',
-    alts: ['inflation', 'in flay shun', 'inflate shun'],
-    keywords: ['inflation', 'inflate', 'flay shun'],
-    guid: 'inflation',
-    date: "2018-10-24T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/inflation-kai-explainer+MIX.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/inflation-kai-intro+MIX.mp3"
     },
   },
   {
