@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: 'Cobra Effect',
+    author: 'Molly Wood',
+    alts: ['cobra f x', 'co bro affect', 'cobra effect'],
+    keywords: ['cobra', 'effect', 'co bra', 'effect', 'affect', 'feck'],
+    guid: 'cobra_effect',
+    date: "2019-11-08T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/cobra-effect-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/cobra-effect-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Inflation',
     author: 'Kai Ryssdal',
     alts: ['inflation', 'in flay shun', 'inflate shun'],
@@ -8,7 +20,7 @@ module.exports = [
     date: "2019-11-07T07:00:00Z",
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/inflation-kai-explainer+MIX.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/inflation-kai-intro+MIX.mp3"
+      // intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/inflation-kai-intro+MIX.mp3"
     },
   },
   {
