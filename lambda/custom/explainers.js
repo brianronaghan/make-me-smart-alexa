@@ -1,5 +1,29 @@
 module.exports = [
   {
+    title: 'Amazon Sellers',
+    author: 'Molly Wood',
+    alts: ['amazon sell or', 'amazon sell ur', 'am a son sell or'],
+    keywords: ['amazon', 'sell', 'or', 'amazon'],
+    guid: 'amazon_sellers',
+    date: "2019-11-12T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/amazon-sellers-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/amazon-sellers-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Containerized Shipping',
+    author: 'Kai Ryssdal',
+    alts: ['con tame her ship in', 'contain or shipping', 'container ship in', 'container shipping'],
+    keywords: ['contain', 'ship', 'shit', 'con tame'],
+    guid: 'container_shipping',
+    date: "2019-11-11T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/container-shipping-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/container-shipping-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Cobra Effect',
     author: 'Molly Wood',
     alts: ['cobra f x', 'co bro affect', 'cobra effect'],
