@@ -1,5 +1,53 @@
 module.exports = [
   {
+    title: 'Indigo and Denim',
+    author: 'Molly Wood',
+    alts: ['in did go n denim', 'indigo n den him', 'in dig go den em', 'in dig o den m'],
+    keywords: ['indigo', 'denim', 'in dig o', 'den m'],
+    guid: 'indigo_and_denim',
+    date: "2019-11-17T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/indigo-and-denim-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/indigo-and-denim-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Wild Horses',
+    author: 'Kai Ryssdal',
+    alts: ['while hoars', 'wild horse', 'wile hoars', 'why l hoarse'],
+    keywords: ['wild', 'horse', 'hoars', 'whores', 'while', 'wile', 'why l', 'hoarse'],
+    guid: 'wild_horse',
+    date: "2019-11-14T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/wild-horses-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/wild-horses-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Data Encryptions',
+    author: 'Molly Wood',
+    alts: ['data encrypt shun', 'data encryption'],
+    keywords: ['data', 'crypt', 'in crib', 'dada'],
+    guid: 'data_encryptions',
+    date: "2019-11-13T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/data-encryption-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/data-encryption-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Gas Prices',
+    author: 'Kai Ryssdal',
+    alts: ['gas price is', 'gas prizes', 'gas prices'],
+    keywords: ['gas', 'price', 'pry', 'prize'],
+    guid: 'gas_prices',
+    date: "2019-11-12T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/gas-prices-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/gas-prices-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Amazon Sellers',
     author: 'Molly Wood',
     alts: ['amazon sell or', 'amazon sell ur', 'am a son sell or'],
