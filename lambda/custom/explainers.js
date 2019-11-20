@@ -1,5 +1,29 @@
 module.exports = [
   {
+    title: 'Seasonal Hiring',
+    author: 'Molly Wood',
+    alts: ['season l hire and', 'seasonal hire in', 'season l hiring', 'seasonal higher in'],
+    keywords: ['season', 'sees', 'seas', 'job', 'hire', 'higher', 'high'],
+    guid: 'seasonal_hiring',
+    date: "2019-11-19T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/seasonal-hiring-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/seasonal-hiring-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Palladium',
+    author: 'Molly Wood',
+    alts: ['pall aid e um', 'palladium'],
+    keywords: ['pall aid e um', 'pall', 'palladium', 'lady'],
+    guid: 'palladium',
+    date: "2019-11-18T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/palladium-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/palladium-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Indigo and Denim',
     author: 'Molly Wood',
     alts: ['in did go n denim', 'indigo n den him', 'in dig go den em', 'in dig o den m'],
