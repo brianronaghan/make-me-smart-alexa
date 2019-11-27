@@ -1,11 +1,108 @@
 module.exports = [
   {
+    title: 'Online Shopping Carts',
+    author: 'Molly Wood',
+    alts: ['shop in cards', 'shop in carts',  'shop in cars', 'shoppin', 'shopping carts', 'on line shopping cards'],
+    keywords: ['shopping', 'carts', 'cards', 'carts', 'on', 'line'],
+    guid: 'online_shopping_carts_2019',
+    date: "2018-12-02T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/onlineshoppingcart-molly-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/onlineshoppingcart-molly-intro+MIX.mp3"
+    },
+  },
+  {
+    title: 'Black Friday',
+    author: 'Molly Wood',
+    alts: ['black friday', 'black fry day', 'black fly day'],
+    keywords: ['black', 'friday', 'fry day'],
+    guid: 'black_friday_2019',
+    date: "2018-11-29T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/black-friday-molly-explainer-mix.mp3",
+      intro: ""
+    },
+  },
+  {
+    title: 'Butterball Hotline',
+    author: 'Kai Ryssdal',
+    alts: ['butter ball hot line', 'butterball hot line', 'better ball'],
+    keywords: ['butter', 'ball', 'hotline', 'hot line'],
+    guid: 'butterball_19',
+    date: "2019-11-28T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/butterball-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/butterball-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Heirloom Plants',
+    author: 'Molly Wood',
+    alts: ['air loom plan', 'hair loom plans', 'heir loom plants'],
+    keywords: ['air', 'hair', 'heir', 'loom', 'plant', 'plans', 'lance','lands'],
+    guid: 'heirloom_vegetables',
+    date: "2019-11-27T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/heirloom-plants-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/heirloom-plants-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'What is Organic',
+    author: 'Kai Ryssdal',
+    alts: ['what is organ ick', 'what is or ganic'],
+    keywords: ['organ', 'org', 'ick'],
+    guid: 'organic',
+    date: "2019-11-26T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/organic-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/organic-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Turkey',
+    author: 'Kai Ryssdal',
+    alts: ['turn key', 'turkey', 'tour key'],
+    keywords: ['turk', 'turn', 'tour'],
+    guid: 'turkey',
+    date: "2019-11-25T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/turkey-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/turkey-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Space Farming',
+    author: 'Molly Wood',
+    alts: ['space farm in', 'spays farm in'],
+    keywords: ['space', 'spay', 'farm'],
+    guid: 'space_farming',
+    date: "2019-11-22T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/space-farming-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/space-farming-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Minimum Wage',
+    author: 'Kai Ryssdal',
+    alts: ['minimum wage', 'minimum ways'],
+    keywords: ['minimum', 'wage', 'way', 'min'],
+    guid: 'minimum_wage',
+    date: "2019-11-21T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/minimum+wage-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/minimum+wage-kai-intro-mix.mp3"
+    },
+  },
+
+  {
     title: 'Seasonal Hiring',
     author: 'Molly Wood',
     alts: ['season l hire and', 'seasonal hire in', 'season l hiring', 'seasonal higher in'],
     keywords: ['season', 'sees', 'seas', 'job', 'hire', 'higher', 'high'],
     guid: 'seasonal_hiring',
-    date: "2019-11-19T07:00:00Z",
+    date: "2019-11-20T07:00:00Z",
     audio: {
       url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/seasonal-hiring-molly-explainer-mix.mp3",
       intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/seasonal-hiring-molly-intro-mix.mp3"
@@ -17,7 +114,7 @@ module.exports = [
     alts: ['pall aid e um', 'palladium'],
     keywords: ['pall aid e um', 'pall', 'palladium', 'lady'],
     guid: 'palladium',
-    date: "2019-11-18T07:00:00Z",
+    date: "2019-11-19T07:00:00Z",
     audio: {
       url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/palladium-molly-explainer-mix.mp3",
       intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/palladium-molly-intro-mix.mp3"
@@ -29,7 +126,7 @@ module.exports = [
     alts: ['in did go n denim', 'indigo n den him', 'in dig go den em', 'in dig o den m'],
     keywords: ['indigo', 'denim', 'in dig o', 'den m'],
     guid: 'indigo_and_denim',
-    date: "2019-11-17T07:00:00Z",
+    date: "2019-11-18T07:00:00Z",
     audio: {
       url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/indigo-and-denim-molly-explainer-mix.mp3",
       intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/indigo-and-denim-molly-intro-mix.mp3"
@@ -41,10 +138,10 @@ module.exports = [
     alts: ['while hoars', 'wild horse', 'wile hoars', 'why l hoarse'],
     keywords: ['wild', 'horse', 'hoars', 'whores', 'while', 'wile', 'why l', 'hoarse'],
     guid: 'wild_horse',
-    date: "2019-11-14T07:00:00Z",
+    date: "2019-11-15T07:00:00Z",
     audio: {
       url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/wild-horses-kai-explainer-mix.mp3",
-      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/wild-horses-kai-intro-mix.mp3"
+      intro: "https://ale5xa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/wild-horses-kai-intro-mix.mp3"
     },
   },
   {
@@ -53,7 +150,7 @@ module.exports = [
     alts: ['data encrypt shun', 'data encryption'],
     keywords: ['data', 'crypt', 'in crib', 'dada'],
     guid: 'data_encryptions',
-    date: "2019-11-13T07:00:00Z",
+    date: "2019-11-14T07:00:00Z",
     audio: {
       url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/data-encryption-molly-explainer-mix.mp3",
       intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/data-encryption-molly-intro-mix.mp3"
@@ -65,7 +162,7 @@ module.exports = [
     alts: ['gas price is', 'gas prizes', 'gas prices'],
     keywords: ['gas', 'price', 'pry', 'prize'],
     guid: 'gas_prices',
-    date: "2019-11-12T07:00:00Z",
+    date: "2019-11-13T07:00:00Z",
     audio: {
       url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/gas-prices-kai-explainer-mix.mp3",
       intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/gas-prices-kai-intro-mix.mp3"
@@ -2972,30 +3069,8 @@ module.exports = [
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/marsmission-molly-intro+MIX.mp3"
     },
   },
-  {
-    title: 'Black Friday',
-    author: 'Molly Wood',
-    alts: ['black friday', 'black fry day', 'black fly day'],
-    keywords: ['black', 'friday', 'fry day'],
-    guid: 'black_friday',
-    date: "2018-11-23T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/blackfriday-molly-explainer+MIX.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/blackfriday-molly-intro+MIX.mp3"
-    },
-  },
-  {
-    title: 'Butterball Hotline',
-    author: 'Kai Ryssdal',
-    alts: ['butter ball hot line', 'butterball hot line', 'better ball'],
-    keywords: ['butter', 'ball', 'hotline', 'hot line'],
-    guid: 'butterball',
-    date: "2018-11-21T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/butterball-kai-explainer+MIX.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/butterball-kai-intro+MIX.mp3"
-    },
-  },
+
+
   {
     title: 'Turkey Economy',
     author: 'Kai Ryssdal',
@@ -3018,18 +3093,6 @@ module.exports = [
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/biohacking-molly-explainer+MIX.mp3",
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/biohacking-molly-intro+MIX.mp3"
-    },
-  },
-  {
-    title: 'Shopping Carts',
-    author: 'Molly Wood',
-    alts: ['shop in cards', 'shop in carts',  'shop in cars', 'shoppin', 'shopping carts'],
-    keywords: ['shopping', 'carts', 'cards', 'cars'],
-    guid: 'shopping_carts',
-    date: "2018-11-16T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/onlineshoppingcart-molly-explainer+MIX.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/onlineshoppingcart-molly-intro+MIX.mp3"
     },
   },
   {
