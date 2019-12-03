@@ -1,11 +1,23 @@
 module.exports = [
   {
+    title: 'Giving Tuesday',
+    author: 'Molly Wood',
+    alts: ['give in today', 'giving tuesday', 'giving twos day'],
+    keywords: ['give', 'giving', 'tuesday', 'twos', 'toos', 'today'],
+    guid: 'giving_tues',
+    date: "2019-12-03T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/giving-tuesday-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/giving-tuesday-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Online Shopping Carts',
     author: 'Molly Wood',
     alts: ['shop in cards', 'shop in carts',  'shop in cars', 'shoppin', 'shopping carts', 'on line shopping cards'],
     keywords: ['shopping', 'carts', 'cards', 'carts', 'on', 'line'],
     guid: 'online_shopping_carts_2019',
-    date: "2018-12-02T07:00:00Z",
+    date: "2019-12-02T07:00:00Z",
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/onlineshoppingcart-molly-explainer+MIX.mp3",
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/onlineshoppingcart-molly-intro+MIX.mp3"
