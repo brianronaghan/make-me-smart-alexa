@@ -1,5 +1,113 @@
 module.exports = [
   {
+    title: 'Movie Theater Releases',
+    author: 'Molly Wood',
+    alts: ['movie theater release is', 'movie theater releases'],
+    keywords: ['move', 'movie', 'theater', 'release'],
+    guid: 'theater_releases',
+    date: "2019-12-16T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/movie-theater-releases-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/movie-theater-releases-molly-intro-mix.mp3"
+    },
+  }, 
+   {
+    title: 'Christmas Tree Farms',
+    author: 'Kai Ryssdal',
+    alts: ['christmas tea farm', 'christmas three farm'],
+    keywords: ['christmas', 'tree', 'farm'],
+    guid: 'christmas_tree_farms_2019',
+    date: "2019-12-13T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/christmastreefarms-kai-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/christmastreefarms-kai-intro+MIX.mp3"
+    },
+  },
+  {
+    title: 'Neobanks',
+    author: 'Molly Wood',
+    alts: ['knee oh bank', 'neo bank', ],
+    keywords: ['neo', 'knee', 'o', 'oh', 'bank'],
+    guid: 'neo_banks',
+    date: "2019-12-12T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/neobanks-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/neobanks-molly-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: 'Greenhouse Gases',
+    author: 'Molly Wood',
+    alts: ['green house gas is', 'green house gases', 'greenhouse gas is'],
+    keywords: ['green', 'house', 'gas'],
+    guid: 'greenhouse_gases',
+    date: "2019-12-11T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/greenhouse-gases-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/greenhouse-gases-molly-intro-mix.mp3"
+    },
+  }, 
+    {
+    title: 'Holiday Album',
+    author: 'Kai Ryssdal',
+    alts: ['holiday album', 'holiday alum', 'holler day album'],
+    keywords: ['album', 'holiday'],
+    guid: 'holiday_album_2019',
+    date: "2019-12-10T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/holidayalbum-kai-explainer+FIX+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/holidayalbum-kai-intro+MIX.mp3"
+    },
+  },
+  {
+    title: 'Retail Robots',
+    author: 'Molly Wood',
+    alts: ['retail robot', 're tale robot'],
+    keywords: ['retail', 'robot', 're tale', 'row bot'],
+    guid: 'retail_robots',
+    date: "2019-12-09T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/retail-robots-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/retail-robots-molly-intro-mix.mp3"
+    },
+  },  
+  {
+    title: 'Hallmark Movies',
+    author: 'Kai Ryssdal',
+    alts: ['hallmark movies', 'hall mark moo v', 'hall mark move e'],
+    keywords: ['hallmark', 'movie'],
+    guid: 'hallmark_movies_2019',
+    date: "2019-12-06T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/hallmark+christmas+movies-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/hallmark+christmas+movies-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Rating Customers',
+    author: 'Molly Wood',
+    alts: ['rating customers', 'rate in custom or', 'rate in customer', 'customer ratings', 'customer rankings', 'custom or rating'],
+    keywords: ['customer', 'custom or', 'ratings'],
+    guid: 'rating_customers_2019',
+    date: "2019-12-05T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/customertracking-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/customer-tracking-new-intro-molly-intro-mix.mp3"
+    },
+  },  
+  {
+    title: 'Letter Paper',
+    author: 'Kai Ryssdal',
+    alts: ['letter paper', 'let her pay per', 'letter pay per', 'let her paper'],
+    keywords: ['let', 'her', 'letter', 'paper', 'pay per', 'papal'],
+    guid: 'letter_paper',
+    date: "2019-12-04T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/letter+paper-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/letter+paper-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Giving Tuesday',
     author: 'Molly Wood',
     alts: ['give in today', 'giving tuesday', 'giving twos day'],
@@ -32,7 +140,7 @@ module.exports = [
     date: "2018-11-29T07:00:00Z",
     audio: {
       url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/black-friday-molly-explainer-mix.mp3",
-      intro: ""
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/black-friday-molly-intro-mix.mp3"
     },
   },
   {
@@ -153,7 +261,7 @@ module.exports = [
     date: "2019-11-15T07:00:00Z",
     audio: {
       url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/wild-horses-kai-explainer-mix.mp3",
-      intro: "https://ale5xa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/wild-horses-kai-intro-mix.mp3"
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/wild-horses-kai-intro-mix.mp3"
     },
   },
   {
@@ -2901,18 +3009,18 @@ module.exports = [
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/christmascarol-kai-intro+MIX.mp3"
     },
   },
-  {
-    title: 'Holiday Album',
-    author: 'Kai Ryssdal',
-    alts: ['holiday album', 'holiday alum', 'holler day album'],
-    keywords: ['album', 'holiday'],
-    guid: 'holiday_album',
-    date: "2018-12-14T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/holidayalbum-kai-explainer+FIX+MIX.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/holidayalbum-kai-intro+MIX.mp3"
-    },
-  },
+  // {
+  //   title: 'Holiday Album',
+  //   author: 'Kai Ryssdal',
+  //   alts: ['holiday album', 'holiday alum', 'holler day album'],
+  //   keywords: ['album', 'holiday'],
+  //   guid: 'holiday_album',
+  //   date: "2018-12-14T07:00:00Z",
+  //   audio: {
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/holidayalbum-kai-explainer+FIX+MIX.mp3",
+  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/holidayalbum-kai-intro+MIX.mp3"
+  //   },
+  // },
   {
     title: 'Space Worms',
     author: 'Molly Wood',
@@ -2985,18 +3093,18 @@ module.exports = [
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/biometricair-molly-intro+MIX.mp3"
     },
   },
-  {
-    title: 'Christmas Tree Farms',
-    author: 'Kai Ryssdal',
-    alts: ['christmas tea farm', 'christmas three farm'],
-    keywords: ['christmas', 'tree', 'farm'],
-    guid: 'christmas_tree_farms',
-    date: "2018-12-05T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/christmastreefarms-kai-explainer+MIX.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/christmastreefarms-kai-intro+MIX.mp3"
-    },
-  },
+  // {
+  //   title: 'Christmas Tree Farms',
+  //   author: 'Kai Ryssdal',
+  //   alts: ['christmas tea farm', 'christmas three farm'],
+  //   keywords: ['christmas', 'tree', 'farm'],
+  //   guid: 'christmas_tree_farms',
+  //   date: "2018-12-05T07:00:00Z",
+  //   audio: {
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/christmastreefarms-kai-explainer+MIX.mp3",
+  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/christmastreefarms-kai-intro+MIX.mp3"
+  //   },
+  // },
   {
     title: 'Sedans',
     author: 'Kai Ryssdal',
@@ -3031,18 +3139,6 @@ module.exports = [
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/petinfluencers-molly-explainer-mix.mp3",
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/petinfluencers-molly-intro-mix.mp3"
-    },
-  },
-  {
-    title: 'Rating Customers',
-    author: 'Molly Wood',
-    alts: ['rating customers', 'rate in custom or', 'rate in customer', 'customer ratings', 'customer rankings', 'custom or rating'],
-    keywords: ['customer', 'custom or', 'ratings'],
-    guid: 'rating_customers',
-    date: "2018-11-29T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/customertracking-molly-explainer-mix.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/customertracking-molly-intro-mix.mp3"
     },
   },
   {
@@ -3251,18 +3347,7 @@ module.exports = [
   //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/candy-kai-intro+MIX.mp3"
   //   },
   // },
-  {
-    title: 'Hallmark Movies',
-    author: 'Kai Ryssdal',
-    alts: ['hallmark movies', 'hall mark moo v', 'hall mark move e'],
-    keywords: ['hallmark', 'movie'],
-    guid: 'hallmark_movies',
-    date: "2018-10-30T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/hallmarkmovies-kai-explainer+MIX.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/hallmarkmovies-kai-intro+MIX.mp3"
-    },
-  },
+
   {
     title: 'Genetic Testing',
     author: 'Molly Wood',
