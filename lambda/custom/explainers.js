@@ -1,5 +1,245 @@
 module.exports = [
   {
+    title: "Why 65",
+    author: 'Kai Ryssdal',
+    alts: ['why 6 5', 'why sixty five', 'y 6 5', 'y sixty-five' ],
+    keywords: ['why', '65', 'sixty-five', 'y', '6 5'],
+    guid: 'why_65_2020',
+    date: "2020-01-13T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/why-65-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/retirement-age-kai-new-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'CB Radio Terms',
+    author: 'Kai Ryssdal',
+    alts: ['see bee radio term', 'c b radio term', 'sea be'],
+    keywords: ['cb', 'c b', 'c.b.', 'see bee', 'radio', 'term', 'sea bee', 'sea b'],
+    guid: 'cb_radio_terms',
+    date: "2020-01-10T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/cb-radio-terms-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/cb-radio-terms-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Foodborne Illness',
+    author: 'Molly Wood',
+    alts: ['food born illness', 'foodborne ill nest', 'foodborne illness'],
+    keywords: ['food', 'born', 'ill', 'ness', 'nest'],
+    guid: 'foodborne_illness',
+    date: "2020-01-09T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/foodborne-illness-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/foodborne-illness-molly-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: 'Title 9',
+    author: 'Kai Ryssdal',
+    alts: ['title nine', 'tie til nine', 'tye tool 9', 'tidal nine'],
+    keywords: ['title', 'nine', 'tie', '9', 'tye', 'tidal'],
+    guid: 'title_9',
+    date: "2020-01-08T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/title-ix-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/title-ix-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'CES',
+    author: 'Molly Wood',
+    alts: ['C.E.S.', 'c e s', 'see e s', 'consumer electronic show'],
+    keywords: ['c.e.s.', 'c e s', 'see e s', 'consumer', 'electronic', 'show'],
+    guid: 'ces',
+    date: "2020-01-07T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/ces-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/ces-molly-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: 'Golden Globes vs Oscars',
+    author: 'Molly Wood',
+    alts: ['gold in globes versus oscar', 'gold and globes v oscar', 'golden globe verse oscar'],
+    keywords: ['gold', 'globe', 'golden', 'oscar', 'verse'],
+    guid: 'golden_globes',
+    date: "2020-01-06T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/golden-globes-vs-oscars-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/golden-globes-vs-oscars-molly-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: 'National Days',
+    author: 'Kai Ryssdal',
+    alts: ['national days', 'national day', 'nash on old days'],
+    keywords: ['national', 'days', 'day', 'daze', 'nash'],
+    guid: 'national_days_20',
+    date: "2020-01-03T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/national-days-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/national-days-kai-new-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Unlimited Vacation',
+    author: 'Kai Ryssdal',
+    alts: ['unlimited vacation', 'un limited vacation'],
+    keywords: ['unlimited', 'vacation', 'un limited'],
+    guid: 'unlimited_vacation_20',
+    date: "2020-01-02T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/ryssdal-unlimited-vacation-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/ryssdal-unlimited-vacation-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Gym Memberships',
+    author: 'Kai Ryssdal',
+    alts: ['gym member ship', 'jim member ship', 'jim member chip'],
+    keywords: ['gym', 'member', 'ship', 'jim', 'chip'],
+    guid: 'gym_memberships_20',
+    date: "2020-01-01T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/gymmemberships-kai-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/gymmemberships-kai-intro+MIX.mp3"
+    },
+  },
+  {
+    title: 'Rose Parade',
+    author: 'Kai Ryssdal',
+    alts: ['rose parade', 'rows per aid', 'rows parade'],
+    keywords: ['rose', 'rows', 'parade', 'raid'],
+    guid: 'rose_parade',
+    date: "2019-12-31T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/rose-parade-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/rose-parade-kai-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: 'College Athletes',
+    author: 'Molly Wood',
+    alts: ['call age athletes', 'col edge athlete', 'college athlete', 'college athletic'],
+    keywords: ['college', 'athlete', 'athletic', 'lead'],
+    guid: 'college_athletes',
+    date: "2019-12-30T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/college-athletes-molly-intro-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/college-athletics-molly-explainer-mix.mp3"
+    },
+  }, 
+  {
+    title: 'Bowl Games',
+    author: 'Molly Wood',
+    alts: ['bowl game', 'ball game', 'old game'],
+    keywords: ['bowl', 'game', 'college', 'ball'],
+    guid: 'bowl_games',
+    date: "2019-12-27T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/bowl-games-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/bowl-games-molly-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: 'Electric Eels',
+    author: 'Molly Wood',
+    alts: ['elect rick eel', 'electric eel'],
+    keywords: ['electric', 'eel', 'e', 'heal', 'elect rick'],
+    guid: 'electric_eels',
+    date: "2019-12-26T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/electric-eels-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/electric-eels-molly-intro-mix.mp3"
+    },
+  }, 
+   {
+    title: 'Wrapping Paper',
+    author: 'Kai Ryssdal',
+    alts: ['wrapping paper', 'rapping pay per', 'rap in paper'],
+    keywords: ['wrap', 'rap', 'paper', 'pay per'],
+    guid: 'wrapping_paper_19',
+    date: "2018-12-25T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/giftwrap-kia-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/giftwrap-kai-intro+MIX.mp3"
+    },
+  },
+  {
+    title: 'Christmas Carol',
+    author: 'Kai Ryssdal',
+    alts: ['christmas carol', 'christ mass carol', 'chris miss carrol'],
+    keywords: ['carol', 'carrol', 'chris miss', 'chris mass car old', 'christmas'],
+    guid: 'christmas_carol_19',
+    date: "2019-12-24T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/christmascarol-kai-explainer+MIX.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/christmascarol-kai-intro+MIX.mp3"
+    },
+  },
+  {
+    title: 'Drone Deliveries',
+    author: 'Molly Wood',
+    alts: ['drone dell revelry', 'wrong delivery'],
+    keywords: ['drone', 'delivery', 'deliver'],
+    guid: 'drone_deliveries',
+    date: "2019-12-23T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/drone-deliveries-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/drone-deliveries-molly-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: 'Star Wars Merchandise',
+    author: 'Molly Wood',
+    alts: ['star wars merch and dice', 'star wars merch and eyes', 'star wars merchandise'],
+    keywords: ['star', 'war', 'merch', 'dice', 'eyes'],
+    guid: 'star_wars_merch',
+    date: "2019-12-20T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/star-wars-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/star-wars-molly-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: 'Quadruple Witching',
+    author: 'Kai Ryssdal',
+    alts: ['quadruple which in', 'quadruple witching', 'quad ruple which ing'],
+    keywords: ['quad', 'ruple', 'witch', 'which'],
+    guid: 'quadruple_wiching',
+    date: "2019-12-19T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/quadruple-witching-kai-explainer.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/quadruple-witching-kai-intro.mp3"
+    },
+  },
+  {
+    title: 'Rent Control',
+    author: 'Kai Ryssdal',
+    alts: ['rent con troll', 'rent control'],
+    keywords: ['rent', 'control', 'con'],
+    guid: 'rent_control',
+    date: "2019-12-18T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/rent-control-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/rent-control-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Trade Deficit',
+    author: 'Kai Ryssdal',
+    alts: ['trade deficit', 'trade deaf is it'],
+    keywords: ['trade', 'deficit', 'deaf'],
+    guid: 'trade_deficit',
+    date: "2019-12-17T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/trade-deficit-kai-explainer.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/trade-deficit-kai-intro.mp3"
+    },
+  },
+  {
     title: 'Movie Theater Releases',
     author: 'Molly Wood',
     alts: ['movie theater release is', 'movie theater releases'],
@@ -1300,18 +1540,18 @@ module.exports = [
       intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/half-meatless-molly-intro-mix.mp3"
     },
   },
-  {
-    title: "Why 65",
-    author: 'Kai Ryssdal',
-    alts: ['why 6 5', 'why sixty five', 'y 6 5', 'y sixty-five' ],
-    keywords: ['why', '65', 'sixty-five', 'y', '6 5'],
-    guid: 'why_65',
-    date: "2019-07-17T07:00:00Z",
-    audio: {
-      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/why-65-kai-explainer-mix.mp3",
-      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/why-65-kai-intro-mix.mp3"
-    },
-  },
+  // {
+  //   title: "Why 65",
+  //   author: 'Kai Ryssdal',
+  //   alts: ['why 6 5', 'why sixty five', 'y 6 5', 'y sixty-five' ],
+  //   keywords: ['why', '65', 'sixty-five', 'y', '6 5'],
+  //   guid: 'why_65',
+  //   date: "2019-07-17T07:00:00Z",
+  //   audio: {
+  //     url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/why-65-kai-explainer-mix.mp3",
+  //     intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/why-65-kai-intro-mix.mp3"
+  //   },
+  // },
   {
     title: "Fake Instagram",
     author: 'Molly Wood',
@@ -2514,18 +2754,18 @@ module.exports = [
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/oscars-for-geeks-molly-intro-mix.mp3"
     },
   },
-  {
-    title: 'National Days',
-    author: 'Kai Ryssdal',
-    alts: ['national days', 'national day', 'nash on old days'],
-    keywords: ['national', 'days', 'day', 'daze', 'nash'],
-    guid: 'national_days',
-    date: "2019-02-14T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/national-days-kai-explainer-mix.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/national-days-kai-intro-mix.mp3"
-    },
-  },
+  // {
+  //   title: 'National Days',
+  //   author: 'Kai Ryssdal',
+  //   alts: ['national days', 'national day', 'nash on old days'],
+  //   keywords: ['national', 'days', 'day', 'daze', 'nash'],
+  //   guid: 'national_days',
+  //   date: "2019-02-14T07:00:00Z",
+  //   audio: {
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/national-days-kai-explainer-mix.mp3",
+  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/national-days-kai-intro-mix.mp3"
+  //   },
+  // },
   {
     title: 'Quantum Computing',
     author: 'Molly Wood',
@@ -2876,18 +3116,18 @@ module.exports = [
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/recession-kai-intro-mix.mp3"
     },
   },
-  {
-    title: 'Gym Memberships',
-    author: 'Kai Ryssdal',
-    alts: ['gym member ship', 'jim member ship', 'jim member chip'],
-    keywords: ['gym', 'member', 'ship', 'jim', 'chip'],
-    guid: 'gym_memberships',
-    date: "2019-01-01T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/gymmemberships-kai-explainer+MIX.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/gymmemberships-kai-intro+MIX.mp3"
-    },
-  },
+  // {
+  //   title: 'Gym Memberships',
+  //   author: 'Kai Ryssdal',
+  //   alts: ['gym member ship', 'jim member ship', 'jim member chip'],
+  //   keywords: ['gym', 'member', 'ship', 'jim', 'chip'],
+  //   guid: 'gym_memberships',
+  //   date: "2019-01-01T07:00:00Z",
+  //   audio: {
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/gymmemberships-kai-explainer+MIX.mp3",
+  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/gymmemberships-kai-intro+MIX.mp3"
+  //   },
+  // },
   {
     title: 'Flexible Spending Accounts',
     author: 'Kai Ryssdal',
@@ -2973,18 +3213,18 @@ module.exports = [
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/userdata-molly-intro-mix.mp3"
     },
   },
-  {
-    title: 'Wrapping Paper',
-    author: 'Kai Ryssdal',
-    alts: ['wrapping paper', 'rapping pay per', 'rap in paper'],
-    keywords: ['wrap', 'rap', 'paper', 'pay per'],
-    guid: 'wrapping_paper',
-    date: "2018-12-19T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/giftwrap-kia-explainer+MIX.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/giftwrap-kai-intro+MIX.mp3"
-    },
-  },
+  // {
+  //   title: 'Wrapping Paper',
+  //   author: 'Kai Ryssdal',
+  //   alts: ['wrapping paper', 'rapping pay per', 'rap in paper'],
+  //   keywords: ['wrap', 'rap', 'paper', 'pay per'],
+  //   guid: 'wrapping_paper',
+  //   date: "2018-12-19T07:00:00Z",
+  //   audio: {
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/giftwrap-kia-explainer+MIX.mp3",
+  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/giftwrap-kai-intro+MIX.mp3"
+  //   },
+  // },
   {
     title: 'Email Bankruptcy',
     author: 'Molly Wood',
@@ -2997,18 +3237,18 @@ module.exports = [
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/emailbankruptcy-molly-intro+MIX.mp3"
     },
   },
-  {
-    title: 'Christmas Carol',
-    author: 'Kai Ryssdal',
-    alts: ['christmas carol', 'christ mass carol', 'chris miss carrol'],
-    keywords: ['carol', 'carrol', 'chris miss', 'chris mass car old', 'christmas'],
-    guid: 'christmas_carol',
-    date: "2018-12-17T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/christmascarol-kai-explainer+MIX.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/christmascarol-kai-intro+MIX.mp3"
-    },
-  },
+  // {
+  //   title: 'Christmas Carol',
+  //   author: 'Kai Ryssdal',
+  //   alts: ['christmas carol', 'christ mass carol', 'chris miss carrol'],
+  //   keywords: ['carol', 'carrol', 'chris miss', 'chris mass car old', 'christmas'],
+  //   guid: 'christmas_carol',
+  //   date: "2018-12-17T07:00:00Z",
+  //   audio: {
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/christmascarol-kai-explainer+MIX.mp3",
+  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/christmascarol-kai-intro+MIX.mp3"
+  //   },
+  // },
   // {
   //   title: 'Holiday Album',
   //   author: 'Kai Ryssdal',
@@ -3746,18 +3986,18 @@ module.exports = [
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/ryssdal-lehman-intro-mix.mp3"
     },
   },
-  {
-    title: 'Unlimited Vacation',
-    author: 'Kai Ryssdal',
-    alts: ['unlimited vacation', 'un limited vacation'],
-    keywords: ['unlimited', 'vacation', 'un limited'],
-    guid: 'unlimited_vacation',
-    date: "2018-09-11T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/ryssdal-unlimited-vacation-explainer-mix.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/ryssdal-unlimited-vacation-intro-mix.mp3"
-    },
-  },
+  // {
+  //   title: 'Unlimited Vacation',
+  //   author: 'Kai Ryssdal',
+  //   alts: ['unlimited vacation', 'un limited vacation'],
+  //   keywords: ['unlimited', 'vacation', 'un limited'],
+  //   guid: 'unlimited_vacation',
+  //   date: "2018-09-11T07:00:00Z",
+  //   audio: {
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/ryssdal-unlimited-vacation-explainer-mix.mp3",
+  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/ryssdal-unlimited-vacation-intro-mix.mp3"
+  //   },
+  // },
   {
     title: 'Sears',
     author: 'Kai Ryssdal',
