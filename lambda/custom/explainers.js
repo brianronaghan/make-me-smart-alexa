@@ -1,4 +1,124 @@
 module.exports = [
+  // {
+  //   title: 'Royal Abdication',
+  //   author: 'Molly Wood',
+  //   alts: ['amber alert', 'amber all hurt'],
+  //   keywords: ['royal', 'alert', 'am burr', 'an burn', 'a lurk', 'hurt'],
+  //   guid: 'royal_abdication',
+  //   date: "2020-01-27T07:00:00Z",
+  //   audio: {
+  //     url: "",
+  //     intro: ""
+  //   },
+  // }, 
+  {
+    title: "Gender Opportunity Gap",
+    author: 'Kai Ryssdal',
+    alts: ['gender opportunity gap', 'jen dern opportune t gap', 'gender opportune t cap' ],
+    keywords: ['gender', 'jen', 'jenn', 'gap', 'opportunity', 'opportune', 'cap'],
+    guid: 'gender_opportunity_gap',
+    date: "2020-01-24T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/gender+opportunity+gap+kai+explainer+mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/gender+opportunity+gap+kai+intro+mix.mp3"
+    },
+  },
+  {
+    title: 'Amber Alerts',
+    author: 'Molly Wood',
+    alts: ['amber alert', 'amber all hurt'],
+    keywords: ['amber', 'alert', 'am burr', 'an burn', 'a lurk', 'hurt'],
+    guid: 'amber_alerts',
+    date: "2020-01-23T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/amber-alerts-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/amber-alerts-molly-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: "Macau",
+    author: 'Kai Ryssdal',
+    alts: ['my cow', 'mick ow', 'mac ow', 'macau' ],
+    keywords: ['cow', 'mac', 'mick', 'mack cow'],
+    guid: 'macau',
+    date: "2020-01-22T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/macau+kai+explainer+mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/macau+kai+intro+mix.mp3"
+    },
+  },
+  {
+    title: 'Anime',
+    author: 'Molly Wood',
+    alts: ['an i may', 'and i may', 'anime', 'any may'],
+    keywords: ['anime', 'any may', 'animay', 'annie', 'an e'],
+    guid: 'anime',
+    date: "2020-01-21T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/anime-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/anime-molly-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: 'Pantone Colors',
+    author: 'Molly Wood',
+    alts: ['pantone color', 'pan tone color', 'pant own cull or'],
+    keywords: ['pan', 'tone', 'color', 'own', 'cull' ],
+    guid: 'pantone_colors',
+    date: "2020-01-20T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/pantone-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/pantone-molly-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: "Aircraft Graveyards",
+    author: 'Kai Ryssdal',
+    alts: ['aircraft graveyards', 'air craft graveyards', 'air crap grave yards' ],
+    keywords: ['air', 'craft', 'grave', 'yard'],
+    guid: 'aircraft_graveyards',
+    date: "2020-01-17T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/aircraft-boneyards-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/aircraft-boneyards-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Corporate Bankruptcy",
+    author: 'Kai Ryssdal',
+    alts: ['corps or rate bankrupt see', 'corporate bankruptcy', 'corp or rut ' ],
+    keywords: ['corporate', 'bank', 'bankrupt', 'corpse or rut','bankruptcy'],
+    guid: 'corporate_bankruptcy',
+    date: "2020-01-16T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/corporate-bankruptcy-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/corporate-bankruptcy-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Opioids",
+    author: 'Kai Ryssdal',
+    alts: ['opioids', 'opie oids', 'opioid' ],
+    keywords: ['opie', 'ope', 'hope', 'opioids',],
+    guid: 'opioids',
+    date: "2020-01-15T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/opioids-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/opioids-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: "B.B.C.",
+    author: 'Kai Ryssdal',
+    alts: ['b b c', 'be be see',  ],
+    keywords: ['be', 'see', 'c'],
+    guid: 'bbc',
+    date: "2020-01-14T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/bbc-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/bbc-kai-intro-mix.mp3"
+    },
+  },
   {
     title: "Why 65",
     author: 'Kai Ryssdal',
