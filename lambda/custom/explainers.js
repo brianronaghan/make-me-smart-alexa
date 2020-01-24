@@ -1,16 +1,16 @@
 module.exports = [
-  // {
-  //   title: 'Royal Abdication',
-  //   author: 'Molly Wood',
-  //   alts: ['amber alert', 'amber all hurt'],
-  //   keywords: ['royal', 'alert', 'am burr', 'an burn', 'a lurk', 'hurt'],
-  //   guid: 'royal_abdication',
-  //   date: "2020-01-27T07:00:00Z",
-  //   audio: {
-  //     url: "",
-  //     intro: ""
-  //   },
-  // }, 
+  {
+    title: 'Royal Abdication',
+    author: 'Molly Wood',
+    alts: ['royal abdication', 'roy old have dictation', 'royal add vacation' ],
+    keywords: ['royal', 'ab', 'cajun', 'abdication', 'roy' , 'dictation', 'k shun'],
+    guid: 'royal_abdication',
+    date: "2020-01-27T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/royal-abdication-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/royal-abdication-molly-intro-mix.mp3"
+    },
+  }, 
   {
     title: "Gender Opportunity Gap",
     author: 'Kai Ryssdal',
