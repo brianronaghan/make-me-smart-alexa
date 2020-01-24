@@ -2,8 +2,7 @@ let Parser = require('rss-parser');
 let parser = new Parser({
     customFields: {
         item: [
-          ['media:content', 'media:content'],
-          ['enclosure', 'enclosures',{keepArray: true}],
+          ['media:content', 'audios',{keepArray: true}],
 
         ]
       }
@@ -16,11 +15,29 @@ let parser = new Parser({
   console.log(feed.title);
  
   feed.items.forEach(item => {
-    console.log(item.enclosures)
+    // console.log(item)
   });
   let exps = feed.items.map(item => {
+      let audio = {}
+    item.audios.forEach(ai => {
+        if (ai.$ && ai.$.url) {
+            if (ai.$.expression == 'sample') {
+                audio.intro = ai.$.url
+            } else {
+                audio.url = ai.$.url
+            }
+        }
+    })
+    
+    console.log(audio)
     return {
         title: item.title,
+        author: item.author, 
+        guid: item.guid, 
+        date: item.isoDate,
+        guid: item.guid,
+        audio
+
     }
   })
  
