@@ -18,7 +18,7 @@ let legacy_dictionary = {};
 
   });
  
-  let feed = await parser.parseURL('http://paper-marketplace.test//feed/alexa/mms-explainers');
+  let feed = await parser.parseURL('https://marketplace-org-preprod.go-vip.co/feed/alexa/mms-explainers');
   console.log(feed.title);
   
   let exps = feed.items.map(item => {
@@ -47,7 +47,7 @@ let legacy_dictionary = {};
       explainer.guid = item.guid;
       explainer.alts = [];
       explainer.alts.push(item.title.toLowerCase())
-      item.title.split(' ').forEach((word) => alts.push(word.toLowerCase()))
+      item.title.split(' ').forEach((word) => explainer.alts.push(word.toLowerCase()))
       explainer.keywords = alts;
     }
     explainer.title = item.title;
