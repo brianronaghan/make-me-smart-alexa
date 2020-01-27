@@ -14,47 +14,47 @@ let legacy_explainers = require('./explainers.js');
 let legacy_dictionary = {};
 (async () => {
   legacy_explainers.forEach((exp) => {
-    legacy_dictionary[exp.toLowerCase()] = exp;
+    legacy_dictionary[exp.title.toLowerCase()] = exp;
 
   });
  
-  let feed = await parser.parseURL('http://paper-marketplace.test/feed/alexa/mms-explainers');
+  let feed = await parser.parseURL('http://paper-marketplace.test//feed/alexa/mms-explainers');
   console.log(feed.title);
   
-  feed.items.forEach(item => {
-    // console.log(item)
-  });
   let exps = feed.items.map(item => {
-      let audio = {}
-      console.log(item.title);
+    console.log(item.title)
+    let explainer = {}
+    explainer.audio = {}
     item.audios.forEach(ai => {
         if (ai.$ && ai.$.url) {
             if (ai.$.expression == 'sample') {
-                audio.intro = ai.$.url
+              explainer.audio.intro = ai.$.url
             } else {
-                audio.url = ai.$.url
+              explainer.audio.url = ai.$.url
             }
         }
     })
-    let alts = [];
-    alts.push(item.title.toLowerCase())
-    item.title.split(' ').forEach((word) => alts.push(word.toLowerCase()))
-    console.log(legacy_explainers.length);
-    let legacy_record = legacy_explainers.find((exp) => {
-      return exp.title.toLowerCase() == item.title.toLowerCase()
-    })
-    console.log(legacy_record)
 
-    return {
-        title: item.title,
-        author: item.author, 
-        guid: item.guid, 
-        date: item.isoDate,
-        guid: item.guid,
-        audio,
-        keywords: alts,
-        alts
+    let legacy_record = legacy_dictionary[item.title.toLowerCase()];
+
+    let guid, keywords, alts;
+
+    if (legacy_record) {
+      explainer.guid = legacy_record.guid;
+      explainer.keywords = legacy_record.keywords;
+      explainer.alts = legacy_record.alts;
+    } else {
+      explainer.guid = item.guid;
+      explainer.alts = [];
+      explainer.alts.push(item.title.toLowerCase())
+      item.title.split(' ').forEach((word) => alts.push(word.toLowerCase()))
+      explainer.keywords = alts;
     }
+    explainer.title = item.title;
+    explainer.author = item.author;
+    explainer.date = item.isoDate;
+    console.log(explainer)
+    return explainer
   })
- 
+  
 })();
