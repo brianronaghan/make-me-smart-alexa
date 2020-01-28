@@ -21,6 +21,7 @@ let legacy_dictionary = {};
   let feed = await parser.parseURL('https://marketplace-org-preprod.go-vip.co/feed/alexa/mms-explainers');
   console.log(feed.title);
   
+  let found = 0, total = 0; 
   let exps = feed.items.map(item => {
     console.log(item.title)
     let explainer = {}
@@ -38,8 +39,9 @@ let legacy_dictionary = {};
     let legacy_record = legacy_dictionary[item.title.toLowerCase()];
 
     let guid, keywords, alts;
-
+    total++;
     if (legacy_record) {
+      found++;
       explainer.guid = legacy_record.guid;
       explainer.keywords = legacy_record.keywords;
       explainer.alts = legacy_record.alts;
@@ -56,5 +58,5 @@ let legacy_dictionary = {};
     console.log(explainer)
     return explainer
   })
-  
+  console.log(`Found ${found} out of ${total}.`)
 })();
