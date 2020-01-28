@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: "U.S. Census",
+    author: 'Kai Ryssdal',
+    alts: ['you s sense us', 'u s census'],
+    keywords: ['census', 'sense', 'us', 'u s'],
+    guid: 'us_census',
+    date: "2020-01-28T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/us-census-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/us-census-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Royal Abdication',
     author: 'Molly Wood',
     alts: ['royal abdication', 'roy old have dictation', 'royal add vacation' ],
