@@ -1,5 +1,53 @@
 module.exports = [
   {
+    title: "Presidential Primaries",
+    author: 'Kai Ryssdal',
+    alts: ['presidential primary', 'residential prime airy' ],
+    keywords: ['primary', 'primaries', 'president', 'residential', 'prime'],
+    guid: 'presidential_primaries',
+    date: "2020-02-03T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/presidential-primaries-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/presidential-primaries-kai-intro-mix.mp3"
+    },
+  },  
+    {
+    title: 'Superbowl Tee Shirts',
+    author: 'Molly Wood',
+    alts: ['super bowl tee shirts', 'super ball tee shirt', 'super bowl t shirt'],
+    keywords: ['superbowl', 'tee', 'super bowl', 'shirts', 'super'],
+    guid: 'superbowl_tees_2020',
+    date: "2020-01-31T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/championshiptshirts-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/championshiptshirts-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'The Largest Scientific Structure Ever',
+    author: 'Molly Wood',
+    alts: ['largest scientific structure' ],
+    keywords: ['largest', 'scientific', 'structure', 'struck'],
+    guid: 'largest_scientific_structure',
+    date: "2020-01-30T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/largest-scientific-structure-ever-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/largest-scientific-structure-ever-molly-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: "Packaging Economy",
+    author: 'Kai Ryssdal',
+    alts: ['pack aging economy', 'pack asian economy' ],
+    keywords: ['pack', 'packaging', 'aging'],
+    guid: 'packaging_economy',
+    date: "2020-01-29T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/packaging-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/packaging-kai-intro-mix.mp3"
+    },
+  },  
+  {
     title: "U.S. Census",
     author: 'Kai Ryssdal',
     alts: ['you s sense us', 'u s census'],
@@ -2996,18 +3044,18 @@ module.exports = [
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/conversation-hearts-kai-intro-mix.mp3"
     },
   },
-  {
-    title: 'Superbowl Tee Shirts',
-    author: 'Molly Wood',
-    alts: ['super bowl tee shirts', 'super ball tee shirt', 'super bowl t shirt'],
-    keywords: ['superbowl', 'tee', 'super bowl', 'shirts', 'super'],
-    guid: 'superbowl_tees',
-    date: "2019-02-01T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/championshiptshirts-molly-explainer-mix.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/championshiptshirts-molly-intro-mix.mp3"
-    },
-  },
+  // {
+  //   title: 'Superbowl Tee Shirts',
+  //   author: 'Molly Wood',
+  //   alts: ['super bowl tee shirts', 'super ball tee shirt', 'super bowl t shirt'],
+  //   keywords: ['superbowl', 'tee', 'super bowl', 'shirts', 'super'],
+  //   guid: 'superbowl_tees',
+  //   date: "2019-02-01T07:00:00Z",
+  //   audio: {
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/championshiptshirts-molly-explainer-mix.mp3",
+  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/championshiptshirts-molly-intro-mix.mp3"
+  //   },
+  // },
   {
     title: 'Netflix Streaming',
     author: 'Molly Wood',
