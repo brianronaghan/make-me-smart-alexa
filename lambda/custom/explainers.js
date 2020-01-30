@@ -60,7 +60,7 @@ module.exports = [
     },
   }, 
   {
-    title: 'Pantone Colors',
+    title: 'Pantone System',
     author: 'Molly Wood',
     alts: ['pantone color', 'pan tone color', 'pant own cull or'],
     keywords: ['pan', 'tone', 'color', 'own', 'cull' ],
@@ -120,7 +120,7 @@ module.exports = [
     },
   },
   {
-    title: "Why 65",
+    title: "Retirement Age",
     author: 'Kai Ryssdal',
     alts: ['why 6 5', 'why sixty five', 'y 6 5', 'y sixty-five' ],
     keywords: ['why', '65', 'sixty-five', 'y', '6 5'],
@@ -156,7 +156,7 @@ module.exports = [
     },
   }, 
   {
-    title: 'Title 9',
+    title: 'Title IX',
     author: 'Kai Ryssdal',
     alts: ['title nine', 'tie til nine', 'tye tool 9', 'tidal nine'],
     keywords: ['title', 'nine', 'tie', '9', 'tye', 'tidal'],
@@ -180,7 +180,7 @@ module.exports = [
     },
   }, 
   {
-    title: 'Golden Globes vs Oscars',
+    title: 'Golden Globes vs. Oscars',
     author: 'Molly Wood',
     alts: ['gold in globes versus oscar', 'gold and globes v oscar', 'golden globe verse oscar'],
     keywords: ['gold', 'globe', 'golden', 'oscar', 'verse'],
@@ -228,7 +228,7 @@ module.exports = [
     },
   },
   {
-    title: 'Rose Parade',
+    title: 'Tournament of Roses Parade',
     author: 'Kai Ryssdal',
     alts: ['rose parade', 'rows per aid', 'rows parade'],
     keywords: ['rose', 'rows', 'parade', 'raid'],
@@ -252,7 +252,7 @@ module.exports = [
     },
   }, 
   {
-    title: 'Bowl Games',
+    title: 'College Bowl Games',
     author: 'Molly Wood',
     alts: ['bowl game', 'ball game', 'old game'],
     keywords: ['bowl', 'game', 'college', 'ball'],
@@ -276,7 +276,7 @@ module.exports = [
     },
   }, 
    {
-    title: 'Wrapping Paper',
+    title: 'Gift Wrap',
     author: 'Kai Ryssdal',
     alts: ['wrapping paper', 'rapping pay per', 'rap in paper'],
     keywords: ['wrap', 'rap', 'paper', 'pay per'],
@@ -288,7 +288,7 @@ module.exports = [
     },
   },
   {
-    title: 'Christmas Carol',
+    title: 'A Christmas Carol',
     author: 'Kai Ryssdal',
     alts: ['christmas carol', 'christ mass carol', 'chris miss carrol'],
     keywords: ['carol', 'carrol', 'chris miss', 'chris mass car old', 'christmas'],
@@ -312,7 +312,7 @@ module.exports = [
     },
   }, 
   {
-    title: 'Star Wars Merchandise',
+    title: 'Star Wars Franchise',
     author: 'Molly Wood',
     alts: ['star wars merch and dice', 'star wars merch and eyes', 'star wars merchandise'],
     keywords: ['star', 'war', 'merch', 'dice', 'eyes'],
@@ -360,7 +360,7 @@ module.exports = [
     },
   },
   {
-    title: 'Movie Theater Releases',
+    title: 'Movie Release Dates',
     author: 'Molly Wood',
     alts: ['movie theater release is', 'movie theater releases'],
     keywords: ['move', 'movie', 'theater', 'release'],
@@ -372,7 +372,7 @@ module.exports = [
     },
   }, 
    {
-    title: 'Christmas Tree Farms',
+    title: 'Christmas Tree Prices',
     author: 'Kai Ryssdal',
     alts: ['christmas tea farm', 'christmas three farm'],
     keywords: ['christmas', 'tree', 'farm'],
@@ -408,7 +408,7 @@ module.exports = [
     },
   }, 
     {
-    title: 'Holiday Album',
+    title: 'Holiday Albums',
     author: 'Kai Ryssdal',
     alts: ['holiday album', 'holiday alum', 'holler day album'],
     keywords: ['album', 'holiday'],
@@ -420,10 +420,10 @@ module.exports = [
     },
   },
   {
-    title: 'Retail Robots',
+    title: 'Automating Retail',
     author: 'Molly Wood',
     alts: ['retail robot', 're tale robot'],
-    keywords: ['retail', 'robot', 're tale', 'row bot'],
+    keywords: ['retail', 'robot', 're tale', 'row bot', 'automating'],
     guid: 'retail_robots',
     date: "2019-12-09T07:00:00Z",
     audio: {
@@ -432,7 +432,7 @@ module.exports = [
     },
   },  
   {
-    title: 'Hallmark Movies',
+    title: 'Hallmark Christmas Movies',
     author: 'Kai Ryssdal',
     alts: ['hallmark movies', 'hall mark moo v', 'hall mark move e'],
     keywords: ['hallmark', 'movie'],
@@ -444,7 +444,7 @@ module.exports = [
     },
   },
   {
-    title: 'Rating Customers',
+    title: 'Customer Tracking',
     author: 'Molly Wood',
     alts: ['rating customers', 'rate in custom or', 'rate in customer', 'customer ratings', 'customer rankings', 'custom or rating'],
     keywords: ['customer', 'custom or', 'ratings'],
@@ -528,7 +528,7 @@ module.exports = [
     },
   },
   {
-    title: 'What is Organic',
+    title: 'Organic',
     author: 'Kai Ryssdal',
     alts: ['what is organ ick', 'what is or ganic'],
     keywords: ['organ', 'org', 'ick'],
@@ -601,7 +601,7 @@ module.exports = [
     },
   },
   {
-    title: 'Indigo and Denim',
+    title: 'Denim and Indigo',
     author: 'Molly Wood',
     alts: ['in did go n denim', 'indigo n den him', 'in dig go den em', 'in dig o den m'],
     keywords: ['indigo', 'denim', 'in dig o', 'den m'],
@@ -625,7 +625,7 @@ module.exports = [
     },
   },
   {
-    title: 'Data Encryptions',
+    title: 'Data Encryption',
     author: 'Molly Wood',
     alts: ['data encrypt shun', 'data encryption'],
     keywords: ['data', 'crypt', 'in crib', 'dada'],
@@ -649,7 +649,7 @@ module.exports = [
     },
   },
   {
-    title: 'Amazon Sellers',
+    title: 'Amazon Third-Party Sellers',
     author: 'Molly Wood',
     alts: ['amazon sell or', 'amazon sell ur', 'am a son sell or'],
     keywords: ['amazon', 'sell', 'or', 'amazon'],
@@ -661,7 +661,7 @@ module.exports = [
     },
   },
   {
-    title: 'Containerized Shipping',
+    title: 'Container Shipping',
     author: 'Kai Ryssdal',
     alts: ['con tame her ship in', 'contain or shipping', 'container ship in', 'container shipping'],
     keywords: ['contain', 'ship', 'shit', 'con tame'],
@@ -673,7 +673,7 @@ module.exports = [
     },
   },
   {
-    title: 'Cobra Effect',
+    title: 'The Cobra Effect',
     author: 'Molly Wood',
     alts: ['cobra f x', 'co bro affect', 'cobra effect'],
     keywords: ['cobra', 'effect', 'co bra', 'effect', 'affect', 'feck'],
@@ -781,10 +781,10 @@ module.exports = [
     },
   },
   {
-    title: 'Horror Movies',
+    title: 'Scary Movies',
     author: 'Kai Ryssdal',
     alts: ['horror move e', 'horror movie'],
-    keywords: ['horror', 'move', 'movie'],
+    keywords: ['horror', 'move', 'movie', 'scary'],
     guid: 'horror_movies',
     date: "2019-10-28T07:00:00Z",
     audio: {
@@ -793,7 +793,7 @@ module.exports = [
     },
   },
   {
-    title: 'Stock Market',
+    title: 'The Stock Market',
     author: 'Kai Ryssdal',
     alts: ['stock mark it', 'stock market', 'stalk mark it'],
     keywords: ['stock', 'mark', 'stalk'],
@@ -818,7 +818,7 @@ module.exports = [
   },
     
   {
-    title: "10 year T-note",
+    title: "10-year Treasury Note",
     author: 'Kai Ryssdal',
     alts: ['tenure tee note', 'tend your t node', 'ten yor teen ode'],
     keywords: ['ten', '10', 'year', 'tee', 't', 'note', 'tea', 'node', 'tenure', 'tend'],
@@ -830,7 +830,7 @@ module.exports = [
     },
   },
   {
-    title: "Debt vs Deficit",
+    title: "Debt and the Deficit",
     author: 'Kai Ryssdal',
     alts: ['debt vs deaf is it', 'debt verse deaf i sit', 'debt vs deficit'],
     keywords: ['debt', 'deaf', 'deft', 'def', 'deficit', 'dent', 'verse', 'versus', 'deaf is it'],
@@ -1130,10 +1130,10 @@ module.exports = [
     },
   },
   {
-    title: "The Fed Cut",
+    title: "Fed Rate Cut",
     author: 'Kai Ryssdal',
     alts: ['the fed', 'the dead', 'fed', 'the fit', 'central bank', 'the federal reserve'],
-    keywords: ['federal', 'reserve', 'fed', 'the fed', 'bank', 'central'],
+    keywords: ['federal', 'reserve', 'fed', 'the fed', 'bank', 'central','rate'],
     guid: 'the_fed_cut_2019',
     date: "2019-09-17T07:00:00Z",
     audio: {
