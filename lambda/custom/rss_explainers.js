@@ -19,8 +19,9 @@ let legacy_dictionary = {};
 
   });
  
-  let feed = await parser.parseURL('https://marketplace-org-preprod.go-vip.co/feed/alexa/mms-explainers');
-  console.log(feed.title);
+  // let feed = await parser.parseURL('https://marketplace-org-preprod.go-vip.co/feed/alexa/mms-explainers');
+  let feed = await parser.parseURL('http://paper-marketplace.test/feed/alexa/mms-explainers');
+  // console.log(feed.title);
   
   let found = 0, total = 0; 
   let unfound = []
@@ -41,12 +42,12 @@ let legacy_dictionary = {};
     let legacy_record = legacy_dictionary[item.title.toLowerCase()];
     if (!legacy_record) {
       legacy_record = legacy_explainers.find((LE) => {
+        
         LE.title.toLowerCase().trim() == item.title.toLowerCase().trim()
       })
     }
     total++;
-
-    if (legacy_record) {
+    if (legacy_record && false) {
       found++;
       explainer.guid = legacy_record.guid;
       explainer.keywords = legacy_record.keywords;
@@ -58,13 +59,18 @@ let legacy_dictionary = {};
       explainer.alts = [];
       explainer.alts.push(item.title.toLowerCase())
       item.title.split(' ').forEach((word) => explainer.alts.push(word.toLowerCase()))
+      
+      if (item.content) {
+        item.content.split(' ').forEach((word) => explainer.alts.push(word.toLowerCase()))
+      }
       explainer.keywords = explainer.alts;
     }
     explainer.title = item.title;
     explainer.author = item.author;
     explainer.date = item.isoDate;
+    console.log(explainer);
     return explainer
   })
   console.log(`Found ${found} out of ${total}.`)
-  console.log(unfound);
+  // console.log(unfound);
 })();
