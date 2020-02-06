@@ -1,5 +1,65 @@
 module.exports = [
   {
+    title: 'Major League Soccer',
+    author: 'Molly Wood',
+    alts: ['major league soccer', 'major league sock or', 'major leak sock are'],
+    keywords: ['major', 'may jour', 'league', 'sock', 'soccer', 'leak'],
+    guid: 'major_league_soccer',
+    date: "2020-02-10T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/major-league-soccer-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/major-league-soccer-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Girl Scout Cookies',
+    author: 'Molly Wood',
+    alts: ['girl scout cook e', 'girl scout cookie', 'girls cow t', 'girl clout cookie'],
+    keywords: ['girl', 'scout', 'cook', 'cow'],
+    guid: 'girl_scout_cookies',
+    date: "2020-02-07T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/girl-scout-cookies-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/girl-scout-cookies-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Multigenerational Households",
+    author: 'Kai Ryssdal',
+    alts: ['multigenerational house holds', 'mull eye generation ole house hold', 'multigenerational households' ],
+    keywords: ['multi', 'generation', 'house', 'hold'],
+    guid: 'multigeneral_households',
+    date: "2020-02-06T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/multigenerational-households-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/multigenerational-households-kai-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: 'Carbon Offsets',
+    author: 'Molly Wood',
+    alts: ['car bun off set', 'carbon off set'],
+    keywords: ['car', 'bun', 'carbon', 'off', 'set'],
+    guid: 'carbon_offsets',
+    date: "2020-02-05T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/carbon-offsets-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/carbon-offsets-molly-intro-mix.mp3"
+    },
+  },
+   {
+    title: 'State of the Union',
+    author: 'Kai Ryssdal',
+    alts: ['state of the union', 'slate of the union', 'sate of the union', 'state of union'],
+    keywords: ['state', 'union'],
+    guid: 'sotu_2020',
+    date: "2020-02-04T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/sotu-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/sotu-kai-new-intro-mix.mp3"
+    },
+  },
+  {
     title: "Presidential Primaries",
     author: 'Kai Ryssdal',
     alts: ['presidential primary', 'residential prime airy' ],
@@ -11,7 +71,7 @@ module.exports = [
       intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/presidential-primaries-kai-intro-mix.mp3"
     },
   },  
-    {
+  {
     title: 'Superbowl Tee Shirts',
     author: 'Molly Wood',
     alts: ['super bowl tee shirts', 'super ball tee shirt', 'super bowl t shirt'],
@@ -3019,18 +3079,18 @@ module.exports = [
     },
   },
 
-  {
-    title: 'State of the Union',
-    author: 'Kai Ryssdal',
-    alts: ['state of the union', 'slate of the union', 'sate of the union', 'state of union'],
-    keywords: ['state', 'union'],
-    guid: 'sotu',
-    date: "2019-02-05T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/sotu-kai-explainer-mix.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/sotu-kai-intro-mix.mp3"
-    },
-  },
+  // {
+  //   title: 'State of the Union',
+  //   author: 'Kai Ryssdal',
+  //   alts: ['state of the union', 'slate of the union', 'sate of the union', 'state of union'],
+  //   keywords: ['state', 'union'],
+  //   guid: 'sotu',
+  //   date: "2019-02-05T07:00:00Z",
+  //   audio: {
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/sotu-kai-explainer-mix.mp3",
+  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/sotu-kai-intro-mix.mp3"
+  //   },
+  // },
 
   {
     title: 'Conversation Hearts',
