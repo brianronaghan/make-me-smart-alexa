@@ -1,5 +1,41 @@
 module.exports = [
   {
+    title: 'Electrical Vehicle Infrastructure',
+    author: 'Molly Wood',
+    alts: ['electric vehicle infrastructure', 'elect rick vehicle infer structure', 'elect writ vehicle infrastructure'],
+    keywords: ['electric', 'vehicle', 'infra', 'structure'],
+    guid: 'ev_infrastructure',
+    date: "2020-02-13T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/electric-vehicle-infrastructure-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/electric-vehicle-infrastructure-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Prohibition",
+    author: 'Kai Ryssdal',
+    alts: ['prohibition', 'pro abition', 'pro uh vision' ],
+    keywords: ['pro', 'fission', 'prohibition', 'ision', 'is shun'],
+    guid: 'prohibition',
+    date: "2020-02-12T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/prohibition-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/prohibition-kai-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: "Low Wage Workers",
+    author: 'Kai Ryssdal',
+    alts: ['low wage worker', 'low age worker' ],
+    keywords: ['low', 'wage', 'work', 'age'],
+    guid: 'low_wage_worker',
+    date: "2020-02-11T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/multigenerational-households-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/multigenerational-households-kai-intro-mix.mp3"
+    },
+  }, 
+  {
     title: 'Major League Soccer',
     author: 'Molly Wood',
     alts: ['major league soccer', 'major league sock or', 'major leak sock are'],
