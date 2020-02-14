@@ -1,5 +1,41 @@
 module.exports = [
   {
+    title: "Welfare",
+    author: 'Kai Ryssdal',
+    alts: ['well fare', 'well fair', 'welfare' ],
+    keywords: ['well', 'fair', 'welfare', 'fare', ],
+    guid: 'welfare',
+    date: "2020-02-18T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/welfare-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/welfare-kai-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: 'Pandemics',
+    author: 'Molly Wood',
+    alts: ['pandemic', 'pan them iks', 'pan dem ix'],
+    keywords: ['pan', 'pandemic', 'mix', 'dem'],
+    guid: 'pandemics',
+    date: "2020-02-17T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/pandemics-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/pandemics-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Fake Meat',
+    author: 'Molly Wood',
+    alts: ['fake meat', 'vague meats'],
+    keywords: ['fake', 'meat', 'mead', 'vague', 'meet'],
+    guid: 'fake_meat',
+    date: "2020-02-14T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/fake-meat-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/fake-meat-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Electrical Vehicle Infrastructure',
     author: 'Molly Wood',
     alts: ['electric vehicle infrastructure', 'elect rick vehicle infer structure', 'elect writ vehicle infrastructure'],
@@ -3066,18 +3102,18 @@ module.exports = [
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/world-bank-kai-intro-mix.mp3"
     },
   },
-  {
-    title: 'Fake Meat',
-    author: 'Molly Wood',
-    alts: ['fake meat', 'fake me', 'fake meet', 'face meek'],
-    keywords: ['fake', 'meat', 'meet'],
-    guid: 'fake_meat',
-    date: "2019-02-11T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/fake-meat-molly-explainer-mix.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/fake-meat-molly-intro-mix.mp3"
-    },
-  },
+  // {
+  //   title: 'Fake Meat',
+  //   author: 'Molly Wood',
+  //   alts: ['fake meat', 'fake me', 'fake meet', 'face meek'],
+  //   keywords: ['fake', 'meat', 'meet'],
+  //   guid: 'fake_meat',
+  //   date: "2019-02-11T07:00:00Z",
+  //   audio: {
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/fake-meat-molly-explainer-mix.mp3",
+  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/fake-meat-molly-intro-mix.mp3"
+  //   },
+  // },
   {
     title: 'Grammy Award',
     author: 'Kai Ryssdal',
