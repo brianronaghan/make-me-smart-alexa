@@ -19,8 +19,8 @@ let legacy_dictionary = {};
 
   });
  
-  // let feed = await parser.parseURL('https://marketplace-org-preprod.go-vip.co/feed/alexa/mms-explainers');
-  let feed = await parser.parseURL('http://paper-marketplace.test/feed/alexa/mms-explainers');
+  let feed = await parser.parseURL('https://marketplace-org-preprod.go-vip.co/feed/alexa/mms-explainers');
+  // let feed = await parser.parseURL('http://paper-marketplace.test/feed/alexa/mms-explainers');
   // console.log(feed.title);
   
   let found = 0, total = 0; 
@@ -47,7 +47,7 @@ let legacy_dictionary = {};
       })
     }
     total++;
-    if (legacy_record && false) {
+    if (legacy_record) {
       found++;
       explainer.guid = legacy_record.guid;
       explainer.keywords = legacy_record.keywords;
