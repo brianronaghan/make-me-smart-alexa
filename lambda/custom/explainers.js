@@ -1,5 +1,209 @@
 module.exports = [
   {
+    title: "China Trade War",
+    author: 'Kai Ryssdal',
+    alts: ['china trade war', 'shy na trade war'],
+    keywords: ['china', 'trade', 'raid', 'war' ],
+    guid: 'china_trade_war_2020',
+    date: "2019-05-23T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/tradewar-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/tradewar-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Welfare",
+    author: 'Kai Ryssdal',
+    alts: ['well fare', 'well fair', 'welfare' ],
+    keywords: ['well', 'fair', 'welfare', 'fare', ],
+    guid: 'welfare',
+    date: "2020-02-18T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/welfare-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/welfare-kai-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: 'Pandemics',
+    author: 'Molly Wood',
+    alts: ['pandemic', 'pan them iks', 'pan dem ix'],
+    keywords: ['pan', 'pandemic', 'mix', 'dem'],
+    guid: 'pandemics',
+    date: "2020-02-17T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/pandemics-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/pandemics-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Fake Meat',
+    author: 'Molly Wood',
+    alts: ['fake meat', 'vague meats'],
+    keywords: ['fake', 'meat', 'mead', 'vague', 'meet'],
+    guid: 'fake_meat',
+    date: "2020-02-14T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/fake-meat-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/fake-meat-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Electrical Vehicle Infrastructure',
+    author: 'Molly Wood',
+    alts: ['electric vehicle infrastructure', 'elect rick vehicle infer structure', 'elect writ vehicle infrastructure'],
+    keywords: ['electric', 'vehicle', 'infra', 'structure'],
+    guid: 'ev_infrastructure',
+    date: "2020-02-13T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/electric-vehicle-infrastructure-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/electric-vehicle-infrastructure-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Prohibition",
+    author: 'Kai Ryssdal',
+    alts: ['prohibition', 'pro abition', 'pro uh vision' ],
+    keywords: ['pro', 'fission', 'prohibition', 'ision', 'is shun'],
+    guid: 'prohibition',
+    date: "2020-02-12T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/prohibition-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/prohibition-kai-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: "Low Wage Workers",
+    author: 'Kai Ryssdal',
+    alts: ['low wage worker', 'low age worker' ],
+    keywords: ['low', 'wage', 'work', 'age'],
+    guid: 'low_wage_worker',
+    date: "2020-02-11T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/multigenerational-households-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/multigenerational-households-kai-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: 'Major League Soccer',
+    author: 'Molly Wood',
+    alts: ['major league soccer', 'major league sock or', 'major leak sock are'],
+    keywords: ['major', 'may jour', 'league', 'sock', 'soccer', 'leak'],
+    guid: 'major_league_soccer',
+    date: "2020-02-10T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/major-league-soccer-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/major-league-soccer-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Girl Scout Cookies',
+    author: 'Molly Wood',
+    alts: ['girl scout cook e', 'girl scout cookie', 'girls cow t', 'girl clout cookie'],
+    keywords: ['girl', 'scout', 'cook', 'cow'],
+    guid: 'girl_scout_cookies',
+    date: "2020-02-07T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/girl-scout-cookies-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/girl-scout-cookies-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Multigenerational Households",
+    author: 'Kai Ryssdal',
+    alts: ['multigenerational house holds', 'mull eye generation ole house hold', 'multigenerational households' ],
+    keywords: ['multi', 'generation', 'house', 'hold'],
+    guid: 'multigeneral_households',
+    date: "2020-02-06T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/multigenerational-households-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/multigenerational-households-kai-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: 'Carbon Offsets',
+    author: 'Molly Wood',
+    alts: ['car bun off set', 'carbon off set'],
+    keywords: ['car', 'bun', 'carbon', 'off', 'set'],
+    guid: 'carbon_offsets',
+    date: "2020-02-05T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/carbon-offsets-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/carbon-offsets-molly-intro-mix.mp3"
+    },
+  },
+   {
+    title: 'State of the Union',
+    author: 'Kai Ryssdal',
+    alts: ['state of the union', 'slate of the union', 'sate of the union', 'state of union'],
+    keywords: ['state', 'union'],
+    guid: 'sotu_2020',
+    date: "2020-02-04T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/sotu-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/sotu-kai-new-intro-mix.mp3"
+    },
+  },
+  {
+    title: "Presidential Primaries",
+    author: 'Kai Ryssdal',
+    alts: ['presidential primary', 'residential prime airy' ],
+    keywords: ['primary', 'primaries', 'president', 'residential', 'prime'],
+    guid: 'presidential_primaries',
+    date: "2020-02-03T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/presidential-primaries-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/presidential-primaries-kai-intro-mix.mp3"
+    },
+  },  
+  {
+    title: 'Superbowl Tee Shirts',
+    author: 'Molly Wood',
+    alts: ['super bowl tee shirts', 'super ball tee shirt', 'super bowl t shirt'],
+    keywords: ['superbowl', 'tee', 'super bowl', 'shirts', 'super'],
+    guid: 'superbowl_tees_2020',
+    date: "2020-01-31T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/championshiptshirts-molly-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/championshiptshirts-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'The Largest Scientific Structure Ever',
+    author: 'Molly Wood',
+    alts: ['largest scientific structure' ],
+    keywords: ['largest', 'scientific', 'structure', 'struck'],
+    guid: 'largest_scientific_structure',
+    date: "2020-01-30T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/largest-scientific-structure-ever-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/largest-scientific-structure-ever-molly-intro-mix.mp3"
+    },
+  }, 
+  {
+    title: "Packaging Economy",
+    author: 'Kai Ryssdal',
+    alts: ['pack aging economy', 'pack asian economy' ],
+    keywords: ['pack', 'packaging', 'aging'],
+    guid: 'packaging_economy',
+    date: "2020-01-29T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/packaging-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/packaging-kai-intro-mix.mp3"
+    },
+  },  
+  {
+    title: "U.S. Census",
+    author: 'Kai Ryssdal',
+    alts: ['you s sense us', 'u s census'],
+    keywords: ['census', 'sense', 'us', 'u s'],
+    guid: 'us_census',
+    date: "2020-01-28T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/us-census-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/us-census-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Royal Abdication',
     author: 'Molly Wood',
     alts: ['royal abdication', 'roy old have dictation', 'royal add vacation' ],
