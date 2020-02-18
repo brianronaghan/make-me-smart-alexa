@@ -1,4 +1,16 @@
 module.exports = [
+    {
+    title: "China Trade War",
+    author: 'Kai Ryssdal',
+    alts: ['china trade war', 'shy na trade war'],
+    keywords: ['china', 'trade', 'raid', 'war' ],
+    guid: 'china_trade_war_2020',
+    date: "2019-05-23T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/tradewar-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/tradewar-kai-intro-mix.mp3"
+    },
+  },
   {
     title: "Welfare",
     author: 'Kai Ryssdal',
@@ -2273,18 +2285,18 @@ module.exports = [
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/snapchatdysmorphia-molly-intro-mix.mp3"
     },
   },
-  {
-    title: "China Trade War",
-    author: 'Kai Ryssdal',
-    alts: ['china trade war', 'shy na trade war'],
-    keywords: ['china', 'trade', 'raid', 'war' ],
-    guid: 'china_trade_war',
-    date: "2019-05-23T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/tradewar-kai-explainer-mix.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/tradewar-kai-intro-mix.mp3"
-    },
-  },
+  // {
+  //   title: "China Trade War",
+  //   author: 'Kai Ryssdal',
+  //   alts: ['china trade war', 'shy na trade war'],
+  //   keywords: ['china', 'trade', 'raid', 'war' ],
+  //   guid: 'china_trade_war',
+  //   date: "2019-05-23T07:00:00Z",
+  //   audio: {
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/tradewar-kai-explainer-mix.mp3",
+  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/tradewar-kai-intro-mix.mp3"
+  //   },
+  // },
   {
     title: "Livestream Shopping",
     author: 'Molly Wood',
