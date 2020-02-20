@@ -5,7 +5,7 @@ module.exports = [
     alts: ['china trade war', 'shy na trade war'],
     keywords: ['china', 'trade', 'raid', 'war' ],
     guid: 'china_trade_war_2020',
-    date: "2019-05-23T07:00:00Z",
+    date: "2020-02-19T07:00:00Z",
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/tradewar-kai-explainer-mix.mp3",
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/tradewar-kai-intro-mix.mp3"

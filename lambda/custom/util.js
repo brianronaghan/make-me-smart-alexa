@@ -682,7 +682,7 @@ function stripActions (searchTerm) {
 }
 
 function liveExplainers() {
-  return explainers.filter(explainer => new Date(explainer.date) < Date.now())
+  return rss_explainers.filter(explainer => new Date(explainer.date) < Date.now())
 }
 
 function displayMessage () {

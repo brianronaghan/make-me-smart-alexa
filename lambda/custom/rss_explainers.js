@@ -1,4 +1,5 @@
 let Parser = require('rss-parser');
+
 let parser = new Parser({
     customFields: {
         item: [
@@ -8,12 +9,29 @@ let parser = new Parser({
       }
 } 
 );
-var util = require('./util.js');
-
 let legacy_explainers = require('./explainers.js');
-
 let legacy_dictionary = {};
+
+let liveExplainers = {};
+
 (async () => {
+  if (liveExplainers && liveExplainers.explainers && (new Date () - new Date(liveExplainers.builtAt) < (1000 * 60 * 60)) ) {  // if it exists in cache
+    console.log('cache good')
+      return liveExplainers.explainers;
+
+  } else { // not in cache, build it
+    console.log('needs a rebuild')
+    await buildExplainers();
+    return liveExplainers.explainers;
+
+  }
+
+})();
+
+
+
+async function buildExplainers () {
+  console.log('HI');
   legacy_explainers.forEach((exp) => {
     legacy_dictionary[exp.title.toLowerCase()] = exp;
 
@@ -68,9 +86,11 @@ let legacy_dictionary = {};
     explainer.title = item.title;
     explainer.author = item.author;
     explainer.date = item.isoDate;
-    console.log(explainer);
+    // console.log(explainer);
     return explainer
   })
   console.log(`Found ${found} out of ${total}.`)
   // console.log(unfound);
-})();
+  liveExplainers.explainers = exps;
+  liveExplainers.builtAt = new Date();
+};
