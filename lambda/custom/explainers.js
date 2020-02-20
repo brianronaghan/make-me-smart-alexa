@@ -1,11 +1,23 @@
 module.exports = [
+  {
+    title: 'Telemedicine',
+    author: 'Molly Wood',
+    alts: ['tell a med a sin', 'tell a medicine', 'telemedicine'],
+    keywords: ['tele', 'med', 'medicine', 'tell'],
+    guid: 'telemedicine',
+    date: "2020-02-20T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/telemedicine-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/telemedicine-molly-intro-mix.mp3"
+    },
+  },
     {
     title: "China Trade War",
     author: 'Kai Ryssdal',
     alts: ['china trade war', 'shy na trade war'],
     keywords: ['china', 'trade', 'raid', 'war' ],
     guid: 'china_trade_war_2020',
-    date: "2019-05-23T07:00:00Z",
+    date: "2019-02-19T07:00:00Z",
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/tradewar-kai-explainer-mix.mp3",
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/tradewar-kai-intro-mix.mp3"
