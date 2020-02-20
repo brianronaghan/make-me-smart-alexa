@@ -682,7 +682,9 @@ function stripActions (searchTerm) {
 }
 
 function liveExplainers() {
-  return rss_explainers.filter(explainer => new Date(explainer.date) < Date.now())
+  console.log('IN LIVE');
+  console.log(rss_explainers)
+  return rss_explainers
 }
 
 function displayMessage () {
