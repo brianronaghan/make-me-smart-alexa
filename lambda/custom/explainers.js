@@ -1,4 +1,28 @@
 module.exports = [
+  // {
+  //   title: "China Trade War",
+  //   author: 'Kai Ryssdal',
+  //   alts: ['china trade war', 'shy na trade war'],
+  //   keywords: ['china', 'trade', 'raid', 'war' ],
+  //   guid: 'china_trade_war_2020',
+  //   date: "2019-02-19T07:00:00Z",
+  //   audio: {
+  //     url: "",
+  //     intro: ""
+  //   },
+  // },
+  {
+    title: 'Weird Brand Names',
+    author: 'Molly Wood',
+    alts: ['weird band names', 'weird brand names'],
+    keywords: ['weird', 'brand', 'name'],
+    guid: 'weird_brand_names',
+    date: "2020-02-21T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/weird-brand-names-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/weird-brand-names-molly-intro-mix.mp3"
+    },
+  },
   {
     title: 'Telemedicine',
     author: 'Molly Wood',
