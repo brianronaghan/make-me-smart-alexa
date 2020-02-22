@@ -1,16 +1,16 @@
 module.exports = [
-  // {
-  //   title: "China Trade War",
-  //   author: 'Kai Ryssdal',
-  //   alts: ['china trade war', 'shy na trade war'],
-  //   keywords: ['china', 'trade', 'raid', 'war' ],
-  //   guid: 'china_trade_war_2020',
-  //   date: "2019-02-19T07:00:00Z",
-  //   audio: {
-  //     url: "",
-  //     intro: ""
-  //   },
-  // },
+  {
+    title: "Manufacturing Jobs",
+    author: 'Kai Ryssdal',
+    alts: ['man you facturing jogs', 'manufacturing job'],
+    keywords: ['manufacture', 'manufacturing', 'man you', 'job', 'jog' ],
+    guid: 'manufacturing_jobs',
+    date: "2019-02-24T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/manufacturing-jobs-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/manufacturing-jobs-kai-intro-mix.mp3"
+    },
+  },
   {
     title: 'Weird Brand Names',
     author: 'Molly Wood',
