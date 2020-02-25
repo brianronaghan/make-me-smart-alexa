@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: 'Bubble Wrap',
+    author: 'Molly Wood',
+    alts: ['bub l rap', 'bubble rap', 'bubble wrap', 'bobble rap', 'bobble wrap'],
+    keywords: ['bub', 'wrap', 'rap', 'bubble', 'bobble'],
+    guid: 'bubble_wrap',
+    date: "2020-02-25T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/bubble-wrap-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/bubble-wrap-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: "Manufacturing Jobs",
     author: 'Kai Ryssdal',
     alts: ['man you facturing jogs', 'manufacturing job'],
