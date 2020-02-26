@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: "Social Security",
+    author: 'Kai Ryssdal',
+    alts: ['social security', 'so shul secure it e', 'social sick your it e'],
+    keywords: ['social', 'security', 'secure', 'sosh l', 'sick your'],
+    guid: 'social_security',
+    date: "2019-02-26T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/social-security-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/social-security-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Bubble Wrap',
     author: 'Molly Wood',
     alts: ['bub l rap', 'bubble rap', 'bubble wrap', 'bobble rap', 'bobble wrap'],
