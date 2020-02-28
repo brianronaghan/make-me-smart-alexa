@@ -1,4 +1,28 @@
 module.exports = [
+    {
+    title: "Leap Year",
+    author: 'Kai Ryssdal',
+    alts: ['leap year', 'lee pear', 'leap here', 'leap ear'],
+    keywords: ['leap', 'year', 'lee','here', 'hear', 'ear' ],
+    guid: 'leap_year',
+    date: "2019-02-28T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/leap-year-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/leap-year-kai-intro-mix.mp3"
+    },
+  },
+    {
+    title: 'Hidden Figures',
+    author: 'Molly Wood',
+    alts: ['hidden figures', 'hid and fig your', 'hid n fig your', 'hidden fig yours', 'hid an fig yours'],
+    keywords: ['hid', 'fig', 'figure', 'hidden'],
+    guid: 'hidden_figures',
+    date: "2020-02-27T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/hidden-figures-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/hidden-figures-molly-intro-mix.mp3"
+    },
+  },
   {
     title: "Social Security",
     author: 'Kai Ryssdal',
