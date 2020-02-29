@@ -1,5 +1,17 @@
 module.exports = [
     {
+    title: 'Wildfire Emissions',
+    author: 'Molly Wood',
+    alts: ['wild fire e mission', 'wild fire e missing', 'while fire emission', 'wildfire emission'],
+    keywords: ['wild', 'fire', 'emission', 'mission', 'miss'],
+    guid: 'wildfire_emissions',
+    date: "2020-03-02T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/wildfire-emissions-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/wildfire-emissions-molly-intro-mix.mp3"
+    },
+  },
+    {
     title: "Leap Year",
     author: 'Kai Ryssdal',
     alts: ['leap year', 'lee pear', 'leap here', 'leap ear'],
