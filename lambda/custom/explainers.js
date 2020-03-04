@@ -1,4 +1,28 @@
 module.exports = [
+  {
+    title: 'Environmental Social Governance',
+    author: 'Molly Wood',
+    alts: ['environmental social governance', 'environmental social government', 'n viral mental social governance'],
+    keywords: ['social', 'environment', 'govern'],
+    guid: 'environmental_social_governance',
+    date: "2020-03-04T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/environmental-social-governance-criteria-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/environmental-social-governance-criteria-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Rotten Tomatoes',
+    author: 'Molly Wood',
+    alts: ['rot n tomatoes', 'rotten tom a toes', 'rotten tomatoes'],
+    keywords: ['rot', 'rotten', 'tomato', 'toes'],
+    guid: 'rotten_tomatoes',
+    date: "2020-03-03T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/rotten-tomatoes-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/rotten-tomatoes-molly-intro-mix.mp3"
+    },
+  },
     {
     title: 'Wildfire Emissions',
     author: 'Molly Wood',
