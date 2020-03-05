@@ -1,5 +1,29 @@
 module.exports = [
   {
+    title: 'Pete Rose',
+    author: 'Molly Wood',
+    alts: ['pete rose', 'pete rows', 'peet rose'],
+    keywords: ['pete', 'rows', 'rose', 'peat', 'peek'],
+    guid: 'pete_rose',
+    date: "2020-03-08T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/pete-rose-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/pete-rose-molly-intro-mix.mp3"
+    },
+  },
+    {
+    title: 'Daylight Savings Time',
+    author: 'Kai Ryssdal',
+    alts: ['daylight savings time', 'day light save ins tying'],
+    keywords: ['daylight', 'savings', 'time'],
+    guid: 'daylight_savings_2020',
+    date: "2020-03-05T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/daylightsavingstime-kai-explainer+MIX.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/daylight-savings-kai-new-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Environmental Social Governance',
     author: 'Molly Wood',
     alts: ['environmental social governance', 'environmental social government', 'n viral mental social governance'],
@@ -3995,18 +4019,18 @@ module.exports = [
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/phonerepair-molly-intro+MIX.mp3"
     },
   },
-  {
-    title: 'Daylight Savings Time',
-    author: 'Kai Ryssdal',
-    alts: ['daylight savings time', 'day light save ins tying'],
-    keywords: ['daylight', 'savings', 'time'],
-    guid: 'daylight_savings',
-    date: "2018-11-02T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/daylightsavingstime-kai-explainer+MIX.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/daylightsavingstime-kai-intro+MIX.mp3"
-    },
-  },
+  // {
+  //   title: 'Daylight Savings Time',
+  //   author: 'Kai Ryssdal',
+  //   alts: ['daylight savings time', 'day light save ins tying'],
+  //   keywords: ['daylight', 'savings', 'time'],
+  //   guid: 'daylight_savings',
+  //   date: "2018-11-02T07:00:00Z",
+  //   audio: {
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/daylightsavingstime-kai-explainer+MIX.mp3",
+  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/daylightsavingstime-kai-intro+MIX.mp3"
+  //   },
+  // },
   {
     title: 'Kepler Telescope',
     author: 'Molly Wood',
