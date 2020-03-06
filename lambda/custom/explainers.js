@@ -11,6 +11,18 @@ module.exports = [
       intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/pete-rose-molly-intro-mix.mp3"
     },
   },
+  {
+    title: 'Fracking',
+    author: 'Kai Ryssdal',
+    alts: ['fracking', 'frack in', 'fraking'],
+    keywords: ['frack', 'fracking', 'flack'],
+    guid: 'fracking',
+    date: "2020-03-06T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/fracking-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/fracking-kai-intro-mix.mp3"
+    },
+  },
     {
     title: 'Daylight Savings Time',
     author: 'Kai Ryssdal',
