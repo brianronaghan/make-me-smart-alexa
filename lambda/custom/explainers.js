@@ -1,11 +1,23 @@
 module.exports = [
   {
+    title: 'Recession',
+    author: 'Kai Ryssdal',
+    alts: ['recession', 're says shun'],
+    keywords: ['recession', 're session', 're says shun'],
+    guid: 'recession_2020',
+    date: "2020-03-10T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/recession-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/recession-kai-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Pete Rose',
     author: 'Molly Wood',
     alts: ['pete rose', 'pete rows', 'peet rose'],
     keywords: ['pete', 'rows', 'rose', 'peat', 'peek'],
     guid: 'pete_rose',
-    date: "2020-03-08T08:00:00Z",
+    date: "2020-03-09T08:00:00Z",
     audio: {
       url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/pete-rose-molly-explainer-mix.mp3",
       intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/pete-rose-molly-intro-mix.mp3"
@@ -3584,18 +3596,18 @@ module.exports = [
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/booksandmovies-kai-intro-mix.mp3"
     },
   },
-  {
-    title: 'Recession',
-    author: 'Kai Ryssdal',
-    alts: ['recession', 're says shun'],
-    keywords: ['recession', 're session', 're says shun'],
-    guid: 'recession',
-    date: "2019-01-03T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/recession-kai-explainer-mix.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/recession-kai-intro-mix.mp3"
-    },
-  },
+  // {
+  //   title: 'Recession',
+  //   author: 'Kai Ryssdal',
+  //   alts: ['recession', 're says shun'],
+  //   keywords: ['recession', 're session', 're says shun'],
+  //   guid: 'recession',
+  //   date: "2019-01-03T07:00:00Z",
+  //   audio: {
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/recession-kai-explainer-mix.mp3",
+  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/recession-kai-intro-mix.mp3"
+  //   },
+  // },
   // {
   //   title: 'Gym Memberships',
   //   author: 'Kai Ryssdal',
