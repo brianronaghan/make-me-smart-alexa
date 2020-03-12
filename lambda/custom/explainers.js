@@ -1,4 +1,53 @@
 module.exports = [
+  //   {
+  //   title: 'Machine Learning',
+  //   author: 'Molly Wood',
+  //   alts: ['machine', 'learning', 'machine burning', 'my sheen learning', 'uh sheen burning', 'sheen burning'],
+  //   keywords: ['machine', 'learning', 'burning'],
+  //   guid: 'machine_learning_2020',
+  //   date: "2020-03-12T07:00:00Z",
+    
+  //   audio: {
+  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/machine-learning-molly-intro-mix.mp3",
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/machine-learning-molly-explainer-mix.mp3",
+  //   },
+  // },
+  {
+    title: 'Super Smellers',
+    author: 'Kai Ryssdal',
+    alts: ['soup or smeller', 'sup or smell or', 'supe r smeller'],
+    keywords: ['super', 'smell', 'soup', ],
+    guid: 'super_smellers',
+    date: "2020-03-13T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/super-smellers-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/super-smellers-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Circuit Breaker',
+    author: 'Kai Ryssdal',
+    alts: ['sir cut breaker', 'circuit break r', 'sir cut break or'],
+    keywords: ['circuit', 'break', 'sir cut', 'brake'],
+    guid: 'circuit_breaker',
+    date: "2020-03-12T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/circuit+breaker-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/circuit+breaker-kai-intro-mix.mp3"
+    },
+  },
+    {
+    title: 'Credit Score',
+    author: 'Kai Ryssdal',
+    alts: ['credit score', 'my credit score', 'your credit score', 'credit rating', 'credit number', 'credit sore', 'credit store', 'reddit sore'],
+    keywords: ['credit', 'score', 'store', 'rating', 'sore'],
+    guid: 'credit_score_2020',
+    date: "2020-03-11T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/credit-score-kai-explainer-mix.mp3",
+      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/credit-score-kai-intro-2-mix.mp3"
+    },
+  },
   {
     title: 'Recession',
     author: 'Kai Ryssdal',
@@ -3644,18 +3693,18 @@ module.exports = [
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/bestof1-molly-intro-mix.mp3"
     },
   },
-  {
-    title: 'Credit Score (Best of)',
-    author: 'Kai Ryssdal',
-    alts: ['credit score', 'my credit score', 'your credit score', 'credit rating', 'credit number', 'credit sore', 'credit store', 'reddit sore'],
-    keywords: ['credit', 'score', 'store', 'rating', 'sore', 'reddit'],
-    guid: 'bestof_credit_score',
-    date: "2018-12-27T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/credit-score-kai-explainer-mix.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/explainerhighlightsihaveanidea-kai-intro+MIX.mp3"
-    },
-  },
+  // {
+  //   title: 'Credit Score (Best of)',
+  //   author: 'Kai Ryssdal',
+  //   alts: ['credit score', 'my credit score', 'your credit score', 'credit rating', 'credit number', 'credit sore', 'credit store', 'reddit sore'],
+  //   keywords: ['credit', 'score', 'store', 'rating', 'sore', 'reddit'],
+  //   guid: 'bestof_credit_score',
+  //   date: "2018-12-27T07:00:00Z",
+  //   audio: {
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/credit-score-kai-explainer-mix.mp3",
+  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/explainerhighlightsihaveanidea-kai-intro+MIX.mp3"
+  //   },
+  // },
   {
     title: 'Scooter Craze (Best of)',
     author: 'Molly Wood',
@@ -4911,18 +4960,18 @@ module.exports = [
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/micromobility-molly-intro-mix.mp3"
     },
   },
-  {
-    title: 'Credit Score',
-    author: 'Kai Ryssdal',
-    alts: ['credit score', 'my credit score', 'your credit score', 'credit rating', 'credit number', 'credit sore', 'credit store', 'reddit sore'],
-    keywords: ['credit', 'score', 'store', 'rating', 'sore', 'reddit'],
-    guid: 'credit_score',
-    date: "2018-07-18T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/credit-score-kai-explainer-mix.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/credit-score-kai-intro-2-mix.mp3"
-    },
-  },
+  // {
+  //   title: 'Credit Score',
+  //   author: 'Kai Ryssdal',
+  //   alts: ['credit score', 'my credit score', 'your credit score', 'credit rating', 'credit number', 'credit sore', 'credit store', 'reddit sore'],
+  //   keywords: ['credit', 'score', 'store', 'rating', 'sore', 'reddit'],
+  //   guid: 'credit_score',
+  //   date: "2018-07-18T07:00:00Z",
+  //   audio: {
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/credit-score-kai-explainer-mix.mp3",
+  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/credit-score-kai-intro-2-mix.mp3"
+  //   },
+  // },
   {
     title: 'Pokémon Go',
     author: 'Molly Wood',
@@ -5177,22 +5226,22 @@ module.exports = [
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/bond-market-kai-explainer-mix.mp3",
     },
   },
-  {
-    title: 'Machine Learning',
-    author: 'Molly Wood',
-    alts: ['machine', 'learning', 'machine burning', 'my sheen learning', 'uh sheen burning', 'sheen burning'],
-    keywords: ['machine', 'learning', 'burning'],
-    guid: 'machine_learning_launch',
-    date: "2018-06-24T07:00:00Z",
-    requestInformation: {
-      user: null,
-      location: null
-    },
-    audio: {
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/machine-learning-molly-intro-mix.mp3",
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/machine-learning-molly-explainer-mix.mp3",
-    },
-  },
+  // {
+  //   title: 'Machine Learning',
+  //   author: 'Molly Wood',
+  //   alts: ['machine', 'learning', 'machine burning', 'my sheen learning', 'uh sheen burning', 'sheen burning'],
+  //   keywords: ['machine', 'learning', 'burning'],
+  //   guid: 'machine_learning_launch',
+  //   date: "2018-06-24T07:00:00Z",
+  //   requestInformation: {
+  //     user: null,
+  //     location: null
+  //   },
+  //   audio: {
+  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/machine-learning-molly-intro-mix.mp3",
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/machine-learning-molly-explainer-mix.mp3",
+  //   },
+  // },
   // {
   //   title: 'Household Debt',
   //   author: 'Kai Ryssdal',
