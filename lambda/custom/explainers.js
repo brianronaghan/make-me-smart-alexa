@@ -13,6 +13,210 @@ module.exports = [
   //   },
   // },
   {
+    title: 'Hospital Ships',
+    author: 'Molly Wood',
+    alts: ['hospital ship','hospital shit', 'hospital shift' ],
+    keywords: ['ship', 'hospital', 'shift', 'hospice' ],
+    guid: 'hospital_ships',
+    date: "2020-04-07T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/hospital-ships-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/hospital-ships-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Furlough vs. Layoff',
+    author: 'Kai Ryssdal',
+    alts: ['furlough verse lay off', 'fur low', ''],
+    keywords: ['furlough', 'lay', 'off', 'low', 'fur'],
+    guid: 'furlough_vs_layoff',
+    date: "2020-04-06T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/furloughs+vs+layoffs-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/furloughs+vs+layoffs-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Soap',
+    author: 'Molly Wood',
+    alts: ['soap','so', 'sew' ],
+    keywords: ['soap', 'soak', 'so' ],
+    guid: 'soap',
+    date: "2020-04-03T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/soap-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/soap-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Quarantine',
+    author: 'Molly Wood',
+    alts: ['quarantine', 'war n teen', 'warrant teen' ],
+    keywords: ['quarantine', 'teen', 'warrant', 'warren' ],
+    guid: 'quarantine',
+    date: "2020-04-02T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/quarantine-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/quarantine-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Grocery Delivery',
+    author: 'Molly Wood',
+    alts: ['gross or e deliver e', 'grocery deliver e', 'grosser e deliver e' ],
+    keywords: ['gross', 'grocery', 'deliver', 'livery' ],
+    guid: 'grocery_delivery',
+    date: "2020-04-01T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/grocery-delivery-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/grocery-delivery-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Remote Work Gap',
+    author: 'Kai Ryssdal',
+    alts: ['remote work gap', 're moat work gap', 're mote work gap'],
+    keywords: ['remote', 'work', 'gap', 'moat',],
+    guid: 'remote_work_gap',
+    date: "2020-03-31T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/remote+work+gap-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/remote+work+gap-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Defense Production Act',
+    author: 'Kai Ryssdal',
+    alts: ['defense production act', 'd fence production at', 'defense prod of shun axe', 'defence production act'],
+    keywords: ['defense', 'fence', 'act', 'production', 'shun'],
+    guid: 'defense_production_act',
+    date: "2020-03-30T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/defense+production+act-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/defense+production+act-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Crowdless Sports',
+    author: 'Kai Ryssdal',
+    alts: ['crowdless sport', 'crowd less sport', 'kraut less sport'],
+    keywords: ['crowd', 'less', 'sport'],
+    guid: 'crowdless_sports',
+    date: "2020-03-27T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/crowdless+sports-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/crowdless+sports-kai-intro-mix.mp3"
+    },
+  },
+    {
+    title: 'Supply Shock',
+    author: 'Kai Ryssdal',
+    alts: ['supply shock', 'supplies oct', 'supplies shop', 'supple i shock'],
+    keywords: ['supply', 'shock', 'sup', 'ply' , 'supplies'],
+    guid: 'supply_shock',
+    date: "2020-03-26T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/supply+shock-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/supply+shock-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Video Conferencing',
+    author: 'Molly Wood',
+    alts: ['video conference', 'video con french', 'video con friends' ],
+    keywords: ['video', 'conference', 'french', 'friends', 'fence' ],
+    guid: 'video_conferencing',
+    date: "2020-03-25T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/video-conferencing-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/video-conferencing-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Consumer Economy',
+    author: 'Kai Ryssdal',
+    alts: ['consume or econo me', 'consumer econ o me', 'consume or econ o me', 'consumer economy'],
+    keywords: ['con', 'consume', 'econ', 'con', 'economy' ],
+    guid: 'consumer_economy',
+    date: "2020-03-24T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/consumer+economy-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/consumer+economy-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Social Distancing',
+    author: 'Molly Wood',
+    alts: ['social distance ing', 'social distance in', 'social distancing', 'social distinct in'],
+    keywords: ['social', 'distance', 'so shul', ],
+    guid: 'social_distancing',
+    date: "2020-03-23T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/social-distancing-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/social-distancing-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Theatrical Window',
+    author: 'Molly Wood',
+    alts: ['theatrical window', 'the attic all window', 'theatrical wind o', 'theatrical win doe'],
+    keywords: ['theatric', 'window', 'win', ],
+    guid: 'theatrical_window',
+    date: "2020-03-20T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/theatrical-windows-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/theatrical-windows-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Tourism Industry',
+    author: 'Molly Wood',
+    alts: ['tour is industry', 'tourism indusry', 'tour is m in does tree', 'tourism industry', 'tour is an industry'],
+    keywords: ['tour', 'industry', 'ism'],
+    guid: 'tourism_industry',
+    date: "2020-03-19T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/tourism-industry-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/tourism-industry-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Bear Market',
+    author: 'Kai Ryssdal',
+    alts: ['bear mark it and bull market', 'bear market and bull market'],
+    keywords: ['bear', 'bare', 'beer', 'bull', 'market', 'mark it' ],
+    guid: 'bear_and_bull',
+    date: "2020-03-18T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/bull+market+bear+market-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/bull+market+bear+market-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Remote Learning',
+    author: 'Molly Wood',
+    alts: ['re moat learn in', 'remote learning', 'remote learn in', 're moat learning'],
+    keywords: ['remote', 'learn', 're moat'],
+    guid: 'remote_learning',
+    date: "2020-03-17T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/remote-learning-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/remote-learning-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Sick Leave',
+    author: 'Molly Wood',
+    alts: ['sick leave', 'sick leaf', 'sic leave', 'sickle eve'],
+    keywords: ['sick', 'eve', 'leave', 'leaf'],
+    guid: 'sick_leave',
+    date: "2020-03-16T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/sick-leave-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/sick-leave-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Super Smellers',
     author: 'Kai Ryssdal',
     alts: ['soup or smeller', 'sup or smell or', 'supe r smeller'],
