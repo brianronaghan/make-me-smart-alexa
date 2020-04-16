@@ -1,17 +1,113 @@
 module.exports = [
-  //   {
-  //   title: 'Machine Learning',
-  //   author: 'Molly Wood',
-  //   alts: ['machine', 'learning', 'machine burning', 'my sheen learning', 'uh sheen burning', 'sheen burning'],
-  //   keywords: ['machine', 'learning', 'burning'],
-  //   guid: 'machine_learning_2020',
-  //   date: "2020-03-12T07:00:00Z",
-    
-  //   audio: {
-  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/machine-learning-molly-intro-mix.mp3",
-  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/machine-learning-molly-explainer-mix.mp3",
-  //   },
-  // },
+  {
+    title: 'Deflation',
+    author: 'Kai Ryssdal',
+    alts: ['deflation', 'd flay shun', 'deflate shun'],
+    keywords: ['deflation', 'deflate', 'shun', 'stun', 'deflay', 'flay' ],
+    guid: 'deflation',
+    date: "2020-04-20T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/deflation-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/deflation-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Viruses',
+    author: 'Molly Wood',
+    alts: ['vie russ', 'eye russ', 'i russ', 'virus' ],
+    keywords: ['virus', 'virus is', 'russ', 'vie' ],
+    guid: 'viruses',
+    date: "2020-04-17T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/viruses-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/viruses-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Force Majeure',
+    author: 'Kai Ryssdal',
+    alts: ['force majeure', 'fours majeure', 'force ma jour' ],
+    keywords: ['force', 'major', 'majeure', 'fours' ],
+    guid: 'force_majeure',
+    date: "2020-04-16T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/force-majeure-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/force-majeure-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Quarterly Earnings',
+    author: 'Kai Ryssdal',
+    alts: ['quarter lee earn in', 'quarterly earnings', 'quarterly earn inks'],
+    keywords: ['quarter', 'earn', 'cord' ],
+    guid: 'quarterly_earnings',
+    date: "2020-04-15T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/quarterly-earnings-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/quarterly-earnings-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Nurse Shortage',
+    author: 'Molly Wood',
+    alts: ['nurse short age', 'nurse shortage', 'nurse short aj' ],
+    keywords: ['nurse', 'short', 'age', 'nerd', 'sort' ],
+    guid: 'nurse_shortage',
+    date: "2020-04-14T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/nurse-shortage-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/nurse-shortage-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Lagging Indicators',
+    author: 'Kai Ryssdal',
+    alts: ['lagging indicators', 'lag in dic caters', 'laggy indicator'],
+    keywords: ['lag', 'lagging', 'indicators' ],
+    guid: 'lagging_indicators',
+    date: "2020-04-13T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/lagging-indicators-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/lagging-indicators-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Economic Depression',
+    author: 'Kai Ryssdal',
+    alts: ['economic depression', 'economic de press shun'],
+    keywords: ['economic', 'depression', ],
+    guid: 'economic_depression',
+    date: "2020-04-10T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/economic+depression-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/economic+depression-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Olympic Postponement',
+    author: 'Molly Wood',
+    alts: ['olympic postponement', 'oh limp pic postpone mint', 'oh limb pick postponement' ],
+    keywords: ['post', 'own', 'pawn', 'meant', 'mint', 'olympic', 'o limp pic','limb' ],
+    guid: 'postponement',
+    date: "2020-04-09T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/olympics-postponement-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/olympics-postponement-molly-intro-mix.mp3"
+    },
+  },
+
+  {
+    title: 'Stimulus Checks',
+    author: 'Kai Ryssdal',
+    alts: ['stimulus check', 'stimulus czech', 'stim you lust checks', 'stimulus checks' , 'stim yule us'],
+    keywords: ['stimulus', 'check', 'stimulate', 'stimulant', 'stem', 'stim yule us', 'Czech'],
+    guid: 'stimulus_checks',
+    date: "2020-04-08T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/stimulus-checks-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/stimulus-checks-kai-intro-mix.mp3"
+    },
+  },
   {
     title: 'Hospital Ships',
     author: 'Molly Wood',
@@ -27,7 +123,7 @@ module.exports = [
   {
     title: 'Furlough vs. Layoff',
     author: 'Kai Ryssdal',
-    alts: ['furlough verse lay off', 'fur low', ''],
+    alts: ['furlough verse lay off', 'fur low verse lay off', 'fur low versus layoff'],
     keywords: ['furlough', 'lay', 'off', 'low', 'fur'],
     guid: 'furlough_vs_layoff',
     date: "2020-04-06T07:00:00Z",
