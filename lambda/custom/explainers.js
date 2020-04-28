@@ -1,5 +1,125 @@
 module.exports = [
   {
+    title: 'Vote by Mail',
+    author: 'Kai Ryssdal',
+    alts: ['vote buy male', 'vote by mail', 'vote buy mail'],
+    keywords: ['vote', 'by', 'buy', 'mail', 'male' ],
+    guid: 'vote_by_mail',
+    date: "2020-05-04T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/vote-by-mail-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/vote-by-mail-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Bread Making',
+    author: 'Molly Wood',
+    alts: ['bread make in', 'bred making', 'bread making'],
+    keywords: ['bread', 'make', 'in', 'bred' ],
+    guid: 'bread_making',
+    date: "2020-05-01T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/bread-making-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/bread-making-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Just In Time Supply',
+    author: 'Kai Ryssdal',
+    alts: ['just in time supply', 'justin time supply'],
+    keywords: ['just', 'time', 'sup', 'ply', 'supply', 'in time' ],
+    guid: 'just_in_time_supply',
+    date: "2020-04-30T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/just-in-time-supply-chain-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/just-in-time-supply-chain-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Hazard Pay',
+    author: 'Kai Ryssdal',
+    alts: ['hazard pay', 'has ard pay', ''],
+    keywords: ['hazard', 'pay', 'has', 'ard' ],
+    guid: 'hazard_pay',
+    date: "2020-04-29T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/hazard-pay-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/hazard-pay-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Pandemic Retail',
+    author: 'Molly Wood',
+    alts: ['pandemic re tale', 'pandemic re tai', 'pandemic retail'],
+    keywords: ['pan', 'dem', 'ic', 'retail', 'pandemic', 'tail', 'tale' ],
+    guid: 'pandemic_retail',
+    date: "2020-04-28T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/pandemic-retail-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/pandemic-retail-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Credit',
+    author: 'Kai Ryssdal',
+    alts: ['credit', 'red it', 'reddit', 'cred it'],
+    keywords: ['credit', 'reddit', 'red it', 'cred it' ],
+    guid: 'credit',
+    date: "2020-04-27T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/credit-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/credit-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Jigsaw Puzzles',
+    author: 'Molly Wood',
+    alts: ['jigsaw puzzle', 'jig saw puzzle'],
+    keywords: ['jig', 'saw', 'puzzle', ],
+    guid: 'jigsaw_puzzles',
+    date: "2020-04-24T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/jigsaw-puzzles-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/jigsaw-puzzles-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'N95 Masks',
+    author: 'Molly Wood',
+    alts: ['N95 Masks', 'and 95 mask', 'N95 Mask'],
+    keywords: ['n', '95', '90', 'ninety', 'five', 'mask', 'mast', 'mass'],
+    guid: 'n95_masks',
+    date: "2020-04-23T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/N95-masks-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/N95-masks-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Unemployment Insurance',
+    author: 'Kai Ryssdal',
+    alts: ['unemployment insurance', 'unemploy meant insure ants', 'one employment insurance', 'unemployment insure ants', 'employment insurance'],
+    keywords: ['un', 'employ', 'unemply', 'meant', 'unemployment', 'insure ants', 'insure', 'ensure', 'sure' ],
+    guid: 'unemployment_insurance',
+    date: "2020-04-22T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/unemployment-insurance-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/unemployment-insurance-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Home Schooling',
+    author: 'Molly Wood',
+    alts: ['home school in', 'home schooling', 'hone school ing' , 'home stool eng'],
+    keywords: ['home', 'school', 'in', 'hone', 'homeschool', 'stool'],
+    guid: 'home_schooling',
+    date: "2020-04-21T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/home-schooling-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/home-schooling-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Deflation',
     author: 'Kai Ryssdal',
     alts: ['deflation', 'd flay shun', 'deflate shun'],
