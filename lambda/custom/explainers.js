@@ -1,5 +1,130 @@
 module.exports = [
   {
+    title: 'I Voted Stickers',
+    author: 'Kai Ryssdal',
+    alts: ['i voted stick her', 'i vote ed sticker', 'i voted stickers'],
+    keywords: ['vote', 'stick', 'voted'],
+    guid: 'i_voted_stickers',
+    date: "2020-11-02T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/i-voted-stickers-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/i-voted-stickers-kai-intro-mix.mp3",
+
+    },
+  },
+  {
+    title: 'Halloween Candy',
+    author: 'Molly Wood',
+    alts: ['halloween candy', 'hallow in canned e'],
+    keywords: ['candy', 'halloween', 'can d', 'canned'],
+    guid: "halloween_candy",
+    date: "2020-10-30T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/halloween-candy-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/halloween-candy-molly-intro-mix.mp3"
+    }
+  },
+  {
+    title: 'Dark Money',
+    author: 'Kai Ryssdal',
+    alts: ['dark money', 'dart money', 'dark monkey'],
+    keywords: ['dark', 'money', 'mon e','dart'],
+    guid: 'dark_money',
+    date: "2020-10-29T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/dark-money-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/dark-money-kai-intro-mix.mp3",
+
+    },
+  },
+  {
+    title: 'Gig Economy',
+    author: 'Molly Wood',
+    alts: ['gig econ oh me', 'gig economy', 'ig economy'],
+    keywords: ['gig', 'econ', 'me'],
+    guid: "gig_economy",
+    date: "2020-10-28T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/gig-economy-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/gig-economy-molly-intro-mix.mp3"
+    }
+  },
+  {
+    title: 'Presidential Transport',
+    author: 'Kai Ryssdal',
+    alts: ['presidential transport', 'presidential trans sport'],
+    keywords: ['trans', 'port', 'dental', 'presidential'],
+    guid: 'presidential_transport',
+    date: "2020-10-27T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/presidential-transport-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/presidential-transport-kai-intro-mix.mp3",
+
+    },
+  },
+  {
+    title: '1918 Flu Pandemic',
+    author: 'Kai Ryssdal',
+    alts: ['1918 flu pandemic', '19 18 flew pandemic'],
+    keywords: ['flu', 'flew', 'pan', '19','18'],
+    guid: '1918_flu_pandeemic',
+    date: "2020-10-26T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/1918-flu-economy-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/1918-flu-economy-kai-intro-mix.mp3",
+
+    },
+  },
+  {
+    title: 'Martini Shot',
+    author: 'Molly Wood',
+    alts: ['martini shot', 'mart eeny shot', 'mart teeny shot'],
+    keywords: ['teen', 'shot', 'teenie', 'martini', 'mart', 'tea knee' ],
+    guid: "marini_shot",
+    date: "2020-10-23T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/martini-shot-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/martini-shot-molly-intro-mix.mp3"
+    }
+  },
+   {
+    title: '5G',
+    author: 'Molly Wood',
+    alts: ['5 g', '5G', 'five g', '5g', '5 G', 'fine g', 'find g', 'why g', '5 g.', 'side g', 'fire t', 'fart g', 'fire g', 'g.', 'by g', "I'm GE"],
+    keywords: ['5g', '5G', 'five', 'gee'],
+    guid: "5G_2020",
+    date: "2020-10-22T07:00:00Z",
+    audio: {
+      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/Alexa+-+Wood+-+5g+-+MIXLEV_alexa.mp3",
+      intro: 'https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/5G-molly-intro-fix-mix.mp3'
+    }
+  },
+  {
+    title: 'Walter Reed',
+    author: 'Kai Ryssdal',
+    alts: ['walter reed', 'wall tour read', 'walt or read', 'walter read'],
+    keywords: ['wall', 'walt', 'reed', 'read', 'reid'],
+    guid: 'waltreed',
+    date: "2020-10-21T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/walter-reed-hospital-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/walter-reed-hospital-kai-intro-mix.mp3",
+
+    },
+  },
+  {
+    title: 'Fire Insurance',
+    author: 'Molly Wood',
+    alts: ['fire insurance', 'fire unsure ents', 'fi her insure ance'],
+    keywords: ['fire', 'sure', 'ensure', 'ents', 'insure'],
+    guid: 'fire_insurance',
+    date: "2020-10-20T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/fire-insurance-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/fire-insurance-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Hurricane Damages',
     author: 'Kai Ryssdal',
     alts: ['her a cane damage is', 'hurricane damage is', 'hurricane damages'],
@@ -29,7 +154,7 @@ module.exports = [
     alts: ['rock e horror', 'rocky hard or', 'rockie hoar or'],
     keywords: ['rock', 'horror'],
     guid: 'rocky_horror',
-    date: "2018-09-26T07:00:00Z",
+    date: "2020-10-15T07:00:00Z",
     audio: {
       url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/rockyhorror-molly-explainer-mix.mp3",
       intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/rocky-horror-molly-intro-NEW-mix.mp3"
@@ -5439,18 +5564,18 @@ module.exports = [
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/nfl-kai-intro-mix.mp3"
     },
   },
-  {
-    title: '5G Rollout',
-    author: 'Molly Wood',
-    alts: ['find g roll out', 'five g role out', '5 g roll out'],
-    keywords: ['5g', 'roll','out'],
-    guid: '5g_rollout',
-    date: "2019-01-10T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/5grollout-molly-explainer-mix.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/5grollout-molly-intro-mix.mp3"
-    },
-  },
+  // {
+  //   title: '5G Rollout',
+  //   author: 'Molly Wood',
+  //   alts: ['find g roll out', 'five g role out', '5 g roll out'],
+  //   keywords: ['5g', 'roll','out'],
+  //   guid: '5g_rollout',
+  //   date: "2019-01-10T07:00:00Z",
+  //   audio: {
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/5grollout-molly-explainer-mix.mp3",
+  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/5grollout-molly-intro-mix.mp3"
+  //   },
+  // },
   {
     title: 'China Space Race',
     author: 'Molly Wood',
@@ -6093,18 +6218,18 @@ module.exports = [
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/hacked-molly-intro-mix.mp3"
     },
   },
-  {
-    title: '5G Race',
-    author: 'Molly Wood',
-    alts: ['5 g', '5G', 'five g', '5g', '5 G', 'fine g', 'find g', 'why g', '5 g.', 'side g', 'fire t', 'fart g', 'fire g', 'g.', 'by g', "I'm GE", "5g race", '5 g rate', '5 G raise'],
-    keywords: ['5g', '5G', 'race', 'raise', '5 g', '5 G', 'five g'],
-    guid: '5g_race',
-    date: "2018-10-15T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/5Grace-molly-explainer-mix.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/5Grace-molly-intro-mix.mp3"
-    },
-  },
+  // {
+  //   title: '5G Race',
+  //   author: 'Molly Wood',
+  //   alts: ['5 g', '5G', 'five g', '5g', '5 G', 'fine g', 'find g', 'why g', '5 g.', 'side g', 'fire t', 'fart g', 'fire g', 'g.', 'by g', "I'm GE", "5g race", '5 g rate', '5 G raise'],
+  //   keywords: ['5g', '5G', 'race', 'raise', '5 g', '5 G', 'five g'],
+  //   guid: '5g_race',
+  //   date: "2018-10-15T07:00:00Z",
+  //   audio: {
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/5Grace-molly-explainer-mix.mp3",
+  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/5Grace-molly-intro-mix.mp3"
+  //   },
+  // },
   {
     title: 'Pet Tech',
     author: 'Molly Wood',
