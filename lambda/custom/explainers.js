@@ -1,4 +1,209 @@
 module.exports = [
+    {
+    title: "Pumpkin Pie Filling",
+    author: 'Molly Wood',
+    alts: ['pump kin pie fill in', 'pumpkin pie', 'pumpkin puree' ],
+    keywords: ['pump', 'kin', 'pure', 'pie', 'pi', 'fill'],
+    guid: 'pumpkin_puree_20',
+    date: "2020-11-25T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/Pumpkin-pie-filling-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/Pumpkin-pie-filling-molly-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Circular Economy',
+    author: 'Kai Ryssdal',
+    alts: ['circular economy', 'circ you lar econ oh me'],
+    keywords: ['circular', 'circ', 'you lar', 'econ', 'sir'],
+    guid: 'circular_economy',
+    date: "2020-11-24T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/kai-circular+economy-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/kai-circular+economy-intro-mix.mp3"
+    },
+  },
+    {
+    title: 'Retail Robots',
+    author: 'Molly Wood',
+    alts: ['retail robot', 're tale robot'],
+    keywords: ['retail', 'robot', 're tale', 'row bot'],
+    guid: 'retail_robots_20',
+    date: "2020-11-23T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/retail-robots-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/retail-robots-molly-intro-mix.mp3"
+    },
+  },  
+  
+  {
+    title: 'Butterball Hotline',
+    author: 'Kai Ryssdal',
+    alts: ['butter ball hot line', 'butterball hot line', 'better ball'],
+    keywords: ['butter', 'ball', 'hotline', 'hot line'],
+    guid: 'butterball_20',
+    date: "2020-11-20T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/butterball-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/kai-butterball-intro-mix+2.mp3"
+    },
+  },
+  {
+    title: 'Gerontocracy',
+    author: 'Kai Ryssdal',
+    alts: ['jer on tock racy', 'gerontocracy'],
+    keywords: ['tock', 'see', 'jer', 'gerund', 'gerontocracy' ],
+    guid: 'gerontocracy',
+    date: "2020-11-19T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/kai-gerontocracy-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/kai-gerontocracy-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Universal Basic Income',
+    author: 'Molly Wood',
+    alts: ['universal basic income', 'universe l basic in come', ],
+    keywords: ['you', 'universe', 'verse', 'bay', 'basic', 'come', 'income', 'base'],
+    guid: "universal_basic_income",
+    date: "2020-11-18T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/universal+basic+income+-+molly+-+explainer+-+mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/universal+basic+income+-+molly+-+intro+-+mix.mp3"
+    }
+  },
+  {
+    title: 'Underinsured',
+    author: 'Molly Wood',
+    alts: ['under insured', 'under in sure', 'underinsured', 'under in shored'],
+    keywords: ['under', 'insure', 'ensure', 'sure', 'shore', 'short'],
+    guid: "underinsured",
+    date: "2020-11-17T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/underinsured+-+molly+-+explainer+-+mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/underinsured+-+molly+-+intro+-+mix.mp3"
+    }
+  },
+  {
+    title: 'Health Insurance',
+    author: 'Molly Wood',
+    alts: ['health insurance', 'health insure ants'],
+    keywords: ['health', 'insure', 'ensura', 'insurance', 'ants'],
+    guid: "health_insurance",
+    date: "2020-11-16T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/health+insurance+-+molly+-+explainer+-+mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/health+insurance+-+molly+-+intro+-+mix.mp3"
+    }
+  },
+  {
+    title: 'Plexiglass',
+    author: 'Kai Ryssdal',
+    alts: ['plexy glass', 'plexi glass', 'plecks e glass'],
+    keywords: ['plex', 'glass',  ],
+    guid: 'plexiglass',
+    date: "2020-11-13T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/plexiglass-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/plexiglass-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Drive Thrus',
+    author: 'Molly Wood',
+    alts: ['drive thru', 'drive threw', 'drive through'],
+    keywords: ['dry', 'drive', 'threw', 'through', 'thru'],
+    guid: "drive_thrus",
+    date: "2020-11-12T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/drive-throughs-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/drive-throughs-molly-intro-mix.mp3"
+    }
+  },
+  {
+    title: 'Smart Speakers',
+    author: 'Molly Wood',
+    alts: ['smart speak hers', 'smart speakers'],
+    keywords: ['smart', 'speak', 'her'],
+    guid: "smart_speakers",
+    date: "2020-11-11T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/smart-speakers-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/smart-speakers-molly-intro-mix.mp3"
+    }
+  },
+  // {
+  //   title: 'Executive Branch Budget',
+  //   author: 'Kai Ryssdal',
+  //   alts: ['executive branch budget', 'executive branch budge it'],
+  //   keywords: ['budge', 'it', 'branch', 'exex'  ],
+  //   guid: 'executive_branch_budget',
+  //   date: "2020-11-10T08:00:00Z",
+  //   audio: {
+  //     url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/kai-executive+branch+budget-explainer-mix.mp3",
+  //     intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/kai-executive+branch+budget-intro-mix.mp3"
+  //   },
+  // },
+  {
+    title: 'Post Election Government',
+    author: 'Kai Ryssdal',
+    alts: ['post elect shun govern meant', 'post election govern meant', 'post election government'],
+    keywords: ['post', 'government', 'elect', 'govern', 'govern'  ],
+    guid: 'post_election_government',
+    date: "2020-11-09T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/kai-post-election+government-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/kai-post-election+government-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Labor Force Participation',
+    author: 'Kai Ryssdal',
+    alts: ['labor forth participation', 'labor force participation'],
+    keywords: ['labor', 'force', 'parse', 'participation', ],
+    guid: 'labor_force_participationNOV2',
+    date: "2020-11-06T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/labor-force-participation-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/labor-force-participation-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Unemployment Insurance',
+    author: 'Kai Ryssdal',
+    alts: ['unemployment insurance', 'unemploy meant insure ants', 'one employment insurance', 'unemployment insure ants', 'employment insurance'],
+    keywords: ['un', 'employ', 'unemply', 'meant', 'unemployment', 'insure ants', 'insure', 'ensure', 'sure' ],
+    guid: 'unemployment_insurance_nov20',
+    date: "2020-11-05T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/unemployment-insurance-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/unemployment-insurance-kai-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Flu Shot',
+    author: 'Molly Wood',
+    alts: ['flu shot', 'flew shot', 'flu shod'],
+    keywords: ['flu', 'flew', 'shot', 'shod'],
+    guid: "flu_shot",
+    date: "2020-11-04T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/flu-shots-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/flu-shot-molly-intro-NEW-mix.mp3"
+    }
+  },
+  {
+    title: 'Election Day',
+    author: 'Molly Wood',
+    alts: ['election day', 'e lect shun day', 'elect shun day'],
+    keywords: ['day', 'election', 'elect'],
+    guid: "election_day",
+    date: "2020-11-03T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/election-day-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/election-day-molly-intro-mix.mp3"
+    }
+  },
   {
     title: 'I Voted Stickers',
     author: 'Kai Ryssdal',
@@ -1486,18 +1691,18 @@ module.exports = [
       intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/divided-supply-chain-molly-intro-mix.mp3"
     },
   },
-  {
-    title: 'Labor Force Participation',
-    author: 'Kai Ryssdal',
-    alts: ['labor forth participation', 'labor force participation'],
-    keywords: ['labor', 'force', 'parse', 'participation', ],
-    guid: 'labor_force_participation',
-    date: "2020-05-13T08:00:00Z",
-    audio: {
-      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/labor-force-participation-kai-explainer-mix.mp3",
-      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/labor-force-participation-kai-intro-mix.mp3"
-    },
-  },
+  // {
+  //   title: 'Labor Force Participation',
+  //   author: 'Kai Ryssdal',
+  //   alts: ['labor forth participation', 'labor force participation'],
+  //   keywords: ['labor', 'force', 'parse', 'participation', ],
+  //   guid: 'labor_force_participation',
+  //   date: "2020-05-13T08:00:00Z",
+  //   audio: {
+  //     url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/labor-force-participation-kai-explainer-mix.mp3",
+  //     intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/labor-force-participation-kai-intro-mix.mp3"
+  //   },
+  // },
   {
     title: 'Ventilators',
     author: 'Molly Wood',
@@ -1666,18 +1871,18 @@ module.exports = [
       intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/N95-masks-molly-intro-mix.mp3"
     },
   },
-  {
-    title: 'Unemployment Insurance',
-    author: 'Kai Ryssdal',
-    alts: ['unemployment insurance', 'unemploy meant insure ants', 'one employment insurance', 'unemployment insure ants', 'employment insurance'],
-    keywords: ['un', 'employ', 'unemply', 'meant', 'unemployment', 'insure ants', 'insure', 'ensure', 'sure' ],
-    guid: 'unemployment_insurance',
-    date: "2020-04-22T08:00:00Z",
-    audio: {
-      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/unemployment-insurance-kai-explainer-mix.mp3",
-      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/unemployment-insurance-kai-intro-mix.mp3"
-    },
-  },
+  // {
+  //   title: 'Unemployment Insurance',
+  //   author: 'Kai Ryssdal',
+  //   alts: ['unemployment insurance', 'unemploy meant insure ants', 'one employment insurance', 'unemployment insure ants', 'employment insurance'],
+  //   keywords: ['un', 'employ', 'unemply', 'meant', 'unemployment', 'insure ants', 'insure', 'ensure', 'sure' ],
+  //   guid: 'unemployment_insurance',
+  //   date: "2020-04-22T08:00:00Z",
+  //   audio: {
+  //     url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/unemployment-insurance-kai-explainer-mix.mp3",
+  //     intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/unemployment-insurance-kai-intro-mix.mp3"
+  //   },
+  // },
   {
     title: 'Home Schooling',
     author: 'Molly Wood',
@@ -2831,18 +3036,18 @@ module.exports = [
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/holidayalbum-kai-intro+MIX.mp3"
     },
   },
-  {
-    title: 'Retail Robots',
-    author: 'Molly Wood',
-    alts: ['retail robot', 're tale robot'],
-    keywords: ['retail', 'robot', 're tale', 'row bot'],
-    guid: 'retail_robots',
-    date: "2019-12-09T07:00:00Z",
-    audio: {
-      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/retail-robots-molly-explainer-mix.mp3",
-      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/retail-robots-molly-intro-mix.mp3"
-    },
-  },  
+  // {
+  //   title: 'Retail Robots',
+  //   author: 'Molly Wood',
+  //   alts: ['retail robot', 're tale robot'],
+  //   keywords: ['retail', 'robot', 're tale', 'row bot'],
+  //   guid: 'retail_robots',
+  //   date: "2019-12-09T07:00:00Z",
+  //   audio: {
+  //     url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/retail-robots-molly-explainer-mix.mp3",
+  //     intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/retail-robots-molly-intro-mix.mp3"
+  //   },
+  // },  
   {
     title: 'Hallmark Movies',
     author: 'Kai Ryssdal',
@@ -2915,18 +3120,18 @@ module.exports = [
       intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/black-friday-molly-intro-mix.mp3"
     },
   },
-  {
-    title: 'Butterball Hotline',
-    author: 'Kai Ryssdal',
-    alts: ['butter ball hot line', 'butterball hot line', 'better ball'],
-    keywords: ['butter', 'ball', 'hotline', 'hot line'],
-    guid: 'butterball_19',
-    date: "2019-11-28T07:00:00Z",
-    audio: {
-      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/butterball-kai-explainer-mix.mp3",
-      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/butterball-kai-intro-mix.mp3"
-    },
-  },
+  // {
+  //   title: 'Butterball Hotline',
+  //   author: 'Kai Ryssdal',
+  //   alts: ['butter ball hot line', 'butterball hot line', 'better ball'],
+  //   keywords: ['butter', 'ball', 'hotline', 'hot line'],
+  //   guid: 'butterball_19',
+  //   date: "2019-11-28T07:00:00Z",
+  //   audio: {
+  //     url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/butterball-kai-explainer-mix.mp3",
+  //     intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/butterball-kai-intro-mix.mp3"
+  //   },
+  // },
   {
     title: 'Heirloom Plants',
     author: 'Molly Wood',
@@ -3180,18 +3385,18 @@ module.exports = [
       intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/Halloween-costumes-molly-intro-mix.mp3"
     },
   },
-  {
-    title: "Pumpkin Pie Filling",
-    author: 'Molly Wood',
-    alts: ['pump kin pie fill in', 'pumpkin pie', 'pumpkin puree' ],
-    keywords: ['pump', 'kin', 'pure', 'pie', 'pi', 'fill'],
-    guid: 'pumpkin_puree',
-    date: "2019-10-29T07:00:00Z",
-    audio: {
-      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/Pumpkin-pie-filling-molly-explainer-mix.mp3",
-      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/Pumpkin-pie-filling-molly-intro-mix.mp3"
-    },
-  },
+  // {
+  //   title: "Pumpkin Pie Filling",
+  //   author: 'Molly Wood',
+  //   alts: ['pump kin pie fill in', 'pumpkin pie', 'pumpkin puree' ],
+  //   keywords: ['pump', 'kin', 'pure', 'pie', 'pi', 'fill'],
+  //   guid: 'pumpkin_puree',
+  //   date: "2019-10-29T07:00:00Z",
+  //   audio: {
+  //     url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/Pumpkin-pie-filling-molly-explainer-mix.mp3",
+  //     intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/Pumpkin-pie-filling-molly-intro-mix.mp3"
+  //   },
+  // },
   // {
   //   title: 'Horror Movies',
   //   author: 'Kai Ryssdal',
@@ -3760,18 +3965,18 @@ module.exports = [
       intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/twinfluencers-molly-intro-mix.mp3"
     },
   }, 
-  {
-    title: "Drive Thrus",
-    author: 'Molly Wood',
-    alts: ['drive through', 'dry view'],
-    keywords: ['drive', 'through', 'thru', 'threw', 'dry'],
-    guid: 'drivethrus',
-    date: "2019-08-21T07:00:00Z",
-    audio: {
-      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/future-of-drive-throughs-molly-explainer-mix.mp3",
-      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/future-of-drive-throughs-molly-intro-mix.mp3"
-    },
-  }, 
+  // {
+  //   title: "Drive Thrus",
+  //   author: 'Molly Wood',
+  //   alts: ['drive through', 'dry view'],
+  //   keywords: ['drive', 'through', 'thru', 'threw', 'dry'],
+  //   guid: 'drivethrus',
+  //   date: "2019-08-21T07:00:00Z",
+  //   audio: {
+  //     url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/explainers/future-of-drive-throughs-molly-explainer-mix.mp3",
+  //     intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/intros/future-of-drive-throughs-molly-intro-mix.mp3"
+  //   },
+  // }, 
   {
     title: "Old Town Road",
     author: 'Molly Wood',
@@ -6047,18 +6252,18 @@ module.exports = [
       intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/autocashiers-kai-intro-mix.mp3"
     },
   },
-  {
-    title: 'Election Day',
-    author: 'Kai Ryssdal',
-    alts: ['elect shun day', 'elect ton day', 'election day'],
-    keywords: ['elect', 'day'],
-    guid: 'election_day',
-    date: "2018-11-06T07:00:00Z",
-    audio: {
-      url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/electionday-kai-explainer-mix.mp3",
-      intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/electionday-kai-intro-mix.mp3"
-    },
-  },
+  // {
+  //   title: 'Election Day',
+  //   author: 'Kai Ryssdal',
+  //   alts: ['elect shun day', 'elect ton day', 'election day'],
+  //   keywords: ['elect', 'day'],
+  //   guid: 'election_day',
+  //   date: "2018-11-06T07:00:00Z",
+  //   audio: {
+  //     url: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/explainers/electionday-kai-explainer-mix.mp3",
+  //     intro: "https://s3.amazonaws.com/alexa-marketplace-make-me-smart/intros/electionday-kai-intro-mix.mp3"
+  //   },
+  // },
   {
     title: 'Phone Repair',
     author: 'Molly Wood',
