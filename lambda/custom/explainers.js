@@ -1,4 +1,89 @@
 module.exports = [
+  {
+    title: 'Marshmallow Test',
+    author: 'Kai Ryssdal',
+    alts: ['marshmallow test', 'marsh mellow test', 'marshmallow tess'],
+    keywords: ['marsh', 'test', 'mellow', 'mars'],
+    guid: 'marshmallow test',
+    date: "2020-12-04T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/kai-marshmallow-test-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/kai-marshmallow-test-intro-mix.mp3"
+    },
+  },
+    {
+    title: 'Bubble Wrap',
+    author: 'Molly Wood',
+    alts: ['bub l rap', 'bubble rap', 'bubble wrap', 'bobble rap', 'bobble wrap'],
+    keywords: ['bub', 'wrap', 'rap', 'bubble', 'bobble'],
+    guid: 'bubble_wrap_re',
+    date: "2020-12-03T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/bubble-wrap-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/bubble+-+molly+-+intro+-+mix.mp3"
+    },
+  },
+  {
+    title: 'Worker Centers',
+    author: 'Molly Wood',
+    alts: ['work her cent hers', 'worker center', 'work or center'],
+    keywords: ['work', 'cent', 'sent', ],
+    guid: 'worker_center',
+    date: "2020-12-02T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/work+centers+-+molly+-+explainer+-+mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/work+centers+-+molly+-+intro+-+mix.mp3"
+    },
+  },
+  {
+    title: 'Giving Tuesday',
+    author: 'Molly Wood',
+    alts: ['give in today', 'giving tuesday', 'giving twos day'],
+    keywords: ['give', 'giving', 'tuesday', 'twos', 'toos', 'today'],
+    guid: 'giving_tues_20',
+    date: "2020-12-01T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/giving-tuesday-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/giving-tuesday-molly-intro-mix.mp3"
+    },
+  },
+
+  {
+    title: 'Hallmark Movies',
+    author: 'Kai Ryssdal',
+    alts: ['hallmark movies', 'hall mark moo v', 'hall mark move e'],
+    keywords: ['hallmark', 'movie'],
+    guid: 'hallmark_movies_2020',
+    date: "2020-11-30T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/hallmark+christmas+movies-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/hallmark+christmas+movies-kai-intro-mix.mp3"
+    },
+  },
+    {
+    title: 'Consumer Economy',
+    author: 'Kai Ryssdal',
+    alts: ['consume or econo me', 'consumer econ o me', 'consume or econ o me', 'consumer economy'],
+    keywords: ['con', 'consume', 'econ', 'con', 'economy' ],
+    guid: 'consumer_economy_re',
+    date: "2020-11-27T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/consumer+economy-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/consumer+economy-kai-intro-mix.mp3"
+    },
+  },
+    {
+    title: 'Turkey',
+    author: 'Kai Ryssdal',
+    alts: ['turn key', 'turkey', 'tour key'],
+    keywords: ['turk', 'turn', 'tour'],
+    guid: 'turkey20',
+    date: "2020-11-26T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/turkey-kai-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/turkey-kai-intro-mix.mp3"
+    },
+  },
     {
     title: "Pumpkin Pie Filling",
     author: 'Molly Wood',
@@ -2124,18 +2209,18 @@ module.exports = [
       intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/video-conferencing-molly-intro-mix.mp3"
     },
   },
-  {
-    title: 'Consumer Economy',
-    author: 'Kai Ryssdal',
-    alts: ['consume or econo me', 'consumer econ o me', 'consume or econ o me', 'consumer economy'],
-    keywords: ['con', 'consume', 'econ', 'con', 'economy' ],
-    guid: 'consumer_economy',
-    date: "2020-03-24T07:00:00Z",
-    audio: {
-      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/consumer+economy-kai-explainer-mix.mp3",
-      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/consumer+economy-kai-intro-mix.mp3"
-    },
-  },
+  // {
+  //   title: 'Consumer Economy',
+  //   author: 'Kai Ryssdal',
+  //   alts: ['consume or econo me', 'consumer econ o me', 'consume or econ o me', 'consumer economy'],
+  //   keywords: ['con', 'consume', 'econ', 'con', 'economy' ],
+  //   guid: 'consumer_economy',
+  //   date: "2020-03-24T07:00:00Z",
+  //   audio: {
+  //     url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/consumer+economy-kai-explainer-mix.mp3",
+  //     intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/consumer+economy-kai-intro-mix.mp3"
+  //   },
+  // },
   {
     title: 'Social Distancing',
     author: 'Molly Wood',
@@ -2364,18 +2449,18 @@ module.exports = [
       intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/social-security-kai-intro-mix.mp3"
     },
   },
-  {
-    title: 'Bubble Wrap',
-    author: 'Molly Wood',
-    alts: ['bub l rap', 'bubble rap', 'bubble wrap', 'bobble rap', 'bobble wrap'],
-    keywords: ['bub', 'wrap', 'rap', 'bubble', 'bobble'],
-    guid: 'bubble_wrap',
-    date: "2020-02-25T08:00:00Z",
-    audio: {
-      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/bubble-wrap-molly-explainer-mix.mp3",
-      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/bubble-wrap-molly-intro-mix.mp3"
-    },
-  },
+  // {
+  //   title: 'Bubble Wrap',
+  //   author: 'Molly Wood',
+  //   alts: ['bub l rap', 'bubble rap', 'bubble wrap', 'bobble rap', 'bobble wrap'],
+  //   keywords: ['bub', 'wrap', 'rap', 'bubble', 'bobble'],
+  //   guid: 'bubble_wrap',
+  //   date: "2020-02-25T08:00:00Z",
+  //   audio: {
+  //     url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/bubble-wrap-molly-explainer-mix.mp3",
+  //     intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/bubble-wrap-molly-intro-mix.mp3"
+  //   },
+  // },
   {
     title: "Manufacturing Jobs",
     author: 'Kai Ryssdal',
@@ -3048,18 +3133,18 @@ module.exports = [
   //     intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/retail-robots-molly-intro-mix.mp3"
   //   },
   // },  
-  {
-    title: 'Hallmark Movies',
-    author: 'Kai Ryssdal',
-    alts: ['hallmark movies', 'hall mark moo v', 'hall mark move e'],
-    keywords: ['hallmark', 'movie'],
-    guid: 'hallmark_movies_2019',
-    date: "2019-12-06T07:00:00Z",
-    audio: {
-      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/hallmark+christmas+movies-kai-explainer-mix.mp3",
-      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/hallmark+christmas+movies-kai-intro-mix.mp3"
-    },
-  },
+  // {
+  //   title: 'Hallmark Movies',
+  //   author: 'Kai Ryssdal',
+  //   alts: ['hallmark movies', 'hall mark moo v', 'hall mark move e'],
+  //   keywords: ['hallmark', 'movie'],
+  //   guid: 'hallmark_movies_2019',
+  //   date: "2019-12-06T07:00:00Z",
+  //   audio: {
+  //     url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/hallmark+christmas+movies-kai-explainer-mix.mp3",
+  //     intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/hallmark+christmas+movies-kai-intro-mix.mp3"
+  //   },
+  // },
   {
     title: 'Rating Customers',
     author: 'Molly Wood',
@@ -3084,18 +3169,18 @@ module.exports = [
       intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/letter+paper-kai-intro-mix.mp3"
     },
   },
-  {
-    title: 'Giving Tuesday',
-    author: 'Molly Wood',
-    alts: ['give in today', 'giving tuesday', 'giving twos day'],
-    keywords: ['give', 'giving', 'tuesday', 'twos', 'toos', 'today'],
-    guid: 'giving_tues',
-    date: "2019-12-03T07:00:00Z",
-    audio: {
-      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/giving-tuesday-molly-explainer-mix.mp3",
-      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/giving-tuesday-molly-intro-mix.mp3"
-    },
-  },
+  // {
+  //   title: 'Giving Tuesday',
+  //   author: 'Molly Wood',
+  //   alts: ['give in today', 'giving tuesday', 'giving twos day'],
+  //   keywords: ['give', 'giving', 'tuesday', 'twos', 'toos', 'today'],
+  //   guid: 'giving_tues',
+  //   date: "2019-12-03T07:00:00Z",
+  //   audio: {
+  //     url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/giving-tuesday-molly-explainer-mix.mp3",
+  //     intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/giving-tuesday-molly-intro-mix.mp3"
+  //   },
+  // },
   {
     title: 'Online Shopping Carts',
     author: 'Molly Wood',
@@ -3156,18 +3241,18 @@ module.exports = [
       intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/organic-kai-intro-mix.mp3"
     },
   },
-  {
-    title: 'Turkey',
-    author: 'Kai Ryssdal',
-    alts: ['turn key', 'turkey', 'tour key'],
-    keywords: ['turk', 'turn', 'tour'],
-    guid: 'turkey',
-    date: "2019-11-25T07:00:00Z",
-    audio: {
-      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/turkey-kai-explainer-mix.mp3",
-      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/turkey-kai-intro-mix.mp3"
-    },
-  },
+  // {
+  //   title: 'Turkey',
+  //   author: 'Kai Ryssdal',
+  //   alts: ['turn key', 'turkey', 'tour key'],
+  //   keywords: ['turk', 'turn', 'tour'],
+  //   guid: 'turkey',
+  //   date: "2019-11-25T07:00:00Z",
+  //   audio: {
+  //     url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/turkey-kai-explainer-mix.mp3",
+  //     intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/turkey-kai-intro-mix.mp3"
+  //   },
+  // },
   {
     title: 'Space Farming',
     author: 'Molly Wood',
