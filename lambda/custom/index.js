@@ -11,8 +11,7 @@ var changeInfoHandlers = require('./handlers/changeInfoHandlers.js')
 var unresolvedHandlers = require('./handlers/unresolvedHandlers.js')
 
 exports.handler = function(event, context) {
-  console.log("WTFBR");
-  console.log(event);
+
     if (event && event.resources && event.resources.indexOf("arn:aws:events:us-east-1:881439228984:rule/keep-warm") >-1) {
       console.log("KEEP WARM HIT")
       return;
