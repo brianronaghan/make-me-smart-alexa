@@ -22,9 +22,10 @@ exports.handler = function(event, context) {
       console.log("KEEP WARM HIT")
       return;
     }
-    console.log('YO  what the request',event.request);
-    console.log('CONTEXT',context);
-
+    if (!event.request) {
+      console.log('THERE IS NO REQUEST WHHHHY',event);
+      return;
+    }
     var alexa = Alexa.handler(event, context);
     alexa.appId = config.appId;
     alexa.dynamoDBTableName = config.dynamoDBTableName;
