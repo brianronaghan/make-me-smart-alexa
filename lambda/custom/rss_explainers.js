@@ -14,20 +14,20 @@ let parser = new Parser({
 let legacy_explainers = require('./explainers.js');
 let legacy_dictionary = {};
 
-let liveExplainers = {};
+let freshExplainers = {};
 module.exports = {
   getExplainers: getExplainers
 }
 
 async function getExplainers () {
-  if (liveExplainers && liveExplainers.explainers && (new Date () - new Date(liveExplainers.builtAt) < (1000 * 60 * 60)) ) {  // if it exists in cache
+  if (freshExplainers && freshExplainers.explainers && (new Date () - new Date(freshExplainers.builtAt) < (1000 * 60 * 60)) ) {  // if it exists in cache
     console.log('cache good')
-      return liveExplainers.explainers;
+      return freshExplainers.explainers;
 
   } else { // not in cache, build it
     console.log('needs a rebuild')
     await buildExplainers();
-    return liveExplainers.explainers;
+    return freshExplainers.explainers;
 
   }
 
@@ -93,6 +93,6 @@ async function buildExplainers () {
   console.log(`Found ${found} out of ${exps.length}.`)
   // console.log(unfound);
 
-  liveExplainers.explainers = exps;
-  liveExplainers.builtAt = new Date();
+  freshExplainers.explainers = exps;
+  freshExplainers.builtAt = new Date();
 };
