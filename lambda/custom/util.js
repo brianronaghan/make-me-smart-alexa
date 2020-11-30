@@ -682,7 +682,11 @@ function stripActions (searchTerm) {
 }
 
 function liveExplainers() {
-  return rss_explainers.getExplainers();
+  console.log('test rss babe')
+
+  rss_explainers.getExplainers();
+  return explainers.filter(explainer => new Date(explainer.date) < Date.now())
+
 }
 
 function displayMessage () {
