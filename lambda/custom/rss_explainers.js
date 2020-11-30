@@ -1,4 +1,6 @@
+const { LexModelBuildingService } = require('aws-sdk');
 let Parser = require('rss-parser');
+const { pindick } = require('./blacklist.js');
 
 let parser = new Parser({
     customFields: {
@@ -13,8 +15,11 @@ let legacy_explainers = require('./explainers.js');
 let legacy_dictionary = {};
 
 let liveExplainers = {};
+module.exports = {
+  getExplainers: getExplainers
+}
 
-(async () => {
+async function getExplainers () {
   if (liveExplainers && liveExplainers.explainers && (new Date () - new Date(liveExplainers.builtAt) < (1000 * 60 * 60)) ) {  // if it exists in cache
     console.log('cache good')
       return liveExplainers.explainers;
@@ -26,20 +31,17 @@ let liveExplainers = {};
 
   }
 
-})();
+};
 
 
 
 async function buildExplainers () {
-  console.log('HI');
   legacy_explainers.forEach((exp) => {
     legacy_dictionary[exp.title.toLowerCase()] = exp;
 
   });
  
   let feed = await parser.parseURL('https://www.marketplace.org/feed/alexa/mms-explainers');
-  // let feed = await parser.parseURL('http://paper-marketplace.test/feed/alexa/mms-explainers');
-  // console.log(feed.title);
   
   let found = 0, total = 0; 
   let unfound = []
@@ -86,11 +88,11 @@ async function buildExplainers () {
     explainer.title = item.title;
     explainer.author = item.author;
     explainer.date = item.isoDate;
-    // console.log(explainer);
     return explainer
   })
-  console.log(`Found ${found} out of ${total}.`)
+  console.log(`Found ${found} out of ${exps.length}.`)
   // console.log(unfound);
+
   liveExplainers.explainers = exps;
   liveExplainers.builtAt = new Date();
 };

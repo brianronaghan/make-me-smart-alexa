@@ -2,7 +2,7 @@ var Alexa = require("alexa-sdk");
 var config = require('./config')
 var constants = config.constants;
 var explainers = require('./explainers')
-var rss_explainers = require('./rss_explainers')
+var getExplainers = require('./rss_explainers')
 var blacklist = require('./blacklist');
 var EASTER_EGGS = require('./easter_eggs.js');
 
@@ -682,9 +682,7 @@ function stripActions (searchTerm) {
 }
 
 function liveExplainers() {
-  console.log('IN LIVE');
-  console.log(rss_explainers)
-  return rss_explainers
+  return rss_explainers.getExplainers();
 }
 
 function displayMessage () {
