@@ -37,7 +37,7 @@ async function buildExplainers () {
 
   });
  
-  let feed = await parser.parseURL('https://marketplace-org-preprod.go-vip.co/feed/alexa/mms-explainers');
+  let feed = await parser.parseURL('https://www.marketplace.org/feed/alexa/mms-explainers');
   // let feed = await parser.parseURL('http://paper-marketplace.test/feed/alexa/mms-explainers');
   // console.log(feed.title);
   
