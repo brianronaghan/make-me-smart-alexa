@@ -2,7 +2,7 @@ var Alexa = require("alexa-sdk");
 var config = require('./config')
 var constants = config.constants;
 var explainers = require('./explainers')
-var getExplainers = require('./rss_explainers')
+var rss_explainers = require('./rss_explainers')
 var blacklist = require('./blacklist');
 var EASTER_EGGS = require('./easter_eggs.js');
 
