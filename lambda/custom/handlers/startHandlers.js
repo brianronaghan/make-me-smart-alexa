@@ -8,113 +8,126 @@ var db = require('../db');
 
 var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
   'LaunchRequest': function (condition, message) {
-    let welcome = '';
-    let prompt = "You can say next, hear what's new, or submit an idea. What would you like to do?"
-    let latestExplainer = util.liveExplainers()[0];
-    let author = util.authorName(latestExplainer.author);
-    if (!this.attributes.deviceIds) { // NEW USER
-      welcome =`<audio src="${config.newUserAudio}" /><audio src="${latestExplainer.audio.url}"/>`;
-    } else if (this.attributes.LATEST_HEARD && this.attributes.LATEST_HEARD === latestExplainer.guid) { // has heard latest
-      let latestUnheardExplainer = util.latestUnheard.call(this);
-      if (latestUnheardExplainer) { // has heard latest, but I found an UNHEARD, so will play it
-        welcome = `Welcome back to Make Me Smart. You've heard our latest topic, but here's ${util.authorName(latestUnheardExplainer.author)} explaining ${latestUnheardExplainer.title}`;
 
-        if (latestUnheardExplainer.requestInformation && latestUnheardExplainer.requestInformation.user) {
-          welcome += ` as requested by ${latestUnheardExplainer.requestInformation.user}`;
-          if (latestUnheardExplainer.requestInformation.location) {
-            welcome += ` from ${latestUnheardExplainer.requestInformation.location}`
+    util.liveExplainers.call(this, function(err, resp) {
+      if(err) {
+        console.log("LIVE EXPLAINER ERR", err);
+      }
+      let welcome = '';
+      let prompt = "You can say next, hear what's new, or submit an idea. What would you like to do?"
+      let myExplainers = resp;
+      let latestExplainer = myExplainers[0];
+      let author = util.authorName(latestExplainer.author);
+      if (!this.attributes.deviceIds) { // NEW USER
+        welcome =`<audio src="${config.newUserAudio}" /><audio src="${latestExplainer.audio.url}"/>`;
+      } else if (this.attributes.LATEST_HEARD && this.attributes.LATEST_HEARD === latestExplainer.guid) { // has heard latest
+        let latestUnheardExplainer = util.latestUnheard.call(this);
+        if (latestUnheardExplainer) { // has heard latest, but I found an UNHEARD, so will play it
+          welcome = `Welcome back to Make Me Smart. You've heard our latest topic, but here's ${util.authorName(latestUnheardExplainer.author)} explaining ${latestUnheardExplainer.title}`;
+  
+          if (latestUnheardExplainer.requestInformation && latestUnheardExplainer.requestInformation.user) {
+            welcome += ` as requested by ${latestUnheardExplainer.requestInformation.user}`;
+            if (latestUnheardExplainer.requestInformation.location) {
+              welcome += ` from ${latestUnheardExplainer.requestInformation.location}`
+            }
           }
-        }
-        welcome += `. <audio src="${latestUnheardExplainer.audio.url}"/> `;
-        prompt = "You can say next, hear what's new, or submit an idea. What would you like to do?"
-        util.logExplainer.call(this, latestUnheardExplainer);
-        this.attributes.currentExplainerIndex = latestUnheardExplainer.index;
-        var payload = {};
-        payload.explainers = [{
-          source: "LAUNCH_ALREADY_HEARD",
-          guid: latestUnheardExplainer.guid,
-          timestamp: this.event.request.timestamp,
-        }]
-        return db.update.call(this, payload, function(err, resp) {
+          welcome += `. <audio src="${latestUnheardExplainer.audio.url}"/> `;
+          prompt = "You can say next, hear what's new, or submit an idea. What would you like to do?"
+          util.logExplainer.call(this, latestUnheardExplainer);
+          this.attributes.currentExplainerIndex = latestUnheardExplainer.index;
+          var payload = {};
+          payload.explainers = [{
+            source: "LAUNCH_ALREADY_HEARD",
+            guid: latestUnheardExplainer.guid,
+            timestamp: this.event.request.timestamp,
+          }]
+          return db.update.call(this, payload, function(err, resp) {
+            if (this.event.context.System.device.supportedInterfaces.Display) {
+              this.response.renderTemplate(
+                util.templateBodyTemplate3(
+                  latestUnheardExplainer.title,
+                  util.imageForExplainer(latestUnheardExplainer),
+                  '',
+                  `You can say replay or next, hear what's new or submit an idea for a new explainer.`,
+                  config.background.show
+                )
+              );
+            }
+            let fullSpeech = welcome + prompt;
+            this.response.speak(fullSpeech).listen(prompt);
+            delete this.attributes.STATE;
+            this.emit(':saveState');
+          });
+        } else { // has heard latest + has HEARD ALL
+          this.attributes.currentExplainerIndex = 0;
+          welcome = `Welcome back to Make Me Smart. Thanks for being a power user! `;
+          prompt =  `You can replay our latest on ${latestExplainer.title}, browse all or submit your idea. Which would you like to do?`;
           if (this.event.context.System.device.supportedInterfaces.Display) {
             this.response.renderTemplate(
               util.templateBodyTemplate3(
-                latestUnheardExplainer.title,
-                util.imageForExplainer(latestUnheardExplainer),
+                latestExplainer.title,
+                util.imageForExplainer(latestExplainer),
                 '',
-                `You can say replay or next, hear what's new or submit an idea for a new explainer.`,
+                prompt,
                 config.background.show
               )
             );
           }
           let fullSpeech = welcome + prompt;
           this.response.speak(fullSpeech).listen(prompt);
-          delete this.attributes.STATE;
-          this.emit(':saveState');
-        });
-      } else { // has heard latest + has HEARD ALL
-        this.attributes.currentExplainerIndex = 0;
-        welcome = `Welcome back to Make Me Smart. Thanks for being a power user! `;
-        prompt =  `You can replay our latest on ${latestExplainer.title}, browse all or submit your idea. Which would you like to do?`;
+          return this.emit(':saveState');
+        }
+      } else if (latestExplainer.audio.intro) { // hasn't heard latest, there's intro
+        welcome =`<audio src="${latestExplainer.audio.intro}" /><audio src="${latestExplainer.audio.url}"/>`;
+      } else { // hasn't heard latest, no intro
+        welcome = `Welcome back to Make Me Smart. Today we're learning about ${latestExplainer.title}`;
+        if (latestExplainer.requestInformation && latestExplainer.requestInformation.user) {
+          welcome += ` as requested by ${latestExplainer.requestInformation.user}`;
+          if (latestExplainer.requestInformation.location) {
+            welcome += ` from ${latestExplainer.requestInformation.location}`
+          }
+        }
+        welcome += `. Here's ${author} to make us smart. <audio src="${latestExplainer.audio.url}"/>`;
+      }
+      this.attributes.LATEST_HEARD = latestExplainer.guid;
+      this.attributes.currentExplainerIndex = 0;
+      var deviceId = util.getDeviceId.call(this);
+      util.nullCheck.call(this, deviceId);
+      util.logExplainer.call(this, latestExplainer);
+  
+      var payload = {};
+      payload.explainers = [{
+        source: "LAUNCH_REQUEST",
+        guid: latestExplainer.guid,
+        timestamp: this.event.request.timestamp,
+      }]
+      console.time('UPDATE-LAUNCH-REQUEST');
+      db.update.call(this, payload, function(err, resp) {
+        console.timeEnd('UPDATE-LAUNCH-REQUEST');
         if (this.event.context.System.device.supportedInterfaces.Display) {
           this.response.renderTemplate(
             util.templateBodyTemplate3(
               latestExplainer.title,
               util.imageForExplainer(latestExplainer),
               '',
-              prompt,
+              `You can say next or replay, hear what's new or submit an idea for a new explainer.`,
               config.background.show
             )
           );
         }
         let fullSpeech = welcome + prompt;
         this.response.speak(fullSpeech).listen(prompt);
-        return this.emit(':saveState');
-      }
-    } else if (latestExplainer.audio.intro) { // hasn't heard latest, there's intro
-      welcome =`<audio src="${latestExplainer.audio.intro}" /><audio src="${latestExplainer.audio.url}"/>`;
-    } else { // hasn't heard latest, no intro
-      welcome = `Welcome back to Make Me Smart. Today we're learning about ${latestExplainer.title}`;
-      if (latestExplainer.requestInformation && latestExplainer.requestInformation.user) {
-        welcome += ` as requested by ${latestExplainer.requestInformation.user}`;
-        if (latestExplainer.requestInformation.location) {
-          welcome += ` from ${latestExplainer.requestInformation.location}`
-        }
-      }
-      welcome += `. Here's ${author} to make us smart. <audio src="${latestExplainer.audio.url}"/>`;
-    }
-    this.attributes.LATEST_HEARD = latestExplainer.guid;
-    this.attributes.currentExplainerIndex = 0;
-    var deviceId = util.getDeviceId.call(this);
-    util.nullCheck.call(this, deviceId);
-    util.logExplainer.call(this, latestExplainer);
+        delete this.attributes.STATE;
+  
+        this.emit(':saveState');
+      });
 
-    var payload = {};
-    payload.explainers = [{
-      source: "LAUNCH_REQUEST",
-      guid: latestExplainer.guid,
-      timestamp: this.event.request.timestamp,
-    }]
-    console.time('UPDATE-LAUNCH-REQUEST');
-    db.update.call(this, payload, function(err, resp) {
-      console.timeEnd('UPDATE-LAUNCH-REQUEST');
-      if (this.event.context.System.device.supportedInterfaces.Display) {
-        this.response.renderTemplate(
-          util.templateBodyTemplate3(
-            latestExplainer.title,
-            util.imageForExplainer(latestExplainer),
-            '',
-            `You can say next or replay, hear what's new or submit an idea for a new explainer.`,
-            config.background.show
-          )
-        );
-      }
-      let fullSpeech = welcome + prompt;
-      this.response.speak(fullSpeech).listen(prompt);
-      delete this.attributes.STATE;
 
-      this.emit(':saveState');
+
     });
+   
+
+    // end of fucntion
   },
   'HomePage': function (condition, message) {
     console.log("START state HomePage", JSON.stringify(this.event.request.intent, null,2))
