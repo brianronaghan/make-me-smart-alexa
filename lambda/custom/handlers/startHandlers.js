@@ -1,7 +1,6 @@
 'use strict';
 
 var Alexa = require('alexa-sdk');
-var allExplainers = require('../explainers');
 var config = require('../config');
 var util = require('../util');
 var db = require('../db');
