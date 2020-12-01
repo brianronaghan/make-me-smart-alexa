@@ -81,17 +81,23 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
     }
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
-    var topics = util.liveExplainers().map(function(item) {
-      return item.title
+    util.asyncExplainers.call(this, function(err, resp) {
+      var topics = resp.map(function(item) {
+        return item.title
+      });
+      if (!this.attributes.HEARD_FIRST) {
+        this.attributes.HEARD_FIRST = 0;
+      }
+      intro += `learning about <prosody volume="x-loud">1) ${topics[this.attributes.HEARD_FIRST + 0]}</prosody>, <prosody volume="x-loud" >2) ${topics[this.attributes.HEARD_FIRST + 1]}</prosody>, and <prosody volume="x-loud" >3) ${topics[this.attributes.HEARD_FIRST + 2]}</prosody>. You can pick one, play them all, or browse all our explainers. Which would you like to hear?`;
+      /*
+      ':elicitSlotWithCard': function (slotName, speechOutput, repromptSpeech, cardTitle, cardContent, updatedIntent, imageObj) {
+      */
+      this.emit(':elicitSlotWithCard', 'query', intro, "Which would you like to hear?", 'Latest Explainers', util.clearProsody(intro), this.event.request.intent, util.cardImage(config.icon.full) );
+        // END OF FUNCTION
+
     });
-    if (!this.attributes.HEARD_FIRST) {
-      this.attributes.HEARD_FIRST = 0;
-    }
-    intro += `learning about <prosody volume="x-loud">1) ${topics[this.attributes.HEARD_FIRST + 0]}</prosody>, <prosody volume="x-loud" >2) ${topics[this.attributes.HEARD_FIRST + 1]}</prosody>, and <prosody volume="x-loud" >3) ${topics[this.attributes.HEARD_FIRST + 2]}</prosody>. You can pick one, play them all, or browse all our explainers. Which would you like to hear?`;
-    /*
-    ':elicitSlotWithCard': function (slotName, speechOutput, repromptSpeech, cardTitle, cardContent, updatedIntent, imageObj) {
-    */
-    this.emit(':elicitSlotWithCard', 'query', intro, "Which would you like to hear?", 'Latest Explainers', util.clearProsody(intro), this.event.request.intent, util.cardImage(config.icon.full) );
+
+
 
   },
 
