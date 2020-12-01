@@ -49,7 +49,7 @@ module.exports = [
   },
 
   {
-    title: 'Hallmark Movies',
+    title: 'Hallmark Holiday Movies',
     author: 'Kai Ryssdal',
     alts: ['hallmark movies', 'hall mark moo v', 'hall mark move e'],
     keywords: ['hallmark', 'movie'],
@@ -122,7 +122,7 @@ module.exports = [
   },  
   
   {
-    title: 'Butterball Hotline',
+    title: 'Butterball Turkey Talk Line',
     author: 'Kai Ryssdal',
     alts: ['butter ball hot line', 'butterball hot line', 'better ball'],
     keywords: ['butter', 'ball', 'hotline', 'hot line'],
@@ -194,7 +194,7 @@ module.exports = [
     },
   },
   {
-    title: 'Drive Thrus',
+    title: 'Drive-Throughs',
     author: 'Molly Wood',
     alts: ['drive thru', 'drive threw', 'drive through'],
     keywords: ['dry', 'drive', 'threw', 'through', 'thru'],
@@ -217,20 +217,20 @@ module.exports = [
       intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/smart-speakers-molly-intro-mix.mp3"
     }
   },
-  // {
-  //   title: 'Executive Branch Budget',
-  //   author: 'Kai Ryssdal',
-  //   alts: ['executive branch budget', 'executive branch budge it'],
-  //   keywords: ['budge', 'it', 'branch', 'exex'  ],
-  //   guid: 'executive_branch_budget',
-  //   date: "2020-11-10T08:00:00Z",
-  //   audio: {
-  //     url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/kai-executive+branch+budget-explainer-mix.mp3",
-  //     intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/kai-executive+branch+budget-intro-mix.mp3"
-  //   },
-  // },
   {
-    title: 'Post Election Government',
+    title: 'Executive Branch Budget',
+    author: 'Kai Ryssdal',
+    alts: ['executive branch budget', 'executive branch budge it'],
+    keywords: ['budge', 'it', 'branch', 'exex'  ],
+    guid: 'executive_branch_budget',
+    date: "2020-11-10T08:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/kai-executive+branch+budget-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/kai-executive+branch+budget-intro-mix.mp3"
+    },
+  },
+  {
+    title: 'Post-Election Government',
     author: 'Kai Ryssdal',
     alts: ['post elect shun govern meant', 'post election govern meant', 'post election government'],
     keywords: ['post', 'government', 'elect', 'govern', 'govern'  ],
@@ -353,7 +353,7 @@ module.exports = [
     },
   },
   {
-    title: '1918 Flu Pandemic',
+    title: '1918 Influenza Pandemic',
     author: 'Kai Ryssdal',
     alts: ['1918 flu pandemic', '19 18 flew pandemic'],
     keywords: ['flu', 'flew', 'pan', '19','18'],
@@ -390,7 +390,7 @@ module.exports = [
     }
   },
   {
-    title: 'Walter Reed',
+    title: 'Walter Reed National Military Medical Center',
     author: 'Kai Ryssdal',
     alts: ['walter reed', 'wall tour read', 'walt or read', 'walter read'],
     keywords: ['wall', 'walt', 'reed', 'read', 'reid'],
@@ -427,10 +427,10 @@ module.exports = [
     },
   },
   {
-    title: 'Horror Movies',
+    title: 'Scary Movies',
     author: 'Kai Ryssdal',
     alts: ['horror move e', 'horror movie'],
-    keywords: ['horror', 'move', 'movie'],
+    keywords: ['scary', 'move', 'movie'],
     guid: 'horror_movies',
     date: "2020-10-16T07:00:00Z",
     audio: {
@@ -439,7 +439,7 @@ module.exports = [
     },
   },
   {
-    title: 'Rocky Horror',
+    title: 'Rocky Horror Picture Show',
     author: 'Molly Wood',
     alts: ['rock e horror', 'rocky hard or', 'rockie hoar or'],
     keywords: ['rock', 'horror'],
@@ -499,7 +499,7 @@ module.exports = [
     },
   },
   {
-    title: 'Wildland Urban Interface',
+    title: 'Wildland-Urban Interface',
     author: 'Molly Wood',
     alts: ['wildland urban interface', 'wild land urban inter face', 'wild land urban phase'],
     keywords: ['wild', 'land', 'urban', 'inter', 'face', 'phase' ],
@@ -584,7 +584,7 @@ module.exports = [
   },
 
   {
-    title: 'Jeopardy',
+    title: 'Jeopardy!',
     author: 'Molly Wood',
     alts: ['jeopardy', 'jeb or d', 'jet or b'],
     keywords: ['or d', 'jep', 'jeopardy' ],
@@ -634,7 +634,7 @@ module.exports = [
     },
   },
   {
-    title: 'Historically Black Colleges and Universities',
+    title: 'HBCUs',
     author: 'Molly Wood',
     alts: ['historical black college is and universe it e', 'historically black colleges and universities'],
     keywords: ['black', 'college', 'universe', 'historic', 'university', 'collage' ],
@@ -646,7 +646,7 @@ module.exports = [
     },
   },
   {
-    title: 'Negro League Baseball',
+    title: 'Negro Leagues Baseball',
     author: 'Kai Ryssdal',
     alts: ['knee grow league base ball', 'negro lead baseball', 'negro league based ball' ],
     keywords: ['knee', 'negro', 'league', 'base', 'ball', 'lead'  ],
@@ -670,7 +670,7 @@ module.exports = [
     },
   },
   {
-    title: 'Decorative Gourd',
+    title: 'Decorative Gourds',
     author: 'Molly Wood',
     alts: ['dec or tiv cord', 'decorate if gourd', 'decorative gourd'],
     keywords: ['dec', 'gourd', 'gore', ],
@@ -695,7 +695,7 @@ module.exports = [
     },
   },
   {
-    title: 'Earthquake Swarm',
+    title: 'Earthquake Swarms',
     author: 'Molly Wood',
     alts: ['earth quake swarm', 'earthquakes warm', 'earthquake swarm'],
     keywords: ['earth', 'quake', 'warm', ],
@@ -743,7 +743,7 @@ module.exports = [
     },
   },
   {
-    title: 'Internet Doorbell',
+    title: 'Connected Doorbells',
     author: 'Molly Wood',
     alts: ['inter net door bell', 'inter net doorbell', 'inter neck door bell'],
     keywords: ['internet', 'door', 'bell'],
@@ -767,7 +767,7 @@ module.exports = [
     },
   },
   {
-    title: 'Personal Protective Equipment',
+    title: 'PPE',
     author: 'Kai Ryssdal',
     alts: ['personal protect if equip meant', 'personal protective equipment', 'personnel proect if equipment' ],
     keywords: ['person', 'protect', 'equip', ],
@@ -803,7 +803,7 @@ module.exports = [
     },
   },
   {
-    title: 'Infinity Inbox',
+    title: 'Inbox Infinity',
     author: 'Kai Ryssdal',
     alts: ['infinity in box', 'ininite e in box', 'infinite inbox'],
     keywords: ['infinity', 'in box', 'inbox', 'infinite e'],
@@ -815,7 +815,7 @@ module.exports = [
     },
   },
   {
-    title: "747",
+    title: "Boeing 747",
     author: 'Kai Ryssdal',
     alts: ['7 4 7', 'seven forty seven'],
     keywords: ['seven', 'forty', '40', '7'],
@@ -827,7 +827,7 @@ module.exports = [
     },
   }, 
   {
-    title: "Stimulus versus Relief",
+    title: "Stimulus vs. Relief",
     author: 'Kai Ryssdal',
     alts: ['stimulus verse relief', 'stim you less versus re leaf', 'stimulus v relief'],
     keywords: ['stim', 'relief', 'stimulus', 're leaf'],
@@ -875,7 +875,7 @@ module.exports = [
     },
   },
   {
-    title: "Initial Public Offering",
+    title: "IPOs",
     author: 'Kai Ryssdal',
     alts: ['initial pub', 'initial public offering', 'initial pub lick off her in'],
     keywords: ['initial', 'public', 'offer', 'lick', 'pub', 'off her'],
@@ -887,7 +887,7 @@ module.exports = [
     },
   }, 
   {
-    title: 'Political Conventions',
+    title: 'Political Party Conventions',
     author: 'Molly Wood',
     alts: ['political party convention', 'political convention',],
     keywords: ['political', 'convention', ],
@@ -911,7 +911,7 @@ module.exports = [
     },
   },
     {
-    title: 'Two Liter Bottle',
+    title: 'Two-Liter',
     author: 'Kai Ryssdal',
     alts: ['two leader bottle', 'two lead or bot l', 'two leader bot old', 'too liter bot l', 'too liter bottle'],
     keywords: ['liter', 'bottle'],
@@ -1019,7 +1019,7 @@ module.exports = [
     },
   },
   {
-    title: "Cashless Economy",
+    title: "Cashless",
     author: 'Molly Wood',
     alts: ['cash less economy', 'cash less econ o me' ],
     keywords: ['cash', 'less', 'economy' ],
@@ -1103,7 +1103,7 @@ module.exports = [
     },
   },
   {
-    title: 'Diversity',
+    title: 'Corporate Diversity',
     author: 'Kai Ryssdal',
     alts: ['diver city', 'diverse city', 'diverse it e'],
     keywords: ['diverse', 'diversity', 'diver', 'city'],
@@ -1139,7 +1139,7 @@ module.exports = [
     },
   },
   {
-    title: "Ethical Hacker",
+    title: "Ethical Hackers",
     author: 'Molly Wood',
     alts: ['ethical hack or', 'ethic all hack or', 'ethic ole hacker'],
     keywords: ['ethic', 'hack', 'f a call'],
@@ -1175,7 +1175,7 @@ module.exports = [
     },
   },
   {
-    title: 'D.C. Statehood',
+    title: 'Washington DC Statehood',
     author: 'Kai Ryssdal',
     alts: ['d c state hood', 'd see state hood', 'd.c. statehood'],
     keywords: ['dee', 'see', 'c', 'state hood', 'state hood'],
@@ -1223,7 +1223,7 @@ module.exports = [
     },
   },
   {
-    title: 'Health Insurance Portability and Accountabily Act',
+    title: 'HIPAA',
     author: 'Molly Wood',
     alts: ['health insurance portability and accountability', 'hip a', 'hip uh', 'h i p p a', 'h.i.p.p.a.', 'health'],
     keywords: ['health', 'insurance', 'sure','port', 'account'],
@@ -1236,7 +1236,7 @@ module.exports = [
   },
 
   {
-    title: 'Black Owned Banks',
+    title: 'Black-Owned Banks',
     author: 'Kai Ryssdal',
     alts: ['black own banks', 'black on banks', 'black owns banks', 'black owned banks'],
     keywords: ['black', 'own', 'bank', 'owned' ],
