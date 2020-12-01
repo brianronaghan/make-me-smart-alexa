@@ -68,30 +68,39 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
         return this.emitWithState('PickItem', slot, 'ITERATING');
       }
     }
-
-    var data = util.itemLister(
-      util.liveExplainers(),
-      `explainers`,
-      'title',
-      this.attributes.indices.explainer,
-      config.items_per_prompt.explainer
-    );
-    let listMessage = '';
-    if (incomingMessage) {
-      listMessage += incomingMessage;
-    }
-    if (this.event.session.new) {
-      if (!condition || condition !== 'unres_external') {
-        listMessage += "Welcome to Make Me Smart! Let's do a deep dive! ";
+    util.asyncExplainers.call(this, function(err, resp) {
+      if(err) {
+        console.log("ASYNC EXPLAINER ERR", err);
       }
-    }
-    if (condition && condition === 'repeating') {
-      listMessage += "Here they are again: "
-    } else if (this.attributes.indices.explainer === 0) {
-      listMessage += `I'll list all ${util.liveExplainers().length} explainers, ${config.items_per_prompt.explainer} at a time: `;
-    }
-    listMessage += data.itemsAudio;
-    this.emit(':elicitSlotWithCard', 'query', listMessage, "Pick one or say newer or older to move forward or backward through list.", 'List of Explainers', data.itemsCard, this.event.request.intent, util.cardImage(config.icon.full));
+      var data = util.itemLister(
+        resp,
+        `explainers`,
+        'title',
+        this.attributes.indices.explainer,
+        config.items_per_prompt.explainer
+      );
+      let listMessage = '';
+      if (incomingMessage) {
+        listMessage += incomingMessage;
+      }
+      if (this.event.session.new) {
+        if (!condition || condition !== 'unres_external') {
+          listMessage += "Welcome to Make Me Smart! Let's do a deep dive! ";
+        }
+      }
+      if (condition && condition === 'repeating') {
+        listMessage += "Here they are again: "
+      } else if (this.attributes.indices.explainer === 0) {
+        listMessage += `I'll list our explainers ${config.items_per_prompt.explainer} at a time:`;
+      }
+      listMessage += data.itemsAudio;
+      this.emit(':elicitSlotWithCard', 'query', listMessage, "Pick one or say newer or older to move forward or backward through list.", 'List of Explainers', data.itemsCard, this.event.request.intent, util.cardImage(config.icon.full));
+
+    });
+
+
+
+    // END OF FUNCTION
   },
 
   // NAVIGATION
@@ -109,7 +118,7 @@ module.exports = Alexa.CreateStateHandler(config.states.ITERATING_EXPLAINER, {
     } else {
       // NO ITERATING, which means, um, to actually do it?
       console.log("OlderExplainers, NO ITERATING FLAG, so I guess it's real? ")
-      if (this.attributes.indices.explainer + config.items_per_prompt.explainer >= util.liveExplainers().length) {
+      if (this.attributes.indices.explainer + config.items_per_prompt.explainer >= 100) {
         let message = "This is the end of the list. Again, the choices are, "
         return util.sendProgressive(
           this.event.context.System.apiEndpoint, // no need to add directives params
