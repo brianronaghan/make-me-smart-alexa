@@ -15,7 +15,15 @@ var changeInfoHandlers = require('./handlers/changeInfoHandlers.js')
 var unresolvedHandlers = require('./handlers/unresolvedHandlers.js')
 
 exports.handler = function(event, context) {
-    rss_explainers.getExplainers();   // hit cache for explainers
+    rss_explainers.getExplainers(function(err, exp){
+      if(err) {
+        console.log('err',err);
+
+      } else {
+        console.log("INITIAL EXP HITHIT");
+        console.log(exp[0]);
+      }
+    });   // hit cache for explainers
 
 
     if (event && event.resources && event.resources.indexOf("arn:aws:events:us-east-1:881439228984:rule/keep-warm") >-1) {
