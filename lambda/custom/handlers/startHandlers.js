@@ -8,7 +8,7 @@ var db = require('../db');
 var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
   'LaunchRequest': function (condition, message) {
 
-    util.liveExplainersAsync.call(this, function(err, resp) {
+    util.asyncExplainers.call(this, function(err, resp) {
       if(err) {
         console.log("LIVE EXPLAINER ERR", err);
       }

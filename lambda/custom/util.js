@@ -80,7 +80,7 @@ module.exports = {
   displayMessage: displayMessage,
   directionCheck: directionCheck,
   liveExplainers: liveExplainers,
-  liveExplainersAsync: liveExplainersAsync,
+  asyncExplainers: asyncExplainers,
 
   searchByName: searchByName,
   externalCheck: externalCheck,
@@ -681,7 +681,7 @@ function stripActions (searchTerm) {
   searchTerm = searchTerm.replace(/^\s+|\s+$/g, "");  // any leading or trailing whitespace
   return searchTerm;
 }
-function liveExplainersAsync (cb) {
+function asyncExplainers (cb) {
   console.log('HERE GOES rss babe')
   // still need to catch if the cache hasn't been built
   
