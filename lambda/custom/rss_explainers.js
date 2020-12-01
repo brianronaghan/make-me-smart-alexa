@@ -1,6 +1,4 @@
-const { LexModelBuildingService } = require('aws-sdk');
 let Parser = require('rss-parser');
-const { pindick } = require('./blacklist.js');
 
 let parser = new Parser({
     customFields: {
@@ -64,18 +62,47 @@ async function buildExplainers () {
     if (!legacy_record) {
       legacy_record = legacy_explainers.find((LE) => {
         
-        LE.title.toLowerCase().trim() == item.title.toLowerCase().trim()
+        LE.title.toLowerCase().trim() == item.title.toLowerCase().trim();
       })
+      if (!legacy_record) {
+        legacy_record = legacy_explainers.find((LE) => {
+          var matched = false;
+          LE.alts.forEach((alt) => {
+            // console.log(alt.indexOf(item.title.toLowerCase().trim()));
+            if (alt.indexOf(item.title.toLowerCase().trim()) > -1) {
+              // console.log(item.title, alt);
+              matched = true;
+            }
+          })
+          return matched;
+        })
+      }
+
+      if (!legacy_record) {
+        legacy_record = legacy_explainers.find((LE) => {
+          var matched = false;
+          LE.keywords.forEach((kw)=>{
+            if (kw && kw != 'movie' && kw != 'flu' && kw != 'ball' && kw != 'state' && kw != 'base' && kw.length > 3 && item.title.toLowerCase().trim().indexOf(kw) > -1) {
+              console.log(`${kw} found in ${item.title} so it must be ${LE.title}`);
+              matched = true;
+            }
+          })
+          return matched
+        })
+
+      }
+
     }
     total++;
     if (legacy_record) {
       found++;
+      // console.log(item.guid, legacy_record.guid)
       explainer.guid = legacy_record.guid;
       explainer.keywords = legacy_record.keywords;
       explainer.alts = legacy_record.alts;
     } else {
       unfound.push(item.title);
-
+      console.log("NOT FOUND ", item.title);
       explainer.guid = item.guid;
       explainer.alts = [];
       explainer.alts.push(item.title.toLowerCase())
