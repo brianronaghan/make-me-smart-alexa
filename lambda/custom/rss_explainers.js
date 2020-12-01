@@ -19,15 +19,15 @@ module.exports = {
   getExplainers: getExplainers
 }
 
-async function getExplainers () {
+async function getExplainers (cb) {
   if (freshExplainers && freshExplainers.explainers && (new Date () - new Date(freshExplainers.builtAt) < (1000 * 60 * 60)) ) {  // if it exists in cache
     console.log('cache good')
-      return freshExplainers.explainers;
+    return cb(null, freshExplainers.explainers);
 
   } else { // not in cache, build it
     console.log('needs a rebuild')
     await buildExplainers();
-    return freshExplainers.explainers;
+    return cb(null, freshExplainers.explainers);
 
   }
 
@@ -36,6 +36,7 @@ async function getExplainers () {
 
 
 async function buildExplainers () {
+  //WTF DO I DO ABOUT ERROR
   legacy_explainers.forEach((exp) => {
     legacy_dictionary[exp.title.toLowerCase()] = exp;
 
