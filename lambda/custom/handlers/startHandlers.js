@@ -10,7 +10,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
 
     util.asyncExplainers.call(this, function(err, resp) {
       if(err) {
-        console.log("LIVE EXPLAINER ERR", err);
+        console.log("ASYNC EXPLAINER ERR", err);
       }
       let welcome = '';
       let prompt = "You can say next, hear what's new, or submit an idea. What would you like to do?"
