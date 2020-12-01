@@ -684,7 +684,8 @@ function stripActions (searchTerm) {
 function liveExplainersAsync (cb) {
   console.log('HERE GOES rss babe')
   // still need to catch if the cache hasn't been built
-  return rss_explainers.getExplainers(cb);
+  
+  rss_explainers.getExplainers.call(this, cb);
   //return explainers.filter(explainer => new Date(explainer.date) < Date.now())
 
 }

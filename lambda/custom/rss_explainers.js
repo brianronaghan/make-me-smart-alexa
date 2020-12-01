@@ -22,12 +22,12 @@ module.exports = {
 async function getExplainers (cb) {
   if (freshExplainers && freshExplainers.explainers && (new Date () - new Date(freshExplainers.builtAt) < (1000 * 60 * 60)) ) {  // if it exists in cache
     console.log('cache good')
-    return cb(null, freshExplainers.explainers);
+    return cb.call(this, null, freshExplainers.explainers);
 
   } else { // not in cache, build it
     console.log('needs a rebuild')
     await buildExplainers();
-    return cb(null, freshExplainers.explainers);
+    return cb.call(this, null, freshExplainers.explainers);
 
   }
 
