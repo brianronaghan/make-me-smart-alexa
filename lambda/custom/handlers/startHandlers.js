@@ -9,7 +9,7 @@ var db = require('../db');
 var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
   'LaunchRequest': function (condition, message) {
 
-    util.liveExplainers.call(this, function(err, resp) {
+    util.liveExplainersAsync.call(this, function(err, resp) {
       if(err) {
         console.log("LIVE EXPLAINER ERR", err);
       }
@@ -21,7 +21,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
       if (!this.attributes.deviceIds) { // NEW USER
         welcome =`<audio src="${config.newUserAudio}" /><audio src="${latestExplainer.audio.url}"/>`;
       } else if (this.attributes.LATEST_HEARD && this.attributes.LATEST_HEARD === latestExplainer.guid) { // has heard latest
-        let latestUnheardExplainer = util.latestUnheard.call(this);
+        let latestUnheardExplainer = util.latestUnheard.call(this, myExplainers);
         if (latestUnheardExplainer) { // has heard latest, but I found an UNHEARD, so will play it
           welcome = `Welcome back to Make Me Smart. You've heard our latest topic, but here's ${util.authorName(latestUnheardExplainer.author)} explaining ${latestUnheardExplainer.title}`;
   
