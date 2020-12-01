@@ -60,13 +60,12 @@ module.exports = {
       return config.icon.full;
     }
   },
-  latestUnheard: function () {
-    let explainers = liveExplainers();
+  latestUnheard: function (myExplainers) {
     this.attributes.heard = this.attributes.heard || {};
-    for (var x = 0; x < explainers.length; x++) {
-      if (!this.attributes.heard[explainers[x].guid]) {
-        explainers[x].index = x;
-        return explainers[x];
+    for (var x = 0; x < myExplainers.length; x++) {
+      if (!this.attributes.heard[myExplainers[x].guid]) {
+        myExplainers[x].index = x;
+        return myExplainers[x];
       }
     }
 
@@ -81,6 +80,8 @@ module.exports = {
   displayMessage: displayMessage,
   directionCheck: directionCheck,
   liveExplainers: liveExplainers,
+  liveExplainersAsync: liveExplainersAsync,
+
   searchByName: searchByName,
   externalCheck: externalCheck,
   templateListTemplate1: function (title, token, itemLabel, itemTitleKey, items) {
@@ -680,11 +681,17 @@ function stripActions (searchTerm) {
   searchTerm = searchTerm.replace(/^\s+|\s+$/g, "");  // any leading or trailing whitespace
   return searchTerm;
 }
-
-function liveExplainers() {
+function liveExplainersAsync (cb) {
   console.log('HERE GOES rss babe')
   // still need to catch if the cache hasn't been built
-  return rss_explainers.getExplainers();
+  return rss_explainers.getExplainers(cb);
+  //return explainers.filter(explainer => new Date(explainer.date) < Date.now())
+
+}
+function liveExplainers() {
+  console.log('OLD FASHIONED FUCKER')
+  // still need to catch if the cache hasn't been built
+  // return rss_explainers.getExplainers(cb);
   return explainers.filter(explainer => new Date(explainer.date) < Date.now())
 
 }
