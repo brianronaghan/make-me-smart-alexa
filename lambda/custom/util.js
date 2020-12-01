@@ -682,9 +682,9 @@ function stripActions (searchTerm) {
 }
 
 function liveExplainers() {
-  console.log('test rss babe')
-
-  rss_explainers.getExplainers();
+  console.log('HERE GOES rss babe')
+  // still need to catch if the cache hasn't been built
+  return rss_explainers.getExplainers();
   return explainers.filter(explainer => new Date(explainer.date) < Date.now())
 
 }
