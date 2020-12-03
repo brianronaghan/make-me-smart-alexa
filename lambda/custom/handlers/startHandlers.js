@@ -409,13 +409,21 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
-    let latestUnheardExplainer = util.latestUnheard.call(this);
-    if (latestUnheardExplainer) {
-      //NOTE temp sanity check
-      this.emitWithState('PickItem', {index: {value: latestUnheardExplainer.index + 1}}, 'LAUNCH_NEXT_TO_UNHEARD');
-    } else {
-      this.emitWithState('PickItem', {index: {value: 2}}, 'LAUNCH_NEXT_HEARDALL');
-    }
+    util.asyncExplainers.call(this, function(err, resp) {
+      if(err) {
+        console.log("ASYNC EXPLAINER ERR", err);
+      }
+      let myExplainers = resp;
+
+      let latestUnheardExplainer = util.latestUnheard.call(this, myExplainers);
+      if (latestUnheardExplainer) {
+        //NOTE temp sanity check
+        this.emitWithState('PickItem', {index: {value: latestUnheardExplainer.index + 1}}, 'LAUNCH_NEXT_TO_UNHEARD');
+      } else {
+        this.emitWithState('PickItem', {index: {value: 2}}, 'LAUNCH_NEXT_HEARDALL');
+      }
+    });
+
   },
 
   'AMAZON.HelpIntent': function () {
