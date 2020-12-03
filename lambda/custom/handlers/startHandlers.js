@@ -13,7 +13,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
         console.log("ASYNC EXPLAINER ERR", err);
       }
       let welcome = '';
-      let prompt = "You can say next, hear what's new, or submit an idea. What would you like to do?"
+      let prompt = "You can say next, hear what's new, or browse all. What would you like to do?"
       let myExplainers = resp;
       let latestExplainer = myExplainers[0];
       let author = util.authorName(latestExplainer.author);
@@ -31,7 +31,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
             }
           }
           welcome += `. <audio src="${latestUnheardExplainer.audio.url}"/> `;
-          prompt = "You can say next, hear what's new, or submit an idea. What would you like to do?"
+          prompt = "You can say next, hear what's new, or browse all. What would you like to do?"
           util.logExplainer.call(this, latestUnheardExplainer);
           this.attributes.currentExplainerIndex = latestUnheardExplainer.index;
           var payload = {};
@@ -47,7 +47,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
                   latestUnheardExplainer.title,
                   util.imageForExplainer(latestUnheardExplainer),
                   '',
-                  `You can say replay or next, hear what's new or submit an idea for a new explainer.`,
+                  `You can say replay or next, hear what's new or browse all.`,
                   config.background.show
                 )
               );
@@ -60,7 +60,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
         } else { // has heard latest + has HEARD ALL
           this.attributes.currentExplainerIndex = 0;
           welcome = `Welcome back to Make Me Smart. Thanks for being a power user! `;
-          prompt =  `You can replay our latest on ${latestExplainer.title}, browse all or submit your idea. Which would you like to do?`;
+          prompt =  `You can replay our latest on ${latestExplainer.title}, browse all or browse. Which would you like to do?`;
           if (this.event.context.System.device.supportedInterfaces.Display) {
             this.response.renderTemplate(
               util.templateBodyTemplate3(
@@ -109,7 +109,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
               latestExplainer.title,
               util.imageForExplainer(latestExplainer),
               '',
-              `You can say next or replay, hear what's new or submit an idea for a new explainer.`,
+              `You can say next or replay, hear what's new or browse all our explainers.`,
               config.background.show
             )
           );
@@ -429,7 +429,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
   'AMAZON.HelpIntent': function () {
     console.log('Help in START');
     // Handler for built-in HelpIntent
-    var message = "You can say next or replay, hear what's new, or submit your idea for an explainer. What would you like to do?";
+    var message = "You can say next or replay, hear what's new, or browse all explainers. What would you like to do?";
     this.response.speak(message).listen(message);
     if (this.event.context.System.device.supportedInterfaces.Display) {
       this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message, null, config.background.show));
@@ -446,7 +446,7 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
    'Unhandled' : function () {
      console.log("START UNHANDLED ",JSON.stringify(this.event.request,null, 2));
      var message = "Sorry I couldn't quite understand that. ";
-     var prompt = "You can replay the explainer, hear what's new, or submit your explainer idea. What would you like to do?";
+     var prompt = "You can replay the explainer, hear what's new, or browse all our explainers. What would you like to do?";
      this.response.speak(message + prompt).listen(prompt);
      if (this.event.context.System.device.supportedInterfaces.Display) {
        this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message + prompt, null, config.background.show));
