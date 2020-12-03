@@ -78,28 +78,6 @@ module.exports = Alexa.CreateStateHandler(config.states.REQUEST, {
         return this.emit(':elicitSlotWithCard', 'query', message, "What topic would you like to request an explainer on?", 'Request a (clean) Explainer', cardMessage, this.event.request.intent, util.cardImage(config.icon.full));
     }
 
-    if (this.attributes.SUGGESTION && !this.attributes.NAME_REQUESTED && !this.attributes.LOCATION_REQUESTED) {
-      var chosenExplainer = util.itemPicker({query: {value: this.attributes.SUGGESTION}}, util.liveExplainers(), 'title', 'topic', false);
-      if (chosenExplainer) {
-        message += `Actually, we've got you covered there. `
-        var newWord = this.attributes.SUGGESTION;
-        delete this.attributes.SUGGESTION;
-        delete this.attributes.requestingExplainer;
-        delete intentObj.confirmationStatus;
-        this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
-        return util.sendProgressive(
-          this.event.context.System.apiEndpoint, // no need to add directives params
-          this.event.request.requestId,
-          this.event.context.System.apiAccessToken,
-          message,
-          function (err) {
-            boundThis.emitWithState('PickItem', {query: {value: newWord}})
-          }
-        );
-      }
-    }
-
-
     if (!this.attributes.SUGGESTION) { // came here without a query
       if (this.event.session.new) {
         message += "Welcome back to Make Me Smart! I'm glad you've got an idea to submit! ";
