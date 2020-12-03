@@ -19,36 +19,37 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
   },
 
   'PickItem': function (slot, source) {
-    console.log(`PLAYING_EXPLAINER, PickItem slot `, JSON.stringify(this.event.request.intent, null,2))
+    // console.log(`P_E, PickItem OUTER THIS `, JSON.stringify(this, null,2))
 
+    // console.log(`P_E, PickItem slot `, JSON.stringify(slot, null,2))
     // set spot in indices
+
+    var wtfSLOT = slot;
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
-
     util.asyncExplainers.call(this, function(err, resp) {
       if(err) {
         console.log("ASYNC EXPLAINER ERR", err);
       }
       var allExplainers = resp;
-
-      var slot = slot || this.event.request.intent.slots;
+      console.log("AFTR SLOT", wtfSLOT);
       var boundThis = this;
       let addOneBool = false;
       if (source === 'HOME_AFTER_LAUNCH') {
         addOneBool = true
       }
-      var chosenExplainer = util.itemPicker(slot, allExplainers, 'title', 'topic', addOneBool);
+      var chosenExplainer = util.itemPicker(wtfSLOT, allExplainers, 'title', 'topic', addOneBool);
       if (chosenExplainer === -1) {
         var theNumber;
-        if (slot.query && slot.query.value) {
-          theNumber = util.stripActions(slot.query.value);
-          delete slot.query.value;
-        } else if (slot.index && slot.index.value) {
-          theNumber = util.stripActions(slot.index.value);
-          delete slot.index.value;
-        } else if (slot.ordinal && slot.ordinal.value) {
-          theNumber = util.stripActions(slot.ordinal.value);
-          delete slot.ordinal.value;
+        if (wtfSLOT.query && wtfSLOT.query.value) {
+          theNumber = util.stripActions(wtfSLOT.query.value);
+          delete wtfSLOT.query.value;
+        } else if (wtfSLOT.index && wtfSLOT.index.value) {
+          theNumber = util.stripActions(wtfSLOT.index.value);
+          delete wtfSLOT.index.value;
+        } else if (wtfSLOT.ordinal && wtfSLOT.ordinal.value) {
+          theNumber = util.stripActions(wtfSLOT.ordinal.value);
+          delete wtfSLOT.ordinal.value;
         }
         var message = `${theNumber} is not a valid choice. Please choose between 1 and 99. Let's try again. `
         var boundThis = this;
@@ -64,9 +65,9 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
         );
 
       } else if (!chosenExplainer) {
-        if (slot.query && slot.query.value) {
-          let intentCheck = util.intentCheck(slot.query.value);
-          let externalCheck = util.externalCheck(slot.query.value);
+        if (wtfSLOT.query && wtfSLOT.query.value) {
+          let intentCheck = util.intentCheck(wtfSLOT.query.value);
+          let externalCheck = util.externalCheck(wtfSLOT.query.value);
           if (externalCheck) {
             this.attributes.EXTERNALS = this.attributes.EXTERNALS || 0;
             this.attributes.EXTERNALS++;
@@ -76,16 +77,16 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
               return this.emitWithState('AMAZON.CancelIntent');
             }
           } else if (intentCheck) {
-            console.log("Playing Explainer PickItem intentCheck -- slot.query.value ", slot.query.value)
-            delete slot.query.value;
+            console.log("Playing Explainer PickItem intentCheck -- wtfSLOT.query.value ", wtfSLOT.query.value)
+            delete wtfSLOT.query.value;
             return this.emitWithState(intentCheck);
           }
-          console.log("PLAYING_EXPLAINER, PickItem - slot.query.value but could not find -- SENDING TO UNRESOLVED");
+          console.log("PLAYING_EXPLAINER, PickItem - wtfSLOT.query.value but could not find -- SENDING TO UNRESOLVED");
           this.handler.state = this.attributes.STATE = config.states.UNRESOLVED;
           return this.emitWithState('PickItem');
-        } else if (slot.index && slot.index.value) {
-          console.log("NO EXPLAINER FOUND, but there is INDEX ", JSON.stringify(slot, null,2))
-          var message = `${slot.index.value} is not a valid choice. Please choose between 1 and 99. Let's try again. `
+        } else if (wtfSLOT.index && wtfSLOT.index.value) {
+          console.log("NO EXPLAINER FOUND, but there is INDEX ", JSON.stringify(wtfSLOT, null,2))
+          var message = `${wtfSLOT.index.value} is not a valid choice. Please choose between 1 and 99. Let's try again. `
           var boundThis = this;
           return util.sendProgressive(
             boundThis.event.context.System.apiEndpoint, // no need to add directives params
@@ -97,10 +98,10 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
               boundThis.emitWithState('ListExplainers');
             }
           );
-        } else if (slot.ordinal && slot.ordinal.value) {
-          console.log("NO EXPLAINER , but there is ORDINAL ", JSON.stringify(slot, null,2))
-          let theOrdinal = slot.ordinal.value;
-          delete slot.ordinal.value;
+        } else if (wtfSLOT.ordinal && wtfSLOT.ordinal.value) {
+          console.log("NO EXPLAINER , but there is ORDINAL ", JSON.stringify(wtfSLOT, null,2))
+          let theOrdinal = wtfSLOT.ordinal.value;
+          delete wtfSLOT.ordinal.value;
           var message = `We don't have a ${theOrdinal}. Please choose between 1 and 99. Let's try again. `
           return util.sendProgressive(
             boundThis.event.context.System.apiEndpoint, // no need to add directives params
@@ -112,13 +113,13 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
               boundThis.emitWithState('ListExplainers', 'invalid_number');
             }
           );
-        } else if (slot.topic && slot.topic.value) {
+        } else if (wtfSLOT.topic && wtfSLOT.topic.value) {
           // convert to query?
-          console.log("PLAYING_EXPLAINER, PickItem - slot.topic.value but could not find -- SENDING TO UNRESOLVED");
+          console.log("PLAYING_EXPLAINER, PickItem - wtfSLOT.topic.value but could not find -- SENDING TO UNRESOLVED");
           this.handler.state = this.attributes.STATE = config.states.UNRESOLVED;
-          return this.emitWithState('PickItem', slot);
+          return this.emitWithState('PickItem', wtfSLOT);
         } else {
-          console.log("NO EXPLAINER, and no slot info I can use ", JSON.stringify(slot, null,2));
+          console.log("NO EXPLAINER, and no wtfSLOT info I can use ", JSON.stringify(wtfSLOT, null,2));
           var message = `Sorry, I couldn't quite understand that.`;
           return util.sendProgressive(
             boundThis.event.context.System.apiEndpoint, // no need to add directives params
