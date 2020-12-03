@@ -185,7 +185,7 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
   },
   'AMAZON.HelpIntent' : function () {
     console.log('UNRESOLVED HelpIntent')
-    var message = "You can hear what's new, browse explainers, or submit an idea for an explainer. Which would you like to do?";
+    var message = "You can hear what's new, browse explainers. Which would you like to do?";
     this.response.speak(message).listen(message);
     delete this.attributes.UNRESOLVED;
     if (this.event.context.System.device.supportedInterfaces.Display) {
@@ -203,7 +203,7 @@ module.exports = Alexa.CreateStateHandler(config.states.UNRESOLVED, {
 
      // Just go to start
      var message = "Sorry I couldn't quite understand that. ";
-     var prompt = "You can hear what's new, browse explainers, or submit an idea for an explainer. Which would you like to do?";
+     var prompt = "You can hear what's new, or browse explainers. Which would you like to do?";
      this.response.speak(message + prompt).listen(prompt);
      if (this.event.context.System.device.supportedInterfaces.Display) {
        this.response.renderTemplate(util.templateBodyTemplate1('Make Me Smart Help', message + prompt, null, config.background.show));
