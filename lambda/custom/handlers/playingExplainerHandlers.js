@@ -175,13 +175,13 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
           intro += `. <break time = "200ms"/> <audio src="${chosenExplainer.audio.url}" />`;
           var prompt;
           if (chosenExplainer.EE) {
-            prompt = `Thanks for listening! By the way, do us a favor and rate Make Me Smart on the Alexa Skill Store or Mobile App. You can hear what's new, browse all our explainers or submit an idea. What would you like to do?`;
+            prompt = `Thanks for listening! By the way, do us a favor and rate Make Me Smart on the Alexa Skill Store or Mobile App. You can hear what's new or browse all our explainers. What would you like to do?`;
           } else if (this.event.session.new) { // came directly here
             prompt = `You can replay the explainer, play the latest, or browse all our explainers. What would you like to do?`;
           } else if (allExplainers[chosenExplainer.index+1]) { // THERE IS a next explainer
             prompt = `You can replay the explainer, say 'next' to hear another, or browse all our explainers. What would you like to do?`;
           } else { // end of the line
-            prompt = "And that's all we have right now. You can replay the explainer, browse all our explainers, or submit an idea for our next one. What would you like to do?"
+            prompt = "And that's all we have right now. You can replay the explainer or browse all our explainers. What would you like to do?"
           }
           let displayMessage;
           if (chosenExplainer.EE) {
@@ -296,14 +296,14 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
   'AMAZON.NextIntent' : function () {
     if (this.attributes.EASTER_EGG_TITLE) {
       let message = "If you could use next to hear more easter eggs, they wouldn't be easter eggs. Instead, ";
-      let prompt = "You can hear what's new, browse all our explainers or submit an idea. What would you like to do?"
+      let prompt = "You can hear what's new, or browse all our explainers. What would you like to do?"
       if (this.event.context.System.device.supportedInterfaces.Display) {
         this.response.renderTemplate(
           util.templateBodyTemplate3(
             "Make Me Smart",
             config.icon.full,
             "You can't use next when hearing an easter egg.",
-            "Instead: you can hear what's new, browse all our explainers or submit an idea.",
+            "Instead: you can hear what's new, or browse all our explainers.",
             config.background.show
           )
         );
@@ -345,14 +345,14 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
   'AMAZON.PreviousIntent' : function () {
     if (this.attributes.EASTER_EGG_TITLE) {
       let message = "If you could use previous to hear more easter eggs, they wouldn't be easter eggs. Instead, ";
-      let prompt = "You can hear what's new, browse all our explainers or submit an idea. What would you like to do?"
+      let prompt = "You can hear what's new or browse all our explainers. What would you like to do?"
       if (this.event.context.System.device.supportedInterfaces.Display) {
         this.response.renderTemplate(
           util.templateBodyTemplate3(
             "Make Me Smart",
             config.icon.full,
             "You can't use previous when hearing an easter egg.",
-            "Instead, you can hear what's new, browse all our explainers or submit an idea.",
+            "Instead, you can hear what's new or browse all our explainers.",
             config.background.show
           )
         );
