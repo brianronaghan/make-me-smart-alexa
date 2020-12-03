@@ -14,16 +14,13 @@ var config = {
     podcastPlug: "You can also hear more from Kai and Molly on their podcast Make Me Smart!",
     stopMessage: "Goodbye! Say 'Make Me Smart' to come back!",
     cancelMessage: 'Cancelled! Come back soon!',
-    defaultDescription: "Something else you want to get smart about? Try 'Alexa, submit an idea' and Kai and Molly might use your idea!",
     externalMessage: "I'm sorry, the Make Me Smart skill can't handle that request. Next time, you can try saying: 'exit', first. Goodbye.",
 
     messages: [
-      "Something else you want to get smart about? Try 'Alexa, submit an idea' and Kai and Molly might use it!",
       "Completionist? Say 'Alexa, browse explainers' to list every single explainer we've done!",
       "To leave, say, 'Alexa, exit.'",
       "Help other people find our skill by rating Make Me Smart on the Alexa Skill Store or Mobile App.",
       "If you want to hear more from Kai and Molly, download the Make Me Smart podcast wherever you get that sort of thing.",
-      "We're always looking for new ideas for explainers. Try 'Alexa, submit an idea' to give us one!",
       "Before using other skills, say, 'Alexa, exit.'",
       "Want to learn more about a topic? Goto: www.marketplace.org and get even smarter!",
       "Hey, guess what? We also have a show on the actual radio. Find Marketplace on your local public radio station.",
