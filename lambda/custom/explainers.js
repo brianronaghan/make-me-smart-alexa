@@ -1,5 +1,17 @@
 module.exports = [
   {
+    title: 'FDA Drug Approval',
+    author: 'Molly Wood',
+    alts: ['fda approval', 'drug approve l'],
+    keywords: ['fda', 'f.d.a', 'drug', 'approve'],
+    guid: 'fda_drug_approval',
+    date: "2020-12-07T07:00:00Z",
+    audio: {
+      url: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/FDA-emergency-use-authorization-molly-explainer-mix.mp3",
+      intro: "https://alexa-marketplace-make-me-smart.s3.amazonaws.com/mms-explainers-new/FDA-emergency-use-authorization-molly-intro-mix.mp3"
+    },
+  },
+  {
     title: 'Marshmallow Test',
     author: 'Kai Ryssdal',
     alts: ['marshmallow test', 'marsh mellow test', 'marshmallow tess'],
