@@ -164,6 +164,35 @@ module.exports = Alexa.CreateStateHandler(config.states.HOME_PAGE, {
       return this.emitWithState('RequestExplainer', {query: {value:null},userLocation: {value: null}, userName: {value: null}});
     }
   },
+  'ChangeMyInfo': function () {
+    console.log('HOME_PAGE ChangeMyInfo - POSSISBLY from change info artifact');
+    var slot = slot || this.event.request.intent.slots;
+    if (slot && slot.query && slot.query.value) { // since we can't change the goddamn thing if it uses elicit, if it has a query, probably after being elicited
+      let resolvedIntent = util.intentCheck(slot.query.value);
+      let externalCheck = util.externalCheck(slot.query.value);
+        if (externalCheck) {
+          this.attributes.EXTERNALS = this.attributes.EXTERNALS || 0;
+          this.attributes.EXTERNALS++;
+          if (this.attributes.EXTERNALS === 1 || (this.attributes.EXTERNALS % config.externalMessageFrequency === 0)) {
+            return this.emitWithState('AMAZON.StopIntent', config.externalMessage);
+          } else {
+            return this.emitWithState('AMAZON.CancelIntent');
+          }
+        } else if (resolvedIntent) {
+            console.log(`HOME_PAGE ChangeMyInfo: got ${slot.query.value} in query.`)
+            delete slot.query.value;
+            return this.emitWithState(resolvedIntent, slot)
+        } else {
+          console.log(`HOME_PAGE ChangeMyInfo: no intent, but query ${slot.query.value}. sending to PickItem`)
+          return this.emitWithState('PickItem', slot)
+        }
+      } else {
+        console.log("HOME_PAGE, ChangeMyInfo, no query, redirect to REQ state")
+        this.handler.state = this.attributes.STATE = config.states.REQUEST;
+        return this.emitWithState('changeMyInfo', {query: {value:null},userLocation: {value: null}, userName: {value: null}});
+      }
+    }
+  },
 
   'OlderExplainers' : function () {
     console.log("OlderExplainers in HOME_PAGE");
