@@ -248,7 +248,13 @@ var startHandlers =  Alexa.CreateStateHandler(config.states.START, {
       this.emitWithState('PickItem', {index: {value: 1}}, 'LAUNCH_REPLAY')
     }
   },
-
+  OrdinalOnly: function () {
+    console.log("START OrdinalOnly", JSON.stringify(this.event.request.intent, null,2))
+    var slot = slot || this.event.request.intent.slots;
+    delete this.attributes.ITERATING;
+    this.handler.state = this.attributes.STATE = config.states.PLAYING_EXPLAINER;
+    this.emitWithState('PickItem', slot, 'ITERATING');
+  },
   'PlayLatestExplainer': function () {
     console.log('START state PlayLatestExplainer', JSON.stringify(this.event.request, null,2))
 

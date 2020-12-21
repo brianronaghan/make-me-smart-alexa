@@ -292,9 +292,9 @@ module.exports = {
       }
     } else {
       var item;
-      if (intentSlot.query && intentSlot.query.value) {
+      if (intentSlot && intentSlot.query && intentSlot.query.value) {
         item = intentSlot.query.value;
-      } else if (intentSlot.topic && intentSlot.topic.value) {
+      } else if (intentSlot && intentSlot.topic && intentSlot.topic.value) {
         item = intentSlot.topic.value;
       }
       if (item && EASTER_EGGS && EASTER_EGGS.length && EASTER_EGGS.length > 0) {

@@ -21,10 +21,17 @@ module.exports = Alexa.CreateStateHandler(config.states.PLAYING_EXPLAINER, {
   'PickItem': function (slot, source) {
     // console.log(`P_E, PickItem OUTER THIS `, JSON.stringify(this, null,2))
 
-    // console.log(`P_E, PickItem slot `, JSON.stringify(slot, null,2))
     // set spot in indices
+    var slot = slot;
+    if (!slot) {
+      console.log("NO SLOT MYSTERY");
+      slot = this.event.request.intent.slots;
+      console.log(JSON.stringify(this.event.request.intent.slots,null,2));
+    }
 
     var wtfSLOT = slot;
+    // console.log(`P_E, PickItem WTF `, JSON.stringify(wtfSLOT, null,2))
+
     var deviceId = util.getDeviceId.call(this);
     util.nullCheck.call(this, deviceId);
     util.asyncExplainers.call(this, function(err, resp) {
